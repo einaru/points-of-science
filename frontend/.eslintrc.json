@@ -21,6 +21,9 @@
         ".ts",
         ".tsx"
       ]
+    }],
+    "react/style-prop-object": [1, {
+      "allow": ["StatusBar"]
     }]
   },
   "settings": {

@@ -1,0 +1,12 @@
+runtime: nodejs
+service: api
+
+env: flex
+automatic_scaling:
+  max_num_instances: 1
+
+env_variables:
+  HTTPPORT: 8080
+  ACCESS_TOKEN_SECRET: ""
+  REFRESH_TOKEN_SECRET: ""
+  FORGOTTEN_PASSWORD_SECRET: ""

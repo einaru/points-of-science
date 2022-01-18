@@ -26,6 +26,9 @@
     "prettier/prettier": "error",
     "react/style-prop-object": [1, {
       "allow": ["StatusBar"]
+    }],
+    "react/no-unstable-nested-components": [1, {
+      "allowAsProps": true
     }]
   }
 }

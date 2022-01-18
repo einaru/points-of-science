@@ -1,34 +1,31 @@
 {
+  "env": {
+    "es2021": true,
+    "node": true
+  },
   "extends": [
     "airbnb",
     "airbnb/hooks",
     "prettier",
-    "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
     "plugin:prettier/recommended"
-
   ],
-  "plugins": ["@typescript-eslint", "react", "prettier"],
-  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "sourceType": "module",
-    "project": "./tsconfig.json"
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
   },
+  "plugins": [
+    "react",
+    "react-native",
+    "prettier"
+  ],
   "rules": {
     "prettier/prettier": "error",
-    "react/jsx-filename-extension": [1, {
-      "extensions": [
-        ".ts",
-        ".tsx"
-      ]
-    }],
     "react/style-prop-object": [1, {
       "allow": ["StatusBar"]
     }]
-  },
-  "settings": {
-    "react": {
-      "version": "detect"
-    }
   }
 }

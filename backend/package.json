@@ -6,7 +6,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node src/server.js",
-    "dev": "nodemon src/server.js"
+    "dev": "set NODE_ENV=development&& nodemon src/server.js --ext js",
+    "prod": "set NODE_ENV=production&& node src/server.js"
   },
   "author": "Andreas N. Digernes & Einar Uvsløkk",
   "license": "ISC",
@@ -14,6 +15,7 @@
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.1",
     "dotenv": "^11.0.0",
+    "dotenv-yaml": "^0.1.4",
     "express": "^4.17.2",
     "express-graphql": "^0.12.0",
     "graphql": "^16.2.0",

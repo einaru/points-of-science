@@ -1,8 +1,22 @@
-import dotenv from 'dotenv';
+import { config } from 'dotenv-yaml';
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
-dotenv.config({ path: 'backend_js/app.yaml' });
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+if(process.env.NODE_ENV === 'production'){
+  console.log("[*] This application runs in production mode.");
+  config({ path: path.resolve(__dirname, `../../app.yaml`) });
+  console.log(path.resolve(__dirname, `../../app.yaml` ));
+} else {
+  console.log("[*] This application runs in development mode.");
+  config({ path: path.resolve(__dirname, `../../${process.env.NODE_ENV.trim()}.yaml`) });
+  console.log(path.resolve(__dirname, `../../${process.env.NODE_ENV.trim()}.yaml` ));
+}
 
 const env =  {
+    NODE_ENV: process.env.NODE_ENV,
     HTTPPort: process.env.HTTPPORT,
     ACCESS_TOKEN_SECRET: process.env.ACCESS_TOKEN_SECRET,
     REFRESH_TOKEN_SECRET: process.env.REFRESH_TOKEN_SECRET,

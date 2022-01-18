@@ -1,0 +1,26 @@
+{
+  "1": {
+    "name": "Ola Nordmann",
+    "password": "thisIsAVaL1dPa$$word",
+    "permission": "control",
+    "comment": "Test ID: 1"
+  },
+  "2": {
+    "name": "Ola#Nordmann",
+    "password": "<not valid>",
+    "permission": "control",
+    "comment": "Test ID: 4"
+  },
+  "3": {
+    "name": "Ola Nordmann2",
+    "password": "thisIsAVaL1dPa$$word",
+    "permission": "experimental",
+    "comment": "Test ID: 6"
+  },
+  "4": {
+    "name": "Ola Nordmann",
+    "password": "notvalid20?",
+    "permission": "experimental",
+    "comment": "Test ID: 7"
+  }
+}

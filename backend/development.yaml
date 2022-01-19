@@ -7,3 +7,4 @@ FORGOTTEN_PASSWORD_SECRET: ""
 
 # Database table names:
 REFRESH_TOKEN_TABLE: "refresh_token"
+USER_TABLE: "User"

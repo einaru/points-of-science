@@ -1,5 +1,5 @@
 import { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLList } from "graphql";
-import { UserModel, getData, getDataByFilter, updateData, deleteData, findLatestID } from '../../../internal.js';
+import { UserModel, SignInModel, getData, getDataByFilter, updateData, deleteData, findLatestID, signIn } from '../../../internal.js';
 
 
 //Root Queries - Used to retrieve data with GET-Requests
@@ -83,10 +83,26 @@ const updateUserQuery = {
   }
 };
 
+const signInQuery = {
+  type: SignInModel,
+  args: {
+    name: { type: GraphQLString },
+    password: { type: GraphQLString }
+  },
+  async resolve(parent, args) {
+    try{
+      return await signIn(args.name, args.password);
+    } catch(error){
+      return error;
+    }
+  }
+}
+
 export {
   getAllUsersQuery,
   getUserByIDQuery,
   createUserQuery,
   deleteUserQuery,
   updateUserQuery,
+  signInQuery,
 }

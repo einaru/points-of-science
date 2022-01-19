@@ -105,7 +105,13 @@ function findDataEntry(data, list){
 }
 
 function hasDataEntry(data, entry){
-  return data.id == entry.id;
+  if(Array.isArray(entry)){
+    return entry.includes(data);
+  } else if(entry === Object(entry)){
+    return data.id == entry.id;
+  }
+
+  return false;
 }
 
 function getPosition(data, list){
@@ -113,7 +119,7 @@ function getPosition(data, list){
   list.find((entry, index) => {
     if(hasDataEntry(data, entry)){
       position = index;
-      return hasDataEntry;
+      return true;
     }
   });
 

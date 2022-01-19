@@ -1,75 +1,565 @@
 {
   "refresh_token": [],
   "User": [
-    {"id":1,"name":"Antonietta Riccard","password":"LcAOoS6h","permission":"control","achievement":[],"challenge":[]},
-    {"id":2,"name":"Aldis Loughan","password":"kEns4u9e4d","permission":"control","achievement":[],"challenge":[]},
-    {"id":3,"name":"Grissel Hamprecht","password":"SnxTm4TTYBwl","permission":"control","achievement":[],"challenge":[]},
-    {"id":4,"name":"Violetta Brinkler","password":"9G9dlTd","permission":"control","achievement":[],"challenge":[]},
-    {"id":5,"name":"Dione Kochl","password":"NMtJVzk5AfBb","permission":"control","achievement":[],"challenge":[]},
-    {"id":6,"name":"Myrle Davitashvili","password":"SnS4LS9j4UL","permission":"control","achievement":[],"challenge":[]},
-    {"id":7,"name":"Susie Bavage","password":"bBsX2NUXdGtr","permission":"control","achievement":[],"challenge":[]},
-    {"id":8,"name":"Maritsa Giamitti","password":"7HywfJWg","permission":"control","achievement":[],"challenge":[]},
-    {"id":9,"name":"Etheline Morteo","password":"Zu1G4J4iSL1","permission":"control","achievement":[],"challenge":[]},
-    {"id":10,"name":"Darnell Braunstein","password":"XlVMxsmu","permission":"control","achievement":[],"challenge":[]},
-    {"id":11,"name":"Ikey Cowpertwait","password":"WI8hZUYx","permission":"control","achievement":[],"challenge":[]},
-    {"id":12,"name":"Mackenzie Eustice","password":"D8PGrGj2fWG","permission":"control","achievement":[],"challenge":[]},
-    {"id":13,"name":"Zed Dightham","password":"RFheefsu","permission":"control","achievement":[],"challenge":[]},
-    {"id":14,"name":"Loni Hanley","password":"BIDq69eT3T","permission":"control","achievement":[],"challenge":[]},
-    {"id":15,"name":"Dotty Mansford","password":"RbTGb8","permission":"control","achievement":[],"challenge":[]},
-    {"id":16,"name":"Glyn Kleeman","password":"7C9uRPts5","permission":"control","achievement":[],"challenge":[]},
-    {"id":17,"name":"Bella Celez","password":"x8mZu4","permission":"control","achievement":[],"challenge":[]},
-    {"id":18,"name":"Karlan Learmount","password":"SHvzFJtD","permission":"control","achievement":[],"challenge":[]},
-    {"id":19,"name":"Nikolas Lazer","password":"lpBzVQg6rJJ","permission":"control","achievement":[],"challenge":[]},
-    {"id":20,"name":"Meredith Ganderton","password":"0lBJBPBHktn","permission":"control","achievement":[],"challenge":[]},
-    {"id":21,"name":"Korie Rablan","password":"DxltejT","permission":"control","achievement":[],"challenge":[]},
-    {"id":22,"name":"Olga Kepp","password":"5gO7nu","permission":"control","achievement":[],"challenge":[]},
-    {"id":23,"name":"Junie Mathevet","password":"LiFH0EXI","permission":"control","achievement":[],"challenge":[]},
-    {"id":24,"name":"Annaliese Gaenor","password":"XGu1j5h5oa","permission":"control","achievement":[],"challenge":[]},
-    {"id":25,"name":"Eleanora Chirm","password":"Uj2reT8wOi2","permission":"control","achievement":[],"challenge":[]},
-    {"id":26,"name":"Trudi O'Cosgra","password":"GaBa33h6S4","permission":"control","achievement":[],"challenge":[]},
-    {"id":27,"name":"Zola Woolland","password":"Cb39TRN","permission":"control","achievement":[],"challenge":[]},
-    {"id":28,"name":"Laurel Duchatel","password":"B3q3tyb","permission":"control","achievement":[],"challenge":[]},
-    {"id":29,"name":"Vance Cheevers","password":"eeTk6nN0CFZz","permission":"control","achievement":[],"challenge":[]},
-    {"id":30,"name":"Pepita Sterry","password":"Xaw1Sprk","permission":"control","achievement":[],"challenge":[]},
-    {"id":31,"name":"Nelli Gullefant","password":"tdh3zC36nC","permission":"control","achievement":[],"challenge":[]},
-    {"id":32,"name":"Stacy MacNair","password":"HEmSqkuHf","permission":"control","achievement":[],"challenge":[]},
-    {"id":33,"name":"Enid Lant","password":"qOCg5egWV8A","permission":"control","achievement":[],"challenge":[]},
-    {"id":34,"name":"Ken Croneen","password":"V1XLhqySue","permission":"control","achievement":[],"challenge":[]},
-    {"id":35,"name":"Astrix Chesworth","password":"384ufVEeTr0","permission":"control","achievement":[],"challenge":[]},
-    {"id":36,"name":"Tilda Beane","password":"8lBcmqYu","permission":"experimental","achievement":[],"challenge":[]},
-    {"id":37,"name":"Hill Lorryman","password":"bI7rKPGdpt","permission":"experimental","achievement":[],"challenge":[]},
-    {"id":38,"name":"Harcourt Dunnico","password":"dHt1u5jZQBF","permission":"experimental","achievement":[],"challenge":[]},
-    {"id":39,"name":"Jobye Deppe","password":"XDMK97EgI8T","permission":"experimental","achievement":[],"challenge":[]},
-    {"id":40,"name":"Sadye Wheatman","password":"iosi6AC4","permission":"experimental","achievement":[],"challenge":[]},
-    {"id":41,"name":"Warde Shellcross","password":"cmxKvu3","permission":"experimental","achievement":[],"challenge":[]},
-    {"id":42,"name":"Nanete LaBastida","password":"56d6rGcMG","permission":"experimental","achievement":[],"challenge":[]},
-    {"id":43,"name":"Karna Clinch","password":"097kjCdNHK","permission":"experimental","achievement":[],"challenge":[]},
-    {"id":44,"name":"Lorna Ebertz","password":"hcEA3X","permission":"experimental","achievement":[],"challenge":[]},
-    {"id":45,"name":"Hillie Camplin","password":"u7SFl7CE5","permission":"experimental","achievement":[],"challenge":[]},
-    {"id":46,"name":"Kerry Quinnell","password":"td0VreA","permission":"experimental","achievement":[],"challenge":[]},
-    {"id":47,"name":"Nanny Gerhts","password":"VDTpfFxjUry","permission":"experimental","achievement":[],"challenge":[]},
-    {"id":48,"name":"Minor Minster","password":"IzrRt547N","permission":"experimental","achievement":[],"challenge":[]},
-    {"id":49,"name":"Amalle Seydlitz","password":"C8BRoP","permission":"experimental","achievement":[],"challenge":[]},
-    {"id":50,"name":"Morganica Redler","password":"dA6l7pjEhM","permission":"experimental","achievement":[],"challenge":[]},
-    {"id":51,"name":"Edwin Brignell","password":"cgM2KaNIvD","permission":"experimental","achievement":[],"challenge":[]},
-    {"id":52,"name":"Lorinda Habron","password":"dphv1kjotn","permission":"experimental","achievement":[],"challenge":[]},
-    {"id":53,"name":"Alexander Penreth","password":"gQO9tZ4","permission":"experimental","achievement":[],"challenge":[]},
-    {"id":54,"name":"Karisa Kerton","password":"sV4vgDlMf","permission":"experimental","achievement":[],"challenge":[]},
-    {"id":55,"name":"Davita Sargood","password":"QkwIbCLNhL","permission":"experimental","achievement":[],"challenge":[]},
-    {"id":56,"name":"Lona Peattie","password":"VcdDho1","permission":"experimental","achievement":[],"challenge":[]},
-    {"id":57,"name":"Kerry Darling","password":"nEX4yCG8Gs","permission":"experimental","achievement":[],"challenge":[]},
-    {"id":58,"name":"Rayna Harteley","password":"q6EImS","permission":"experimental","achievement":[],"challenge":[]},
-    {"id":59,"name":"Kit Rubica","password":"BIlP2xQIld","permission":"experimental","achievement":[],"challenge":[]},
-    {"id":60,"name":"Phylys Deering","password":"Dh7r4el19g","permission":"experimental","achievement":[],"challenge":[]},
-    {"id":61,"name":"Ulrika Offener","password":"WZNjeKBVr5r","permission":"experimental","achievement":[],"challenge":[]},
-    {"id":62,"name":"Morton Sibbald","password":"9q1PVB","permission":"experimental","achievement":[],"challenge":[]},
-    {"id":63,"name":"Shirleen Pilling","password":"tCyqos","permission":"experimental","achievement":[],"challenge":[]},
-    {"id":64,"name":"Ogdon Boustred","password":"npwZJTFuhx9c","permission":"experimental","achievement":[],"challenge":[]},
-    {"id":65,"name":"Aloysius Ogelbe","password":"kf4SUinVDyW","permission":"experimental","achievement":[],"challenge":[]},
-    {"id":66,"name":"Isaak Whatley","password":"BRvqnWojHj","permission":"experimental","achievement":[],"challenge":[]},
-    {"id":67,"name":"Tory Musslewhite","password":"mPY95H","permission":"experimental","achievement":[],"challenge":[]},
-    {"id":68,"name":"Pansy Mewburn","password":"ltIYotMw6i6F","permission":"experimental","achievement":[],"challenge":[]},
-    {"id":69,"name":"Sherlocke Piatek","password":"ZyrhBN4gcJpF","permission":"experimental","achievement":[],"challenge":[]},
-    {"id":70,"name":"Jay Farmar","password":"tXlkRw9D4","permission":"experimental","achievement":[],"challenge":[]}
+    {
+      "id": 1,
+      "name": "Antonietta Riccard",
+      "password": "$2b$10$HGImWpGHTqsCUW7QPqE.xOLknm/a.IqV7bC.35ybKUGqLj13e9xiO",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 2,
+      "name": "Aldis Loughan",
+      "password": "kEns4u9e4d",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 3,
+      "name": "Grissel Hamprecht",
+      "password": "SnxTm4TTYBwl",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 4,
+      "name": "Violetta Brinkler",
+      "password": "9G9dlTd",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 5,
+      "name": "Dione Kochl",
+      "password": "NMtJVzk5AfBb",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 6,
+      "name": "Myrle Davitashvili",
+      "password": "SnS4LS9j4UL",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 7,
+      "name": "Susie Bavage",
+      "password": "bBsX2NUXdGtr",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 8,
+      "name": "Maritsa Giamitti",
+      "password": "7HywfJWg",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 9,
+      "name": "Etheline Morteo",
+      "password": "Zu1G4J4iSL1",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 10,
+      "name": "Darnell Braunstein",
+      "password": "XlVMxsmu",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 11,
+      "name": "Ikey Cowpertwait",
+      "password": "WI8hZUYx",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 12,
+      "name": "Mackenzie Eustice",
+      "password": "D8PGrGj2fWG",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 13,
+      "name": "Zed Dightham",
+      "password": "RFheefsu",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 14,
+      "name": "Loni Hanley",
+      "password": "BIDq69eT3T",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 15,
+      "name": "Dotty Mansford",
+      "password": "RbTGb8",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 16,
+      "name": "Glyn Kleeman",
+      "password": "7C9uRPts5",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 17,
+      "name": "Bella Celez",
+      "password": "x8mZu4",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 18,
+      "name": "Karlan Learmount",
+      "password": "SHvzFJtD",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 19,
+      "name": "Nikolas Lazer",
+      "password": "lpBzVQg6rJJ",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 20,
+      "name": "Meredith Ganderton",
+      "password": "0lBJBPBHktn",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 21,
+      "name": "Korie Rablan",
+      "password": "DxltejT",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 22,
+      "name": "Olga Kepp",
+      "password": "5gO7nu",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 23,
+      "name": "Junie Mathevet",
+      "password": "LiFH0EXI",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 24,
+      "name": "Annaliese Gaenor",
+      "password": "XGu1j5h5oa",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 25,
+      "name": "Eleanora Chirm",
+      "password": "Uj2reT8wOi2",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 26,
+      "name": "Trudi O'Cosgra",
+      "password": "GaBa33h6S4",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 27,
+      "name": "Zola Woolland",
+      "password": "Cb39TRN",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 28,
+      "name": "Laurel Duchatel",
+      "password": "B3q3tyb",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 29,
+      "name": "Vance Cheevers",
+      "password": "eeTk6nN0CFZz",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 30,
+      "name": "Pepita Sterry",
+      "password": "Xaw1Sprk",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 31,
+      "name": "Nelli Gullefant",
+      "password": "tdh3zC36nC",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 32,
+      "name": "Stacy MacNair",
+      "password": "HEmSqkuHf",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 33,
+      "name": "Enid Lant",
+      "password": "qOCg5egWV8A",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 34,
+      "name": "Ken Croneen",
+      "password": "V1XLhqySue",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 35,
+      "name": "Astrix Chesworth",
+      "password": "384ufVEeTr0",
+      "permission": "control",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 36,
+      "name": "Tilda Beane",
+      "password": "8lBcmqYu",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 37,
+      "name": "Hill Lorryman",
+      "password": "bI7rKPGdpt",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 38,
+      "name": "Harcourt Dunnico",
+      "password": "dHt1u5jZQBF",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 39,
+      "name": "Jobye Deppe",
+      "password": "XDMK97EgI8T",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 40,
+      "name": "Sadye Wheatman",
+      "password": "iosi6AC4",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 41,
+      "name": "Warde Shellcross",
+      "password": "cmxKvu3",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 42,
+      "name": "Nanete LaBastida",
+      "password": "56d6rGcMG",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 43,
+      "name": "Karna Clinch",
+      "password": "097kjCdNHK",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 44,
+      "name": "Lorna Ebertz",
+      "password": "hcEA3X",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 45,
+      "name": "Hillie Camplin",
+      "password": "u7SFl7CE5",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 46,
+      "name": "Kerry Quinnell",
+      "password": "td0VreA",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 47,
+      "name": "Nanny Gerhts",
+      "password": "VDTpfFxjUry",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 48,
+      "name": "Minor Minster",
+      "password": "IzrRt547N",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 49,
+      "name": "Amalle Seydlitz",
+      "password": "C8BRoP",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 50,
+      "name": "Morganica Redler",
+      "password": "dA6l7pjEhM",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 51,
+      "name": "Edwin Brignell",
+      "password": "cgM2KaNIvD",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 52,
+      "name": "Lorinda Habron",
+      "password": "dphv1kjotn",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 53,
+      "name": "Alexander Penreth",
+      "password": "gQO9tZ4",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 54,
+      "name": "Karisa Kerton",
+      "password": "sV4vgDlMf",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 55,
+      "name": "Davita Sargood",
+      "password": "QkwIbCLNhL",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 56,
+      "name": "Lona Peattie",
+      "password": "VcdDho1",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 57,
+      "name": "Kerry Darling",
+      "password": "nEX4yCG8Gs",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 58,
+      "name": "Rayna Harteley",
+      "password": "q6EImS",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 59,
+      "name": "Kit Rubica",
+      "password": "BIlP2xQIld",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 60,
+      "name": "Phylys Deering",
+      "password": "Dh7r4el19g",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 61,
+      "name": "Ulrika Offener",
+      "password": "WZNjeKBVr5r",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 62,
+      "name": "Morton Sibbald",
+      "password": "9q1PVB",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 63,
+      "name": "Shirleen Pilling",
+      "password": "tCyqos",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 64,
+      "name": "Ogdon Boustred",
+      "password": "npwZJTFuhx9c",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 65,
+      "name": "Aloysius Ogelbe",
+      "password": "kf4SUinVDyW",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 66,
+      "name": "Isaak Whatley",
+      "password": "BRvqnWojHj",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 67,
+      "name": "Tory Musslewhite",
+      "password": "mPY95H",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 68,
+      "name": "Pansy Mewburn",
+      "password": "ltIYotMw6i6F",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 69,
+      "name": "Sherlocke Piatek",
+      "password": "ZyrhBN4gcJpF",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    },
+    {
+      "id": 70,
+      "name": "Jay Farmar",
+      "password": "tXlkRw9D4",
+      "permission": "experimental",
+      "achievement": [],
+      "challenge": []
+    }
   ]
 }

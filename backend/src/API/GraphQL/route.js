@@ -1,5 +1,5 @@
 import { GraphQLSchema, GraphQLObjectType } from "graphql";
-import { getAllUsersQuery, getUserByIDQuery, createUserQuery, deleteUserQuery, updateUserQuery } from '../../internal.js';
+import { getAllUsersQuery, getUserByIDQuery, createUserQuery, deleteUserQuery, updateUserQuery, signInQuery } from '../../internal.js';
 
 const ROOTQUERY = new GraphQLObjectType({
   name: "RootQueryType",
@@ -15,6 +15,7 @@ const MUTATION = new GraphQLObjectType({
     createUser: createUserQuery,
     deleteUser: deleteUserQuery,
     updateUser: updateUserQuery,
+    signIn: signInQuery,
   }
 });
 

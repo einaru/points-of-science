@@ -16,29 +16,33 @@ function createAccessToken(user) {
       expiresIn: "900s",
     });
   } catch (error) {
-    return error;
+    throw error;
   }
 }
 
-function authenticateAccessToken(next) {
-  const authHeader = request.headers["authorization"];
-  const accessToken = authHeader && authHeader.split(" ")[1];
-  if (accessToken == null) {
-    return { status: 403, type: "error", message: "Access token is missing." };
-  }
-
-  jwt.verify(accessToken, config.env.ACCESS_TOKEN_SECRET, (error, user) => {
-    if (error) {
-      return {
-        status: 403,
-        type: "error",
-        message: "Access token is invalid.",
-      };
+function authenticateAccessToken(request, next) {
+  try{
+    const authHeader = request.headers["authorization"];
+    const accessToken = authHeader && authHeader.split(" ")[1];
+    if (accessToken == null) {
+      return { status: 403, type: "error", message: "Access token is missing." };
     }
 
-    request.user = user;
-    next();
-  });
+    jwt.verify(accessToken, config.env.ACCESS_TOKEN_SECRET, (error, user) => {
+      if (error) {
+        return {
+          status: 403,
+          type: "error",
+          message: "Access token is invalid.",
+        };
+      }
+
+      request.user = user;
+      next();
+    });
+  } catch(error){
+    throw error;
+  }
 }
 
 function createRefreshToken(user) {
@@ -49,11 +53,11 @@ function createRefreshToken(user) {
       permission: user.permission,
     };
 
-    const refreshToken = jwt.sign(userData, config.REFRESH_TOKEN_SECRET);
-    storeRefreshTokenInDatabase(refreshToken);
+    const refreshToken = jwt.sign(userData, config.env.REFRESH_TOKEN_SECRET);
+    console.log(storeRefreshTokenInDatabase(refreshToken));
     return refreshToken;
   } catch (error) {
-    return error;
+    throw error;
   }
 }
 
@@ -104,7 +108,7 @@ function deleteRefreshTokenFromDatabase(refreshToken) {
       message: "User signed out successfully.",
     };
   } catch (error) {
-    return { status: 400, type: "error", message: error.message };
+    throw error;
   }
 }
 
@@ -129,7 +133,7 @@ function storeRefreshTokenInDatabase(refreshToken) {
       message: "Access token stored to database successfully.",
     };
   } catch (error) {
-    return { status: 400, type: "error", message: error.message };
+    throw error;
   }
 }
 

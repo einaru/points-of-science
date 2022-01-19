@@ -242,6 +242,29 @@ const ClickStreamItemModel = new GraphQLObjectType({
   })
 });
 
+const ResponseModel = {
+  message: { type: GraphQLString },
+  status: { type: GraphQLInt },
+  type: { type: GraphQLString }
+}
+
+const SignInModel = new GraphQLObjectType({
+  name: "SignIn",
+  fields: () => ({
+    ...ResponseModel,
+    data: { type: SignInDataModel }
+  })
+});
+
+const SignInDataModel = new GraphQLObjectType({
+  name: "SignInData",
+  fields: () => ({
+    access_token: { type: GraphQLString },
+    refresh_token: { type: GraphQLString },
+    user: { type: UserModel }
+  })
+});
+
 export {
   ActivityModel,
   AchievementModel,
@@ -250,6 +273,7 @@ export {
   ClickStreamModel,
   LeaderboardModel,
   ReflectionModel,
+  SignInModel,
   UserAchievementModel,
   UserChallengeModel,
   UserModel,

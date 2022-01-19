@@ -24,47 +24,47 @@ function signIn(username, password) {
 
     const storedPassword = user.password;
     comparePassword(password, storedPassword)
-      .then((result) => {
-        if (
-          result.type === config.env.RESPONSE_TYPE.success &&
-          result.data.is_matching
-        ) {
-          const accessToken = createAccessToken(user);
-          const refreshToken = createRefreshToken(user);
-          return resolve(
-            getResponseObject(
-              "Sign in successful.",
-              200,
-              config.env.RESPONSE_TYPE.success,
-              {
-                user: user,
-                access_token: accessToken,
-                refresh_token: refreshToken,
-              }
-            )
-          );
-        }
+    .then((result) => {
+      if (
+        result.type === config.env.RESPONSE_TYPE.success &&
+        result.data.is_matching
+      ) {
+        const accessToken = createAccessToken(user);
+        const refreshToken = createRefreshToken(user);
+        return resolve(
+          getResponseObject(
+            "Sign in successful.",
+            200,
+            config.env.RESPONSE_TYPE.success,
+            {
+              user: user,
+              access_token: accessToken,
+              refresh_token: refreshToken,
+            }
+          )
+        );
+      }
 
-        return reject(
-          getResponseObject(
-            "Something went wrong during sign in. Sign in unsuccessful.",
-            500,
-            config.env.RESPONSE_TYPE.error,
-            {}
-          )
-        );
-      })
-      .catch((error) => {
-        //TO-DO: Implement error handler to take care of the error and provide a proper response to the user.
-        return reject(
-          getResponseObject(
-            "Something went wrong during sign in. Sign in unsuccessful.",
-            500,
-            config.env.RESPONSE_TYPE.error,
-            {}
-          )
-        );
-      });
+      return reject(
+        getResponseObject(
+          "Username or password is incorrect. Sign in unsuccessful.",
+          401,
+          config.env.RESPONSE_TYPE.error,
+          {}
+        )
+      );
+    })
+    .catch((error) => {
+      //TO-DO: Implement error handler to take care of the error and provide a proper response to the user.
+      return reject(
+        getResponseObject(
+          `Something went wrong during sign in. Sign in unsuccessful. ERROR: ${error.message}`,
+          500,
+          config.env.RESPONSE_TYPE.error,
+          {}
+        )
+      );
+    });
   });
 }
 

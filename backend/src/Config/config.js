@@ -11,8 +11,8 @@ if(process.env.NODE_ENV === 'production'){
   console.log(path.resolve(__dirname, `../../app.yaml` ));
 } else {
   console.log("[*] This application runs in development mode.");
-  config({ path: path.resolve(__dirname, `../../${process.env.NODE_ENV.trim()}.yaml`) });
-  console.log(path.resolve(__dirname, `../../${process.env.NODE_ENV.trim()}.yaml` ));
+  config({ path: path.resolve(__dirname, `../../development.yaml`) });
+  console.log(path.resolve(__dirname, `../../development.yaml` ));
 }
 
 const env =  {

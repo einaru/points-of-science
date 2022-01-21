@@ -8,7 +8,7 @@
     "start": "cross-env NODE_ENV=production yarn node src/server.js",
     "dev": "cross-env NODE_ENV=development nodemon src/server.js --ext js",
     "prod": "cross-env NODE_ENV=production yarn node src/server.js",
-    "test": "cross-env NODE_ENV=development yarn node --experimental-vm-modules $(yarn bin jest) --coverage"
+    "test": "cross-env NODE_ENV=development yarn node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
   },
   "author": "Andreas N. Digernes & Einar Uvsløkk",
   "license": "ISC",

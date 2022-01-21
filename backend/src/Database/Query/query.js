@@ -15,60 +15,91 @@ if(config.env.NODE_ENV === "production"){
 
 function getData(collectionName){
   const data = database[collectionName];
-  if(isNull(collectionName)){
-    return [];
+  if(isNull(data)){
+    return null;
   }
 
   return data;
 }
 
 function getDataByFilter(collectionName, filter){
-  console.log(filter);
-  const data = getData(collectionName);
-  const filteredData = data.filter((entry) => {
-    if(!isNull(entry[filter.key])){
-      return entry[filter.key] == filter.value;
+  try{
+    const data = getData(collectionName);
+    if(isNull(data)){
+      throw new Error(`Attempt to filter a table which do not exist.`);
     }
-  });
+    const filteredData = data.filter((entry) => {
+      if(!isNull(entry[filter.key])){
+        return entry[filter.key] == filter.value;
+      }
+    });
 
-  return filteredData;
+    return filteredData;
+  } catch(error){
+    reThrowError(error);
+  }
 }
 
 function deleteData(collectionName, deleteData){
-  mutateData(collectionName, deleteData, performDelete);
+  try{
+    return mutateData(collectionName, deleteData, performDelete);
+  } catch(error){
+    reThrowError(error);
+  }
 }
 
 function updateData(collectionName, newData){
-  const hasUpdated = mutateData(collectionName, newData, performUpdate);
-  if(!hasUpdated){
-    performCreate(database, collectionName, newData);
-    writeData();
+  try{
+    const hasUpdated = mutateData(collectionName, newData, performUpdate);
+    if(!hasUpdated){
+      performCreate(database, collectionName, newData);
+      writeData();
+    }
+
+    return hasUpdated;
+  } catch(error){
+    reThrowError(error);
   }
 }
 
 function mutateData(collectionName, findData, mutateFunction){
-  console.log(findData);
-  const data = getData(collectionName);
-  const entryFound = getPosition(findData, data);
-  if(entryFound > -1){
+  try{
+    const data = getData(collectionName);
+    if(isNull(data)){
+      return false;
+    }
+
+    const entryFound = getPosition(findData, data);
+    if(entryFound == -1){
+      return false;
+    }
+
     mutateFunction(database, collectionName, entryFound, findData);
     writeData();
     return true;
+  } catch(error){
+    reThrowError(error);
   }
-
-  return false;
 }
 
-function findLatestID(collectionName){
-  const data = getData(collectionName);
-  return data.length + incrementor;
+function nextID(table){
+  if(isNull(table) || !Array.isArray(table)){
+    throw new Error(`Table is not an array.`);
+  }
+
+  return table.length + incrementor;
 }
 
 
 //-------------------------------------------------- Helper-functions ----------------------------------------------------
 
 function performCreate(database, key, newData){
-  database[key].push(newData);
+  if(database[key]){
+    database[key].push(newData);
+  } else {
+    database[key] = [];
+    database[key].push(newData);
+  }
 }
 
 function performUpdate(database, key, position, newEntry){
@@ -126,6 +157,10 @@ function getPosition(data, list){
   return position;
 }
 
+function reThrowError(error){
+  throw error;
+}
+
 function printUpdate(oldEntry, newEntry){
   /*console.log(`[*] Updated from: ${oldEntry} ==> ${newEntry}`);
   console.log(oldEntry);
@@ -137,5 +172,5 @@ export {
   getDataByFilter,
   deleteData,
   updateData,
-  findLatestID
+  nextID,
 }

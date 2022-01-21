@@ -1,6 +1,6 @@
-import data from "../../DataSet/DatabaseMockData/dummy_data.json";
+import data from "../../../assets/Database/Test/dummy_data.json";
 import {
-  config,
+  connectToDatabase,
   getData,
   getDataByFilter,
   updateData,
@@ -16,6 +16,7 @@ let user;
 let newTable;
 
 beforeAll(async () => {
+  connectToDatabase();
   database = data;
   collectionName = "User";
   nonExistingCollectionName = "NotATableName";

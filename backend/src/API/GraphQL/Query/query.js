@@ -1,5 +1,5 @@
 import { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLList } from "graphql";
-import { UserModel, SignInModel, getData, getDataByFilter, updateData, deleteData, findLatestID, signIn } from '../../../internal.js';
+import { UserModel, SignInModel, getData, getDataByFilter, updateData, deleteData, nextID, signIn } from '../../../internal.js';
 
 
 //Root Queries - Used to retrieve data with GET-Requests
@@ -31,7 +31,7 @@ const createUserQuery = {
   resolve(parent, args){
     //Put the create user logic for the BusinessLogic here.
     const newUser = {
-      "id": findLatestID('User') + 1,
+      "id": nextID('User'),
       "name": args.name,
       "password": args.password,
       "permission": "control",

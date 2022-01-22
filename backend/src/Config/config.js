@@ -11,7 +11,7 @@ if (process.env.NODE_ENV === "production") {
   console.log(path.resolve(__dirname, `../../app.yaml`));
 } else if (process.env.NODE_ENV === "test") {
   console.log("[*] This application runs in test mode.");
-  config({ path: path.resolve(__dirname, `../..test.yaml`) });
+  config({ path: path.resolve(__dirname, `../../test.yaml`) });
   console.log(path.resolve(__dirname, `../../test.yaml`));
 } else {
   console.log("[*] This application runs in development mode.");

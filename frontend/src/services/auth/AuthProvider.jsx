@@ -1,4 +1,5 @@
 import React, { useReducer, useEffect, useMemo, createContext } from "react";
+import { gql, useApolloClient } from "@apollo/client";
 import authReducer from "./authReducer";
 import * as Storage from "../storage";
 
@@ -13,25 +14,49 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const initState = async () => {
+      let token;
       try {
-        const token = await Storage.getItem();
-        if (token) {
-          dispatch({ type: "login", token });
-        }
+        token = await Storage.getItem("authToken");
       } catch (e) {
         // TODO Handle error logging
       }
+      // TODO validate token
+      dispatch({ type: "restoreToken", token });
     };
     initState();
   }, []);
 
+  const client = useApolloClient();
+
   const authContext = useMemo(
     () => ({
       ...state,
-      logIn: (data) => {
-        // TODO Link up with backend
-        console.log("Got login data:", data);
-        dispatch({ type: "login", token: "dummy-auth-token" });
+      logIn: async ({ username, password }) => {
+        client
+          .mutate({
+            mutation: gql`
+              mutation signIn($name: String!, $password: String!) {
+                signIn(name: $name, password: $password) {
+                  type
+                  data {
+                    access_token
+                    refresh_token
+                  }
+                }
+              }
+            `,
+            variables: { name: username, password },
+          })
+          .then(({ data }) => {
+            console.log(data);
+            if (data.signIn.type === "success") {
+              const token = data.signIn.data.access_token;
+              dispatch({ type: "login", token });
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       },
       logOut: () => dispatch({ type: "logOut" }),
       createAccount: (data) => {
@@ -39,7 +64,7 @@ export function AuthProvider({ children }) {
         console.log("Got create account data:", data);
       },
     }),
-    [state, dispatch]
+    [state, dispatch, client]
   );
 
   return (

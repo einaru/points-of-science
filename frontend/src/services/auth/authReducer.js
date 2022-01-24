@@ -1,5 +1,11 @@
 function authReducer(state, action) {
   switch (action.type) {
+    case "restoreToken":
+      return {
+        ...state,
+        authToken: action.token,
+        isLoading: false,
+      };
     case "login":
       return {
         ...state,

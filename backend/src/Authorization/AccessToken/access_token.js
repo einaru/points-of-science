@@ -21,26 +21,30 @@ function createAccessToken(user) {
 }
 
 function authenticateAccessToken(request, next) {
-  try{
+  try {
     const authHeader = request.headers["authorization"];
     const accessToken = authHeader && authHeader.split(" ")[1];
     if (accessToken == null) {
-      return { status: 403, type: "error", message: "Access token is missing." };
+      return getResponseObject(
+        "Access token is missing.",
+        403,
+        config.env.RESPONSE_TYPE.error
+      );
     }
 
     jwt.verify(accessToken, config.env.ACCESS_TOKEN_SECRET, (error, user) => {
       if (error) {
-        return {
-          status: 403,
-          type: "error",
-          message: "Access token is invalid.",
-        };
+        return getResponseObject(
+          "Access token is invalid.",
+          403,
+          config.env.RESPONSE_TYPE.error
+        );
       }
 
       request.user = user;
       next();
     });
-  } catch(error){
+  } catch (error) {
     throw error;
   }
 }
@@ -54,7 +58,11 @@ function createRefreshToken(user) {
     };
 
     const refreshToken = jwt.sign(userData, config.env.REFRESH_TOKEN_SECRET);
-    console.log(storeRefreshTokenInDatabase(refreshToken));
+    const response = storeRefreshTokenInDatabase(refreshToken);
+    if (response.type == "error") {
+      throw new Error("Refresh token was not stored in database.");
+    }
+
     return refreshToken;
   } catch (error) {
     throw error;
@@ -65,11 +73,13 @@ function authenticateRefreshToken(refreshToken) {
   return new Promise((resolve, reject) => {
     const refreshTokens = getData(config.env.REFRESH_TOKEN_TABLE);
     if (!refreshTokens.includes(refreshToken)) {
-      return reject({
-        status: 403,
-        type: "error",
-        message: "Refresh token is invalid.",
-      });
+      return reject(
+        getResponseObject(
+          "Refresh token is invalid.",
+          403,
+          config.env.RESPONSE_TYPE.error
+        )
+      );
     }
 
     jwt.verify(
@@ -77,11 +87,13 @@ function authenticateRefreshToken(refreshToken) {
       config.env.REFRESH_TOKEN_SECRET,
       (error, userVerified) => {
         if (error) {
-          return reject({
-            status: 403,
-            type: "error",
-            message: "Refresh token is invalid.",
-          });
+          return reject(
+            getResponseObject(
+              "Refresh token is invalid.",
+              403,
+              config.env.RESPONSE_TYPE.error
+            )
+          );
         }
 
         return resolve(createAccessToken(userVerified));
@@ -94,19 +106,26 @@ function deleteRefreshTokenFromDatabase(refreshToken) {
   try {
     const refreshTokens = getData(config.env.REFRESH_TOKEN_TABLE);
     if (refreshTokens.length == 0) {
-      return {
-        status: 200,
-        type: "success",
-        message: "User is already signed out.",
-      };
+      return getResponseObject(
+        "User is already signed out.",
+        200,
+        config.env.RESPONSE_TYPE.success
+      );
     }
 
-    deleteData(config.env.REFRESH_TOKEN_TABLE, refreshToken);
-    return {
-      status: 200,
-      type: "success",
-      message: "User signed out successfully.",
-    };
+    if (!deleteData(config.env.REFRESH_TOKEN_TABLE, refreshToken)) {
+      return getResponseObject(
+        "Could not sign out user.",
+        500,
+        config.env.RESPONSE_TYPE.error
+      );
+    }
+
+    return getResponseObject(
+      "User signed out successfully.",
+      200,
+      config.env.RESPONSE_TYPE.success
+    );
   } catch (error) {
     throw error;
   }
@@ -119,22 +138,30 @@ function storeRefreshTokenInDatabase(refreshToken) {
       (token) => token == refreshToken
     );
     if (refreshTokenExist != null) {
-      return {
-        status: 200,
-        type: "success",
-        message: "Access token already exist.",
-      };
+      return getResponseObject(
+        "Access token already exist.",
+        200,
+        config.env.RESPONSE_TYPE.success
+      );
     }
 
     updateData(config.env.REFRESH_TOKEN_TABLE, refreshToken);
-    return {
-      status: 200,
-      type: "success",
-      message: "Access token stored to database successfully.",
-    };
+    return getResponseObject(
+      "Access token stored to database successfully.",
+      200,
+      config.env.RESPONSE_TYPE.success
+    );
   } catch (error) {
     throw error;
   }
+}
+
+function getResponseObject(message, statusCode, type) {
+  return {
+    message: message,
+    status: statusCode,
+    type: type,
+  };
 }
 
 export {

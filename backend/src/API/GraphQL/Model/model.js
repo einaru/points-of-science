@@ -265,9 +265,25 @@ const SignInDataModel = new GraphQLObjectType({
   })
 });
 
+const AccessTokenModel = new GraphQLObjectType({
+  name: "AccessToken",
+  fields: () => ({
+    access_token: { type: GraphQLString }
+  })
+});
+
+const AuthenticateTokenModel = new GraphQLObjectType({
+  name: "AuthToken",
+  fields: () => ({
+  ...ResponseModel,
+  data:{ type: AccessTokenModel }
+  })
+});
+
 export {
   ActivityModel,
   AchievementModel,
+  AuthenticateTokenModel,
   CategoryModel,
   ChallengeModel,
   ClickStreamModel,

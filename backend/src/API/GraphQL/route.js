@@ -1,9 +1,10 @@
 import { GraphQLSchema, GraphQLObjectType } from "graphql";
-import { getAllUsersQuery, getUserByIDQuery, createUserQuery, deleteUserQuery, updateUserQuery, signInQuery } from '../../internal.js';
+import { authRefreshTokenQuery, getAllUsersQuery, getUserByIDQuery, createUserQuery, deleteUserQuery, updateUserQuery, signInQuery } from '../../internal.js';
 
 const ROOTQUERY = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
+    authenticateToken: authRefreshTokenQuery,
     getAllUsers: getAllUsersQuery,
     getUserByID: getUserByIDQuery,
   }

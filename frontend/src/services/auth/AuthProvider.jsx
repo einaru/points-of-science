@@ -1,6 +1,7 @@
 import React, { useReducer, useEffect, useMemo, createContext } from "react";
-import { gql, useApolloClient } from "@apollo/client";
+import { useApolloClient } from "@apollo/client";
 import authReducer from "./authReducer";
+import * as Query from "./query";
 import * as Storage from "../storage";
 
 export const AuthContext = createContext();
@@ -34,17 +35,7 @@ export function AuthProvider({ children }) {
       logIn: async ({ username, password }) => {
         client
           .mutate({
-            mutation: gql`
-              mutation signIn($name: String!, $password: String!) {
-                signIn(name: $name, password: $password) {
-                  type
-                  data {
-                    access_token
-                    refresh_token
-                  }
-                }
-              }
-            `,
+            mutation: Query.LOGIN,
             variables: { name: username, password },
           })
           .then(({ data }) => {

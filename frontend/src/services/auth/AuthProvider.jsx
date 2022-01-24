@@ -51,6 +51,7 @@ export function AuthProvider({ children }) {
             console.log(data);
             if (data.signIn.type === "success") {
               const token = data.signIn.data.access_token;
+              Storage.setItem("authToken", token);
               dispatch({ type: "login", token });
             }
           })

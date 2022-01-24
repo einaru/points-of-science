@@ -92,15 +92,11 @@ function performCreate(database, key, newData) {
 }
 
 function performUpdate(database, key, position, newEntry) {
-  const tempOldEntry = database[key][position];
   database[key][position] = newEntry;
-  printUpdate(tempOldEntry, database[key][position]);
 }
 
 function performDelete(database, key, position, deleteEntry) {
-  const tempOldEntry = database[key][position];
   database[key].splice(position, 1);
-  printUpdate(tempOldEntry, database[key][position]);
 }
 
 function writeData() {
@@ -115,23 +111,13 @@ function isNull(data) {
   return data == null;
 }
 
-function hasLength(list) {
-  return list.length > 0;
-}
-
-function findDataEntry(data, list) {
-  const entryFound = list.find((entry) => {
-    return hasDataEntry(data, entry);
-  });
-
-  return entryFound;
-}
-
 function hasDataEntry(data, entry) {
   if (Array.isArray(entry)) {
     return entry.includes(data);
   } else if (entry === Object(entry)) {
     return data.id == entry.id;
+  } else if (data === entry) {
+    return true;
   }
 
   return false;
@@ -153,16 +139,4 @@ function reThrowError(error) {
   throw error;
 }
 
-function printUpdate(oldEntry, newEntry) {
-  /*console.log(`[*] Updated from: ${oldEntry} ==> ${newEntry}`);
-  console.log(oldEntry);
-  console.log(newEntry);*/
-}
-
-export {
-  getData,
-  getDataByFilter,
-  deleteData,
-  updateData,
-  nextID
-};
+export { getData, getDataByFilter, deleteData, updateData, nextID };

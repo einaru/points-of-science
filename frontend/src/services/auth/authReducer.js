@@ -3,19 +3,19 @@ function authReducer(state, action) {
     case "restoreToken":
       return {
         ...state,
-        authToken: action.token,
+        accessToken: action.accessToken,
         isLoading: false,
       };
     case "login":
       return {
         ...state,
-        authToken: action.token,
+        accessToken: action.accessToken,
         isLoading: false,
       };
     case "logout":
       return {
         ...state,
-        authToken: null,
+        accessToken: null,
         isLogout: true,
       };
     default:

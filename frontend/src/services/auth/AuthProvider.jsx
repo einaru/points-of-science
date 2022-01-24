@@ -9,19 +9,19 @@ export function AuthProvider({ children }) {
   const [state, dispatch] = useReducer(authReducer, {
     isLoading: false,
     isLogout: false,
-    authToken: null,
+    accessToken: null,
   });
 
   useEffect(() => {
     const initState = async () => {
-      let token;
+      let accessToken;
       try {
-        token = await Storage.getItem("authToken");
+        accessToken = await Storage.getItem("accessToken");
       } catch (e) {
         // TODO Handle error logging
       }
       // TODO validate token
-      dispatch({ type: "restoreToken", token });
+      dispatch({ type: "restoreToken", accessToken });
     };
     initState();
   }, []);
@@ -50,9 +50,9 @@ export function AuthProvider({ children }) {
           .then(({ data }) => {
             console.log(data);
             if (data.signIn.type === "success") {
-              const token = data.signIn.data.access_token;
-              Storage.setItem("authToken", token);
-              dispatch({ type: "login", token });
+              const accessToken = data.signIn.data.access_token;
+              Storage.setItem("accessToken", accessToken);
+              dispatch({ type: "login", accessToken });
             }
           })
           .catch((err) => {

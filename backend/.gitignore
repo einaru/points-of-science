@@ -1,5 +1,6 @@
 node_modules/
 development.yaml
+test.yaml
 app.yaml
 coverage
 

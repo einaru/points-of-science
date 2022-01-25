@@ -5,10 +5,10 @@ import AccountNavigator from "./AccountNavigator";
 import { AuthContext } from "./services/auth/AuthProvider";
 
 function Navigation() {
-  const { authToken } = useContext(AuthContext);
+  const { isAuthenticated } = useContext(AuthContext);
   return (
     <NavigationContainer>
-      {authToken == null ? <AccountNavigator /> : <ContentNavigator />}
+      {isAuthenticated ? <ContentNavigator /> : <AccountNavigator />}
     </NavigationContainer>
   );
 }

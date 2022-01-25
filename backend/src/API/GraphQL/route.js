@@ -1,13 +1,24 @@
 import { GraphQLSchema, GraphQLObjectType } from "graphql";
-import { authRefreshTokenQuery, getAllUsersQuery, getUserByIDQuery, createUserQuery, deleteUserQuery, updateUserQuery, signInQuery } from '../../internal.js';
+import {
+  authAccessTokenQuery,
+  authRefreshTokenQuery,
+  getAllUsersQuery,
+  getUserByIDQuery,
+  createUserQuery,
+  deleteUserQuery,
+  updateUserQuery,
+  signInQuery,
+  signOutQuery,
+} from "../../internal.js";
 
 const ROOTQUERY = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
-    authenticateToken: authRefreshTokenQuery,
     getAllUsers: getAllUsersQuery,
+    getNewToken: authRefreshTokenQuery,
     getUserByID: getUserByIDQuery,
-  }
+    verifyToken: authAccessTokenQuery,
+  },
 });
 
 const MUTATION = new GraphQLObjectType({
@@ -17,7 +28,8 @@ const MUTATION = new GraphQLObjectType({
     deleteUser: deleteUserQuery,
     updateUser: updateUserQuery,
     signIn: signInQuery,
-  }
+    signOut: signOutQuery,
+  },
 });
 
 export default new GraphQLSchema({ query: ROOTQUERY, mutation: MUTATION });

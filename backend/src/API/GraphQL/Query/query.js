@@ -6,8 +6,11 @@ import {
 } from "graphql";
 import {
   AuthenticateTokenModel,
+  authenticateAccessToken,
   authenticateRefreshToken,
+  deleteRefreshTokenFromDatabase,
   UserModel,
+  NormalResponseModel,
   SignInModel,
   getData,
   getDataByFilter,
@@ -18,6 +21,18 @@ import {
 } from "../../../internal.js";
 
 //Root Queries - Used to retrieve data with GET-Requests
+const authAccessTokenQuery = {
+  type: NormalResponseModel,
+  args: {},
+  async resolve(parent, args, context) {
+    try{
+      return await authenticateAccessToken(context);
+    } catch(error){
+      return error;
+    }
+  }
+};
+
 const authRefreshTokenQuery = {
   type: AuthenticateTokenModel,
   args: {
@@ -25,7 +40,7 @@ const authRefreshTokenQuery = {
   },
   async resolve(parent, args) {
     try{
-      const response = await authenticateRefreshToken(args.refreshToken);
+      const response = await authenticateRefreshToken(args.refresh_token);
       if(response.type == 'error'){
         return response;
       }
@@ -134,12 +149,29 @@ const signInQuery = {
   }
 };
 
+const signOutQuery = {
+  type: NormalResponseModel,
+  args: {
+    refresh_token: { type: GraphQLString }
+  },
+  async resolve(parent, args, context){
+    try{
+      authenticateAccessToken(context);
+      return deleteRefreshTokenFromDatabase(args.refresh_token);
+    } catch(error){
+      return error;
+    }
+  }
+}
+
 export {
+  authAccessTokenQuery,
   authRefreshTokenQuery,
-  getAllUsersQuery,
-  getUserByIDQuery,
   createUserQuery,
   deleteUserQuery,
-  updateUserQuery,
+  getAllUsersQuery,
+  getUserByIDQuery,
   signInQuery,
+  signOutQuery,
+  updateUserQuery,
 };

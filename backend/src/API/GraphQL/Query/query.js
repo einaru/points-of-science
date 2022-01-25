@@ -156,7 +156,7 @@ const signOutQuery = {
   },
   async resolve(parent, args, context){
     try{
-      authenticateAccessToken(context);
+      await authenticateAccessToken(context);
       return deleteRefreshTokenFromDatabase(args.refresh_token);
     } catch(error){
       return error;

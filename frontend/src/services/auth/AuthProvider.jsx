@@ -14,12 +14,12 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const initState = async () => {
       const user = await Storage.getItem("user");
+      const refreshToken = await Storage.getItem("refreshToken");
       console.log("Restore user:", user);
-      dispatch({ type: "restoreUser", user });
+      dispatch({ type: "restoreUser", user, refreshToken });
       if (user) {
         const { data } = await client.query({ query: Query.VERIFY_TOKEN });
         if (data.verifyToken.type === "error") {
-          const refreshToken = await Storage.getItem("refreshToken");
           client
             .query({
               query: Query.GET_NEW_TOKEN,
@@ -64,6 +64,7 @@ export function AuthProvider({ children }) {
               dispatch({
                 type: "login",
                 user,
+                refreshToken,
               });
             }
           })
@@ -72,7 +73,17 @@ export function AuthProvider({ children }) {
           });
       },
       logOut: () => {
-        console.log("log out");
+        client
+          .mutate({
+            mutation: Query.LOGOUT,
+            variables: { refresh_token: state.refreshToken },
+          })
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((err) => {
+            console.error(err);
+          });
         Storage.removeItem("accessToken");
         Storage.removeItem("refreshToken");
         Storage.removeItem("user");

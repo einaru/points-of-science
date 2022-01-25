@@ -18,6 +18,16 @@ export const LOGIN = gql`
   }
 `;
 
+export const LOGOUT = gql`
+  mutation signOut($refresh_token: String!) {
+    signOut(refresh_token: $refresh_token) {
+      type
+      status
+      message
+    }
+  }
+`;
+
 export const VERIFY_TOKEN = gql`
   query verifyToken {
     verifyToken {

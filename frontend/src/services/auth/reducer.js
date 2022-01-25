@@ -1,5 +1,6 @@
 export const initialState = {
   isAuthenticated: false,
+  refreshToken: null,
   user: null,
 };
 
@@ -9,6 +10,7 @@ export function reducer(state, action) {
       return {
         ...state,
         user: action.user,
+        refreshToken: action.refreshToken,
       };
     case "restoreToken":
       return {
@@ -19,14 +21,11 @@ export function reducer(state, action) {
       return {
         ...state,
         user: action.user,
+        refreshToken: action.refreshToken,
         isAuthenticated: true,
       };
     case "logout":
-      return {
-        ...state,
-        user: null,
-        isAuthenticated: false,
-      };
+      return initialState;
     default:
       return new Error();
   }

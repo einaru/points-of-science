@@ -248,6 +248,13 @@ const ResponseModel = {
   type: { type: GraphQLString }
 }
 
+const NormalResponseModel = new GraphQLObjectType({
+  name: "Response",
+  fields: () => ({
+    ...ResponseModel
+  })
+});
+
 const SignInModel = new GraphQLObjectType({
   name: "SignIn",
   fields: () => ({
@@ -288,6 +295,7 @@ export {
   ChallengeModel,
   ClickStreamModel,
   LeaderboardModel,
+  NormalResponseModel,
   ReflectionModel,
   SignInModel,
   UserAchievementModel,

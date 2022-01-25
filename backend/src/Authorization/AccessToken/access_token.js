@@ -20,33 +20,31 @@ function createAccessToken(user) {
   }
 }
 
-function authenticateAccessToken(request, next) {
-  try {
+function authenticateAccessToken(request) {
+  return new Promise((resolve, reject) => {
     const authHeader = request.headers["authorization"];
     const accessToken = authHeader && authHeader.split(" ")[1];
     if (accessToken == null) {
-      return getResponseObject(
+      return reject(getResponseObject(
         "Access token is missing.",
         403,
         config.env.RESPONSE_TYPE.error
-      );
+      ));
     }
 
     jwt.verify(accessToken, config.env.ACCESS_TOKEN_SECRET, (error, user) => {
       if (error) {
-        return getResponseObject(
-          "Access token is invalid.",
+        return reject(getResponseObject(
+          "Access token is invalid. It has either expired or is missing.",
           403,
           config.env.RESPONSE_TYPE.error
-        );
+        ));
       }
 
       request.user = user;
-      next();
+      return resolve(getResponseObject("Authentication successful.", 200, config.env.RESPONSE_TYPE.success));
     });
-  } catch (error) {
-    throw error;
-  }
+  });
 }
 
 function createRefreshToken(user) {

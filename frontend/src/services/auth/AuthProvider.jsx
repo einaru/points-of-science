@@ -1,6 +1,6 @@
 import React, { useReducer, useEffect, useMemo, createContext } from "react";
 import { useApolloClient } from "@apollo/client";
-import { reducer, initialState } from "./authReducer";
+import { reducer, initialState } from "./reducer";
 import * as Query from "./query";
 import * as Storage from "../storage";
 

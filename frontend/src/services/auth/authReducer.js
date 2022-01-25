@@ -1,25 +1,33 @@
-function authReducer(state, action) {
+export const initialState = {
+  isAuthenticated: false,
+  user: null,
+};
+
+export function reducer(state, action) {
   switch (action.type) {
+    case "restoreUser":
+      return {
+        ...state,
+        user: action.user,
+      };
     case "restoreToken":
       return {
         ...state,
-        accessToken: action.accessToken,
-        isLoading: false,
+        isAuthenticated: true,
       };
     case "login":
       return {
         ...state,
-        accessToken: action.accessToken,
-        isLoading: false,
+        user: action.user,
+        isAuthenticated: true,
       };
     case "logout":
       return {
         ...state,
-        accessToken: null,
-        isLogout: true,
+        user: null,
+        isAuthenticated: false,
       };
     default:
       return new Error();
   }
 }
-export default authReducer;

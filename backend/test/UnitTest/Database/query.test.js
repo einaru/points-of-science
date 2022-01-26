@@ -1,28 +1,34 @@
-import data from "../../../assets/Database/Test/dummy_data.json";
 import {
+  config,
   connectToDatabase,
-  getData,
-  getDataByFilter,
-  updateData,
   deleteData,
-  nextID
+  getData,
+  getDatabase,
+  getDataByFilter,
+  nextID,
+  resetTestData,
+  updateData,
 } from "../../../src/internal.js";
 
-let database;
 let collectionName;
 let nonExistingCollectionName;
 let filter;
 let user;
 let newTable;
+let database;
 
 beforeAll(async () => {
   connectToDatabase();
-  database = data;
-  collectionName = "User";
+  database = getDatabase();
+  collectionName = config.env.USER_TABLE;
   nonExistingCollectionName = "NotATableName";
   filter = { key: "name", value: "Rayna Harteley" };
-  user = data[collectionName][1];
+  user = getDataByFilter(collectionName, { key: "id", value: 1 })[0];
   newTable = "Other_Users";
+});
+
+afterAll( () => {
+  resetTestData(config.env.ENVIRONMENT_MODE.TEST.dummy_data);
 });
 
 test("Next id for table and increment by one.", () => {
@@ -129,12 +135,6 @@ test("Delete data in database.", () => {
 
 test("Delete data returns false if table does not exist.", () => {
   const expectedResult = false;
-  const result = deleteData(newTable, user);
-  expect(result).toEqual(expectedResult);
-});
-
-test("Update data returns false if table does not exist.", () => {
-  const expectedResult = false;
-  const result = updateData(newTable, user);
+  const result = deleteData(nonExistingCollectionName, user);
   expect(result).toEqual(expectedResult);
 });

@@ -1,21 +1,29 @@
-import data from "../../../assets/Database/Test/dummy_data.json";
 import {
-  connectToDatabase,
-  getData,
   authenticateAccessToken,
   authenticateRefreshToken,
+  config,
+  connectToDatabase,
   createAccessToken,
   createRefreshToken,
-  deleteRefreshTokenFromDatabase
+  deleteRefreshTokenFromDatabase,
+  getData,
+  getDataByFilter,
+  resetTestData,
 } from "../../../src/internal.js";
 
 let user;
 let refreshTokenTable;
+let userTable;
 
 beforeAll(async () => {
   connectToDatabase();
-  user = data['User'][4];
-  refreshTokenTable = 'refresh_token';
+  refreshTokenTable = config.env.REFRESH_TOKEN_TABLE;
+  userTable = config.env.USER_TABLE;
+  user = getDataByFilter(userTable, { key: 'id', value: 4 });
+});
+
+afterAll( () => {
+  resetTestData(config.env.ENVIRONMENT_MODE.TEST.dummy_data);
 });
 
 test("Create access token.", () => {

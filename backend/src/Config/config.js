@@ -2,21 +2,21 @@ import { config } from "dotenv-yaml";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const filename = fileURLToPath(import.meta.url);
+const here = dirname(filename);
 
 if (process.env.NODE_ENV === "production") {
   console.log("[*] This application runs in production mode.");
-  config({ path: path.resolve(__dirname, `../../app.yaml`) });
-  console.log(path.resolve(__dirname, `../../app.yaml`));
+  config({ path: path.resolve(here, `../../app.yaml`) });
+  console.log(path.resolve(here, `../../app.yaml`));
 } else if (process.env.NODE_ENV === "test") {
   console.log("[*] This application runs in test mode.");
-  config({ path: path.resolve(__dirname, `../../test.yaml`) });
-  console.log(path.resolve(__dirname, `../../test.yaml`));
+  config({ path: path.resolve(here, `../../test.yaml`) });
+  console.log(path.resolve(here, `../../test.yaml`));
 } else {
   console.log("[*] This application runs in development mode.");
-  config({ path: path.resolve(__dirname, `../../development.yaml`) });
-  console.log(path.resolve(__dirname, `../../development.yaml`));
+  config({ path: path.resolve(here, `../../development.yaml`) });
+  console.log(path.resolve(here, `../../development.yaml`));
 }
 
 const env = {

@@ -38,11 +38,11 @@ const authAccessTokenQuery = {
 const authRefreshTokenQuery = {
   type: AuthenticateTokenModel,
   args: {
-    refresh_token: { type: GraphQLString },
+    refreshToken: { type: GraphQLString },
   },
   async resolve(parent, args) {
     try {
-      const response = await authenticateRefreshToken(args.refresh_token);
+      const response = await authenticateRefreshToken(args.refreshToken);
       if (response.type === "error") {
         return response;
       }
@@ -51,7 +51,7 @@ const authRefreshTokenQuery = {
         message: "Authentication successful.",
         status: 200,
         type: "success",
-        data: { access_token: response },
+        data: { accessToken: response },
       };
     } catch (error) {
       return error;
@@ -203,12 +203,12 @@ const signInQuery = {
 const signOutQuery = {
   type: NormalResponseModel,
   args: {
-    refresh_token: { type: GraphQLString },
+    refreshToken: { type: GraphQLString },
   },
   async resolve(parent, args, context) {
     try {
       await authenticateAccessToken(context);
-      return deleteRefreshTokenFromDatabase(args.refresh_token);
+      return deleteRefreshTokenFromDatabase(args.refreshToken);
     } catch (error) {
       return error;
     }

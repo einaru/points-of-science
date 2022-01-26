@@ -38,8 +38,8 @@ function signIn(username, password) {
               config.env.RESPONSE_TYPE.success,
               {
                 user,
-                access_token: accessToken,
-                refresh_token: refreshToken,
+                accessToken,
+                refreshToken,
               }
             )
           );

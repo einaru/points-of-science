@@ -41,7 +41,7 @@ const authRefreshTokenQuery = {
   async resolve(parent, args) {
     try {
       const response = await authenticateRefreshToken(args.refresh_token);
-      if (response.type == "error") {
+      if (response.type === "error") {
         return response;
       }
 

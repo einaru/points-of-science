@@ -10,7 +10,7 @@ import {
 function signIn(username, password) {
   return new Promise((resolve, reject) => {
     const users = getData(config.env.USER_TABLE);
-    const user = users.find((user) => user.name == username);
+    const user = users.find((user) => user.name === username);
     if (user == null) {
       return reject(
         getResponseObject(

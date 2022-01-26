@@ -67,7 +67,7 @@ function createRefreshToken(user) {
 
     const refreshToken = jwt.sign(userData, config.env.REFRESH_TOKEN_SECRET);
     const response = storeRefreshTokenInDatabase(refreshToken);
-    if (response.type == "error") {
+    if (response.type === "error") {
       throw new Error("Refresh token was not stored in database.");
     }
 
@@ -113,7 +113,7 @@ function authenticateRefreshToken(refreshToken) {
 function deleteRefreshTokenFromDatabase(refreshToken) {
   try {
     const refreshTokens = getData(config.env.REFRESH_TOKEN_TABLE);
-    if (refreshTokens.length == 0) {
+    if (refreshTokens.length === 0) {
       return getResponseObject(
         "User is already signed out.",
         200,
@@ -143,7 +143,7 @@ function storeRefreshTokenInDatabase(refreshToken) {
   try {
     const refreshTokens = getData(config.env.REFRESH_TOKEN_TABLE);
     const refreshTokenExist = refreshTokens.find(
-      (token) => token == refreshToken
+      (token) => token === refreshToken
     );
     if (refreshTokenExist != null) {
       return getResponseObject(

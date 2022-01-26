@@ -3,7 +3,7 @@
   "User": [
     {
       "id": 1,
-      "name": "Antonietta Riccard",
+      "username": "Antonietta Riccard",
       "password": "$2b$10$HGImWpGHTqsCUW7QPqE.xOLknm/a.IqV7bC.35ybKUGqLj13e9xiO",
       "permission": "control",
       "achievement": [],
@@ -11,7 +11,7 @@
     },
     {
       "id": 2,
-      "name": "Aldis Loughan",
+      "username": "Aldis Loughan",
       "password": "kEns4u9e4d",
       "permission": "control",
       "achievement": [],
@@ -19,7 +19,7 @@
     },
     {
       "id": 3,
-      "name": "Grissel Hamprecht",
+      "username": "Grissel Hamprecht",
       "password": "SnxTm4TTYBwl",
       "permission": "control",
       "achievement": [],
@@ -27,7 +27,7 @@
     },
     {
       "id": 4,
-      "name": "Violetta Brinkler",
+      "username": "Violetta Brinkler",
       "password": "9G9dlTd",
       "permission": "control",
       "achievement": [],
@@ -35,7 +35,7 @@
     },
     {
       "id": 5,
-      "name": "Dione Kochl",
+      "username": "Dione Kochl",
       "password": "NMtJVzk5AfBb",
       "permission": "control",
       "achievement": [],
@@ -43,7 +43,7 @@
     },
     {
       "id": 6,
-      "name": "Myrle Davitashvili",
+      "username": "Myrle Davitashvili",
       "password": "SnS4LS9j4UL",
       "permission": "control",
       "achievement": [],
@@ -51,7 +51,7 @@
     },
     {
       "id": 7,
-      "name": "Susie Bavage",
+      "username": "Susie Bavage",
       "password": "bBsX2NUXdGtr",
       "permission": "control",
       "achievement": [],
@@ -59,7 +59,7 @@
     },
     {
       "id": 8,
-      "name": "Maritsa Giamitti",
+      "username": "Maritsa Giamitti",
       "password": "7HywfJWg",
       "permission": "control",
       "achievement": [],
@@ -67,7 +67,7 @@
     },
     {
       "id": 9,
-      "name": "Etheline Morteo",
+      "username": "Etheline Morteo",
       "password": "Zu1G4J4iSL1",
       "permission": "control",
       "achievement": [],
@@ -75,7 +75,7 @@
     },
     {
       "id": 10,
-      "name": "Darnell Braunstein",
+      "username": "Darnell Braunstein",
       "password": "XlVMxsmu",
       "permission": "control",
       "achievement": [],
@@ -83,7 +83,7 @@
     },
     {
       "id": 11,
-      "name": "Ikey Cowpertwait",
+      "username": "Ikey Cowpertwait",
       "password": "WI8hZUYx",
       "permission": "control",
       "achievement": [],
@@ -91,7 +91,7 @@
     },
     {
       "id": 12,
-      "name": "Mackenzie Eustice",
+      "username": "Mackenzie Eustice",
       "password": "D8PGrGj2fWG",
       "permission": "control",
       "achievement": [],
@@ -99,7 +99,7 @@
     },
     {
       "id": 13,
-      "name": "Zed Dightham",
+      "username": "Zed Dightham",
       "password": "RFheefsu",
       "permission": "control",
       "achievement": [],
@@ -107,7 +107,7 @@
     },
     {
       "id": 14,
-      "name": "Loni Hanley",
+      "username": "Loni Hanley",
       "password": "BIDq69eT3T",
       "permission": "control",
       "achievement": [],
@@ -115,7 +115,7 @@
     },
     {
       "id": 15,
-      "name": "Dotty Mansford",
+      "username": "Dotty Mansford",
       "password": "RbTGb8",
       "permission": "control",
       "achievement": [],
@@ -123,7 +123,7 @@
     },
     {
       "id": 16,
-      "name": "Glyn Kleeman",
+      "username": "Glyn Kleeman",
       "password": "7C9uRPts5",
       "permission": "control",
       "achievement": [],
@@ -131,7 +131,7 @@
     },
     {
       "id": 17,
-      "name": "Bella Celez",
+      "username": "Bella Celez",
       "password": "x8mZu4",
       "permission": "control",
       "achievement": [],
@@ -139,7 +139,7 @@
     },
     {
       "id": 18,
-      "name": "Karlan Learmount",
+      "username": "Karlan Learmount",
       "password": "SHvzFJtD",
       "permission": "control",
       "achievement": [],
@@ -147,7 +147,7 @@
     },
     {
       "id": 19,
-      "name": "Nikolas Lazer",
+      "username": "Nikolas Lazer",
       "password": "lpBzVQg6rJJ",
       "permission": "control",
       "achievement": [],
@@ -155,7 +155,7 @@
     },
     {
       "id": 20,
-      "name": "Meredith Ganderton",
+      "username": "Meredith Ganderton",
       "password": "0lBJBPBHktn",
       "permission": "control",
       "achievement": [],
@@ -163,7 +163,7 @@
     },
     {
       "id": 21,
-      "name": "Korie Rablan",
+      "username": "Korie Rablan",
       "password": "DxltejT",
       "permission": "control",
       "achievement": [],
@@ -171,7 +171,7 @@
     },
     {
       "id": 22,
-      "name": "Olga Kepp",
+      "username": "Olga Kepp",
       "password": "5gO7nu",
       "permission": "control",
       "achievement": [],
@@ -179,7 +179,7 @@
     },
     {
       "id": 23,
-      "name": "Junie Mathevet",
+      "username": "Junie Mathevet",
       "password": "LiFH0EXI",
       "permission": "control",
       "achievement": [],
@@ -187,7 +187,7 @@
     },
     {
       "id": 24,
-      "name": "Annaliese Gaenor",
+      "username": "Annaliese Gaenor",
       "password": "XGu1j5h5oa",
       "permission": "control",
       "achievement": [],
@@ -195,7 +195,7 @@
     },
     {
       "id": 25,
-      "name": "Eleanora Chirm",
+      "username": "Eleanora Chirm",
       "password": "Uj2reT8wOi2",
       "permission": "control",
       "achievement": [],
@@ -203,7 +203,7 @@
     },
     {
       "id": 26,
-      "name": "Trudi O'Cosgra",
+      "username": "Trudi O'Cosgra",
       "password": "GaBa33h6S4",
       "permission": "control",
       "achievement": [],
@@ -211,7 +211,7 @@
     },
     {
       "id": 27,
-      "name": "Zola Woolland",
+      "username": "Zola Woolland",
       "password": "Cb39TRN",
       "permission": "control",
       "achievement": [],
@@ -219,7 +219,7 @@
     },
     {
       "id": 28,
-      "name": "Laurel Duchatel",
+      "username": "Laurel Duchatel",
       "password": "B3q3tyb",
       "permission": "control",
       "achievement": [],
@@ -227,7 +227,7 @@
     },
     {
       "id": 29,
-      "name": "Vance Cheevers",
+      "username": "Vance Cheevers",
       "password": "eeTk6nN0CFZz",
       "permission": "control",
       "achievement": [],
@@ -235,7 +235,7 @@
     },
     {
       "id": 30,
-      "name": "Pepita Sterry",
+      "username": "Pepita Sterry",
       "password": "Xaw1Sprk",
       "permission": "control",
       "achievement": [],
@@ -243,7 +243,7 @@
     },
     {
       "id": 31,
-      "name": "Nelli Gullefant",
+      "username": "Nelli Gullefant",
       "password": "tdh3zC36nC",
       "permission": "control",
       "achievement": [],
@@ -251,7 +251,7 @@
     },
     {
       "id": 32,
-      "name": "Stacy MacNair",
+      "username": "Stacy MacNair",
       "password": "HEmSqkuHf",
       "permission": "control",
       "achievement": [],
@@ -259,7 +259,7 @@
     },
     {
       "id": 33,
-      "name": "Enid Lant",
+      "username": "Enid Lant",
       "password": "qOCg5egWV8A",
       "permission": "control",
       "achievement": [],
@@ -267,7 +267,7 @@
     },
     {
       "id": 34,
-      "name": "Ken Croneen",
+      "username": "Ken Croneen",
       "password": "V1XLhqySue",
       "permission": "control",
       "achievement": [],
@@ -275,7 +275,7 @@
     },
     {
       "id": 35,
-      "name": "Astrix Chesworth",
+      "username": "Astrix Chesworth",
       "password": "384ufVEeTr0",
       "permission": "control",
       "achievement": [],
@@ -283,7 +283,7 @@
     },
     {
       "id": 36,
-      "name": "Tilda Beane",
+      "username": "Tilda Beane",
       "password": "8lBcmqYu",
       "permission": "experimental",
       "achievement": [],
@@ -291,7 +291,7 @@
     },
     {
       "id": 37,
-      "name": "Hill Lorryman",
+      "username": "Hill Lorryman",
       "password": "bI7rKPGdpt",
       "permission": "experimental",
       "achievement": [],
@@ -299,7 +299,7 @@
     },
     {
       "id": 38,
-      "name": "Harcourt Dunnico",
+      "username": "Harcourt Dunnico",
       "password": "dHt1u5jZQBF",
       "permission": "experimental",
       "achievement": [],
@@ -307,7 +307,7 @@
     },
     {
       "id": 39,
-      "name": "Jobye Deppe",
+      "username": "Jobye Deppe",
       "password": "XDMK97EgI8T",
       "permission": "experimental",
       "achievement": [],
@@ -315,7 +315,7 @@
     },
     {
       "id": 40,
-      "name": "Sadye Wheatman",
+      "username": "Sadye Wheatman",
       "password": "iosi6AC4",
       "permission": "experimental",
       "achievement": [],
@@ -323,7 +323,7 @@
     },
     {
       "id": 41,
-      "name": "Warde Shellcross",
+      "username": "Warde Shellcross",
       "password": "cmxKvu3",
       "permission": "experimental",
       "achievement": [],
@@ -331,7 +331,7 @@
     },
     {
       "id": 42,
-      "name": "Nanete LaBastida",
+      "username": "Nanete LaBastida",
       "password": "56d6rGcMG",
       "permission": "experimental",
       "achievement": [],
@@ -339,7 +339,7 @@
     },
     {
       "id": 43,
-      "name": "Karna Clinch",
+      "username": "Karna Clinch",
       "password": "097kjCdNHK",
       "permission": "experimental",
       "achievement": [],
@@ -347,7 +347,7 @@
     },
     {
       "id": 44,
-      "name": "Lorna Ebertz",
+      "username": "Lorna Ebertz",
       "password": "hcEA3X",
       "permission": "experimental",
       "achievement": [],
@@ -355,7 +355,7 @@
     },
     {
       "id": 45,
-      "name": "Hillie Camplin",
+      "username": "Hillie Camplin",
       "password": "u7SFl7CE5",
       "permission": "experimental",
       "achievement": [],
@@ -363,7 +363,7 @@
     },
     {
       "id": 46,
-      "name": "Kerry Quinnell",
+      "username": "Kerry Quinnell",
       "password": "td0VreA",
       "permission": "experimental",
       "achievement": [],
@@ -371,7 +371,7 @@
     },
     {
       "id": 47,
-      "name": "Nanny Gerhts",
+      "username": "Nanny Gerhts",
       "password": "VDTpfFxjUry",
       "permission": "experimental",
       "achievement": [],
@@ -379,7 +379,7 @@
     },
     {
       "id": 48,
-      "name": "Minor Minster",
+      "username": "Minor Minster",
       "password": "IzrRt547N",
       "permission": "experimental",
       "achievement": [],
@@ -387,7 +387,7 @@
     },
     {
       "id": 49,
-      "name": "Amalle Seydlitz",
+      "username": "Amalle Seydlitz",
       "password": "C8BRoP",
       "permission": "experimental",
       "achievement": [],
@@ -395,7 +395,7 @@
     },
     {
       "id": 50,
-      "name": "Morganica Redler",
+      "username": "Morganica Redler",
       "password": "dA6l7pjEhM",
       "permission": "experimental",
       "achievement": [],
@@ -403,7 +403,7 @@
     },
     {
       "id": 51,
-      "name": "Edwin Brignell",
+      "username": "Edwin Brignell",
       "password": "cgM2KaNIvD",
       "permission": "experimental",
       "achievement": [],
@@ -411,7 +411,7 @@
     },
     {
       "id": 52,
-      "name": "Lorinda Habron",
+      "username": "Lorinda Habron",
       "password": "dphv1kjotn",
       "permission": "experimental",
       "achievement": [],
@@ -419,7 +419,7 @@
     },
     {
       "id": 53,
-      "name": "Alexander Penreth",
+      "username": "Alexander Penreth",
       "password": "gQO9tZ4",
       "permission": "experimental",
       "achievement": [],
@@ -427,7 +427,7 @@
     },
     {
       "id": 54,
-      "name": "Karisa Kerton",
+      "username": "Karisa Kerton",
       "password": "sV4vgDlMf",
       "permission": "experimental",
       "achievement": [],
@@ -435,7 +435,7 @@
     },
     {
       "id": 55,
-      "name": "Davita Sargood",
+      "username": "Davita Sargood",
       "password": "QkwIbCLNhL",
       "permission": "experimental",
       "achievement": [],
@@ -443,7 +443,7 @@
     },
     {
       "id": 56,
-      "name": "Lona Peattie",
+      "username": "Lona Peattie",
       "password": "VcdDho1",
       "permission": "experimental",
       "achievement": [],
@@ -451,7 +451,7 @@
     },
     {
       "id": 57,
-      "name": "Kerry Darling",
+      "username": "Kerry Darling",
       "password": "nEX4yCG8Gs",
       "permission": "experimental",
       "achievement": [],
@@ -459,7 +459,7 @@
     },
     {
       "id": 58,
-      "name": "Rayna Harteley",
+      "username": "Rayna Harteley",
       "password": "q6EImS",
       "permission": "experimental",
       "achievement": [],
@@ -467,7 +467,7 @@
     },
     {
       "id": 59,
-      "name": "Kit Rubica",
+      "username": "Kit Rubica",
       "password": "BIlP2xQIld",
       "permission": "experimental",
       "achievement": [],
@@ -475,7 +475,7 @@
     },
     {
       "id": 60,
-      "name": "Phylys Deering",
+      "username": "Phylys Deering",
       "password": "Dh7r4el19g",
       "permission": "experimental",
       "achievement": [],
@@ -483,7 +483,7 @@
     },
     {
       "id": 61,
-      "name": "Ulrika Offener",
+      "username": "Ulrika Offener",
       "password": "WZNjeKBVr5r",
       "permission": "experimental",
       "achievement": [],
@@ -491,7 +491,7 @@
     },
     {
       "id": 62,
-      "name": "Morton Sibbald",
+      "username": "Morton Sibbald",
       "password": "9q1PVB",
       "permission": "experimental",
       "achievement": [],
@@ -499,7 +499,7 @@
     },
     {
       "id": 63,
-      "name": "Shirleen Pilling",
+      "username": "Shirleen Pilling",
       "password": "tCyqos",
       "permission": "experimental",
       "achievement": [],
@@ -507,7 +507,7 @@
     },
     {
       "id": 64,
-      "name": "Ogdon Boustred",
+      "username": "Ogdon Boustred",
       "password": "npwZJTFuhx9c",
       "permission": "experimental",
       "achievement": [],
@@ -515,7 +515,7 @@
     },
     {
       "id": 65,
-      "name": "Aloysius Ogelbe",
+      "username": "Aloysius Ogelbe",
       "password": "kf4SUinVDyW",
       "permission": "experimental",
       "achievement": [],
@@ -523,7 +523,7 @@
     },
     {
       "id": 66,
-      "name": "Isaak Whatley",
+      "username": "Isaak Whatley",
       "password": "BRvqnWojHj",
       "permission": "experimental",
       "achievement": [],
@@ -531,7 +531,7 @@
     },
     {
       "id": 67,
-      "name": "Tory Musslewhite",
+      "username": "Tory Musslewhite",
       "password": "mPY95H",
       "permission": "experimental",
       "achievement": [],
@@ -539,7 +539,7 @@
     },
     {
       "id": 68,
-      "name": "Pansy Mewburn",
+      "username": "Pansy Mewburn",
       "password": "ltIYotMw6i6F",
       "permission": "experimental",
       "achievement": [],
@@ -547,7 +547,7 @@
     },
     {
       "id": 69,
-      "name": "Sherlocke Piatek",
+      "username": "Sherlocke Piatek",
       "password": "ZyrhBN4gcJpF",
       "permission": "experimental",
       "achievement": [],
@@ -555,11 +555,223 @@
     },
     {
       "id": 70,
-      "name": "Jay Farmar",
+      "username": "Jay Farmar",
       "password": "tXlkRw9D4",
       "permission": "experimental",
       "achievement": [],
       "challenge": []
+    }
+  ],
+  "valid_username": [
+    {
+      "username": "Antonietta Riccard"
+    },
+    {
+      "username": "Aldis Loughan"
+    },
+    {
+      "username": "Grissel Hamprecht"
+    },
+    {
+      "username": "Violetta Brinkler"
+    },
+    {
+      "username": "Dione Kochl"
+    },
+    {
+      "username": "Myrle Davitashvili"
+    },
+    {
+      "username": "Susie Bavage"
+    },
+    {
+      "username": "Maritsa Giamitti"
+    },
+    {
+      "username": "Etheline Morteo"
+    },
+    {
+      "username": "Darnell Braunstein"
+    },
+    {
+      "username": "Ikey Cowpertwait"
+    },
+    {
+      "username": "Mackenzie Eustice"
+    },
+    {
+      "username": "Zed Dightham"
+    },
+    {
+      "username": "Loni Hanley"
+    },
+    {
+      "username": "Dotty Mansford"
+    },
+    {
+      "username": "Glyn Kleeman"
+    },
+    {
+      "username": "Bella Celez"
+    },
+    {
+      "username": "Karlan Learmount"
+    },
+    {
+      "username": "Nikolas Lazer"
+    },
+    {
+      "username": "Meredith Ganderton"
+    },
+    {
+      "username": "Korie Rablan"
+    },
+    {
+      "username": "Olga Kepp"
+    },
+    {
+      "username": "Junie Mathevet"
+    },
+    {
+      "username": "Annaliese Gaenor"
+    },
+    {
+      "username": "Eleanora Chirm"
+    },
+    {
+      "username": "Trudi O'Cosgra"
+    },
+    {
+      "username": "Zola Woolland"
+    },
+    {
+      "username": "Laurel Duchatel"
+    },
+    {
+      "username": "Vance Cheevers"
+    },
+    {
+      "username": "Pepita Sterry"
+    },
+    {
+      "username": "Nelli Gullefant"
+    },
+    {
+      "username": "Stacy MacNair"
+    },
+    {
+      "username": "Enid Lant"
+    },
+    {
+      "username": "Ken Croneen"
+    },
+    {
+      "username": "Astrix Chesworth"
+    },
+    {
+      "username": "Tilda Beane"
+    },
+    {
+      "username": "Hill Lorryman"
+    },
+    {
+      "username": "Harcourt Dunnico"
+    },
+    {
+      "username": "Jobye Deppe"
+    },
+    {
+      "username": "Sadye Wheatman"
+    },
+    {
+      "username": "Warde Shellcross"
+    },
+    {
+      "username": "Nanete LaBastida"
+    },
+    {
+      "username": "Karna Clinch"
+    },
+    {
+      "username": "Lorna Ebertz"
+    },
+    {
+      "username": "Hillie Camplin"
+    },
+    {
+      "username": "Kerry Quinnell"
+    },
+    {
+      "username": "Nanny Gerhts"
+    },
+    {
+      "username": "Minor Minster"
+    },
+    {
+      "username": "Amalle Seydlitz"
+    },
+    {
+      "username": "Morganica Redler"
+    },
+    {
+      "username": "Edwin Brignell"
+    },
+    {
+      "username": "Lorinda Habron"
+    },
+    {
+      "username": "Alexander Penreth"
+    },
+    {
+      "username": "Karisa Kerton"
+    },
+    {
+      "username": "Davita Sargood"
+    },
+    {
+      "username": "Lona Peattie"
+    },
+    {
+      "username": "Kerry Darling"
+    },
+    {
+      "username": "Rayna Harteley"
+    },
+    {
+      "username": "Kit Rubica"
+    },
+    {
+      "username": "Phylys Deering"
+    },
+    {
+      "username": "Ulrika Offener"
+    },
+    {
+      "username": "Morton Sibbald"
+    },
+    {
+      "username": "Shirleen Pilling"
+    },
+    {
+      "username": "Ogdon Boustred"
+    },
+    {
+      "username": "Aloysius Ogelbe"
+    },
+    {
+      "username": "Isaak Whatley"
+    },
+    {
+      "username": "Tory Musslewhite"
+    },
+    {
+      "username": "Pansy Mewburn"
+    },
+    {
+      "username": "Sherlocke Piatek"
+    },
+    {
+      "username": "Jay Farmar"
     }
   ]
 }

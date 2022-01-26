@@ -8,6 +8,7 @@ import {
   AuthenticateTokenModel,
   authenticateAccessToken,
   authenticateRefreshToken,
+  config,
   deleteRefreshTokenFromDatabase,
   UserModel,
   NormalResponseModel,
@@ -18,6 +19,7 @@ import {
   deleteData,
   nextID,
   signIn,
+  signUp,
 } from "../../../internal.js";
 
 // Root Queries - Used to retrieve data with GET-Requests
@@ -76,11 +78,59 @@ const getUserByIDQuery = {
   },
 };
 
+const verifyUsernameQuery = {
+  type: NormalResponseModel,
+  args: { username: { type: GraphQLString } },
+  resolve(parent, args) {
+    try {
+      const username = getDataByFilter(config.env.VALID_USERNAME_TABLE, {
+        key: "username",
+        value: args.username,
+      });
+      if (username.length === 0) {
+        return {
+          message: "Invalid username.",
+          status: 400,
+          type: config.env.RESPONSE_TYPE.error,
+        };
+      }
+
+      return {
+        message: "Username is verified.",
+        status: 200,
+        type: config.env.RESPONSE_TYPE.success,
+      };
+    } catch (error) {
+      return {
+        message: `Could not verify username due to an error. Error: ${error.message}`,
+        status: 400,
+        type: config.env.RESPONSE_TYPE.error,
+      };
+    }
+  },
+};
+
 // Mutation Queries - Used to update or delete data with PUT- and DELETE-requests
+const activateAccountQuery = {
+  type: SignInModel,
+  args: {
+    username: { type: GraphQLString },
+    password: { type: GraphQLString },
+    confirmPassword: { type: GraphQLString },
+  },
+  async resolve(parent, args) {
+    try {
+      return await signUp(args);
+    } catch (error) {
+      return error;
+    }
+  },
+};
+
 const createUserQuery = {
   type: UserModel,
   args: {
-    name: { type: GraphQLString },
+    username: { type: GraphQLString },
     password: { type: GraphQLString },
     confirm_password: { type: GraphQLString },
   },
@@ -88,7 +138,7 @@ const createUserQuery = {
     // Put the create user logic for the BusinessLogic here.
     const newUser = {
       id: nextID("User"),
-      name: args.name,
+      username: args.username,
       password: args.password,
       permission: "control",
       achievement: [],
@@ -119,7 +169,7 @@ const updateUserQuery = {
   type: UserModel,
   args: {
     id: { type: GraphQLInt },
-    name: { type: GraphQLString },
+    username: { type: GraphQLString },
     password: { type: GraphQLString },
     confirm_password: { type: GraphQLString },
   },
@@ -128,7 +178,7 @@ const updateUserQuery = {
     const userList = getDataByFilter("User", { key: "id", value: args.id });
     if (userList.length > 0) {
       const user = userList[0];
-      user.name = args.name;
+      user.username = args.username;
       updateData("User", user);
       return user;
     }
@@ -138,12 +188,12 @@ const updateUserQuery = {
 const signInQuery = {
   type: SignInModel,
   args: {
-    name: { type: GraphQLString },
+    username: { type: GraphQLString },
     password: { type: GraphQLString },
   },
   async resolve(parent, args) {
     try {
-      return await signIn(args.name, args.password);
+      return await signIn(args.username, args.password);
     } catch (error) {
       return error;
     }
@@ -166,6 +216,7 @@ const signOutQuery = {
 };
 
 export {
+  activateAccountQuery,
   authAccessTokenQuery,
   authRefreshTokenQuery,
   createUserQuery,
@@ -175,4 +226,5 @@ export {
   signInQuery,
   signOutQuery,
   updateUserQuery,
+  verifyUsernameQuery,
 };

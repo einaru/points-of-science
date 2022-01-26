@@ -68,13 +68,13 @@ function createObjectTemplate(functionKey, code) {
 function emptyData() {
   return {
     data: {
-      user_id: 0,
+      id: 0,
+      username: "",
       password: "",
-      name: "",
       permission: "",
       achievements: [],
       challenges: [],
-      data_collection: {},
+      active: 1,
     },
   };
 }

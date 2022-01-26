@@ -17,18 +17,15 @@ let user;
 let newTable;
 let database;
 
-beforeAll(async () => {
+beforeAll(() => {
   connectToDatabase();
+  resetTestData(config.env.ENVIRONMENT_MODE.TEST.dummy_data);
   database = getDatabase();
   collectionName = config.env.USER_TABLE;
   nonExistingCollectionName = "NotATableName";
   filter = { key: "name", value: "Rayna Harteley" };
   user = getDataByFilter(collectionName, { key: "id", value: 1 })[0];
   newTable = "Other_Users";
-});
-
-afterAll( () => {
-  resetTestData(config.env.ENVIRONMENT_MODE.TEST.dummy_data);
 });
 
 test("Next id for table and increment by one.", () => {
@@ -39,10 +36,10 @@ test("Next id for table and increment by one.", () => {
 });
 
 test("Next id handle null.", () => {
-  try{
+  try {
     expect.assertions(1);
     nextID(null);
-  } catch(error){
+  } catch (error) {
     const expectedResult = `Table is not an array.`;
     const result = error.message;
     expect(result).toEqual(expectedResult);
@@ -63,22 +60,24 @@ test("Get data return null if table does not exist.", () => {
 
 test("Get data by filter from database.", () => {
   const result = getDataByFilter(collectionName, filter);
-  const expectedResult = [{
-    id: 58,
-    name: "Rayna Harteley",
-    password: "q6EImS",
-    permission: "experimental",
-    achievement: [],
-    challenge: [],
-  }];
+  const expectedResult = [
+    {
+      id: 58,
+      name: "Rayna Harteley",
+      password: "q6EImS",
+      permission: "experimental",
+      achievement: [],
+      challenge: [],
+    },
+  ];
   expect(result).toEqual(expectedResult);
 });
 
 test("Get data by filter throw error if table does not exist.", () => {
-  try{
+  try {
     expect.assertions(1);
     getDataByFilter(nonExistingCollectionName, filter);
-  } catch(error){
+  } catch (error) {
     const expectedResult = `Attempt to filter a table which do not exist.`;
     const result = error.message;
     expect(result).toEqual(expectedResult);
@@ -88,28 +87,31 @@ test("Get data by filter throw error if table does not exist.", () => {
 test("Create data in database.", () => {
   const id = nextID(database[collectionName]);
   const newUser = {
-    "id": id,
-    "name": "Ola Nordmann",
-    "password": "thisIsNOtAnActualpassWord",
-    "permission": "control",
-    "achievement": [],
-    "challenge": []
+    id: id,
+    name: "Ola Nordmann",
+    password: "thisIsNOtAnActualpassWord",
+    permission: "control",
+    achievement: [],
+    challenge: [],
   };
 
   updateData(collectionName, newUser);
-  const result = getDataByFilter(collectionName, { key: 'id', value: newUser.id });
+  const result = getDataByFilter(collectionName, {
+    key: "id",
+    value: newUser.id,
+  });
   const expectedResult = [newUser];
   expect(result).toEqual(expectedResult);
 });
 
 test("Create data creates table in database if table does not exist.", () => {
   const newUser = {
-    "id": 1,
-    "name": "Ola Nordmann",
-    "password": "thisIsNOtAnActualpassWord",
-    "permission": "control",
-    "achievement": [],
-    "challenge": []
+    id: 1,
+    name: "Ola Nordmann",
+    password: "thisIsNOtAnActualpassWord",
+    permission: "control",
+    achievement: [],
+    challenge: [],
   };
 
   updateData(newTable, newUser);
@@ -119,16 +121,16 @@ test("Create data creates table in database if table does not exist.", () => {
 });
 
 test("Update data in database.", () => {
-  user.permission = 'experimental';
+  user.permission = "experimental";
   updateData(collectionName, user);
-  const result = getDataByFilter(collectionName, { key: 'id', value: user.id });
+  const result = getDataByFilter(collectionName, { key: "id", value: user.id });
   const expectedResult = [user];
   expect(result).toEqual(expectedResult);
 });
 
 test("Delete data in database.", () => {
   deleteData(collectionName, user);
-  const result = getDataByFilter(collectionName, { key: 'id', value: user.id });
+  const result = getDataByFilter(collectionName, { key: "id", value: user.id });
   const expectedResult = [];
   expect(result).toEqual(expectedResult);
 });

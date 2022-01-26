@@ -4,13 +4,15 @@ import {
   connectToDatabase,
   hashPassword,
   comparePassword,
+  resetTestData,
 } from "../../../src/internal.js";
 
 let plainText;
 let hash;
 
-beforeAll(async () => {
+beforeAll(() => {
   connectToDatabase();
+  resetTestData(config.env.ENVIRONMENT_MODE.TEST.dummy_data);
   plainText = data["1"].plain_text;
   hash = data["1"].hash;
 });

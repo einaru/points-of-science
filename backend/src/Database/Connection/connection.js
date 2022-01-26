@@ -36,19 +36,25 @@ function connectToDatabase() {
   }
 }
 
-function connectToNonProductionDatabase(databaseFolder, filePath, dummyDataPath) {
-  try{
+function connectToNonProductionDatabase(
+  databaseFolder,
+  filePath,
+  dummyDataPath
+) {
+  try {
     makeFolders(databaseFolder);
     filePathToDatabase = path.resolve(__dirname, filePath);
     copyDummyDataToDatabase(dummyDataPath);
     database = JSON.parse(fs.readFileSync(filePathToDatabase, "utf-8"));
     return database;
-  } catch(error){
-    console.log(`\n[-] An error occurred in file connection.js when connecting to database. Error: ${error.message}.`);
+  } catch (error) {
+    console.log(
+      `\n[-] An error occurred in file connection.js when connecting to database. Error: ${error.message}.`
+    );
   }
 }
 
-function getDatabase(){
+function getDatabase() {
   return database;
 }
 
@@ -58,16 +64,18 @@ function checkEnvironmentMode(mode) {
   return config.env.NODE_ENV === mode;
 }
 
-function makeFolders(databaseFolder){
-  if(!fs.existsSync(databaseFolder)){
+function makeFolders(databaseFolder) {
+  if (!fs.existsSync(databaseFolder)) {
     fs.mkdirSync(databaseFolder, { recursive: true });
   }
 }
 
-function copyDummyDataToDatabase(dummyDataPath){
+function copyDummyDataToDatabase(dummyDataPath) {
   const filePathToStaticData = path.resolve(__dirname, dummyDataPath);
-  if(!fs.existsSync(filePathToDatabase)){
-    const dummyData = JSON.parse(fs.readFileSync(filePathToStaticData, "utf-8"));
+  if (!fs.existsSync(filePathToDatabase)) {
+    const dummyData = JSON.parse(
+      fs.readFileSync(filePathToStaticData, "utf-8")
+    );
     fs.writeFileSync(
       filePathToDatabase,
       JSON.stringify(dummyData, null, 2),
@@ -76,9 +84,10 @@ function copyDummyDataToDatabase(dummyDataPath){
   }
 }
 
-function resetTestData(dummyDataPath){
+function resetTestData(dummyDataPath) {
   const filePathToStaticData = path.resolve(__dirname, dummyDataPath);
   const dummyData = JSON.parse(fs.readFileSync(filePathToStaticData, "utf-8"));
+  database = dummyData;
   fs.writeFileSync(
     filePathToDatabase,
     JSON.stringify(dummyData, null, 2),

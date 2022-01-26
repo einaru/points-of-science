@@ -1,10 +1,10 @@
-import { config } from "../../internal.js";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
+import { config } from "../../internal.js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const filename = fileURLToPath(import.meta.url);
+const here = dirname(filename);
 
 let database;
 let filePathToDatabase;
@@ -31,8 +31,7 @@ function connectToDatabase() {
   }
 
   if (checkEnvironmentMode(config.env.ENVIRONMENT_MODE.PRODUCTION.mode)) {
-    //Fill in logic connecting the application to a production database.
-    return;
+    // Fill in logic connecting the application to a production database.
   }
 }
 
@@ -43,7 +42,7 @@ function connectToNonProductionDatabase(
 ) {
   try {
     makeFolders(databaseFolder);
-    filePathToDatabase = path.resolve(__dirname, filePath);
+    filePathToDatabase = path.resolve(here, filePath);
     copyDummyDataToDatabase(dummyDataPath);
     database = JSON.parse(fs.readFileSync(filePathToDatabase, "utf-8"));
     return database;
@@ -58,7 +57,7 @@ function getDatabase() {
   return database;
 }
 
-//---------------------------------------------------- Helper-functions ------------------------------------------------------
+// ---------------------------------------------------- Helper-functions ------------------------------------------------------
 
 function checkEnvironmentMode(mode) {
   return config.env.NODE_ENV === mode;
@@ -71,7 +70,7 @@ function makeFolders(databaseFolder) {
 }
 
 function copyDummyDataToDatabase(dummyDataPath) {
-  const filePathToStaticData = path.resolve(__dirname, dummyDataPath);
+  const filePathToStaticData = path.resolve(here, dummyDataPath);
   if (!fs.existsSync(filePathToDatabase)) {
     const dummyData = JSON.parse(
       fs.readFileSync(filePathToStaticData, "utf-8")
@@ -85,7 +84,7 @@ function copyDummyDataToDatabase(dummyDataPath) {
 }
 
 function resetTestData(dummyDataPath) {
-  const filePathToStaticData = path.resolve(__dirname, dummyDataPath);
+  const filePathToStaticData = path.resolve(here, dummyDataPath);
   const dummyData = JSON.parse(fs.readFileSync(filePathToStaticData, "utf-8"));
   database = dummyData;
   fs.writeFileSync(

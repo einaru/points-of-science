@@ -8,7 +8,9 @@
     "start": "cross-env NODE_ENV=production yarn node src/server.js",
     "dev": "cross-env NODE_ENV=development nodemon src/server.js --ext js",
     "prod": "cross-env NODE_ENV=production yarn node src/server.js",
-    "test": "cross-env NODE_ENV=test yarn node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
+    "test": "cross-env NODE_ENV=test yarn node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
+    "lint": "eslint . --ext js",
+    "lint:fix": "eslint . --ext js --fix"
   },
   "author": "Andreas N. Digernes & Einar Uvsløkk",
   "license": "ISC",
@@ -25,7 +27,14 @@
     "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {
+    "eslint": "^8.7.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jest": "^26.0.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "jest": "^27.4.7",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "prettier": "^2.5.1"
   }
 }

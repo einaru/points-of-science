@@ -1,8 +1,8 @@
-//Server directory imports:
+// Server directory imports:
+import jwt from "jsonwebtoken";
 import { config, getData, updateData, deleteData } from "../../internal.js";
 
-//Other third party dependencies:
-import jwt from "jsonwebtoken";
+// Other third party dependencies:
 
 function createAccessToken(user) {
   try {
@@ -22,27 +22,37 @@ function createAccessToken(user) {
 
 function authenticateAccessToken(request) {
   return new Promise((resolve, reject) => {
-    const authHeader = request.headers["authorization"];
+    const authHeader = request.headers.authorization;
     const accessToken = authHeader && authHeader.split(" ")[1];
     if (accessToken == null) {
-      return reject(getResponseObject(
-        "Access token is missing.",
-        403,
-        config.env.RESPONSE_TYPE.error
-      ));
+      return reject(
+        getResponseObject(
+          "Access token is missing.",
+          403,
+          config.env.RESPONSE_TYPE.error
+        )
+      );
     }
 
     jwt.verify(accessToken, config.env.ACCESS_TOKEN_SECRET, (error, user) => {
       if (error) {
-        return reject(getResponseObject(
-          "Access token is invalid. It has either expired or is missing.",
-          403,
-          config.env.RESPONSE_TYPE.error
-        ));
+        return reject(
+          getResponseObject(
+            "Access token is invalid. It has either expired or is missing.",
+            403,
+            config.env.RESPONSE_TYPE.error
+          )
+        );
       }
 
       request.user = user;
-      return resolve(getResponseObject("Authentication successful.", 200, config.env.RESPONSE_TYPE.success));
+      return resolve(
+        getResponseObject(
+          "Authentication successful.",
+          200,
+          config.env.RESPONSE_TYPE.success
+        )
+      );
     });
   });
 }
@@ -57,7 +67,7 @@ function createRefreshToken(user) {
 
     const refreshToken = jwt.sign(userData, config.env.REFRESH_TOKEN_SECRET);
     const response = storeRefreshTokenInDatabase(refreshToken);
-    if (response.type == "error") {
+    if (response.type === "error") {
       throw new Error("Refresh token was not stored in database.");
     }
 
@@ -103,7 +113,7 @@ function authenticateRefreshToken(refreshToken) {
 function deleteRefreshTokenFromDatabase(refreshToken) {
   try {
     const refreshTokens = getData(config.env.REFRESH_TOKEN_TABLE);
-    if (refreshTokens.length == 0) {
+    if (refreshTokens.length === 0) {
       return getResponseObject(
         "User is already signed out.",
         200,
@@ -133,7 +143,7 @@ function storeRefreshTokenInDatabase(refreshToken) {
   try {
     const refreshTokens = getData(config.env.REFRESH_TOKEN_TABLE);
     const refreshTokenExist = refreshTokens.find(
-      (token) => token == refreshToken
+      (token) => token === refreshToken
     );
     if (refreshTokenExist != null) {
       return getResponseObject(
@@ -156,9 +166,9 @@ function storeRefreshTokenInDatabase(refreshToken) {
 
 function getResponseObject(message, statusCode, type) {
   return {
-    message: message,
+    message,
     status: statusCode,
-    type: type,
+    type,
   };
 }
 

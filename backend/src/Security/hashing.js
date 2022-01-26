@@ -1,7 +1,6 @@
-//Server directory imports:
-import { config } from '../internal.js';
-
+// Server directory imports:
 import bcrypt from "bcrypt";
+import { config } from "../internal.js";
 
 function hashPassword(password) {
   return new Promise((resolve, reject) => {
@@ -18,7 +17,7 @@ function hashPassword(password) {
         });
       })
       .catch((error) => {
-        //TO-DO: Implement error handler to take care of the error and provide a proper response to the user.
+        // TO-DO: Implement error handler to take care of the error and provide a proper response to the user.
         return reject(error);
       });
   });
@@ -36,7 +35,7 @@ function comparePassword(userPassword, storedPassword) {
         });
       })
       .catch((error) => {
-        //TO-DO: Implement error handler to take care of the error and provide a proper response to the user.
+        // TO-DO: Implement error handler to take care of the error and provide a proper response to the user.
         return reject(error);
       });
   });

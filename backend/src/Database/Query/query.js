@@ -1,5 +1,5 @@
-import { getDatabase, filePathToDatabase } from "../../internal.js";
 import fs from "fs";
+import { getDatabase, filePathToDatabase } from "../../internal.js";
 
 const incrementor = 1;
 
@@ -21,7 +21,7 @@ function getDataByFilter(collectionName, filter) {
     }
     const filteredData = data.filter((entry) => {
       if (!isNull(entry[filter.key])) {
-        return entry[filter.key] == filter.value;
+        return entry[filter.key] === filter.value;
       }
     });
 
@@ -61,7 +61,7 @@ function mutateData(collectionName, findData, mutateFunction) {
     }
 
     const entryFound = getPosition(findData, data);
-    if (entryFound == -1) {
+    if (entryFound === -1) {
       return false;
     }
 
@@ -81,7 +81,7 @@ function nextID(table) {
   return table.length + incrementor;
 }
 
-//-------------------------------------------------- Helper-functions ----------------------------------------------------
+// -------------------------------------------------- Helper-functions ----------------------------------------------------
 
 function performCreate(database, key, newData) {
   if (database[key]) {
@@ -115,9 +115,11 @@ function isNull(data) {
 function hasDataEntry(data, entry) {
   if (Array.isArray(entry)) {
     return entry.includes(data);
-  } else if (entry === Object(entry)) {
-    return data.id == entry.id;
-  } else if (data === entry) {
+  }
+  if (entry === Object(entry)) {
+    return data.id === entry.id;
+  }
+  if (data === entry) {
     return true;
   }
 

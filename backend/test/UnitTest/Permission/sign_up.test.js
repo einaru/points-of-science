@@ -1,9 +1,3 @@
+beforeAll(async () => {});
 
-
-beforeAll(async () => {
-
-});
-
-test("Register user", () => {
-
-});
+test("Register user", () => {});

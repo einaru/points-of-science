@@ -23,12 +23,11 @@ export function AuthProvider({ children }) {
           client
             .query({
               query: Query.GET_NEW_TOKEN,
-              variables: { refresh_token: refreshToken },
+              variables: { refreshToken },
             })
             .then((resp) => {
               if (resp.data.getNewToken.type === "success") {
-                const { access_token: accessToken } =
-                  resp.data.getNewToken.data;
+                const { accessToken } = resp.data.getNewToken.data;
                 Storage.setItem("accessToken", accessToken);
                 dispatch({ type: "restoreToken" });
               }
@@ -45,19 +44,17 @@ export function AuthProvider({ children }) {
     () => ({
       ...state,
       logIn: async ({ username, password }) => {
+        console.log(username, password);
         client
           .mutate({
             mutation: Query.LOGIN,
-            variables: { name: username, password },
+            variables: { username, password },
           })
           .then(({ data }) => {
             console.log(data);
+            console.log(data.signIn.message);
             if (data.signIn.type === "success") {
-              const {
-                access_token: accessToken,
-                refresh_token: refreshToken,
-                user,
-              } = data.signIn.data;
+              const { accessToken, refreshToken, user } = data.signIn.data;
               Storage.setItem("accessToken", accessToken);
               Storage.setItem("refreshToken", refreshToken);
               Storage.setItem("user", JSON.stringify(user));
@@ -76,7 +73,7 @@ export function AuthProvider({ children }) {
         client
           .mutate({
             mutation: Query.LOGOUT,
-            variables: { refresh_token: state.refreshToken },
+            variables: { refreshToken: state.refreshToken },
           })
           .then((data) => {
             console.log(data);

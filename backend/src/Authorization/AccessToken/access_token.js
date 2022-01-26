@@ -1,8 +1,8 @@
-//Server directory imports:
+// Server directory imports:
+import jwt from "jsonwebtoken";
 import { config, getData, updateData, deleteData } from "../../internal.js";
 
-//Other third party dependencies:
-import jwt from "jsonwebtoken";
+// Other third party dependencies:
 
 function createAccessToken(user) {
   try {
@@ -22,27 +22,37 @@ function createAccessToken(user) {
 
 function authenticateAccessToken(request) {
   return new Promise((resolve, reject) => {
-    const authHeader = request.headers["authorization"];
+    const authHeader = request.headers.authorization;
     const accessToken = authHeader && authHeader.split(" ")[1];
     if (accessToken == null) {
-      return reject(getResponseObject(
-        "Access token is missing.",
-        403,
-        config.env.RESPONSE_TYPE.error
-      ));
+      return reject(
+        getResponseObject(
+          "Access token is missing.",
+          403,
+          config.env.RESPONSE_TYPE.error
+        )
+      );
     }
 
     jwt.verify(accessToken, config.env.ACCESS_TOKEN_SECRET, (error, user) => {
       if (error) {
-        return reject(getResponseObject(
-          "Access token is invalid. It has either expired or is missing.",
-          403,
-          config.env.RESPONSE_TYPE.error
-        ));
+        return reject(
+          getResponseObject(
+            "Access token is invalid. It has either expired or is missing.",
+            403,
+            config.env.RESPONSE_TYPE.error
+          )
+        );
       }
 
       request.user = user;
-      return resolve(getResponseObject("Authentication successful.", 200, config.env.RESPONSE_TYPE.success));
+      return resolve(
+        getResponseObject(
+          "Authentication successful.",
+          200,
+          config.env.RESPONSE_TYPE.success
+        )
+      );
     });
   });
 }
@@ -156,9 +166,9 @@ function storeRefreshTokenInDatabase(refreshToken) {
 
 function getResponseObject(message, statusCode, type) {
   return {
-    message: message,
+    message,
     status: statusCode,
-    type: type,
+    type,
   };
 }
 

@@ -87,7 +87,7 @@ test("Get data by filter throw error if table does not exist.", () => {
 test("Create data in database.", () => {
   const id = nextID(database[collectionName]);
   const newUser = {
-    id: id,
+    id,
     name: "Ola Nordmann",
     password: "thisIsNOtAnActualpassWord",
     permission: "control",

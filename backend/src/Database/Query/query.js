@@ -1,5 +1,5 @@
-import { getDatabase, filePathToDatabase } from "../../internal.js";
 import fs from "fs";
+import { getDatabase, filePathToDatabase } from "../../internal.js";
 
 const incrementor = 1;
 
@@ -81,7 +81,7 @@ function nextID(table) {
   return table.length + incrementor;
 }
 
-//-------------------------------------------------- Helper-functions ----------------------------------------------------
+// -------------------------------------------------- Helper-functions ----------------------------------------------------
 
 function performCreate(database, key, newData) {
   if (database[key]) {
@@ -115,9 +115,11 @@ function isNull(data) {
 function hasDataEntry(data, entry) {
   if (Array.isArray(entry)) {
     return entry.includes(data);
-  } else if (entry === Object(entry)) {
+  }
+  if (entry === Object(entry)) {
     return data.id == entry.id;
-  } else if (data === entry) {
+  }
+  if (data === entry) {
     return true;
   }
 

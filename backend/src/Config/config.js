@@ -31,19 +31,14 @@ const env = {
       mode: "development",
       database_file_path:
         "../../../assets/Database/Development/dummy_data.json",
-      database_folder:
-        "./assets/Database/Development",
-      dummy_data:
-        "../../../assets/Static/dummy_data.json"
+      database_folder: "./assets/Database/Development",
+      dummy_data: "../../../assets/Static/dummy_data.json",
     },
     TEST: {
       mode: "test",
-      database_file_path:
-        "../../../assets/Database/Test/dummy_data.json",
-      database_folder:
-        "./assets/Database/Test",
-      dummy_data:
-        "../../../assets/Static/dummy_data.json"
+      database_file_path: "../../../assets/Database/Test/dummy_data.json",
+      database_folder: "./assets/Database/Test",
+      dummy_data: "../../../assets/Static/dummy_data.json",
     },
   },
   HTTPPORT: process.env.HTTPPORT,

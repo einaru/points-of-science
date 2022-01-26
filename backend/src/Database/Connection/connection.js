@@ -1,7 +1,7 @@
-import { config } from "../../internal.js";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
+import { config } from "../../internal.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -31,8 +31,7 @@ function connectToDatabase() {
   }
 
   if (checkEnvironmentMode(config.env.ENVIRONMENT_MODE.PRODUCTION.mode)) {
-    //Fill in logic connecting the application to a production database.
-    return;
+    // Fill in logic connecting the application to a production database.
   }
 }
 
@@ -58,7 +57,7 @@ function getDatabase() {
   return database;
 }
 
-//---------------------------------------------------- Helper-functions ------------------------------------------------------
+// ---------------------------------------------------- Helper-functions ------------------------------------------------------
 
 function checkEnvironmentMode(mode) {
   return config.env.NODE_ENV === mode;

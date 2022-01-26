@@ -1,17 +1,7 @@
+beforeAll(async () => {});
 
+test("Update name", () => {});
 
-beforeAll(async () => {
+test("Change password", () => {});
 
-});
-
-test("Update name", () => {
-
-});
-
-test("Change password", () => {
-
-});
-
-test("Swap permission", () => {
-
-});
+test("Swap permission", () => {});

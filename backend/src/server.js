@@ -1,7 +1,7 @@
-import cors from 'cors';
-import express from 'express';
-import bodyParser from 'body-parser';
-import { graphqlHTTP } from 'express-graphql';
+import cors from "cors";
+import express from "express";
+import bodyParser from "body-parser";
+import { graphqlHTTP } from "express-graphql";
 
 import { config, schema, connectToDatabase } from "./internal.js";
 

@@ -52,6 +52,11 @@ const env = {
     success: "success",
     error: "error",
   },
+  PERMISSION_LEVELS: {
+    ADMIN: 1,
+    EXPERIMENTAL: 2,
+    CONTROL: 3
+  }
 };
 
 export { env };

@@ -277,6 +277,32 @@ const AuthenticateTokenModel = new GraphQLObjectType({
   }),
 });
 
+const PermissionEnum = new GraphQLEnumType({
+  name: "PermissionEnum",
+  values: {
+    ADMIN: { value: 1 },
+    EXPERIMENTAL: { value: 2 },
+    CONTROL: { value: 3 },
+  },
+});
+
+const PermissionStructure = new GraphQLObjectType({
+  name: "PermissinStructure",
+  fields: () => ({
+    ADMIN: { type: GraphQLInt },
+    EXPERIMENTAL: { type: GraphQLInt },
+    CONTROL: { type: GraphQLInt },
+  }),
+});
+
+const PermissionModel = new GraphQLObjectType({
+  name: "Permission",
+  fields: () => ({
+    ...ResponseModel,
+    data: { type: PermissionStructure },
+  }),
+});
+
 export {
   ActivityModel,
   AchievementModel,
@@ -286,6 +312,7 @@ export {
   ClickStreamModel,
   LeaderboardModel,
   NormalResponseModel,
+  PermissionModel,
   ReflectionModel,
   SignInModel,
   UserAchievementModel,

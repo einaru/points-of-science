@@ -11,6 +11,9 @@ import {
   signInQuery,
   signOutQuery,
   verifyUsernameQuery,
+  getPermissionsQuery,
+  setPermissionQuery,
+  swapPermissionQuery,
 } from "../../internal.js";
 
 const ROOTQUERY = new GraphQLObjectType({
@@ -18,6 +21,7 @@ const ROOTQUERY = new GraphQLObjectType({
   fields: {
     getAllUsers: getAllUsersQuery,
     getNewToken: authRefreshTokenQuery,
+    getPermissions: getPermissionsQuery,
     getUserByID: getUserByIDQuery,
     verifyToken: authAccessTokenQuery,
     verifyUsername: verifyUsernameQuery,
@@ -32,7 +36,9 @@ const MUTATION = new GraphQLObjectType({
     deleteUser: deleteUserQuery,
     updateUser: updateUserQuery,
     signIn: signInQuery,
+    setPermission: setPermissionQuery,
     signOut: signOutQuery,
+    swapPermissionGroup: swapPermissionQuery,
   },
 });
 

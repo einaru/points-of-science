@@ -1,9 +1,10 @@
-import { database, filePathToDatabase } from "../../internal.js";
+import { getDatabase, filePathToDatabase } from "../../internal.js";
 import fs from "fs";
 
 const incrementor = 1;
 
 function getData(collectionName) {
+  const database = getDatabase();
   const data = database[collectionName];
   if (isNull(data)) {
     return null;
@@ -42,7 +43,7 @@ function updateData(collectionName, newData) {
   try {
     const hasUpdated = mutateData(collectionName, newData, performUpdate);
     if (!hasUpdated) {
-      performCreate(database, collectionName, newData);
+      performCreate(getDatabase(), collectionName, newData);
       writeData();
     }
 
@@ -64,7 +65,7 @@ function mutateData(collectionName, findData, mutateFunction) {
       return false;
     }
 
-    mutateFunction(database, collectionName, entryFound, findData);
+    mutateFunction(getDatabase(), collectionName, entryFound, findData);
     writeData();
     return true;
   } catch (error) {
@@ -102,7 +103,7 @@ function performDelete(database, key, position, deleteEntry) {
 function writeData() {
   fs.writeFileSync(
     filePathToDatabase,
-    JSON.stringify(database, null, 2),
+    JSON.stringify(getDatabase(), null, 2),
     "utf-8"
   );
 }

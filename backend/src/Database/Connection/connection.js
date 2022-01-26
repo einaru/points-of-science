@@ -48,6 +48,10 @@ function connectToNonProductionDatabase(databaseFolder, filePath, dummyDataPath)
   }
 }
 
+function getDatabase(){
+  return database;
+}
+
 //---------------------------------------------------- Helper-functions ------------------------------------------------------
 
 function checkEnvironmentMode(mode) {
@@ -72,4 +76,14 @@ function copyDummyDataToDatabase(dummyDataPath){
   }
 }
 
-export { connectToDatabase, database, filePathToDatabase };
+function resetTestData(dummyDataPath){
+  const filePathToStaticData = path.resolve(__dirname, dummyDataPath);
+  const dummyData = JSON.parse(fs.readFileSync(filePathToStaticData, "utf-8"));
+  fs.writeFileSync(
+    filePathToDatabase,
+    JSON.stringify(dummyData, null, 2),
+    "utf-8"
+  );
+}
+
+export { connectToDatabase, getDatabase, filePathToDatabase, resetTestData };

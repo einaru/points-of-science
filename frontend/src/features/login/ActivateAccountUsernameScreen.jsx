@@ -1,13 +1,12 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import { Button, TextInput } from "react-native-paper";
 import { View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { gql, useLazyQuery } from "@apollo/client";
 import Loading from "../../shared/components/Loading";
-import { ActivateAccountContext } from "./ActivateAccountProvider";
 
 const VERIFY_USERNAME = gql`
-  query verifyUsername(username: String!) {
+  query verifyUsername($username: String!) {
     verifyUsername(username: $username) {
       type
       status
@@ -17,7 +16,7 @@ const VERIFY_USERNAME = gql`
 `;
 
 function ActivateAccountUsernameScreen() {
-  const { username, setUsername } = useContext(ActivateAccountContext);
+  const [username, setUsername] = useState("");
 
   const navigation = useNavigation();
 
@@ -28,9 +27,10 @@ function ActivateAccountUsernameScreen() {
     return <Loading />;
   }
 
-  // TODO ensure that the response data is success
-  if (data) {
-    navigation.navigate("Account password");
+  if (data && data.verifyUsername.type === "success") {
+    console.debug(data);
+    // FIXME need to navigate to the password screen
+    navigation.navigate("Account password", { username });
   }
 
   return (
@@ -38,9 +38,15 @@ function ActivateAccountUsernameScreen() {
       <TextInput
         placeholder="Username"
         value={username}
-        onChange={setUsername}
+        onChangeText={(text) => setUsername(text)}
       />
-      <Button onPress={verifyUsername(username)}>Next</Button>
+      <Button
+        onPress={() => {
+          verifyUsername({ variables: { username } });
+        }}
+      >
+        Next
+      </Button>
     </View>
   );
 }

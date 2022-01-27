@@ -1,14 +1,20 @@
-import React, { useContext } from "react";
-import { Button, TextInput } from "react-native-paper";
+import React, { useState } from "react";
+import { Button, Text, TextInput } from "react-native-paper";
 import { View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import { gql, useMutation } from "@apollo/client";
 import Loading from "../../shared/components/Loading";
-import { ActivateAccountContext } from "./ActivateAccountProvider";
 
 const ACTIVATE_ACCOUNT = gql`
-  mutation activateAccount(username: String!, password: String!, confirmPassword: String!) {
-    activateAccount(username: $username, password: $password, confirmPassword: $confirmPassword) {
+  mutation activateAccount(
+    $username: String!
+    $password: String!
+    $confirmPassword: String!
+  ) {
+    activateAccount(
+      username: $username
+      password: $password
+      confirmPassword: $confirmPassword
+    ) {
       type
       status
       message
@@ -16,45 +22,49 @@ const ACTIVATE_ACCOUNT = gql`
   }
 `;
 
-function ActivateAccountPasswordScreen() {
-  const {
-    username,
-    password,
-    setPassword,
-    confirmPassword,
-    setConfirmPassword,
-  } = useContext(ActivateAccountContext);
+function ActivateAccountPasswordScreen({ username }) {
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const navigation = useNavigation();
-
-  const [activateAccount, { loading, errors, data }] =
+  const [activateAccount, { data, loading, error }] =
     useMutation(ACTIVATE_ACCOUNT);
 
   if (loading) {
     return <Loading />;
   }
 
-  if (errors) {
+  if (error) {
     // TODO provide feedback to user on errors
+    console.error(error);
   }
 
-  // TODO ensure successful response data
-  if (data) {
-    navigation.navigate("Login");
+  if (data && data.activateAccount.type === "success") {
+    console.log("Account is activated");
+    console.debug(data);
   }
+
   return (
     <View>
+      <Text>Username: {username}</Text>
       <TextInput
         placeholder="Password"
         value={password}
-        onChange={setPassword}
+        onChangeText={(text) => setPassword(text)}
+        secureTextEntry
       />
       <TextInput
         placeholder="Confirm password"
         value={confirmPassword}
-        onChange={setConfirmPassword}
+        onChangeText={(text) => setConfirmPassword(text)}
+        secureTextEntry
       />
-      <Button onPress={activateAccount(username, password, confirmPassword)}>
+      <Button
+        onPress={() => {
+          activateAccount({
+            variables: { username, password, confirmPassword },
+          });
+        }}
+      >
         Activate account
       </Button>
     </View>

@@ -2,7 +2,7 @@ import * as React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "./features/login/LoginScreen";
 import CreateAccountScreen from "./features/login/CreateAccountScreen";
-import ActivateAccountStack from "./features/login/ActivateAccountStack";
+import ActivateAccountScreen from "./features/login/ActivateAccountScreen";
 import ActivateAccountProvider from "./features/login/ActivateAccountProvider";
 
 const Stack = createNativeStackNavigator();
@@ -10,7 +10,7 @@ const Stack = createNativeStackNavigator();
 function ActivateAccountScreenWrapper() {
   return (
     <ActivateAccountProvider>
-      <ActivateAccountStack />
+      <ActivateAccountScreen />
     </ActivateAccountProvider>
   );
 }

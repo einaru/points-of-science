@@ -15,7 +15,7 @@ const VERIFY_USERNAME = gql`
   }
 `;
 
-export default function ActivateAccountUsernameScreen() {
+export default function VerifyUsernameScreen() {
   const [username, setUsername] = useState("");
   const { setVerifiedUsername } = useContext(ActivateAccountContext);
   const [verifyUsername, { called, loading, data }] =

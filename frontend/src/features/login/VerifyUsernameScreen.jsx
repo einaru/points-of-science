@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { View } from "react-native";
 import { Button, Text, TextInput } from "react-native-paper";
 import Loading from "../../shared/components/Loading";
+import styles from "../../shared/styles";
 import { ActivateAccountContext } from "./ActivateAccountProvider";
 
 const VERIFY_USERNAME = gql`
@@ -33,7 +34,7 @@ export default function VerifyUsernameScreen() {
   }
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text>Verify username</Text>
       <TextInput
         placeholder="Username"

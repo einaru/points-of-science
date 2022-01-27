@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { View } from "react-native";
 import { Button, Text, TextInput } from "react-native-paper";
 import Loading from "../../shared/components/Loading";
+import styles from "../../shared/styles";
 import { ActivateAccountContext } from "./ActivateAccountProvider";
 
 const ACTIVATE_ACCOUNT = gql`
@@ -53,7 +54,7 @@ export default function SetPasswordScreen() {
   }
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text>Username: {username}</Text>
       <TextInput
         placeholder="Password"

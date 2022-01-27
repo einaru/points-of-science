@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { Button, TextInput } from "react-native-paper";
-import { View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import { gql, useLazyQuery } from "@apollo/client";
+import React, { useContext, useEffect, useState } from "react";
+import { View } from "react-native";
+import { Button, Text, TextInput } from "react-native-paper";
 import Loading from "../../shared/components/Loading";
+import { ActivateAccountContext } from "./ActivateAccountProvider";
 
 const VERIFY_USERNAME = gql`
   query verifyUsername($username: String!) {
@@ -15,26 +15,26 @@ const VERIFY_USERNAME = gql`
   }
 `;
 
-function ActivateAccountUsernameScreen() {
+export default function ActivateAccountUsernameScreen() {
   const [username, setUsername] = useState("");
-
-  const navigation = useNavigation();
-
+  const { setVerifiedUsername } = useContext(ActivateAccountContext);
   const [verifyUsername, { called, loading, data }] =
     useLazyQuery(VERIFY_USERNAME);
+
+  useEffect(() => {
+    if (data && data.verifyUsername.type === "success") {
+      console.debug(data);
+      setVerifiedUsername(username);
+    }
+  }, [data, username, setVerifiedUsername]);
 
   if (called && loading) {
     return <Loading />;
   }
 
-  if (data && data.verifyUsername.type === "success") {
-    console.debug(data);
-    // FIXME need to navigate to the password screen
-    navigation.navigate("Account password", { username });
-  }
-
   return (
     <View>
+      <Text>Verify username</Text>
       <TextInput
         placeholder="Username"
         value={username}
@@ -50,5 +50,3 @@ function ActivateAccountUsernameScreen() {
     </View>
   );
 }
-
-export default ActivateAccountUsernameScreen;

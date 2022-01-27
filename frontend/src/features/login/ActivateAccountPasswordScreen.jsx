@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import { Button, Text, TextInput } from "react-native-paper";
-import { View } from "react-native";
 import { gql, useMutation } from "@apollo/client";
+import React, { useContext, useEffect, useState } from "react";
+import { View } from "react-native";
+import { Button, Text, TextInput } from "react-native-paper";
 import Loading from "../../shared/components/Loading";
+import { ActivateAccountContext } from "./ActivateAccountProvider";
 
 const ACTIVATE_ACCOUNT = gql`
   mutation activateAccount(
@@ -22,12 +23,25 @@ const ACTIVATE_ACCOUNT = gql`
   }
 `;
 
-function ActivateAccountPasswordScreen({ username }) {
+export default function ActivateAccountPasswordScreen() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const { username, setAccountPassword: setAccountPasswords } = useContext(
+    ActivateAccountContext
+  );
+
   const [activateAccount, { data, loading, error }] =
     useMutation(ACTIVATE_ACCOUNT);
+
+  useEffect(() => {
+    console.debug(data);
+    if (data && data.activateAccount.type === "success") {
+      console.log("Account is activated");
+      console.debug(data);
+      setAccountPasswords(password, confirmPassword);
+    }
+  }, [data, password, confirmPassword, setAccountPasswords]);
 
   if (loading) {
     return <Loading />;
@@ -36,11 +50,6 @@ function ActivateAccountPasswordScreen({ username }) {
   if (error) {
     // TODO provide feedback to user on errors
     console.error(error);
-  }
-
-  if (data && data.activateAccount.type === "success") {
-    console.log("Account is activated");
-    console.debug(data);
   }
 
   return (
@@ -70,5 +79,3 @@ function ActivateAccountPasswordScreen({ username }) {
     </View>
   );
 }
-
-export default ActivateAccountPasswordScreen;

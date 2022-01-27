@@ -1,24 +1,15 @@
-import React from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import ActivateAccountUsernameScreen from "./ActivateAccountUsernameScreen";
+import React, { useContext } from "react";
 import ActivateAccountPasswordScreen from "./ActivateAccountPasswordScreen";
-import ActivateAccountProvider from "./ActivateAccountProvider";
+import { ActivateAccountContext } from "./ActivateAccountProvider";
+import ActivateAccountUsernameScreen from "./ActivateAccountUsernameScreen";
 
-const Stack = createNativeStackNavigator();
-
-export default function ActivateAccountStack() {
-  return (
-    <ActivateAccountProvider>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Account username"
-          component={ActivateAccountUsernameScreen}
-        />
-        <Stack.Screen
-          name="Account password"
-          component={ActivateAccountPasswordScreen}
-        />
-      </Stack.Navigator>
-    </ActivateAccountProvider>
+function ActivateAccountStack() {
+  const { isVerified } = useContext(ActivateAccountContext);
+  return isVerified ? (
+    <ActivateAccountPasswordScreen />
+  ) : (
+    <ActivateAccountUsernameScreen />
   );
 }
+
+export default ActivateAccountStack;

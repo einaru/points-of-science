@@ -43,44 +43,13 @@ export function AuthProvider({ children }) {
   const authContext = useMemo(
     () => ({
       ...state,
-      logIn: async ({ username, password }) => {
-        console.log(username, password);
-        client
-          .mutate({
-            mutation: Query.LOGIN,
-            variables: { username, password },
-          })
-          .then(({ data }) => {
-            console.log(data);
-            console.log(data.signIn.message);
-            if (data.signIn.type === "success") {
-              const { accessToken, refreshToken, user } = data.signIn.data;
-              Storage.setItem("accessToken", accessToken);
-              Storage.setItem("refreshToken", refreshToken);
-              Storage.setItem("user", JSON.stringify(user));
-              dispatch({
-                type: "login",
-                user,
-                refreshToken,
-              });
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+      logInUser: (user, accessToken, refreshToken) => {
+        Storage.setItem("user", JSON.stringify(user));
+        Storage.setItem("accessToken", accessToken);
+        Storage.setItem("refreshToken", refreshToken);
+        dispatch({ type: "login", user, refreshToken });
       },
-      logOut: () => {
-        client
-          .mutate({
-            mutation: Query.LOGOUT,
-            variables: { refreshToken: state.refreshToken },
-          })
-          .then((data) => {
-            console.log(data);
-          })
-          .catch((err) => {
-            console.error(err);
-          });
+      logOutUser: () => {
         Storage.removeItem("accessToken");
         Storage.removeItem("refreshToken");
         Storage.removeItem("user");
@@ -91,7 +60,7 @@ export function AuthProvider({ children }) {
         console.log("Got create account data:", data);
       },
     }),
-    [state, dispatch, client]
+    [state, dispatch]
   );
 
   return (

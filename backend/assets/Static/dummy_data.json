@@ -7,7 +7,8 @@
       "password": "$2b$10$HGImWpGHTqsCUW7QPqE.xOLknm/a.IqV7bC.35ybKUGqLj13e9xiO",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 2,
@@ -15,7 +16,8 @@
       "password": "kEns4u9e4d",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 3,
@@ -23,7 +25,8 @@
       "password": "SnxTm4TTYBwl",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 4,
@@ -31,7 +34,8 @@
       "password": "9G9dlTd",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 5,
@@ -39,7 +43,8 @@
       "password": "NMtJVzk5AfBb",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 6,
@@ -47,7 +52,8 @@
       "password": "SnS4LS9j4UL",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 7,
@@ -55,7 +61,8 @@
       "password": "bBsX2NUXdGtr",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 8,
@@ -63,7 +70,8 @@
       "password": "7HywfJWg",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 9,
@@ -71,7 +79,8 @@
       "password": "Zu1G4J4iSL1",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 10,
@@ -79,7 +88,8 @@
       "password": "XlVMxsmu",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 11,
@@ -87,7 +97,8 @@
       "password": "WI8hZUYx",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 12,
@@ -95,7 +106,8 @@
       "password": "D8PGrGj2fWG",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 13,
@@ -103,7 +115,8 @@
       "password": "RFheefsu",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 14,
@@ -111,7 +124,8 @@
       "password": "BIDq69eT3T",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 15,
@@ -119,7 +133,8 @@
       "password": "RbTGb8",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 16,
@@ -127,7 +142,8 @@
       "password": "7C9uRPts5",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 17,
@@ -135,7 +151,8 @@
       "password": "x8mZu4",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 18,
@@ -143,7 +160,8 @@
       "password": "SHvzFJtD",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 19,
@@ -151,7 +169,8 @@
       "password": "lpBzVQg6rJJ",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 20,
@@ -159,7 +178,8 @@
       "password": "0lBJBPBHktn",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 21,
@@ -167,7 +187,8 @@
       "password": "DxltejT",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 22,
@@ -175,7 +196,8 @@
       "password": "5gO7nu",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 23,
@@ -183,7 +205,8 @@
       "password": "LiFH0EXI",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 24,
@@ -191,7 +214,8 @@
       "password": "XGu1j5h5oa",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 25,
@@ -199,7 +223,8 @@
       "password": "Uj2reT8wOi2",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 26,
@@ -207,7 +232,8 @@
       "password": "GaBa33h6S4",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 27,
@@ -215,7 +241,8 @@
       "password": "Cb39TRN",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 28,
@@ -223,7 +250,8 @@
       "password": "B3q3tyb",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 29,
@@ -231,7 +259,8 @@
       "password": "eeTk6nN0CFZz",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 30,
@@ -239,7 +268,8 @@
       "password": "Xaw1Sprk",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 31,
@@ -247,7 +277,8 @@
       "password": "tdh3zC36nC",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 32,
@@ -255,7 +286,8 @@
       "password": "HEmSqkuHf",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 33,
@@ -263,7 +295,8 @@
       "password": "qOCg5egWV8A",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 34,
@@ -271,7 +304,8 @@
       "password": "V1XLhqySue",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 35,
@@ -279,7 +313,8 @@
       "password": "384ufVEeTr0",
       "permission": "control",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 36,
@@ -287,7 +322,8 @@
       "password": "8lBcmqYu",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 37,
@@ -295,7 +331,8 @@
       "password": "bI7rKPGdpt",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 38,
@@ -303,7 +340,8 @@
       "password": "dHt1u5jZQBF",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 39,
@@ -311,7 +349,8 @@
       "password": "XDMK97EgI8T",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 40,
@@ -319,7 +358,8 @@
       "password": "iosi6AC4",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 41,
@@ -327,7 +367,8 @@
       "password": "cmxKvu3",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 42,
@@ -335,7 +376,8 @@
       "password": "56d6rGcMG",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 43,
@@ -343,7 +385,8 @@
       "password": "097kjCdNHK",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 44,
@@ -351,7 +394,8 @@
       "password": "hcEA3X",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 45,
@@ -359,7 +403,8 @@
       "password": "u7SFl7CE5",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 46,
@@ -367,7 +412,8 @@
       "password": "td0VreA",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 47,
@@ -375,7 +421,8 @@
       "password": "VDTpfFxjUry",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 48,
@@ -383,7 +430,8 @@
       "password": "IzrRt547N",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 49,
@@ -391,7 +439,8 @@
       "password": "C8BRoP",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 50,
@@ -399,7 +448,8 @@
       "password": "dA6l7pjEhM",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 51,
@@ -407,7 +457,8 @@
       "password": "cgM2KaNIvD",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 52,
@@ -415,7 +466,8 @@
       "password": "dphv1kjotn",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 53,
@@ -423,7 +475,8 @@
       "password": "gQO9tZ4",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 54,
@@ -431,7 +484,8 @@
       "password": "sV4vgDlMf",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 55,
@@ -439,7 +493,8 @@
       "password": "QkwIbCLNhL",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 56,
@@ -447,7 +502,8 @@
       "password": "VcdDho1",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 57,
@@ -455,7 +511,8 @@
       "password": "nEX4yCG8Gs",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 58,
@@ -463,7 +520,8 @@
       "password": "q6EImS",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 59,
@@ -471,7 +529,8 @@
       "password": "BIlP2xQIld",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 60,
@@ -479,7 +538,8 @@
       "password": "Dh7r4el19g",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 61,
@@ -487,7 +547,8 @@
       "password": "WZNjeKBVr5r",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 62,
@@ -495,7 +556,8 @@
       "password": "9q1PVB",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 63,
@@ -503,7 +565,8 @@
       "password": "tCyqos",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 64,
@@ -511,7 +574,8 @@
       "password": "npwZJTFuhx9c",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 65,
@@ -519,7 +583,8 @@
       "password": "kf4SUinVDyW",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 66,
@@ -527,7 +592,8 @@
       "password": "BRvqnWojHj",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 67,
@@ -535,7 +601,8 @@
       "password": "mPY95H",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 68,
@@ -543,7 +610,8 @@
       "password": "ltIYotMw6i6F",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 69,
@@ -551,7 +619,8 @@
       "password": "ZyrhBN4gcJpF",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     },
     {
       "id": 70,
@@ -559,7 +628,8 @@
       "password": "tXlkRw9D4",
       "permission": "experimental",
       "achievement": [],
-      "challenge": []
+      "challenge": [],
+      "state": 1
     }
   ],
   "valid_username": [

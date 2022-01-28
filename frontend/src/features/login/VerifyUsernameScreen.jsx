@@ -23,9 +23,12 @@ export default function VerifyUsernameScreen() {
     useLazyQuery(VERIFY_USERNAME);
 
   useEffect(() => {
-    if (data && data.verifyUsername.type === "success") {
-      console.debug(data);
-      setVerifiedUsername(username);
+    if (data) {
+      console.debug(data.verifyUsername.message);
+      if (data.verifyUsername.type === "success") {
+        console.debug(data);
+        setVerifiedUsername(username);
+      }
     }
   }, [data, username, setVerifiedUsername]);
 

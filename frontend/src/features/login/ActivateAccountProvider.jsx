@@ -2,10 +2,7 @@ import React, { createContext, useMemo, useReducer } from "react";
 
 const initialState = {
   isVerified: false,
-  isActivated: false,
   username: "",
-  password: "",
-  confirmPassword: "",
 };
 
 function reducer(state, action) {
@@ -15,13 +12,6 @@ function reducer(state, action) {
         ...state,
         isVerified: true,
         username: action.username,
-      };
-    case "activateAccount":
-      return {
-        ...state,
-        isActivated: true,
-        password: action.password,
-        confirmPassword: action.confirmPassword,
       };
     default:
       return new Error();
@@ -38,9 +28,6 @@ function ActivateAccountProvider({ children }) {
       ...state,
       setVerifiedUsername: (username) => {
         dispatch({ type: "verifyUsername", username });
-      },
-      setAccountPasswords: (password, confirmPassword) => {
-        dispatch({ type: "activateAccount", password, confirmPassword });
       },
     }),
     [state, dispatch]

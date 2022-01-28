@@ -2,6 +2,7 @@ import { gql, useMutation } from "@apollo/client";
 import React, { useContext, useEffect, useState } from "react";
 import { View } from "react-native";
 import { Button, Text, TextInput } from "react-native-paper";
+import { AuthContext } from "../../services/auth/AuthProvider";
 import Loading from "../../shared/components/Loading";
 import styles from "../../shared/styles";
 import { ActivateAccountContext } from "./ActivateAccountProvider";
@@ -20,6 +21,14 @@ const ACTIVATE_ACCOUNT = gql`
       type
       status
       message
+      data {
+        accessToken
+        refreshToken
+        user {
+          id
+          username
+        }
+      }
     }
   }
 `;
@@ -28,21 +37,22 @@ export default function SetPasswordScreen() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const { username, setAccountPassword: setAccountPasswords } = useContext(
-    ActivateAccountContext
-  );
+  const { username } = useContext(ActivateAccountContext);
+  const { logInUser } = useContext(AuthContext);
 
   const [activateAccount, { data, loading, error }] =
     useMutation(ACTIVATE_ACCOUNT);
 
   useEffect(() => {
-    console.debug(data);
-    if (data && data.activateAccount.type === "success") {
-      console.log("Account is activated");
-      console.debug(data);
-      setAccountPasswords(password, confirmPassword);
+    if (data) {
+      console.debug(data.activateAccount.message);
+      if (data.activateAccount.type === "success") {
+        console.log("Account is activated");
+        const { user, accessToken, refreshToken } = data.activateAccount.data;
+        logInUser(user, accessToken, refreshToken);
+      }
     }
-  }, [data, password, confirmPassword, setAccountPasswords]);
+  }, [data, logInUser]);
 
   if (loading) {
     return <Loading />;

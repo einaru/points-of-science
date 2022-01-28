@@ -78,7 +78,7 @@ function nextID(table) {
     throw new Error(`Table is not an array.`);
   }
 
-  return table.length + incrementor;
+  return table[table.length - 1].id + incrementor;
 }
 
 // -------------------------------------------------- Helper-functions ----------------------------------------------------

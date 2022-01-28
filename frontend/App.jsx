@@ -51,15 +51,15 @@ const client = new ApolloClient({
 
 export default function App() {
   return (
-    <SafeAreaProvider>
-      <ThemeProvider>
-        <ApolloProvider client={client}>
-          <AuthProvider>
+    <ThemeProvider>
+      <ApolloProvider client={client}>
+        <AuthProvider>
+          <SafeAreaProvider>
             <Navigation />
-          </AuthProvider>
-          <StatusBar style="auto" />
-        </ApolloProvider>
-      </ThemeProvider>
-    </SafeAreaProvider>
+          </SafeAreaProvider>
+        </AuthProvider>
+        <StatusBar style="auto" />
+      </ApolloProvider>
+    </ThemeProvider>
   );
 }

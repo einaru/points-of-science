@@ -5,6 +5,7 @@ import { AuthContext } from "../../services/auth/AuthProvider";
 import styles from "../../shared/styles";
 import { ActivateAccountContext } from "./ActivateAccountProvider";
 import FormView from "./FormView";
+import { t } from "../i18n";
 
 const ACTIVATE_ACCOUNT = gql`
   mutation activateAccount(
@@ -63,15 +64,17 @@ export default function SetPasswordScreen() {
 
   return (
     <FormView>
-      <Text>Username: {username}</Text>
+      <Text>
+        {t("Username")}: {username}
+      </Text>
       <TextInput
-        label="Password"
+        label={t("Password")}
         value={password}
         onChangeText={(text) => setPassword(text)}
         secureTextEntry
       />
       <TextInput
-        label="Confirm password"
+        label={t("Confirm password")}
         value={confirmPassword}
         onChangeText={(text) => setConfirmPassword(text)}
         secureTextEntry
@@ -89,7 +92,7 @@ export default function SetPasswordScreen() {
           });
         }}
       >
-        Activate account
+        {t("Activate account")}
       </Button>
     </FormView>
   );

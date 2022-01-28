@@ -5,6 +5,7 @@ import styles from "../../shared/styles";
 import { ActivateAccountContext } from "./ActivateAccountProvider";
 import FormView from "./FormView";
 import NavigationLink from "./NavigationLink";
+import { t } from "../i18n";
 
 const VERIFY_USERNAME = gql`
   query verifyUsername($username: String!) {
@@ -40,7 +41,7 @@ export default function VerifyUsernameScreen() {
   return (
     <FormView>
       <TextInput
-        label="Username"
+        label={t("Username")}
         value={username}
         onChangeText={(text) => setUsername(text)}
       />
@@ -55,11 +56,11 @@ export default function VerifyUsernameScreen() {
           verifyUsername({ variables: { username } });
         }}
       >
-        Verify username
+        {t("Verify username")}
       </Button>
       <NavigationLink
-        label="Log in"
-        message="Already activated your account?"
+        label={t("Log in")}
+        message={t("Already activated your account?")}
         screenName="Login"
       />
     </FormView>

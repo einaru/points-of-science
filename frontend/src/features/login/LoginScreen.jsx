@@ -5,6 +5,7 @@ import { AuthContext } from "../../services/auth/AuthProvider";
 import FormView from "./FormView";
 import styles from "../../shared/styles";
 import NavigationLink from "./NavigationLink";
+import { t } from "../i18n";
 
 export const LOGIN = gql`
   mutation signIn($username: String!, $password: String!) {
@@ -51,9 +52,13 @@ function LoginScreen() {
 
   return (
     <FormView>
-      <TextInput label="Username" value={username} onChangeText={setUsername} />
       <TextInput
-        label="Password"
+        label={t("Username")}
+        value={username}
+        onChangeText={setUsername}
+      />
+      <TextInput
+        label={t("Password")}
         value={password}
         onChangeText={setPassword}
         secureTextEntry
@@ -69,11 +74,11 @@ function LoginScreen() {
           logIn({ variables: { username, password } });
         }}
       >
-        Log in
+        {t("Log in")}
       </Button>
       <NavigationLink
-        message="Haven't activated your account yet?"
-        label="Activate account"
+        message={t("Haven't activated your account yet?")}
+        label={t("Activate account")}
         screenName="Activate account"
       />
     </FormView>

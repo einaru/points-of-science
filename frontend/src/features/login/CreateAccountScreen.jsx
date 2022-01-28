@@ -4,6 +4,7 @@ import styles from "../../shared/styles";
 import { AuthContext } from "../../services/auth/AuthProvider";
 import FormView from "./FormView";
 import NavigationLink from "./NavigationLink";
+import { t } from "../i18n";
 
 function CreateAccountScreen() {
   const [username, setUsername] = useState("");
@@ -14,15 +15,19 @@ function CreateAccountScreen() {
 
   return (
     <FormView>
-      <TextInput label="Username" value={username} onChange={setUsername} />
       <TextInput
-        label="Password"
+        label={t("Username")}
+        value={username}
+        onChange={setUsername}
+      />
+      <TextInput
+        label={t("Password")}
         value={password}
         onChange={setPassword}
         secureTextEntry
       />
       <TextInput
-        label="Confirm password"
+        label={t("Confirm password")}
         value={confirmPassword}
         onChange={setConfirmPassword}
         secureTextEntry
@@ -32,11 +37,11 @@ function CreateAccountScreen() {
         style={styles.formAction}
         onPress={() => createAccount({ username, password, confirmPassword })}
       >
-        Create account
+        {t("Create account")}
       </Button>
       <NavigationLink
-        label="Log in"
-        message="Already have an account?"
+        label={t("Log in")}
+        message={t("Already have an account?")}
         screenName="Login"
       />
     </FormView>

@@ -1,27 +1,8 @@
-// import AsyncStorage from "@react-native-async-storage/async-storage";
-// import * as Storage from "./storage";
-//
-// beforeEach(() => {
-//  AsyncStorage.clear();
-// });
-//
-// describe("Storage", () => {
-//  it("sets values", async () => {
-//    const key = "key";
-//    const value = "value";
-//    await Storage.setItem(key, value);
-//    expect(AsyncStorage.setItem).toBeCalledWith(key, value);
-//    const result = await Storage.getItem(key);
-//    expect(AsyncStorage.getItem).toBeCalledWith(key);
-//    expect(result).toEqual(value);
-//  });
-// });
-
 import { NativeModulesProxy } from "expo-modules-core";
 import * as Storage from "./storage";
 
-describe("Storage", () => {
-  it("sets values", async () => {
+describe("Native storage", () => {
+  it("stores a value", async () => {
     const key = "key";
     const value = "value";
     const options = {};
@@ -32,5 +13,29 @@ describe("Storage", () => {
     expect(
       NativeModulesProxy.ExpoSecureStore.setValueWithKeyAsync
     ).toHaveBeenCalledWith(value, key, options);
+  });
+
+  it("retrieves a value", async () => {
+    NativeModulesProxy.ExpoSecureStore.getValueWithKeyAsync.mockImplementation(
+      () => "value"
+    );
+    const key = "key";
+    const value = "value";
+    const options = {};
+    await Storage.setItem(key, value);
+    const result = await Storage.getItem(key);
+    expect(
+      NativeModulesProxy.ExpoSecureStore.getValueWithKeyAsync
+    ).toHaveBeenCalledWith(key, options);
+    expect(result).toBe(value);
+  });
+
+  it("removes a value", async () => {
+    const key = "key";
+    const options = {};
+    await Storage.removeItem(key);
+    expect(
+      NativeModulesProxy.ExpoSecureStore.deleteValueWithKeyAsync
+    ).toHaveBeenCalledWith(key, options);
   });
 });

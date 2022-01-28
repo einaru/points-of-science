@@ -18,19 +18,31 @@ import {
 function signUp(args) {
   return new Promise((resolve, reject) => {
     const { password, confirmPassword, username } = args;
-    const list = getDataByFilter(config.env.VALID_USERNAME_TABLE, {
-      key: "username",
-      value: username,
-    });
-    validateSignUp(list[0], password, confirmPassword)
+    const validUsername = getDataFromDatabaseByFilter(
+      config.env.VALID_USERNAME_TABLE,
+      "username",
+      username
+    );
+
+    const userObject = getDataFromDatabaseByFilter(
+      config.env.USER_TABLE,
+      "username",
+      username
+    );
+
+    validateSignUp(validUsername, userObject, password, confirmPassword)
       .then(() => {
         return hashPassword(password);
       })
       .then((result) => {
-        return updateUser(
+        if (!isNull(userObject)) {
+          return updateExistingUser(userObject, result.data.hashedPassword);
+        }
+
+        return updateNewUser(
           username,
           result.data.hashedPassword,
-          list[0].permission
+          validUsername.permission
         );
       })
       .then((user) => {
@@ -46,7 +58,7 @@ function signUp(args) {
   });
 }
 
-function validateSignUp(data, password, confirmPassword) {
+function validateSignUp(data, user, password, confirmPassword) {
   return new Promise((resolve, reject) => {
     if (isNull(data)) {
       reject({
@@ -56,10 +68,10 @@ function validateSignUp(data, password, confirmPassword) {
       });
     }
 
-    if (isExistingUser(data.username)) {
+    if (isNull(user) || !isUserDeativated(user)) {
       reject(
         getResponseObject(
-          "User already exists.",
+          "User already exists and has an active account.",
           400,
           config.env.RESPONSE_TYPE.error
         )
@@ -98,13 +110,15 @@ function isNull(data) {
   return data == null;
 }
 
-function isExistingUser(username) {
-  return (
-    getDataByFilter(config.env.USER_TABLE, {
-      key: "username",
-      value: username,
-    }).length > 0
-  );
+function isUserDeativated(user) {
+  return user.state === profileState.deactivated.value;
+}
+
+function getDataFromDatabaseByFilter(table, key, value) {
+  return getDataByFilter(table, {
+    key,
+    value,
+  })[0];
 }
 
 function getNextID() {
@@ -112,7 +126,15 @@ function getNextID() {
   return nextID(users);
 }
 
-function updateUser(username, hashedPassword, permission) {
+function updateExistingUser(existingUser, hashedPassword) {
+  existingUser.password = hashedPassword;
+  existingUser.state = profileState.active.value;
+  const user = profileCreator();
+  user.updateData(existingUser);
+  return user;
+}
+
+function updateNewUser(username, hashedPassword, permission) {
   const id = getNextID();
   const user = profileCreator();
   user.updateData({

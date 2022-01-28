@@ -47,6 +47,7 @@ const env = {
   FORGOTTEN_PASSWORD_SECRET: process.env.FORGOTTEN_PASSWORD_SECRET,
   REFRESH_TOKEN_TABLE: process.env.REFRESH_TOKEN_TABLE,
   USER_TABLE: process.env.USER_TABLE,
+  VALID_USERNAME_TABLE: process.env.VALID_USERNAME_TABLE,
   RESPONSE_TYPE: {
     success: "success",
     error: "error",

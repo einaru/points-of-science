@@ -23,7 +23,7 @@ beforeAll(() => {
   database = getDatabase();
   collectionName = config.env.USER_TABLE;
   nonExistingCollectionName = "NotATableName";
-  filter = { key: "name", value: "Rayna Harteley" };
+  filter = { key: "username", value: "Rayna Harteley" };
   user = getDataByFilter(collectionName, { key: "id", value: 1 })[0];
   newTable = "Other_Users";
 });
@@ -63,7 +63,7 @@ test("Get data by filter from database.", () => {
   const expectedResult = [
     {
       id: 58,
-      name: "Rayna Harteley",
+      username: "Rayna Harteley",
       password: "q6EImS",
       permission: "experimental",
       achievement: [],
@@ -88,7 +88,7 @@ test("Create data in database.", () => {
   const id = nextID(database[collectionName]);
   const newUser = {
     id,
-    name: "Ola Nordmann",
+    username: "Ola Nordmann",
     password: "thisIsNOtAnActualpassWord",
     permission: "control",
     achievement: [],
@@ -107,7 +107,7 @@ test("Create data in database.", () => {
 test("Create data creates table in database if table does not exist.", () => {
   const newUser = {
     id: 1,
-    name: "Ola Nordmann",
+    username: "Ola Nordmann",
     password: "thisIsNOtAnActualpassWord",
     permission: "control",
     achievement: [],

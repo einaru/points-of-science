@@ -1,33 +1,5 @@
 import { gql } from "@apollo/client";
 
-export const LOGIN = gql`
-  mutation signIn($name: String!, $password: String!) {
-    signIn(name: $name, password: $password) {
-      type
-      status
-      message
-      data {
-        access_token
-        refresh_token
-        user {
-          id
-          name
-        }
-      }
-    }
-  }
-`;
-
-export const LOGOUT = gql`
-  mutation signOut($refresh_token: String!) {
-    signOut(refresh_token: $refresh_token) {
-      type
-      status
-      message
-    }
-  }
-`;
-
 export const VERIFY_TOKEN = gql`
   query verifyToken {
     verifyToken {
@@ -39,13 +11,13 @@ export const VERIFY_TOKEN = gql`
 `;
 
 export const GET_NEW_TOKEN = gql`
-  query getNewToken($refresh_token: String!) {
-    getNewToken(refresh_token: $refresh_token) {
+  query getNewToken($refreshToken: String!) {
+    getNewToken(refreshToken: $refreshToken) {
       type
       status
       message
       data {
-        access_token
+        accessToken
       }
     }
   }

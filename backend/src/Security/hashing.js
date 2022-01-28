@@ -13,7 +13,7 @@ function hashPassword(password) {
         return resolve({
           status: 200,
           type: config.env.RESPONSE_TYPE.success,
-          data: { hashed_password: hashedPassword },
+          data: { hashedPassword },
         });
       })
       .catch((error) => {

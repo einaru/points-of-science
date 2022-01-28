@@ -1,20 +1,36 @@
+/* eslint-disable no-promise-executor-return */
 // Server directory imports:
 import {
   config,
   comparePassword,
-  getData,
   createAccessToken,
   createRefreshToken,
+  getData,
+  profileState,
 } from "../internal.js";
 
 function signIn(username, password) {
   return new Promise((resolve, reject) => {
     const users = getData(config.env.USER_TABLE);
-    const user = users.find((user) => user.name === username);
+    const user = users.find((user) => user.username === username);
     if (user == null) {
       return reject(
         getResponseObject(
           "User not found. Sign in unsuccessful.",
+          400,
+          config.env.RESPONSE_TYPE.error,
+          {}
+        )
+      );
+    }
+
+    if (
+      user.state === profileState.deactivated.value ||
+      user.state === profileState.suspended.value
+    ) {
+      return reject(
+        getResponseObject(
+          `The profile is deactivated or suspended.`,
           400,
           config.env.RESPONSE_TYPE.error,
           {}
@@ -38,8 +54,8 @@ function signIn(username, password) {
               config.env.RESPONSE_TYPE.success,
               {
                 user,
-                access_token: accessToken,
-                refresh_token: refreshToken,
+                accessToken,
+                refreshToken,
               }
             )
           );

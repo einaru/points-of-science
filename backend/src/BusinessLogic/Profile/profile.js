@@ -1,3 +1,90 @@
+const profileState = {
+  deactivated: { text: "deactivated", value: 1 },
+  active: { text: "active", value: 2 },
+  suspended: { text: "suspended", value: 3 },
+};
+
+Object.freeze(profileState);
+
+function createObjectTemplate(functionKey, code) {
+  const object = {};
+  object[functionKey] = code;
+  return object;
+}
+
+function updateData(profile) {
+  const functionKey = "updateData";
+  const code = (args) => {
+    // Fill in the blanks
+    Object.keys(args).forEach((key) => {
+      profile[key] = args[key];
+    });
+  };
+
+  return createObjectTemplate(functionKey, code);
+}
+
+function getPoints(profile) {
+  const functionKey = "getPoints";
+  const code = () => {
+    // Fill in the blanks
+  };
+
+  return createObjectTemplate(functionKey, code);
+}
+
+function changePassword(profile) {
+  const functionKey = "changePassword";
+  const code = (oldPassword, newPassword) => {
+    // Fill in the blanks
+  };
+
+  return createObjectTemplate(functionKey, code);
+}
+
+function hasState(profile) {
+  const functionKey = "hasState";
+  const code = (stateText) => {
+    // Fill in the blancs
+    const stateValue = profileState[stateText].value;
+    return profile.state === stateValue;
+  };
+
+  return createObjectTemplate(functionKey, code);
+}
+
+function deleteProfile(profile) {
+  const functionKey = "deleteProfile";
+  const code = () => {
+    // Fill in the blanks
+  };
+
+  return createObjectTemplate(functionKey, code);
+}
+
+function requestUserData(profile) {
+  const functionKey = "requestUserData";
+  const code = () => {
+    // Fill in the blanks
+  };
+
+  return createObjectTemplate(functionKey, code);
+}
+
+function emptyData() {
+  return {
+    data: {
+      id: 0,
+      username: "",
+      password: "",
+      permission: "",
+      achievements: [],
+      challenges: [],
+      state: profileState.deactivated.value,
+    },
+  };
+}
+
 function profileCreator() {
   const profile = emptyData();
 
@@ -6,77 +93,10 @@ function profileCreator() {
     ...updateData(profile.data),
     ...getPoints(profile.data),
     ...changePassword(profile.data),
+    ...hasState(profile.data),
     ...deleteProfile(profile.data),
     ...requestUserData(profile.data),
   };
 }
 
-function updateData(profile) {
-  const key = "updateData";
-  const code = (args) => {
-    // Fill in the blanks
-    for (const [key, value] of Object.entries(args)) {
-      profile[key] = value;
-    }
-  };
-
-  return createObjectTemplate(key, code);
-}
-
-function getPoints(profile) {
-  const key = "getPoints";
-  const code = () => {
-    // Fill in the blanks
-  };
-
-  return createObjectTemplate(key, code);
-}
-
-function changePassword(profile) {
-  const key = "changePassword";
-  const code = (oldPassword, newPassword) => {
-    // Fill in the blanks
-  };
-
-  return createObjectTemplate(key, code);
-}
-
-function deleteProfile(profile) {
-  const key = "deleteProfile";
-  const code = () => {
-    // Fill in the blanks
-  };
-
-  return createObjectTemplate(key, code);
-}
-
-function requestUserData(profile) {
-  const key = "requestUserData";
-  const code = () => {
-    // Fill in the blanks
-  };
-
-  return createObjectTemplate(key, code);
-}
-
-function createObjectTemplate(functionKey, code) {
-  const object = {};
-  object[functionKey] = code;
-  return object;
-}
-
-function emptyData() {
-  return {
-    data: {
-      user_id: 0,
-      password: "",
-      name: "",
-      permission: "",
-      achievements: [],
-      challenges: [],
-      data_collection: {},
-    },
-  };
-}
-
-export { profileCreator };
+export { profileCreator, profileState };

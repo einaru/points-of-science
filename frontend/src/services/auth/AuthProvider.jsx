@@ -23,12 +23,11 @@ export function AuthProvider({ children }) {
           client
             .query({
               query: Query.GET_NEW_TOKEN,
-              variables: { refresh_token: refreshToken },
+              variables: { refreshToken },
             })
             .then((resp) => {
               if (resp.data.getNewToken.type === "success") {
-                const { access_token: accessToken } =
-                  resp.data.getNewToken.data;
+                const { accessToken } = resp.data.getNewToken.data;
                 Storage.setItem("accessToken", accessToken);
                 dispatch({ type: "restoreToken" });
               }
@@ -44,46 +43,13 @@ export function AuthProvider({ children }) {
   const authContext = useMemo(
     () => ({
       ...state,
-      logIn: async ({ username, password }) => {
-        client
-          .mutate({
-            mutation: Query.LOGIN,
-            variables: { name: username, password },
-          })
-          .then(({ data }) => {
-            console.log(data);
-            if (data.signIn.type === "success") {
-              const {
-                access_token: accessToken,
-                refresh_token: refreshToken,
-                user,
-              } = data.signIn.data;
-              Storage.setItem("accessToken", accessToken);
-              Storage.setItem("refreshToken", refreshToken);
-              Storage.setItem("user", JSON.stringify(user));
-              dispatch({
-                type: "login",
-                user,
-                refreshToken,
-              });
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+      logInUser: (user, accessToken, refreshToken) => {
+        Storage.setItem("user", JSON.stringify(user));
+        Storage.setItem("accessToken", accessToken);
+        Storage.setItem("refreshToken", refreshToken);
+        dispatch({ type: "login", user, refreshToken });
       },
-      logOut: () => {
-        client
-          .mutate({
-            mutation: Query.LOGOUT,
-            variables: { refresh_token: state.refreshToken },
-          })
-          .then((data) => {
-            console.log(data);
-          })
-          .catch((err) => {
-            console.error(err);
-          });
+      logOutUser: () => {
         Storage.removeItem("accessToken");
         Storage.removeItem("refreshToken");
         Storage.removeItem("user");
@@ -94,7 +60,7 @@ export function AuthProvider({ children }) {
         console.log("Got create account data:", data);
       },
     }),
-    [state, dispatch, client]
+    [state, dispatch]
   );
 
   return (

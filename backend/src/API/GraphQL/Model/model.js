@@ -12,11 +12,11 @@ const UserModel = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLInt },
     password: { type: GraphQLString },
-    name: { type: GraphQLString },
+    username: { type: GraphQLString },
     permission: { type: GraphQLString },
     achievements: { type: new GraphQLList(AchievementModel) },
     challenges: { type: new GraphQLList(ChallengeModel) },
-    data_collection: { type: ClickStreamModel },
+    dataCollection: { type: ClickStreamModel },
   }),
 });
 
@@ -119,9 +119,9 @@ const RewardModel = new GraphQLObjectType({
   name: "Reward",
   fields: () => ({
     id: { type: GraphQLInt },
-    max_points: { type: GraphQLInt },
-    first_try_points: { type: GraphQLInt },
-    bonus_points: { type: GraphQLInt },
+    maxPoints: { type: GraphQLInt },
+    firstTryPoints: { type: GraphQLInt },
+    bonusPoints: { type: GraphQLInt },
   }),
 });
 
@@ -147,10 +147,10 @@ const UserChallengeModel = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLInt },
     title: { type: GraphQLString },
-    challenge_id: { type: GraphQLInt },
-    user_id: { type: GraphQLInt },
+    challengeID: { type: GraphQLInt },
+    userID: { type: GraphQLInt },
     completed: { type: GraphQLBoolean },
-    answered_correct: { type: GraphQLBoolean },
+    answeredCorrect: { type: GraphQLBoolean },
     activity: { type: UserActivityModel },
     reflection: { type: UserReflectionModel },
     reward: { type: UserRewardModel },
@@ -161,9 +161,9 @@ const UserActivityModel = new GraphQLObjectType({
   name: "UserActivity",
   fields: () => ({
     id: { type: GraphQLInt },
-    activity_id: { type: GraphQLInt },
-    date_started: { type: GraphQLString },
-    date_completed: { type: GraphQLString },
+    activityID: { type: GraphQLInt },
+    dateStarted: { type: GraphQLString },
+    dateCompleted: { type: GraphQLString },
     answer: { type: GraphQLString },
   }),
 });
@@ -181,13 +181,13 @@ const UserReflectionModel = new GraphQLObjectType({
   name: "UserReflection",
   fields: () => ({
     id: { type: GraphQLInt },
-    user_id: { type: GraphQLInt },
-    reflection_id: { type: GraphQLInt },
-    date_started: { type: GraphQLString },
-    date_completed: { type: GraphQLString },
+    userID: { type: GraphQLInt },
+    reflectionID: { type: GraphQLInt },
+    dateStarted: { type: GraphQLString },
+    dateCompleted: { type: GraphQLString },
     answer: { type: GraphQLString },
     vote: { type: VoteEnum },
-    vote_choices: { type: VoteEnum },
+    voteChoices: { type: VoteEnum },
   }),
 });
 
@@ -195,10 +195,10 @@ const UserRewardModel = new GraphQLObjectType({
   name: "UserReward",
   fields: () => ({
     id: { type: GraphQLInt },
-    user_id: { type: GraphQLInt },
-    reward_id: { type: GraphQLInt },
+    userID: { type: GraphQLInt },
+    rewardID: { type: GraphQLInt },
     points: { type: GraphQLInt },
-    bonus_points: { type: GraphQLInt },
+    bonusPoints: { type: GraphQLInt },
   }),
 });
 
@@ -206,8 +206,8 @@ const UserAchievementModel = new GraphQLObjectType({
   name: "UserAchievement",
   fields: () => ({
     id: { type: GraphQLInt },
-    user_id: { type: GraphQLInt },
-    achievement_id: { type: GraphQLInt },
+    userID: { type: GraphQLInt },
+    achievementID: { type: GraphQLInt },
     completed: { type: GraphQLBoolean },
   }),
 });
@@ -216,8 +216,8 @@ const ClickStreamModel = new GraphQLObjectType({
   name: "ClickStream",
   fields: () => ({
     id: { type: GraphQLInt },
-    user_id: { type: GraphQLInt },
-    click_stream_item: { type: ClickStreamItemModel },
+    userID: { type: GraphQLInt },
+    clickStreamItem: { type: ClickStreamItemModel },
   }),
 });
 
@@ -225,10 +225,10 @@ const ClickStreamItemModel = new GraphQLObjectType({
   name: "ClickStreamItemModel",
   fields: () => ({
     id: { type: GraphQLInt },
-    screen_id: { type: GraphQLInt },
+    screenID: { type: GraphQLInt },
     timestamp: { type: GraphQLString },
-    next_item: { type: ClickStreamItemModel },
-    prev_item: { type: ClickStreamItemModel },
+    nextItem: { type: ClickStreamItemModel },
+    prevItem: { type: ClickStreamItemModel },
   }),
 });
 
@@ -256,8 +256,8 @@ const SignInModel = new GraphQLObjectType({
 const SignInDataModel = new GraphQLObjectType({
   name: "SignInData",
   fields: () => ({
-    access_token: { type: GraphQLString },
-    refresh_token: { type: GraphQLString },
+    accessToken: { type: GraphQLString },
+    refreshToken: { type: GraphQLString },
     user: { type: UserModel },
   }),
 });
@@ -265,7 +265,7 @@ const SignInDataModel = new GraphQLObjectType({
 const AccessTokenModel = new GraphQLObjectType({
   name: "AccessToken",
   fields: () => ({
-    access_token: { type: GraphQLString },
+    accessToken: { type: GraphQLString },
   }),
 });
 

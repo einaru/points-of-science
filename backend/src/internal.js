@@ -38,3 +38,4 @@ export * from "./ErrorHandler/error_handler.js";
 export * from "./Logger/logger.js";
 
 export * from "./Security/hashing.js";
+export * from "./Security/password.js";

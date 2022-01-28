@@ -71,9 +71,9 @@ function LoginScreen() {
       >
         Log in
       </Button>
-      <Text>Do not have an account yet?</Text>
-      <TouchableOpacity onPress={() => navigation.navigate("Create account")}>
-        <Text>Create one</Text>
+      <Text>Have not activated your account yet?</Text>
+      <TouchableOpacity onPress={() => navigation.navigate("Activate account")}>
+        <Text>Activate account</Text>
       </TouchableOpacity>
     </View>
   );

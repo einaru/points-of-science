@@ -1,10 +1,12 @@
+/* eslint-disable no-promise-executor-return */
 // Server directory imports:
 import {
   config,
   comparePassword,
-  getData,
   createAccessToken,
   createRefreshToken,
+  getData,
+  profileState,
 } from "../internal.js";
 
 function signIn(username, password) {
@@ -15,6 +17,20 @@ function signIn(username, password) {
       return reject(
         getResponseObject(
           "User not found. Sign in unsuccessful.",
+          400,
+          config.env.RESPONSE_TYPE.error,
+          {}
+        )
+      );
+    }
+
+    if (
+      user.state === profileState.deactivated.value ||
+      user.state === profileState.suspended.value
+    ) {
+      return reject(
+        getResponseObject(
+          `The profile is deactivated or suspended.`,
           400,
           config.env.RESPONSE_TYPE.error,
           {}

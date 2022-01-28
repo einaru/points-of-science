@@ -9,17 +9,18 @@ import {
   authenticateAccessToken,
   authenticateRefreshToken,
   config,
+  deleteData,
   deleteRefreshTokenFromDatabase,
-  UserModel,
-  NormalResponseModel,
-  SignInModel,
   getData,
   getDataByFilter,
-  updateData,
-  deleteData,
   nextID,
+  NormalResponseModel,
+  profileState,
+  SignInModel,
   signIn,
   signUp,
+  updateData,
+  UserModel,
 } from "../../../internal.js";
 
 // Root Queries - Used to retrieve data with GET-Requests
@@ -93,6 +94,23 @@ const verifyUsernameQuery = {
           status: 400,
           type: config.env.RESPONSE_TYPE.error,
         };
+      }
+
+      const user = getDataByFilter(config.env.USER_TABLE, {
+        key: "username",
+        value: args.username,
+      })[0];
+      if (user != null) {
+        if (
+          user.state === profileState.active.value ||
+          user.state === profileState.suspended.value
+        ) {
+          return {
+            message: "User is already active or suspended.",
+            status: 400,
+            type: config.env.RESPONSE_TYPE.error,
+          };
+        }
       }
 
       return {

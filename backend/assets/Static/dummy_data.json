@@ -564,214 +564,284 @@
   ],
   "valid_username": [
     {
-      "username": "Antonietta Riccard"
+      "username": "Antonietta Riccard",
+      "permission": 2
     },
     {
-      "username": "Aldis Loughan"
+      "username": "Aldis Loughan",
+      "permission": 2
     },
     {
-      "username": "Grissel Hamprecht"
+      "username": "Grissel Hamprecht",
+      "permission": 2
     },
     {
-      "username": "Violetta Brinkler"
+      "username": "Violetta Brinkler",
+      "permission": 2
     },
     {
-      "username": "Dione Kochl"
+      "username": "Dione Kochl",
+      "permission": 2
     },
     {
-      "username": "Myrle Davitashvili"
+      "username": "Myrle Davitashvili",
+      "permission": 2
     },
     {
-      "username": "Susie Bavage"
+      "username": "Susie Bavage",
+      "permission": 2
     },
     {
-      "username": "Maritsa Giamitti"
+      "username": "Maritsa Giamitti",
+      "permission": 2
     },
     {
-      "username": "Etheline Morteo"
+      "username": "Etheline Morteo",
+      "permission": 2
     },
     {
-      "username": "Darnell Braunstein"
+      "username": "Darnell Braunstein",
+      "permission": 2
     },
     {
-      "username": "Ikey Cowpertwait"
+      "username": "Ikey Cowpertwait",
+      "permission": 2
     },
     {
-      "username": "Mackenzie Eustice"
+      "username": "Mackenzie Eustice",
+      "permission": 2
     },
     {
-      "username": "Zed Dightham"
+      "username": "Zed Dightham",
+      "permission": 2
     },
     {
-      "username": "Loni Hanley"
+      "username": "Loni Hanley",
+      "permission": 2
     },
     {
-      "username": "Dotty Mansford"
+      "username": "Dotty Mansford",
+      "permission": 2
     },
     {
-      "username": "Glyn Kleeman"
+      "username": "Glyn Kleeman",
+      "permission": 2
     },
     {
-      "username": "Bella Celez"
+      "username": "Bella Celez",
+      "permission": 2
     },
     {
-      "username": "Karlan Learmount"
+      "username": "Karlan Learmount",
+      "permission": 2
     },
     {
-      "username": "Nikolas Lazer"
+      "username": "Nikolas Lazer",
+      "permission": 2
     },
     {
-      "username": "Meredith Ganderton"
+      "username": "Meredith Ganderton",
+      "permission": 2
     },
     {
-      "username": "Korie Rablan"
+      "username": "Korie Rablan",
+      "permission": 2
     },
     {
-      "username": "Olga Kepp"
+      "username": "Olga Kepp",
+      "permission": 2
     },
     {
-      "username": "Junie Mathevet"
+      "username": "Junie Mathevet",
+      "permission": 2
     },
     {
-      "username": "Annaliese Gaenor"
+      "username": "Annaliese Gaenor",
+      "permission": 2
     },
     {
-      "username": "Eleanora Chirm"
+      "username": "Eleanora Chirm",
+      "permission": 2
     },
     {
-      "username": "Trudi O'Cosgra"
+      "username": "Trudi O'Cosgra",
+      "permission": 2
     },
     {
-      "username": "Zola Woolland"
+      "username": "Zola Woolland",
+      "permission": 2
     },
     {
-      "username": "Laurel Duchatel"
+      "username": "Laurel Duchatel",
+      "permission": 2
     },
     {
-      "username": "Vance Cheevers"
+      "username": "Vance Cheevers",
+      "permission": 2
     },
     {
-      "username": "Pepita Sterry"
+      "username": "Pepita Sterry",
+      "permission": 2
     },
     {
-      "username": "Nelli Gullefant"
+      "username": "Nelli Gullefant",
+      "permission": 2
     },
     {
-      "username": "Stacy MacNair"
+      "username": "Stacy MacNair",
+      "permission": 2
     },
     {
-      "username": "Enid Lant"
+      "username": "Enid Lant",
+      "permission": 2
     },
     {
-      "username": "Ken Croneen"
+      "username": "Ken Croneen",
+      "permission": 2
     },
     {
-      "username": "Astrix Chesworth"
+      "username": "Astrix Chesworth",
+      "permission": 2
     },
     {
-      "username": "Tilda Beane"
+      "username": "Tilda Beane",
+      "permission": 3
     },
     {
-      "username": "Hill Lorryman"
+      "username": "Hill Lorryman",
+      "permission": 3
     },
     {
-      "username": "Harcourt Dunnico"
+      "username": "Harcourt Dunnico",
+      "permission": 3
     },
     {
-      "username": "Jobye Deppe"
+      "username": "Jobye Deppe",
+      "permission": 3
     },
     {
-      "username": "Sadye Wheatman"
+      "username": "Sadye Wheatman",
+      "permission": 3
     },
     {
-      "username": "Warde Shellcross"
+      "username": "Warde Shellcross",
+      "permission": 3
     },
     {
-      "username": "Nanete LaBastida"
+      "username": "Nanete LaBastida",
+      "permission": 3
     },
     {
-      "username": "Karna Clinch"
+      "username": "Karna Clinch",
+      "permission": 3
     },
     {
-      "username": "Lorna Ebertz"
+      "username": "Lorna Ebertz",
+      "permission": 3
     },
     {
-      "username": "Hillie Camplin"
+      "username": "Hillie Camplin",
+      "permission": 3
     },
     {
-      "username": "Kerry Quinnell"
+      "username": "Kerry Quinnell",
+      "permission": 3
     },
     {
-      "username": "Nanny Gerhts"
+      "username": "Nanny Gerhts",
+      "permission": 3
     },
     {
-      "username": "Minor Minster"
+      "username": "Minor Minster",
+      "permission": 3
     },
     {
-      "username": "Amalle Seydlitz"
+      "username": "Amalle Seydlitz",
+      "permission": 3
     },
     {
-      "username": "Morganica Redler"
+      "username": "Morganica Redler",
+      "permission": 3
     },
     {
-      "username": "Edwin Brignell"
+      "username": "Edwin Brignell",
+      "permission": 3
     },
     {
-      "username": "Lorinda Habron"
+      "username": "Lorinda Habron",
+      "permission": 3
     },
     {
-      "username": "Alexander Penreth"
+      "username": "Alexander Penreth",
+      "permission": 3
     },
     {
-      "username": "Karisa Kerton"
+      "username": "Karisa Kerton",
+      "permission": 3
     },
     {
-      "username": "Davita Sargood"
+      "username": "Davita Sargood",
+      "permission": 3
     },
     {
-      "username": "Lona Peattie"
+      "username": "Lona Peattie",
+      "permission": 3
     },
     {
-      "username": "Kerry Darling"
+      "username": "Kerry Darling",
+      "permission": 3
     },
     {
-      "username": "Rayna Harteley"
+      "username": "Rayna Harteley",
+      "permission": 3
     },
     {
-      "username": "Kit Rubica"
+      "username": "Kit Rubica",
+      "permission": 3
     },
     {
-      "username": "Phylys Deering"
+      "username": "Phylys Deering",
+      "permission": 3
     },
     {
-      "username": "Ulrika Offener"
+      "username": "Ulrika Offener",
+      "permission": 3
     },
     {
-      "username": "Morton Sibbald"
+      "username": "Morton Sibbald",
+      "permission": 3
     },
     {
-      "username": "Shirleen Pilling"
+      "username": "Shirleen Pilling",
+      "permission": 3
     },
     {
-      "username": "Ogdon Boustred"
+      "username": "Ogdon Boustred",
+      "permission": 3
     },
     {
-      "username": "Aloysius Ogelbe"
+      "username": "Aloysius Ogelbe",
+      "permission": 3
     },
     {
-      "username": "Isaak Whatley"
+      "username": "Isaak Whatley",
+      "permission": 3
     },
     {
-      "username": "Tory Musslewhite"
+      "username": "Tory Musslewhite",
+      "permission": 3
     },
     {
-      "username": "Pansy Mewburn"
+      "username": "Pansy Mewburn",
+      "permission": 3
     },
     {
-      "username": "Sherlocke Piatek"
+      "username": "Sherlocke Piatek",
+      "permission": 3
     },
     {
-      "username": "Jay Farmar"
+      "username": "Jay Farmar",
+      "permission": 3
     }
   ]
 }

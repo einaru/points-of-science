@@ -1,11 +1,15 @@
 import {
-  profileCreator,
   checkPassword,
   config,
+  errorsInPassword,
+  generateErrorMessage,
   getData,
   getDataByFilter,
   hashPassword,
+  isValidPassword,
   nextID,
+  profileCreator,
+  profileState,
   signIn,
   updateData,
   validatePassword,
@@ -14,11 +18,20 @@ import {
 function signUp(args) {
   return new Promise((resolve, reject) => {
     const { password, confirmPassword, username } = args;
-    validateSignIn(username, password, confirmPassword, reject);
-
-    hashPassword(password)
+    const list = getDataByFilter(config.env.VALID_USERNAME_TABLE, {
+      key: "username",
+      value: username,
+    });
+    validateSignUp(list[0], password, confirmPassword)
+      .then(() => {
+        return hashPassword(password);
+      })
       .then((result) => {
-        return updateUser(username, result.data.hashedPassword);
+        return updateUser(
+          username,
+          result.data.hashedPassword,
+          list[0].permission
+        );
       })
       .then((user) => {
         updateData(config.env.USER_TABLE, user.data);
@@ -33,62 +46,65 @@ function signUp(args) {
   });
 }
 
-function validateSignIn(username, password, confirmPassword, reject) {
-  if (!isValidUsername(username, reject)) {
-    return;
-  }
+function validateSignUp(data, password, confirmPassword) {
+  return new Promise((resolve, reject) => {
+    if (isNull(data)) {
+      reject({
+        message: "Invalid username.",
+        status: 400,
+        type: config.env.RESPONSE_TYPE.error,
+      });
+    }
 
-  if (isExistingUser(username, reject)) {
-    return;
-  }
+    if (isExistingUser(data.username)) {
+      reject(
+        getResponseObject(
+          "User already exists.",
+          400,
+          config.env.RESPONSE_TYPE.error
+        )
+      );
+    }
 
-  if (!checkPassword(password, confirmPassword)) {
-    throw new Error("Passwords did not match.");
-  }
+    if (!checkPassword(password, confirmPassword)) {
+      reject(
+        getResponseObject(
+          "Passwords did not match.",
+          400,
+          config.env.RESPONSE_TYPE.error
+        )
+      );
+    }
 
-  if (!validatePassword(password)) {
-    throw new Error("Password has wrong format.");
-  }
-}
+    validatePassword(password)
+      .then((validation) => {
+        if (!isValidPassword(validation)) {
+          const errors = errorsInPassword(validation);
+          const message = generateErrorMessage(errors);
+          return reject(
+            getResponseObject(message, 400, config.env.RESPONSE_TYPE.error)
+          );
+        }
 
-function isValidUsername(username, reject) {
-  const validUsername = getDataByFilter(config.env.VALID_USERNAME_TABLE, {
-    key: "username",
-    value: username,
+        return resolve();
+      })
+      .catch((error) => {
+        reject(error);
+      });
   });
-  if (validUsername.length === 0) {
-    return reject({
-      message: "Invalid username.",
-      status: 400,
-      type: config.env.RESPONSE_TYPE.error,
-    });
-  }
-
-  return true;
 }
 
-function isExistingUser(username, reject) {
-  if (
+function isNull(data) {
+  return data == null;
+}
+
+function isExistingUser(username) {
+  return (
     getDataByFilter(config.env.USER_TABLE, {
       key: "username",
       value: username,
     }).length > 0
-  ) {
-    reject(
-      getResponseObject(
-        "User already exists.",
-        400,
-        config.env.RESPONSE_TYPE.error
-      )
-    );
-    return true;
-  }
-
-  return false;
-}
-
-function randomizePermission() {
-  return 2;
+  );
 }
 
 function getNextID() {
@@ -96,16 +112,15 @@ function getNextID() {
   return nextID(users);
 }
 
-function updateUser(username, hashedPassword) {
+function updateUser(username, hashedPassword, permission) {
   const id = getNextID();
   const user = profileCreator();
-  const permission = randomizePermission();
   user.updateData({
     id,
     username,
     permission,
     password: hashedPassword,
-    active: 2,
+    state: profileState.active.value,
   });
   return user;
 }

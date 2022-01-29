@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { View, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { Button, Text, TextInput } from "react-native-paper";
 import { gql, useMutation } from "@apollo/client";
-import styles from "../../shared/styles";
 import { AuthContext } from "../../services/auth/AuthProvider";
 import Loading from "../../shared/components/Loading";
+import FormView from "./FormView";
+import styles from "../../shared/styles";
 
 export const LOGIN = gql`
   mutation signIn($username: String!, $password: String!) {
@@ -51,7 +52,7 @@ function LoginScreen() {
   }
 
   return (
-    <View style={styles.container}>
+    <FormView>
       <TextInput
         placeholder="Username"
         value={username}
@@ -65,6 +66,7 @@ function LoginScreen() {
       />
       <Button
         mode="contained"
+        style={styles.formAction}
         onPress={() => {
           logIn({ variables: { username, password } });
         }}
@@ -75,7 +77,7 @@ function LoginScreen() {
       <TouchableOpacity onPress={() => navigation.navigate("Activate account")}>
         <Text>Activate account</Text>
       </TouchableOpacity>
-    </View>
+    </FormView>
   );
 }
 

@@ -79,6 +79,8 @@ export default function SetPasswordScreen() {
         secureTextEntry
       />
       <Button
+        mode="contained"
+        style={styles.formAction}
         onPress={() => {
           activateAccount({
             variables: { username, password, confirmPassword },

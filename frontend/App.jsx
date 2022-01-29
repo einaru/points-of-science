@@ -10,6 +10,7 @@ import { setContext } from "@apollo/client/link/context";
 import { onError } from "@apollo/client/link/error";
 import { StatusBar } from "expo-status-bar";
 import { Provider as ThemeProvider } from "react-native-paper";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { AuthProvider } from "./src/services/auth/AuthProvider";
 import Navigation from "./src/Navigation";
 import * as Storage from "./src/services/storage";
@@ -50,13 +51,15 @@ const client = new ApolloClient({
 
 export default function App() {
   return (
-    <ThemeProvider>
-      <ApolloProvider client={client}>
-        <AuthProvider>
-          <Navigation />
-        </AuthProvider>
-        <StatusBar style="auto" />
-      </ApolloProvider>
-    </ThemeProvider>
+    <SafeAreaProvider>
+      <ThemeProvider>
+        <ApolloProvider client={client}>
+          <AuthProvider>
+            <Navigation />
+          </AuthProvider>
+          <StatusBar style="auto" />
+        </ApolloProvider>
+      </ThemeProvider>
+    </SafeAreaProvider>
   );
 }

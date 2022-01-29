@@ -1,11 +1,12 @@
 import { gql, useLazyQuery } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
 import React, { useContext, useEffect, useState } from "react";
-import { TouchableOpacity, View } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { Button, Text, TextInput } from "react-native-paper";
 import Loading from "../../shared/components/Loading";
 import styles from "../../shared/styles";
 import { ActivateAccountContext } from "./ActivateAccountProvider";
+import FormView from "./FormView";
 
 const VERIFY_USERNAME = gql`
   query verifyUsername($username: String!) {
@@ -39,24 +40,25 @@ export default function VerifyUsernameScreen() {
   }
 
   return (
-    <View style={styles.container}>
-      <Text>Verify username</Text>
+    <FormView>
       <TextInput
         placeholder="Username"
         value={username}
         onChangeText={(text) => setUsername(text)}
       />
       <Button
+        mode="contained"
+        style={styles.formAction}
         onPress={() => {
           verifyUsername({ variables: { username } });
         }}
       >
-        Next
+        Verify username
       </Button>
       <Text>Already activated your account?</Text>
       <TouchableOpacity onPress={() => navigation.navigate("Login")}>
         <Text>Log in</Text>
       </TouchableOpacity>
-    </View>
+    </FormView>
   );
 }

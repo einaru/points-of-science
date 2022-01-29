@@ -1,9 +1,10 @@
 import React, { useContext, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { View, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { Button, Text, TextInput } from "react-native-paper";
 import styles from "../../shared/styles";
 import { AuthContext } from "../../services/auth/AuthProvider";
+import FormView from "./FormView";
 
 function CreateAccountScreen() {
   const navigation = useNavigation();
@@ -15,7 +16,7 @@ function CreateAccountScreen() {
   const { createAccount } = useContext(AuthContext);
 
   return (
-    <View style={styles.container}>
+    <FormView>
       <TextInput
         placeholder="Username"
         value={username}
@@ -35,6 +36,7 @@ function CreateAccountScreen() {
       />
       <Button
         mode="contained"
+        style={styles.formAction}
         onPress={() => createAccount({ username, password, confirmPassword })}
       >
         Create account
@@ -43,7 +45,7 @@ function CreateAccountScreen() {
       <TouchableOpacity onPress={() => navigation.navigate("Login")}>
         <Text>Log in</Text>
       </TouchableOpacity>
-    </View>
+    </FormView>
   );
 }
 

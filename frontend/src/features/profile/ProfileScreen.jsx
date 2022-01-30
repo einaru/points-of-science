@@ -59,7 +59,7 @@ function ProfileScreen() {
   }, [data, logOutUser]);
 
   if (loading) {
-    return <Loading />;
+    return <Loading message="Logging out…" />;
   }
 
   if (error) {

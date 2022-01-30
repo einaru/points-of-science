@@ -1,7 +1,7 @@
 import { gql, useMutation } from "@apollo/client";
 import React, { useContext, useEffect, useState } from "react";
 import { View } from "react-native";
-import { Button, Text, TextInput } from "react-native-paper";
+import { Button, HelperText, Text, TextInput } from "react-native-paper";
 import { AuthContext } from "../../services/auth/AuthProvider";
 import Loading from "../../shared/components/Loading";
 import styles from "../../shared/styles";
@@ -36,6 +36,7 @@ const ACTIVATE_ACCOUNT = gql`
 export default function SetPasswordScreen() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const { username } = useContext(ActivateAccountContext);
   const { logInUser } = useContext(AuthContext);
@@ -45,11 +46,13 @@ export default function SetPasswordScreen() {
 
   useEffect(() => {
     if (data) {
-      console.debug(data.activateAccount.message);
+      console.debug(data);
       if (data.activateAccount.type === "success") {
-        console.log("Account is activated");
         const { user, accessToken, refreshToken } = data.activateAccount.data;
         logInUser(user, accessToken, refreshToken);
+        setErrorMessage("");
+      } else {
+        setErrorMessage(data.activateAccount.message);
       }
     }
   }, [data, logInUser]);
@@ -78,6 +81,9 @@ export default function SetPasswordScreen() {
         onChangeText={(text) => setConfirmPassword(text)}
         secureTextEntry
       />
+      <HelperText type="error" visible={errorMessage}>
+        {errorMessage}
+      </HelperText>
       <Button
         mode="contained"
         style={styles.formAction}

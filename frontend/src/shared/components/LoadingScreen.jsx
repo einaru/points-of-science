@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   },
 });
 
-function Loading({ animating = true, message = "" }) {
+function LoadingScreen({ animating = true, message = "" }) {
   return (
     <SafeAreaView style={styles.container}>
       <View>
@@ -25,4 +25,4 @@ function Loading({ animating = true, message = "" }) {
   );
 }
 
-export default Loading;
+export default LoadingScreen;

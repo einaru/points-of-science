@@ -6,7 +6,7 @@ import { StyleSheet, View } from "react-native";
 import { Avatar, Divider, List, Text } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AuthContext } from "../../services/auth/AuthProvider";
-import Loading from "../../shared/components/Loading";
+import Loading from "../../shared/components/LoadingScreen";
 
 const styles = StyleSheet.create({
   container: {

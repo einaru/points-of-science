@@ -1,14 +1,11 @@
 import React, { useContext, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
-import { TouchableOpacity } from "react-native";
-import { Button, Text, TextInput } from "react-native-paper";
+import { Button, TextInput } from "react-native-paper";
 import styles from "../../shared/styles";
 import { AuthContext } from "../../services/auth/AuthProvider";
 import FormView from "./FormView";
+import NavigationLink from "./NavigationLink";
 
 function CreateAccountScreen() {
-  const navigation = useNavigation();
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -37,10 +34,11 @@ function CreateAccountScreen() {
       >
         Create account
       </Button>
-      <Text>Already have an account?</Text>
-      <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-        <Text>Log in</Text>
-      </TouchableOpacity>
+      <NavigationLink
+        label="Log in"
+        message="Already have an account?"
+        screenName="Login"
+      />
     </FormView>
   );
 }

@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
-import { TouchableOpacity } from "react-native";
-import { Button, Text, TextInput } from "react-native-paper";
+import { Button, TextInput } from "react-native-paper";
 import { gql, useMutation } from "@apollo/client";
 import { AuthContext } from "../../services/auth/AuthProvider";
 import Loading from "../../shared/components/Loading";
 import FormView from "./FormView";
 import styles from "../../shared/styles";
+import NavigationLink from "./NavigationLink";
 
 export const LOGIN = gql`
   mutation signIn($username: String!, $password: String!) {
@@ -27,8 +26,6 @@ export const LOGIN = gql`
 `;
 
 function LoginScreen() {
-  const navigation = useNavigation();
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -69,10 +66,11 @@ function LoginScreen() {
       >
         Log in
       </Button>
-      <Text>Have not activated your account yet?</Text>
-      <TouchableOpacity onPress={() => navigation.navigate("Activate account")}>
-        <Text>Activate account</Text>
-      </TouchableOpacity>
+      <NavigationLink
+        message="Haven't activated your account yet?"
+        label="Activate account"
+        screenName="Activate account"
+      />
     </FormView>
   );
 }

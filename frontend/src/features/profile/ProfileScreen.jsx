@@ -6,6 +6,7 @@ import { StyleSheet, View } from "react-native";
 import { Avatar, Divider, List, Text } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AuthContext } from "../../services/auth/AuthProvider";
+import { t } from "../i18n";
 import LoadingScreen from "../../shared/components/LoadingScreen";
 
 const styles = StyleSheet.create({
@@ -59,7 +60,7 @@ function ProfileScreen() {
   }, [data, logOutUser]);
 
   if (loading) {
-    return <LoadingScreen message="Logging out…" />;
+    return <LoadingScreen message={t("Logging out…")} />;
   }
 
   if (error) {
@@ -76,7 +77,7 @@ function ProfileScreen() {
         </View>
         <List.Section>
           <List.Item
-            title="Dashboard"
+            title={t("Dashboard")}
             left={() => <List.Icon icon="view-dashboard" />}
             right={() => <List.Icon icon="chevron-right" />}
             onPress={() => {
@@ -85,7 +86,7 @@ function ProfileScreen() {
             }}
           />
           <List.Item
-            title="Achievements"
+            title={t("Achievements")}
             left={() => <List.Icon icon="medal" />}
             right={() => <List.Icon icon="chevron-right" />}
             onPress={() => {
@@ -97,7 +98,7 @@ function ProfileScreen() {
         <Divider />
         <List.Section>
           <List.Item
-            title="Log out"
+            title={t("Log out")}
             left={() => <List.Icon icon="logout" />}
             onPress={() => {
               console.debug("Logging out");

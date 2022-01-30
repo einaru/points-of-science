@@ -1,11 +1,10 @@
 import { gql, useLazyQuery } from "@apollo/client";
-import { useNavigation } from "@react-navigation/native";
 import React, { useContext, useEffect, useState } from "react";
-import { TouchableOpacity, View } from "react-native";
-import { Button, Text, TextInput } from "react-native-paper";
-import Loading from "../../shared/components/Loading";
+import { Button, HelperText, TextInput } from "react-native-paper";
 import styles from "../../shared/styles";
 import { ActivateAccountContext } from "./ActivateAccountProvider";
+import FormView from "./FormView";
+import NavigationLink from "./NavigationLink";
 
 const VERIFY_USERNAME = gql`
   query verifyUsername($username: String!) {
@@ -18,45 +17,51 @@ const VERIFY_USERNAME = gql`
 `;
 
 export default function VerifyUsernameScreen() {
-  const navigation = useNavigation();
   const [username, setUsername] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
   const { setVerifiedUsername } = useContext(ActivateAccountContext);
+
   const [verifyUsername, { called, loading, data }] =
     useLazyQuery(VERIFY_USERNAME);
 
   useEffect(() => {
     if (data) {
-      console.debug(data.verifyUsername.message);
+      console.debug(data);
       if (data.verifyUsername.type === "success") {
-        console.debug(data);
         setVerifiedUsername(username);
+        setErrorMessage("");
+      } else {
+        setErrorMessage(data.verifyUsername.message);
       }
     }
   }, [data, username, setVerifiedUsername]);
 
-  if (called && loading) {
-    return <Loading />;
-  }
-
   return (
-    <View style={styles.container}>
-      <Text>Verify username</Text>
+    <FormView>
       <TextInput
-        placeholder="Username"
+        label="Username"
         value={username}
         onChangeText={(text) => setUsername(text)}
       />
+      <HelperText type="error" visible={errorMessage}>
+        {errorMessage}
+      </HelperText>
       <Button
+        mode="contained"
+        loading={called && loading}
+        style={styles.formAction}
         onPress={() => {
           verifyUsername({ variables: { username } });
         }}
       >
-        Next
+        Verify username
       </Button>
-      <Text>Already activated your account?</Text>
-      <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-        <Text>Log in</Text>
-      </TouchableOpacity>
-    </View>
+      <NavigationLink
+        label="Log in"
+        message="Already activated your account?"
+        screenName="Login"
+      />
+    </FormView>
   );
 }

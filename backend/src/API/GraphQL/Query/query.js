@@ -10,6 +10,7 @@ import {
   authenticateRefreshToken,
   config,
   deleteData,
+  checkPermissionLevel,
   deleteRefreshTokenFromDatabase,
   getData,
   getDataByFilter,
@@ -21,6 +22,10 @@ import {
   signUp,
   updateData,
   UserModel,
+  PermissionModel,
+  profileCreator,
+  setPermissionLevel,
+  swapPermissionGroup,
 } from "../../../internal.js";
 
 // Root Queries - Used to retrieve data with GET-Requests
@@ -124,6 +129,33 @@ const verifyUsernameQuery = {
         status: 400,
         type: config.env.RESPONSE_TYPE.error,
       };
+    }
+  },
+};
+
+const getPermissionsQuery = {
+  type: PermissionModel,
+  args: {},
+  async resolve(parent, args, context) {
+    try {
+      await authenticateAccessToken(context);
+      const response = checkPermissionLevel(
+        config.env.PERMISSION_LEVELS.ADMIN,
+        context.user
+      );
+      if (response.type === "error") {
+        return response;
+      }
+
+      // const permissionLevels = getPermissionLevels();
+      return {
+        message: "Permission levels retrieved successfully.",
+        status: 200,
+        type: config.env.RESPONSE_TYPE.success,
+        data: config.env.PERMISSION_LEVELS,
+      };
+    } catch (error) {
+      return error;
     }
   },
 };
@@ -233,6 +265,77 @@ const signOutQuery = {
   },
 };
 
+const setPermissionQuery = {
+  type: NormalResponseModel,
+  args: { userID: { type: GraphQLInt }, permission: { type: GraphQLInt } },
+  async resolve(parent, args, context) {
+    try {
+      await authenticateAccessToken(context);
+      const response = checkPermissionLevel(
+        config.env.PERMISSION_LEVELS.ADMIN,
+        context.user
+      );
+      if (response.type === "error") {
+        return response;
+      }
+
+      const userData = getDataByFilter(config.env.USER_TABLE, {
+        key: "id",
+        value: args.userID,
+      })[0];
+
+      const user = profileCreator();
+      user.updateData(userData);
+      setPermissionLevel(args.permission, user);
+      updateData(config.env.USER_TABLE, user.data);
+      return {
+        message: "Permission level updated successfully.",
+        status: 200,
+        type: config.env.RESPONSE_TYPE.success,
+      };
+    } catch (error) {
+      return error;
+    }
+  },
+};
+
+const swapPermissionQuery = {
+  type: NormalResponseModel,
+  args: {},
+  async resolve(parent, args, context) {
+    try {
+      await authenticateAccessToken(context);
+      const response = checkPermissionLevel(
+        config.env.PERMISSION_LEVELS.ADMIN,
+        context.user
+      );
+      if (response.type === "error") {
+        return response;
+      }
+
+      const userData = getData(config.env.USER_TABLE);
+      const users = [];
+      userData.forEach((userObject) => {
+        const user = profileCreator();
+        user.updateData(userObject);
+        users.push(user);
+      });
+
+      swapPermissionGroup(users);
+      users.forEach((user) => {
+        updateData(config.env.USER_TABLE, user.data);
+      });
+      return {
+        message: "Swapped permission groups successfully.",
+        status: 200,
+        type: config.env.RESPONSE_TYPE.success,
+      };
+    } catch (error) {
+      return error;
+    }
+  },
+};
+
 export {
   activateAccountQuery,
   authAccessTokenQuery,
@@ -240,9 +343,12 @@ export {
   createUserQuery,
   deleteUserQuery,
   getAllUsersQuery,
+  getPermissionsQuery,
   getUserByIDQuery,
+  setPermissionQuery,
   signInQuery,
   signOutQuery,
+  swapPermissionQuery,
   updateUserQuery,
   verifyUsernameQuery,
 };

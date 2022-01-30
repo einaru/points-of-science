@@ -3,7 +3,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { View } from "react-native";
 import { Button, HelperText, Text, TextInput } from "react-native-paper";
 import { AuthContext } from "../../services/auth/AuthProvider";
-import Loading from "../../shared/components/Loading";
 import styles from "../../shared/styles";
 import { ActivateAccountContext } from "./ActivateAccountProvider";
 
@@ -57,10 +56,6 @@ export default function SetPasswordScreen() {
     }
   }, [data, logInUser]);
 
-  if (loading) {
-    return <Loading />;
-  }
-
   if (error) {
     // TODO provide feedback to user on errors
     console.error(error);
@@ -86,6 +81,7 @@ export default function SetPasswordScreen() {
       </HelperText>
       <Button
         mode="contained"
+        loading={loading}
         style={styles.formAction}
         onPress={() => {
           activateAccount({

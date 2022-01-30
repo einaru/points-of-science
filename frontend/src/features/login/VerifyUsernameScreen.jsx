@@ -1,7 +1,6 @@
 import { gql, useLazyQuery } from "@apollo/client";
 import React, { useContext, useEffect, useState } from "react";
 import { Button, HelperText, TextInput } from "react-native-paper";
-import Loading from "../../shared/components/Loading";
 import styles from "../../shared/styles";
 import { ActivateAccountContext } from "./ActivateAccountProvider";
 import FormView from "./FormView";
@@ -38,10 +37,6 @@ export default function VerifyUsernameScreen() {
     }
   }, [data, username, setVerifiedUsername]);
 
-  if (called && loading) {
-    return <Loading />;
-  }
-
   return (
     <FormView>
       <TextInput
@@ -54,6 +49,7 @@ export default function VerifyUsernameScreen() {
       </HelperText>
       <Button
         mode="contained"
+        loading={called && loading}
         style={styles.formAction}
         onPress={() => {
           verifyUsername({ variables: { username } });

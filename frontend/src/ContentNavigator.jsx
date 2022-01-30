@@ -5,14 +5,15 @@ import AchievementsScreen from "./features/achievement/AchievementsScreen";
 import ChallengesScreen from "./features/challenge/ChallengesScreen";
 import DashboardScreen from "./features/dashboard/DashboardScreen";
 import LeaderboardsScreen from "./features/leaderboard/LeaderboardsScreen";
+import ProfileScreen from "./features/profile/ProfileScreen";
 
 const tabIconMap = {
   Challenges: "lightbulb-on",
   Leaderboards: "trophy",
   Achievements: "medal",
   Dashboard: "view-dashboard",
+  UserProfile: "account",
 };
-
 const Tab = createMaterialBottomTabNavigator();
 
 function ContentNavigator() {
@@ -27,6 +28,7 @@ function ContentNavigator() {
         },
       })}
     >
+      <Tab.Screen name="UserProfile" component={ProfileScreen} />
       <Tab.Screen name="Challenges" component={ChallengesScreen} />
       <Tab.Screen name="Leaderboards" component={LeaderboardsScreen} />
       <Tab.Screen name="Achievements" component={AchievementsScreen} />

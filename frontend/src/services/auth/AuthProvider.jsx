@@ -13,7 +13,7 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const initState = async () => {
-      const user = await Storage.getItem("user");
+      const user = JSON.parse(await Storage.getItem("user"));
       const refreshToken = await Storage.getItem("refreshToken");
       console.log("Restore user:", user);
       dispatch({ type: "restoreUser", user, refreshToken });

@@ -42,7 +42,7 @@ export default function VerifyUsernameScreen() {
   return (
     <FormView>
       <TextInput
-        placeholder="Username"
+        label="Username"
         value={username}
         onChangeText={(text) => setUsername(text)}
       />

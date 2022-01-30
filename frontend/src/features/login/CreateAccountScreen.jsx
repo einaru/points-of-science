@@ -17,19 +17,15 @@ function CreateAccountScreen() {
 
   return (
     <FormView>
+      <TextInput label="Username" value={username} onChange={setUsername} />
       <TextInput
-        placeholder="Username"
-        value={username}
-        onChange={setUsername}
-      />
-      <TextInput
-        placeholder="Password"
+        label="Password"
         value={password}
         onChange={setPassword}
         secureTextEntry
       />
       <TextInput
-        placeholder="Confirm password"
+        label="Confirm password"
         value={confirmPassword}
         onChange={setConfirmPassword}
         secureTextEntry

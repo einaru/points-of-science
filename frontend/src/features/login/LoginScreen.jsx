@@ -53,13 +53,9 @@ function LoginScreen() {
 
   return (
     <FormView>
+      <TextInput label="Username" value={username} onChangeText={setUsername} />
       <TextInput
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
-      />
-      <TextInput
-        placeholder="Password"
+        label="Password"
         value={password}
         onChangeText={setPassword}
         secureTextEntry

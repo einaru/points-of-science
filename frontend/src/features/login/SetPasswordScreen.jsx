@@ -67,13 +67,13 @@ export default function SetPasswordScreen() {
     <View style={styles.container}>
       <Text>Username: {username}</Text>
       <TextInput
-        placeholder="Password"
+        label="Password"
         value={password}
         onChangeText={(text) => setPassword(text)}
         secureTextEntry
       />
       <TextInput
-        placeholder="Confirm password"
+        label="Confirm password"
         value={confirmPassword}
         onChangeText={(text) => setConfirmPassword(text)}
         secureTextEntry

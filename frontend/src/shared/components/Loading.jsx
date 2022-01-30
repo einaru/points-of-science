@@ -1,12 +1,27 @@
 import React from "react";
-import { Text } from "react-native-paper";
-import { View } from "react-native";
+import { ActivityIndicator, Text } from "react-native-paper";
+import { StyleSheet, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-function Loading() {
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  label: {
+    paddingVertical: 12,
+  },
+});
+
+function Loading({ animating = true, message = "" }) {
   return (
-    <View>
-      <Text>Loading…</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <View>
+        <ActivityIndicator animating={animating} size="large" />
+        <Text style={styles.label}>{message}</Text>
+      </View>
+    </SafeAreaView>
   );
 }
 

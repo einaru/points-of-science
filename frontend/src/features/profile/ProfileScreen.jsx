@@ -6,7 +6,7 @@ import { StyleSheet, View } from "react-native";
 import { Avatar, Divider, List, Text } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AuthContext } from "../../services/auth/AuthProvider";
-import Loading from "../../shared/components/LoadingScreen";
+import LoadingScreen from "../../shared/components/LoadingScreen";
 
 const styles = StyleSheet.create({
   container: {
@@ -15,12 +15,12 @@ const styles = StyleSheet.create({
   avatarContainer: {
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 12,
-    marginBottom: 24,
+    marginTop: 16,
+    marginBottom: 16,
   },
   title: {
-    marginTop: 12,
-    fontSize: 20,
+    marginTop: 8,
+    fontSize: 16,
     fontWeight: "bold",
   },
 });
@@ -59,7 +59,7 @@ function ProfileScreen() {
   }, [data, logOutUser]);
 
   if (loading) {
-    return <Loading message="Logging out…" />;
+    return <LoadingScreen message="Logging out…" />;
   }
 
   if (error) {
@@ -69,7 +69,7 @@ function ProfileScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{ paddingTop: "12px" }}>
+      <View>
         <View style={styles.avatarContainer}>
           <Avatar.Text size={96} label={initials} />
           <Text style={styles.title}>{user.username}</Text>

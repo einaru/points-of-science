@@ -1,10 +1,12 @@
 /* eslint-disable no-console */
+import { gql, useMutation } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
-import React, { useContext, useMemo } from "react";
+import React, { useContext, useEffect, useMemo } from "react";
 import { StyleSheet, View } from "react-native";
-import { Avatar, List, Text } from "react-native-paper";
+import { Avatar, Divider, List, Text } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AuthContext } from "../../services/auth/AuthProvider";
+import Loading from "../../shared/components/Loading";
 
 const styles = StyleSheet.create({
   container: {
@@ -23,10 +25,20 @@ const styles = StyleSheet.create({
   },
 });
 
+const LOGOUT = gql`
+  mutation signOut($refreshToken: String!) {
+    signOut(refreshToken: $refreshToken) {
+      type
+      status
+      message
+    }
+  }
+`;
+
 function ProfileScreen() {
   const navigation = useNavigation();
 
-  const { user } = useContext(AuthContext);
+  const { user, logOutUser, refreshToken } = useContext(AuthContext);
 
   const initials = useMemo(() => {
     return user.username
@@ -34,6 +46,26 @@ function ProfileScreen() {
       .map((word) => word[0])
       .join("");
   }, [user.username]);
+
+  const [logOut, { data, loading, error }] = useMutation(LOGOUT);
+
+  useEffect(() => {
+    if (data) {
+      console.debug(data.signOut.message);
+      if (data.signOut.type === "success") {
+        logOutUser();
+      }
+    }
+  }, [data, logOutUser]);
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    // TODO provide feedback to user on errors
+    console.error(error);
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -59,6 +91,17 @@ function ProfileScreen() {
             onPress={() => {
               console.debug("Pressed: Dashboard");
               navigation.navigate("Achievements");
+            }}
+          />
+        </List.Section>
+        <Divider />
+        <List.Section>
+          <List.Item
+            title="Log out"
+            left={() => <List.Icon icon="logout" />}
+            onPress={() => {
+              console.debug("Logging out");
+              logOut({ variables: { refreshToken } });
             }}
           />
         </List.Section>

@@ -275,22 +275,23 @@ const setPermissionQuery = {
         config.env.PERMISSION_LEVELS.ADMIN,
         context.user
       );
-      if (response.type == "error") {
+      if (response.type === "error") {
         return response;
       }
 
       const userData = getDataByFilter(config.env.USER_TABLE, {
-        text: "id",
+        key: "id",
         value: args.userID,
-      });
+      })[0];
+
       const user = profileCreator();
       user.updateData(userData);
-      const permissionLevels = setPermissionLevel(args.permission, user);
+      setPermissionLevel(args.permission, user);
+      updateData(config.env.USER_TABLE, user.data);
       return {
-        message: "Permission levels retrieved successfully.",
+        message: "Permission level updated successfully.",
         status: 200,
         type: config.env.RESPONSE_TYPE.success,
-        data: permissionLevels,
       };
     } catch (error) {
       return error;
@@ -308,7 +309,7 @@ const swapPermissionQuery = {
         config.env.PERMISSION_LEVELS.ADMIN,
         context.user
       );
-      if (response.type == "error") {
+      if (response.type === "error") {
         return response;
       }
 
@@ -321,11 +322,9 @@ const swapPermissionQuery = {
       });
 
       swapPermissionGroup(users);
-      const userObjects = [];
       users.forEach((user) => {
-        userObjects.push(user.data);
+        updateData(config.env.USER_TABLE, user.data);
       });
-      updateData(config.env.USER_TABLE, userObjects);
       return {
         message: "Swapped permission groups successfully.",
         status: 200,

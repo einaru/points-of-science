@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
-import { Button, TextInput } from "react-native-paper";
-import styles from "../../shared/styles";
+import { TextInput } from "react-native-paper";
 import { AuthContext } from "../auth/AuthProvider";
 import FormView from "./FormView";
 import NavigationLink from "./NavigationLink";
 import { t } from "../i18n";
+import FormAction from "./FormAction";
 
 function CreateAccountScreen() {
   const [username, setUsername] = useState("");
@@ -32,13 +32,11 @@ function CreateAccountScreen() {
         onChange={setConfirmPassword}
         secureTextEntry
       />
-      <Button
+      <FormAction
+        label={t("Create account")}
         mode="contained"
-        style={styles.formAction}
         onPress={() => createAccount({ username, password, confirmPassword })}
-      >
-        {t("Create account")}
-      </Button>
+      />
       <NavigationLink
         label={t("Log in")}
         message={t("Already have an account?")}

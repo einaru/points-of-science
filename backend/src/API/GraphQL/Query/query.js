@@ -1,9 +1,5 @@
-import {
-  GraphQLObjectType,
-  GraphQLString,
-  GraphQLInt,
-  GraphQLList,
-} from "graphql";
+/* eslint-disable import/no-cycle */
+import { GraphQLString, GraphQLInt, GraphQLList } from "graphql";
 import {
   AuthenticateTokenModel,
   authenticateAccessToken,
@@ -87,9 +83,9 @@ const getUserByIDQuery = {
 const verifyUsernameQuery = {
   type: NormalResponseModel,
   args: { username: { type: GraphQLString } },
-  resolve(parent, args) {
+  async resolve(parent, args) {
     try {
-      const username = getDataByFilter(config.env.VALID_USERNAME_TABLE, {
+      const username = await getDataByFilter(config.env.VALID_USERNAME_TABLE, {
         key: "username",
         value: args.username,
       });
@@ -184,18 +180,24 @@ const createUserQuery = {
     password: { type: GraphQLString },
     confirm_password: { type: GraphQLString },
   },
-  resolve(parent, args) {
+  async resolve(parent, args) {
     // Put the create user logic for the BusinessLogic here.
-    const newUser = {
-      id: nextID("User"),
-      username: args.username,
-      password: args.password,
-      permission: "control",
-      achievement: [],
-      challenge: [],
-    };
-    updateData("User", newUser);
-    return newUser;
+    try {
+      const users = await getData(config.env.USER_TABLE);
+      const id = nextID(users);
+      const newUser = {
+        id,
+        username: args.username,
+        password: args.password,
+        permission: "control",
+        achievement: [],
+        challenge: [],
+      };
+      await updateData(config.env.USER_TABLE, newUser);
+      return newUser;
+    } catch (error) {
+      return null;
+    }
   },
 };
 

@@ -1,4 +1,5 @@
 import React from "react";
+import fetch from "cross-fetch";
 import {
   ApolloClient,
   ApolloLink,
@@ -41,7 +42,7 @@ const authLink = setContext(async (_, { headers }) => {
   };
 });
 
-const httpLink = new HttpLink({ uri: "http://localhost:5000/graphql" });
+const httpLink = new HttpLink({ uri: "http://localhost:5000/graphql", fetch });
 const link = ApolloLink.from([errorLink, authLink.concat(httpLink)]);
 
 const client = new ApolloClient({
@@ -51,15 +52,15 @@ const client = new ApolloClient({
 
 export default function App() {
   return (
-    <SafeAreaProvider>
-      <ThemeProvider>
-        <ApolloProvider client={client}>
-          <AuthProvider>
+    <ThemeProvider>
+      <ApolloProvider client={client}>
+        <AuthProvider>
+          <SafeAreaProvider>
             <Navigation />
-          </AuthProvider>
-          <StatusBar style="auto" />
-        </ApolloProvider>
-      </ThemeProvider>
-    </SafeAreaProvider>
+          </SafeAreaProvider>
+        </AuthProvider>
+        <StatusBar style="auto" />
+      </ApolloProvider>
+    </ThemeProvider>
   );
 }

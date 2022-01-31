@@ -8,6 +8,7 @@
     "airbnb/hooks",
     "prettier",
     "plugin:react/recommended",
+    "plugin:jest/recommended",
     "plugin:prettier/recommended"
   ],
   "parserOptions": {
@@ -20,6 +21,7 @@
   "plugins": [
     "react",
     "react-native",
+    "jest",
     "prettier"
   ],
   "rules": {

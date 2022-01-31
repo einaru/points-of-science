@@ -2,7 +2,7 @@ import React, { useReducer, useEffect, useMemo, createContext } from "react";
 import { useApolloClient } from "@apollo/client";
 import { reducer, initialState } from "./reducer";
 import * as Query from "./query";
-import * as Storage from "../storage";
+import * as Storage from "../../services/storage";
 
 export const AuthContext = createContext();
 

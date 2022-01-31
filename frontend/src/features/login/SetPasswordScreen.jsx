@@ -1,7 +1,7 @@
 import { gql, useMutation } from "@apollo/client";
 import React, { useContext, useEffect, useState } from "react";
 import { Button, HelperText, Text, TextInput } from "react-native-paper";
-import { AuthContext } from "../../services/auth/AuthProvider";
+import { AuthContext } from "../auth/AuthProvider";
 import styles from "../../shared/styles";
 import { ActivateAccountContext } from "./ActivateAccountProvider";
 import FormView from "./FormView";

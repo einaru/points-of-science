@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Button, TextInput } from "react-native-paper";
 import styles from "../../shared/styles";
-import { AuthContext } from "../../services/auth/AuthProvider";
+import { AuthContext } from "../auth/AuthProvider";
 import FormView from "./FormView";
 import NavigationLink from "./NavigationLink";
 import { t } from "../i18n";

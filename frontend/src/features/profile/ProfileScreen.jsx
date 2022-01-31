@@ -5,7 +5,7 @@ import React, { useContext, useEffect, useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 import { Avatar, Divider, List, Text } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { AuthContext } from "../../services/auth/AuthProvider";
+import { AuthContext } from "../auth/AuthProvider";
 import { t } from "../i18n";
 import LoadingScreen from "../../shared/components/LoadingScreen";
 

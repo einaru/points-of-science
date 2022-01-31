@@ -1,7 +1,17 @@
 import React from "react";
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import styles from "../../shared/styles";
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  formContainer: {
+    flex: 1,
+    margin: 24,
+    justifyContent: "center",
+  },
+});
 
 function FormView({ children }) {
   return (

@@ -6,8 +6,7 @@ import { StyleSheet, View } from "react-native";
 import { Avatar, Divider, List, Text } from "react-native-paper";
 import { AuthContext } from "../auth/AuthProvider";
 import { t } from "../i18n";
-import LoadingScreen from "../../shared/components/LoadingScreen";
-import Container from "../../shared/components/Container";
+import { Container, LoadingScreen } from "../../shared/components";
 
 const styles = StyleSheet.create({
   container: {

@@ -1,11 +1,11 @@
 import React from "react";
 import { MaterialCommunityIcons } from "react-native-vector-icons";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-import AchievementsScreen from "./features/achievement/AchievementsScreen";
-import ChallengesScreen from "./features/challenge/ChallengesScreen";
-import DashboardScreen from "./features/dashboard/DashboardScreen";
-import LeaderboardsScreen from "./features/leaderboard/LeaderboardsScreen";
-import ProfileScreen from "./features/profile/ProfileScreen";
+import AchievementsScreen from "../achievement/AchievementsScreen";
+import ChallengesScreen from "../challenge/ChallengesScreen";
+import DashboardScreen from "../dashboard/DashboardScreen";
+import LeaderboardsScreen from "../leaderboard/LeaderboardsScreen";
+import ProfileScreen from "../profile/ProfileScreen";
 
 const tabIconMap = {
   Challenges: "lightbulb-on",

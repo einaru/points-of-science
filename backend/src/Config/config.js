@@ -24,6 +24,7 @@ const env = {
   ENVIRONMENT_MODE: {
     PRODUCTION: {
       mode: "production",
+      database: process.env.DATABASE,
       database_file_path: "",
       database_folder: "",
     },
@@ -55,8 +56,8 @@ const env = {
   PERMISSION_LEVELS: {
     ADMIN: 1,
     EXPERIMENTAL: 2,
-    CONTROL: 3
-  }
+    CONTROL: 3,
+  },
 };
 
 export { env };

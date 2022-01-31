@@ -15,7 +15,7 @@ function ActivateAccountScreenWrapper() {
   );
 }
 
-function AccountNavigator() {
+function LoginStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Login" component={LoginScreen} />
@@ -28,4 +28,4 @@ function AccountNavigator() {
   );
 }
 
-export default AccountNavigator;
+export default LoginStack;

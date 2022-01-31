@@ -1,12 +1,12 @@
 import React from "react";
-import { Text, View } from "react-native";
-import styles from "../../shared/styles";
+import { Text } from "react-native-paper";
+import { Container } from "../../shared/components";
 
 function AchievementsScreen() {
   return (
-    <View style={styles.container}>
+    <Container>
       <Text>Achievements</Text>
-    </View>
+    </Container>
   );
 }
 

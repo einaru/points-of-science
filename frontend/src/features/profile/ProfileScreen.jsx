@@ -4,10 +4,9 @@ import { useNavigation } from "@react-navigation/native";
 import React, { useContext, useEffect, useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 import { Avatar, Divider, List, Text } from "react-native-paper";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { AuthContext } from "../../services/auth/AuthProvider";
+import { AuthContext } from "../auth/AuthProvider";
 import { t } from "../i18n";
-import LoadingScreen from "../../shared/components/LoadingScreen";
+import { Container, LoadingScreen } from "../../shared/components";
 
 const styles = StyleSheet.create({
   container: {
@@ -69,45 +68,43 @@ function ProfileScreen() {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View>
-        <View style={styles.avatarContainer}>
-          <Avatar.Text size={96} label={initials} />
-          <Text style={styles.title}>{user.username}</Text>
-        </View>
-        <List.Section>
-          <List.Item
-            title={t("Dashboard")}
-            left={() => <List.Icon icon="view-dashboard" />}
-            right={() => <List.Icon icon="chevron-right" />}
-            onPress={() => {
-              console.debug("Pressed: Dashboard");
-              navigation.navigate("Dashboard");
-            }}
-          />
-          <List.Item
-            title={t("Achievements")}
-            left={() => <List.Icon icon="medal" />}
-            right={() => <List.Icon icon="chevron-right" />}
-            onPress={() => {
-              console.debug("Pressed: Dashboard");
-              navigation.navigate("Achievements");
-            }}
-          />
-        </List.Section>
-        <Divider />
-        <List.Section>
-          <List.Item
-            title={t("Log out")}
-            left={() => <List.Icon icon="logout" />}
-            onPress={() => {
-              console.debug("Logging out");
-              logOut({ variables: { refreshToken } });
-            }}
-          />
-        </List.Section>
+    <Container noMargins>
+      <View style={styles.avatarContainer}>
+        <Avatar.Text size={96} label={initials} />
+        <Text style={styles.title}>{user.username}</Text>
       </View>
-    </SafeAreaView>
+      <List.Section>
+        <List.Item
+          title={t("Dashboard")}
+          left={() => <List.Icon icon="view-dashboard" />}
+          right={() => <List.Icon icon="chevron-right" />}
+          onPress={() => {
+            console.debug("Pressed: Dashboard");
+            navigation.navigate("Dashboard");
+          }}
+        />
+        <List.Item
+          title={t("Achievements")}
+          left={() => <List.Icon icon="medal" />}
+          right={() => <List.Icon icon="chevron-right" />}
+          onPress={() => {
+            console.debug("Pressed: Dashboard");
+            navigation.navigate("Achievements");
+          }}
+        />
+      </List.Section>
+      <Divider />
+      <List.Section>
+        <List.Item
+          title={t("Log out")}
+          left={() => <List.Icon icon="logout" />}
+          onPress={() => {
+            console.debug("Logging out");
+            logOut({ variables: { refreshToken } });
+          }}
+        />
+      </List.Section>
+    </Container>
   );
 }
 

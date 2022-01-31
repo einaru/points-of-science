@@ -1,11 +1,11 @@
 import { gql, useMutation } from "@apollo/client";
 import React, { useContext, useEffect, useState } from "react";
-import { Button, HelperText, Text, TextInput } from "react-native-paper";
-import { AuthContext } from "../../services/auth/AuthProvider";
-import styles from "../../shared/styles";
+import { HelperText, Text, TextInput } from "react-native-paper";
+import { AuthContext } from "../auth/AuthProvider";
 import { ActivateAccountContext } from "./ActivateAccountProvider";
 import FormView from "./FormView";
 import { t } from "../i18n";
+import FormAction from "./FormAction";
 
 const ACTIVATE_ACCOUNT = gql`
   mutation activateAccount(
@@ -82,18 +82,15 @@ export default function SetPasswordScreen() {
       <HelperText type="error" visible={errorMessage}>
         {errorMessage}
       </HelperText>
-      <Button
-        mode="contained"
+      <FormAction
+        label={t("Activate account")}
         loading={loading}
-        style={styles.formAction}
         onPress={() => {
           activateAccount({
             variables: { username, password, confirmPassword },
           });
         }}
-      >
-        {t("Activate account")}
-      </Button>
+      />
     </FormView>
   );
 }

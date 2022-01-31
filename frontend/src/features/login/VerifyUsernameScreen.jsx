@@ -1,11 +1,11 @@
 import { gql, useLazyQuery } from "@apollo/client";
 import React, { useContext, useEffect, useState } from "react";
-import { Button, HelperText, TextInput } from "react-native-paper";
-import styles from "../../shared/styles";
+import { HelperText, TextInput } from "react-native-paper";
 import { ActivateAccountContext } from "./ActivateAccountProvider";
 import FormView from "./FormView";
-import NavigationLink from "./NavigationLink";
+import FormLink from "./FormLink";
 import { t } from "../i18n";
+import FormAction from "./FormAction";
 
 const VERIFY_USERNAME = gql`
   query verifyUsername($username: String!) {
@@ -48,17 +48,14 @@ export default function VerifyUsernameScreen() {
       <HelperText type="error" visible={errorMessage}>
         {errorMessage}
       </HelperText>
-      <Button
-        mode="contained"
+      <FormAction
+        label={t("Verify username")}
         loading={called && loading}
-        style={styles.formAction}
         onPress={() => {
           verifyUsername({ variables: { username } });
         }}
-      >
-        {t("Verify username")}
-      </Button>
-      <NavigationLink
+      />
+      <FormLink
         label={t("Log in")}
         message={t("Already activated your account?")}
         screenName="Login"

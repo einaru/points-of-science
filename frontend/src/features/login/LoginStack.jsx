@@ -1,9 +1,9 @@
 import * as React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import LoginScreen from "./features/login/LoginScreen";
-import CreateAccountScreen from "./features/login/CreateAccountScreen";
-import ActivateAccountScreen from "./features/login/ActivateAccountScreen";
-import ActivateAccountProvider from "./features/login/ActivateAccountProvider";
+import LoginScreen from "./LoginScreen";
+import CreateAccountScreen from "./CreateAccountScreen";
+import ActivateAccountScreen from "./ActivateAccountScreen";
+import ActivateAccountProvider from "./ActivateAccountProvider";
 
 const Stack = createNativeStackNavigator();
 
@@ -15,7 +15,7 @@ function ActivateAccountScreenWrapper() {
   );
 }
 
-function AccountNavigator() {
+function LoginStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Login" component={LoginScreen} />
@@ -28,4 +28,4 @@ function AccountNavigator() {
   );
 }
 
-export default AccountNavigator;
+export default LoginStack;

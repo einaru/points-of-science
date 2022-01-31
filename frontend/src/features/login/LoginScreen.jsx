@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Button, HelperText, TextInput } from "react-native-paper";
+import { HelperText, TextInput } from "react-native-paper";
 import { gql, useMutation } from "@apollo/client";
-import { AuthContext } from "../../services/auth/AuthProvider";
+import { AuthContext } from "../auth/AuthProvider";
 import FormView from "./FormView";
-import styles from "../../shared/styles";
-import NavigationLink from "./NavigationLink";
+import FormLink from "./FormLink";
 import { t } from "../i18n";
+import FormAction from "./FormAction";
 
 export const LOGIN = gql`
   mutation signIn($username: String!, $password: String!) {
@@ -66,17 +66,14 @@ function LoginScreen() {
       <HelperText type="error" visible={errorMessage}>
         {errorMessage}
       </HelperText>
-      <Button
-        mode="contained"
+      <FormAction
+        label={t("Log in")}
         loading={loading}
-        style={styles.formAction}
         onPress={() => {
           logIn({ variables: { username, password } });
         }}
-      >
-        {t("Log in")}
-      </Button>
-      <NavigationLink
+      />
+      <FormLink
         message={t("Haven't activated your account yet?")}
         label={t("Activate account")}
         screenName="Activate account"

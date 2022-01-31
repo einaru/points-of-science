@@ -1,12 +1,12 @@
 import React from "react";
-import { Text, View } from "react-native";
-import styles from "../../shared/styles";
+import { Text } from "react-native-paper";
+import { Container } from "../../shared/components";
 
 function ChallengesScreen() {
   return (
-    <View style={styles.container}>
+    <Container>
       <Text>Challenges</Text>
-    </View>
+    </Container>
   );
 }
 

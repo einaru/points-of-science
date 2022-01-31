@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   },
 });
 
-function NavigationLink({ message, label, screenName }) {
+function FormLink({ message, label, screenName }) {
   const navigation = useNavigation();
   return (
     <View style={styles.row}>
@@ -30,4 +30,4 @@ function NavigationLink({ message, label, screenName }) {
   );
 }
 
-export default NavigationLink;
+export default FormLink;

@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { HelperText, TextInput } from "react-native-paper";
 import { ActivateAccountContext } from "./ActivateAccountProvider";
 import FormView from "./FormView";
-import NavigationLink from "./NavigationLink";
+import FormLink from "./FormLink";
 import { t } from "../i18n";
 import FormAction from "./FormAction";
 
@@ -55,7 +55,7 @@ export default function VerifyUsernameScreen() {
           verifyUsername({ variables: { username } });
         }}
       />
-      <NavigationLink
+      <FormLink
         label={t("Log in")}
         message={t("Already activated your account?")}
         screenName="Login"

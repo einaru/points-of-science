@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { TextInput } from "react-native-paper";
 import { AuthContext } from "../auth/AuthProvider";
 import FormView from "./FormView";
-import NavigationLink from "./NavigationLink";
+import FormLink from "./FormLink";
 import { t } from "../i18n";
 import FormAction from "./FormAction";
 
@@ -37,7 +37,7 @@ function CreateAccountScreen() {
         mode="contained"
         onPress={() => createAccount({ username, password, confirmPassword })}
       />
-      <NavigationLink
+      <FormLink
         label={t("Log in")}
         message={t("Already have an account?")}
         screenName="Login"

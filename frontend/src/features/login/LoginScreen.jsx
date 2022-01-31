@@ -3,7 +3,7 @@ import { HelperText, TextInput } from "react-native-paper";
 import { gql, useMutation } from "@apollo/client";
 import { AuthContext } from "../auth/AuthProvider";
 import FormView from "./FormView";
-import NavigationLink from "./NavigationLink";
+import FormLink from "./FormLink";
 import { t } from "../i18n";
 import FormAction from "./FormAction";
 
@@ -73,7 +73,7 @@ function LoginScreen() {
           logIn({ variables: { username, password } });
         }}
       />
-      <NavigationLink
+      <FormLink
         message={t("Haven't activated your account yet?")}
         label={t("Activate account")}
         screenName="Activate account"

@@ -71,11 +71,11 @@ const getAllUsersQuery = {
 
 const getUserByIDQuery = {
   type: new GraphQLList(UserModel),
-  args: { id: { type: GraphQLInt }, permission: { type: GraphQLString } },
+  args: { id: { type: GraphQLInt } },
   resolve(parent, args) {
     return getDataByFilter("User", {
-      key: "permission",
-      value: args.permission,
+      key: "id",
+      value: args.id,
     });
   },
 };
@@ -97,7 +97,7 @@ const verifyUsernameQuery = {
         };
       }
 
-      const user = getDataByFilter(config.env.USER_TABLE, {
+      const user = await getDataByFilter(config.env.USER_TABLE, {
         key: "username",
         value: args.username,
       })[0];
@@ -143,7 +143,6 @@ const getPermissionsQuery = {
         return response;
       }
 
-      // const permissionLevels = getPermissionLevels();
       return {
         message: "Permission levels retrieved successfully.",
         status: 200,
@@ -206,13 +205,22 @@ const deleteUserQuery = {
   args: {
     id: { type: GraphQLInt },
   },
-  resolve(parent, args) {
-    // Put the delete user logic for the BusinessLogic here.
-    const userList = getDataByFilter("User", { key: "id", value: args.id });
-    if (userList.length > 0) {
-      const user = userList[0];
-      deleteData("User", user);
-      return user;
+  async resolve(parent, args) {
+    try {
+      // Put the delete user logic for the BusinessLogic here.
+      const userList = await getDataByFilter("User", {
+        key: "id",
+        value: args.id,
+      });
+      if (userList.length > 0) {
+        const user = userList[0];
+        await deleteData("User", user);
+        return user;
+      }
+
+      return null;
+    } catch (error) {
+      return error;
     }
   },
 };
@@ -225,14 +233,23 @@ const updateUserQuery = {
     password: { type: GraphQLString },
     confirm_password: { type: GraphQLString },
   },
-  resolve(parent, args) {
+  async resolve(parent, args) {
     // Put the delete user logic for the BusinessLogic here.
-    const userList = getDataByFilter("User", { key: "id", value: args.id });
-    if (userList.length > 0) {
+    try {
+      const userList = await getDataByFilter("User", {
+        key: "id",
+        value: args.id,
+      });
+      if (userList.length === 0) {
+        return null;
+      }
+
       const user = userList[0];
       user.username = args.username;
       updateData("User", user);
       return user;
+    } catch (error) {
+      return error;
     }
   },
 };
@@ -281,7 +298,7 @@ const setPermissionQuery = {
         return response;
       }
 
-      const userData = getDataByFilter(config.env.USER_TABLE, {
+      const userData = await getDataByFilter(config.env.USER_TABLE, {
         key: "id",
         value: args.userID,
       })[0];
@@ -289,7 +306,7 @@ const setPermissionQuery = {
       const user = profileCreator();
       user.updateData(userData);
       setPermissionLevel(args.permission, user);
-      updateData(config.env.USER_TABLE, user.data);
+      await updateData(config.env.USER_TABLE, user.data);
       return {
         message: "Permission level updated successfully.",
         status: 200,

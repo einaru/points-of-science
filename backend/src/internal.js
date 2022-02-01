@@ -1,7 +1,8 @@
+/* eslint-disable import/no-cycle */
 export * as config from "./Config/config.js";
 export * from "./API/GraphQL/Model/model.js";
 export * from "./API/GraphQL/Query/query.js";
-export * from "./API/index.js";
+export * as schema from "./API/GraphQL/route.js";
 
 export * from "./Authentication/sign_in.js";
 export * from "./Authentication/sign_up.js";
@@ -28,6 +29,9 @@ export * from "./BusinessLogic/UserTracker/user_reflection.js";
 export * from "./BusinessLogic/UserTracker/user_reward.js";
 
 export * from "./Database/Connection/connection.js";
+export * from "./Database/Firebase/firebase.js";
+export * as JSONProvider from "./Database/Provider/json_provider.js";
+export * as FirebaseProvider from "./Database/Provider/firebase_provider.js";
 export * from "./Database/Query/query.js";
 
 export * from "./DataCollection/click_stream.js";

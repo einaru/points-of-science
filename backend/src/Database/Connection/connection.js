@@ -1,12 +1,19 @@
+/* eslint-disable import/no-cycle */
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
-import { config } from "../../internal.js";
+import {
+  config,
+  connectToFirebase,
+  FirebaseProvider,
+  JSONProvider,
+} from "../../internal.js";
 
 const filename = fileURLToPath(import.meta.url);
 const here = dirname(filename);
 
 let database;
+let provider;
 let filePathToDatabase;
 
 function connectToDatabase() {
@@ -16,6 +23,7 @@ function connectToDatabase() {
       config.env.ENVIRONMENT_MODE.TEST.database_file_path,
       config.env.ENVIRONMENT_MODE.TEST.dummy_data
     );
+    provider = JSONProvider;
 
     return;
   }
@@ -26,12 +34,17 @@ function connectToDatabase() {
       config.env.ENVIRONMENT_MODE.DEVELOPMENT.database_file_path,
       config.env.ENVIRONMENT_MODE.TEST.dummy_data
     );
+    provider = JSONProvider;
 
     return;
   }
 
   if (checkEnvironmentMode(config.env.ENVIRONMENT_MODE.PRODUCTION.mode)) {
     // Fill in logic connecting the application to a production database.
+    if (config.env.ENVIRONMENT_MODE.PRODUCTION.database === "FIREBASE") {
+      database = connectToFirebase();
+      provider = FirebaseProvider;
+    }
   }
 }
 
@@ -55,6 +68,10 @@ function connectToNonProductionDatabase(
 
 function getDatabase() {
   return database;
+}
+
+function getProvider() {
+  return provider;
 }
 
 // ---------------------------------------------------- Helper-functions ------------------------------------------------------
@@ -94,4 +111,10 @@ function resetTestData(dummyDataPath) {
   );
 }
 
-export { connectToDatabase, getDatabase, filePathToDatabase, resetTestData };
+export {
+  connectToDatabase,
+  getDatabase,
+  filePathToDatabase,
+  getProvider,
+  resetTestData,
+};

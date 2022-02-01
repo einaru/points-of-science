@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import {
   checkPassword,
   config,
@@ -30,7 +31,10 @@ function signUp(args) {
       username
     );
 
-    validateSignUp(validUsername, userObject, password, confirmPassword)
+    Promise.all([validUsername, userObject])
+      .then((data) => {
+        return validateSignUp(data[0], data[1], password, confirmPassword);
+      })
       .then(() => {
         return hashPassword(password);
       })
@@ -115,15 +119,30 @@ function isUserDeativated(user) {
 }
 
 function getDataFromDatabaseByFilter(table, key, value) {
-  return getDataByFilter(table, {
-    key,
-    value,
-  })[0];
+  return new Promise((resolve, reject) => {
+    getDataByFilter(table, {
+      key,
+      value,
+    })
+      .then((data) => {
+        resolve(data[0]);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
 }
 
 function getNextID() {
-  const users = getData(config.env.USER_TABLE);
-  return nextID(users);
+  return new Promise((resolve, reject) => {
+    getData(config.env.USER_TABLE)
+      .then((users) => {
+        resolve(nextID(users));
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
 }
 
 function updateExistingUser(existingUser, hashedPassword) {
@@ -135,16 +154,23 @@ function updateExistingUser(existingUser, hashedPassword) {
 }
 
 function updateNewUser(username, hashedPassword, permission) {
-  const id = getNextID();
-  const user = profileCreator();
-  user.updateData({
-    id,
-    username,
-    permission,
-    password: hashedPassword,
-    state: profileState.active.value,
+  return new Promise((resolve, reject) => {
+    getNextID()
+      .then((id) => {
+        const user = profileCreator();
+        user.updateData({
+          id,
+          username,
+          permission,
+          password: hashedPassword,
+          state: profileState.active.value,
+        });
+        resolve(user);
+      })
+      .catch((error) => {
+        reject(error);
+      });
   });
-  return user;
 }
 
 function getResponseObject(message, statusCode, type) {

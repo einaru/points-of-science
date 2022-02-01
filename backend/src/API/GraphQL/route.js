@@ -42,4 +42,5 @@ const MUTATION = new GraphQLObjectType({
   },
 });
 
-export default new GraphQLSchema({ query: ROOTQUERY, mutation: MUTATION });
+const schema = new GraphQLSchema({ query: ROOTQUERY, mutation: MUTATION });
+export default schema;

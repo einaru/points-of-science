@@ -77,9 +77,9 @@ function isPermissionGroup(user, permissionLevel) {
 
 function getResponseObject(message, statusCode, type) {
   return {
-    message: message,
+    message,
     status: statusCode,
-    type: type,
+    type,
   };
 }
 

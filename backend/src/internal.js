@@ -2,7 +2,7 @@
 export * as config from "./Config/config.js";
 export * from "./API/GraphQL/Model/model.js";
 export * from "./API/GraphQL/Query/query.js";
-export * from "./API/index.js";
+export * as schema from "./API/GraphQL/route.js";
 
 export * from "./Authentication/sign_in.js";
 export * from "./Authentication/sign_up.js";

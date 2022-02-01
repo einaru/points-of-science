@@ -5,20 +5,24 @@ import { config, getData, updateData, deleteData } from "../../internal.js";
 
 // Other third party dependencies:
 
-function createAccessToken(user) {
-  try {
-    const userData = {
-      id: user.id,
-      name: user.name,
-      permission: user.permission,
-    };
+function getResponseObject(message, statusCode, type) {
+  return {
+    message,
+    status: statusCode,
+    type,
+  };
+}
 
-    return jwt.sign(userData, config.env.ACCESS_TOKEN_SECRET, {
-      expiresIn: "900s",
-    });
-  } catch (error) {
-    throw error;
-  }
+function createAccessToken(user) {
+  const userData = {
+    id: user.id,
+    name: user.name,
+    permission: user.permission,
+  };
+
+  return jwt.sign(userData, config.env.ACCESS_TOKEN_SECRET, {
+    expiresIn: "900s",
+  });
 }
 
 function authenticateAccessToken(request) {
@@ -26,13 +30,15 @@ function authenticateAccessToken(request) {
     const authHeader = request.headers.authorization;
     const accessToken = authHeader && authHeader.split(" ")[1];
     if (accessToken == null) {
-      return reject(
+      reject(
         getResponseObject(
           "Access token is missing.",
           403,
           config.env.RESPONSE_TYPE.error
         )
       );
+
+      return;
     }
 
     jwt.verify(accessToken, config.env.ACCESS_TOKEN_SECRET, (error, user) => {
@@ -58,44 +64,75 @@ function authenticateAccessToken(request) {
   });
 }
 
+function storeRefreshTokenInDatabase(refreshToken) {
+  return new Promise((resolve, reject) => {
+    getData(config.env.REFRESH_TOKEN_TABLE)
+      .then((refreshTokens) => {
+        const refreshTokenExist = refreshTokens.find(
+          (token) => token === refreshToken
+        );
+        if (refreshTokenExist != null) {
+          return resolve(
+            getResponseObject(
+              "Access token already exist.",
+              200,
+              config.env.RESPONSE_TYPE.success
+            )
+          );
+        }
+
+        return updateData(config.env.REFRESH_TOKEN_TABLE, refreshToken);
+      })
+      .then(() => {
+        return resolve(
+          getResponseObject(
+            "Access token stored to database successfully.",
+            200,
+            config.env.RESPONSE_TYPE.success
+          )
+        );
+      })
+      .catch((error) => {
+        return reject(error);
+      });
+  });
+}
+
 function createRefreshToken(user) {
-  try {
-    const userData = {
-      id: user.id,
-      name: user.name,
-      permission: user.permission,
-    };
+  return new Promise((resolve, reject) => {
+    try {
+      const userData = {
+        id: user.id,
+        username: user.username,
+        permission: user.permission,
+        state: user.state,
+      };
 
-    const refreshToken = jwt.sign(userData, config.env.REFRESH_TOKEN_SECRET);
-    const response = storeRefreshTokenInDatabase(refreshToken);
-    if (response.type === "error") {
-      throw new Error("Refresh token was not stored in database.");
+      const refreshToken = jwt.sign(userData, config.env.REFRESH_TOKEN_SECRET);
+      storeRefreshTokenInDatabase(refreshToken)
+        .then((response) => {
+          if (response.type === "error") {
+            return reject(
+              new Error("Refresh token was not stored in database.")
+            );
+          }
+
+          return resolve(refreshToken);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    } catch (error) {
+      reject(error);
     }
-
-    return refreshToken;
-  } catch (error) {
-    throw error;
-  }
+  });
 }
 
 function authenticateRefreshToken(refreshToken) {
   return new Promise((resolve, reject) => {
-    const refreshTokens = getData(config.env.REFRESH_TOKEN_TABLE);
-    if (!refreshTokens.includes(refreshToken)) {
-      return reject(
-        getResponseObject(
-          "Refresh token is invalid.",
-          403,
-          config.env.RESPONSE_TYPE.error
-        )
-      );
-    }
-
-    jwt.verify(
-      refreshToken,
-      config.env.REFRESH_TOKEN_SECRET,
-      (error, userVerified) => {
-        if (error) {
+    getData(config.env.REFRESH_TOKEN_TABLE)
+      .then((refreshTokens) => {
+        if (!refreshTokens.includes(refreshToken)) {
           return reject(
             getResponseObject(
               "Refresh token is invalid.",
@@ -105,72 +142,69 @@ function authenticateRefreshToken(refreshToken) {
           );
         }
 
-        return resolve(createAccessToken(userVerified));
-      }
-    );
+        jwt.verify(
+          refreshToken,
+          config.env.REFRESH_TOKEN_SECRET,
+          (error, userVerified) => {
+            if (error) {
+              return reject(
+                getResponseObject(
+                  "Refresh token is invalid.",
+                  403,
+                  config.env.RESPONSE_TYPE.error
+                )
+              );
+            }
+
+            return resolve(createAccessToken(userVerified));
+          }
+        );
+      })
+      .catch((error) => {
+        reject(error);
+      });
   });
 }
 
 function deleteRefreshTokenFromDatabase(refreshToken) {
-  try {
-    const refreshTokens = getData(config.env.REFRESH_TOKEN_TABLE);
-    if (refreshTokens.length === 0) {
-      return getResponseObject(
-        "User is already signed out.",
-        200,
-        config.env.RESPONSE_TYPE.success
-      );
-    }
+  return new Promise((resolve, reject) => {
+    getData(config.env.REFRESH_TOKEN_TABLE)
+      .then((refreshTokens) => {
+        if (refreshTokens.length === 0) {
+          return resolve(
+            getResponseObject(
+              "User is already signed out.",
+              200,
+              config.env.RESPONSE_TYPE.success
+            )
+          );
+        }
 
-    if (!deleteData(config.env.REFRESH_TOKEN_TABLE, refreshToken)) {
-      return getResponseObject(
-        "Could not sign out user.",
-        500,
-        config.env.RESPONSE_TYPE.error
-      );
-    }
+        return deleteData(config.env.REFRESH_TOKEN_TABLE, refreshToken);
+      })
+      .then((response) => {
+        if (!response) {
+          return reject(
+            getResponseObject(
+              "Could not sign out user.",
+              500,
+              config.env.RESPONSE_TYPE.error
+            )
+          );
+        }
 
-    return getResponseObject(
-      "User signed out successfully.",
-      200,
-      config.env.RESPONSE_TYPE.success
-    );
-  } catch (error) {
-    throw error;
-  }
-}
-
-function storeRefreshTokenInDatabase(refreshToken) {
-  try {
-    const refreshTokens = getData(config.env.REFRESH_TOKEN_TABLE);
-    const refreshTokenExist = refreshTokens.find(
-      (token) => token === refreshToken
-    );
-    if (refreshTokenExist != null) {
-      return getResponseObject(
-        "Access token already exist.",
-        200,
-        config.env.RESPONSE_TYPE.success
-      );
-    }
-
-    updateData(config.env.REFRESH_TOKEN_TABLE, refreshToken);
-    return getResponseObject(
-      "Access token stored to database successfully.",
-      200,
-      config.env.RESPONSE_TYPE.success
-    );
-  } catch (error) {
-    throw error;
-  }
-}
-
-function getResponseObject(message, statusCode, type) {
-  return {
-    message,
-    status: statusCode,
-    type,
-  };
+        return resolve(
+          getResponseObject(
+            "User signed out successfully.",
+            200,
+            config.env.RESPONSE_TYPE.success
+          )
+        );
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
 }
 
 export {

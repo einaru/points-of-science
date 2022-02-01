@@ -3,42 +3,31 @@ import { getProvider } from "../../internal.js";
 
 function getData(collectionName) {
   const dataProvider = getProvider();
-  const data = dataProvider.getData(collectionName);
-  if (isNull(data)) {
-    return null;
-  }
-
-  return data;
+  return dataProvider.getData(collectionName);
 }
 
 function getDataByFilter(collectionName, filter) {
   const dataProvider = getProvider();
-  const data = dataProvider.getDataByFilter(collectionName, filter);
-  return data;
+  return dataProvider.getDataByFilter(collectionName, filter);
 }
 
 function deleteData(collectionName, deleteData) {
   const dataProvider = getProvider();
-  const data = dataProvider.deleteData(collectionName, deleteData);
-  return data;
+  return dataProvider.deleteData(collectionName, deleteData);
 }
 
 function updateData(collectionName, newData) {
   const dataProvider = getProvider();
-  const data = dataProvider.updateData(collectionName, newData);
-  return data;
+  return dataProvider.updateData(collectionName, newData);
 }
 
 function nextID(table) {
   const dataProvider = getProvider();
-  const data = dataProvider.nextID(table);
-  return data;
+  return dataProvider.nextID(table);
 }
 
 // -------------------------------------------------- Helper-functions ----------------------------------------------------
 
-function isNull(data) {
-  return data == null;
-}
+// --------------------------------------------------    Exports    --------------------------------------------------------
 
 export { getData, getDataByFilter, deleteData, updateData, nextID };

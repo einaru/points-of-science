@@ -2,11 +2,11 @@ import React from "react";
 import { MaterialCommunityIcons } from "react-native-vector-icons";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import AchievementsScreen from "../achievement/AchievementsScreen";
-import ChallengesScreen from "../challenge/ChallengesScreen";
 import DashboardScreen from "../dashboard/DashboardScreen";
 import LeaderboardsScreen from "../leaderboard/LeaderboardsScreen";
 import ProfileStack from "../profile/ProfileStack";
 import { t } from "../i18n";
+import ChallengesStack from "../challenge/ChallengesStack";
 
 const tabIconMap = {
   "tab:challenges": "lightbulb-on",
@@ -37,7 +37,7 @@ function ContentNavigator() {
       <Tab.Screen
         name="tab:challenges"
         options={{ title: t("Challenges") }}
-        component={ChallengesScreen}
+        component={ChallengesStack}
       />
       <Tab.Screen
         name="tab:leaderboards"

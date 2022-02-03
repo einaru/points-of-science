@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
-import { gql, useApolloClient, useMutation } from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 import { Avatar, Divider, List, Text } from "react-native-paper";
 import { AuthContext } from "../auth/AuthProvider";

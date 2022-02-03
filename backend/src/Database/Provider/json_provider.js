@@ -165,4 +165,11 @@ function getPosition(data, list) {
   return position;
 }
 
-export { getData, getDataByFilter, deleteData, updateData, nextID };
+function getFilter() {
+  return {
+    key: "",
+    value: "",
+  };
+}
+
+export { getData, getDataByFilter, deleteData, updateData, nextID, getFilter };

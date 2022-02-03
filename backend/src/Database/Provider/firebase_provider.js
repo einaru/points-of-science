@@ -48,7 +48,7 @@ function getDataByFilter(collectionName, args) {
     const firebaseDB = getDatabase();
     firebaseDB
       .collection(collectionName)
-      .where(args.id, args.operator, args.filter)
+      .where(args.key, args.operator, args.value)
       .get()
       .then((snapshot) => {
         if (snapshot.empty) {
@@ -137,4 +137,20 @@ function isNull(data) {
   return data == null;
 }
 
-export { getData, getDataByFilter, storeData, deleteData, updateData, nextID };
+function getFilter() {
+  return {
+    key: "",
+    operator: "",
+    value: "",
+  };
+}
+
+export {
+  getData,
+  getDataByFilter,
+  storeData,
+  deleteData,
+  updateData,
+  nextID,
+  getFilter,
+};

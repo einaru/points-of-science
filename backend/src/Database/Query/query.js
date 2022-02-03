@@ -26,8 +26,23 @@ function nextID(table) {
   return dataProvider.nextID(table);
 }
 
+function getFilter(args) {
+  const dataProvider = getProvider();
+  const filter = dataProvider.getFilter();
+  if (filter.key && filter.operator && filter.value) {
+    filter.key = args.key;
+    filter.operator = args.operator;
+    filter.value = args.value;
+    return filter;
+  }
+
+  filter.key = args.key;
+  filter.value = args.value;
+  return filter;
+}
+
 // -------------------------------------------------- Helper-functions ----------------------------------------------------
 
 // --------------------------------------------------    Exports    --------------------------------------------------------
 
-export { getData, getDataByFilter, deleteData, updateData, nextID };
+export { getData, getDataByFilter, deleteData, updateData, nextID, getFilter };

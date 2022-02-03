@@ -10,6 +10,7 @@ import {
   deleteRefreshTokenFromDatabase,
   getData,
   getDataByFilter,
+  getFilter,
   nextID,
   NormalResponseModel,
   profileState,
@@ -23,6 +24,14 @@ import {
   setPermissionLevel,
   swapPermissionGroup,
 } from "../../../internal.js";
+
+function getResponseObject(message, statusCode, type) {
+  return {
+    message,
+    status: statusCode,
+    type,
+  };
+}
 
 // Root Queries - Used to retrieve data with GET-Requests
 const authAccessTokenQuery = {
@@ -168,6 +177,49 @@ const activateAccountQuery = {
       return await signUp(args);
     } catch (error) {
       return error;
+    }
+  },
+};
+
+const changePasswordQuery = {
+  type: NormalResponseModel,
+  args: {
+    id: { type: GraphQLInt },
+    password: { type: GraphQLString },
+    confirmPassword: { type: GraphQLString },
+  },
+  async resolve(parent, args, context) {
+    try {
+      await authenticateAccessToken(context);
+      const userObject = context.user;
+      if (userObject.id !== args.id) {
+        return getResponseObject(
+          "Password update not successful. Wrong user.",
+          400,
+          config.env.RESPONSE_TYPE.error
+        );
+      }
+
+      const filter = getFilter({ key: "id", operator: "==", value: args.id });
+      const users = await getDataByFilter(config.env.USER_TABLE, filter);
+      if (users.length === 0) {
+        return getResponseObject(
+          "Could not find user.",
+          400,
+          config.RESPONSE_TYPE.error
+        );
+      }
+
+      const user = profileCreator();
+      user.updateData(users[0]);
+      const response = await user.changePassword(
+        args.password,
+        args.confirmPassword
+      );
+      await updateData(config.env.USER_TABLE, user.data);
+      return getResponseObject(response, 200, config.env.RESPONSE_TYPE.success);
+    } catch (error) {
+      return getResponseObject(error, 400, config.env.RESPONSE_TYPE.error);
     }
   },
 };
@@ -359,6 +411,7 @@ export {
   activateAccountQuery,
   authAccessTokenQuery,
   authRefreshTokenQuery,
+  changePasswordQuery,
   createUserQuery,
   deleteUserQuery,
   getAllUsersQuery,

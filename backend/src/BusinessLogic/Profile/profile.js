@@ -1,3 +1,12 @@
+import {
+  hashPassword,
+  checkPassword,
+  validatePassword,
+  isValidPassword,
+  errorsInPassword,
+  generateErrorMessage,
+} from "../../internal.js";
+
 const profileState = {
   deactivated: { text: "deactivated", value: 1 },
   active: { text: "active", value: 2 },
@@ -35,8 +44,30 @@ function getPoints(profile) {
 
 function changePassword(profile) {
   const functionKey = "changePassword";
-  const code = (oldPassword, newPassword) => {
-    // Fill in the blanks
+  const code = (password, confirmPassword) => {
+    return new Promise((resolve, reject) => {
+      if (!checkPassword(password, confirmPassword)) {
+        return reject("The passwords does not match");
+      }
+
+      validatePassword(password)
+        .then((validation) => {
+          if (!isValidPassword(validation)) {
+            const errors = errorsInPassword(validation);
+            const message = generateErrorMessage(errors);
+            return reject(message);
+          }
+
+          return hashPassword(password);
+        })
+        .then((result) => {
+          profile.password = result.data.hashedPassword;
+          return resolve("Password updated successfully.");
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
   };
 
   return createObjectTemplate(functionKey, code);

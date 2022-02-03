@@ -1,8 +1,7 @@
-/* eslint-disable import/no-cycle */
 export * as config from "./Config/config.js";
 export * from "./API/GraphQL/Model/model.js";
 export * from "./API/GraphQL/Query/query.js";
-export * as schema from "./API/GraphQL/route.js";
+export * from "./API/GraphQL/index.js";
 
 export * from "./Authentication/sign_in.js";
 export * from "./Authentication/sign_up.js";

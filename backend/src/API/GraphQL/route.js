@@ -3,6 +3,7 @@ import {
   activateAccountQuery,
   authAccessTokenQuery,
   authRefreshTokenQuery,
+  changePasswordQuery,
   getAllUsersQuery,
   getUserByIDQuery,
   createUserQuery,
@@ -32,6 +33,7 @@ const MUTATION = new GraphQLObjectType({
   name: "Mutation",
   fields: {
     activateAccount: activateAccountQuery,
+    changePassword: changePasswordQuery,
     createUser: createUserQuery,
     deleteUser: deleteUserQuery,
     updateUser: updateUserQuery,
@@ -42,5 +44,4 @@ const MUTATION = new GraphQLObjectType({
   },
 });
 
-const schema = new GraphQLSchema({ query: ROOTQUERY, mutation: MUTATION });
-export default schema;
+export default new GraphQLSchema({ query: ROOTQUERY, mutation: MUTATION });

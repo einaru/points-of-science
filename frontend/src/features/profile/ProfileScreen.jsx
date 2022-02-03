@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
-import { gql, useMutation } from "@apollo/client";
+import { gql, useApolloClient, useMutation } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
-import React, { useContext, useEffect, useMemo } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Avatar, Divider, List, Text } from "react-native-paper";
 import { AuthContext } from "../auth/AuthProvider";
@@ -73,6 +73,15 @@ function ProfileScreen() {
         <Avatar.Text size={96} label={initials} />
         <Text style={styles.title}>{user.username}</Text>
       </View>
+      <List.Section>
+        <List.Item
+          title={t("Change password")}
+          left={() => <List.Icon icon="key" />}
+          right={() => <List.Icon icon="chevron-right" />}
+          onPress={() => navigation.navigate("ChangePassword")}
+        />
+      </List.Section>
+      <Divider />
       <List.Section>
         <List.Item
           title={t("Dashboard")}

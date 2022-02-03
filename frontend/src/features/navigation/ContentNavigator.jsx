@@ -5,7 +5,7 @@ import AchievementsScreen from "../achievement/AchievementsScreen";
 import ChallengesScreen from "../challenge/ChallengesScreen";
 import DashboardScreen from "../dashboard/DashboardScreen";
 import LeaderboardsScreen from "../leaderboard/LeaderboardsScreen";
-import ProfileScreen from "../profile/ProfileScreen";
+import ProfileStack from "../profile/ProfileStack";
 
 const tabIconMap = {
   Challenges: "lightbulb-on",
@@ -28,7 +28,7 @@ function ContentNavigator() {
         },
       })}
     >
-      <Tab.Screen name="UserProfile" component={ProfileScreen} />
+      <Tab.Screen name="UserProfile" component={ProfileStack} />
       <Tab.Screen name="Challenges" component={ChallengesScreen} />
       <Tab.Screen name="Leaderboards" component={LeaderboardsScreen} />
       <Tab.Screen name="Achievements" component={AchievementsScreen} />

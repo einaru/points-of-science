@@ -4,6 +4,10 @@ export default {
   "Username": "Brukernavn",
   "Password": "Passord",
   "Confirm password": "Bekreft passord",
+  "Change password": "Bytt password",
+  "New password": "Nytt passord",
+  "Confirm new password": "Bekreft nytt passord",
+  "Your password is updated": "Passordet ditt er oppdatert",
   "Login": "Innlogging",
   "Log in": "Logg inn",
   "Logout": "Utlogging",
@@ -16,6 +20,7 @@ export default {
   "Already have an account?": "Har du allerede en konto?",
   "Verify username": "Verifiser brukernavn",
   "Next": "Neste",
+  "Go back": "Gå tilbake",
   "Dashboard": "Dashbord",
   "Achievements": "Prestasjoner",
 };

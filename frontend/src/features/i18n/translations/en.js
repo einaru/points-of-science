@@ -2,6 +2,7 @@ const strings = [
   "Username",
   "Password",
   "Confirm password",
+  "Change password",
   "Login",
   "Log in",
   "Logout",

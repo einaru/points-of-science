@@ -4,6 +4,7 @@ export default {
   "Username": "Brukernavn",
   "Password": "Passord",
   "Confirm password": "Bekreft passord",
+  "Change password": "Bytt password",
   "Login": "Innlogging",
   "Log in": "Logg inn",
   "Logout": "Utlogging",

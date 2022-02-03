@@ -1,12 +1,13 @@
 /* eslint-disable no-console */
-import { gql, useMutation } from "@apollo/client";
+import { gql, useApolloClient, useMutation } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
-import React, { useContext, useEffect, useMemo } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { Avatar, Divider, List, Text } from "react-native-paper";
+import { Avatar, Divider, List, Portal, Text } from "react-native-paper";
 import { AuthContext } from "../auth/AuthProvider";
 import { t } from "../i18n";
 import { Container, LoadingScreen } from "../../shared/components";
+import ChangePassword from "./ChangePassword";
 
 const styles = StyleSheet.create({
   container: {
@@ -37,6 +38,7 @@ const LOGOUT = gql`
 
 function ProfileScreen() {
   const navigation = useNavigation();
+  const client = useApolloClient();
 
   const { user, logOutUser, refreshToken } = useContext(AuthContext);
 
@@ -46,6 +48,11 @@ function ProfileScreen() {
       .map((word) => word[0])
       .join("");
   }, [user.username]);
+
+  const [passwordModalVisible, setPasswordModalVisible] = useState(false);
+
+  const showPasswordModal = () => setPasswordModalVisible(true);
+  const hidePasswordModal = () => setPasswordModalVisible(false);
 
   const [logOut, { data, loading, error }] = useMutation(LOGOUT);
 
@@ -73,6 +80,23 @@ function ProfileScreen() {
         <Avatar.Text size={96} label={initials} />
         <Text style={styles.title}>{user.username}</Text>
       </View>
+      <List.Section>
+        <Portal>
+          <ChangePassword
+            userID={user.id}
+            client={client}
+            visible={passwordModalVisible}
+            onDismiss={hidePasswordModal}
+          />
+        </Portal>
+        <List.Item
+          title={t("Change password")}
+          left={() => <List.Icon icon="key" />}
+          right={() => <List.Icon icon="chevron-right" />}
+          onPress={() => showPasswordModal()}
+        />
+      </List.Section>
+      <Divider />
       <List.Section>
         <List.Item
           title={t("Dashboard")}

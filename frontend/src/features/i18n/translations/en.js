@@ -1,44 +1,44 @@
 // Put short strings that should be translated in this list.
 // Longer text and paragraphs should be put in the object below.
 const strings = [
-  "Username",
-  "Password",
-  "Confirm password",
+  "Achievements",
+  "Activate account",
+  "Already activated your account?",
+  "Challenges",
   "Change password",
-  "New password",
   "Confirm new password",
-  "Your password is updated",
-  "Login",
+  "Confirm password",
+  "Contact info",
+  "Create account",
+  "Dashboard",
+  "Go back",
+  "Haven't activated your account yet?",
+  "Leaderboards",
   "Log in",
-  "Logout",
   "Log out",
   "Logging out…",
-  "Activate account",
-  "Create account",
-  "Haven't activated your account yet?",
-  "Already activated your account?",
-  "Verify username",
+  "Login",
+  "Logout",
+  "New password",
   "Next",
-  "Go back",
-  "Dashboard",
-  "Achievements",
-  "Leaderboards",
-  "Challenges",
+  "Password",
   "Profile",
   "Project info",
   "Purpose",
-  "Contact info",
+  "Username",
+  "Verify username",
+  "Your password is updated",
 ];
 
 const en = {
+  aboutContact:
+    "Don't hesitate to get in touch if you have any questions about the app " +
+    "or the research project.",
   aboutPurpose:
     "This research project is carried out as part of a master's thesis at " +
     "IDI at NTNU in Trondheim. The purpose of the project is to investigate " +
     "how the use of game elements in a mobile application can influence " +
     "young people's interest in and attitude towards science.",
-  aboutContact:
-    "Don't hesitate to get in touch if you have any questions about the app " +
-    "or the research project.",
 };
 
 export default strings.reduce((obj, value, index, array) => {

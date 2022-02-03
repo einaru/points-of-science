@@ -16,7 +16,8 @@ const styles = StyleSheet.create({
   avatarContainer: {
     alignItems: "center",
     justifyContent: "center",
-    margin: 8,
+    marginTop: 32,
+    margin: 16,
   },
   title: {
     marginTop: 8,
@@ -68,7 +69,7 @@ function ProfileScreen() {
   }
 
   return (
-    <View>
+    <SafeAreaView>
       <View style={styles.avatarContainer}>
         <Avatar.Text size={96} label={initials} />
         <Text style={styles.title}>{user.username}</Text>
@@ -119,7 +120,7 @@ function ProfileScreen() {
           }}
         />
       </List.Section>
-    </View>
+    </SafeAreaView>
   );
 }
 

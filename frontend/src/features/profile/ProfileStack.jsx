@@ -14,7 +14,7 @@ function ProfileStack() {
       <Stack.Navigator>
         <Stack.Screen
           name="ProfileScreen"
-          options={{ title: t("Profile") }}
+          options={{ title: t("Profile"), headerShown: false }}
           component={ProfileScreen}
         />
         <Stack.Screen

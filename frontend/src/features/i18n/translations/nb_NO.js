@@ -23,4 +23,18 @@ export default {
   "Go back": "Gå tilbake",
   "Dashboard": "Dashbord",
   "Achievements": "Prestasjoner",
+  "Project info": "Prosjekt info",
+  "Purpose": "Formål",
+  "Contact info": "Kontaktinformasjon",
+
+  // Longer text and paragraphs
+  aboutPurpose:
+    "Dette forskningsprosjektet gjennomføres som del av en masteroppgave ved " +
+    "IDI ved NTNU i Trondheim. Formålet med prosjektet er å undersøke " +
+    "hvordan bruken av spillelementer i en mobilapplikasjon kan være med på " +
+    "å påvirke ungdoms interesse for og holdning til naturvitenskap og " +
+    "forskning.",
+  aboutContact:
+    "Ikke nøl med å ta kontakt om det er noe du lurer på angående appen " +
+    "eller forskningsprosjektet."
 };

@@ -105,6 +105,12 @@ function ProfileScreen() {
       <Divider />
       <List.Section>
         <List.Item
+          title={t("Project info")}
+          left={() => <List.Icon icon="information" />}
+          right={() => <List.Icon icon="chevron-right" />}
+          onPress={() => navigation.navigate("ProjectInfo")}
+        />
+        <List.Item
           title={t("Log out")}
           left={() => <List.Icon icon="logout" />}
           onPress={() => {

@@ -1,3 +1,5 @@
+// Put short strings that should be translated in this list.
+// Longer text and paragraphs should be put in the object below.
 const strings = [
   "Username",
   "Password",
@@ -20,11 +22,25 @@ const strings = [
   "Go back",
   "Dashboard",
   "Achievements",
+  "Project info",
+  "Purpose",
+  "Contact info",
 ];
+
+const en = {
+  aboutPurpose:
+    "This research project is carried out as part of a master's thesis at " +
+    "IDI at NTNU in Trondheim. The purpose of the project is to investigate " +
+    "how the use of game elements in a mobile application can influence " +
+    "young people's interest in and attitude towards science.",
+  aboutContact:
+    "Don't hesitate to get in touch if you have any questions about the app " +
+    "or the research project.",
+};
 
 export default strings.reduce((obj, value, index, array) => {
   return {
     ...obj,
     [array[index]]: value,
   };
-}, {});
+}, en);

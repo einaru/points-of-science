@@ -1,12 +1,13 @@
 /* eslint-disable no-console */
-import { gql, useApolloClient, useMutation } from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 import { Avatar, Divider, List, Text } from "react-native-paper";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { AuthContext } from "../auth/AuthProvider";
 import { t } from "../i18n";
-import { Container, LoadingScreen } from "../../shared/components";
+import { LoadingScreen } from "../../shared/components";
 
 const styles = StyleSheet.create({
   container: {
@@ -15,8 +16,8 @@ const styles = StyleSheet.create({
   avatarContainer: {
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 16,
-    marginBottom: 16,
+    marginTop: 32,
+    margin: 16,
   },
   title: {
     marginTop: 8,
@@ -68,7 +69,7 @@ function ProfileScreen() {
   }
 
   return (
-    <Container noMargins>
+    <SafeAreaView>
       <View style={styles.avatarContainer}>
         <Avatar.Text size={96} label={initials} />
         <Text style={styles.title}>{user.username}</Text>
@@ -105,6 +106,12 @@ function ProfileScreen() {
       <Divider />
       <List.Section>
         <List.Item
+          title={t("Project info")}
+          left={() => <List.Icon icon="information" />}
+          right={() => <List.Icon icon="chevron-right" />}
+          onPress={() => navigation.navigate("ProjectInfo")}
+        />
+        <List.Item
           title={t("Log out")}
           left={() => <List.Icon icon="logout" />}
           onPress={() => {
@@ -113,7 +120,7 @@ function ProfileScreen() {
           }}
         />
       </List.Section>
-    </Container>
+    </SafeAreaView>
   );
 }
 

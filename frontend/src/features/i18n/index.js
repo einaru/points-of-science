@@ -8,7 +8,7 @@ i18n.translations = {
   nb,
 };
 
-i18n.locale = Localization.locale;
+i18n.locale = "nb" || Localization.locale;
 i18n.fallbacks = true;
 
 export const { t } = i18n;

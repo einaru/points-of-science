@@ -1,26 +1,43 @@
 // spell-checker: disable
 // prettier-ignore
 export default {
-  "Username": "Brukernavn",
-  "Password": "Passord",
-  "Confirm password": "Bekreft passord",
-  "Change password": "Bytt password",
-  "New password": "Nytt passord",
-  "Confirm new password": "Bekreft nytt passord",
-  "Your password is updated": "Passordet ditt er oppdatert",
-  "Login": "Innlogging",
-  "Log in": "Logg inn",
-  "Logout": "Utlogging",
-  "Log out": "Logg ut",
-  "Logging out…": "Logger ut…",
+  "Achievements": "Prestasjoner",
   "Activate account": "Aktiver konto",
-  "Create account": "Opprett konto",
-  "Haven't activated your account yet?": "Har du ikke aktivert kontoen din enda?",
   "Already activated your account?": "Har du allerede aktivert kontoen din?",
   "Already have an account?": "Har du allerede en konto?",
-  "Verify username": "Verifiser brukernavn",
-  "Next": "Neste",
-  "Go back": "Gå tilbake",
+  "Challenges": "Utfordringer",
+  "Change password": "Bytt password",
+  "Confirm new password": "Bekreft nytt passord",
+  "Confirm password": "Bekreft passord",
+  "Contact info": "Kontaktinformasjon",
+  "Create account": "Opprett konto",
   "Dashboard": "Dashbord",
-  "Achievements": "Prestasjoner",
+  "Go back": "Gå tilbake",
+  "Haven't activated your account yet?": "Har du ikke aktivert kontoen din enda?",
+  "Leaderboards": "Ledertavler",
+  "Log in": "Logg inn",
+  "Log out": "Logg ut",
+  "Logging out…": "Logger ut…",
+  "Login": "Innlogging",
+  "Logout": "Utlogging",
+  "New password": "Nytt passord",
+  "Next": "Neste",
+  "Password": "Passord",
+  "Profile": "Profil",
+  "Project info": "Prosjekt info",
+  "Purpose": "Formål",
+  "Username": "Brukernavn",
+  "Verify username": "Verifiser brukernavn",
+  "Your password is updated": "Passordet ditt er oppdatert",
+
+  // Longer text and paragraphs
+  aboutContact:
+    "Ikke nøl med å ta kontakt om det er noe du lurer på angående appen " +
+    "eller forskningsprosjektet.",
+  aboutPurpose:
+    "Dette forskningsprosjektet gjennomføres som del av en masteroppgave ved " +
+    "IDI ved NTNU i Trondheim. Formålet med prosjektet er å undersøke " +
+    "hvordan bruken av spillelementer i en mobilapplikasjon kan være med på " +
+    "å påvirke ungdoms interesse for og holdning til naturvitenskap og " +
+    "forskning.",
 };

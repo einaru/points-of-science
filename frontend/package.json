@@ -22,6 +22,7 @@
     "cross-fetch": "^3.1.5",
     "eslint-plugin-react-native": "^4.0.0",
     "expo": "~44.0.0",
+    "expo-linking": "~3.0.0",
     "expo-localization": "~12.0.0",
     "expo-modules-core": "~0.6.4",
     "expo-secure-store": "~11.1.0",

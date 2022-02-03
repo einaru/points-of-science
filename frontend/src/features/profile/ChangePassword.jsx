@@ -1,14 +1,7 @@
 import { gql, useMutation } from "@apollo/client";
-import { useNavigation } from "@react-navigation/native";
 import React, { useContext, useState } from "react";
 import { StyleSheet, View } from "react-native";
-import {
-  Button,
-  HelperText,
-  Snackbar,
-  TextInput,
-  Title,
-} from "react-native-paper";
+import { Button, HelperText, Snackbar, TextInput } from "react-native-paper";
 import { useEffect } from "react/cjs/react.development";
 import { AuthContext } from "../auth/AuthProvider";
 import { t } from "../i18n";
@@ -20,9 +13,6 @@ const styles = StyleSheet.create({
   formContainer: {
     flex: 1,
     margin: 8,
-  },
-  backButton: {
-    marginTop: 8,
   },
 });
 
@@ -45,7 +35,6 @@ const CHANGE_PASSWORD = gql`
 `;
 
 function ChangePassword() {
-  const navigation = useNavigation();
   const { user } = useContext(AuthContext);
 
   const [password, setPassword] = useState("");
@@ -55,12 +44,6 @@ function ChangePassword() {
 
   const showSnackbar = () => setVisibleSnackbar(true);
   const hideSnackbar = () => setVisibleSnackbar(false);
-
-  const reset = () => {
-    setPassword("");
-    setConfirmPassword("");
-    setErrorMessage("");
-  };
 
   const [changePassword, { data, loading, error }] =
     useMutation(CHANGE_PASSWORD);
@@ -83,7 +66,6 @@ function ChangePassword() {
   return (
     <View style={styles.container}>
       <View style={styles.formContainer}>
-        <Title>Change password</Title>
         <TextInput
           label={t("New password")}
           value={password}
@@ -109,16 +91,6 @@ function ChangePassword() {
           }}
         >
           {t("Change password")}
-        </Button>
-        <Button
-          style={styles.backButton}
-          icon="arrow-left"
-          onPress={() => {
-            reset();
-            navigation.goBack();
-          }}
-        >
-          {t("Go back")}
         </Button>
       </View>
       <Snackbar

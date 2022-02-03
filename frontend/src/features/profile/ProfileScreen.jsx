@@ -4,9 +4,10 @@ import { useNavigation } from "@react-navigation/native";
 import React, { useContext, useEffect, useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 import { Avatar, Divider, List, Text } from "react-native-paper";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { AuthContext } from "../auth/AuthProvider";
 import { t } from "../i18n";
-import { Container, LoadingScreen } from "../../shared/components";
+import { LoadingScreen } from "../../shared/components";
 
 const styles = StyleSheet.create({
   container: {
@@ -15,8 +16,7 @@ const styles = StyleSheet.create({
   avatarContainer: {
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 16,
-    marginBottom: 16,
+    margin: 8,
   },
   title: {
     marginTop: 8,
@@ -68,7 +68,7 @@ function ProfileScreen() {
   }
 
   return (
-    <Container noMargins>
+    <View>
       <View style={styles.avatarContainer}>
         <Avatar.Text size={96} label={initials} />
         <Text style={styles.title}>{user.username}</Text>
@@ -113,7 +113,7 @@ function ProfileScreen() {
           }}
         />
       </List.Section>
-    </Container>
+    </View>
   );
 }
 

@@ -1,13 +1,11 @@
 import {
   config,
   connectToDatabase,
-  getDatabase,
   JSONProvider,
   profileCreator,
   resetTestData,
 } from "../../../src/internal.js";
 
-let database;
 let collectionName;
 let userData;
 let user;
@@ -19,7 +17,6 @@ let notMatch;
 beforeAll(async () => {
   connectToDatabase();
   resetTestData(config.env.ENVIRONMENT_MODE.TEST.dummy_data);
-  database = getDatabase();
   collectionName = config.env.USER_TABLE;
   userData = await JSONProvider.getDataByFilter(collectionName, {
     key: "id",
@@ -62,7 +59,7 @@ test("Too short password", () => {
 
 test("Change password to null", () => {
   return user.changePassword(null, null).catch((result) => {
-    expect(result).toMatch("error");
+    expect(result).toEqual("Password cannot be null.");
   });
 });
 

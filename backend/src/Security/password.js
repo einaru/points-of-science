@@ -33,6 +33,9 @@ function isInString(text, checkFor) {
 
 function validatePassword(password) {
   return new Promise((resolve, reject) => {
+    if (password === null) {
+      return reject("Password cannot be null.");
+    }
     let { len, upperCase, lowerCase, numberCase, specialChar } = false;
     len = isValidLength(password, 8, 64);
     upperCase = isInString(password, "ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ");

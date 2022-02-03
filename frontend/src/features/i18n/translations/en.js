@@ -3,6 +3,9 @@ const strings = [
   "Password",
   "Confirm password",
   "Change password",
+  "New password",
+  "Confirm new password",
+  "Your password is updated",
   "Login",
   "Log in",
   "Logout",
@@ -14,6 +17,7 @@ const strings = [
   "Already activated your account?",
   "Verify username",
   "Next",
+  "Go back",
   "Dashboard",
   "Achievements",
 ];

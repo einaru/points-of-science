@@ -1,22 +1,28 @@
-import { gql } from "@apollo/client";
-import React, { useCallback, useState } from "react";
+import { gql, useMutation } from "@apollo/client";
+import { useNavigation } from "@react-navigation/native";
+import React, { useContext, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import {
   Button,
   HelperText,
-  Modal,
+  Snackbar,
   TextInput,
   Title,
 } from "react-native-paper";
+import { useEffect } from "react/cjs/react.development";
+import { AuthContext } from "../auth/AuthProvider";
 import { t } from "../i18n";
 
 const styles = StyleSheet.create({
-  modal: {
-    padding: 8,
-  },
   container: {
-    backgroundColor: "white",
-    padding: 8,
+    flex: 1,
+  },
+  formContainer: {
+    flex: 1,
+    margin: 8,
+  },
+  backButton: {
+    marginTop: 8,
   },
 });
 
@@ -38,71 +44,91 @@ const CHANGE_PASSWORD = gql`
   }
 `;
 
-function ChangePassword({ userID, client, visible, onDismiss }) {
+function ChangePassword() {
+  const navigation = useNavigation();
+  const { user } = useContext(AuthContext);
+
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [visibleSnackbar, setVisibleSnackbar] = useState(false);
 
-  const dismiss = useCallback(() => {
+  const showSnackbar = () => setVisibleSnackbar(true);
+  const hideSnackbar = () => setVisibleSnackbar(false);
+
+  const reset = () => {
     setPassword("");
     setConfirmPassword("");
-    setPasswordError("");
-    onDismiss();
-  }, [onDismiss]);
+    setErrorMessage("");
+  };
 
-  const changePassword = useCallback(() => {
-    client
-      .mutate({
-        mutation: CHANGE_PASSWORD,
-        variables: {
-          userID,
-          password,
-          confirmPassword,
-        },
-      })
-      .then((response) => {
-        const { type, message } = response.data.changePassword;
-        if (type === "success") {
-          dismiss();
-        }
-        setPasswordError(type === "error" ? message : "");
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, [dismiss, client, userID, password, confirmPassword]);
+  const [changePassword, { data, loading, error }] =
+    useMutation(CHANGE_PASSWORD);
+
+  useEffect(() => {
+    if (data) {
+      const { type, message } = data.changePassword;
+      if (type === "success") {
+        showSnackbar();
+      }
+      setErrorMessage(type === "error" ? message : "");
+    }
+  }, [data]);
+
+  if (error) {
+    // TODO provide feedback to user on errors
+    console.error(error);
+  }
 
   return (
-    <Modal style={styles.modal} visible={visible} onDismiss={dismiss}>
-      <View style={styles.container}>
+    <View style={styles.container}>
+      <View style={styles.formContainer}>
         <Title>Change password</Title>
         <TextInput
-          label={t("Password")}
+          label={t("New password")}
           value={password}
           onChangeText={setPassword}
           secureTextEntry
         />
         <TextInput
-          label={t("Confirm password")}
+          label={t("Confirm new password")}
           value={confirmPassword}
           onChangeText={setConfirmPassword}
           secureTextEntry
         />
-        <HelperText type="error" visible={passwordError}>
-          {passwordError}
+        <HelperText type="error" visible={errorMessage}>
+          {errorMessage}
         </HelperText>
         <Button
           mode="contained"
+          loading={loading}
           onPress={() => {
             changePassword({
-              variables: { userID, password, confirmPassword },
+              variables: { userID: user.id, password, confirmPassword },
             });
           }}
         >
           {t("Change password")}
         </Button>
+        <Button
+          style={styles.backButton}
+          icon="arrow-left"
+          onPress={() => {
+            reset();
+            navigation.goBack();
+          }}
+        >
+          {t("Go back")}
+        </Button>
       </View>
-    </Modal>
+      <Snackbar
+        visible={visibleSnackbar}
+        duration={5000}
+        onDismiss={hideSnackbar}
+      >
+        {t("Your password is updated")}
+      </Snackbar>
+    </View>
   );
 }
 

@@ -45,7 +45,6 @@ export default function SetPassword() {
 
   useEffect(() => {
     if (data) {
-      console.debug(data);
       if (data.activateAccount.type === "success") {
         const { user, accessToken, refreshToken } = data.activateAccount.data;
         logInUser(user, accessToken, refreshToken);

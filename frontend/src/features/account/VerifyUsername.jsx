@@ -27,7 +27,6 @@ export default function VerifyUsername() {
 
   useEffect(() => {
     if (data) {
-      console.debug(data);
       if (data.verifyUsername.type === "success") {
         setIsVerified(true);
         setErrorMessage("");

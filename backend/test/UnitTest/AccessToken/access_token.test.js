@@ -40,7 +40,7 @@ test("Create refresh token and store in database.", () => {
       return Promise.all([getData(refreshTokenTable), refreshToken]);
     })
     .then((data) => {
-      const refreshTokenList = data[0];
+      const refreshTokenList = [data[0][0].id];
       const refreshToken = data[1];
       const expectedResult = true;
       const result = refreshTokenList.includes(refreshToken);
@@ -59,7 +59,7 @@ test("Create refresh token throw error when user is null.", () => {
 test("Authenticate refresh token.", () => {
   return getData(refreshTokenTable)
     .then((refreshTokenList) => {
-      const refreshToken = refreshTokenList[0];
+      const refreshToken = refreshTokenList[0].id;
       return authenticateRefreshToken(refreshToken);
     })
     .then((accessToken) => {

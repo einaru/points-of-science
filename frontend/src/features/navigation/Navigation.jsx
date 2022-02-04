@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import ContentNavigator from "./ContentNavigator";
-import LoginStack from "../login/LoginStack";
+import LoginStack from "../account/LoginStack";
 import { AuthContext } from "../auth/AuthProvider";
 
 function Navigation() {

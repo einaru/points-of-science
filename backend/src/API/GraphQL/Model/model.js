@@ -7,6 +7,12 @@ import {
   GraphQLList,
 } from "graphql";
 
+const ResponseModel = {
+  message: { type: GraphQLString },
+  status: { type: GraphQLInt },
+  type: { type: GraphQLString },
+};
+
 const UserModel = new GraphQLObjectType({
   name: "User",
   fields: () => ({
@@ -40,6 +46,22 @@ const CategoryModel = new GraphQLObjectType({
   }),
 });
 
+const CategoryResponseModel = new GraphQLObjectType({
+  name: "CategoryResponse",
+  fields: () => ({
+    ...ResponseModel,
+    data: { type: CategoryModel },
+  }),
+});
+
+const AllCategoriesResponseModel = new GraphQLObjectType({
+  name: "AllCategoriesResponse",
+  fields: () => ({
+    ...ResponseModel,
+    data: { type: new GraphQLList(CategoryModel) },
+  }),
+});
+
 const DifficultyEnum = new GraphQLEnumType({
   name: "Difficulty",
   values: {
@@ -59,6 +81,14 @@ const ChallengeModel = new GraphQLObjectType({
     reflection: { type: ReflectionModel },
     reward: { type: RewardModel },
     category: { type: CategoryModel },
+  }),
+});
+
+const ChallengeResponseModel = new GraphQLObjectType({
+  name: "ChallengeResponse",
+  fields: () => ({
+    ...ResponseModel,
+    data: { type: ChallengeModel },
   }),
 });
 
@@ -232,12 +262,6 @@ const ClickStreamItemModel = new GraphQLObjectType({
   }),
 });
 
-const ResponseModel = {
-  message: { type: GraphQLString },
-  status: { type: GraphQLInt },
-  type: { type: GraphQLString },
-};
-
 const NormalResponseModel = new GraphQLObjectType({
   name: "Response",
   fields: () => ({
@@ -306,9 +330,10 @@ const PermissionModel = new GraphQLObjectType({
 export {
   ActivityModel,
   AchievementModel,
+  AllCategoriesResponseModel,
   AuthenticateTokenModel,
-  CategoryModel,
-  ChallengeModel,
+  CategoryResponseModel,
+  ChallengeResponseModel,
   ClickStreamModel,
   LeaderboardModel,
   NormalResponseModel,

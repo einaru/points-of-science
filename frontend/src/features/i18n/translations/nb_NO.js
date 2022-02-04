@@ -26,6 +26,7 @@ export default {
   "Profile": "Profil",
   "Project info": "Prosjekt info",
   "Purpose": "Formål",
+  "Reset": "Nullstill",
   "Username": "Brukernavn",
   "Verify username": "Verifiser brukernavn",
   "Your password is updated": "Passordet ditt er oppdatert",

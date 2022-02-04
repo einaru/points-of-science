@@ -1,36 +1,23 @@
-import React, { createContext, useMemo, useReducer } from "react";
-
-const initialState = {
-  isVerified: false,
-  username: "",
-};
-
-function reducer(state, action) {
-  switch (action.type) {
-    case "verifyUsername":
-      return {
-        ...state,
-        isVerified: true,
-        username: action.username,
-      };
-    default:
-      return new Error();
-  }
-}
+import React, { createContext, useMemo, useState } from "react";
 
 export const ActivateAccountContext = createContext();
 
 function ActivateAccountProvider({ children }) {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [username, setUsername] = useState("");
+  const [isVerified, setIsVerified] = useState(false);
 
   const accountContext = useMemo(
     () => ({
-      ...state,
-      setVerifiedUsername: (username) => {
-        dispatch({ type: "verifyUsername", username });
+      username,
+      isVerified,
+      setUsername,
+      setIsVerified,
+      resetUsername: () => {
+        setUsername("");
+        setIsVerified(false);
       },
     }),
-    [state, dispatch]
+    [username, isVerified, setUsername, setIsVerified]
   );
   return (
     <ActivateAccountContext.Provider value={accountContext}>

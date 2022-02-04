@@ -1,20 +1,19 @@
 import React from "react";
-import { StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
 
-const styles = StyleSheet.create({
-  formAction: {
-    marginTop: 12,
-    marginBottom: 12,
-  },
-});
-
-function FormAction({ label, onPress, mode = "contained", loading = false }) {
+function FormAction({
+  label,
+  onPress,
+  mode = "contained",
+  loading = false,
+  disabled = false,
+}) {
   return (
     <Button
       mode={mode}
-      style={styles.formAction}
+      style={{ marginVertical: 8 }}
       loading={loading}
+      disabled={disabled}
       onPress={onPress}
     >
       {label}

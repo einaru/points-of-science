@@ -7,24 +7,15 @@ import ActivateAccountProvider from "./ActivateAccountProvider";
 
 const Stack = createNativeStackNavigator();
 
-function ActivateAccountWrapper() {
-  return (
-    <ActivateAccountProvider>
-      <ActivateAccount />
-    </ActivateAccountProvider>
-  );
-}
-
 function AccountStack() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="account:login" component={Login} />
-      <Stack.Screen
-        name="account:activate"
-        component={ActivateAccountWrapper}
-      />
-      <Stack.Screen name="account:create" component={CreateAccount} />
-    </Stack.Navigator>
+    <ActivateAccountProvider>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="account:login" component={Login} />
+        <Stack.Screen name="account:activate" component={ActivateAccount} />
+        <Stack.Screen name="account:create" component={CreateAccount} />
+      </Stack.Navigator>
+    </ActivateAccountProvider>
   );
 }
 

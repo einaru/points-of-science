@@ -1,7 +1,7 @@
 import * as React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "./Login";
-import CreateAccountScreen from "./CreateAccountScreen";
+import CreateAccount from "./CreateAccount";
 import ActivateAccount from "./ActivateAccount";
 import ActivateAccountProvider from "./ActivateAccountProvider";
 
@@ -23,7 +23,7 @@ function AccountStack() {
         name="account:activate"
         component={ActivateAccountScreenWrapper}
       />
-      <Stack.Screen name="account:create" component={CreateAccountScreen} />
+      <Stack.Screen name="account:create" component={CreateAccount} />
     </Stack.Navigator>
   );
 }

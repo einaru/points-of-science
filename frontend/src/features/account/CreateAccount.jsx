@@ -6,7 +6,7 @@ import FormLink from "./FormLink";
 import { t } from "../i18n";
 import FormAction from "./FormAction";
 
-function CreateAccountScreen() {
+function CreateAccount() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -46,4 +46,4 @@ function CreateAccountScreen() {
   );
 }
 
-export default CreateAccountScreen;
+export default CreateAccount;

@@ -18,12 +18,12 @@ function ActivateAccountScreenWrapper() {
 function LoginStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="account:login" component={LoginScreen} />
       <Stack.Screen
-        name="Activate account"
+        name="account:activate"
         component={ActivateAccountScreenWrapper}
       />
-      <Stack.Screen name="Create account" component={CreateAccountScreen} />
+      <Stack.Screen name="account:create" component={CreateAccountScreen} />
     </Stack.Navigator>
   );
 }

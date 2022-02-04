@@ -9,11 +9,11 @@ import ProfileStack from "../profile/ProfileStack";
 import { t } from "../i18n";
 
 const tabIconMap = {
-  ChallengesTab: "lightbulb-on",
-  LeaderboardsTab: "trophy",
-  AchievementsTab: "medal",
-  DashboardTab: "view-dashboard",
-  ProfileTab: "account",
+  "tab:challenges": "lightbulb-on",
+  "tab:leaderboards": "trophy",
+  "tab:achievements": "medal",
+  "tab:dashboard": "view-dashboard",
+  "tab:profile": "account",
 };
 const Tab = createMaterialBottomTabNavigator();
 
@@ -30,27 +30,27 @@ function ContentNavigator() {
       })}
     >
       <Tab.Screen
-        name="ProfileTab"
+        name="tab:profile"
         options={{ title: t("Profile") }}
         component={ProfileStack}
       />
       <Tab.Screen
-        name="ChallengesTab"
+        name="tab:challenges"
         options={{ title: t("Challenges") }}
         component={ChallengesScreen}
       />
       <Tab.Screen
-        name="LeaderboardsTab"
+        name="tab:leaderboards"
         options={{ title: t("Leaderboards") }}
         component={LeaderboardsScreen}
       />
       <Tab.Screen
-        name="AchievementsTab"
+        name="tab:achievements"
         options={{ title: t("Achievements") }}
         component={AchievementsScreen}
       />
       <Tab.Screen
-        name="DashboardTab"
+        name="tab:dashboard"
         options={{ title: t("Dashboard") }}
         component={DashboardScreen}
       />

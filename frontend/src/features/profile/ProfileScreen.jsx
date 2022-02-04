@@ -79,7 +79,7 @@ function ProfileScreen() {
           title={t("Change password")}
           left={() => <List.Icon icon="key" />}
           right={() => <List.Icon icon="chevron-right" />}
-          onPress={() => navigation.navigate("ChangePassword")}
+          onPress={() => navigation.navigate("profile:change-password")}
         />
       </List.Section>
       <Divider />
@@ -90,7 +90,7 @@ function ProfileScreen() {
           right={() => <List.Icon icon="chevron-right" />}
           onPress={() => {
             console.debug("Pressed: Dashboard");
-            navigation.navigate("Dashboard");
+            navigation.navigate("tab:dashboard");
           }}
         />
         <List.Item
@@ -99,7 +99,7 @@ function ProfileScreen() {
           right={() => <List.Icon icon="chevron-right" />}
           onPress={() => {
             console.debug("Pressed: Dashboard");
-            navigation.navigate("Achievements");
+            navigation.navigate("tab:achievements");
           }}
         />
       </List.Section>
@@ -109,7 +109,7 @@ function ProfileScreen() {
           title={t("Project info")}
           left={() => <List.Icon icon="information" />}
           right={() => <List.Icon icon="chevron-right" />}
-          onPress={() => navigation.navigate("ProjectInfo")}
+          onPress={() => navigation.navigate("profile:project-info")}
         />
         <List.Item
           title={t("Log out")}

@@ -76,7 +76,7 @@ function LoginScreen() {
       <FormLink
         message={t("Haven't activated your account yet?")}
         label={t("Activate account")}
-        screenName="Activate account"
+        screenName="account:activate"
       />
     </FormView>
   );

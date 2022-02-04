@@ -40,7 +40,7 @@ function CreateAccountScreen() {
       <FormLink
         label={t("Log in")}
         message={t("Already have an account?")}
-        screenName="Login"
+        screenName="account:login"
       />
     </FormView>
   );

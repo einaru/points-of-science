@@ -13,17 +13,17 @@ function ProfileStack() {
     <View style={{ flex: 1 }} collapsable={false}>
       <Stack.Navigator>
         <Stack.Screen
-          name="ProfileScreen"
+          name="profile:main"
           options={{ title: t("Profile"), headerShown: false }}
           component={ProfileScreen}
         />
         <Stack.Screen
-          name="ChangePassword"
+          name="profile:change-password"
           options={{ title: t("Change password") }}
           component={ChangePassword}
         />
         <Stack.Screen
-          name="ProjectInfo"
+          name="profile:project-info"
           options={{ title: t("Project info") }}
           component={ProjectInfo}
         />

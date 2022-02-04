@@ -33,7 +33,7 @@ const ACTIVATE_ACCOUNT = gql`
   }
 `;
 
-export default function SetPasswordScreen() {
+export default function SetPassword() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");

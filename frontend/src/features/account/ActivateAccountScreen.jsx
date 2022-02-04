@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { ActivateAccountContext } from "./ActivateAccountProvider";
-import SetPasswordScreen from "./SetPasswordScreen";
+import SetPassword from "./SetPassword";
 import VerifyUsername from "./VerifyUsername";
 
 function ActivateAccountScreen() {
   const { isVerified } = useContext(ActivateAccountContext);
-  return isVerified ? <SetPasswordScreen /> : <VerifyUsername />;
+  return isVerified ? <SetPassword /> : <VerifyUsername />;
 }
 
 export default ActivateAccountScreen;

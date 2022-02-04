@@ -6,7 +6,7 @@ import FormLink from "./FormLink";
 import { t } from "../i18n";
 import FormAction from "./FormAction";
 
-function CreateAccountScreen() {
+function CreateAccount() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -40,10 +40,10 @@ function CreateAccountScreen() {
       <FormLink
         label={t("Log in")}
         message={t("Already have an account?")}
-        screenName="Login"
+        screenName="account:login"
       />
     </FormView>
   );
 }
 
-export default CreateAccountScreen;
+export default CreateAccount;

@@ -17,7 +17,7 @@ const VERIFY_USERNAME = gql`
   }
 `;
 
-export default function VerifyUsernameScreen() {
+export default function VerifyUsername() {
   const [username, setUsername] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -58,7 +58,7 @@ export default function VerifyUsernameScreen() {
       <FormLink
         label={t("Log in")}
         message={t("Already activated your account?")}
-        screenName="Login"
+        screenName="account:login"
       />
     </FormView>
   );

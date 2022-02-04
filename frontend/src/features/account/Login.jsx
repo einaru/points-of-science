@@ -33,6 +33,8 @@ function LoginScreen() {
   const { logInUser } = useContext(AuthContext);
   const [logIn, { data, loading, error }] = useMutation(LOGIN);
 
+  const isDisabled = !username && !password;
+
   useEffect(() => {
     if (data) {
       if (data.signIn.type === "success") {
@@ -69,6 +71,7 @@ function LoginScreen() {
       <FormAction
         label={t("Log in")}
         loading={loading}
+        disabled={isDisabled}
         onPress={() => {
           logIn({ variables: { username, password } });
         }}

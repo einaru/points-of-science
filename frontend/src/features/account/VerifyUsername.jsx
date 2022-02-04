@@ -22,6 +22,8 @@ export default function VerifyUsername() {
     ActivateAccountContext
   );
 
+  const isDisabled = username === "";
+
   const [verifyUsername, { called, loading, data }] =
     useLazyQuery(VERIFY_USERNAME);
 
@@ -49,6 +51,7 @@ export default function VerifyUsername() {
       <FormAction
         label={t("Verify username")}
         loading={called && loading}
+        disabled={isDisabled}
         onPress={() => {
           verifyUsername({ variables: { username } });
         }}

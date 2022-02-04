@@ -11,6 +11,8 @@ function CreateAccount() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const isDisabled = !username && !password && !confirmPassword;
+
   const { createAccount } = useContext(AuthContext);
 
   return (
@@ -35,6 +37,7 @@ function CreateAccount() {
       <FormAction
         label={t("Create account")}
         mode="contained"
+        disabled={isDisabled}
         onPress={() => createAccount({ username, password, confirmPassword })}
       />
       <FormLink

@@ -37,6 +37,8 @@ export default function SetPassword() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+  const isDisabled = !password && !confirmPassword;
+
   const { username } = useContext(ActivateAccountContext);
   const { logInUser } = useContext(AuthContext);
 
@@ -87,6 +89,7 @@ export default function SetPassword() {
       <FormAction
         label={t("Activate account")}
         loading={loading}
+        disabled={isDisabled}
         onPress={() => {
           activateAccount({
             variables: { username, password, confirmPassword },

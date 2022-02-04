@@ -29,7 +29,11 @@ function nextID(table) {
 function getFilter(args) {
   const dataProvider = getProvider();
   const filter = dataProvider.getFilter();
-  if (filter.key && filter.operator && filter.value) {
+  if (
+    Object.prototype.hasOwnProperty.call(filter, "key") &&
+    Object.prototype.hasOwnProperty.call(filter, "operator") &&
+    Object.prototype.hasOwnProperty.call(filter, "value")
+  ) {
     filter.key = args.key;
     filter.operator = args.operator;
     filter.value = args.value;

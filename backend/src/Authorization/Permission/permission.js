@@ -14,7 +14,7 @@ function getPermissionLevels() {
 
 function checkPermissionLevel(permissionLevel, user) {
   try {
-    if (user.permissionLevel > permissionLevel) {
+    if (user.permission !== permissionLevel) {
       return getResponseObject(
         `Access denied. Missing permission level of ${permissionLevels[permissionLevel].text}.`,
         401,

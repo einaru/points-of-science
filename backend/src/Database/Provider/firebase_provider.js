@@ -99,9 +99,9 @@ function updateData(collectionName, data) {
   return new Promise((resolve, reject) => {
     const firebaseDB = getDatabase();
     getDataByFilter(collectionName, {
-      id: `${data.id}`,
+      key: `${data.id}`,
       operator: "==",
-      filter: `${data.id}`,
+      value: `${data.id}`,
     })
       .then((response) => {
         if (response != null) {

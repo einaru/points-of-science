@@ -16,7 +16,7 @@ function getResponseObject(message, statusCode, type) {
 function createAccessToken(user) {
   const userData = {
     id: user.id,
-    name: user.name,
+    username: user.username,
     permission: user.permission,
   };
 
@@ -68,9 +68,12 @@ function storeRefreshTokenInDatabase(refreshToken) {
   return new Promise((resolve, reject) => {
     getData(config.env.REFRESH_TOKEN_TABLE)
       .then((refreshTokens) => {
-        const refreshTokenExist = refreshTokens.find(
-          (token) => token === refreshToken
-        );
+        const refreshTokenExist = refreshTokens.find((token) => {
+          if (token === Object(token)) {
+            return token.id === refreshToken;
+          }
+          return token === refreshToken;
+        });
         if (refreshTokenExist != null) {
           return resolve(
             getResponseObject(
@@ -81,7 +84,10 @@ function storeRefreshTokenInDatabase(refreshToken) {
           );
         }
 
-        return updateData(config.env.REFRESH_TOKEN_TABLE, refreshToken);
+        const data = {
+          id: refreshToken,
+        };
+        return updateData(config.env.REFRESH_TOKEN_TABLE, data);
       })
       .then(() => {
         return resolve(
@@ -132,7 +138,14 @@ function authenticateRefreshToken(refreshToken) {
   return new Promise((resolve, reject) => {
     getData(config.env.REFRESH_TOKEN_TABLE)
       .then((refreshTokens) => {
-        if (!refreshTokens.includes(refreshToken)) {
+        const refreshTokenExist = refreshTokens.filter((token) => {
+          if (token === Object(token)) {
+            return token.id === refreshToken;
+          }
+          return token === refreshToken;
+        });
+
+        if (!refreshTokenExist.length) {
           return reject(
             getResponseObject(
               "Refresh token is invalid.",

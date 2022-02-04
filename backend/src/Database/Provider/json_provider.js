@@ -102,7 +102,7 @@ function nextID(table) {
   }
 
   if (table.length === 0) {
-    return resolve(1);
+    return 1;
   }
 
   return table[table.length - 1].id + incrementor;

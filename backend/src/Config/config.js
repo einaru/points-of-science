@@ -49,6 +49,9 @@ const env = {
   REFRESH_TOKEN_TABLE: process.env.REFRESH_TOKEN_TABLE,
   USER_TABLE: process.env.USER_TABLE,
   VALID_USERNAME_TABLE: process.env.VALID_USERNAME_TABLE,
+  CATEGORY_TABLE: "Category",
+  CONTENT_TABLE: "Content",
+  PROGRESS_TABLE: "Progress",
   RESPONSE_TYPE: {
     success: "success",
     error: "error",

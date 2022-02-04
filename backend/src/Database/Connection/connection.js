@@ -29,12 +29,15 @@ function connectToDatabase() {
   }
 
   if (checkEnvironmentMode(config.env.ENVIRONMENT_MODE.DEVELOPMENT.mode)) {
-    database = connectToNonProductionDatabase(
+    /* database = connectToNonProductionDatabase(
       config.env.ENVIRONMENT_MODE.DEVELOPMENT.database_folder,
       config.env.ENVIRONMENT_MODE.DEVELOPMENT.database_file_path,
       config.env.ENVIRONMENT_MODE.TEST.dummy_data
     );
-    provider = JSONProvider;
+    provider = JSONProvider; */
+
+    database = connectToFirebase();
+    provider = FirebaseProvider;
 
     return;
   }

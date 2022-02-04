@@ -3,7 +3,9 @@ import {
   activateAccountQuery,
   authAccessTokenQuery,
   authRefreshTokenQuery,
+  createCategoryQuery,
   changePasswordQuery,
+  getAllCategoriesQuery,
   getAllUsersQuery,
   getUserByIDQuery,
   createUserQuery,
@@ -20,6 +22,7 @@ import {
 const ROOTQUERY = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
+    getAllCategories: getAllCategoriesQuery,
     getAllUsers: getAllUsersQuery,
     getNewToken: authRefreshTokenQuery,
     getPermissions: getPermissionsQuery,
@@ -34,6 +37,7 @@ const MUTATION = new GraphQLObjectType({
   fields: {
     activateAccount: activateAccountQuery,
     changePassword: changePasswordQuery,
+    createCategory: createCategoryQuery,
     createUser: createUserQuery,
     deleteUser: deleteUserQuery,
     updateUser: updateUserQuery,

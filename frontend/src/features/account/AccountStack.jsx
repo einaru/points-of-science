@@ -7,7 +7,7 @@ import ActivateAccountProvider from "./ActivateAccountProvider";
 
 const Stack = createNativeStackNavigator();
 
-function ActivateAccountScreenWrapper() {
+function ActivateAccountWrapper() {
   return (
     <ActivateAccountProvider>
       <ActivateAccount />
@@ -21,7 +21,7 @@ function AccountStack() {
       <Stack.Screen name="account:login" component={Login} />
       <Stack.Screen
         name="account:activate"
-        component={ActivateAccountScreenWrapper}
+        component={ActivateAccountWrapper}
       />
       <Stack.Screen name="account:create" component={CreateAccount} />
     </Stack.Navigator>

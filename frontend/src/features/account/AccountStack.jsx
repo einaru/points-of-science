@@ -12,7 +12,7 @@ function AccountStack() {
   return (
     <ActivateAccountProvider>
       <Stack.Navigator
-        initialRouteName="account:activate"
+        initialRouteName="account:login"
         screenOptions={{ headerShown: true, headerLeft: null }}
       >
         <Stack.Screen

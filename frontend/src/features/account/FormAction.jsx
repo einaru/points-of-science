@@ -11,7 +11,7 @@ function FormAction({
   return (
     <Button
       mode={mode}
-      style={{ marginVertical: 8 }}
+      style={{ marginTop: 8 }}
       loading={loading}
       disabled={disabled}
       onPress={onPress}

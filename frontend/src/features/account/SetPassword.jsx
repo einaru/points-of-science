@@ -6,6 +6,7 @@ import { ActivateAccountContext } from "./ActivateAccountProvider";
 import FormView from "./FormView";
 import { t } from "../i18n";
 import FormAction from "./FormAction";
+import FormLink from "./FormLink";
 
 const ACTIVATE_ACCOUNT = gql`
   mutation activateAccount(
@@ -90,6 +91,11 @@ export default function SetPassword() {
             variables: { username, password, confirmPassword },
           });
         }}
+      />
+      <FormLink
+        label={t("Log in")}
+        message={t("Already activated your account?")}
+        screenName="account:login"
       />
     </FormView>
   );

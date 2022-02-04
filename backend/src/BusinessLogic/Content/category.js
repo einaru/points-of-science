@@ -136,7 +136,7 @@ function restoreObject() {
           }
 
           if (data[1] != null) {
-            [progress] = data[1][0];
+            progress = data[1][0];
           }
 
           category.updateData(categoryData);

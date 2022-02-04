@@ -97,10 +97,15 @@ const verifyUsernameQuery = {
   args: { username: { type: GraphQLString } },
   async resolve(parent, args) {
     try {
-      const username = await getDataByFilter(config.env.VALID_USERNAME_TABLE, {
+      const filter = getFilter({
         key: "username",
+        operator: "==",
         value: args.username,
       });
+      const username = await getDataByFilter(
+        config.env.VALID_USERNAME_TABLE,
+        filter
+      );
       if (username.length === 0) {
         return {
           message: "Invalid username.",
@@ -109,10 +114,7 @@ const verifyUsernameQuery = {
         };
       }
 
-      const user = await getDataByFilter(config.env.USER_TABLE, {
-        key: "username",
-        value: args.username,
-      })[0];
+      const user = await getDataByFilter(config.env.USER_TABLE, filter)[0];
       if (user != null) {
         if (
           user.state === profileState.active.value ||

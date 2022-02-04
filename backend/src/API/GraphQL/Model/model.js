@@ -13,6 +13,12 @@ const ResponseModel = {
   type: { type: GraphQLString },
 };
 
+const ContentResponse = {
+  title: { type: GraphQLString },
+  image: { type: GraphQLString },
+  description: { type: GraphQLString },
+};
+
 const UserModel = new GraphQLObjectType({
   name: "User",
   fields: () => ({
@@ -30,9 +36,7 @@ const ContentModel = new GraphQLObjectType({
   name: "Content",
   fields: () => ({
     id: { type: GraphQLInt },
-    title: { type: GraphQLString },
-    image: { type: GraphQLString },
-    description: { type: GraphQLString },
+    ...ContentResponse,
   }),
 });
 
@@ -40,8 +44,8 @@ const CategoryModel = new GraphQLObjectType({
   name: "Category",
   fields: () => ({
     id: { type: GraphQLInt },
-    challenge: { type: new GraphQLList(ChallengeModel) },
-    content: { type: ContentModel },
+    challenges: { type: new GraphQLList(ChallengeModel) },
+    ...ContentResponse,
     progress: { type: ProgressModel },
   }),
 });

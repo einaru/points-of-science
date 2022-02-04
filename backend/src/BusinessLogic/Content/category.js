@@ -95,7 +95,7 @@ function convertToResponseObject(category) {
   return {
     id: category.data.id,
     challenge: category.data.challenges,
-    content: category.content.data,
+    ...category.content.data,
     progress: category.progress.data,
   };
 }

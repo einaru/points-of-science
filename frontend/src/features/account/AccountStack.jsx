@@ -1,6 +1,6 @@
 import * as React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import LoginScreen from "./LoginScreen";
+import Login from "./Login";
 import CreateAccountScreen from "./CreateAccountScreen";
 import ActivateAccountScreen from "./ActivateAccountScreen";
 import ActivateAccountProvider from "./ActivateAccountProvider";
@@ -18,7 +18,7 @@ function ActivateAccountScreenWrapper() {
 function AccountStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="account:login" component={LoginScreen} />
+      <Stack.Screen name="account:login" component={Login} />
       <Stack.Screen
         name="account:activate"
         component={ActivateAccountScreenWrapper}

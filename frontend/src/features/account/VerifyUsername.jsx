@@ -17,7 +17,7 @@ const VERIFY_USERNAME = gql`
   }
 `;
 
-export default function VerifyUsernameScreen() {
+export default function VerifyUsername() {
   const [username, setUsername] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 

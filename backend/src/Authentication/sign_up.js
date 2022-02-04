@@ -5,6 +5,7 @@ import {
   errorsInPassword,
   generateErrorMessage,
   getData,
+  getFilter,
   getDataByFilter,
   hashPassword,
   isValidPassword,
@@ -120,11 +121,16 @@ function isUserDeativated(user) {
 
 function getDataFromDatabaseByFilter(table, key, value) {
   return new Promise((resolve, reject) => {
-    getDataByFilter(table, {
+    const filter = getFilter({
       key,
+      operator: "==",
       value,
-    })
+    });
+    getDataByFilter(table, filter)
       .then((data) => {
+        if (data == null) {
+          resolve([]);
+        }
         resolve(data[0]);
       })
       .catch((error) => {

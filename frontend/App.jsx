@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import fetch from "cross-fetch";
 import {
   ApolloClient,
@@ -16,6 +16,8 @@ import Constants from "expo-constants";
 import { AuthProvider } from "./src/features/auth/AuthProvider";
 import Navigation from "./src/features/navigation";
 import * as Storage from "./src/services/storage";
+import PreferencesContext from "./src/features/preferences/PreferencesContext";
+import { darkTheme, defaultTheme } from "./src/shared/theme";
 
 // See: https://stackoverflow.com/a/56927782
 const errorLink = onError(({ graphQLErrors, networkErrors: networkError }) => {
@@ -54,16 +56,35 @@ const client = new ApolloClient({
 });
 
 export default function App() {
+  const [preferDarkTheme, setPreferDarkTheme] = useState("");
+
+  const theme = preferDarkTheme ? darkTheme : defaultTheme;
+  const statusBarStyle = preferDarkTheme ? "inverted" : "auto";
+
+  const toggleTheme = useCallback(() => {
+    return setPreferDarkTheme(!preferDarkTheme);
+  }, [preferDarkTheme]);
+
+  const preferences = useMemo(
+    () => ({
+      toggleTheme,
+      preferDarkTheme,
+    }),
+    [toggleTheme, preferDarkTheme]
+  );
+
   return (
-    <ThemeProvider>
-      <ApolloProvider client={client}>
-        <AuthProvider>
-          <SafeAreaProvider>
-            <Navigation />
-          </SafeAreaProvider>
-        </AuthProvider>
-        <StatusBar style="auto" />
-      </ApolloProvider>
-    </ThemeProvider>
+    <PreferencesContext.Provider value={preferences}>
+      <ThemeProvider theme={theme}>
+        <ApolloProvider client={client}>
+          <AuthProvider>
+            <SafeAreaProvider>
+              <Navigation theme={theme} />
+            </SafeAreaProvider>
+          </AuthProvider>
+          <StatusBar style={statusBarStyle} />
+        </ApolloProvider>
+      </ThemeProvider>
+    </PreferencesContext.Provider>
   );
 }

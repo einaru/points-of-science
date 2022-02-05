@@ -1,8 +1,7 @@
 import * as React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { Text } from "react-native-paper";
-import theme from "../../shared/theme";
+import { Text, useTheme } from "react-native-paper";
 
 const styles = StyleSheet.create({
   container: {
@@ -11,17 +10,19 @@ const styles = StyleSheet.create({
   },
   linkText: {
     fontWeight: "bold",
-    color: theme.colors.primary,
   },
 });
 
 function FormLink({ message, label, screenName }) {
   const navigation = useNavigation();
+  const theme = useTheme();
   return (
     <View style={styles.container}>
       <Text style={styles.message}>{message}</Text>
       <TouchableOpacity onPress={() => navigation.navigate(screenName)}>
-        <Text style={styles.linkText}>{label}</Text>
+        <Text style={{ ...styles.linkText, color: theme.colors.primary }}>
+          {label}
+        </Text>
       </TouchableOpacity>
     </View>
   );

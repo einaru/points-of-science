@@ -18,9 +18,16 @@ function initializeFirebaseApp() {
   });
 }
 
-function connectToFirebase() {
+function connectToFirebaseProduction() {
   initializeFirebaseApp();
   return admin.firestore();
 }
 
-export { connectToFirebase };
+function connectToFirebaseEmulator() {
+  admin.initializeApp({
+    projectId: "msc-scienceapp",
+  });
+  return admin.firestore();
+}
+
+export { connectToFirebaseEmulator, connectToFirebaseProduction };

@@ -4,7 +4,8 @@ import { fileURLToPath } from "url";
 import fs from "fs";
 import {
   config,
-  connectToFirebase,
+  connectToFirebaseProduction,
+  connectToFirebaseEmulator,
   FirebaseProvider,
   JSONProvider,
 } from "../../internal.js";
@@ -29,14 +30,7 @@ function connectToDatabase() {
   }
 
   if (checkEnvironmentMode(config.env.ENVIRONMENT_MODE.DEVELOPMENT.mode)) {
-    /* database = connectToNonProductionDatabase(
-      config.env.ENVIRONMENT_MODE.DEVELOPMENT.database_folder,
-      config.env.ENVIRONMENT_MODE.DEVELOPMENT.database_file_path,
-      config.env.ENVIRONMENT_MODE.TEST.dummy_data
-    );
-    provider = JSONProvider; */
-
-    database = connectToFirebase();
+    database = connectToFirebaseEmulator();
     provider = FirebaseProvider;
 
     return;
@@ -45,7 +39,7 @@ function connectToDatabase() {
   if (checkEnvironmentMode(config.env.ENVIRONMENT_MODE.PRODUCTION.mode)) {
     // Fill in logic connecting the application to a production database.
     if (config.env.ENVIRONMENT_MODE.PRODUCTION.database === "FIREBASE") {
-      database = connectToFirebase();
+      database = connectToFirebaseProduction();
       provider = FirebaseProvider;
     }
   }

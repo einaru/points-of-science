@@ -1,7 +1,8 @@
 /* eslint-disable import/no-cycle */
 // Server directory imports:
 import jwt from "jsonwebtoken";
-import { config, getData, updateData, deleteData } from "../../internal.js";
+import { getData, updateData, deleteData } from "../../internal.js";
+import config from "../../Config/config.js";
 
 // Other third party dependencies:
 
@@ -20,7 +21,7 @@ function createAccessToken(user) {
     permission: user.permission,
   };
 
-  return jwt.sign(userData, config.env.ACCESS_TOKEN_SECRET, {
+  return jwt.sign(userData, config.secret.accessToken, {
     expiresIn: "900s",
   });
 }
@@ -34,20 +35,20 @@ function authenticateAccessToken(request) {
         getResponseObject(
           "Access token is missing.",
           403,
-          config.env.RESPONSE_TYPE.error
+          config.responseType.error
         )
       );
 
       return;
     }
 
-    jwt.verify(accessToken, config.env.ACCESS_TOKEN_SECRET, (error, user) => {
+    jwt.verify(accessToken, config.secret.accessToken, (error, user) => {
       if (error) {
         return reject(
           getResponseObject(
             "Access token is invalid. It has either expired or is missing.",
             403,
-            config.env.RESPONSE_TYPE.error
+            config.responseType.error
           )
         );
       }
@@ -57,7 +58,7 @@ function authenticateAccessToken(request) {
         getResponseObject(
           "Authentication successful.",
           200,
-          config.env.RESPONSE_TYPE.success
+          config.responseType.success
         )
       );
     });
@@ -66,7 +67,7 @@ function authenticateAccessToken(request) {
 
 function storeRefreshTokenInDatabase(refreshToken) {
   return new Promise((resolve, reject) => {
-    getData(config.env.REFRESH_TOKEN_TABLE)
+    getData(config.db.table.refreshToken)
       .then((refreshTokens) => {
         const refreshTokenExist = refreshTokens.find((token) => {
           if (token === Object(token)) {
@@ -79,7 +80,7 @@ function storeRefreshTokenInDatabase(refreshToken) {
             getResponseObject(
               "Access token already exist.",
               200,
-              config.env.RESPONSE_TYPE.success
+              config.responseType.success
             )
           );
         }
@@ -87,14 +88,14 @@ function storeRefreshTokenInDatabase(refreshToken) {
         const data = {
           id: refreshToken,
         };
-        return updateData(config.env.REFRESH_TOKEN_TABLE, data);
+        return updateData(config.db.table.refreshToken, data);
       })
       .then(() => {
         return resolve(
           getResponseObject(
             "Access token stored to database successfully.",
             200,
-            config.env.RESPONSE_TYPE.success
+            config.responseType.success
           )
         );
       })
@@ -114,7 +115,7 @@ function createRefreshToken(user) {
         state: user.state,
       };
 
-      const refreshToken = jwt.sign(userData, config.env.REFRESH_TOKEN_SECRET);
+      const refreshToken = jwt.sign(userData, config.secret.refreshToken);
       storeRefreshTokenInDatabase(refreshToken)
         .then((response) => {
           if (response.type === "error") {
@@ -136,7 +137,7 @@ function createRefreshToken(user) {
 
 function authenticateRefreshToken(refreshToken) {
   return new Promise((resolve, reject) => {
-    getData(config.env.REFRESH_TOKEN_TABLE)
+    getData(config.db.table.refreshToken)
       .then((refreshTokens) => {
         const refreshTokenExist = refreshTokens.filter((token) => {
           if (token === Object(token)) {
@@ -150,21 +151,21 @@ function authenticateRefreshToken(refreshToken) {
             getResponseObject(
               "Refresh token is invalid.",
               403,
-              config.env.RESPONSE_TYPE.error
+              config.responseType.error
             )
           );
         }
 
         jwt.verify(
           refreshToken,
-          config.env.REFRESH_TOKEN_SECRET,
+          config.secret.refreshToken,
           (error, userVerified) => {
             if (error) {
               return reject(
                 getResponseObject(
                   "Refresh token is invalid.",
                   403,
-                  config.env.RESPONSE_TYPE.error
+                  config.responseType.error
                 )
               );
             }
@@ -181,19 +182,19 @@ function authenticateRefreshToken(refreshToken) {
 
 function deleteRefreshTokenFromDatabase(refreshToken) {
   return new Promise((resolve, reject) => {
-    getData(config.env.REFRESH_TOKEN_TABLE)
+    getData(config.db.table.refreshToken)
       .then((refreshTokens) => {
         if (refreshTokens.length === 0) {
           return resolve(
             getResponseObject(
               "User is already signed out.",
               200,
-              config.env.RESPONSE_TYPE.success
+              config.responseType.success
             )
           );
         }
 
-        return deleteData(config.env.REFRESH_TOKEN_TABLE, refreshToken);
+        return deleteData(config.db.table.refreshToken, refreshToken);
       })
       .then((response) => {
         if (!response) {
@@ -201,7 +202,7 @@ function deleteRefreshTokenFromDatabase(refreshToken) {
             getResponseObject(
               "Could not sign out user.",
               500,
-              config.env.RESPONSE_TYPE.error
+              config.responseType.error
             )
           );
         }
@@ -210,7 +211,7 @@ function deleteRefreshTokenFromDatabase(refreshToken) {
           getResponseObject(
             "User signed out successfully.",
             200,
-            config.env.RESPONSE_TYPE.success
+            config.responseType.success
           )
         );
       })

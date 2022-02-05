@@ -1,4 +1,5 @@
-import { config, updateData } from "../../internal.js";
+import { updateData } from "../../internal.js";
+import config from "../../Config/config.js";
 
 function createObjectTemplate(functionKey, code) {
   const object = {};
@@ -68,7 +69,7 @@ function saveData() {
             getResponseObject(
               message,
               200,
-              config.env.RESPONSE_TYPE.success,
+              config.responseType.success,
               convertToResponseObject(key, data)
             )
           );

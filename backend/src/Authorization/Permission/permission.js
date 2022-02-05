@@ -1,4 +1,4 @@
-import { config } from "../../internal.js";
+import config from "../../Config/config.js";
 
 const permissionLevels = {
   1: { text: "admin", value: 1 },
@@ -18,20 +18,20 @@ function checkPermissionLevel(permissionLevel, user) {
       return getResponseObject(
         `Access denied. Missing permission level of ${permissionLevels[permissionLevel].text}.`,
         401,
-        config.env.RESPONSE_TYPE.error
+        config.responseType.error
       );
     }
 
     return getResponseObject(
       `Access granted.`,
       200,
-      config.env.RESPONSE_TYPE.success
+      config.responseType.success
     );
   } catch (error) {
     return getResponseObject(
       `Access denied. Data is missing to complete the request. Error: ${error.message}.`,
       401,
-      config.env.RESPONSE_TYPE.error
+      config.responseType.error
     );
   }
 }
@@ -42,7 +42,7 @@ function setPermissionLevel(permissionLevel, user) {
       return getResponseObject(
         `Permission level was not found. Available permission levels are 1: admin, 2: experimental, and 3: control.`,
         400,
-        config.env.RESPONSE_TYPE.error
+        config.responseType.error
       );
     }
 
@@ -50,13 +50,13 @@ function setPermissionLevel(permissionLevel, user) {
     return getResponseObject(
       `Permission for user ${user.data.username} was updated.`,
       200,
-      config.env.RESPONSE_TYPE.success
+      config.responseType.success
     );
   } catch (error) {
     return getResponseObject(
       `Could not update permission level for user ${user.data.username}. Error: ${error.message}.`,
       400,
-      config.env.RESPONSE_TYPE.error
+      config.responseType.error
     );
   }
 }

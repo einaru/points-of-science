@@ -2,7 +2,6 @@ import { GraphQLString, GraphQLInt } from "graphql";
 import {
   authenticateAccessToken,
   authenticateRefreshToken,
-  config,
   checkPermissionLevel,
   deleteRefreshTokenFromDatabase,
   getData,
@@ -18,6 +17,7 @@ import {
   PermissionModel,
   SignInModel,
 } from "../../../internal.js";
+import config from "../../../Config/config.js";
 
 function getResponseObject(message, statusCode, type) {
   return {
@@ -44,7 +44,7 @@ const authRefreshTokenQuery = {
       const result = getResponseObject(
         "Authentication successful.",
         200,
-        config.env.RESPONSE_TYPE.success
+        config.responseType.success
       );
       result.data = { accessToken: response };
 
@@ -74,7 +74,7 @@ const getPermissionsQuery = {
     try {
       await authenticateAccessToken(context);
       const response = checkPermissionLevel(
-        config.env.PERMISSION_LEVELS.ADMIN,
+        config.permissionLevel.admin,
         context.user
       );
       if (response.type === "error") {
@@ -84,8 +84,8 @@ const getPermissionsQuery = {
       return {
         message: "Permission levels retrieved successfully.",
         status: 200,
-        type: config.env.RESPONSE_TYPE.success,
-        data: config.env.PERMISSION_LEVELS,
+        type: config.responseType.success,
+        data: config.permissionLevel,
       };
     } catch (error) {
       return error;
@@ -117,14 +117,14 @@ const setPermissionQuery = {
     try {
       await authenticateAccessToken(context);
       const response = checkPermissionLevel(
-        config.env.PERMISSION_LEVELS.ADMIN,
+        config.permissionLevel.admin,
         context.user
       );
       if (response.type === "error") {
         return response;
       }
 
-      const userData = await getDataByFilter(config.env.USER_TABLE, {
+      const userData = await getDataByFilter(config.db.table.user, {
         key: "id",
         value: args.userID,
       })[0];
@@ -132,11 +132,11 @@ const setPermissionQuery = {
       const user = profileCreator();
       user.updateData(userData);
       setPermissionLevel(args.permission, user);
-      await updateData(config.env.USER_TABLE, user.data);
+      await updateData(config.db.table.user, user.data);
       return getResponseObject(
         "Permission level updated successfully.",
         200,
-        config.env.RESPONSE_TYPE.success
+        config.responseType.success
       );
     } catch (error) {
       return error;
@@ -181,14 +181,14 @@ const swapPermissionQuery = {
     try {
       await authenticateAccessToken(context);
       const response = checkPermissionLevel(
-        config.env.PERMISSION_LEVELS.ADMIN,
+        config.permissionLevel.admin,
         context.user
       );
       if (response.type === "error") {
         return response;
       }
 
-      const userData = await getData(config.env.USER_TABLE);
+      const userData = await getData(config.db.table.user);
       const users = [];
       userData.forEach((userObject) => {
         const user = profileCreator();
@@ -198,12 +198,12 @@ const swapPermissionQuery = {
 
       swapPermissionGroup(users);
       users.forEach((user) => {
-        updateData(config.env.USER_TABLE, user.data);
+        updateData(config.db.table.user, user.data);
       });
       return getResponseObject(
         "Swapped permission groups successfully.",
         200,
-        config.env.RESPONSE_TYPE.success
+        config.responseType.success
       );
     } catch (error) {
       return error;

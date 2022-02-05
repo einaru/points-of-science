@@ -1,7 +1,6 @@
 /* eslint-disable import/no-cycle */
 import {
   checkPassword,
-  config,
   errorsInPassword,
   generateErrorMessage,
   getData,
@@ -16,18 +15,19 @@ import {
   updateData,
   validatePassword,
 } from "../internal.js";
+import config from "../Config/config.js";
 
 function signUp(args) {
   return new Promise((resolve, reject) => {
     const { password, confirmPassword, username } = args;
     const validUsername = getDataFromDatabaseByFilter(
-      config.env.VALID_USERNAME_TABLE,
+      config.db.table.validUsername,
       "username",
       username
     );
 
     const userObject = getDataFromDatabaseByFilter(
-      config.env.USER_TABLE,
+      config.db.table.user,
       "username",
       username
     );
@@ -51,7 +51,7 @@ function signUp(args) {
         );
       })
       .then((user) => {
-        updateData(config.env.USER_TABLE, user.data);
+        updateData(config.db.table.user, user.data);
         return signIn(user.data.username, password);
       })
       .then((response) => {
@@ -69,7 +69,7 @@ function validateSignUp(data, user, password, confirmPassword) {
       reject({
         message: "Invalid username.",
         status: 400,
-        type: config.env.RESPONSE_TYPE.error,
+        type: config.responseType.error,
       });
     }
 
@@ -78,7 +78,7 @@ function validateSignUp(data, user, password, confirmPassword) {
         getResponseObject(
           "User already exists and has an active account.",
           400,
-          config.env.RESPONSE_TYPE.error
+          config.responseType.error
         )
       );
     }
@@ -88,7 +88,7 @@ function validateSignUp(data, user, password, confirmPassword) {
         getResponseObject(
           "Passwords did not match.",
           400,
-          config.env.RESPONSE_TYPE.error
+          config.responseType.error
         )
       );
     }
@@ -99,7 +99,7 @@ function validateSignUp(data, user, password, confirmPassword) {
           const errors = errorsInPassword(validation);
           const message = generateErrorMessage(errors);
           return reject(
-            getResponseObject(message, 400, config.env.RESPONSE_TYPE.error)
+            getResponseObject(message, 400, config.responseType.error)
           );
         }
 
@@ -141,7 +141,7 @@ function getDataFromDatabaseByFilter(table, key, value) {
 
 function getNextID() {
   return new Promise((resolve, reject) => {
-    getData(config.env.USER_TABLE)
+    getData(config.db.table.user)
       .then((users) => {
         resolve(nextID(users));
       })

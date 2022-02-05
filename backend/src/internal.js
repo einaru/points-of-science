@@ -1,4 +1,3 @@
-export * as config from "./Config/config.js";
 export * from "./API/GraphQL/Model/authModel.js";
 export * from "./API/GraphQL/Model/contentModel.js";
 export * from "./API/GraphQL/Model/dataCollectionModel.js";
@@ -7,7 +6,6 @@ export * from "./API/GraphQL/Model/model.js";
 export * from "./API/GraphQL/Model/userModel.js";
 export * from "./API/GraphQL/Query/authQuery.js";
 export * from "./API/GraphQL/Query/categoryQuery.js";
-export * from "./API/GraphQL/Query/query.js";
 export * from "./API/GraphQL/Query/userQuery.js";
 export * from "./API/GraphQL/index.js";
 

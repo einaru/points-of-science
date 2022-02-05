@@ -1,5 +1,4 @@
 import {
-  config,
   contentCreator,
   convertToResponseObject,
   createObjectTemplate,
@@ -8,6 +7,7 @@ import {
   progressCreator,
   saveData,
 } from "../../internal.js";
+import config from "../../Config/config.js";
 
 function updateCategory(category) {
   const functionKey = "updateData";
@@ -86,12 +86,12 @@ function restoreObject() {
       });
 
       const contentData = getDataByFilter(
-        config.env.CONTENT_TABLE,
+        config.db.table.content,
         contentFilter
       );
 
       const progressData = getDataByFilter(
-        config.env.PROGRESS_TABLE,
+        config.db.table.progress,
         progressFilter
       );
 

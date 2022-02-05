@@ -5,6 +5,5 @@ test.yaml
 app.yaml
 coverage
 firebasesdk.json
-ui-debug.log
-firestore-debug.log
-firebase-debug.log
+*.key.json
+*.log

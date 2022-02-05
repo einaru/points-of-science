@@ -1,12 +1,8 @@
-import path, { dirname } from "path";
-import { fileURLToPath } from "url";
 import fs from "fs";
 import admin from "firebase-admin";
+import config from "../../Config/config.js";
 
-const filename = fileURLToPath(import.meta.url);
-const here = dirname(filename);
-
-const filePathToFirebaseSDK = path.resolve(here, "../../../firebasesdk.json");
+const filePathToFirebaseSDK = config.firebase.serviceAccountKey;
 
 const serviceAccount = JSON.parse(
   fs.readFileSync(filePathToFirebaseSDK, "utf-8")

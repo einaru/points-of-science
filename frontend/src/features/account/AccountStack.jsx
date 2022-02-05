@@ -13,7 +13,11 @@ function AccountStack() {
     <ActivateAccountProvider>
       <Stack.Navigator
         initialRouteName="account:login"
-        screenOptions={{ headerShown: true, headerLeft: null }}
+        screenOptions={{
+          headerShown: true,
+          headerLeft: null,
+          headerTitleAlign: "center",
+        }}
       >
         <Stack.Screen
           name="account:login"

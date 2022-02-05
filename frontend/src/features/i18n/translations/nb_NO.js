@@ -28,6 +28,7 @@ export default {
   "Project info": "Prosjekt info",
   "Purpose": "Formål",
   "Reset": "Nullstill",
+  "Username copied to clipboard": "Brukernavnet er kopiert til utklippstavlen",
   "Username": "Brukernavn",
   "Verify username": "Verifiser brukernavn",
   "Your password is updated": "Passordet ditt er oppdatert",

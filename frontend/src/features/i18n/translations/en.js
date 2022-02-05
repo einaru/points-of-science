@@ -25,6 +25,7 @@ const strings = [
   "Profile",
   "Project info",
   "Purpose",
+  "Reset",
   "Username",
   "Verify username",
   "Your password is updated",

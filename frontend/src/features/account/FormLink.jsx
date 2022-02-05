@@ -5,14 +5,11 @@ import { Text } from "react-native-paper";
 import theme from "../../shared/theme";
 
 const styles = StyleSheet.create({
-  row: {
+  container: {
     alignItems: "center",
-    marginTop: 6,
+    marginTop: 16,
   },
-  message: {
-    marginEnd: 6,
-  },
-  link: {
+  linkText: {
     fontWeight: "bold",
     color: theme.colors.primary,
   },
@@ -21,10 +18,10 @@ const styles = StyleSheet.create({
 function FormLink({ message, label, screenName }) {
   const navigation = useNavigation();
   return (
-    <View style={styles.row}>
+    <View style={styles.container}>
       <Text style={styles.message}>{message}</Text>
       <TouchableOpacity onPress={() => navigation.navigate(screenName)}>
-        <Text style={styles.link}>{label}</Text>
+        <Text style={styles.linkText}>{label}</Text>
       </TouchableOpacity>
     </View>
   );

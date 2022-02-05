@@ -4,27 +4,38 @@ import Login from "./Login";
 import CreateAccount from "./CreateAccount";
 import ActivateAccount from "./ActivateAccount";
 import ActivateAccountProvider from "./ActivateAccountProvider";
+import { t } from "../i18n";
 
 const Stack = createNativeStackNavigator();
 
-function ActivateAccountWrapper() {
-  return (
-    <ActivateAccountProvider>
-      <ActivateAccount />
-    </ActivateAccountProvider>
-  );
-}
-
 function AccountStack() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="account:login" component={Login} />
-      <Stack.Screen
-        name="account:activate"
-        component={ActivateAccountWrapper}
-      />
-      <Stack.Screen name="account:create" component={CreateAccount} />
-    </Stack.Navigator>
+    <ActivateAccountProvider>
+      <Stack.Navigator
+        initialRouteName="account:login"
+        screenOptions={{
+          headerShown: true,
+          headerLeft: null,
+          headerTitleAlign: "center",
+        }}
+      >
+        <Stack.Screen
+          name="account:login"
+          component={Login}
+          options={{ title: t("Login") }}
+        />
+        <Stack.Screen
+          name="account:activate"
+          component={ActivateAccount}
+          options={{ title: t("Activate account") }}
+        />
+        <Stack.Screen
+          name="account:create"
+          component={CreateAccount}
+          options={{ title: t("Create account") }}
+        />
+      </Stack.Navigator>
+    </ActivateAccountProvider>
   );
 }
 

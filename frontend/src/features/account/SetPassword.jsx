@@ -1,12 +1,10 @@
 import { gql, useMutation } from "@apollo/client";
 import React, { useContext, useEffect, useState } from "react";
-import { HelperText, Text, TextInput } from "react-native-paper";
+import { HelperText, TextInput } from "react-native-paper";
 import { AuthContext } from "../auth/AuthProvider";
 import { ActivateAccountContext } from "./ActivateAccountProvider";
-import FormView from "./FormView";
 import { t } from "../i18n";
 import FormAction from "./FormAction";
-import FormLink from "./FormLink";
 
 const ACTIVATE_ACCOUNT = gql`
   mutation activateAccount(
@@ -39,6 +37,8 @@ export default function SetPassword() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+  const isDisabled = !password && !confirmPassword;
+
   const { username } = useContext(ActivateAccountContext);
   const { logInUser } = useContext(AuthContext);
 
@@ -47,7 +47,6 @@ export default function SetPassword() {
 
   useEffect(() => {
     if (data) {
-      console.debug(data);
       if (data.activateAccount.type === "success") {
         const { user, accessToken, refreshToken } = data.activateAccount.data;
         logInUser(user, accessToken, refreshToken);
@@ -64,10 +63,14 @@ export default function SetPassword() {
   }
 
   return (
-    <FormView>
-      <Text>
-        {t("Username")}: {username}
-      </Text>
+    <>
+      <TextInput
+        style={{ marginBottom: 16 }}
+        label={t("Username")}
+        value={username}
+        disabled
+        right={<TextInput.Icon name="check" />}
+      />
       <TextInput
         label={t("Password")}
         value={password}
@@ -86,17 +89,13 @@ export default function SetPassword() {
       <FormAction
         label={t("Activate account")}
         loading={loading}
+        disabled={isDisabled}
         onPress={() => {
           activateAccount({
             variables: { username, password, confirmPassword },
           });
         }}
       />
-      <FormLink
-        label={t("Log in")}
-        message={t("Already activated your account?")}
-        screenName="account:login"
-      />
-    </FormView>
+    </>
   );
 }

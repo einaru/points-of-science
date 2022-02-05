@@ -4,6 +4,7 @@ import {
   GraphQLString,
   GraphQLInt,
 } from "graphql";
+import { ResponseModel, UserModel } from "../../../internal.js";
 
 const SignInDataModel = new GraphQLObjectType({
   name: "SignInData",

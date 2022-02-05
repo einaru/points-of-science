@@ -7,6 +7,12 @@ import {
   GraphQLList,
 } from "graphql";
 
+import {
+  AchievementModel,
+  ChallengeModel,
+  ClickStreamModel,
+} from "../../../internal.js";
+
 const UserAchievementModel = new GraphQLObjectType({
   name: "UserAchievement",
   fields: () => ({

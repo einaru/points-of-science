@@ -5,24 +5,14 @@ import {
   GraphQLInt,
   GraphQLList,
 } from "graphql";
-
-const AchievementTypeEnum = new GraphQLEnumType({
-  name: "AchievementType",
-  values: {
-    category: { value: 1 },
-    challenge: { value: 2 },
-  },
-});
-
-const AchievementModel = new GraphQLObjectType({
-  name: "Achievement",
-  fields: () => ({
-    id: { type: GraphQLInt },
-    condition: { type: new GraphQLList(ChallengeModel) },
-    type: { type: AchievementTypeEnum },
-    content: { type: ContentModel },
-  }),
-});
+import {
+  ActivityModel,
+  CategoryModel,
+  ContentModel,
+  ReflectionModel,
+  ResponseModel,
+  UserModel,
+} from "../../../internal.js";
 
 const RewardModel = new GraphQLObjectType({
   name: "Reward",
@@ -31,23 +21,6 @@ const RewardModel = new GraphQLObjectType({
     maxPoints: { type: GraphQLInt },
     firstTryPoints: { type: GraphQLInt },
     bonusPoints: { type: GraphQLInt },
-  }),
-});
-
-const ProgressModel = new GraphQLObjectType({
-  name: "Progress",
-  fields: () => ({
-    id: { type: GraphQLInt },
-    percentage: { type: GraphQLInt },
-  }),
-});
-
-const LeaderboardModel = new GraphQLObjectType({
-  name: "Leaderboard",
-  fields: () => ({
-    id: { type: GraphQLInt },
-    title: { type: GraphQLString },
-    leaderboard: { type: new GraphQLList(UserModel) },
   }),
 });
 
@@ -81,10 +54,46 @@ const ChallengeResponseModel = new GraphQLObjectType({
   }),
 });
 
+const AchievementTypeEnum = new GraphQLEnumType({
+  name: "AchievementType",
+  values: {
+    category: { value: 1 },
+    challenge: { value: 2 },
+  },
+});
+
+const AchievementModel = new GraphQLObjectType({
+  name: "Achievement",
+  fields: () => ({
+    id: { type: GraphQLInt },
+    condition: { type: new GraphQLList(ChallengeModel) },
+    type: { type: AchievementTypeEnum },
+    content: { type: ContentModel },
+  }),
+});
+
+const ProgressModel = new GraphQLObjectType({
+  name: "Progress",
+  fields: () => ({
+    id: { type: GraphQLInt },
+    percentage: { type: GraphQLInt },
+  }),
+});
+
+const LeaderboardModel = new GraphQLObjectType({
+  name: "Leaderboard",
+  fields: () => ({
+    id: { type: GraphQLInt },
+    title: { type: GraphQLString },
+    leaderboard: { type: new GraphQLList(UserModel) },
+  }),
+});
+
 export {
   AchievementModel,
   RewardModel,
   ProgressModel,
   LeaderboardModel,
+  ChallengeModel,
   ChallengeResponseModel,
 };

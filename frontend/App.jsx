@@ -12,6 +12,7 @@ import { onError } from "@apollo/client/link/error";
 import { StatusBar } from "expo-status-bar";
 import { Provider as ThemeProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import Constants from "expo-constants";
 import { AuthProvider } from "./src/features/auth/AuthProvider";
 import Navigation from "./src/features/navigation";
 import * as Storage from "./src/services/storage";
@@ -42,7 +43,9 @@ const authLink = setContext(async (_, { headers }) => {
   };
 });
 
-const httpLink = new HttpLink({ uri: "http://localhost:5000/graphql", fetch });
+const { apiEndpoint } = Constants.manifest.extra;
+
+const httpLink = new HttpLink({ uri: apiEndpoint, fetch });
 const link = ApolloLink.from([errorLink, authLink.concat(httpLink)]);
 
 const client = new ApolloClient({

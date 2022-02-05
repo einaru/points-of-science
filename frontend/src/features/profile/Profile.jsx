@@ -1,10 +1,11 @@
 /* eslint-disable no-console */
 import { gql, useMutation } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
-import React, { useContext, useEffect, useMemo } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { Avatar, Divider, List, Switch, Text } from "react-native-paper";
+import { Avatar, Divider, List, Snackbar, Switch } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
+import * as Clipboard from "expo-clipboard";
 import { AuthContext } from "../auth/AuthProvider";
 import { t } from "../i18n";
 import { LoadingScreen } from "../../shared/components";
@@ -20,11 +21,6 @@ const styles = StyleSheet.create({
     marginTop: 32,
     margin: 16,
   },
-  title: {
-    marginTop: 8,
-    fontSize: 16,
-    fontWeight: "bold",
-  },
 });
 
 const LOGOUT = gql`
@@ -39,6 +35,10 @@ const LOGOUT = gql`
 
 function Profile() {
   const navigation = useNavigation();
+
+  const [visibleSnackbar, setVisibleSnackbar] = useState(false);
+  const showSnackbar = () => setVisibleSnackbar(true);
+  const hideSnackbar = () => setVisibleSnackbar(false);
 
   const { preferDarkTheme, toggleTheme } = useContext(PreferencesContext);
   const { user, logOutUser, refreshToken } = useContext(AuthContext);
@@ -71,46 +71,67 @@ function Profile() {
   }
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <View style={styles.avatarContainer}>
         <Avatar.Text size={96} label={initials} />
-        <Text style={styles.title}>{user.username}</Text>
       </View>
-      <List.Section>
-        <List.Item
-          title={t("Prefer dark theme")}
-          left={() => <List.Icon icon="theme-light-dark" />}
-          right={() => (
-            <Switch value={preferDarkTheme} onValueChange={toggleTheme} />
-          )}
-        />
-      </List.Section>
-      <Divider />
-      <List.Section>
-        <List.Item
-          title={t("Change password")}
-          left={() => <List.Icon icon="key" />}
-          right={() => <List.Icon icon="chevron-right" />}
-          onPress={() => navigation.navigate("profile:change-password")}
-        />
-        <List.Item
-          title={t("Project info")}
-          left={() => <List.Icon icon="information" />}
-          right={() => <List.Icon icon="chevron-right" />}
-          onPress={() => navigation.navigate("profile:project-info")}
-        />
-      </List.Section>
-      <Divider />
-      <List.Section>
-        <List.Item
-          title={t("Log out")}
-          left={() => <List.Icon icon="logout" />}
-          onPress={() => {
-            console.debug("Logging out");
-            logOut({ variables: { refreshToken } });
-          }}
-        />
-      </List.Section>
+      <View style={styles.container}>
+        <List.Section>
+          <List.Item
+            title={user.username}
+            description={t("Username")}
+            left={() => <List.Icon icon="account" />}
+            right={() => <List.Icon icon="content-copy" />}
+            onPress={() => {
+              Clipboard.setString(user.username);
+              showSnackbar(true);
+            }}
+          />
+        </List.Section>
+        <Divider />
+        <List.Section>
+          <List.Item
+            title={t("Prefer dark theme")}
+            left={() => <List.Icon icon="theme-light-dark" />}
+            right={() => (
+              <Switch value={preferDarkTheme} onValueChange={toggleTheme} />
+            )}
+          />
+        </List.Section>
+        <Divider />
+        <List.Section>
+          <List.Item
+            title={t("Change password")}
+            left={() => <List.Icon icon="key" />}
+            right={() => <List.Icon icon="chevron-right" />}
+            onPress={() => navigation.navigate("profile:change-password")}
+          />
+          <List.Item
+            title={t("Project info")}
+            left={() => <List.Icon icon="information" />}
+            right={() => <List.Icon icon="chevron-right" />}
+            onPress={() => navigation.navigate("profile:project-info")}
+          />
+        </List.Section>
+        <Divider />
+        <List.Section>
+          <List.Item
+            title={t("Log out")}
+            left={() => <List.Icon icon="logout" />}
+            onPress={() => {
+              console.debug("Logging out");
+              logOut({ variables: { refreshToken } });
+            }}
+          />
+        </List.Section>
+      </View>
+      <Snackbar
+        visible={visibleSnackbar}
+        duration={5000}
+        onDismiss={hideSnackbar}
+      >
+        {t("Username copied to clipboard")}
+      </Snackbar>
     </SafeAreaView>
   );
 }

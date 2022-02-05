@@ -87,27 +87,6 @@ function Profile() {
       <Divider />
       <List.Section>
         <List.Item
-          title={t("Dashboard")}
-          left={() => <List.Icon icon="view-dashboard" />}
-          right={() => <List.Icon icon="chevron-right" />}
-          onPress={() => {
-            console.debug("Pressed: Dashboard");
-            navigation.navigate("tab:dashboard");
-          }}
-        />
-        <List.Item
-          title={t("Achievements")}
-          left={() => <List.Icon icon="medal" />}
-          right={() => <List.Icon icon="chevron-right" />}
-          onPress={() => {
-            console.debug("Pressed: Dashboard");
-            navigation.navigate("tab:achievements");
-          }}
-        />
-      </List.Section>
-      <Divider />
-      <List.Section>
-        <List.Item
           title={t("Prefer dark theme")}
           left={() => <List.Icon icon="theme-light-dark" />}
           right={() => (

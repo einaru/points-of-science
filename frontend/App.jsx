@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import fetch from "cross-fetch";
 import {
   ApolloClient,
@@ -13,6 +13,8 @@ import { StatusBar } from "expo-status-bar";
 import { Provider as ThemeProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Constants from "expo-constants";
+import * as NavigationBar from "expo-navigation-bar";
+import { Platform } from "react-native";
 import { AuthProvider } from "./src/features/auth/AuthProvider";
 import Navigation from "./src/features/navigation";
 import * as Storage from "./src/services/storage";
@@ -59,11 +61,21 @@ export default function App() {
   const [preferDarkTheme, setPreferDarkTheme] = useState("");
 
   const theme = preferDarkTheme ? darkTheme : defaultTheme;
-  const statusBarStyle = preferDarkTheme ? "inverted" : "auto";
+  const statusBarStyle = preferDarkTheme ? "light" : "dark";
 
   const toggleTheme = useCallback(() => {
     return setPreferDarkTheme(!preferDarkTheme);
   }, [preferDarkTheme]);
+
+  useEffect(() => {
+    if (Platform.OS === "android") {
+      // According to the documentation the BottomNavigation component is
+      // supposed to use the surface color in dark theme with adaptive mode,
+      // but the color used is actually slightly lighter
+      const color = preferDarkTheme ? "#272727" : theme.colors.primary;
+      NavigationBar.setBackgroundColorAsync(color);
+    }
+  }, [preferDarkTheme, theme]);
 
   const preferences = useMemo(
     () => ({

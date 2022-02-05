@@ -34,6 +34,7 @@ export * from "./BusinessLogic/UserTracker/user_activity.js";
 export * from "./BusinessLogic/UserTracker/user_challenge.js";
 export * from "./BusinessLogic/UserTracker/user_reflection.js";
 export * from "./BusinessLogic/UserTracker/user_reward.js";
+export * from "./BusinessLogic/Util/utility.js";
 
 export * from "./Database/Connection/connection.js";
 export * from "./Database/Firebase/firebase.js";

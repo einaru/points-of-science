@@ -1,13 +1,4 @@
-import { config, updateData } from "../../internal.js";
-
-function getResponseObject(message, statusCode, type, data) {
-  return {
-    message,
-    status: statusCode,
-    type,
-    data,
-  };
-}
+import { createObjectTemplate, saveData } from "../../internal.js";
 
 function emptyData() {
   return {
@@ -18,12 +9,6 @@ function emptyData() {
       description: "",
     },
   };
-}
-
-function createObjectTemplate(functionKey, code) {
-  const object = {};
-  object[functionKey] = code;
-  return object;
 }
 
 function updateContent(content) {
@@ -37,49 +22,6 @@ function updateContent(content) {
 
     Object.keys(args).forEach((key) => {
       content[key] = args[key];
-    });
-  };
-
-  return createObjectTemplate(functionKey, code);
-}
-
-function convertToStoredObject(content) {
-  return {
-    id: content.data.id,
-    title: content.data.title,
-    image: content.data.image,
-    description: content.data.description,
-  };
-}
-
-function convertToResponseObject(content) {
-  return {
-    id: content.data.id,
-    title: content.data.title,
-    image: content.data.image,
-    description: content.data.description,
-  };
-}
-
-function saveData() {
-  const functionKey = "saveData";
-  const code = (content) => {
-    return new Promise((resolve, reject) => {
-      const storedData = convertToStoredObject(content);
-      updateData(config.env.CONTENT_TABLE, storedData)
-        .then(() => {
-          resolve(
-            getResponseObject(
-              "Content stored successfully.",
-              200,
-              config.env.RESPONSE_TYPE.success,
-              convertToResponseObject(content)
-            )
-          );
-        })
-        .catch((error) => {
-          reject(error);
-        });
     });
   };
 

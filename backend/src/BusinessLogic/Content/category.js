@@ -1,26 +1,13 @@
 import {
   config,
   contentCreator,
+  convertToResponseObject,
+  createObjectTemplate,
   getDataByFilter,
   getFilter,
   progressCreator,
-  updateData,
+  saveData,
 } from "../../internal.js";
-
-function getResponseObject(message, statusCode, type, data) {
-  return {
-    message,
-    status: statusCode,
-    type,
-    data,
-  };
-}
-
-function createObjectTemplate(functionKey, code) {
-  const object = {};
-  object[functionKey] = code;
-  return object;
-}
 
 function updateCategory(category) {
   const functionKey = "updateData";
@@ -82,24 +69,6 @@ function removeChallenge(category) {
   return createObjectTemplate(functionKey, code);
 }
 
-function convertToStoredObject(category) {
-  return {
-    id: category.data.id,
-    challenges: category.data.challenges,
-    contentID: category.content.data.id,
-    progressID: category.content.data.id,
-  };
-}
-
-function convertToResponseObject(category) {
-  return {
-    id: category.data.id,
-    challenge: category.data.challenges,
-    ...category.content.data,
-    progress: category.progress.data,
-  };
-}
-
 function restoreObject() {
   const functionKey = "restoreObject";
   const code = (category, categoryData) => {
@@ -142,32 +111,7 @@ function restoreObject() {
           category.updateData(categoryData);
           category.content.updateData(content);
           category.progress.updateData(progress);
-          resolve(convertToResponseObject(category));
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    });
-  };
-
-  return createObjectTemplate(functionKey, code);
-}
-
-function saveData() {
-  const functionKey = "saveData";
-  const code = (category) => {
-    return new Promise((resolve, reject) => {
-      const storedData = convertToStoredObject(category);
-      updateData(config.env.CATEGORY_TABLE, storedData)
-        .then(() => {
-          resolve(
-            getResponseObject(
-              "Category stored successfully.",
-              200,
-              config.env.RESPONSE_TYPE.success,
-              convertToResponseObject(category)
-            )
-          );
+          resolve(convertToResponseObject("category", category));
         })
         .catch((error) => {
           reject(error);

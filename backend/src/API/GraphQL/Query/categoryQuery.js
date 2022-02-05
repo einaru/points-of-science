@@ -87,8 +87,18 @@ const createCategoryQuery = {
         description: args.description,
       };
       category.content.updateData(newContent);
-      await category.content.saveData(category.content);
-      response = await category.saveData(category);
+      await category.content.saveData(
+        "content",
+        category.content,
+        config.env.CONTENT_TABLE,
+        "Content stored successfully."
+      );
+      response = await category.saveData(
+        "category",
+        category,
+        config.env.CATEGORY_TABLE,
+        "Category stored successfully."
+      );
       return response;
     } catch (error) {
       return error;

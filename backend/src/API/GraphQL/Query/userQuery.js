@@ -153,7 +153,7 @@ const createUserQuery = {
         id,
         username: args.username,
         password: args.password,
-        permission: "control",
+        permission: config.env.PERMISSION_LEVELS.CONTROL,
         achievement: [],
         challenge: [],
       };

@@ -37,7 +37,7 @@ const LOGOUT = gql`
   }
 `;
 
-function ProfileScreen() {
+function Profile() {
   const navigation = useNavigation();
 
   const { preferDarkTheme, toggleTheme } = useContext(PreferencesContext);
@@ -136,4 +136,4 @@ function ProfileScreen() {
   );
 }
 
-export default ProfileScreen;
+export default Profile;

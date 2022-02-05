@@ -1,7 +1,7 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View } from "react-native";
-import ProfileScreen from "./ProfileScreen";
+import Profile from "./Profile";
 import ChangePassword from "./ChangePassword";
 import ProjectInfo from "./ProjectInfo";
 import { t } from "../i18n";
@@ -15,7 +15,7 @@ function ProfileStack() {
         <Stack.Screen
           name="profile:main"
           options={{ title: t("Profile"), headerShown: false }}
-          component={ProfileScreen}
+          component={Profile}
         />
         <Stack.Screen
           name="profile:change-password"

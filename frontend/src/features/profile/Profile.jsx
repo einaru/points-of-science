@@ -78,15 +78,6 @@ function Profile() {
       </View>
       <List.Section>
         <List.Item
-          title={t("Change password")}
-          left={() => <List.Icon icon="key" />}
-          right={() => <List.Icon icon="chevron-right" />}
-          onPress={() => navigation.navigate("profile:change-password")}
-        />
-      </List.Section>
-      <Divider />
-      <List.Section>
-        <List.Item
           title={t("Prefer dark theme")}
           left={() => <List.Icon icon="theme-light-dark" />}
           right={() => (
@@ -97,11 +88,20 @@ function Profile() {
       <Divider />
       <List.Section>
         <List.Item
+          title={t("Change password")}
+          left={() => <List.Icon icon="key" />}
+          right={() => <List.Icon icon="chevron-right" />}
+          onPress={() => navigation.navigate("profile:change-password")}
+        />
+        <List.Item
           title={t("Project info")}
           left={() => <List.Icon icon="information" />}
           right={() => <List.Icon icon="chevron-right" />}
           onPress={() => navigation.navigate("profile:project-info")}
         />
+      </List.Section>
+      <Divider />
+      <List.Section>
         <List.Item
           title={t("Log out")}
           left={() => <List.Icon icon="logout" />}

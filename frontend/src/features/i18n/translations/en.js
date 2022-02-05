@@ -22,6 +22,7 @@ const strings = [
   "New password",
   "Next",
   "Password",
+  "Prefer dark theme",
   "Profile",
   "Project info",
   "Purpose",

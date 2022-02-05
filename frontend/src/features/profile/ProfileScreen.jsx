@@ -3,11 +3,12 @@ import { gql, useMutation } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
 import React, { useContext, useEffect, useMemo } from "react";
 import { StyleSheet, View } from "react-native";
-import { Avatar, Divider, List, Text } from "react-native-paper";
+import { Avatar, Divider, List, Switch, Text } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AuthContext } from "../auth/AuthProvider";
 import { t } from "../i18n";
 import { LoadingScreen } from "../../shared/components";
+import PreferencesContext from "../preferences/PreferencesContext";
 
 const styles = StyleSheet.create({
   container: {
@@ -39,6 +40,7 @@ const LOGOUT = gql`
 function ProfileScreen() {
   const navigation = useNavigation();
 
+  const { preferDarkTheme, toggleTheme } = useContext(PreferencesContext);
   const { user, logOutUser, refreshToken } = useContext(AuthContext);
 
   const initials = useMemo(() => {
@@ -101,6 +103,16 @@ function ProfileScreen() {
             console.debug("Pressed: Dashboard");
             navigation.navigate("tab:achievements");
           }}
+        />
+      </List.Section>
+      <Divider />
+      <List.Section>
+        <List.Item
+          title={t("Prefer dark theme")}
+          left={() => <List.Icon icon="theme-light-dark" />}
+          right={() => (
+            <Switch value={preferDarkTheme} onValueChange={toggleTheme} />
+          )}
         />
       </List.Section>
       <Divider />

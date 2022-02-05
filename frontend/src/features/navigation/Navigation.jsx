@@ -4,10 +4,10 @@ import ContentNavigator from "./ContentNavigator";
 import AccountStack from "../account/AccountStack";
 import { AuthContext } from "../auth/AuthProvider";
 
-function Navigation() {
+function Navigation({ theme }) {
   const { isAuthenticated } = useContext(AuthContext);
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={theme}>
       {isAuthenticated ? <ContentNavigator /> : <AccountStack />}
     </NavigationContainer>
   );

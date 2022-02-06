@@ -6,7 +6,7 @@ export default {
   "Already activated your account?": "Har du allerede aktivert kontoen din?",
   "Already have an account?": "Har du allerede en konto?",
   "Challenges": "Utfordringer",
-  "Change password": "Bytt password",
+  "Change password": "Bytt passord",
   "Confirm new password": "Bekreft nytt passord",
   "Confirm password": "Bekreft passord",
   "Contact info": "Kontaktinformasjon",

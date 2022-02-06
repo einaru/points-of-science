@@ -7,9 +7,6 @@ const config = {
     accessToken: process.env.ACCESS_TOKEN_SECRET || null,
     refreshToken: process.env.REFRESH_TOKEN_SECRET || null,
   },
-  firebase: {
-    serviceAccountKey: process.env.FIREBASE_SERVICE_ACCOUNT_KEY,
-  },
   db: {
     table: {
       category: "Category",

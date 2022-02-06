@@ -15,6 +15,9 @@ The application runs on [Node.js][] and uses [Firestore][] to persist data.
 In order to run the application in development mode you must first install the
 [Firebase Emulator Suite][]. Start by installing the [Firebase CLI][]:
 
+[Firebase Emulator Suite]: https://firebase.google.com/docs/emulator-suite/install_and_configure
+[Firebase CLI]: https://firebase.google.com/docs/cli
+
     yarn global add firebase-tools
 
 Then you must log in by running
@@ -42,8 +45,26 @@ ACCESS_TOKEN_SECRET=SuPeRsEcReT
 REFRESH_TOKEN_SECRET=EvEnMoReSeCrEt
 ```
 
-
 Now you should be able run `yarn dev` to fire up the application.
 
-[Firebase Emulator Suite]: https://firebase.google.com/docs/emulator-suite/install_and_configure
-[Firebase CLI]: https://firebase.google.com/docs/cli
+### Production mode
+
+In order to run the application in production mode you need to
+[initialize the Firebase Admin SDK][] with a Google Service Account.
+Follow these steps to generate a private key for your service account:
+
+1. In the Firebase console, open **Settings** > [Service Accounts][].
+2. Click **Generate New Private Key**, then confirm by clicking **Generate Key**.
+3. Securely store the JSON file containing the key.
+
+Now you need to set the `GOOGLE_APPLICATION_CREDENTIALS` environment variable,
+either put in the `.env` file or export it on the command line:
+
+```bash
+export GOOGLE_APPLICATION_CREDENTIALS="/path/to/service-account-file.json"
+```
+
+You should now be able to run `yarn start` to fire up the application.
+
+[initialize the Firebase Admin SDK]: https://firebase.google.com/docs/admin/setup#initialize-sdk
+[Service Accounts]: https://console.firebase.google.com/project/_/settings/serviceaccounts/adminsdk

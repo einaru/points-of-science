@@ -45,6 +45,12 @@ function ChangePassword() {
   const showSnackbar = () => setVisibleSnackbar(true);
   const hideSnackbar = () => setVisibleSnackbar(false);
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const toggleShowPassword = () => setShowPassword(!showPassword);
+  const toggleShowConfirmPassword = () =>
+    setShowConfirmPassword(!showConfirmPassword);
+
   const [changePassword, { data, loading, error }] =
     useMutation(CHANGE_PASSWORD);
 
@@ -70,13 +76,25 @@ function ChangePassword() {
           label={t("New password")}
           value={password}
           onChangeText={setPassword}
-          secureTextEntry
+          secureTextEntry={!showPassword}
+          right={
+            <TextInput.Icon
+              icon={showPassword ? "eye-off" : "eye"}
+              onPress={toggleShowPassword}
+            />
+          }
         />
         <TextInput
           label={t("Confirm new password")}
           value={confirmPassword}
           onChangeText={setConfirmPassword}
-          secureTextEntry
+          secureTextEntry={!showConfirmPassword}
+          right={
+            <TextInput.Icon
+              icon={showConfirmPassword ? "eye-off" : "eye"}
+              onPress={toggleShowConfirmPassword}
+            />
+          }
         />
         <HelperText type="error" visible={errorMessage}>
           {errorMessage}

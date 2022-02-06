@@ -35,6 +35,9 @@ function LoginScreen() {
 
   const isDisabled = !username && !password;
 
+  const [showPassword, setShowPassword] = useState(false);
+  const toggleShowPassword = () => setShowPassword(!showPassword);
+
   useEffect(() => {
     if (data) {
       if (data.signIn.type === "success") {
@@ -63,7 +66,13 @@ function LoginScreen() {
         label={t("Password")}
         value={password}
         onChangeText={setPassword}
-        secureTextEntry
+        secureTextEntry={!showPassword}
+        right={
+          <TextInput.Icon
+            icon={showPassword ? "eye-off" : "eye"}
+            onPress={toggleShowPassword}
+          />
+        }
       />
       <HelperText type="error" visible={errorMessage}>
         {errorMessage}

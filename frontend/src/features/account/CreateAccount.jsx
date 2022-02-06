@@ -13,6 +13,12 @@ function CreateAccount() {
 
   const isDisabled = !username && !password && !confirmPassword;
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const toggleShowPassword = () => setShowPassword(!showPassword);
+  const toggleShowConfirmPassword = () =>
+    setShowConfirmPassword(!showConfirmPassword);
+
   const { createAccount } = useContext(AuthContext);
 
   return (
@@ -26,13 +32,25 @@ function CreateAccount() {
         label={t("Password")}
         value={password}
         onChange={setPassword}
-        secureTextEntry
+        secureTextEntry={!showPassword}
+        right={
+          <TextInput.Icon
+            icon={showPassword ? "eye-off" : "eye"}
+            onPress={toggleShowPassword}
+          />
+        }
       />
       <TextInput
         label={t("Confirm password")}
         value={confirmPassword}
         onChange={setConfirmPassword}
-        secureTextEntry
+        secureTextEntry={!showConfirmPassword}
+        right={
+          <TextInput.Icon
+            icon={showConfirmPassword ? "eye-off" : "eye"}
+            onPress={toggleShowConfirmPassword}
+          />
+        }
       />
       <FormAction
         label={t("Create account")}

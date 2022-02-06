@@ -10,7 +10,8 @@
     "eject": "expo eject",
     "lint": "eslint . --ext .js,.jsx",
     "lint:fix": "eslint . --ext .js,.jsx --fix",
-    "test": "yarn node --experimental-vm-modules $(yarn bin jest)"
+    "test": "yarn node --experimental-vm-modules $(yarn bin jest)",
+    "test:coverage": "yarn node --experimental-vm-modules $(yarn bin jest) --coverage"
   },
   "dependencies": {
     "@apollo/client": "^3.5.7",

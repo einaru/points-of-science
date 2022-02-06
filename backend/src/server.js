@@ -1,9 +1,10 @@
+import "dotenv/config";
 import cors from "cors";
 import express from "express";
 import bodyParser from "body-parser";
 import { graphqlHTTP } from "express-graphql";
-
-import { config, schema, connectToDatabase } from "./internal.js";
+import config from "./Config/config.js";
+import { schema, connectToDatabase } from "./internal.js";
 
 const app = express();
 
@@ -24,12 +25,19 @@ app.use((error, request, response, next) => {
   if (error) {
     return response.status(500).send(error);
   }
-
   next();
+});
+
+// Provide feedback on missing secret keys
+Object.entries(config.secret).forEach(([key, value]) => {
+  if (!value) {
+    console.error(`Error: Secret key for ${key} is not set!`);
+  }
 });
 
 connectToDatabase();
 
-app.listen(config.env.HTTPPORT, () =>
-  console.log(`[*] Server listening at port ${config.env.HTTPPORT} \n`)
-);
+app.listen(config.port, () => {
+  console.log(`Running in "${config.env}" mode`);
+  console.log(`Server listening on port ${config.port}`);
+});

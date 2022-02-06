@@ -2,13 +2,13 @@ import { GraphQLString } from "graphql";
 import {
   authenticateAccessToken,
   AllCategoriesResponseModel,
-  config,
   categoryCreator,
   CategoryResponseModel,
   checkPermissionLevel,
   getData,
   nextID,
 } from "../../../internal.js";
+import config from "../../../Config/config.js";
 
 function getResponseObject(message, statusCode, type) {
   return {
@@ -26,7 +26,7 @@ const getAllCategoriesQuery = {
   async resolve(parent, args, context) {
     try {
       await authenticateAccessToken(context);
-      const categoriesData = await getData(config.env.CATEGORY_TABLE);
+      const categoriesData = await getData(config.db.table.category);
       let categories = [];
       categoriesData.forEach((categoryData) => {
         const category = categoryCreator();
@@ -36,7 +36,7 @@ const getAllCategoriesQuery = {
       const response = getResponseObject(
         "Categories retrieved successfully",
         200,
-        config.env.RESPONSE_TYPE.success
+        config.responseType.success
       );
 
       categories = await Promise.all(categories);
@@ -61,7 +61,7 @@ const createCategoryQuery = {
     try {
       await authenticateAccessToken(context);
       let response = checkPermissionLevel(
-        config.env.PERMISSION_LEVELS.ADMIN,
+        config.permissionLevel.admin,
         context.user
       );
 
@@ -69,8 +69,8 @@ const createCategoryQuery = {
         return response;
       }
 
-      const categoriesData = await getData(config.env.CATEGORY_TABLE);
-      const contentData = await getData(config.env.CONTENT_TABLE);
+      const categoriesData = await getData(config.db.table.category);
+      const contentData = await getData(config.db.table.content);
       const categoryID = nextID(categoriesData);
       const contentID = nextID(contentData);
 
@@ -90,13 +90,13 @@ const createCategoryQuery = {
       await category.content.saveData(
         "content",
         category.content,
-        config.env.CONTENT_TABLE,
+        config.db.table.content,
         "Content stored successfully."
       );
       response = await category.saveData(
         "category",
         category,
-        config.env.CATEGORY_TABLE,
+        config.db.table.category,
         "Category stored successfully."
       );
       return response;

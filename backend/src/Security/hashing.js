@@ -1,6 +1,6 @@
 // Server directory imports:
 import bcrypt from "bcrypt";
-import { config } from "../internal.js";
+import config from "../Config/config.js";
 
 function hashPassword(password) {
   return new Promise((resolve, reject) => {
@@ -12,7 +12,7 @@ function hashPassword(password) {
       .then((hashedPassword) => {
         return resolve({
           status: 200,
-          type: config.env.RESPONSE_TYPE.success,
+          type: config.responseType.success,
           data: { hashedPassword },
         });
       })
@@ -30,7 +30,7 @@ function comparePassword(userPassword, storedPassword) {
       .then((isMatching) => {
         return resolve({
           status: 200,
-          type: config.env.RESPONSE_TYPE.success,
+          type: config.responseType.success,
           data: { is_matching: isMatching },
         });
       })

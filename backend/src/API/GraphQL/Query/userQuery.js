@@ -1,6 +1,5 @@
 import { GraphQLString, GraphQLInt, GraphQLList } from "graphql";
 import {
-  config,
   authenticateAccessToken,
   deleteData,
   getData,
@@ -13,6 +12,7 @@ import {
   NormalResponseModel,
   UserModel,
 } from "../../../internal.js";
+import config from "../../../Config/config.js";
 
 function getResponseObject(message, statusCode, type) {
   return {
@@ -53,18 +53,18 @@ const verifyUsernameQuery = {
         value: args.username,
       });
       const username = await getDataByFilter(
-        config.env.VALID_USERNAME_TABLE,
+        config.db.table.validUsername,
         filter
       );
       if (username.length === 0) {
         return {
           message: "Invalid username.",
           status: 400,
-          type: config.env.RESPONSE_TYPE.error,
+          type: config.responseType.error,
         };
       }
 
-      const user = await getDataByFilter(config.env.USER_TABLE, filter)[0];
+      const user = await getDataByFilter(config.db.table.user, filter)[0];
       if (user != null) {
         if (
           user.state === profileState.active.value ||
@@ -73,7 +73,7 @@ const verifyUsernameQuery = {
           return {
             message: "User is already active or suspended.",
             status: 400,
-            type: config.env.RESPONSE_TYPE.error,
+            type: config.responseType.error,
           };
         }
       }
@@ -81,13 +81,13 @@ const verifyUsernameQuery = {
       return {
         message: "Username is verified.",
         status: 200,
-        type: config.env.RESPONSE_TYPE.success,
+        type: config.responseType.success,
       };
     } catch (error) {
       return {
         message: `Could not verify username due to an error. Error: ${error.message}`,
         status: 400,
-        type: config.env.RESPONSE_TYPE.error,
+        type: config.responseType.error,
       };
     }
   },
@@ -109,17 +109,17 @@ const changePasswordQuery = {
         return getResponseObject(
           "Password update not successful. Wrong user.",
           400,
-          config.env.RESPONSE_TYPE.error
+          config.responseType.error
         );
       }
 
       const filter = getFilter({ key: "id", operator: "==", value: args.id });
-      const users = await getDataByFilter(config.env.USER_TABLE, filter);
+      const users = await getDataByFilter(config.db.table.user, filter);
       if (users.length === 0) {
         return getResponseObject(
           "Could not find user.",
           400,
-          config.RESPONSE_TYPE.error
+          config.responseType.error
         );
       }
 
@@ -129,10 +129,10 @@ const changePasswordQuery = {
         args.password,
         args.confirmPassword
       );
-      await updateData(config.env.USER_TABLE, user.data);
-      return getResponseObject(response, 200, config.env.RESPONSE_TYPE.success);
+      await updateData(config.db.table.user, user.data);
+      return getResponseObject(response, 200, config.responseType.success);
     } catch (error) {
-      return getResponseObject(error, 400, config.env.RESPONSE_TYPE.error);
+      return getResponseObject(error, 400, config.responseType.error);
     }
   },
 };
@@ -147,17 +147,17 @@ const createUserQuery = {
   async resolve(parent, args) {
     // Put the create user logic for the BusinessLogic here.
     try {
-      const users = await getData(config.env.USER_TABLE);
+      const users = await getData(config.db.table.user);
       const id = nextID(users);
       const newUser = {
         id,
         username: args.username,
         password: args.password,
-        permission: config.env.PERMISSION_LEVELS.CONTROL,
+        permission: config.permissionLevel.control,
         achievement: [],
         challenge: [],
       };
-      await updateData(config.env.USER_TABLE, newUser);
+      await updateData(config.db.table.user, newUser);
       return newUser;
     } catch (error) {
       return null;

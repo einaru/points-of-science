@@ -2,13 +2,13 @@
 /* eslint-disable no-promise-executor-return */
 // Server directory imports:
 import {
-  config,
   comparePassword,
   createAccessToken,
   createRefreshToken,
   getData,
   profileState,
 } from "../internal.js";
+import config from "../Config/config.js";
 
 function getResponseObject(message, statusCode, type, data) {
   return {
@@ -42,7 +42,7 @@ function signIn(username, password) {
           getResponseObject(
             `Something went wrong during sign in. Sign in unsuccessful. ERROR: ${error.message}`,
             500,
-            config.env.RESPONSE_TYPE.error,
+            config.responseType.error,
             {}
           )
         );
@@ -52,7 +52,7 @@ function signIn(username, password) {
 
 function getUser(username) {
   return new Promise((resolve, reject) => {
-    getData(config.env.USER_TABLE)
+    getData(config.db.table.user)
       .then((users) => {
         const user = users.find((user) => user.username === username);
         if (user == null) {
@@ -60,7 +60,7 @@ function getUser(username) {
             getResponseObject(
               "User not found. Sign in unsuccessful.",
               400,
-              config.env.RESPONSE_TYPE.error,
+              config.responseType.error,
               {}
             )
           );
@@ -84,7 +84,7 @@ function checkProfileState(user) {
         getResponseObject(
           `The profile is deactivated or suspended.`,
           400,
-          config.env.RESPONSE_TYPE.error,
+          config.responseType.error,
           {}
         )
       );
@@ -97,7 +97,7 @@ function checkProfileState(user) {
 function completeSignIn(result, user) {
   return new Promise((resolve, reject) => {
     if (
-      result.type === config.env.RESPONSE_TYPE.success &&
+      result.type === config.responseType.success &&
       result.data.is_matching
     ) {
       const accessToken = createAccessToken(user);
@@ -106,7 +106,7 @@ function completeSignIn(result, user) {
         getResponseObject(
           "Sign in successful.",
           200,
-          config.env.RESPONSE_TYPE.success,
+          config.responseType.success,
           {
             user,
             accessToken,
@@ -120,7 +120,7 @@ function completeSignIn(result, user) {
       getResponseObject(
         "Username or password is incorrect. Sign in unsuccessful.",
         401,
-        config.env.RESPONSE_TYPE.error,
+        config.responseType.error,
         {}
       )
     );

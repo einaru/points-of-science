@@ -3,12 +3,12 @@ import path, { dirname } from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
 import {
-  config,
   connectToFirebaseProduction,
   connectToFirebaseEmulator,
   FirebaseProvider,
   JSONProvider,
 } from "../../internal.js";
+import config from "../../Config/config.js";
 
 const filename = fileURLToPath(import.meta.url);
 const here = dirname(filename);
@@ -18,30 +18,26 @@ let provider;
 let filePathToDatabase;
 
 function connectToDatabase() {
-  if (checkEnvironmentMode(config.env.ENVIRONMENT_MODE.TEST.mode)) {
-    database = connectToNonProductionDatabase(
-      config.env.ENVIRONMENT_MODE.TEST.database_folder,
-      config.env.ENVIRONMENT_MODE.TEST.database_file_path,
-      config.env.ENVIRONMENT_MODE.TEST.dummy_data
-    );
-    provider = JSONProvider;
-
-    return;
-  }
-
-  if (checkEnvironmentMode(config.env.ENVIRONMENT_MODE.DEVELOPMENT.mode)) {
-    database = connectToFirebaseEmulator();
-    provider = FirebaseProvider;
-
-    return;
-  }
-
-  if (checkEnvironmentMode(config.env.ENVIRONMENT_MODE.PRODUCTION.mode)) {
-    // Fill in logic connecting the application to a production database.
-    if (config.env.ENVIRONMENT_MODE.PRODUCTION.database === "FIREBASE") {
+  const env = process.env.NODE_ENV;
+  switch (env) {
+    case "test":
+      database = connectToNonProductionDatabase(
+        config.db.test.folder,
+        config.db.test.file,
+        config.db.test.data
+      );
+      provider = JSONProvider;
+      break;
+    case "development":
+      database = connectToFirebaseEmulator();
+      provider = FirebaseProvider;
+      break;
+    case "production":
       database = connectToFirebaseProduction();
       provider = FirebaseProvider;
-    }
+      break;
+    default:
+      console.error(`Error: Unexpected NODE_ENV=${env}`);
   }
 }
 
@@ -72,10 +68,6 @@ function getProvider() {
 }
 
 // ---------------------------------------------------- Helper-functions ------------------------------------------------------
-
-function checkEnvironmentMode(mode) {
-  return config.env.NODE_ENV === mode;
-}
 
 function makeFolders(databaseFolder) {
   if (!fs.existsSync(databaseFolder)) {

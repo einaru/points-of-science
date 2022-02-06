@@ -7,3 +7,4 @@ coverage
 firebasesdk.json
 *.key.json
 *.log
+.env

@@ -39,6 +39,12 @@ export default function SetPassword() {
 
   const isDisabled = !password && !confirmPassword;
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const toggleShowPassword = () => setShowPassword(!showPassword);
+  const toggleShowConfirmPassword = () =>
+    setShowConfirmPassword(!showConfirmPassword);
+
   const { username } = useContext(ActivateAccountContext);
   const { logInUser } = useContext(AuthContext);
 
@@ -74,14 +80,26 @@ export default function SetPassword() {
       <TextInput
         label={t("Password")}
         value={password}
-        onChangeText={(text) => setPassword(text)}
-        secureTextEntry
+        onChangeText={setPassword}
+        secureTextEntry={!showPassword}
+        right={
+          <TextInput.Icon
+            icon={showPassword ? "eye-off" : "eye"}
+            onPress={toggleShowPassword}
+          />
+        }
       />
       <TextInput
         label={t("Confirm password")}
         value={confirmPassword}
-        onChangeText={(text) => setConfirmPassword(text)}
-        secureTextEntry
+        onChangeText={setConfirmPassword}
+        secureTextEntry={!showConfirmPassword}
+        right={
+          <TextInput.Icon
+            icon={showConfirmPassword ? "eye-off" : "eye"}
+            onPress={toggleShowConfirmPassword}
+          />
+        }
       />
       <HelperText type="error" visible={errorMessage}>
         {errorMessage}

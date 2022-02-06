@@ -11,7 +11,7 @@ const Stack = createNativeStackNavigator();
 function ProfileStack() {
   return (
     <View style={{ flex: 1 }} collapsable={false}>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="profile:main">
         <Stack.Screen
           name="profile:main"
           options={{ title: t("Profile"), headerShown: false }}

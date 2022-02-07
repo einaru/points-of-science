@@ -5,7 +5,7 @@
       "id": 1,
       "username": "Antonietta Riccard",
       "password": "$2b$10$HGImWpGHTqsCUW7QPqE.xOLknm/a.IqV7bC.35ybKUGqLj13e9xiO",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -14,7 +14,7 @@
       "id": 2,
       "username": "Aldis Loughan",
       "password": "kEns4u9e4d",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -23,7 +23,7 @@
       "id": 3,
       "username": "Grissel Hamprecht",
       "password": "SnxTm4TTYBwl",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -32,7 +32,7 @@
       "id": 4,
       "username": "Violetta Brinkler",
       "password": "9G9dlTd",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -41,7 +41,7 @@
       "id": 5,
       "username": "Dione Kochl",
       "password": "NMtJVzk5AfBb",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -50,7 +50,7 @@
       "id": 6,
       "username": "Myrle Davitashvili",
       "password": "SnS4LS9j4UL",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -59,7 +59,7 @@
       "id": 7,
       "username": "Susie Bavage",
       "password": "bBsX2NUXdGtr",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -68,7 +68,7 @@
       "id": 8,
       "username": "Maritsa Giamitti",
       "password": "7HywfJWg",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -77,7 +77,7 @@
       "id": 9,
       "username": "Etheline Morteo",
       "password": "Zu1G4J4iSL1",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -86,7 +86,7 @@
       "id": 10,
       "username": "Darnell Braunstein",
       "password": "XlVMxsmu",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -95,7 +95,7 @@
       "id": 11,
       "username": "Ikey Cowpertwait",
       "password": "WI8hZUYx",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -104,7 +104,7 @@
       "id": 12,
       "username": "Mackenzie Eustice",
       "password": "D8PGrGj2fWG",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -113,7 +113,7 @@
       "id": 13,
       "username": "Zed Dightham",
       "password": "RFheefsu",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -122,7 +122,7 @@
       "id": 14,
       "username": "Loni Hanley",
       "password": "BIDq69eT3T",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -131,7 +131,7 @@
       "id": 15,
       "username": "Dotty Mansford",
       "password": "RbTGb8",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -140,7 +140,7 @@
       "id": 16,
       "username": "Glyn Kleeman",
       "password": "7C9uRPts5",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -149,7 +149,7 @@
       "id": 17,
       "username": "Bella Celez",
       "password": "x8mZu4",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -158,7 +158,7 @@
       "id": 18,
       "username": "Karlan Learmount",
       "password": "SHvzFJtD",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -167,7 +167,7 @@
       "id": 19,
       "username": "Nikolas Lazer",
       "password": "lpBzVQg6rJJ",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -176,7 +176,7 @@
       "id": 20,
       "username": "Meredith Ganderton",
       "password": "0lBJBPBHktn",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -185,7 +185,7 @@
       "id": 21,
       "username": "Korie Rablan",
       "password": "DxltejT",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -194,7 +194,7 @@
       "id": 22,
       "username": "Olga Kepp",
       "password": "5gO7nu",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -203,7 +203,7 @@
       "id": 23,
       "username": "Junie Mathevet",
       "password": "LiFH0EXI",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -212,7 +212,7 @@
       "id": 24,
       "username": "Annaliese Gaenor",
       "password": "XGu1j5h5oa",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -221,7 +221,7 @@
       "id": 25,
       "username": "Eleanora Chirm",
       "password": "Uj2reT8wOi2",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -230,7 +230,7 @@
       "id": 26,
       "username": "Trudi O'Cosgra",
       "password": "GaBa33h6S4",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -239,7 +239,7 @@
       "id": 27,
       "username": "Zola Woolland",
       "password": "Cb39TRN",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -248,7 +248,7 @@
       "id": 28,
       "username": "Laurel Duchatel",
       "password": "B3q3tyb",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -257,7 +257,7 @@
       "id": 29,
       "username": "Vance Cheevers",
       "password": "eeTk6nN0CFZz",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -266,7 +266,7 @@
       "id": 30,
       "username": "Pepita Sterry",
       "password": "Xaw1Sprk",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -275,7 +275,7 @@
       "id": 31,
       "username": "Nelli Gullefant",
       "password": "tdh3zC36nC",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -284,7 +284,7 @@
       "id": 32,
       "username": "Stacy MacNair",
       "password": "HEmSqkuHf",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -293,7 +293,7 @@
       "id": 33,
       "username": "Enid Lant",
       "password": "qOCg5egWV8A",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -302,7 +302,7 @@
       "id": 34,
       "username": "Ken Croneen",
       "password": "V1XLhqySue",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -311,7 +311,7 @@
       "id": 35,
       "username": "Astrix Chesworth",
       "password": "384ufVEeTr0",
-      "permission": "control",
+      "permission": 3,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -320,7 +320,7 @@
       "id": 36,
       "username": "Tilda Beane",
       "password": "8lBcmqYu",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -329,7 +329,7 @@
       "id": 37,
       "username": "Hill Lorryman",
       "password": "bI7rKPGdpt",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -338,7 +338,7 @@
       "id": 38,
       "username": "Harcourt Dunnico",
       "password": "dHt1u5jZQBF",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -347,7 +347,7 @@
       "id": 39,
       "username": "Jobye Deppe",
       "password": "XDMK97EgI8T",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -356,7 +356,7 @@
       "id": 40,
       "username": "Sadye Wheatman",
       "password": "iosi6AC4",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -365,7 +365,7 @@
       "id": 41,
       "username": "Warde Shellcross",
       "password": "cmxKvu3",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -374,7 +374,7 @@
       "id": 42,
       "username": "Nanete LaBastida",
       "password": "56d6rGcMG",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -383,7 +383,7 @@
       "id": 43,
       "username": "Karna Clinch",
       "password": "097kjCdNHK",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -392,7 +392,7 @@
       "id": 44,
       "username": "Lorna Ebertz",
       "password": "hcEA3X",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -401,7 +401,7 @@
       "id": 45,
       "username": "Hillie Camplin",
       "password": "u7SFl7CE5",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -410,7 +410,7 @@
       "id": 46,
       "username": "Kerry Quinnell",
       "password": "td0VreA",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -419,7 +419,7 @@
       "id": 47,
       "username": "Nanny Gerhts",
       "password": "VDTpfFxjUry",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -428,7 +428,7 @@
       "id": 48,
       "username": "Minor Minster",
       "password": "IzrRt547N",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -437,7 +437,7 @@
       "id": 49,
       "username": "Amalle Seydlitz",
       "password": "C8BRoP",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -446,7 +446,7 @@
       "id": 50,
       "username": "Morganica Redler",
       "password": "dA6l7pjEhM",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -455,7 +455,7 @@
       "id": 51,
       "username": "Edwin Brignell",
       "password": "cgM2KaNIvD",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -464,7 +464,7 @@
       "id": 52,
       "username": "Lorinda Habron",
       "password": "dphv1kjotn",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -473,7 +473,7 @@
       "id": 53,
       "username": "Alexander Penreth",
       "password": "gQO9tZ4",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -482,7 +482,7 @@
       "id": 54,
       "username": "Karisa Kerton",
       "password": "sV4vgDlMf",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -491,7 +491,7 @@
       "id": 55,
       "username": "Davita Sargood",
       "password": "QkwIbCLNhL",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -500,7 +500,7 @@
       "id": 56,
       "username": "Lona Peattie",
       "password": "VcdDho1",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -509,7 +509,7 @@
       "id": 57,
       "username": "Kerry Darling",
       "password": "nEX4yCG8Gs",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -518,7 +518,7 @@
       "id": 58,
       "username": "Rayna Harteley",
       "password": "q6EImS",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -527,7 +527,7 @@
       "id": 59,
       "username": "Kit Rubica",
       "password": "BIlP2xQIld",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -536,7 +536,7 @@
       "id": 60,
       "username": "Phylys Deering",
       "password": "Dh7r4el19g",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -545,7 +545,7 @@
       "id": 61,
       "username": "Ulrika Offener",
       "password": "WZNjeKBVr5r",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -554,7 +554,7 @@
       "id": 62,
       "username": "Morton Sibbald",
       "password": "9q1PVB",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -563,7 +563,7 @@
       "id": 63,
       "username": "Shirleen Pilling",
       "password": "tCyqos",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -572,7 +572,7 @@
       "id": 64,
       "username": "Ogdon Boustred",
       "password": "npwZJTFuhx9c",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -581,7 +581,7 @@
       "id": 65,
       "username": "Aloysius Ogelbe",
       "password": "kf4SUinVDyW",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -590,7 +590,7 @@
       "id": 66,
       "username": "Isaak Whatley",
       "password": "BRvqnWojHj",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -599,7 +599,7 @@
       "id": 67,
       "username": "Tory Musslewhite",
       "password": "mPY95H",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -608,7 +608,7 @@
       "id": 68,
       "username": "Pansy Mewburn",
       "password": "ltIYotMw6i6F",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -617,7 +617,7 @@
       "id": 69,
       "username": "Sherlocke Piatek",
       "password": "ZyrhBN4gcJpF",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -626,7 +626,7 @@
       "id": 70,
       "username": "Jay Farmar",
       "password": "tXlkRw9D4",
-      "permission": "experimental",
+      "permission": 2,
       "achievement": [],
       "challenge": [],
       "state": 1
@@ -635,139 +635,139 @@
   "ValidUsername": [
     {
       "username": "Antonietta Riccard",
-      "permission": 2
+      "permission": 3
     },
     {
       "username": "Aldis Loughan",
-      "permission": 2
+      "permission": 3
     },
     {
       "username": "Grissel Hamprecht",
-      "permission": 2
+      "permission": 3
     },
     {
       "username": "Violetta Brinkler",
-      "permission": 2
+      "permission": 3
     },
     {
       "username": "Dione Kochl",
-      "permission": 2
+      "permission": 3
     },
     {
       "username": "Myrle Davitashvili",
-      "permission": 2
+      "permission": 3
     },
     {
       "username": "Susie Bavage",
-      "permission": 2
+      "permission": 3
     },
     {
       "username": "Maritsa Giamitti",
-      "permission": 2
+      "permission": 3
     },
     {
       "username": "Etheline Morteo",
-      "permission": 2
+      "permission": 3
     },
     {
       "username": "Darnell Braunstein",
-      "permission": 2
+      "permission": 3
     },
     {
       "username": "Ikey Cowpertwait",
-      "permission": 2
+      "permission": 3
     },
     {
       "username": "Mackenzie Eustice",
-      "permission": 2
+      "permission": 3
     },
     {
       "username": "Zed Dightham",
-      "permission": 2
+      "permission": 3
     },
     {
       "username": "Loni Hanley",
-      "permission": 2
+      "permission": 3
     },
     {
       "username": "Dotty Mansford",
-      "permission": 2
+      "permission": 3
     },
     {
       "username": "Glyn Kleeman",
-      "permission": 2
+      "permission": 3
     },
     {
       "username": "Bella Celez",
-      "permission": 2
+      "permission": 3
     },
     {
       "username": "Karlan Learmount",
-      "permission": 2
+      "permission": 3
     },
     {
       "username": "Nikolas Lazer",
-      "permission": 2
+      "permission": 3
     },
     {
       "username": "Meredith Ganderton",
-      "permission": 2
+      "permission": 3
     },
     {
       "username": "Korie Rablan",
-      "permission": 2
+      "permission": 3
     },
     {
       "username": "Olga Kepp",
-      "permission": 2
+      "permission": 3
     },
     {
       "username": "Junie Mathevet",
-      "permission": 2
+      "permission": 3
     },
     {
       "username": "Annaliese Gaenor",
-      "permission": 2
+      "permission": 3
     },
     {
       "username": "Eleanora Chirm",
-      "permission": 2
+      "permission": 3
     },
     {
       "username": "Trudi O'Cosgra",
-      "permission": 2
+      "permission": 3
     },
     {
       "username": "Zola Woolland",
-      "permission": 2
+      "permission": 3
     },
     {
       "username": "Laurel Duchatel",
-      "permission": 2
+      "permission": 3
     },
     {
       "username": "Vance Cheevers",
-      "permission": 2
+      "permission": 3
     },
     {
       "username": "Pepita Sterry",
-      "permission": 2
+      "permission": 3
     },
     {
       "username": "Nelli Gullefant",
-      "permission": 2
+      "permission": 3
     },
     {
       "username": "Stacy MacNair",
-      "permission": 2
+      "permission": 3
     },
     {
       "username": "Enid Lant",
-      "permission": 2
+      "permission": 3
     },
     {
       "username": "Ken Croneen",
-      "permission": 2
+      "permission": 3
     },
     {
       "username": "Astrix Chesworth",
@@ -775,143 +775,143 @@
     },
     {
       "username": "Tilda Beane",
-      "permission": 3
+      "permission": 2
     },
     {
       "username": "Hill Lorryman",
-      "permission": 3
+      "permission": 2
     },
     {
       "username": "Harcourt Dunnico",
-      "permission": 3
+      "permission": 2
     },
     {
       "username": "Jobye Deppe",
-      "permission": 3
+      "permission": 2
     },
     {
       "username": "Sadye Wheatman",
-      "permission": 3
+      "permission": 2
     },
     {
       "username": "Warde Shellcross",
-      "permission": 3
+      "permission": 2
     },
     {
       "username": "Nanete LaBastida",
-      "permission": 3
+      "permission": 2
     },
     {
       "username": "Karna Clinch",
-      "permission": 3
+      "permission": 2
     },
     {
       "username": "Lorna Ebertz",
-      "permission": 3
+      "permission": 2
     },
     {
       "username": "Hillie Camplin",
-      "permission": 3
+      "permission": 2
     },
     {
       "username": "Kerry Quinnell",
-      "permission": 3
+      "permission": 2
     },
     {
       "username": "Nanny Gerhts",
-      "permission": 3
+      "permission": 2
     },
     {
       "username": "Minor Minster",
-      "permission": 3
+      "permission": 2
     },
     {
       "username": "Amalle Seydlitz",
-      "permission": 3
+      "permission": 2
     },
     {
       "username": "Morganica Redler",
-      "permission": 3
+      "permission": 2
     },
     {
       "username": "Edwin Brignell",
-      "permission": 3
+      "permission": 2
     },
     {
       "username": "Lorinda Habron",
-      "permission": 3
+      "permission": 2
     },
     {
       "username": "Alexander Penreth",
-      "permission": 3
+      "permission": 2
     },
     {
       "username": "Karisa Kerton",
-      "permission": 3
+      "permission": 2
     },
     {
       "username": "Davita Sargood",
-      "permission": 3
+      "permission": 2
     },
     {
       "username": "Lona Peattie",
-      "permission": 3
+      "permission": 2
     },
     {
       "username": "Kerry Darling",
-      "permission": 3
+      "permission": 2
     },
     {
       "username": "Rayna Harteley",
-      "permission": 3
+      "permission": 2
     },
     {
       "username": "Kit Rubica",
-      "permission": 3
+      "permission": 2
     },
     {
       "username": "Phylys Deering",
-      "permission": 3
+      "permission": 2
     },
     {
       "username": "Ulrika Offener",
-      "permission": 3
+      "permission": 2
     },
     {
       "username": "Morton Sibbald",
-      "permission": 3
+      "permission": 2
     },
     {
       "username": "Shirleen Pilling",
-      "permission": 3
+      "permission": 2
     },
     {
       "username": "Ogdon Boustred",
-      "permission": 3
+      "permission": 2
     },
     {
       "username": "Aloysius Ogelbe",
-      "permission": 3
+      "permission": 2
     },
     {
       "username": "Isaak Whatley",
-      "permission": 3
+      "permission": 2
     },
     {
       "username": "Tory Musslewhite",
-      "permission": 3
+      "permission": 2
     },
     {
       "username": "Pansy Mewburn",
-      "permission": 3
+      "permission": 2
     },
     {
       "username": "Sherlocke Piatek",
-      "permission": 3
+      "permission": 2
     },
     {
       "username": "Jay Farmar",
-      "permission": 3
+      "permission": 2
     }
   ],
   "Category": [],

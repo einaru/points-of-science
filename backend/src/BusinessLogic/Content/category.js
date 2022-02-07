@@ -134,7 +134,7 @@ function deleteCategory(category) {
 function emptyData() {
   return {
     data: {
-      id: 0,
+      id: "",
       challenges: [],
     },
   };

@@ -1,9 +1,4 @@
-import {
-  GraphQLObjectType,
-  GraphQLString,
-  GraphQLInt,
-  GraphQLList,
-} from "graphql";
+import { GraphQLObjectType, GraphQLString, GraphQLList } from "graphql";
 import {
   ChallengeModel,
   ResponseModel,
@@ -19,7 +14,7 @@ const ContentResponse = {
 const ContentModel = new GraphQLObjectType({
   name: "Content",
   fields: () => ({
-    id: { type: GraphQLInt },
+    id: { type: GraphQLString },
     ...ContentResponse,
   }),
 });
@@ -27,7 +22,7 @@ const ContentModel = new GraphQLObjectType({
 const CategoryModel = new GraphQLObjectType({
   name: "Category",
   fields: () => ({
-    id: { type: GraphQLInt },
+    id: { type: GraphQLString },
     challenges: { type: new GraphQLList(ChallengeModel) },
     ...ContentResponse,
     progress: { type: ProgressModel },
@@ -53,7 +48,7 @@ const AllCategoriesResponseModel = new GraphQLObjectType({
 const HintModel = new GraphQLObjectType({
   name: "Hint",
   fields: () => ({
-    id: { type: GraphQLInt },
+    id: { type: GraphQLString },
     text: { type: GraphQLString },
   }),
 });
@@ -61,7 +56,7 @@ const HintModel = new GraphQLObjectType({
 const ResourceModel = new GraphQLObjectType({
   name: "Resource",
   fields: () => ({
-    id: { type: GraphQLInt },
+    id: { type: GraphQLString },
     title: { type: GraphQLString },
     url: { type: GraphQLString },
   }),
@@ -70,7 +65,7 @@ const ResourceModel = new GraphQLObjectType({
 const ActivityModel = new GraphQLObjectType({
   name: "Activity",
   fields: () => ({
-    id: { type: GraphQLInt },
+    id: { type: GraphQLString },
     hint: { type: new GraphQLList(HintModel) },
     resource: { type: new GraphQLList(ResourceModel) },
   }),
@@ -79,7 +74,7 @@ const ActivityModel = new GraphQLObjectType({
 const ReflectionModel = new GraphQLObjectType({
   name: "Reflection",
   fields: () => ({
-    id: { type: GraphQLInt },
+    id: { type: GraphQLString },
     title: { type: GraphQLString },
     solution: { type: GraphQLString },
   }),

@@ -3,7 +3,7 @@ import { createObjectTemplate, saveData } from "../../internal.js";
 function emptyData() {
   return {
     data: {
-      id: 0,
+      id: "",
       title: "",
       image: "",
       description: "",

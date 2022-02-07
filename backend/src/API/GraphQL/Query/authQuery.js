@@ -6,6 +6,7 @@ import {
   deleteRefreshTokenFromDatabase,
   getData,
   getDataByFilter,
+  getFilter,
   profileCreator,
   setPermissionLevel,
   signIn,
@@ -124,10 +125,12 @@ const setPermissionQuery = {
         return response;
       }
 
-      const userData = await getDataByFilter(config.db.table.user, {
+      const filter = getFilter({
         key: "id",
+        operator: "==",
         value: args.userID,
-      })[0];
+      });
+      const userData = await getDataByFilter(config.db.table.user, filter)[0];
 
       const user = profileCreator();
       user.updateData(userData);

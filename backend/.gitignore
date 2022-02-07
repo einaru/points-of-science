@@ -1,5 +1,6 @@
 node_modules/
 assets/Database
+assets/Static/seed
 development.yaml
 test.yaml
 app.yaml

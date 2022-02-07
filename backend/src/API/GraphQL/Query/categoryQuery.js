@@ -69,10 +69,8 @@ const createCategoryQuery = {
         return response;
       }
 
-      const categoriesData = await getData(config.db.table.category);
-      const contentData = await getData(config.db.table.content);
-      const categoryID = nextID(categoriesData);
-      const contentID = nextID(contentData);
+      const categoryID = nextID(config.db.table.category);
+      const contentID = nextID(config.db.table.content);
 
       const category = categoryCreator();
       const newCategory = {

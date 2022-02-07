@@ -17,7 +17,7 @@ import {
 const RewardModel = new GraphQLObjectType({
   name: "Reward",
   fields: () => ({
-    id: { type: GraphQLInt },
+    id: { type: GraphQLString },
     maxPoints: { type: GraphQLInt },
     firstTryPoints: { type: GraphQLInt },
     bonusPoints: { type: GraphQLInt },
@@ -36,7 +36,7 @@ const DifficultyEnum = new GraphQLEnumType({
 const ChallengeModel = new GraphQLObjectType({
   name: "Challenge",
   fields: () => ({
-    id: { type: GraphQLInt },
+    id: { type: GraphQLString },
     difficulty: { type: DifficultyEnum },
     content: { type: ContentModel },
     activity: { type: ActivityModel },
@@ -65,7 +65,7 @@ const AchievementTypeEnum = new GraphQLEnumType({
 const AchievementModel = new GraphQLObjectType({
   name: "Achievement",
   fields: () => ({
-    id: { type: GraphQLInt },
+    id: { type: GraphQLString },
     condition: { type: new GraphQLList(ChallengeModel) },
     type: { type: AchievementTypeEnum },
     content: { type: ContentModel },
@@ -75,7 +75,7 @@ const AchievementModel = new GraphQLObjectType({
 const ProgressModel = new GraphQLObjectType({
   name: "Progress",
   fields: () => ({
-    id: { type: GraphQLInt },
+    id: { type: GraphQLString },
     percentage: { type: GraphQLInt },
   }),
 });
@@ -83,7 +83,7 @@ const ProgressModel = new GraphQLObjectType({
 const LeaderboardModel = new GraphQLObjectType({
   name: "Leaderboard",
   fields: () => ({
-    id: { type: GraphQLInt },
+    id: { type: GraphQLString },
     title: { type: GraphQLString },
     leaderboard: { type: new GraphQLList(UserModel) },
   }),

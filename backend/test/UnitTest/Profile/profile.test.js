@@ -1,10 +1,10 @@
 import {
-  config,
   connectToDatabase,
   JSONProvider,
   profileCreator,
   resetTestData,
 } from "../../../src/internal.js";
+import config from "../../../src/Config/config.js";
 
 let collectionName;
 let userData;
@@ -16,8 +16,8 @@ let notMatch;
 
 beforeAll(async () => {
   connectToDatabase();
-  resetTestData(config.env.ENVIRONMENT_MODE.TEST.dummy_data);
-  collectionName = config.env.USER_TABLE;
+  resetTestData(config.db.test.data);
+  collectionName = config.db.table.user;
   userData = await JSONProvider.getDataByFilter(collectionName, {
     key: "id",
     value: 1,

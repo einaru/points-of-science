@@ -105,7 +105,7 @@ function requestUserData(profile) {
 function emptyData() {
   return {
     data: {
-      id: 0,
+      id: "",
       username: "",
       password: "",
       permission: "",

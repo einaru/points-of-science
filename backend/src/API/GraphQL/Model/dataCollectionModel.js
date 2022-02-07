@@ -1,10 +1,10 @@
-import { GraphQLObjectType, GraphQLString, GraphQLInt } from "graphql";
+import { GraphQLObjectType, GraphQLString } from "graphql";
 
 const ClickStreamItemModel = new GraphQLObjectType({
   name: "ClickStreamItemModel",
   fields: () => ({
-    id: { type: GraphQLInt },
-    screenID: { type: GraphQLInt },
+    id: { type: GraphQLString },
+    screenID: { type: GraphQLString },
     timestamp: { type: GraphQLString },
     nextItem: { type: ClickStreamItemModel },
     prevItem: { type: ClickStreamItemModel },
@@ -14,8 +14,8 @@ const ClickStreamItemModel = new GraphQLObjectType({
 const ClickStreamModel = new GraphQLObjectType({
   name: "ClickStream",
   fields: () => ({
-    id: { type: GraphQLInt },
-    userID: { type: GraphQLInt },
+    id: { type: GraphQLString },
+    userID: { type: GraphQLString },
     clickStreamItem: { type: ClickStreamItemModel },
   }),
 });

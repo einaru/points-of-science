@@ -16,9 +16,9 @@ import {
 const UserAchievementModel = new GraphQLObjectType({
   name: "UserAchievement",
   fields: () => ({
-    id: { type: GraphQLInt },
-    userID: { type: GraphQLInt },
-    achievementID: { type: GraphQLInt },
+    id: { type: GraphQLString },
+    userID: { type: GraphQLString },
+    achievementID: { type: GraphQLString },
     completed: { type: GraphQLBoolean },
   }),
 });
@@ -26,8 +26,8 @@ const UserAchievementModel = new GraphQLObjectType({
 const UserActivityModel = new GraphQLObjectType({
   name: "UserActivity",
   fields: () => ({
-    id: { type: GraphQLInt },
-    activityID: { type: GraphQLInt },
+    id: { type: GraphQLString },
+    activityID: { type: GraphQLString },
     dateStarted: { type: GraphQLString },
     dateCompleted: { type: GraphQLString },
     answer: { type: GraphQLString },
@@ -46,9 +46,9 @@ const VoteEnum = new GraphQLEnumType({
 const UserReflectionModel = new GraphQLObjectType({
   name: "UserReflection",
   fields: () => ({
-    id: { type: GraphQLInt },
-    userID: { type: GraphQLInt },
-    reflectionID: { type: GraphQLInt },
+    id: { type: GraphQLString },
+    userID: { type: GraphQLString },
+    reflectionID: { type: GraphQLString },
     dateStarted: { type: GraphQLString },
     dateCompleted: { type: GraphQLString },
     answer: { type: GraphQLString },
@@ -60,9 +60,9 @@ const UserReflectionModel = new GraphQLObjectType({
 const UserRewardModel = new GraphQLObjectType({
   name: "UserReward",
   fields: () => ({
-    id: { type: GraphQLInt },
-    userID: { type: GraphQLInt },
-    rewardID: { type: GraphQLInt },
+    id: { type: GraphQLString },
+    userID: { type: GraphQLString },
+    rewardID: { type: GraphQLString },
     points: { type: GraphQLInt },
     bonusPoints: { type: GraphQLInt },
   }),
@@ -71,10 +71,10 @@ const UserRewardModel = new GraphQLObjectType({
 const UserChallengeModel = new GraphQLObjectType({
   name: "UserChallenge",
   fields: () => ({
-    id: { type: GraphQLInt },
+    id: { type: GraphQLString },
     title: { type: GraphQLString },
-    challengeID: { type: GraphQLInt },
-    userID: { type: GraphQLInt },
+    challengeID: { type: GraphQLString },
+    userID: { type: GraphQLString },
     completed: { type: GraphQLBoolean },
     answeredCorrect: { type: GraphQLBoolean },
     activity: { type: UserActivityModel },
@@ -86,7 +86,7 @@ const UserChallengeModel = new GraphQLObjectType({
 const UserModel = new GraphQLObjectType({
   name: "User",
   fields: () => ({
-    id: { type: GraphQLInt },
+    id: { type: GraphQLString },
     password: { type: GraphQLString },
     username: { type: GraphQLString },
     permission: { type: GraphQLString },

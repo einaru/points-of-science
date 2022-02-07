@@ -1,10 +1,10 @@
 import {
-  config,
   connectToDatabase,
   JSONProvider,
   getDatabase,
   resetTestData,
 } from "../../../src/internal.js";
+import config from "../../../src/Config/config.js";
 
 let collectionName;
 let nonExistingCollectionName;
@@ -15,9 +15,9 @@ let database;
 
 beforeAll(async () => {
   connectToDatabase();
-  resetTestData(config.env.ENVIRONMENT_MODE.TEST.dummy_data);
+  resetTestData(config.db.test.data);
   database = getDatabase();
-  collectionName = config.env.USER_TABLE;
+  collectionName = config.db.table.user;
   nonExistingCollectionName = "NotATableName";
   filter = { key: "username", value: "Rayna Harteley" };
   user = await JSONProvider.getDataByFilter(collectionName, {
@@ -71,7 +71,7 @@ test("Get data by filter from database.", () => {
         id: 58,
         username: "Rayna Harteley",
         password: "q6EImS",
-        permission: "experimental",
+        permission: 2,
         achievement: [],
         challenge: [],
         state: 1,

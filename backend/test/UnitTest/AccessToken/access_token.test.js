@@ -1,7 +1,6 @@
 import {
   authenticateAccessToken,
   authenticateRefreshToken,
-  config,
   connectToDatabase,
   createAccessToken,
   createRefreshToken,
@@ -10,6 +9,7 @@ import {
   getDataByFilter,
   resetTestData,
 } from "../../../src/internal.js";
+import config from "../../../src/Config/config.js";
 
 let user;
 let refreshTokenTable;
@@ -17,9 +17,9 @@ let userTable;
 
 beforeAll(async () => {
   connectToDatabase();
-  resetTestData(config.env.ENVIRONMENT_MODE.TEST.dummy_data);
-  refreshTokenTable = config.env.REFRESH_TOKEN_TABLE;
-  userTable = config.env.USER_TABLE;
+  resetTestData(config.db.test.data);
+  refreshTokenTable = config.db.table.refreshToken;
+  userTable = config.db.table.user;
   user = await getDataByFilter(userTable, { key: "id", value: 4 });
 });
 

@@ -147,8 +147,7 @@ const createUserQuery = {
   async resolve(parent, args) {
     // Put the create user logic for the BusinessLogic here.
     try {
-      const users = await getData(config.db.table.user);
-      const id = nextID(users);
+      const id = nextID(config.db.table.user);
       const newUser = {
         id,
         username: args.username,
@@ -199,19 +198,20 @@ const updateUserQuery = {
     confirm_password: { type: GraphQLString },
   },
   async resolve(parent, args) {
-    // Put the delete user logic for the BusinessLogic here.
     try {
-      const userList = await getDataByFilter("User", {
+      const filter = getFilter({
         key: "id",
+        operator: "==",
         value: args.id,
       });
+      const userList = await getDataByFilter("User", filter);
       if (userList.length === 0) {
         return null;
       }
 
       const user = userList[0];
       user.username = args.username;
-      updateData("User", user);
+      await updateData(config.db.table.user, user);
       return user;
     } catch (error) {
       return error;

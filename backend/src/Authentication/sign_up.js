@@ -3,7 +3,6 @@ import {
   checkPassword,
   errorsInPassword,
   generateErrorMessage,
-  getData,
   getFilter,
   getDataByFilter,
   hashPassword,
@@ -20,13 +19,13 @@ import config from "../Config/config.js";
 function signUp(args) {
   return new Promise((resolve, reject) => {
     const { password, confirmPassword, username } = args;
-    const validUsername = getDataFromDatabaseByFilter(
+    let validUsername = getDataFromDatabaseByFilter(
       config.db.table.validUsername,
       "username",
       username
     );
 
-    const userObject = getDataFromDatabaseByFilter(
+    let userObject = getDataFromDatabaseByFilter(
       config.db.table.user,
       "username",
       username
@@ -34,6 +33,7 @@ function signUp(args) {
 
     Promise.all([validUsername, userObject])
       .then((data) => {
+        [validUsername, userObject] = data;
         return validateSignUp(data[0], data[1], password, confirmPassword);
       })
       .then(() => {
@@ -140,15 +140,7 @@ function getDataFromDatabaseByFilter(table, key, value) {
 }
 
 function getNextID() {
-  return new Promise((resolve, reject) => {
-    getData(config.db.table.user)
-      .then((users) => {
-        resolve(nextID(users));
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
+  return nextID(config.db.table.user);
 }
 
 function updateExistingUser(existingUser, hashedPassword) {
@@ -160,23 +152,20 @@ function updateExistingUser(existingUser, hashedPassword) {
 }
 
 function updateNewUser(username, hashedPassword, permission) {
-  return new Promise((resolve, reject) => {
-    getNextID()
-      .then((id) => {
-        const user = profileCreator();
-        user.updateData({
-          id,
-          username,
-          permission,
-          password: hashedPassword,
-          state: profileState.active.value,
-        });
-        resolve(user);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
+  try {
+    const id = getNextID();
+    const user = profileCreator();
+    user.updateData({
+      id,
+      username,
+      permission,
+      password: hashedPassword,
+      state: profileState.active.value,
+    });
+    return user;
+  } catch (error) {
+    return error;
+  }
 }
 
 function getResponseObject(message, statusCode, type) {

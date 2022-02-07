@@ -50,8 +50,8 @@ function connectToNonProductionDatabase(
     makeFolders(databaseFolder);
     filePathToDatabase = path.resolve(here, filePath);
     copyDummyDataToDatabase(dummyDataPath);
-    database = JSON.parse(fs.readFileSync(filePathToDatabase, "utf-8"));
-    return database;
+    const dummyData = JSON.parse(fs.readFileSync(filePathToDatabase, "utf-8"));
+    return dummyData;
   } catch (error) {
     console.log(
       `\n[-] An error occurred in file connection.js when connecting to database. Error: ${error.message}.`

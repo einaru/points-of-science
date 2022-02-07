@@ -1,7 +1,6 @@
 import React from "react";
 import { ActivityIndicator, Text } from "react-native-paper";
 import { StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 const styles = StyleSheet.create({
   container: {
@@ -16,12 +15,10 @@ const styles = StyleSheet.create({
 
 function LoadingScreen({ animating = true, message = "" }) {
   return (
-    <SafeAreaView style={styles.container}>
-      <View>
-        <ActivityIndicator animating={animating} size="large" />
-        <Text style={styles.label}>{message}</Text>
-      </View>
-    </SafeAreaView>
+    <View style={styles.container}>
+      <ActivityIndicator animating={animating} size="large" />
+      <Text style={styles.label}>{message}</Text>
+    </View>
   );
 }
 

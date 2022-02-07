@@ -50,7 +50,7 @@ function Profile() {
       .join("");
   }, [user.username]);
 
-  const [logOut, { data, loading, error }] = useMutation(LOGOUT);
+  const [logOut, { data, loading, error, client }] = useMutation(LOGOUT);
 
   useEffect(() => {
     if (data) {
@@ -121,7 +121,9 @@ function Profile() {
               left={() => <List.Icon icon="logout" />}
               onPress={() => {
                 console.debug("Logging out");
-                logOut({ variables: { refreshToken } });
+                logOut({ variables: { refreshToken } }).then(() => {
+                  client.clearStore();
+                });
               }}
             />
           </List.Section>

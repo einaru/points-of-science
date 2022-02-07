@@ -9,7 +9,8 @@ import { AuthProvider } from "./src/features/auth/AuthProvider";
 import Navigation from "./src/features/navigation";
 import PreferencesContext from "./src/features/preferences/PreferencesContext";
 import { darkTheme, defaultTheme } from "./src/shared/theme";
-import client from "./src/services/api/client";
+import useApiClient from "./src/services/api/useApiClient";
+import { LoadingScreen } from "./src/shared/components";
 
 export default function App() {
   const [preferDarkTheme, setPreferDarkTheme] = useState("");
@@ -38,6 +39,12 @@ export default function App() {
     }),
     [toggleTheme, preferDarkTheme]
   );
+
+  const client = useApiClient();
+
+  if (!client) {
+    return <LoadingScreen />;
+  }
 
   return (
     <PreferencesContext.Provider value={preferences}>

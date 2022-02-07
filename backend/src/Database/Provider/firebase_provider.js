@@ -2,8 +2,6 @@
 // Server directory imports:
 import { getDatabase } from "../../internal.js";
 
-const incrementor = 1;
-
 function getSnapshot(collectionName) {
   return new Promise((resolve, reject) => {
     const firebaseDB = getDatabase();
@@ -31,11 +29,7 @@ function getData(collectionName) {
   return new Promise((resolve, reject) => {
     getSnapshot(collectionName)
       .then((snapshot) => {
-        const data = [];
-        snapshot.forEach((doc) => {
-          data.push(doc.data());
-        });
-        resolve(data);
+        resolve(pushData(snapshot));
       })
       .catch((error) => {
         reject(error);
@@ -121,20 +115,9 @@ function updateData(collectionName, data) {
   });
 }
 
-function nextID(table) {
-  if (isNull(table) || !Array.isArray(table)) {
-    return new Error(`Table is not an array.`);
-  }
-
-  if (table.length === 0) {
-    return 1;
-  }
-
-  return table[table.length - 1].id + incrementor;
-}
-
-function isNull(data) {
-  return data == null;
+function nextID(collectionName) {
+  const firebaseDB = getDatabase();
+  return firebaseDB.collection(collectionName).doc().id;
 }
 
 function getFilter() {

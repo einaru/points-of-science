@@ -37,6 +37,22 @@ variable in a `.env` file or export in on the command line:
 export FIRESTORE_EMULATOR_HOST=localhost:8080
 ```
 
+When the emulator starts you can run a script which will populate the emulator for you the
+first time. The script is located in the script folder. To run the script, enter the following 
+into a terminal:
+
+```
+node .\script\emulatorInitialization.js
+```
+
+If this is not the first time you start the emulator, it can be populated from the previously exported data
+which assumes you ran the firebase export command the first time you shut down, 
+the following command will import the latest exported data and export on exit:
+
+```
+yarn firestore
+```
+
 You should also remember to set secret keys for both access and refresh tokens.
 These secrets can be set in the `.env` file as well:
 
@@ -46,6 +62,16 @@ REFRESH_TOKEN_SECRET=EvEnMoReSeCrEt
 ```
 
 Now you should be able run `yarn dev` to fire up the application.
+
+Remember to create a new folder in ./assets/Static which should be named "seed". 
+This folder must exist before proceeding with exporting of data from Firestore emulator. 
+
+Before shutting down the Firestore emulator for the first time you will have to export the stored data
+in the emulator. To do so, run the following command in a terminal:
+
+```
+firebase emulators:export ./assets/Static/seed
+```
 
 ### Production mode
 

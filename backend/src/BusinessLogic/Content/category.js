@@ -2,10 +2,10 @@ import {
   contentCreator,
   convertToResponseObject,
   createObjectTemplate,
-  getDataByFilter,
-  getFilter,
+  getDataFromDatabaseByFilter,
   progressCreator,
   saveData,
+  restoreChallenges,
 } from "../../internal.js";
 import config from "../../Config/config.js";
 
@@ -13,8 +13,10 @@ function updateCategory(category) {
   const functionKey = "updateData";
   const code = (args) => {
     // Fill in the blanks
-    if (args == null) {
-      return;
+    if (args == null || args !== Object(args)) {
+      throw new Error(
+        "Category could not be updated because of wrong type of input. Input must be an object."
+      );
     }
 
     Object.keys(args).forEach((key) => {
@@ -33,14 +35,15 @@ function addChallenge(category) {
     }
 
     const found = category.challenges.filter((object) => {
-      return object.data.id !== challenge.data.id;
+      return object.data.id === challenge.data.id;
     });
 
-    if (!found.length) {
+    if (found.length > 0) {
       return "Challenge exist from before.";
     }
 
     category.challenges.push(challenge);
+    return "Challnge successfully added.";
   };
 
   return createObjectTemplate(functionKey, code);
@@ -73,44 +76,38 @@ function restoreObject() {
   const functionKey = "restoreObject";
   const code = (category, categoryData) => {
     return new Promise((resolve, reject) => {
-      const { contentID, progressID } = categoryData;
-      const contentFilter = getFilter({
-        key: "id",
-        operator: "==",
-        value: contentID,
-      });
-      const progressFilter = getFilter({
-        key: "id",
-        operator: "==",
-        value: progressID,
-      });
-
-      const contentData = getDataByFilter(
-        config.db.table.content,
-        contentFilter
+      const { contentID, progressID, challenges } = categoryData;
+      const contentData = getDataFromDatabaseByFilter(
+        contentID,
+        config.db.table.content
+      );
+      const progressData = getDataFromDatabaseByFilter(
+        progressID,
+        config.db.table.progress
       );
 
-      const progressData = getDataByFilter(
-        config.db.table.progress,
-        progressFilter
-      );
+      const challengeList = restoreChallenges(challenges);
 
-      Promise.all([contentData, progressData])
+      Promise.all([contentData, progressData, challengeList])
         .then((data) => {
           let content = [];
           let progress = [];
 
           if (data[0] != null) {
             content = data[0][0];
+            category.content.updateData(content);
           }
 
           if (data[1] != null) {
             progress = data[1][0];
+            category.progress.updateData(progress);
+          }
+
+          if (data[2] != null) {
+            categoryData.challenges = data[2];
           }
 
           category.updateData(categoryData);
-          category.content.updateData(content);
-          category.progress.updateData(progress);
           resolve(convertToResponseObject("category", category));
         })
         .catch((error) => {

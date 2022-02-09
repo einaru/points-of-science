@@ -8,6 +8,7 @@ import {
   Portal,
   Title,
 } from "react-native-paper";
+import * as Linking from "expo-linking";
 import { t } from "../../i18n";
 import ChallengeContext from "../ChallengeContext";
 import styles from "./styles";
@@ -36,6 +37,13 @@ function Activity({ navigation }) {
     console.log(`The hint was ${thumbUp ? "good \\o/" : "bad /o\\"}`);
   };
 
+  const openExternalResource = () => {
+    const { resources } = activity;
+    if (resources && resources.length > 0) {
+      Linking.openURL(resources[0].url);
+    }
+  };
+
   useLayoutEffect(() => {
     navigation.setOptions({
       title: challenge.name,
@@ -50,13 +58,7 @@ function Activity({ navigation }) {
       </View>
       <View style={styles.helpContainer}>
         <Button onPress={showHint}>{t("Get a hint?")}</Button>
-        <Button
-          onPress={() => {
-            console.log("Watch a video…");
-          }}
-        >
-          {t("Watch a video")}
-        </Button>
+        <Button onPress={openExternalResource}>{t("Watch a video")}</Button>
       </View>
       <Button
         mode="contained"

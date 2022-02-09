@@ -86,5 +86,6 @@ export {
   CategoryModel,
   CategoryResponseModel,
   ContentModel,
+  ContentResponse,
   ReflectionModel,
 };

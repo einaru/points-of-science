@@ -6,9 +6,8 @@ import {
   GraphQLList,
 } from "graphql";
 import {
-  ActivityModel,
-  CategoryModel,
   ContentModel,
+  ContentResponse,
   ReflectionModel,
   ResponseModel,
   UserModel,
@@ -37,12 +36,12 @@ const ChallengeModel = new GraphQLObjectType({
   name: "Challenge",
   fields: () => ({
     id: { type: GraphQLString },
+    categoryID: { type: GraphQLString },
     difficulty: { type: DifficultyEnum },
-    content: { type: ContentModel },
-    activity: { type: ActivityModel },
+    ...ContentResponse,
+    // activity: { type: ActivityModel },
     reflection: { type: ReflectionModel },
     reward: { type: RewardModel },
-    category: { type: CategoryModel },
   }),
 });
 
@@ -51,6 +50,14 @@ const ChallengeResponseModel = new GraphQLObjectType({
   fields: () => ({
     ...ResponseModel,
     data: { type: ChallengeModel },
+  }),
+});
+
+const AllChallengesResponseModel = new GraphQLObjectType({
+  name: "AllChallengesResponse",
+  fields: () => ({
+    ...ResponseModel,
+    data: { type: new GraphQLList(ChallengeModel) },
   }),
 });
 
@@ -90,6 +97,7 @@ const LeaderboardModel = new GraphQLObjectType({
 });
 
 export {
+  AllChallengesResponseModel,
   AchievementModel,
   RewardModel,
   ProgressModel,

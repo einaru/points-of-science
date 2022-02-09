@@ -32,7 +32,19 @@
             ],
             "hints": [
               {
-                "content": "Some valuable hint"
+                "content": "Some valuable hint #1"
+              },
+              {
+                "content": "Some valuable hint #2"
+              },
+              {
+                "content": "Some valuable hint #3"
+              },
+              {
+                "content": "Some valuable hint #4"
+              },
+              {
+                "content": "Some valuable hint #5"
               }
             ]
           },

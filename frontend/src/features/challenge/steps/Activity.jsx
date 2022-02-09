@@ -1,6 +1,13 @@
-import React, { useContext, useLayoutEffect } from "react";
+import React, { useContext, useLayoutEffect, useState } from "react";
 import { View } from "react-native";
-import { Button, Paragraph, Title } from "react-native-paper";
+import {
+  Button,
+  Dialog,
+  IconButton,
+  Paragraph,
+  Portal,
+  Title,
+} from "react-native-paper";
 import { t } from "../../i18n";
 import ChallengeContext from "../ChallengeContext";
 import styles from "./styles";
@@ -8,6 +15,26 @@ import styles from "./styles";
 function Activity({ navigation }) {
   const challenge = useContext(ChallengeContext);
   const { activity } = challenge;
+
+  const [hint, setHint] = useState("");
+  const [hintIsVisible, setHintIsVisible] = useState(false);
+
+  // TODO Keep track of which hints have been shown
+  const getAHint = () => {
+    const { hints } = activity;
+    const index = Math.floor(Math.random() * hints.length);
+    setHint(hints[index].content);
+  };
+
+  const showHint = () => {
+    setHintIsVisible(true);
+    getAHint();
+  };
+
+  const hideHint = (thumbUp) => {
+    setHintIsVisible(false);
+    console.log(`The hint was ${thumbUp ? "good \\o/" : "bad /o\\"}`);
+  };
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -22,13 +49,7 @@ function Activity({ navigation }) {
         <Paragraph style={styles.text}>{activity.description}</Paragraph>
       </View>
       <View style={styles.helpContainer}>
-        <Button
-          onPress={() => {
-            console.log("Get a hint…");
-          }}
-        >
-          {t("Get a hint?")}
-        </Button>
+        <Button onPress={showHint}>{t("Get a hint?")}</Button>
         <Button
           onPress={() => {
             console.log("Watch a video…");
@@ -44,6 +65,18 @@ function Activity({ navigation }) {
       >
         {t("Continue")}
       </Button>
+      <Portal>
+        <Dialog visible={hintIsVisible} onDismiss={hideHint}>
+          <Dialog.Title>{t("Here's a little hint")}</Dialog.Title>
+          <Dialog.Content>
+            <Paragraph>{hint}</Paragraph>
+          </Dialog.Content>
+          <Dialog.Actions>
+            <IconButton icon="thumb-down" onPress={() => hideHint(false)} />
+            <IconButton icon="thumb-up" onPress={() => hideHint(true)} />
+          </Dialog.Actions>
+        </Dialog>
+      </Portal>
     </View>
   );
 }

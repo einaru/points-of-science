@@ -21,6 +21,7 @@ export default {
   "Get a hint?": "Få et hint?",
   "Go back": "Gå tilbake",
   "Haven't activated your account yet?": "Har du ikke aktivert kontoen din enda?",
+  "Here's a little hint": "Her er et lite hint",
   "Intro": "Intro",
   "Leaderboards": "Ledertavler",
   "Log in": "Logg inn",

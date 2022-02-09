@@ -20,6 +20,7 @@ const strings = [
   "Get a hint?",
   "Go back",
   "Haven't activated your account yet?",
+  "Here's a little hint",
   "Intro",
   "Leaderboards",
   "Log in",

@@ -51,7 +51,10 @@ function signUp(args) {
         );
       })
       .then((user) => {
-        updateData(config.db.table.user, user.data);
+        return Promise.all([updateData(config.db.table.user, user.data), user]);
+      })
+      .then((data) => {
+        const user = data[1];
         return signIn(user.data.username, password);
       })
       .then((response) => {

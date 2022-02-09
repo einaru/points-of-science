@@ -1,22 +1,18 @@
-function rewardCreator() {
-  const reward = emptyData();
+import { createObjectTemplate, saveData } from "../../internal.js";
+import config from "../../Config/config.js";
 
-  return {
-    reward: {
-      ...reward,
-      ...updateData(reward.data),
-      ...deleteReward(reward.data),
-    },
-  };
-}
-
-function updateData(content) {
+function updateData(reward) {
   const key = "updateData";
   const code = (args) => {
-    // Fill in the blanks
-    for (const [key, value] of Object.entries(args)) {
-      content[key] = value;
+    if (args == null || args !== Object(args)) {
+      throw new Error(
+        "Reward could not be updated because of wrong type of input. Input must be an object."
+      );
     }
+
+    Object.keys(args).forEach((key) => {
+      reward[key] = args[key];
+    });
   };
 
   return createObjectTemplate(key, code);
@@ -31,18 +27,26 @@ function deleteReward(reward) {
   return createObjectTemplate(key, code);
 }
 
-function createObjectTemplate(functionKey, code) {
-  const object = {};
-  object[functionKey] = code;
-  return object;
-}
-
 function emptyData() {
   return {
     data: {
+      id: "",
       max_points: 0,
       first_try_points: 0,
       bonus_points: 0,
+    },
+  };
+}
+
+function rewardCreator() {
+  const reward = emptyData();
+
+  return {
+    reward: {
+      ...reward,
+      ...updateData(reward.data),
+      ...deleteReward(reward.data),
+      ...saveData(),
     },
   };
 }

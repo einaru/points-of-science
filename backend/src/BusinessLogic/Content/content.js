@@ -14,9 +14,9 @@ function emptyData() {
 function updateContent(content) {
   const functionKey = "updateData";
   const code = (args) => {
-    if (args == null && args !== Object(args)) {
+    if (args == null || args !== Object(args)) {
       throw new Error(
-        "Content could not be updated because of wrong type of input."
+        "Content could not be updated because of wrong type of input. Input must be an object."
       );
     }
 

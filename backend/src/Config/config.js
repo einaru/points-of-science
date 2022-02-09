@@ -10,9 +10,12 @@ const config = {
   db: {
     table: {
       category: "Category",
+      challenge: "Challenge",
       content: "Content",
       progress: "Progress",
       refreshToken: "RefreshToken",
+      reflection: "Reflection",
+      reward: "Reward",
       user: "User",
       validUsername: "ValidUsername",
     },

@@ -1,31 +1,5 @@
-function reflectionCreator() {
-  const reflection = emptyData();
-
-  return {
-    reflection: {
-      ...reflection,
-      ...setTitle(reflection.data),
-      ...setSolution(reflection.data),
-      ...deleteReflection(reflection.data),
-    },
-  };
-}
-
-function argumentCreator() {
-  const argument = emptyData();
-  addEmptyChoiceList(argument);
-
-  return {
-    reflection: {
-      ...argument,
-      ...setTitle(argument.data),
-      ...setSolution(argument.data),
-      ...addChoice(argument.data),
-      ...removeChoice(argument.data),
-      ...deleteReflection(argument.data),
-    },
-  };
-}
+import { createObjectTemplate, saveData } from "../../internal.js";
+import config from "../../Config/config.js";
 
 function setTitle(reflection) {
   const key = "setTitle";
@@ -72,16 +46,10 @@ function deleteReflection(reflection) {
   return createObjectTemplate(key, code);
 }
 
-function createObjectTemplate(functionKey, code) {
-  const object = {};
-  object[functionKey] = code;
-  return object;
-}
-
 function emptyData() {
   return {
     data: {
-      id: 0,
+      id: "",
       title: "",
       solution: "",
     },
@@ -90,6 +58,37 @@ function emptyData() {
 
 function addEmptyChoiceList(argument) {
   argument.data.choices = [];
+}
+
+function reflectionCreator() {
+  const reflection = emptyData();
+
+  return {
+    reflection: {
+      ...reflection,
+      ...setTitle(reflection.data),
+      ...setSolution(reflection.data),
+      ...deleteReflection(reflection.data),
+      ...saveData(),
+    },
+  };
+}
+
+function argumentCreator() {
+  const argument = emptyData();
+  addEmptyChoiceList(argument);
+
+  return {
+    reflection: {
+      ...argument,
+      ...setTitle(argument.data),
+      ...setSolution(argument.data),
+      ...addChoice(argument.data),
+      ...removeChoice(argument.data),
+      ...deleteReflection(argument.data),
+      ...saveData(),
+    },
+  };
 }
 
 export { reflectionCreator, argumentCreator };

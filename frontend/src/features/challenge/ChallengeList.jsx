@@ -1,6 +1,7 @@
 import React from "react";
-import { ScrollView, View } from "react-native";
-import { Card, Chip } from "react-native-paper";
+import { Image, ScrollView, View } from "react-native";
+import { Chip, Title, TouchableRipple } from "react-native-paper";
+import { Surface } from "../../shared/components";
 import styles from "./ChallengeList.style";
 
 const fallbackImage = require("./assets/challenge.png");
@@ -10,18 +11,22 @@ function ChallengeListItem({ challenge, onPress }) {
     ? { uri: challenge.image }
     : fallbackImage;
   return (
-    <Card onPress={onPress} style={styles.listItem}>
-      <Card.Title title={challenge.name} />
-      <Card.Cover style={styles.listItemCover} source={imageSource} />
-      <Card.Content style={styles.listItemContent}>
-        <Chip mode="outlined" style={styles.chip}>
-          {challenge.difficulty.name}
-        </Chip>
-        <Chip mode="outlined" style={styles.chip}>
-          {challenge.points} points
-        </Chip>
-      </Card.Content>
-    </Card>
+    <Surface style={styles.surface}>
+      <TouchableRipple onPress={onPress}>
+        <View>
+          <Title style={styles.title}>{challenge.name}</Title>
+          <Image style={styles.image} source={imageSource} />
+          <View style={styles.metaContainer}>
+            <Chip style={styles.chip} mode="outlined">
+              {challenge.difficulty.name}
+            </Chip>
+            <Chip style={styles.chip} mode="outlined">
+              {challenge.reward.value} points
+            </Chip>
+          </View>
+        </View>
+      </TouchableRipple>
+    </Surface>
   );
 }
 

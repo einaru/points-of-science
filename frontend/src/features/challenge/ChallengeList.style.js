@@ -5,21 +5,25 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 8,
   },
-  listItem: {
-    marginBottom: 8,
-  },
-  listItemCover: {
-    height: 100,
-  },
-  listItemContent: {
+  metaContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingTop: 8,
-    paddingBottom: 8,
-    paddingHorizontal: 8,
+    margin: 8,
+  },
+  title: {
+    marginVertical: 8,
+    marginHorizontal: 8,
+  },
+  image: {
+    width: "100%",
+    height: 100,
   },
   chip: {
     marginEnd: 4,
+  },
+  surface: {
+    marginBottom: 8,
+    elevation: 2,
   },
 });
 

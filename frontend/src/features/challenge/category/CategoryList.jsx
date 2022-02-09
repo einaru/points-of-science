@@ -1,8 +1,9 @@
 import React from "react";
 import { Image, View } from "react-native";
-import { Surface, Title, TouchableRipple } from "react-native-paper";
+import { Title, TouchableRipple } from "react-native-paper";
 import styles from "./CategoryList.style";
 import data from "../assets/data.json";
+import { Surface } from "../../../shared/components";
 
 const fallbackImage = require("../assets/category.png");
 

@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Image, View } from "react-native";
 import { Title, TouchableRipple } from "react-native-paper";
 import styles from "./CategoryList.style";
-import data from "../assets/data.json";
 import { Surface } from "../../../shared/components";
+import ContentContext from "../../content/ContentContext";
 
 const fallbackImage = require("../assets/category.png");
 
@@ -25,7 +25,7 @@ function CategoryListItem({ category, onPress }) {
 }
 
 function CategoryList({ navigation }) {
-  const { categories } = data;
+  const { categories } = useContext(ContentContext);
 
   return (
     <View style={styles.listContainer}>

@@ -49,23 +49,19 @@ function updateClickStream(clickStream) {
 
 function deleteClickStream(data) {
   const functionKey = "deleteClickStream";
-  const code = (clickStream) => {
+  const code = () => {
     return new Promise((resolve, reject) => {
-      if (data == null || clickStream == null) {
+      if (data == null) {
         throw new Error("Click stream object or its data is missing.");
       }
 
-      if (clickStream !== Object(clickStream)) {
-        throw new Error("Click stream is not an object.");
-      }
-
-      clickStream.clickStreamItem
-        .deleteClickStreamItem(clickStream.clickStreamItem)
+      deleteData(config.db.table.clickStream, data.id)
         .then(() => {
-          return deleteData(config.db.table.clickStream, data.id);
-        })
-        .then((response) => {
-          resolve(response);
+          resolve({
+            message: `Click stream with id ${data.id} successfully deleted.`,
+            status: 200,
+            type: config.responseType.success,
+          });
         })
         .catch((error) => {
           reject(error);

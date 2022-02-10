@@ -1,10 +1,12 @@
-import { GraphQLString, GraphQLInt, GraphQLList } from "graphql";
+import { GraphQLString, GraphQLList } from "graphql";
 import {
   authenticateAccessToken,
   checkPermissionLevel,
   clickStreamCreator,
+  getData,
   getDataFromDatabaseByFilter,
   nextID,
+  AllClickStreamsResponseModel,
   CreateClickStreamModel,
   NormalResponseModel,
 } from "../../../internal.js";
@@ -19,11 +21,50 @@ function getResponseObject(message, statusCode, type) {
 }
 
 // Root Queries - Used to retrieve data with GET-Requests
+const getAllClickStreamsQuery = {
+  type: AllClickStreamsResponseModel,
+  args: {},
+  async resolve(parent, args, context) {
+    try {
+      await authenticateAccessToken(context);
+
+      let response = checkPermissionLevel(
+        config.permissionLevel.admin,
+        context.user
+      );
+      if (response.type === "error") {
+        return response;
+      }
+
+      const clickStreamsData = await getData(config.db.table.clickStream);
+      let clickStreams = [];
+      clickStreamsData.forEach((clickStreamData) => {
+        const clickStream = clickStreamCreator();
+        clickStreams.push(
+          clickStream.restoreObject(clickStream, clickStreamData)
+        );
+      });
+
+      response = getResponseObject(
+        "Click streams retrieved successfully",
+        200,
+        config.responseType.success
+      );
+
+      clickStreams = await Promise.all(clickStreams);
+      response.data = clickStreams;
+      return response;
+    } catch (error) {
+      return error;
+    }
+  },
+};
 
 // Mutation Queries - Used to update or delete data with PUT- and DELETE-requests
 const createClickStreamQuery = {
   type: NormalResponseModel,
   args: {
+    sessionToken: { type: GraphQLString },
     clicks: { type: new GraphQLList(CreateClickStreamModel) },
   },
   async resolve(parent, args, context) {
@@ -31,22 +72,45 @@ const createClickStreamQuery = {
       await authenticateAccessToken(context);
       const { user } = context;
 
-      const id = nextID(config.db.table.clickStream);
-      const data = args;
-      data.id = id;
-      data.userID = user.id;
+      const refreshToken = await getDataFromDatabaseByFilter(
+        "id",
+        args.sessionToken,
+        config.db.table.refreshToken
+      );
 
+      if (refreshToken == null) {
+        throw new Error("Session token is not valid.");
+      }
+
+      const clickStreamData = await getDataFromDatabaseByFilter(
+        "sessionToken",
+        args.sessionToken,
+        config.db.table.clickStream
+      );
+
+      let id;
+      let data;
       const clickStream = clickStreamCreator();
-      clickStream.updateData(data);
+      if (clickStreamData == null) {
+        id = nextID(config.db.table.clickStream);
+        data = args;
+        data.id = id;
+        data.userID = user.id;
+        clickStream.updateData(data);
+      } else {
+        [data] = clickStreamData;
+        clickStream.updateData(data);
+        args.clicks.forEach((click) => {
+          clickStream.addClickNode(click);
+        });
+      }
 
-      const response = await clickStream.saveData(
+      return await clickStream.saveData(
         "clickStream",
         clickStream,
         config.db.table.clickStream,
         "Click stream stored successfully."
       );
-
-      return response;
     } catch (error) {
       return error;
     }
@@ -69,6 +133,7 @@ const deleteClickStreamQuery = {
       }
 
       const clickStreamData = await getDataFromDatabaseByFilter(
+        "id",
         args.clickStreamID,
         config.db.table.clickStream
       );
@@ -92,4 +157,8 @@ const deleteClickStreamQuery = {
   },
 };
 
-export { createClickStreamQuery, deleteClickStreamQuery };
+export {
+  createClickStreamQuery,
+  deleteClickStreamQuery,
+  getAllClickStreamsQuery,
+};

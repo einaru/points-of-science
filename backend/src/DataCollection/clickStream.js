@@ -1,4 +1,9 @@
-import { createObjectTemplate, deleteData, saveData } from "../internal.js";
+import {
+  createObjectTemplate,
+  convertToResponseObject,
+  deleteData,
+  saveData,
+} from "../internal.js";
 import config from "../Config/config.js";
 
 function clickNode() {
@@ -12,6 +17,32 @@ function clickNode() {
       source: "",
     },
   };
+}
+
+function addClickNode(clickStream) {
+  const functionKey = "addClickNode";
+  const code = (data) => {
+    if (data == null) {
+      throw new Error("Click stream data is missing");
+    }
+
+    const node = clickNode();
+    Object.keys(node).forEach((key) => {
+      if (data[key]) {
+        if (data[key] === "metadata") {
+          Object.keys(node[key]).forEach((metaDataKey) => {
+            node[key][metaDataKey] = data[key][metaDataKey];
+          });
+        } else {
+          node[key] = data[key];
+        }
+      }
+    });
+
+    clickStream.clicks.push(node);
+  };
+
+  return createObjectTemplate(functionKey, code);
 }
 
 function updateClickStream(clickStream) {
@@ -40,6 +71,22 @@ function updateClickStream(clickStream) {
         });
       } else {
         clickStream[key] = args[key];
+      }
+    });
+  };
+
+  return createObjectTemplate(functionKey, code);
+}
+
+function restoreObject() {
+  const functionKey = "restoreObject";
+  const code = (clickStream, clickStreamData) => {
+    return new Promise((resolve, reject) => {
+      try {
+        clickStream.updateData(clickStreamData);
+        resolve(convertToResponseObject("clickStream", clickStream));
+      } catch (error) {
+        reject(error);
       }
     });
   };
@@ -76,6 +123,7 @@ function emptyData() {
   return {
     data: {
       id: "",
+      sessionToken: "",
       userID: "",
       clicks: [],
     },
@@ -87,7 +135,9 @@ function clickStreamCreator() {
 
   return {
     ...clickStream,
+    ...addClickNode(clickStream.data),
     ...updateClickStream(clickStream.data),
+    ...restoreObject(),
     ...deleteClickStream(clickStream.data),
     ...saveData(),
   };

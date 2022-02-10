@@ -89,6 +89,14 @@ function getChallengeStoredObject(object) {
   };
 }
 
+function getClickStreamStoredObject(object) {
+  return {
+    id: object.data.id,
+    userID: object.data.userID,
+    clicks: object.data.clicks,
+  };
+}
+
 function getCategoryStoredObject(object) {
   return {
     id: object.data.id,
@@ -116,6 +124,8 @@ function convertToStoredObject(key, object) {
       return getCategoryStoredObject(object);
     case "challenge":
       return getChallengeStoredObject(object);
+    case "clickStream":
+      return getClickStreamStoredObject(object);
     case "content":
       return getContentStoredObject(object);
     default:

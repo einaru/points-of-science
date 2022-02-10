@@ -11,6 +11,8 @@ const config = {
     table: {
       category: "Category",
       challenge: "Challenge",
+      clickStream: "ClickStream",
+      clickStreamItem: "ClickStreamItem",
       content: "Content",
       progress: "Progress",
       refreshToken: "RefreshToken",

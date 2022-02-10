@@ -1,7 +1,9 @@
 import { GraphQLString, GraphQLInt, GraphQLList } from "graphql";
 import {
   authenticateAccessToken,
+  checkPermissionLevel,
   clickStreamCreator,
+  getDataFromDatabaseByFilter,
   nextID,
   CreateClickStreamModel,
   NormalResponseModel,
@@ -51,4 +53,43 @@ const createClickStreamQuery = {
   },
 };
 
-export { createClickStreamQuery };
+const deleteClickStreamQuery = {
+  type: NormalResponseModel,
+  args: {
+    clickStreamID: { type: GraphQLString },
+  },
+  async resolve(parent, args, context) {
+    try {
+      await authenticateAccessToken(context);
+      const { user } = context;
+
+      let response = checkPermissionLevel(config.permissionLevel.admin, user);
+      if (response.type === "error") {
+        return response;
+      }
+
+      const clickStreamData = await getDataFromDatabaseByFilter(
+        args.clickStreamID,
+        config.db.table.clickStream
+      );
+
+      if (clickStreamData == null || clickStreamData[0] == null) {
+        return getResponseObject(
+          "The click stream you try to delete does not exist.",
+          400,
+          config.responseType.error
+        );
+      }
+
+      const clickStream = clickStreamCreator();
+      clickStream.updateData(clickStreamData[0]);
+
+      response = await clickStream.deleteClickStream();
+      return response;
+    } catch (error) {
+      return error;
+    }
+  },
+};
+
+export { createClickStreamQuery, deleteClickStreamQuery };

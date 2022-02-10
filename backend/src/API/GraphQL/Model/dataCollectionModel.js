@@ -1,13 +1,42 @@
-import { GraphQLObjectType, GraphQLString } from "graphql";
+import {
+  GraphQLObjectType,
+  GraphQLInputObjectType,
+  GraphQLString,
+  GraphQLList,
+} from "graphql";
+import { ResponseModel } from "../../../internal.js";
+
+const MetaData = {
+  challengeID: { type: GraphQLString },
+  prevScreen: { type: GraphQLString },
+  source: { type: GraphQLString },
+};
+
+const MetaDataModel = new GraphQLObjectType({
+  name: "MetaDataModel",
+  fields: () => ({
+    ...MetaData,
+  }),
+});
+
+const MetaDataInputModel = new GraphQLInputObjectType({
+  name: "MetaDataInputModel",
+  fields: () => ({
+    ...MetaData,
+  }),
+});
+
+const ClickStream = {
+  event: { type: GraphQLString },
+  screen: { type: GraphQLString },
+  timestamp: { type: GraphQLString },
+};
 
 const ClickStreamItemModel = new GraphQLObjectType({
   name: "ClickStreamItemModel",
   fields: () => ({
-    id: { type: GraphQLString },
-    screenID: { type: GraphQLString },
-    timestamp: { type: GraphQLString },
-    nextItem: { type: ClickStreamItemModel },
-    prevItem: { type: ClickStreamItemModel },
+    ...ClickStream,
+    metadata: { type: MetaDataModel },
   }),
 });
 
@@ -15,9 +44,30 @@ const ClickStreamModel = new GraphQLObjectType({
   name: "ClickStream",
   fields: () => ({
     id: { type: GraphQLString },
+    sessionToken: { type: GraphQLString },
     userID: { type: GraphQLString },
-    clickStreamItem: { type: ClickStreamItemModel },
+    items: { type: new GraphQLList(ClickStreamItemModel) },
   }),
 });
 
-export { ClickStreamModel };
+const CreateClickStreamModel = new GraphQLInputObjectType({
+  name: "createClickStream",
+  fields: () => ({
+    ...ClickStream,
+    metadata: { type: MetaDataInputModel },
+  }),
+});
+
+const AllClickStreamsResponseModel = new GraphQLObjectType({
+  name: "AllClickStreamsResponse",
+  fields: () => ({
+    ...ResponseModel,
+    data: { type: new GraphQLList(ClickStreamModel) },
+  }),
+});
+
+export {
+  ClickStreamModel,
+  CreateClickStreamModel,
+  AllClickStreamsResponseModel,
+};

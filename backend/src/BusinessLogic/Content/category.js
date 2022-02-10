@@ -78,10 +78,12 @@ function restoreObject() {
     return new Promise((resolve, reject) => {
       const { contentID, progressID, challenges } = categoryData;
       const contentData = getDataFromDatabaseByFilter(
+        "id",
         contentID,
         config.db.table.content
       );
       const progressData = getDataFromDatabaseByFilter(
+        "id",
         progressID,
         config.db.table.progress
       );

@@ -22,11 +22,11 @@ function getResponseObject(message, statusCode, type, data) {
   };
 }
 
-function getDataFromDatabaseByFilter(id, table) {
+function getDataFromDatabaseByFilter(key, value, table) {
   const filter = getFilter({
-    key: "id",
+    key,
     operator: "==",
-    value: id,
+    value,
   });
   return getDataByFilter(table, filter);
 }
@@ -89,6 +89,15 @@ function getChallengeStoredObject(object) {
   };
 }
 
+function getClickStreamStoredObject(object) {
+  return {
+    id: object.data.id,
+    sessionToken: object.data.sessionToken,
+    userID: object.data.userID,
+    clicks: object.data.clicks,
+  };
+}
+
 function getCategoryStoredObject(object) {
   return {
     id: object.data.id,
@@ -116,6 +125,8 @@ function convertToStoredObject(key, object) {
       return getCategoryStoredObject(object);
     case "challenge":
       return getChallengeStoredObject(object);
+    case "clickStream":
+      return getClickStreamStoredObject(object);
     case "content":
       return getContentStoredObject(object);
     default:
@@ -140,6 +151,15 @@ function getChallengeResponseObject(object) {
     ...object.content.data,
     reflection: object.reflection.data,
     reward: object.reward.data,
+  };
+}
+
+function getClickStreamResponseObject(object) {
+  return {
+    id: object.data.id,
+    sessionToken: object.data.sessionToken,
+    userID: object.data.userID,
+    items: object.data.clicks,
   };
 }
 
@@ -170,6 +190,8 @@ function convertToResponseObject(key, object) {
       return getCategoryResponseObject(object);
     case "challenge":
       return getChallengeResponseObject(object);
+    case "clickStream":
+      return getClickStreamResponseObject(object);
     case "content":
       return getContentResponseObject(object);
     default:

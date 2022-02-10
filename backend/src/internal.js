@@ -7,6 +7,7 @@ export * from "./API/GraphQL/Model/userModel.js";
 export * from "./API/GraphQL/Query/authQuery.js";
 export * from "./API/GraphQL/Query/categoryQuery.js";
 export * from "./API/GraphQL/Query/challengeQuery.js";
+export * from "./API/GraphQL/Query/clickStreamQuery.js";
 export * from "./API/GraphQL/Query/userQuery.js";
 export * from "./API/GraphQL/index.js";
 
@@ -41,8 +42,8 @@ export * as JSONProvider from "./Database/Provider/json_provider.js";
 export * as FirebaseProvider from "./Database/Provider/firebase_provider.js";
 export * from "./Database/Query/query.js";
 
-export * from "./DataCollection/click_stream.js";
-export * from "./DataCollection/click_stream_item.js";
+export * from "./DataCollection/clickStream.js";
+export * from "./DataCollection/clickStreamItem.js";
 
 export * from "./ErrorHandler/error_handler.js";
 

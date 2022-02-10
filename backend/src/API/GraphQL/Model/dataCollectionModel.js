@@ -1,13 +1,42 @@
-import { GraphQLObjectType, GraphQLString } from "graphql";
+import {
+  GraphQLObjectType,
+  GraphQLInputObjectType,
+  GraphQLString,
+  GraphQLList,
+} from "graphql";
+
+const MetaData = {
+  challengeID: { type: GraphQLString },
+  prevScreen: { type: GraphQLString },
+  source: { type: GraphQLString },
+};
+
+const MetaDataModel = new GraphQLObjectType({
+  name: "MetaDataModel",
+  fields: () => ({
+    ...MetaData,
+  }),
+});
+
+const MetaDataInputModel = new GraphQLInputObjectType({
+  name: "MetaDataInputModel",
+  fields: () => ({
+    ...MetaData,
+  }),
+});
+
+const ClickStream = {
+  event: { type: GraphQLString },
+  screen: { type: GraphQLString },
+  timestamp: { type: GraphQLString },
+};
 
 const ClickStreamItemModel = new GraphQLObjectType({
   name: "ClickStreamItemModel",
   fields: () => ({
     id: { type: GraphQLString },
-    screenID: { type: GraphQLString },
-    timestamp: { type: GraphQLString },
-    nextItem: { type: ClickStreamItemModel },
-    prevItem: { type: ClickStreamItemModel },
+    ...ClickStream,
+    metadata: { type: MetaDataModel },
   }),
 });
 
@@ -16,8 +45,16 @@ const ClickStreamModel = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLString },
     userID: { type: GraphQLString },
-    clickStreamItem: { type: ClickStreamItemModel },
+    items: { type: new GraphQLList(ClickStreamItemModel) },
   }),
 });
 
-export { ClickStreamModel };
+const CreateClickStreamModel = new GraphQLInputObjectType({
+  name: "createClickStream",
+  fields: () => ({
+    ...ClickStream,
+    metadata: { type: MetaDataInputModel },
+  }),
+});
+
+export { ClickStreamModel, CreateClickStreamModel };

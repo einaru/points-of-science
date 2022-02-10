@@ -41,16 +41,19 @@ function restoreObject() {
       const { contentID, reflectionID, rewardID } = challengeData;
 
       const contentData = getDataFromDatabaseByFilter(
+        "id",
         contentID,
         config.db.table.content
       );
 
       const reflectionData = getDataFromDatabaseByFilter(
+        "id",
         reflectionID,
         config.db.table.reflection
       );
 
       const rewardData = getDataFromDatabaseByFilter(
+        "id",
         rewardID,
         config.db.table.reward
       );

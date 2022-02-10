@@ -22,11 +22,11 @@ function getResponseObject(message, statusCode, type, data) {
   };
 }
 
-function getDataFromDatabaseByFilter(id, table) {
+function getDataFromDatabaseByFilter(key, value, table) {
   const filter = getFilter({
-    key: "id",
+    key,
     operator: "==",
-    value: id,
+    value,
   });
   return getDataByFilter(table, filter);
 }
@@ -92,6 +92,7 @@ function getChallengeStoredObject(object) {
 function getClickStreamStoredObject(object) {
   return {
     id: object.data.id,
+    sessionToken: object.data.sessionToken,
     userID: object.data.userID,
     clicks: object.data.clicks,
   };
@@ -153,6 +154,15 @@ function getChallengeResponseObject(object) {
   };
 }
 
+function getClickStreamResponseObject(object) {
+  return {
+    id: object.data.id,
+    sessionToken: object.data.sessionToken,
+    userID: object.data.userID,
+    items: object.data.clicks,
+  };
+}
+
 function getCategoryResponseObject(object) {
   return {
     id: object.data.id,
@@ -180,6 +190,8 @@ function convertToResponseObject(key, object) {
       return getCategoryResponseObject(object);
     case "challenge":
       return getChallengeResponseObject(object);
+    case "clickStream":
+      return getClickStreamResponseObject(object);
     case "content":
       return getContentResponseObject(object);
     default:

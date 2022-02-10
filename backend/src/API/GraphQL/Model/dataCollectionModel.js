@@ -4,6 +4,7 @@ import {
   GraphQLString,
   GraphQLList,
 } from "graphql";
+import { ResponseModel } from "../../../internal.js";
 
 const MetaData = {
   challengeID: { type: GraphQLString },
@@ -34,7 +35,6 @@ const ClickStream = {
 const ClickStreamItemModel = new GraphQLObjectType({
   name: "ClickStreamItemModel",
   fields: () => ({
-    id: { type: GraphQLString },
     ...ClickStream,
     metadata: { type: MetaDataModel },
   }),
@@ -44,6 +44,7 @@ const ClickStreamModel = new GraphQLObjectType({
   name: "ClickStream",
   fields: () => ({
     id: { type: GraphQLString },
+    sessionToken: { type: GraphQLString },
     userID: { type: GraphQLString },
     items: { type: new GraphQLList(ClickStreamItemModel) },
   }),
@@ -57,4 +58,16 @@ const CreateClickStreamModel = new GraphQLInputObjectType({
   }),
 });
 
-export { ClickStreamModel, CreateClickStreamModel };
+const AllClickStreamsResponseModel = new GraphQLObjectType({
+  name: "AllClickStreamsResponse",
+  fields: () => ({
+    ...ResponseModel,
+    data: { type: new GraphQLList(ClickStreamModel) },
+  }),
+});
+
+export {
+  ClickStreamModel,
+  CreateClickStreamModel,
+  AllClickStreamsResponseModel,
+};

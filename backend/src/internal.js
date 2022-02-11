@@ -43,7 +43,6 @@ export * as FirebaseProvider from "./Database/Provider/firebase_provider.js";
 export * from "./Database/Query/query.js";
 
 export * from "./DataCollection/clickStream.js";
-export * from "./DataCollection/clickStreamItem.js";
 
 export * from "./ErrorHandler/error_handler.js";
 

@@ -33,27 +33,27 @@ const DifficultyEnum = new GraphQLEnumType({
   },
 });
 
-const challengeFields = {
-  id: { type: GraphQLString },
-  categoryID: { type: GraphQLString },
-  difficulty: { type: DifficultyEnum },
-  ...ContentResponse,
-  // activity: { type: ActivityModel },
-  reflection: { type: ReflectionModel },
-  reward: { type: RewardModel },
-};
-
 const ChallengeModel = new GraphQLObjectType({
   name: "Challenge",
   fields: () => ({
-    ...challengeFields,
+    id: { type: GraphQLString },
+    categoryID: { type: GraphQLString },
+    difficulty: { type: DifficultyEnum },
+    ...ContentResponse,
+    // activity: { type: ActivityModel },
+    reflection: { type: ReflectionModel },
+    reward: { type: RewardModel },
   }),
 });
 
-const challengeInputModel = new GraphQLInputObjectType({
+const ChallengeInputModel = new GraphQLInputObjectType({
   name: "ChallengeInput",
   fields: () => ({
-    ...challengeFields,
+    categoryID: { type: GraphQLString },
+    title: { type: GraphQLString },
+    image: { type: GraphQLString },
+    description: { type: GraphQLString },
+    difficulty: { type: DifficultyEnum },
   }),
 });
 
@@ -111,6 +111,7 @@ const LeaderboardModel = new GraphQLObjectType({
 export {
   AllChallengesResponseModel,
   AchievementModel,
+  ChallengeInputModel,
   RewardModel,
   ProgressModel,
   LeaderboardModel,

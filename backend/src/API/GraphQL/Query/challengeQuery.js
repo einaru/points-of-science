@@ -1,8 +1,8 @@
-import { GraphQLString, GraphQLInt } from "graphql";
 import {
   authenticateAccessToken,
   AllChallengesResponseModel,
   ChallengeResponseModel,
+  ChallengeInputModel,
   categoryCreator,
   challengeCreator,
   checkPermissionLevel,
@@ -56,12 +56,7 @@ const getAllChallengesQuery = {
 const createChallengeQuery = {
   type: ChallengeResponseModel,
   args: {
-    categoryID: { type: GraphQLString },
-    title: { type: GraphQLString },
-    image: { type: GraphQLString },
-    description: { type: GraphQLString },
-    difficulty: { type: GraphQLInt },
-    contentID: { type: GraphQLString },
+    challenge: { type: ChallengeInputModel },
   },
   async resolve(parent, args, context) {
     try {
@@ -75,10 +70,11 @@ const createChallengeQuery = {
         return response;
       }
 
-      let { categoryID, contentID } = args;
+      const input = args.challenge;
+      const { categoryID, title, image, description, difficulty } = input;
 
       let categoryData;
-      if (args.categoryID.trim().length === 0) {
+      if (categoryID.trim().length === 0) {
         return getResponseObject(
           "Category you try to add the challenge to does not exist. Please create a Category before creating a Challenge.",
           400,
@@ -86,7 +82,7 @@ const createChallengeQuery = {
         );
       }
 
-      if (args.categoryID.trim().length > 0) {
+      if (categoryID.trim().length > 0) {
         const filter = getFilter({
           key: "id",
           operator: "==",
@@ -113,30 +109,19 @@ const createChallengeQuery = {
 
       const challengeID = nextID(config.db.table.challenge);
 
-      let contentData;
-      const filter = getFilter({
-        key: "id",
-        operator: "==",
-        value: contentID,
-      });
-      const content = await getDataByFilter(config.db.table.content, filter);
-      if (content == null) {
-        contentID = nextID(config.db.table.content);
-        contentData = {
-          id: contentID,
-          title: args.title,
-          image: args.image,
-          description: args.description,
-        };
-      } else {
-        [contentData] = content;
-      }
+      const contentID = nextID(config.db.table.content);
+      const contentData = {
+        id: contentID,
+        title,
+        image,
+        description,
+      };
 
       const challenge = challengeCreator();
       const newChallenge = {
         id: challengeID,
-        categoryID: args.categoryID,
-        difficulty: args.difficulty || 1,
+        categoryID,
+        difficulty: difficulty || 1,
       };
       challenge.updateData(newChallenge);
 

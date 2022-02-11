@@ -4,6 +4,7 @@ import {
   GraphQLString,
   GraphQLInt,
   GraphQLList,
+  GraphQLInputObjectType,
 } from "graphql";
 import {
   ContentModel,
@@ -42,6 +43,17 @@ const ChallengeModel = new GraphQLObjectType({
     // activity: { type: ActivityModel },
     reflection: { type: ReflectionModel },
     reward: { type: RewardModel },
+  }),
+});
+
+const ChallengeInputModel = new GraphQLInputObjectType({
+  name: "ChallengeInput",
+  fields: () => ({
+    categoryID: { type: GraphQLString },
+    title: { type: GraphQLString },
+    image: { type: GraphQLString },
+    description: { type: GraphQLString },
+    difficulty: { type: DifficultyEnum },
   }),
 });
 
@@ -99,6 +111,7 @@ const LeaderboardModel = new GraphQLObjectType({
 export {
   AllChallengesResponseModel,
   AchievementModel,
+  ChallengeInputModel,
   RewardModel,
   ProgressModel,
   LeaderboardModel,

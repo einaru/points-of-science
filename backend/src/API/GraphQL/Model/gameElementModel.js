@@ -4,6 +4,7 @@ import {
   GraphQLString,
   GraphQLInt,
   GraphQLList,
+  GraphQLInputObjectType,
 } from "graphql";
 import {
   ContentModel,
@@ -32,16 +33,27 @@ const DifficultyEnum = new GraphQLEnumType({
   },
 });
 
+const challengeFields = {
+  id: { type: GraphQLString },
+  categoryID: { type: GraphQLString },
+  difficulty: { type: DifficultyEnum },
+  ...ContentResponse,
+  // activity: { type: ActivityModel },
+  reflection: { type: ReflectionModel },
+  reward: { type: RewardModel },
+};
+
 const ChallengeModel = new GraphQLObjectType({
   name: "Challenge",
   fields: () => ({
-    id: { type: GraphQLString },
-    categoryID: { type: GraphQLString },
-    difficulty: { type: DifficultyEnum },
-    ...ContentResponse,
-    // activity: { type: ActivityModel },
-    reflection: { type: ReflectionModel },
-    reward: { type: RewardModel },
+    ...challengeFields,
+  }),
+});
+
+const challengeInputModel = new GraphQLInputObjectType({
+  name: "ChallengeInput",
+  fields: () => ({
+    ...challengeFields,
   }),
 });
 

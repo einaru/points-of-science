@@ -4,7 +4,7 @@
     {
       "id": 1,
       "username": "Antonietta Riccard",
-      "password": "$2b$10$HGImWpGHTqsCUW7QPqE.xOLknm/a.IqV7bC.35ybKUGqLj13e9xiO",
+      "password": "testpassword",
       "permission": 3,
       "achievement": [],
       "challenge": [],
@@ -130,7 +130,7 @@
     {
       "id": 15,
       "username": "Dotty Mansford",
-      "password": "RbTGb8",
+      "password": "RbTGb8ndas9",
       "permission": 3,
       "achievement": [],
       "challenge": [],

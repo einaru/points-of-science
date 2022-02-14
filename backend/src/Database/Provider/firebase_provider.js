@@ -80,8 +80,8 @@ function deleteData(collectionName, docRef) {
       .collection(collectionName)
       .doc(`${docRef}`)
       .delete()
-      .then((message) => {
-        resolve(message);
+      .then(() => {
+        resolve(true);
       })
       .catch((error) => {
         reject(error);

@@ -1,8 +1,7 @@
 import {
   connectToDatabase,
-  JSONProvider,
+  getDataFromDatabaseByFilter,
   profileCreator,
-  resetTestData,
 } from "../../../src/internal.js";
 import config from "../../../src/Config/config.js";
 
@@ -16,12 +15,12 @@ let notMatch;
 
 beforeAll(async () => {
   connectToDatabase();
-  resetTestData(config.db.test.data);
   collectionName = config.db.table.user;
-  userData = await JSONProvider.getDataByFilter(collectionName, {
-    key: "id",
-    value: 1,
-  });
+  userData = await getDataFromDatabaseByFilter(
+    "username",
+    "Antonietta Riccard",
+    collectionName
+  );
   [userData] = userData;
   user = profileCreator();
   user.updateData(userData);
@@ -30,8 +29,6 @@ beforeAll(async () => {
   shortPassword = "short";
   notMatch = "thisPasswordHasNoMatch";
 });
-
-test("Update name", () => {});
 
 test("Change password", () => {
   return user.changePassword(password, confirmPassword).then(() => {

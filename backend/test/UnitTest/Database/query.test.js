@@ -1,114 +1,93 @@
 import {
   connectToDatabase,
-  JSONProvider,
-  getDatabase,
-  resetTestData,
+  deleteData,
+  getData,
+  getDataFromDatabaseByFilter,
+  nextID,
+  updateData,
 } from "../../../src/internal.js";
 import config from "../../../src/Config/config.js";
 
 let collectionName;
 let nonExistingCollectionName;
-let filter;
 let user;
 let newTable;
-let database;
 
 beforeAll(async () => {
   connectToDatabase();
-  resetTestData(config.db.test.data);
-  database = getDatabase();
   collectionName = config.db.table.user;
   nonExistingCollectionName = "NotATableName";
-  filter = { key: "username", value: "Rayna Harteley" };
-  user = await JSONProvider.getDataByFilter(collectionName, {
-    key: "id",
-    value: 1,
-  });
-  [user] = user;
+  const userData = await getDataFromDatabaseByFilter(
+    "username",
+    "Antonietta Riccard",
+    collectionName
+  );
+  [user] = userData;
   newTable = "Other_Users";
 });
 
-test("Next id for table and increment by one.", () => {
-  return JSONProvider.getData(collectionName)
-    .then((dataList) => {
-      return Promise.all([JSONProvider.nextID(dataList), dataList]);
-    })
-    .then((result) => {
-      const expectedResult = result[1].length + 1;
-      expect(result[0]).toBe(expectedResult);
-    });
+test("Next id for table", () => {
+  const id = nextID(collectionName);
+  const expectedResult = true;
+  const result = id.length !== 0;
+  expect(result).toEqual(expectedResult);
 });
 
-test("Next id handle null.", () => {
-  try {
-    expect.assertions(1);
-    JSONProvider.nextID(null);
-  } catch (error) {
-    const expectedResult = `Table is not an array.`;
-    const result = error.message;
-    expect(result).toEqual(expectedResult);
-  }
+test("Next id throws error on null.", () => {
+  expect(() => nextID(null)).toThrow(Error);
 });
 
 test("Get data from database.", () => {
-  return JSONProvider.getData(collectionName).then((result) => {
-    const expectedResult = database[collectionName];
-    expect(result).toEqual(expectedResult);
+  return getData(collectionName).then((result) => {
+    const expectedResult = true;
+    expect(Array.isArray(result)).toEqual(expectedResult);
   });
 });
 
 test("Get data return null if table does not exist.", () => {
-  return JSONProvider.getData(nonExistingCollectionName).then((result) => {
-    const expectedResult = null;
+  return getData(nonExistingCollectionName).then((result) => {
+    const expectedResult = [];
     expect(result).toEqual(expectedResult);
   });
 });
 
 test("Get data by filter from database.", () => {
-  return JSONProvider.getDataByFilter(collectionName, filter).then((result) => {
-    const expectedResult = [
-      {
-        id: 58,
-        username: "Rayna Harteley",
-        password: "q6EImS",
-        permission: 2,
-        achievement: [],
-        challenge: [],
-        state: 1,
-      },
-    ];
-    expect(result).toEqual(expectedResult);
+  return getDataFromDatabaseByFilter(
+    "username",
+    "Lorinda Habron",
+    collectionName
+  ).then((result) => {
+    const expectedResult = 1;
+    expect(result.length).toBe(expectedResult);
   });
 });
 
 test("Get data by filter throw error if table does not exist.", () => {
-  expect.assertions(1);
-  return JSONProvider.getDataByFilter(nonExistingCollectionName, filter).catch(
-    (error) => {
-      const expectedResult = `Attempt to filter a table which do not exist.`;
-      const result = error.message;
-      expect(result).toEqual(expectedResult);
-    }
-  );
+  return getDataFromDatabaseByFilter(
+    "username",
+    "Lorinda Habron",
+    nonExistingCollectionName
+  ).catch((error) => {
+    const expectedResult = `Attempt to filter a table which do not exist.`;
+    const result = error.message;
+    expect(result).toEqual(expectedResult);
+  });
 });
 
 test("Create data in database.", () => {
-  const id = JSONProvider.nextID(database[collectionName]);
+  const id = nextID(collectionName);
   const newUser = {
     id,
     username: "Ola Nordmann",
     password: "thisIsNOtAnActualpassWord",
-    permission: "control",
-    achievement: [],
-    challenge: [],
+    permission: 2,
+    achievements: [],
+    challenges: [],
   };
 
-  return JSONProvider.updateData(collectionName, newUser)
+  return updateData(collectionName, newUser)
     .then(() => {
-      return JSONProvider.getDataByFilter(collectionName, {
-        key: "id",
-        value: newUser.id,
-      });
+      return getDataFromDatabaseByFilter("id", newUser.id, collectionName);
     })
     .then((result) => {
       const expectedResult = [newUser];
@@ -121,14 +100,14 @@ test("Create data creates table in database if table does not exist.", () => {
     id: 1,
     username: "Ola Nordmann",
     password: "thisIsNOtAnActualpassWord",
-    permission: "control",
-    achievement: [],
-    challenge: [],
+    permission: 3,
+    achievements: [],
+    challenges: [],
   };
 
-  return JSONProvider.updateData(newTable, newUser)
+  return updateData(newTable, newUser)
     .then(() => {
-      return JSONProvider.getData(newTable);
+      return getData(newTable);
     })
     .then((result) => {
       const expectedResult = [newUser];
@@ -137,13 +116,10 @@ test("Create data creates table in database if table does not exist.", () => {
 });
 
 test("Update data in database.", () => {
-  user.permission = "experimental";
-  return JSONProvider.updateData(collectionName, user)
+  user.permission = 2;
+  return updateData(collectionName, user)
     .then(() => {
-      return JSONProvider.getDataByFilter(collectionName, {
-        key: "id",
-        value: user.id,
-      });
+      return getDataFromDatabaseByFilter("id", user.id, collectionName);
     })
     .then((result) => {
       const expectedResult = [user];
@@ -152,24 +128,19 @@ test("Update data in database.", () => {
 });
 
 test("Delete data in database.", () => {
-  return JSONProvider.deleteData(collectionName, user)
+  return deleteData(collectionName, user)
     .then(() => {
-      return JSONProvider.getDataByFilter(collectionName, {
-        key: "id",
-        value: user.id,
-      });
+      return getDataFromDatabaseByFilter("id", user.id, collectionName);
     })
     .then((result) => {
-      const expectedResult = [];
-      expect(result).toEqual(expectedResult);
+      const expectedResult = 1;
+      expect(result.length).toEqual(expectedResult);
     });
 });
 
 test("Delete data returns false if table does not exist.", () => {
-  return JSONProvider.deleteData(nonExistingCollectionName, user).then(
-    (result) => {
-      const expectedResult = false;
-      expect(result).toEqual(expectedResult);
-    }
-  );
+  return deleteData(nonExistingCollectionName, user).then((result) => {
+    const expectedResult = false;
+    expect(result).toEqual(expectedResult);
+  });
 });

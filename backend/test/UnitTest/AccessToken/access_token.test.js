@@ -6,8 +6,7 @@ import {
   createRefreshToken,
   deleteRefreshTokenFromDatabase,
   getData,
-  getDataByFilter,
-  resetTestData,
+  getDataFromDatabaseByFilter,
 } from "../../../src/internal.js";
 import config from "../../../src/Config/config.js";
 
@@ -17,10 +16,15 @@ let userTable;
 
 beforeAll(async () => {
   connectToDatabase();
-  resetTestData(config.db.test.data);
   refreshTokenTable = config.db.table.refreshToken;
   userTable = config.db.table.user;
-  user = await getDataByFilter(userTable, { key: "id", value: 4 });
+  const userData = await getDataFromDatabaseByFilter(
+    "id",
+    "fQcf5jOFOZqzfKvFE7o4",
+    userTable
+  );
+
+  [user] = userData;
 });
 
 test("Create access token.", () => {
@@ -84,7 +88,7 @@ test("Authenticate with a null token.", () => {
 test("Delete a stored refresh token from database.", () => {
   return getData(refreshTokenTable)
     .then((refreshTokenListBefore) => {
-      const refreshToken = refreshTokenListBefore[0];
+      const refreshToken = refreshTokenListBefore[0].id;
       return Promise.all([
         deleteRefreshTokenFromDatabase(refreshToken),
         getData(refreshTokenTable),

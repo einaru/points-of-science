@@ -10,9 +10,16 @@
     "prod": "cross-env NODE_ENV=production yarn node src/server.js",
     "test": "cross-env NODE_ENV=test yarn node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "test:coverage": "cross-env NODE_ENV=test yarn node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
-    "firestore": "firebase emulators:start --import=./assets/Static/seed --export-on-exit",
+    "test:firestore": "cross-env NODE_ENV=test FIRESTORE=true yarn node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:firestore:coverage": "cross-env NODE_ENV=test FIRESTORE=true yarn node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
+    "firestore": "firebase emulators:start --import=./assets/Static/seed",
+    "firestore:test": "firebase emulators:start --import=./assets/Static/test",
     "lint": "eslint . --ext js",
     "lint:fix": "eslint . --ext js --fix"
+  },
+  "jest": {
+    "testTimeout": 50000,
+    "verbose": true
   },
   "author": "Andreas N. Digernes & Einar Uvsløkk",
   "license": "ISC",

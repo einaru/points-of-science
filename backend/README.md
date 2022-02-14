@@ -94,3 +94,40 @@ You should now be able to run `yarn start` to fire up the application.
 
 [initialize the Firebase Admin SDK]: https://firebase.google.com/docs/admin/setup#initialize-sdk
 [Service Accounts]: https://console.firebase.google.com/project/_/settings/serviceaccounts/adminsdk
+
+### Testing
+
+To run unit tests, make sure you have followed the instruction under the section Development Mode of this README file 
+before you proceed.
+
+To start with testing the initial data must have been exported once manually by first populating the Firestore emulator and ran 
+the following command:
+
+```
+firebase emulators:export ./assets/Static/test
+```
+
+If the initial data is exported correctly, then from now on you can run the following command in a terminal before you
+start running the test to import the initial test data:
+
+```
+yarn firestore:test
+```
+
+To run a all tests you can run the following command in a terminal:
+
+```
+yarn test:firestore
+```
+
+To run tests in a single file you can run the following command:
+
+```
+yarn test:firestore <name_of_file>
+```
+
+To run test with coverage report, run the following command:
+
+```
+yarn test:firestore:coverage
+```

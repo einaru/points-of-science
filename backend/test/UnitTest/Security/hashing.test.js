@@ -3,7 +3,6 @@ import {
   connectToDatabase,
   hashPassword,
   comparePassword,
-  resetTestData,
 } from "../../../src/internal.js";
 import config from "../../../src/Config/config.js";
 
@@ -12,7 +11,6 @@ let hash;
 
 beforeAll(() => {
   connectToDatabase();
-  resetTestData(config.db.test.data);
   plainText = data["1"].plain_text;
   hash = data["1"].hash;
 });

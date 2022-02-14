@@ -26,6 +26,7 @@ const config = {
       file: process.env.DATABASE_TEST_FILE,
       folder: process.env.DATABASE_TEST_FOLDER,
       data: process.env.DATABASE_TEST_DATA,
+      firestore: process.env.FIRESTORE,
     },
   },
   responseType: {

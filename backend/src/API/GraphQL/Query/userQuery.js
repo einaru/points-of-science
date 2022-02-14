@@ -33,7 +33,7 @@ const getAllUsersQuery = {
 
 const getUserByIDQuery = {
   type: new GraphQLList(UserModel),
-  args: { id: { type: GraphQLInt } },
+  args: { id: { type: GraphQLString } },
   resolve(parent, args) {
     return getDataByFilter("User", {
       key: "id",
@@ -97,7 +97,7 @@ const verifyUsernameQuery = {
 const changePasswordQuery = {
   type: NormalResponseModel,
   args: {
-    id: { type: GraphQLInt },
+    id: { type: GraphQLString },
     password: { type: GraphQLString },
     confirmPassword: { type: GraphQLString },
   },
@@ -167,7 +167,7 @@ const createUserQuery = {
 const deleteUserQuery = {
   type: UserModel,
   args: {
-    id: { type: GraphQLInt },
+    id: { type: GraphQLString },
   },
   async resolve(parent, args) {
     try {
@@ -192,7 +192,7 @@ const deleteUserQuery = {
 const updateUserQuery = {
   type: UserModel,
   args: {
-    id: { type: GraphQLInt },
+    id: { type: GraphQLString },
     username: { type: GraphQLString },
     password: { type: GraphQLString },
     confirm_password: { type: GraphQLString },

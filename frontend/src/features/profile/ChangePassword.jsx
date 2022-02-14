@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 
 const CHANGE_PASSWORD = gql`
   mutation changePassword(
-    $userID: Int!
+    $userID: String!
     $password: String!
     $confirmPassword: String!
   ) {

@@ -23,6 +23,7 @@ const strings = [
   "Here's a little hint",
   "Intro",
   "Leaderboards",
+  "Loading content…",
   "Log in",
   "Log out",
   "Logging out…",

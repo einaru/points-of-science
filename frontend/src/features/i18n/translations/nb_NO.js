@@ -24,6 +24,7 @@ export default {
   "Here's a little hint": "Her er et lite hint",
   "Intro": "Intro",
   "Leaderboards": "Ledertavler",
+  "Loading content…": "Laster innhold…",
   "Log in": "Logg inn",
   "Log out": "Logg ut",
   "Logging out…": "Logger ut…",

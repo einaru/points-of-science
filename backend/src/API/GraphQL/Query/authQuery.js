@@ -113,7 +113,7 @@ const activateAccountQuery = {
 
 const setPermissionQuery = {
   type: NormalResponseModel,
-  args: { userID: { type: GraphQLInt }, permission: { type: GraphQLInt } },
+  args: { userID: { type: GraphQLString }, permission: { type: GraphQLInt } },
   async resolve(parent, args, context) {
     try {
       await authenticateAccessToken(context);

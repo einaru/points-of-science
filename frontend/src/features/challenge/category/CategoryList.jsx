@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import { Image, View } from "react-native";
-import { Title, TouchableRipple } from "react-native-paper";
+import { Text, Title, TouchableRipple } from "react-native-paper";
 import styles from "./CategoryList.style";
 import { Surface } from "../../../shared/components";
 import ContentContext from "../../content/ContentContext";
+import { t } from "../../i18n";
 
 const fallbackImage = require("../assets/category.png");
 
@@ -26,6 +27,16 @@ function CategoryListItem({ category, onPress }) {
 
 function CategoryList({ navigation }) {
   const { categories } = useContext(ContentContext);
+
+  if (!categories.length) {
+    return (
+      <View style={styles.noContentContainer}>
+        <Text style={styles.noContentText}>
+          {t("Couldn't find any content")}
+        </Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.listContainer}>

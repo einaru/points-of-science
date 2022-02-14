@@ -15,6 +15,7 @@ const strings = [
   "Confirm password",
   "Contact info",
   "Continue",
+  "Couldn't find any content",
   "Create account",
   "Dashboard",
   "Get a hint?",

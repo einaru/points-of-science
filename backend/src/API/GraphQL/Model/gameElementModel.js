@@ -76,13 +76,6 @@ const ChallengeResponseModel = new GraphQLObjectType({
   }),
 });
 
-const AllChallengesResponseModel = new GraphQLObjectType({
-  name: "AllChallengesResponse",
-  fields: () => ({
-    challenges: { type: new GraphQLList(ChallengeModel) },
-  }),
-});
-
 const AchievementTypeEnum = new GraphQLEnumType({
   name: "AchievementType",
   values: {
@@ -119,7 +112,6 @@ const LeaderboardModel = new GraphQLObjectType({
 });
 
 export {
-  AllChallengesResponseModel,
   AchievementModel,
   ChallengeInputModel,
   RewardModel,

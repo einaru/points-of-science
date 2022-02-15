@@ -1,7 +1,8 @@
+import { GraphQLList } from "graphql";
 import {
-  AllChallengesResponseModel,
   ChallengeResponseModel,
   ChallengeInputModel,
+  ChallengeModel,
   RewardInputModel,
   categoryCreator,
   challengeCreator,
@@ -15,18 +16,10 @@ import {
 import config from "../../../Config/config.js";
 import { assertIsAdmin, assertIsAuthenticated } from "../assert.js";
 
-function getResponseObject(message, statusCode, type) {
-  return {
-    message,
-    status: statusCode,
-    type,
-  };
-}
-
 // Root Queries - Used to retrieve data with GET-Requests
 
 const getAllChallengesQuery = {
-  type: AllChallengesResponseModel,
+  type: new GraphQLList(ChallengeModel),
   args: {},
   async resolve(parent, args, context) {
     assertIsAuthenticated(context.user);
@@ -39,7 +32,7 @@ const getAllChallengesQuery = {
     });
 
     challenges = await Promise.all(challenges);
-    return { challenges };
+    return challenges;
   },
 };
 

@@ -30,35 +30,23 @@ function createChallenge(categoryID, difficulty) {
 function saveChallenge(content, category, challenge, reward) {
   return new Promise((resolve, reject) => {
     content
-      .saveData(
-        "content",
-        content,
-        config.db.table.content,
-        "Content stored successfully."
-      )
+      .saveData("content", content, config.db.table.content)
       .then((response) => {
-        return reward.saveData(
-          "reward",
-          reward,
-          config.db.table.reward,
-          "Reward stored successfully"
-        );
+        return reward.saveData("reward", reward, config.db.table.reward);
       })
       .then((response) => {
         category.addChallenge(challenge);
         return category.saveData(
           "category",
           category,
-          config.db.table.category,
-          "Category stored successfully."
+          config.db.table.category
         );
       })
       .then((response) => {
         return challenge.saveData(
           "challenge",
           challenge,
-          config.db.table.challenge,
-          "Challenge stored successfully."
+          config.db.table.challenge
         );
       })
       .then((response) => {

@@ -223,19 +223,12 @@ function convertToResponseObject(key, object) {
 
 function saveData() {
   const functionKey = "saveData";
-  const code = (key, data, table, message) => {
+  const code = (key, data, table) => {
     return new Promise((resolve, reject) => {
       const storedData = convertToStoredObject(key, data);
       updateData(table, storedData)
         .then(() => {
-          resolve(
-            getResponseObject(
-              message,
-              200,
-              config.responseType.success,
-              convertToResponseObject(key, data)
-            )
-          );
+          resolve(convertToResponseObject(key, data));
         })
         .catch((error) => {
           reject(error);

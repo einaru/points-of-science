@@ -68,10 +68,8 @@ const createChallengeQuery = {
 
     let categoryData;
     if (categoryID.trim().length === 0) {
-      return getResponseObject(
-        "Category you try to add the challenge to does not exist. Please create a Category before creating a Challenge.",
-        400,
-        config.responseType.error
+      throw new Error(
+        "Category you try to add the challenge to does not exist. Please create a Category before creating a Challenge."
       );
     }
 
@@ -83,10 +81,8 @@ const createChallengeQuery = {
       );
 
       if (storedCategory == null) {
-        return getResponseObject(
-          "Category you try to add the challenge to does not exist. Please create a Category before creating a Challenge.",
-          400,
-          config.responseType.error
+        throw new Error(
+          "Category you try to add the challenge to does not exist. Please create a Category before creating a Challenge."
         );
       }
 

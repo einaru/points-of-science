@@ -1,26 +1,17 @@
-import { GraphQLString } from "graphql";
+import { GraphQLList, GraphQLString } from "graphql";
 import {
-  AllCategoriesResponseModel,
+  CategoryModel,
   categoryCreator,
-  CategoryResponseModel,
   getData,
   nextID,
 } from "../../../internal.js";
 import config from "../../../Config/config.js";
 import { assertIsAdmin, assertIsAuthenticated } from "../assert.js";
 
-function getResponseObject(message, statusCode, type) {
-  return {
-    message,
-    status: statusCode,
-    type,
-  };
-}
-
 // Root Queries - Used to retrieve data with GET-Requests
 
 const getAllCategoriesQuery = {
-  type: AllCategoriesResponseModel,
+  type: new GraphQLList(CategoryModel),
   args: {},
   async resolve(parent, args, context) {
     assertIsAuthenticated(context.user);
@@ -32,22 +23,15 @@ const getAllCategoriesQuery = {
       categories.push(category.restoreObject(category, categoryData));
     });
 
-    const response = getResponseObject(
-      "Categories retrieved successfully",
-      200,
-      config.responseType.success
-    );
-
     categories = await Promise.all(categories);
-    response.data = categories;
-    return response;
+    return categories;
   },
 };
 
 // Mutation Queries - Used to update or delete data with PUT- and DELETE-requests
 
 const createCategoryQuery = {
-  type: CategoryResponseModel,
+  type: CategoryModel,
   args: {
     title: { type: GraphQLString },
     image: { type: GraphQLString },
@@ -76,16 +60,9 @@ const createCategoryQuery = {
     await category.content.saveData(
       "content",
       category.content,
-      config.db.table.content,
-      "Content stored successfully."
+      config.db.table.content
     );
-    const response = await category.saveData(
-      "category",
-      category,
-      config.db.table.category,
-      "Category stored successfully."
-    );
-    return response;
+    return category.saveData("category", category, config.db.table.category);
   },
 };
 

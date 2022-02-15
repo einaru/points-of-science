@@ -5,6 +5,7 @@ import bodyParser from "body-parser";
 import { graphqlHTTP } from "express-graphql";
 import config from "./Config/config.js";
 import { schema, connectToDatabase } from "./internal.js";
+import authMiddleware from "./Authorization/authMiddleware.js";
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(cors());
+app.use(authMiddleware);
 
 app.use(
   "/graphql",

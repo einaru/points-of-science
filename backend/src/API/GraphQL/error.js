@@ -25,3 +25,10 @@ export class ForbiddenError extends ApiError {
     Object.defineProperty(this, "name", { value: "ForbiddenError" });
   }
 }
+
+export class UserInputError extends ApiError {
+  constructor(message, extensions) {
+    super(message, "BAD_USER_INPUT", extensions);
+    Object.defineProperty(this, "name", { value: "UserInputError" });
+  }
+}

@@ -1,8 +1,6 @@
 import { GraphQLString, GraphQLInt } from "graphql";
 import {
-  authenticateAccessToken,
   authenticateRefreshToken,
-  checkPermissionLevel,
   deleteRefreshTokenFromDatabase,
   getData,
   getDataByFilter,
@@ -18,6 +16,7 @@ import {
   PermissionModel,
   SignInModel,
   AuthenticationError,
+  ForbiddenError,
 } from "../../../internal.js";
 import config from "../../../Config/config.js";
 
@@ -81,25 +80,20 @@ const getPermissionsQuery = {
   type: PermissionModel,
   args: {},
   async resolve(parent, args, context) {
-    try {
-      await authenticateAccessToken(context);
-      const response = checkPermissionLevel(
-        config.permissionLevel.admin,
-        context.user
-      );
-      if (response.type === "error") {
-        return response;
-      }
-
-      return {
-        message: "Permission levels retrieved successfully.",
-        status: 200,
-        type: config.responseType.success,
-        data: config.permissionLevel,
-      };
-    } catch (error) {
-      return error;
+    if (!context.user) {
+      throw new AuthenticationError("User is not authorized.");
     }
+
+    if (context.user.permission !== config.permissionLevel.admin) {
+      throw new ForbiddenError("Admin permission is required.");
+    }
+
+    return {
+      message: "Permission levels retrieved successfully.",
+      status: 200,
+      type: config.responseType.success,
+      data: config.permissionLevel,
+    };
   },
 };
 
@@ -112,11 +106,7 @@ const activateAccountQuery = {
     confirmPassword: { type: GraphQLString },
   },
   async resolve(parent, args) {
-    try {
-      return await signUp(args);
-    } catch (error) {
-      return error;
-    }
+    return signUp(args);
   },
 };
 
@@ -124,35 +114,30 @@ const setPermissionQuery = {
   type: NormalResponseModel,
   args: { userID: { type: GraphQLString }, permission: { type: GraphQLInt } },
   async resolve(parent, args, context) {
-    try {
-      await authenticateAccessToken(context);
-      const response = checkPermissionLevel(
-        config.permissionLevel.admin,
-        context.user
-      );
-      if (response.type === "error") {
-        return response;
-      }
-
-      const filter = getFilter({
-        key: "id",
-        operator: "==",
-        value: args.userID,
-      });
-      const userData = await getDataByFilter(config.db.table.user, filter)[0];
-
-      const user = profileCreator();
-      user.updateData(userData);
-      setPermissionLevel(args.permission, user);
-      await updateData(config.db.table.user, user.data);
-      return getResponseObject(
-        "Permission level updated successfully.",
-        200,
-        config.responseType.success
-      );
-    } catch (error) {
-      return error;
+    if (!context.user) {
+      throw new AuthenticationError("User is not authorized.");
     }
+
+    if (context.user.permission !== config.permissionLevel.admin) {
+      throw new ForbiddenError("Admin permission is required.");
+    }
+
+    const filter = getFilter({
+      key: "id",
+      operator: "==",
+      value: args.userID,
+    });
+    const userData = await getDataByFilter(config.db.table.user, filter)[0];
+
+    const user = profileCreator();
+    user.updateData(userData);
+    setPermissionLevel(args.permission, user);
+    await updateData(config.db.table.user, user.data);
+    return getResponseObject(
+      "Permission level updated successfully.",
+      200,
+      config.responseType.success
+    );
   },
 };
 
@@ -163,11 +148,7 @@ const signInQuery = {
     password: { type: GraphQLString },
   },
   async resolve(parent, args) {
-    try {
-      return await signIn(args.username, args.password);
-    } catch (error) {
-      return error;
-    }
+    return signIn(args.username, args.password);
   },
 };
 
@@ -177,12 +158,10 @@ const signOutQuery = {
     refreshToken: { type: GraphQLString },
   },
   async resolve(parent, args, context) {
-    try {
-      await authenticateAccessToken(context);
-      return deleteRefreshTokenFromDatabase(args.refreshToken);
-    } catch (error) {
-      return error;
+    if (!context.user) {
+      throw new AuthenticationError("User is not authorized.");
     }
+    return deleteRefreshTokenFromDatabase(args.refreshToken);
   },
 };
 
@@ -190,36 +169,31 @@ const swapPermissionQuery = {
   type: NormalResponseModel,
   args: {},
   async resolve(parent, args, context) {
-    try {
-      await authenticateAccessToken(context);
-      const response = checkPermissionLevel(
-        config.permissionLevel.admin,
-        context.user
-      );
-      if (response.type === "error") {
-        return response;
-      }
-
-      const userData = await getData(config.db.table.user);
-      const users = [];
-      userData.forEach((userObject) => {
-        const user = profileCreator();
-        user.updateData(userObject);
-        users.push(user);
-      });
-
-      swapPermissionGroup(users);
-      users.forEach((user) => {
-        updateData(config.db.table.user, user.data);
-      });
-      return getResponseObject(
-        "Swapped permission groups successfully.",
-        200,
-        config.responseType.success
-      );
-    } catch (error) {
-      return error;
+    if (!context.user) {
+      throw new AuthenticationError("User is not authorized.");
     }
+
+    if (context.user.permission !== config.permissionLevel.admin) {
+      throw new ForbiddenError("Admin permission is required.");
+    }
+
+    const userData = await getData(config.db.table.user);
+    const users = [];
+    userData.forEach((userObject) => {
+      const user = profileCreator();
+      user.updateData(userObject);
+      users.push(user);
+    });
+
+    swapPermissionGroup(users);
+    users.forEach((user) => {
+      updateData(config.db.table.user, user.data);
+    });
+    return getResponseObject(
+      "Swapped permission groups successfully.",
+      200,
+      config.responseType.success
+    );
   },
 };
 

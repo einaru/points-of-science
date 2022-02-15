@@ -24,6 +24,15 @@ const RewardModel = new GraphQLObjectType({
   }),
 });
 
+const RewardInputModel = new GraphQLInputObjectType({
+  name: "RewardInput",
+  fields: () => ({
+    maxPoints: { type: GraphQLInt },
+    firstTryPoints: { type: GraphQLInt },
+    bonusPoints: { type: GraphQLInt },
+  }),
+});
+
 const DifficultyEnum = new GraphQLEnumType({
   name: "Difficulty",
   values: {
@@ -113,6 +122,7 @@ export {
   AchievementModel,
   ChallengeInputModel,
   RewardModel,
+  RewardInputModel,
   ProgressModel,
   LeaderboardModel,
   ChallengeModel,

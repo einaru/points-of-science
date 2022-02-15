@@ -29,11 +29,7 @@ function signIn(username, password) {
       })
       .catch((error) => {
         // TO-DO: Implement error handler to take care of the error and provide a proper response to the user.
-        reject(
-          new Error(
-            `Something went wrong during sign in. Sign in unsuccessful. ERROR: ${error.message}`
-          )
-        );
+        reject(error);
       });
   });
 }

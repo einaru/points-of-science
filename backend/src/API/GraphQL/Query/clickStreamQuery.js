@@ -4,25 +4,19 @@ import {
   getData,
   getDataFromDatabaseByFilter,
   nextID,
-  AllClickStreamsResponseModel,
-  CreateClickStreamModel,
-  NormalResponseModel,
 } from "../../../internal.js";
 import config from "../../../Config/config.js";
 import { assertIsAdmin, assertIsAuthenticated } from "../assert.js";
 import { UserInputError } from "../error.js";
-
-function getResponseObject(message, statusCode, type) {
-  return {
-    message,
-    status: statusCode,
-    type,
-  };
-}
+import { NormalResponseModel } from "../Model/model.js";
+import {
+  ClickStreamModel,
+  CreateClickStreamModel,
+} from "../Model/dataCollectionModel.js";
 
 // Root Queries - Used to retrieve data with GET-Requests
 const getAllClickStreamsQuery = {
-  type: AllClickStreamsResponseModel,
+  type: new GraphQLList(ClickStreamModel),
   args: {},
   async resolve(parent, args, context) {
     assertIsAuthenticated(context.user);
@@ -37,21 +31,14 @@ const getAllClickStreamsQuery = {
       );
     });
 
-    const response = getResponseObject(
-      "Click streams retrieved successfully",
-      200,
-      config.responseType.success
-    );
-
     clickStreams = await Promise.all(clickStreams);
-    response.data = clickStreams;
-    return response;
+    return clickStreams;
   },
 };
 
 // Mutation Queries - Used to update or delete data with PUT- and DELETE-requests
 const createClickStreamQuery = {
-  type: NormalResponseModel,
+  type: ClickStreamModel,
   args: {
     sessionToken: { type: GraphQLString },
     clicks: { type: new GraphQLList(CreateClickStreamModel) },
@@ -125,8 +112,8 @@ const deleteClickStreamQuery = {
     const clickStream = clickStreamCreator();
     clickStream.updateData(clickStreamData[0]);
 
-    const response = await clickStream.deleteClickStream();
-    return response;
+    const message = await clickStream.deleteClickStream();
+    return { message };
   },
 };
 

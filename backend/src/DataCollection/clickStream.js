@@ -104,11 +104,7 @@ function deleteClickStream(data) {
 
       deleteData(config.db.table.clickStream, data.id)
         .then(() => {
-          resolve({
-            message: `Click stream with id ${data.id} successfully deleted.`,
-            status: 200,
-            type: config.responseType.success,
-          });
+          resolve(`Click stream with id ${data.id} successfully deleted.`);
         })
         .catch((error) => {
           reject(error);

@@ -27,31 +27,6 @@ function createAccessToken(user) {
   });
 }
 
-function authenticateAccessToken(request) {
-  return new Promise((resolve, reject) => {
-    const authHeader = request.headers.authorization;
-    const accessToken = authHeader && authHeader.split(" ")[1];
-    if (accessToken == null) {
-      reject(new AuthenticationError("Access token is missing."));
-      return;
-    }
-
-    jwt.verify(accessToken, config.secret.accessToken, (error, user) => {
-      if (error) {
-        reject(
-          new AuthenticationError("Access token is invalid.", {
-            reason: "Access token has either expired or is missing.",
-          })
-        );
-        return;
-      }
-
-      request.user = user;
-      resolve({ message: "Authentication successful." });
-    });
-  });
-}
-
 function storeRefreshTokenInDatabase(refreshToken) {
   return new Promise((resolve, reject) => {
     getData(config.db.table.refreshToken)
@@ -189,7 +164,6 @@ function deleteRefreshTokenFromDatabase(refreshToken) {
 }
 
 export {
-  authenticateAccessToken,
   authenticateRefreshToken,
   createAccessToken,
   createRefreshToken,

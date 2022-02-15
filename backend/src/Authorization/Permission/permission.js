@@ -12,30 +12,6 @@ function getPermissionLevels() {
   return permissionLevels;
 }
 
-function checkPermissionLevel(permissionLevel, user) {
-  try {
-    if (user.permission !== permissionLevel) {
-      return getResponseObject(
-        `Access denied. Missing permission level of ${permissionLevels[permissionLevel].text}.`,
-        401,
-        config.responseType.error
-      );
-    }
-
-    return getResponseObject(
-      `Access granted.`,
-      200,
-      config.responseType.success
-    );
-  } catch (error) {
-    return getResponseObject(
-      `Access denied. Data is missing to complete the request. Error: ${error.message}.`,
-      401,
-      config.responseType.error
-    );
-  }
-}
-
 function setPermissionLevel(permissionLevel, user) {
   try {
     if (permissionLevels[permissionLevel] == null) {
@@ -83,9 +59,4 @@ function getResponseObject(message, statusCode, type) {
   };
 }
 
-export {
-  checkPermissionLevel,
-  getPermissionLevels,
-  setPermissionLevel,
-  swapPermissionGroup,
-};
+export { getPermissionLevels, setPermissionLevel, swapPermissionGroup };

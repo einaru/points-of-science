@@ -1,14 +1,13 @@
 import { GraphQLString } from "graphql";
 import {
-  authenticateAccessToken,
   AllCategoriesResponseModel,
   categoryCreator,
   CategoryResponseModel,
-  checkPermissionLevel,
   getData,
   nextID,
 } from "../../../internal.js";
 import config from "../../../Config/config.js";
+import { AuthenticationError, ForbiddenError } from "../error.js";
 
 function getResponseObject(message, statusCode, type) {
   return {
@@ -24,27 +23,25 @@ const getAllCategoriesQuery = {
   type: AllCategoriesResponseModel,
   args: {},
   async resolve(parent, args, context) {
-    try {
-      await authenticateAccessToken(context);
-      const categoriesData = await getData(config.db.table.category);
-      let categories = [];
-      categoriesData.forEach((categoryData) => {
-        const category = categoryCreator();
-        categories.push(category.restoreObject(category, categoryData));
-      });
-
-      const response = getResponseObject(
-        "Categories retrieved successfully",
-        200,
-        config.responseType.success
-      );
-
-      categories = await Promise.all(categories);
-      response.data = categories;
-      return response;
-    } catch (error) {
-      return error;
+    if (!context.user) {
+      throw new AuthenticationError("User is not authorized.");
     }
+    const categoriesData = await getData(config.db.table.category);
+    let categories = [];
+    categoriesData.forEach((categoryData) => {
+      const category = categoryCreator();
+      categories.push(category.restoreObject(category, categoryData));
+    });
+
+    const response = getResponseObject(
+      "Categories retrieved successfully",
+      200,
+      config.responseType.success
+    );
+
+    categories = await Promise.all(categories);
+    response.data = categories;
+    return response;
   },
 };
 
@@ -58,49 +55,42 @@ const createCategoryQuery = {
     description: { type: GraphQLString },
   },
   async resolve(parent, args, context) {
-    try {
-      await authenticateAccessToken(context);
-      let response = checkPermissionLevel(
-        config.permissionLevel.admin,
-        context.user
-      );
-
-      if (response.type === "error") {
-        return response;
-      }
-
-      const categoryID = nextID(config.db.table.category);
-      const contentID = nextID(config.db.table.content);
-
-      const category = categoryCreator();
-      const newCategory = {
-        id: categoryID,
-      };
-      category.updateData(newCategory);
-
-      const newContent = {
-        id: contentID,
-        title: args.title,
-        image: args.image,
-        description: args.description,
-      };
-      category.content.updateData(newContent);
-      await category.content.saveData(
-        "content",
-        category.content,
-        config.db.table.content,
-        "Content stored successfully."
-      );
-      response = await category.saveData(
-        "category",
-        category,
-        config.db.table.category,
-        "Category stored successfully."
-      );
-      return response;
-    } catch (error) {
-      return error;
+    if (!context.user) {
+      throw new AuthenticationError("User is not authorized.");
     }
+    if (context.user.permission !== config.permissionLevel.admin) {
+      throw new ForbiddenError("Admin permission is required.");
+    }
+
+    const categoryID = nextID(config.db.table.category);
+    const contentID = nextID(config.db.table.content);
+
+    const category = categoryCreator();
+    const newCategory = {
+      id: categoryID,
+    };
+    category.updateData(newCategory);
+
+    const newContent = {
+      id: contentID,
+      title: args.title,
+      image: args.image,
+      description: args.description,
+    };
+    category.content.updateData(newContent);
+    await category.content.saveData(
+      "content",
+      category.content,
+      config.db.table.content,
+      "Content stored successfully."
+    );
+    const response = await category.saveData(
+      "category",
+      category,
+      config.db.table.category,
+      "Category stored successfully."
+    );
+    return response;
   },
 };
 

@@ -17,7 +17,7 @@ import {
   SignInModel,
 } from "../../../internal.js";
 import config from "../../../Config/config.js";
-import { AuthenticationError, ForbiddenError } from "../error.js";
+import { assertIsAdmin, assertIsAuthenticated } from "../assert.js";
 
 function getResponseObject(message, statusCode, type) {
   return {
@@ -59,19 +59,12 @@ const authAccessTokenQuery = {
   type: NormalResponseModel,
   args: {},
   async resolve(parent, args, context) {
-    try {
-      if (!context.user) {
-        throw new AuthenticationError("User is not authorized.");
-      }
-
-      return getResponseObject(
-        "Authentication successful.",
-        200,
-        config.responseType.success
-      );
-    } catch (error) {
-      return error;
-    }
+    assertIsAuthenticated(context.user);
+    return getResponseObject(
+      "Authentication successful.",
+      200,
+      config.responseType.success
+    );
   },
 };
 
@@ -79,14 +72,8 @@ const getPermissionsQuery = {
   type: PermissionModel,
   args: {},
   async resolve(parent, args, context) {
-    if (!context.user) {
-      throw new AuthenticationError("User is not authorized.");
-    }
-
-    if (context.user.permission !== config.permissionLevel.admin) {
-      throw new ForbiddenError("Admin permission is required.");
-    }
-
+    assertIsAuthenticated(context.user);
+    assertIsAdmin(context.user);
     return {
       message: "Permission levels retrieved successfully.",
       status: 200,
@@ -113,13 +100,8 @@ const setPermissionQuery = {
   type: NormalResponseModel,
   args: { userID: { type: GraphQLString }, permission: { type: GraphQLInt } },
   async resolve(parent, args, context) {
-    if (!context.user) {
-      throw new AuthenticationError("User is not authorized.");
-    }
-
-    if (context.user.permission !== config.permissionLevel.admin) {
-      throw new ForbiddenError("Admin permission is required.");
-    }
+    assertIsAuthenticated(context.user);
+    assertIsAdmin(context.user);
 
     const filter = getFilter({
       key: "id",
@@ -157,9 +139,7 @@ const signOutQuery = {
     refreshToken: { type: GraphQLString },
   },
   async resolve(parent, args, context) {
-    if (!context.user) {
-      throw new AuthenticationError("User is not authorized.");
-    }
+    assertIsAuthenticated(context.user);
     return deleteRefreshTokenFromDatabase(args.refreshToken);
   },
 };
@@ -168,13 +148,8 @@ const swapPermissionQuery = {
   type: NormalResponseModel,
   args: {},
   async resolve(parent, args, context) {
-    if (!context.user) {
-      throw new AuthenticationError("User is not authorized.");
-    }
-
-    if (context.user.permission !== config.permissionLevel.admin) {
-      throw new ForbiddenError("Admin permission is required.");
-    }
+    assertIsAuthenticated(context.user);
+    assertIsAdmin(context.user);
 
     const userData = await getData(config.db.table.user);
     const users = [];

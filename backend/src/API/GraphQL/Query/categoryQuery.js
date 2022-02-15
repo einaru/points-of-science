@@ -7,7 +7,7 @@ import {
   nextID,
 } from "../../../internal.js";
 import config from "../../../Config/config.js";
-import { AuthenticationError, ForbiddenError } from "../error.js";
+import { assertIsAdmin, assertIsAuthenticated } from "../assert.js";
 
 function getResponseObject(message, statusCode, type) {
   return {
@@ -23,9 +23,8 @@ const getAllCategoriesQuery = {
   type: AllCategoriesResponseModel,
   args: {},
   async resolve(parent, args, context) {
-    if (!context.user) {
-      throw new AuthenticationError("User is not authorized.");
-    }
+    assertIsAuthenticated(context.user);
+
     const categoriesData = await getData(config.db.table.category);
     let categories = [];
     categoriesData.forEach((categoryData) => {
@@ -55,12 +54,8 @@ const createCategoryQuery = {
     description: { type: GraphQLString },
   },
   async resolve(parent, args, context) {
-    if (!context.user) {
-      throw new AuthenticationError("User is not authorized.");
-    }
-    if (context.user.permission !== config.permissionLevel.admin) {
-      throw new ForbiddenError("Admin permission is required.");
-    }
+    assertIsAuthenticated(context.user);
+    assertIsAdmin(context.user);
 
     const categoryID = nextID(config.db.table.category);
     const contentID = nextID(config.db.table.content);

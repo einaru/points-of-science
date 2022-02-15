@@ -12,7 +12,7 @@ import {
   UserModel,
 } from "../../../internal.js";
 import config from "../../../Config/config.js";
-import { AuthenticationError } from "../error.js";
+import { assertIsAuthenticated } from "../assert.js";
 
 function getResponseObject(message, statusCode, type) {
   return {
@@ -102,9 +102,7 @@ const changePasswordQuery = {
     confirmPassword: { type: GraphQLString },
   },
   async resolve(parent, args, context) {
-    if (!context.user) {
-      throw new AuthenticationError("User is not authorized.");
-    }
+    assertIsAuthenticated(context.user);
 
     const userObject = context.user;
     if (userObject.id !== args.id) {

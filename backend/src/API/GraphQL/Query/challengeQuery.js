@@ -13,7 +13,7 @@ import {
   saveChallenge,
 } from "../../../internal.js";
 import config from "../../../Config/config.js";
-import { AuthenticationError, ForbiddenError } from "../error.js";
+import { assertIsAdmin, assertIsAuthenticated } from "../assert.js";
 
 function getResponseObject(message, statusCode, type) {
   return {
@@ -29,9 +29,7 @@ const getAllChallengesQuery = {
   type: AllChallengesResponseModel,
   args: {},
   async resolve(parent, args, context) {
-    if (!context.user) {
-      throw new AuthenticationError("User is not authorized.");
-    }
+    assertIsAuthenticated(context.user);
 
     const challengesData = await getData(config.db.table.challenge);
     let challenges = [];
@@ -61,13 +59,8 @@ const createChallengeQuery = {
     reward: { type: RewardInputModel },
   },
   async resolve(parent, args, context) {
-    if (!context.user) {
-      throw new AuthenticationError("User is not authorized.");
-    }
-
-    if (context.user.permission !== config.permissionLevel.admin) {
-      throw new ForbiddenError("Admin permission is required.");
-    }
+    assertIsAuthenticated(context.user);
+    assertIsAdmin(context.user);
 
     const { categoryID, title, image, description, difficulty } =
       args.challenge;

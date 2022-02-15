@@ -5,7 +5,7 @@ import {
   getDataFromDatabaseByFilter,
 } from "../../../internal.js";
 import config from "../../../Config/config.js";
-import { AuthenticationError, ForbiddenError } from "../error.js";
+import { assertIsAdmin, assertIsAuthenticated } from "../assert.js";
 
 function getResponseObject(message, statusCode, type) {
   return {
@@ -22,13 +22,8 @@ const deleteRewardQuery = {
     rewardID: { type: GraphQLString },
   },
   async resolve(parent, args, context) {
-    if (!context.user) {
-      throw new AuthenticationError("User is not authorized.");
-    }
-
-    if (context.user.permission !== config.permissionLevel.admin) {
-      throw new ForbiddenError("Admin permission is required.");
-    }
+    assertIsAuthenticated(context.user);
+    assertIsAdmin(context.user);
 
     const challengesData = await getDataFromDatabaseByFilter(
       "rewardID",

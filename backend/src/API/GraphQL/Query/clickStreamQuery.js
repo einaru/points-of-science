@@ -9,7 +9,7 @@ import {
   NormalResponseModel,
 } from "../../../internal.js";
 import config from "../../../Config/config.js";
-import { AuthenticationError, ForbiddenError } from "../error.js";
+import { assertIsAdmin, assertIsAuthenticated } from "../assert.js";
 
 function getResponseObject(message, statusCode, type) {
   return {
@@ -24,12 +24,8 @@ const getAllClickStreamsQuery = {
   type: AllClickStreamsResponseModel,
   args: {},
   async resolve(parent, args, context) {
-    if (!context.user) {
-      throw new AuthenticationError("User is not authorized.");
-    }
-    if (context.user.permission !== config.permissionLevel.admin) {
-      throw new ForbiddenError("Admin permission is required.");
-    }
+    assertIsAuthenticated(context.user);
+    assertIsAdmin(context.user);
 
     const clickStreamsData = await getData(config.db.table.clickStream);
     let clickStreams = [];
@@ -60,9 +56,7 @@ const createClickStreamQuery = {
     clicks: { type: new GraphQLList(CreateClickStreamModel) },
   },
   async resolve(parent, args, context) {
-    if (!context.user) {
-      throw new AuthenticationError("User is not authorized.");
-    }
+    assertIsAuthenticated(context.user);
 
     const refreshToken = await getDataFromDatabaseByFilter(
       "id",
@@ -112,12 +106,8 @@ const deleteClickStreamQuery = {
     clickStreamID: { type: GraphQLString },
   },
   async resolve(parent, args, context) {
-    if (!context.user) {
-      throw new AuthenticationError("User is not authorized.");
-    }
-    if (context.user.permission !== config.permissionLevel.admin) {
-      throw new ForbiddenError("Admin permission is required.");
-    }
+    assertIsAuthenticated(context.user);
+    assertIsAdmin(context.user);
 
     const clickStreamData = await getDataFromDatabaseByFilter(
       "id",

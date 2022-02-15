@@ -11,60 +11,35 @@ import {
   signUp,
   swapPermissionGroup,
   updateData,
-  AuthenticateTokenModel,
-  NormalResponseModel,
-  PermissionModel,
-  SignInModel,
 } from "../../../internal.js";
 import config from "../../../Config/config.js";
 import { assertIsAdmin, assertIsAuthenticated } from "../assert.js";
-
-function getResponseObject(message, statusCode, type) {
-  return {
-    message,
-    status: statusCode,
-    type,
-  };
-}
+import {
+  AccessTokenModel,
+  PermissionModel,
+  SignInModel,
+  MessageResponseModel,
+} from "../Model/authModel.js";
 
 // Root Queries - Used to retrieve data with GET-Requests
 
 const authRefreshTokenQuery = {
-  type: AuthenticateTokenModel,
+  type: AccessTokenModel,
   args: {
     refreshToken: { type: GraphQLString },
   },
   async resolve(parent, args) {
-    try {
-      const response = await authenticateRefreshToken(args.refreshToken);
-      if (response.type === "error") {
-        return response;
-      }
-
-      const result = getResponseObject(
-        "Authentication successful.",
-        200,
-        config.responseType.success
-      );
-      result.data = { accessToken: response };
-
-      return result;
-    } catch (error) {
-      return error;
-    }
+    const accessToken = await authenticateRefreshToken(args.refreshToken);
+    return { accessToken };
   },
 };
 
 const authAccessTokenQuery = {
-  type: NormalResponseModel,
+  type: MessageResponseModel,
   args: {},
   async resolve(parent, args, context) {
     assertIsAuthenticated(context.user);
-    return getResponseObject(
-      "Authentication successful.",
-      200,
-      config.responseType.success
-    );
+    return { message: "Authentication successful." };
   },
 };
 
@@ -74,12 +49,7 @@ const getPermissionsQuery = {
   async resolve(parent, args, context) {
     assertIsAuthenticated(context.user);
     assertIsAdmin(context.user);
-    return {
-      message: "Permission levels retrieved successfully.",
-      status: 200,
-      type: config.responseType.success,
-      data: config.permissionLevel,
-    };
+    return config.permissionLevel;
   },
 };
 
@@ -97,7 +67,7 @@ const activateAccountQuery = {
 };
 
 const setPermissionQuery = {
-  type: NormalResponseModel,
+  type: MessageResponseModel,
   args: { userID: { type: GraphQLString }, permission: { type: GraphQLInt } },
   async resolve(parent, args, context) {
     assertIsAuthenticated(context.user);
@@ -114,11 +84,7 @@ const setPermissionQuery = {
     user.updateData(userData);
     setPermissionLevel(args.permission, user);
     await updateData(config.db.table.user, user.data);
-    return getResponseObject(
-      "Permission level updated successfully.",
-      200,
-      config.responseType.success
-    );
+    return { message: "Permission level updated successfully." };
   },
 };
 
@@ -134,7 +100,7 @@ const signInQuery = {
 };
 
 const signOutQuery = {
-  type: NormalResponseModel,
+  type: MessageResponseModel,
   args: {
     refreshToken: { type: GraphQLString },
   },
@@ -145,7 +111,7 @@ const signOutQuery = {
 };
 
 const swapPermissionQuery = {
-  type: NormalResponseModel,
+  type: MessageResponseModel,
   args: {},
   async resolve(parent, args, context) {
     assertIsAuthenticated(context.user);
@@ -163,11 +129,7 @@ const swapPermissionQuery = {
     users.forEach((user) => {
       updateData(config.db.table.user, user.data);
     });
-    return getResponseObject(
-      "Swapped permission groups successfully.",
-      200,
-      config.responseType.success
-    );
+    return { message: "Swapped permission groups successfully." };
   },
 };
 

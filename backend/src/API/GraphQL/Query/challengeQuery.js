@@ -3,13 +3,16 @@ import {
   AllChallengesResponseModel,
   ChallengeResponseModel,
   ChallengeInputModel,
+  RewardInputModel,
   categoryCreator,
   challengeCreator,
   checkPermissionLevel,
+  createChallenge,
+  createContent,
+  createReward,
   getData,
-  getFilter,
-  getDataByFilter,
-  nextID,
+  getDataFromDatabaseByFilter,
+  saveChallenge,
 } from "../../../internal.js";
 import config from "../../../Config/config.js";
 
@@ -57,11 +60,12 @@ const createChallengeQuery = {
   type: ChallengeResponseModel,
   args: {
     challenge: { type: ChallengeInputModel },
+    reward: { type: RewardInputModel },
   },
   async resolve(parent, args, context) {
     try {
       await authenticateAccessToken(context);
-      let response = checkPermissionLevel(
+      const response = checkPermissionLevel(
         config.permissionLevel.admin,
         context.user
       );
@@ -70,8 +74,9 @@ const createChallengeQuery = {
         return response;
       }
 
-      const input = args.challenge;
-      const { categoryID, title, image, description, difficulty } = input;
+      const { categoryID, title, image, description, difficulty } =
+        args.challenge;
+      const { maxPoints, firstTryPoints, bonusPoints } = args.reward;
 
       let categoryData;
       if (categoryID.trim().length === 0) {
@@ -83,14 +88,10 @@ const createChallengeQuery = {
       }
 
       if (categoryID.trim().length > 0) {
-        const filter = getFilter({
-          key: "id",
-          operator: "==",
-          value: categoryID,
-        });
-        const storedCategory = await getDataByFilter(
-          config.db.table.category,
-          filter
+        const storedCategory = await getDataFromDatabaseByFilter(
+          "id",
+          categoryID,
+          config.db.table.category
         );
 
         if (storedCategory == null) {
@@ -107,49 +108,21 @@ const createChallengeQuery = {
       const category = categoryCreator();
       await category.restoreObject(category, categoryData);
 
-      const challengeID = nextID(config.db.table.challenge);
-
-      const contentID = nextID(config.db.table.content);
-      const contentData = {
-        id: contentID,
+      const challenge = createChallenge(categoryID, difficulty);
+      const content = createContent(
+        challenge.content,
         title,
         image,
-        description,
-      };
-
-      const challenge = challengeCreator();
-      const newChallenge = {
-        id: challengeID,
-        categoryID,
-        difficulty: difficulty || 1,
-      };
-      challenge.updateData(newChallenge);
-
-      challenge.content.updateData(contentData);
-
-      await challenge.content.saveData(
-        "content",
-        challenge.content,
-        config.db.table.content,
-        "Content stored successfully."
+        description
+      );
+      const reward = createReward(
+        challenge.reward,
+        maxPoints,
+        firstTryPoints,
+        bonusPoints
       );
 
-      category.addChallenge(challenge);
-      await category.saveData(
-        "category",
-        category,
-        config.db.table.category,
-        "Category stored successfully."
-      );
-
-      response = await challenge.saveData(
-        "challenge",
-        challenge,
-        config.db.table.challenge,
-        "Challenge stored successfully."
-      );
-
-      return response;
+      return saveChallenge(content, category, challenge, reward);
     } catch (error) {
       return error;
     }

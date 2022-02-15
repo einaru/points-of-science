@@ -119,6 +119,15 @@ function getContentStoredObject(object) {
   };
 }
 
+function getRewardStoredObject(object) {
+  return {
+    id: object.data.id,
+    maxPoints: object.data.maxPoints,
+    firstTryPoints: object.data.firstTryPoints,
+    bonusPoints: object.data.bonusPoints,
+  };
+}
+
 function convertToStoredObject(key, object) {
   switch (key) {
     case "category":
@@ -129,6 +138,8 @@ function convertToStoredObject(key, object) {
       return getClickStreamStoredObject(object);
     case "content":
       return getContentStoredObject(object);
+    case "reward":
+      return getRewardStoredObject(object);
     default:
       return {};
   }
@@ -184,6 +195,15 @@ function getContentResponseObject(object) {
   };
 }
 
+function getRewardResponseObject(object){
+  return {
+    id: object.data.id,
+    maxPoints: object.data.maxPoints,
+    firstTryPoints: object.data.firstTryPoints,
+    bonusPoints: object.data.bonusPoints,
+  };
+}
+
 function convertToResponseObject(key, object) {
   switch (key) {
     case "category":
@@ -194,6 +214,8 @@ function convertToResponseObject(key, object) {
       return getClickStreamResponseObject(object);
     case "content":
       return getContentResponseObject(object);
+    case "reward":
+      return getRewardResponseObject(object);
     default:
       return {};
   }

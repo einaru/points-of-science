@@ -8,12 +8,12 @@ import {
   profileState,
   nextID,
   updateData,
-  NormalResponseModel,
   UserModel,
 } from "../../../internal.js";
 import config from "../../../Config/config.js";
 import { assertIsAuthenticated } from "../assert.js";
 import { UserInputError } from "../error.js";
+import { NormalResponseModel } from "../Model/model.js";
 
 function getResponseObject(message, statusCode, type) {
   return {
@@ -70,11 +70,7 @@ const verifyUsernameQuery = {
       }
     }
 
-    return {
-      message: "Username is verified.",
-      status: 200,
-      type: config.responseType.success,
-    };
+    return { message: "Username is verified." };
   },
 };
 
@@ -102,12 +98,12 @@ const changePasswordQuery = {
 
     const user = profileCreator();
     user.updateData(users[0]);
-    const response = await user.changePassword(
+    const message = await user.changePassword(
       args.password,
       args.confirmPassword
     );
     await updateData(config.db.table.user, user.data);
-    return getResponseObject(response, 200, config.responseType.success);
+    return { message };
   },
 };
 

@@ -10,6 +10,7 @@ import {
 } from "../../../internal.js";
 import config from "../../../Config/config.js";
 import { assertIsAdmin, assertIsAuthenticated } from "../assert.js";
+import { UserInputError } from "../error.js";
 
 function getResponseObject(message, statusCode, type) {
   return {
@@ -116,10 +117,8 @@ const deleteClickStreamQuery = {
     );
 
     if (clickStreamData == null || clickStreamData[0] == null) {
-      return getResponseObject(
-        "The click stream you try to delete does not exist.",
-        400,
-        config.responseType.error
+      throw new UserInputError(
+        "The click stream you try to delete does not exist."
       );
     }
 

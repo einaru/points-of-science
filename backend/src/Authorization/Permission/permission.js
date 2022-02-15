@@ -1,3 +1,4 @@
+import { UserInputError } from "../../API/GraphQL/error.js";
 import config from "../../Config/config.js";
 
 const permissionLevels = {
@@ -13,28 +14,16 @@ function getPermissionLevels() {
 }
 
 function setPermissionLevel(permissionLevel, user) {
-  try {
-    if (permissionLevels[permissionLevel] == null) {
-      return getResponseObject(
-        `Permission level was not found. Available permission levels are 1: admin, 2: experimental, and 3: control.`,
-        400,
-        config.responseType.error
-      );
-    }
-
-    user.updateData({ permission: permissionLevel });
-    return getResponseObject(
-      `Permission for user ${user.data.username} was updated.`,
-      200,
-      config.responseType.success
-    );
-  } catch (error) {
-    return getResponseObject(
-      `Could not update permission level for user ${user.data.username}. Error: ${error.message}.`,
-      400,
-      config.responseType.error
-    );
+  if (permissionLevels[permissionLevel] == null) {
+    throw new UserInputError("Invalid permission level.");
   }
+
+  user.updateData({ permission: permissionLevel });
+  return getResponseObject(
+    `Permission for user ${user.data.username} was updated.`,
+    200,
+    config.responseType.success
+  );
 }
 
 function swapPermissionGroup(users) {

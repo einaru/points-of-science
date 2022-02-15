@@ -1,8 +1,19 @@
-import { createObjectTemplate, saveData } from "../../internal.js";
+import { createObjectTemplate, deleteData, saveData } from "../../internal.js";
 import config from "../../Config/config.js";
 
+function emptyData() {
+  return {
+    data: {
+      id: "",
+      maxPoints: 0,
+      firstTryPoints: 0,
+      bonusPoints: 0,
+    },
+  };
+}
+
 function updateData(reward) {
-  const key = "updateData";
+  const functionKey = "updateData";
   const code = (args) => {
     if (args == null || args !== Object(args)) {
       throw new Error(
@@ -15,27 +26,34 @@ function updateData(reward) {
     });
   };
 
-  return createObjectTemplate(key, code);
+  return createObjectTemplate(functionKey, code);
 }
 
 function deleteReward(reward) {
-  const key = "deleteReward";
-  const code = () => {
-    // Fill in the blanks
+  const functionKey = "deleteReward";
+  const code = (challenge) => {
+    return new Promise((resolve, reject) => {
+      if (challenge == null || challenge !== Object(challenge)) {
+        reject(
+          Error(
+            "Challenge to delete this reward from has wrong type. Input must be an object."
+          )
+        );
+      }
+
+      deleteData(config.db.table.reward, reward.id)
+        .then((response) => {
+          const emptyReward = emptyData();
+          challenge.reward.updateData(emptyReward.data);
+          resolve(response);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
   };
 
-  return createObjectTemplate(key, code);
-}
-
-function emptyData() {
-  return {
-    data: {
-      id: "",
-      max_points: 0,
-      first_try_points: 0,
-      bonus_points: 0,
-    },
-  };
+  return createObjectTemplate(functionKey, code);
 }
 
 function rewardCreator() {

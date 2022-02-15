@@ -15,10 +15,9 @@ import {
   NormalResponseModel,
   PermissionModel,
   SignInModel,
-  AuthenticationError,
-  ForbiddenError,
 } from "../../../internal.js";
 import config from "../../../Config/config.js";
+import { AuthenticationError, ForbiddenError } from "../error.js";
 
 function getResponseObject(message, statusCode, type) {
   return {

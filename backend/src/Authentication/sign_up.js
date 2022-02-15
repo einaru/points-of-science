@@ -69,31 +69,18 @@ function signUp(args) {
 function validateSignUp(data, user, password, confirmPassword) {
   return new Promise((resolve, reject) => {
     if (isNull(data)) {
-      reject({
-        message: "Invalid username.",
-        status: 400,
-        type: config.responseType.error,
-      });
+      reject(new Error("Invalid username"));
+      return;
     }
 
     if (isNull(user) || !isUserDeativated(user)) {
-      reject(
-        getResponseObject(
-          "User already exists and has an active account.",
-          400,
-          config.responseType.error
-        )
-      );
+      reject(new Error("User already exists and has an active account."));
+      return;
     }
 
     if (!checkPassword(password, confirmPassword)) {
-      reject(
-        getResponseObject(
-          "Passwords did not match.",
-          400,
-          config.responseType.error
-        )
-      );
+      reject(new Error("Passwords did not match."));
+      return;
     }
 
     validatePassword(password)
@@ -101,12 +88,11 @@ function validateSignUp(data, user, password, confirmPassword) {
         if (!isValidPassword(validation)) {
           const errors = errorsInPassword(validation);
           const message = generateErrorMessage(errors);
-          return reject(
-            getResponseObject(message, 400, config.responseType.error)
-          );
+          reject(new Error(message));
+          return;
         }
 
-        return resolve();
+        resolve();
       })
       .catch((error) => {
         reject(error);
@@ -169,14 +155,6 @@ function updateNewUser(username, hashedPassword, permission) {
   } catch (error) {
     return error;
   }
-}
-
-function getResponseObject(message, statusCode, type) {
-  return {
-    message,
-    status: statusCode,
-    type,
-  };
 }
 
 export { signUp };

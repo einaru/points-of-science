@@ -132,13 +132,7 @@ function deleteRefreshTokenFromDatabase(refreshToken) {
     getData(config.db.table.refreshToken)
       .then((refreshTokens) => {
         if (refreshTokens.length === 0) {
-          return resolve(
-            getResponseObject(
-              "User is already signed out.",
-              200,
-              config.responseType.success
-            )
-          );
+          return resolve({ message: "User is already signed out." });
         }
 
         return deleteData(config.db.table.refreshToken, refreshToken);
@@ -149,13 +143,7 @@ function deleteRefreshTokenFromDatabase(refreshToken) {
           return;
         }
 
-        resolve(
-          getResponseObject(
-            "User signed out successfully.",
-            200,
-            config.responseType.success
-          )
-        );
+        resolve({ message: "User signed out successfully." });
       })
       .catch((error) => {
         reject(error);

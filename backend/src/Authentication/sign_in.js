@@ -10,15 +10,6 @@ import {
 } from "../internal.js";
 import config from "../Config/config.js";
 
-function getResponseObject(message, statusCode, type, data) {
-  return {
-    message,
-    status: statusCode,
-    type,
-    data,
-  };
-}
-
 function signIn(username, password) {
   return new Promise((resolve, reject) => {
     getUser(username)
@@ -87,18 +78,11 @@ function completeSignIn(result, user) {
     ) {
       const accessToken = createAccessToken(user);
       const refreshToken = createRefreshToken(user);
-      return resolve(
-        getResponseObject(
-          "Sign in successful.",
-          200,
-          config.responseType.success,
-          {
-            user,
-            accessToken,
-            refreshToken,
-          }
-        )
-      );
+      return resolve({
+        user,
+        accessToken,
+        refreshToken,
+      });
     }
 
     return reject(

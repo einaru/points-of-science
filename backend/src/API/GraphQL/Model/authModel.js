@@ -4,10 +4,10 @@ import {
   GraphQLString,
   GraphQLInt,
 } from "graphql";
-import { ResponseModel, UserModel } from "../../../internal.js";
+import { UserModel } from "../../../internal.js";
 
-const SignInDataModel = new GraphQLObjectType({
-  name: "SignInData",
+export const SignInModel = new GraphQLObjectType({
+  name: "SignIn",
   fields: () => ({
     accessToken: { type: GraphQLString },
     refreshToken: { type: GraphQLString },
@@ -15,26 +15,17 @@ const SignInDataModel = new GraphQLObjectType({
   }),
 });
 
-const SignInModel = new GraphQLObjectType({
-  name: "SignIn",
-  fields: () => ({
-    ...ResponseModel,
-    data: { type: SignInDataModel },
-  }),
-});
-
-const AccessTokenModel = new GraphQLObjectType({
+export const AccessTokenModel = new GraphQLObjectType({
   name: "AccessToken",
   fields: () => ({
     accessToken: { type: GraphQLString },
   }),
 });
 
-const AuthenticateTokenModel = new GraphQLObjectType({
-  name: "AuthToken",
+export const MessageResponseModel = new GraphQLObjectType({
+  name: "MessageResponse",
   fields: () => ({
-    ...ResponseModel,
-    data: { type: AccessTokenModel },
+    message: { type: GraphQLString },
   }),
 });
 
@@ -47,26 +38,11 @@ const PermissionEnum = new GraphQLEnumType({
   },
 });
 
-const PermissionStructure = new GraphQLObjectType({
-  name: "PermissinStructure",
+export const PermissionModel = new GraphQLObjectType({
+  name: "Permission",
   fields: () => ({
     ADMIN: { type: GraphQLInt },
     EXPERIMENTAL: { type: GraphQLInt },
     CONTROL: { type: GraphQLInt },
   }),
 });
-
-const PermissionModel = new GraphQLObjectType({
-  name: "Permission",
-  fields: () => ({
-    ...ResponseModel,
-    data: { type: PermissionStructure },
-  }),
-});
-
-export {
-  SignInModel,
-  AuthenticateTokenModel,
-  PermissionStructure,
-  PermissionModel,
-};

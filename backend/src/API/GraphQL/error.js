@@ -2,7 +2,7 @@
 import { GraphQLError } from "graphql";
 
 export class ApiError extends GraphQLError {
-  constructor(message, extensions, code) {
+  constructor(message, code, extensions) {
     super(message);
     Object.defineProperty(this, "name", { value: "ApiError" });
     this.extensions = {

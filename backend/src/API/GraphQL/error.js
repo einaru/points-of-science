@@ -18,3 +18,10 @@ export class AuthenticationError extends ApiError {
     Object.defineProperty(this, "name", { value: "AuthenticationError" });
   }
 }
+
+export class ForbiddenError extends ApiError {
+  constructor(message, extensions) {
+    super(message, "FORBIDDEN", extensions);
+    Object.defineProperty(this, "name", { value: "ForbiddenError" });
+  }
+}

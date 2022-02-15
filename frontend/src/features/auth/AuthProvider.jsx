@@ -1,12 +1,11 @@
-import React, { useReducer, useEffect, useMemo, createContext } from "react";
+import React, { useReducer, useEffect, useMemo } from "react";
 import { useApolloClient } from "@apollo/client";
 import { reducer, initialState } from "./reducer";
 import * as Query from "./query";
 import * as Storage from "../../services/storage";
+import AuthContext from "./AuthContext";
 
-export const AuthContext = createContext();
-
-export function AuthProvider({ children }) {
+function AuthProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const client = useApolloClient();
@@ -58,3 +57,5 @@ export function AuthProvider({ children }) {
     <AuthContext.Provider value={authContext}>{children}</AuthContext.Provider>
   );
 }
+
+export default AuthProvider;

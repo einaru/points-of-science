@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Button, HelperText, Snackbar, TextInput } from "react-native-paper";
 import { useEffect } from "react/cjs/react.development";
-import { AuthContext } from "../auth/AuthProvider";
+import AuthContext from "../auth/AuthContext";
 import { t } from "../i18n";
 
 const styles = StyleSheet.create({

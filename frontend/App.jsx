@@ -3,7 +3,7 @@ import { ApolloProvider } from "@apollo/client";
 import { StatusBar } from "expo-status-bar";
 import { Provider as ThemeProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { AuthProvider } from "./src/features/auth/AuthProvider";
+import AuthProvider from "./src/features/auth/AuthProvider";
 import Navigation from "./src/features/navigation";
 import PreferencesContext from "./src/features/preferences/PreferencesContext";
 import useApiClient from "./src/services/api/useApiClient";

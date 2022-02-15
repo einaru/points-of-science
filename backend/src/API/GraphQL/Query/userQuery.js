@@ -102,41 +102,37 @@ const changePasswordQuery = {
     confirmPassword: { type: GraphQLString },
   },
   async resolve(parent, args, context) {
-    try {
-      if (!context.user) {
-        throw new AuthenticationError("User is not authorized.");
-      }
-
-      const userObject = context.user;
-      if (userObject.id !== args.id) {
-        return getResponseObject(
-          "Password update not successful. Wrong user.",
-          400,
-          config.responseType.error
-        );
-      }
-
-      const filter = getFilter({ key: "id", operator: "==", value: args.id });
-      const users = await getDataByFilter(config.db.table.user, filter);
-      if (users.length === 0) {
-        return getResponseObject(
-          "Could not find user.",
-          400,
-          config.responseType.error
-        );
-      }
-
-      const user = profileCreator();
-      user.updateData(users[0]);
-      const response = await user.changePassword(
-        args.password,
-        args.confirmPassword
-      );
-      await updateData(config.db.table.user, user.data);
-      return getResponseObject(response, 200, config.responseType.success);
-    } catch (error) {
-      return getResponseObject(error, 400, config.responseType.error);
+    if (!context.user) {
+      throw new AuthenticationError("User is not authorized.");
     }
+
+    const userObject = context.user;
+    if (userObject.id !== args.id) {
+      return getResponseObject(
+        "Password update not successful. Wrong user.",
+        400,
+        config.responseType.error
+      );
+    }
+
+    const filter = getFilter({ key: "id", operator: "==", value: args.id });
+    const users = await getDataByFilter(config.db.table.user, filter);
+    if (users.length === 0) {
+      return getResponseObject(
+        "Could not find user.",
+        400,
+        config.responseType.error
+      );
+    }
+
+    const user = profileCreator();
+    user.updateData(users[0]);
+    const response = await user.changePassword(
+      args.password,
+      args.confirmPassword
+    );
+    await updateData(config.db.table.user, user.data);
+    return getResponseObject(response, 200, config.responseType.success);
   },
 };
 

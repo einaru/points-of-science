@@ -17,6 +17,7 @@ import {
   NormalResponseModel,
   PermissionModel,
   SignInModel,
+  AuthenticationError,
 } from "../../../internal.js";
 import config from "../../../Config/config.js";
 
@@ -61,7 +62,15 @@ const authAccessTokenQuery = {
   args: {},
   async resolve(parent, args, context) {
     try {
-      return await authenticateAccessToken(context);
+      if (!context.user) {
+        throw new AuthenticationError("User is not authorized.");
+      }
+
+      return getResponseObject(
+        "Authentication successful.",
+        200,
+        config.responseType.success
+      );
     } catch (error) {
       return error;
     }

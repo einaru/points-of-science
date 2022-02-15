@@ -18,23 +18,14 @@ export function AuthProvider({ children }) {
       console.log("Restore user:", user);
       dispatch({ type: "restoreUser", user, refreshToken });
       if (user) {
-        const { data } = await client.query({ query: Query.VERIFY_TOKEN });
-        if (data.verifyToken.type === "error") {
-          client
-            .query({
-              query: Query.GET_NEW_TOKEN,
-              variables: { refreshToken },
-            })
-            .then((resp) => {
-              if (resp.data.getNewToken.type === "success") {
-                const { accessToken } = resp.data.getNewToken.data;
-                Storage.setItem("accessToken", accessToken);
-                dispatch({ type: "restoreToken" });
-              }
-            });
-        } else {
-          dispatch({ type: "restoreToken" });
-        }
+        client
+          .query({ query: Query.VERIFY_TOKEN, fetchPolicy: "network-only" })
+          .then(() => {
+            dispatch({ type: "restoreToken" });
+          })
+          .catch((error) => {
+            console.debug(error.message);
+          });
       }
     };
     initState();

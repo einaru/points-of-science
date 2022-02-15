@@ -10,16 +10,11 @@ import FormAction from "./FormAction";
 export const LOGIN = gql`
   mutation signIn($username: String!, $password: String!) {
     signIn(username: $username, password: $password) {
-      type
-      status
-      message
-      data {
-        accessToken
-        refreshToken
-        user {
-          id
-          username
-        }
+      accessToken
+      refreshToken
+      user {
+        id
+        username
       }
     }
   }
@@ -31,7 +26,11 @@ function LoginScreen() {
   const [errorMessage, setErrorMessage] = useState("");
 
   const { logInUser } = useContext(AuthContext);
-  const [logIn, { data, loading, error }] = useMutation(LOGIN);
+  const [logIn, { data, loading }] = useMutation(LOGIN, {
+    onError: (error) => {
+      setErrorMessage(error.message);
+    },
+  });
 
   const isDisabled = !username && !password;
 
@@ -39,21 +38,12 @@ function LoginScreen() {
   const toggleShowPassword = () => setShowPassword(!showPassword);
 
   useEffect(() => {
-    if (data) {
-      if (data.signIn.type === "success") {
-        const { user, accessToken, refreshToken } = data.signIn.data;
-        logInUser(user, accessToken, refreshToken);
-        setErrorMessage("");
-      } else {
-        setErrorMessage(data.signIn.message);
-      }
+    if (data?.signIn) {
+      const { user, accessToken, refreshToken } = data.signIn;
+      logInUser(user, accessToken, refreshToken);
+      setErrorMessage("");
     }
   }, [data, logInUser]);
-
-  if (error) {
-    // TODO provide feedback to user on errors
-    console.error(error);
-  }
 
   return (
     <FormView>

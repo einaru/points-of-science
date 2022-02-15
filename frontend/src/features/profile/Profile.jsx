@@ -26,8 +26,6 @@ const styles = StyleSheet.create({
 const LOGOUT = gql`
   mutation signOut($refreshToken: String!) {
     signOut(refreshToken: $refreshToken) {
-      type
-      status
       message
     }
   }
@@ -50,24 +48,20 @@ function Profile() {
       .join("");
   }, [user.username]);
 
-  const [logOut, { data, loading, error, client }] = useMutation(LOGOUT);
+  const [logOut, { data, loading, client }] = useMutation(LOGOUT, {
+    onError: (error) => {
+      console.error("Error login out:", error.message);
+    },
+  });
 
   useEffect(() => {
-    if (data) {
-      console.debug(data.signOut.message);
-      if (data.signOut.type === "success") {
-        logOutUser();
-      }
+    if (data?.signOut) {
+      logOutUser();
     }
   }, [data, logOutUser]);
 
   if (loading) {
     return <LoadingScreen message={t("Logging out…")} />;
-  }
-
-  if (error) {
-    // TODO provide feedback to user on errors
-    console.error(error);
   }
 
   return (

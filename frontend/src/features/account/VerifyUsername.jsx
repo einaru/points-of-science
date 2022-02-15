@@ -8,8 +8,6 @@ import FormAction from "./FormAction";
 const VERIFY_USERNAME = gql`
   query verifyUsername($username: String!) {
     verifyUsername(username: $username) {
-      type
-      status
       message
     }
   }
@@ -24,19 +22,19 @@ export default function VerifyUsername() {
 
   const isDisabled = username === "";
 
-  const [verifyUsername, { called, loading, data }] =
+  const [verifyUsername, { called, loading, data, error }] =
     useLazyQuery(VERIFY_USERNAME);
 
   useEffect(() => {
-    if (data) {
-      if (data.verifyUsername.type === "success") {
-        setIsVerified(true);
-        setErrorMessage("");
-      } else {
-        setErrorMessage(data.verifyUsername.message);
-      }
+    if (data?.verifyUsername) {
+      console.log("Verify username got data:", data);
+      setIsVerified(true);
+      setErrorMessage("");
     }
-  }, [data, username, setIsVerified]);
+    if (error) {
+      setErrorMessage(error.message);
+    }
+  }, [data, error, username, setIsVerified]);
 
   return (
     <>

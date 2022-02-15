@@ -17,16 +17,11 @@ const ACTIVATE_ACCOUNT = gql`
       password: $password
       confirmPassword: $confirmPassword
     ) {
-      type
-      status
-      message
-      data {
-        accessToken
-        refreshToken
-        user {
-          id
-          username
-        }
+      accessToken
+      refreshToken
+      user {
+        id
+        username
       }
     }
   }
@@ -48,25 +43,19 @@ export default function SetPassword() {
   const { username } = useContext(ActivateAccountContext);
   const { logInUser } = useContext(AuthContext);
 
-  const [activateAccount, { data, loading, error }] =
-    useMutation(ACTIVATE_ACCOUNT);
+  const [activateAccount, { data, loading }] = useMutation(ACTIVATE_ACCOUNT, {
+    onError: (error) => {
+      setErrorMessage(error.message);
+    },
+  });
 
   useEffect(() => {
-    if (data) {
-      if (data.activateAccount.type === "success") {
-        const { user, accessToken, refreshToken } = data.activateAccount.data;
-        logInUser(user, accessToken, refreshToken);
-        setErrorMessage("");
-      } else {
-        setErrorMessage(data.activateAccount.message);
-      }
+    if (data?.activateAccount) {
+      const { user, accessToken, refreshToken } = data.activateAccount;
+      logInUser(user, accessToken, refreshToken);
+      setErrorMessage("");
     }
   }, [data, logInUser]);
-
-  if (error) {
-    // TODO provide feedback to user on errors
-    console.error(error);
-  }
 
   return (
     <>

@@ -10,7 +10,6 @@ import {
   ContentModel,
   ContentResponse,
   ReflectionModel,
-  ResponseModel,
   UserModel,
 } from "../../../internal.js";
 
@@ -42,16 +41,20 @@ const DifficultyEnum = new GraphQLEnumType({
   },
 });
 
+const challengeData = {
+  id: { type: GraphQLString },
+  categoryID: { type: GraphQLString },
+  difficulty: { type: DifficultyEnum },
+  ...ContentResponse,
+  // activity: { type: ActivityModel },
+  reflection: { type: ReflectionModel },
+  reward: { type: RewardModel },
+};
+
 const ChallengeModel = new GraphQLObjectType({
   name: "Challenge",
   fields: () => ({
-    id: { type: GraphQLString },
-    categoryID: { type: GraphQLString },
-    difficulty: { type: DifficultyEnum },
-    ...ContentResponse,
-    // activity: { type: ActivityModel },
-    reflection: { type: ReflectionModel },
-    reward: { type: RewardModel },
+    ...challengeData,
   }),
 });
 
@@ -69,16 +72,14 @@ const ChallengeInputModel = new GraphQLInputObjectType({
 const ChallengeResponseModel = new GraphQLObjectType({
   name: "ChallengeResponse",
   fields: () => ({
-    ...ResponseModel,
-    data: { type: ChallengeModel },
+    ...challengeData,
   }),
 });
 
 const AllChallengesResponseModel = new GraphQLObjectType({
   name: "AllChallengesResponse",
   fields: () => ({
-    ...ResponseModel,
-    data: { type: new GraphQLList(ChallengeModel) },
+    challenges: { type: new GraphQLList(ChallengeModel) },
   }),
 });
 

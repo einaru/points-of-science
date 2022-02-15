@@ -38,15 +38,8 @@ const getAllChallengesQuery = {
       challenges.push(challenge.restoreObject(challenge, challengeData));
     });
 
-    const response = getResponseObject(
-      "Challenges retrieved successfully",
-      200,
-      config.responseType.success
-    );
-
     challenges = await Promise.all(challenges);
-    response.data = challenges;
-    return response;
+    return { challenges };
   },
 };
 

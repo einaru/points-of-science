@@ -1,6 +1,5 @@
-import { GraphQLString, GraphQLInt, GraphQLList } from "graphql";
+import { GraphQLString, GraphQLList } from "graphql";
 import {
-  authenticateAccessToken,
   deleteData,
   getData,
   getFilter,
@@ -13,6 +12,7 @@ import {
   UserModel,
 } from "../../../internal.js";
 import config from "../../../Config/config.js";
+import { AuthenticationError } from "../error.js";
 
 function getResponseObject(message, statusCode, type) {
   return {
@@ -103,7 +103,10 @@ const changePasswordQuery = {
   },
   async resolve(parent, args, context) {
     try {
-      await authenticateAccessToken(context);
+      if (!context.user) {
+        throw new AuthenticationError("User is not authorized.");
+      }
+
       const userObject = context.user;
       if (userObject.id !== args.id) {
         return getResponseObject(

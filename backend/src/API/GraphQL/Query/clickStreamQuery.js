@@ -1,7 +1,5 @@
 import { GraphQLString, GraphQLList } from "graphql";
 import {
-  authenticateAccessToken,
-  checkPermissionLevel,
   clickStreamCreator,
   getData,
   getDataFromDatabaseByFilter,
@@ -11,6 +9,7 @@ import {
   NormalResponseModel,
 } from "../../../internal.js";
 import config from "../../../Config/config.js";
+import { AuthenticationError, ForbiddenError } from "../error.js";
 
 function getResponseObject(message, statusCode, type) {
   return {
@@ -25,38 +24,31 @@ const getAllClickStreamsQuery = {
   type: AllClickStreamsResponseModel,
   args: {},
   async resolve(parent, args, context) {
-    try {
-      await authenticateAccessToken(context);
-
-      let response = checkPermissionLevel(
-        config.permissionLevel.admin,
-        context.user
-      );
-      if (response.type === "error") {
-        return response;
-      }
-
-      const clickStreamsData = await getData(config.db.table.clickStream);
-      let clickStreams = [];
-      clickStreamsData.forEach((clickStreamData) => {
-        const clickStream = clickStreamCreator();
-        clickStreams.push(
-          clickStream.restoreObject(clickStream, clickStreamData)
-        );
-      });
-
-      response = getResponseObject(
-        "Click streams retrieved successfully",
-        200,
-        config.responseType.success
-      );
-
-      clickStreams = await Promise.all(clickStreams);
-      response.data = clickStreams;
-      return response;
-    } catch (error) {
-      return error;
+    if (!context.user) {
+      throw new AuthenticationError("User is not authorized.");
     }
+    if (context.user.permission !== config.permissionLevel.admin) {
+      throw new ForbiddenError("Admin permission is required.");
+    }
+
+    const clickStreamsData = await getData(config.db.table.clickStream);
+    let clickStreams = [];
+    clickStreamsData.forEach((clickStreamData) => {
+      const clickStream = clickStreamCreator();
+      clickStreams.push(
+        clickStream.restoreObject(clickStream, clickStreamData)
+      );
+    });
+
+    const response = getResponseObject(
+      "Click streams retrieved successfully",
+      200,
+      config.responseType.success
+    );
+
+    clickStreams = await Promise.all(clickStreams);
+    response.data = clickStreams;
+    return response;
   },
 };
 
@@ -68,52 +60,49 @@ const createClickStreamQuery = {
     clicks: { type: new GraphQLList(CreateClickStreamModel) },
   },
   async resolve(parent, args, context) {
-    try {
-      await authenticateAccessToken(context);
-      const { user } = context;
-
-      const refreshToken = await getDataFromDatabaseByFilter(
-        "id",
-        args.sessionToken,
-        config.db.table.refreshToken
-      );
-
-      if (refreshToken == null) {
-        throw new Error("Session token is not valid.");
-      }
-
-      const clickStreamData = await getDataFromDatabaseByFilter(
-        "sessionToken",
-        args.sessionToken,
-        config.db.table.clickStream
-      );
-
-      let id;
-      let data;
-      const clickStream = clickStreamCreator();
-      if (clickStreamData == null) {
-        id = nextID(config.db.table.clickStream);
-        data = args;
-        data.id = id;
-        data.userID = user.id;
-        clickStream.updateData(data);
-      } else {
-        [data] = clickStreamData;
-        clickStream.updateData(data);
-        args.clicks.forEach((click) => {
-          clickStream.addClickNode(click);
-        });
-      }
-
-      return await clickStream.saveData(
-        "clickStream",
-        clickStream,
-        config.db.table.clickStream,
-        "Click stream stored successfully."
-      );
-    } catch (error) {
-      return error;
+    if (!context.user) {
+      throw new AuthenticationError("User is not authorized.");
     }
+
+    const refreshToken = await getDataFromDatabaseByFilter(
+      "id",
+      args.sessionToken,
+      config.db.table.refreshToken
+    );
+
+    if (refreshToken == null) {
+      throw new Error("Session token is not valid.");
+    }
+
+    const clickStreamData = await getDataFromDatabaseByFilter(
+      "sessionToken",
+      args.sessionToken,
+      config.db.table.clickStream
+    );
+
+    let id;
+    let data;
+    const clickStream = clickStreamCreator();
+    if (clickStreamData == null) {
+      id = nextID(config.db.table.clickStream);
+      data = args;
+      data.id = id;
+      data.userID = context.user.id;
+      clickStream.updateData(data);
+    } else {
+      [data] = clickStreamData;
+      clickStream.updateData(data);
+      args.clicks.forEach((click) => {
+        clickStream.addClickNode(click);
+      });
+    }
+    const response = await clickStream.saveData(
+      "clickStream",
+      clickStream,
+      config.db.table.clickStream,
+      "Click stream stored successfully."
+    );
+    return response;
   },
 };
 
@@ -123,37 +112,32 @@ const deleteClickStreamQuery = {
     clickStreamID: { type: GraphQLString },
   },
   async resolve(parent, args, context) {
-    try {
-      await authenticateAccessToken(context);
-      const { user } = context;
-
-      let response = checkPermissionLevel(config.permissionLevel.admin, user);
-      if (response.type === "error") {
-        return response;
-      }
-
-      const clickStreamData = await getDataFromDatabaseByFilter(
-        "id",
-        args.clickStreamID,
-        config.db.table.clickStream
-      );
-
-      if (clickStreamData == null || clickStreamData[0] == null) {
-        return getResponseObject(
-          "The click stream you try to delete does not exist.",
-          400,
-          config.responseType.error
-        );
-      }
-
-      const clickStream = clickStreamCreator();
-      clickStream.updateData(clickStreamData[0]);
-
-      response = await clickStream.deleteClickStream();
-      return response;
-    } catch (error) {
-      return error;
+    if (!context.user) {
+      throw new AuthenticationError("User is not authorized.");
     }
+    if (context.user.permission !== config.permissionLevel.admin) {
+      throw new ForbiddenError("Admin permission is required.");
+    }
+
+    const clickStreamData = await getDataFromDatabaseByFilter(
+      "id",
+      args.clickStreamID,
+      config.db.table.clickStream
+    );
+
+    if (clickStreamData == null || clickStreamData[0] == null) {
+      return getResponseObject(
+        "The click stream you try to delete does not exist.",
+        400,
+        config.responseType.error
+      );
+    }
+
+    const clickStream = clickStreamCreator();
+    clickStream.updateData(clickStreamData[0]);
+
+    const response = await clickStream.deleteClickStream();
+    return response;
   },
 };
 

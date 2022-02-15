@@ -8,14 +8,6 @@ import config from "../../../Config/config.js";
 import { assertIsAdmin, assertIsAuthenticated } from "../assert.js";
 import { UserInputError } from "../error.js";
 
-function getResponseObject(message, statusCode, type) {
-  return {
-    message,
-    status: statusCode,
-    type,
-  };
-}
-
 // Mutation Queries - Used to update or delete data with PUT- and DELETE-requests
 const deleteRewardQuery = {
   type: NormalResponseModel,
@@ -44,23 +36,14 @@ const deleteRewardQuery = {
           return challenge.reward.deleteReward(challenge);
         })
         .then(() => {
-          challenge.saveData(
-            "challenge",
-            challenge,
-            config.db.table.challenge,
-            "Challenge stored successfully."
-          );
+          challenge.saveData("challenge", challenge, config.db.table.challenge);
         })
         .catch((error) => {
           throw new Error(error);
         });
     });
 
-    return getResponseObject(
-      `Reward successfully deleted.`,
-      200,
-      config.responseType.success
-    );
+    return { message: `Reward successfully deleted.` };
   },
 };
 

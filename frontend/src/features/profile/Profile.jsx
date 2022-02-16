@@ -2,7 +2,7 @@
 import { useMutation } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
 import React, { useContext, useEffect, useMemo, useState } from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { Avatar, Divider, List, Snackbar, Switch } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as Clipboard from "expo-clipboard";
@@ -11,18 +11,7 @@ import { t } from "../i18n";
 import { LoadingScreen } from "../../shared/components";
 import PreferencesContext from "../preferences/PreferencesContext";
 import LOGOUT from "./Profile.gql";
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  avatarContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 32,
-    margin: 16,
-  },
-});
+import styles from "./Profile.style";
 
 function Profile() {
   const navigation = useNavigation();

@@ -1,26 +1,10 @@
 /* eslint-disable global-require */
 import { openURL } from "expo-linking";
 import React from "react";
-import { View, Image, ScrollView, StyleSheet } from "react-native";
+import { View, Image, ScrollView } from "react-native";
 import { List, Paragraph, Subheading } from "react-native-paper";
 import { t } from "../i18n";
-
-const styles = StyleSheet.create({
-  content: {
-    margin: 8,
-  },
-  heroImage: {
-    width: 128,
-    height: 128,
-    alignSelf: "center",
-    marginTop: 16,
-    marginBottom: 8,
-  },
-  heading: {
-    fontWeight: "bold",
-    marginTop: 8,
-  },
-});
+import styles from "./ProjectInfo.style";
 
 function ProjectInfo() {
   // TODO persist this somewhere else

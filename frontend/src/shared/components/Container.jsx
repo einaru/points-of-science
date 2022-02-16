@@ -1,12 +1,7 @@
 import * as React from "react";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+import styles from "./Container.style";
 
 function Container({ children, noMargins = false }) {
   const style = noMargins ? { margin: 0 } : { margin: 8 };

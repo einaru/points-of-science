@@ -3,11 +3,10 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
   },
-  text: {
-    fontSize: 24,
-    fontWeight: "bold",
+  formContainer: {
+    flex: 1,
+    margin: 24,
+    justifyContent: "center",
   },
 });

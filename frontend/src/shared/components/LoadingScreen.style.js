@@ -6,8 +6,7 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  text: {
-    fontSize: 24,
-    fontWeight: "bold",
+  label: {
+    paddingVertical: 12,
   },
 });

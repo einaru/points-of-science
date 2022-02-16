@@ -1,17 +1,7 @@
 import React from "react";
 import { ActivityIndicator, Text } from "react-native-paper";
-import { StyleSheet, View } from "react-native";
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  label: {
-    paddingVertical: 12,
-  },
-});
+import { View } from "react-native";
+import styles from "./LoadingScreen.style";
 
 function LoadingScreen({ animating = true, message = "" }) {
   return (

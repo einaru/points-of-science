@@ -1,13 +1,11 @@
-import { StyleSheet } from "react-native";
+const { StyleSheet } = require("react-native");
 
 export default StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    marginTop: 16,
   },
-  text: {
-    fontSize: 24,
+  linkText: {
     fontWeight: "bold",
   },
 });

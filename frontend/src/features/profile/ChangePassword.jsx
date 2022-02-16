@@ -1,21 +1,12 @@
 import { useMutation } from "@apollo/client";
 import React, { useContext, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { Button, HelperText, Snackbar, TextInput } from "react-native-paper";
 import { useEffect } from "react/cjs/react.development";
 import AuthContext from "../auth/AuthContext";
 import { t } from "../i18n";
 import CHANGE_PASSWORD from "./ChangePassword.gql";
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  formContainer: {
-    flex: 1,
-    margin: 8,
-  },
-});
+import styles from "./ChangePassword.style";
 
 function ChangePassword() {
   const { user } = useContext(AuthContext);

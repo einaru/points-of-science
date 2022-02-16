@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-const styles = StyleSheet.create({
+export default StyleSheet.create({
   listContainer: {
     flex: 1,
     margin: 8,
@@ -26,5 +26,3 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
 });
-
-export default styles;

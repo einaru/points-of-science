@@ -3,11 +3,11 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
   container: {
     flex: 1,
+  },
+  avatarContainer: {
     alignItems: "center",
     justifyContent: "center",
-  },
-  text: {
-    fontSize: 24,
-    fontWeight: "bold",
+    marginTop: 32,
+    margin: 16,
   },
 });

@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { gql, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { useNavigation } from "@react-navigation/native";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
@@ -10,6 +10,7 @@ import AuthContext from "../auth/AuthContext";
 import { t } from "../i18n";
 import { LoadingScreen } from "../../shared/components";
 import PreferencesContext from "../preferences/PreferencesContext";
+import LOGOUT from "./Profile.gql";
 
 const styles = StyleSheet.create({
   container: {
@@ -22,14 +23,6 @@ const styles = StyleSheet.create({
     margin: 16,
   },
 });
-
-const LOGOUT = gql`
-  mutation signOut($refreshToken: String!) {
-    signOut(refreshToken: $refreshToken) {
-      message
-    }
-  }
-`;
 
 function Profile() {
   const navigation = useNavigation();

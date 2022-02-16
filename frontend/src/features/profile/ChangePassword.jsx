@@ -1,10 +1,11 @@
-import { gql, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import React, { useContext, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Button, HelperText, Snackbar, TextInput } from "react-native-paper";
 import { useEffect } from "react/cjs/react.development";
 import AuthContext from "../auth/AuthContext";
 import { t } from "../i18n";
+import CHANGE_PASSWORD from "./ChangePassword.gql";
 
 const styles = StyleSheet.create({
   container: {
@@ -15,22 +16,6 @@ const styles = StyleSheet.create({
     margin: 8,
   },
 });
-
-const CHANGE_PASSWORD = gql`
-  mutation changePassword(
-    $userID: String!
-    $password: String!
-    $confirmPassword: String!
-  ) {
-    changePassword(
-      id: $userID
-      password: $password
-      confirmPassword: $confirmPassword
-    ) {
-      message
-    }
-  }
-`;
 
 function ChangePassword() {
   const { user } = useContext(AuthContext);

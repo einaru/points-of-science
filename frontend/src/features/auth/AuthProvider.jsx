@@ -1,16 +1,9 @@
 import React, { useReducer, useEffect, useMemo } from "react";
-import { gql, useApolloClient } from "@apollo/client";
+import { useApolloClient } from "@apollo/client";
 import { reducer, initialState } from "./reducer";
 import * as Storage from "../../services/storage";
 import AuthContext from "./AuthContext";
-
-const VERIFY_TOKEN = gql`
-  query verifyToken {
-    verifyToken {
-      message
-    }
-  }
-`;
+import VERIFY_TOKEN from "./AuthProvider.gql";
 
 function AuthProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);

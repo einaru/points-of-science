@@ -1,31 +1,11 @@
-import { gql, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import React, { useContext, useEffect, useState } from "react";
 import { HelperText, TextInput } from "react-native-paper";
 import AuthContext from "../auth/AuthContext";
 import { ActivateAccountContext } from "./ActivateAccountProvider";
 import { t } from "../i18n";
 import FormAction from "./FormAction";
-
-const ACTIVATE_ACCOUNT = gql`
-  mutation activateAccount(
-    $username: String!
-    $password: String!
-    $confirmPassword: String!
-  ) {
-    activateAccount(
-      username: $username
-      password: $password
-      confirmPassword: $confirmPassword
-    ) {
-      accessToken
-      refreshToken
-      user {
-        id
-        username
-      }
-    }
-  }
-`;
+import ACTIVATE_ACCOUNT from "./SetPassword.gql";
 
 export default function SetPassword() {
   const [password, setPassword] = useState("");

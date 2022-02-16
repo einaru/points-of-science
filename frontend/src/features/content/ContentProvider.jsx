@@ -1,46 +1,9 @@
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import React, { useMemo } from "react";
 import { LoadingScreen } from "../../shared/components";
 import { t } from "../i18n";
 import ContentContext from "./ContentContext";
-
-const GET_ALL_CATEGORIES = gql`
-  query getAllCategories {
-    getAllCategories {
-      id
-      name
-      image
-      description
-      challenges {
-        id
-        name
-        image
-        description
-        difficulty
-        reward {
-          maxPoints
-          firstTryPoints
-          bonusPoints
-        }
-        activity {
-          resource {
-            id
-            title
-            url
-          }
-          hint {
-            id
-            text
-          }
-        }
-        reflection {
-          title
-          solution
-        }
-      }
-    }
-  }
-`;
+import GET_ALL_CATEGORIES from "./ContentProvider.gql";
 
 function ContentProvider({ children }) {
   const { loading, data } = useQuery(GET_ALL_CATEGORIES);

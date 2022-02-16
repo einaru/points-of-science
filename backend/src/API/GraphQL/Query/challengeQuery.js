@@ -51,8 +51,8 @@ const createChallengeQuery = {
     assertIsAuthenticated(context.user);
     assertIsAdmin(context.user);
 
-    const { categoryID, title, image, description, difficulty } =
-      args.challenge;
+    const { categoryID, image, description, difficulty } = args.challenge;
+    const title = args.challenge.name;
     const { maxPoints, firstTryPoints, bonusPoints } = args.reward;
     const { solution, reflectionType, choices } = args.reflection;
     const reflectionTitle = args.reflection.title;

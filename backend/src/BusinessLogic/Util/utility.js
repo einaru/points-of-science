@@ -175,7 +175,9 @@ function getChallengeResponseObject(object) {
     id: object.data.id,
     categoryID: object.data.categoryID,
     difficulty: object.data.difficulty,
-    ...object.content.data,
+    name: object.content.data.title,
+    description: object.content.data.description,
+    image: object.content.data.image,
     reflection: object.reflection.data,
     reflectionType: object.data.reflectionType,
     reward: object.reward.data,
@@ -198,7 +200,9 @@ function getCategoryResponseObject(object) {
       object.data.challenges,
       getChallengeResponseObject
     ),
-    ...object.content.data,
+    name: object.content.data.title,
+    description: object.content.data.description,
+    image: object.content.data.image,
     progress: object.progress.data,
   };
 }
@@ -206,7 +210,7 @@ function getCategoryResponseObject(object) {
 function getContentResponseObject(object) {
   return {
     id: object.data.id,
-    title: object.data.title,
+    name: object.data.title,
     image: object.data.image,
     description: object.data.description,
   };

@@ -1,6 +1,5 @@
-import { GraphQLString, GraphQLInt, GraphQLList } from "graphql";
+import { GraphQLString, GraphQLList } from "graphql";
 import {
-  authenticateAccessToken,
   deleteData,
   getData,
   getFilter,
@@ -9,10 +8,12 @@ import {
   profileState,
   nextID,
   updateData,
-  NormalResponseModel,
   UserModel,
 } from "../../../internal.js";
 import config from "../../../Config/config.js";
+import { assertIsAuthenticated } from "../assert.js";
+import { UserInputError } from "../error.js";
+import { NormalResponseModel } from "../Model/model.js";
 
 function getResponseObject(message, statusCode, type) {
   return {
@@ -46,50 +47,30 @@ const verifyUsernameQuery = {
   type: NormalResponseModel,
   args: { username: { type: GraphQLString } },
   async resolve(parent, args) {
-    try {
-      const filter = getFilter({
-        key: "username",
-        operator: "==",
-        value: args.username,
-      });
-      const username = await getDataByFilter(
-        config.db.table.validUsername,
-        filter
-      );
-      if (username.length === 0) {
-        return {
-          message: "Invalid username.",
-          status: 400,
-          type: config.responseType.error,
-        };
-      }
-
-      const user = await getDataByFilter(config.db.table.user, filter)[0];
-      if (user != null) {
-        if (
-          user.state === profileState.active.value ||
-          user.state === profileState.suspended.value
-        ) {
-          return {
-            message: "User is already active or suspended.",
-            status: 400,
-            type: config.responseType.error,
-          };
-        }
-      }
-
-      return {
-        message: "Username is verified.",
-        status: 200,
-        type: config.responseType.success,
-      };
-    } catch (error) {
-      return {
-        message: `Could not verify username due to an error. Error: ${error.message}`,
-        status: 400,
-        type: config.responseType.error,
-      };
+    const filter = getFilter({
+      key: "username",
+      operator: "==",
+      value: args.username,
+    });
+    const username = await getDataByFilter(
+      config.db.table.validUsername,
+      filter
+    );
+    if (username.length === 0) {
+      throw new UserInputError("Invalid username.");
     }
+
+    const user = await getDataByFilter(config.db.table.user, filter)[0];
+    if (user != null) {
+      if (
+        user.state === profileState.active.value ||
+        user.state === profileState.suspended.value
+      ) {
+        throw new UserInputError("User is already active or suspended.");
+      }
+    }
+
+    return { message: "Username is verified." };
   },
 };
 
@@ -102,38 +83,27 @@ const changePasswordQuery = {
     confirmPassword: { type: GraphQLString },
   },
   async resolve(parent, args, context) {
-    try {
-      await authenticateAccessToken(context);
-      const userObject = context.user;
-      if (userObject.id !== args.id) {
-        return getResponseObject(
-          "Password update not successful. Wrong user.",
-          400,
-          config.responseType.error
-        );
-      }
+    assertIsAuthenticated(context.user);
 
-      const filter = getFilter({ key: "id", operator: "==", value: args.id });
-      const users = await getDataByFilter(config.db.table.user, filter);
-      if (users.length === 0) {
-        return getResponseObject(
-          "Could not find user.",
-          400,
-          config.responseType.error
-        );
-      }
-
-      const user = profileCreator();
-      user.updateData(users[0]);
-      const response = await user.changePassword(
-        args.password,
-        args.confirmPassword
-      );
-      await updateData(config.db.table.user, user.data);
-      return getResponseObject(response, 200, config.responseType.success);
-    } catch (error) {
-      return getResponseObject(error, 400, config.responseType.error);
+    const userObject = context.user;
+    if (userObject.id !== args.id) {
+      throw new UserInputError("Password update not successful. Wrong user.");
     }
+
+    const filter = getFilter({ key: "id", operator: "==", value: args.id });
+    const users = await getDataByFilter(config.db.table.user, filter);
+    if (users.length === 0) {
+      throw new UserInputError("Could not find user.");
+    }
+
+    const user = profileCreator();
+    user.updateData(users[0]);
+    const message = await user.changePassword(
+      args.password,
+      args.confirmPassword
+    );
+    await updateData(config.db.table.user, user.data);
+    return { message };
   },
 };
 
@@ -145,22 +115,17 @@ const createUserQuery = {
     confirm_password: { type: GraphQLString },
   },
   async resolve(parent, args) {
-    // Put the create user logic for the BusinessLogic here.
-    try {
-      const id = nextID(config.db.table.user);
-      const newUser = {
-        id,
-        username: args.username,
-        password: args.password,
-        permission: config.permissionLevel.control,
-        achievement: [],
-        challenge: [],
-      };
-      await updateData(config.db.table.user, newUser);
-      return newUser;
-    } catch (error) {
-      return null;
-    }
+    const id = nextID(config.db.table.user);
+    const newUser = {
+      id,
+      username: args.username,
+      password: args.password,
+      permission: config.permissionLevel.control,
+      achievement: [],
+      challenge: [],
+    };
+    await updateData(config.db.table.user, newUser);
+    return newUser;
   },
 };
 
@@ -170,22 +135,18 @@ const deleteUserQuery = {
     id: { type: GraphQLString },
   },
   async resolve(parent, args) {
-    try {
-      // Put the delete user logic for the BusinessLogic here.
-      const userList = await getDataByFilter("User", {
-        key: "id",
-        value: args.id,
-      });
-      if (userList.length > 0) {
-        const user = userList[0];
-        await deleteData("User", user);
-        return user;
-      }
+    const userList = await getDataByFilter("User", {
+      key: "id",
+      value: args.id,
+    });
 
-      return null;
-    } catch (error) {
-      return error;
+    if (userList.length > 0) {
+      const user = userList[0];
+      await deleteData("User", user);
+      return user;
     }
+
+    return null;
   },
 };
 
@@ -198,24 +159,20 @@ const updateUserQuery = {
     confirm_password: { type: GraphQLString },
   },
   async resolve(parent, args) {
-    try {
-      const filter = getFilter({
-        key: "id",
-        operator: "==",
-        value: args.id,
-      });
-      const userList = await getDataByFilter("User", filter);
-      if (userList.length === 0) {
-        return null;
-      }
-
-      const user = userList[0];
-      user.username = args.username;
-      await updateData(config.db.table.user, user);
-      return user;
-    } catch (error) {
-      return error;
+    const filter = getFilter({
+      key: "id",
+      operator: "==",
+      value: args.id,
+    });
+    const userList = await getDataByFilter("User", filter);
+    if (userList.length === 0) {
+      return null;
     }
+
+    const user = userList[0];
+    user.username = args.username;
+    await updateData(config.db.table.user, user);
+    return user;
   },
 };
 

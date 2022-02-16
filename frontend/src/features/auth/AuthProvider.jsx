@@ -1,12 +1,18 @@
-import React, { useReducer, useEffect, useMemo, createContext } from "react";
-import { useApolloClient } from "@apollo/client";
+import React, { useReducer, useEffect, useMemo } from "react";
+import { gql, useApolloClient } from "@apollo/client";
 import { reducer, initialState } from "./reducer";
-import * as Query from "./query";
 import * as Storage from "../../services/storage";
+import AuthContext from "./AuthContext";
 
-export const AuthContext = createContext();
+const VERIFY_TOKEN = gql`
+  query verifyToken {
+    verifyToken {
+      message
+    }
+  }
+`;
 
-export function AuthProvider({ children }) {
+function AuthProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const client = useApolloClient();
@@ -18,23 +24,14 @@ export function AuthProvider({ children }) {
       console.log("Restore user:", user);
       dispatch({ type: "restoreUser", user, refreshToken });
       if (user) {
-        const { data } = await client.query({ query: Query.VERIFY_TOKEN });
-        if (data.verifyToken.type === "error") {
-          client
-            .query({
-              query: Query.GET_NEW_TOKEN,
-              variables: { refreshToken },
-            })
-            .then((resp) => {
-              if (resp.data.getNewToken.type === "success") {
-                const { accessToken } = resp.data.getNewToken.data;
-                Storage.setItem("accessToken", accessToken);
-                dispatch({ type: "restoreToken" });
-              }
-            });
-        } else {
-          dispatch({ type: "restoreToken" });
-        }
+        client
+          .query({ query: VERIFY_TOKEN, fetchPolicy: "network-only" })
+          .then(() => {
+            dispatch({ type: "restoreToken" });
+          })
+          .catch((error) => {
+            console.debug(error.message);
+          });
       }
     };
     initState();
@@ -67,3 +64,5 @@ export function AuthProvider({ children }) {
     <AuthContext.Provider value={authContext}>{children}</AuthContext.Provider>
   );
 }
+
+export default AuthProvider;

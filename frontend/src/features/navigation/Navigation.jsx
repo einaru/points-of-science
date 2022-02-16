@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import ContentNavigator from "./ContentNavigator";
 import AccountStack from "../account/AccountStack";
-import { AuthContext } from "../auth/AuthProvider";
+import AuthContext from "../auth/AuthContext";
 
 function Navigation({ theme }) {
   const { isAuthenticated } = useContext(AuthContext);

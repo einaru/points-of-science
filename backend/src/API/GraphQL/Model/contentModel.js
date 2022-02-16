@@ -1,7 +1,6 @@
 import { GraphQLObjectType, GraphQLString, GraphQLList } from "graphql";
 import {
   ChallengeModel,
-  ResponseModel,
   ProgressModel,
 } from "../../../internal.js";
 
@@ -26,22 +25,6 @@ const CategoryModel = new GraphQLObjectType({
     challenges: { type: new GraphQLList(ChallengeModel) },
     ...ContentResponse,
     progress: { type: ProgressModel },
-  }),
-});
-
-const CategoryResponseModel = new GraphQLObjectType({
-  name: "CategoryResponse",
-  fields: () => ({
-    ...ResponseModel,
-    data: { type: CategoryModel },
-  }),
-});
-
-const AllCategoriesResponseModel = new GraphQLObjectType({
-  name: "AllCategoriesResponse",
-  fields: () => ({
-    ...ResponseModel,
-    data: { type: new GraphQLList(CategoryModel) },
   }),
 });
 
@@ -82,9 +65,7 @@ const ReflectionModel = new GraphQLObjectType({
 
 export {
   ActivityModel,
-  AllCategoriesResponseModel,
   CategoryModel,
-  CategoryResponseModel,
   ContentModel,
   ContentResponse,
   ReflectionModel,

@@ -9,7 +9,7 @@ const ResponseModel = {
 const NormalResponseModel = new GraphQLObjectType({
   name: "Response",
   fields: () => ({
-    ...ResponseModel,
+    message: { type: GraphQLString },
   }),
 });
 

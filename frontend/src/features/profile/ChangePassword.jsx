@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Button, HelperText, Snackbar, TextInput } from "react-native-paper";
 import { useEffect } from "react/cjs/react.development";
-import { AuthContext } from "../auth/AuthProvider";
+import AuthContext from "../auth/AuthContext";
 import { t } from "../i18n";
 
 const styles = StyleSheet.create({
@@ -27,8 +27,6 @@ const CHANGE_PASSWORD = gql`
       password: $password
       confirmPassword: $confirmPassword
     ) {
-      type
-      status
       message
     }
   }
@@ -51,23 +49,17 @@ function ChangePassword() {
   const toggleShowConfirmPassword = () =>
     setShowConfirmPassword(!showConfirmPassword);
 
-  const [changePassword, { data, loading, error }] =
-    useMutation(CHANGE_PASSWORD);
+  const [changePassword, { data, loading }] = useMutation(CHANGE_PASSWORD, {
+    onError: (error) => {
+      setErrorMessage(error.message);
+    },
+  });
 
   useEffect(() => {
-    if (data) {
-      const { type, message } = data.changePassword;
-      if (type === "success") {
-        showSnackbar();
-      }
-      setErrorMessage(type === "error" ? message : "");
+    if (data?.changePassword) {
+      showSnackbar();
     }
   }, [data]);
-
-  if (error) {
-    // TODO provide feedback to user on errors
-    console.error(error);
-  }
 
   return (
     <View style={styles.container}>

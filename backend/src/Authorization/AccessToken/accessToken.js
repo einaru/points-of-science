@@ -3,6 +3,7 @@
 import jwt from "jsonwebtoken";
 import { getData, updateData, deleteData } from "../../internal.js";
 import config from "../../Config/config.js";
+import { AuthenticationError } from "../../API/GraphQL/error.js";
 
 // Other third party dependencies:
 
@@ -26,45 +27,6 @@ function createAccessToken(user) {
   });
 }
 
-function authenticateAccessToken(request) {
-  return new Promise((resolve, reject) => {
-    const authHeader = request.headers.authorization;
-    const accessToken = authHeader && authHeader.split(" ")[1];
-    if (accessToken == null) {
-      reject(
-        getResponseObject(
-          "Access token is missing.",
-          403,
-          config.responseType.error
-        )
-      );
-
-      return;
-    }
-
-    jwt.verify(accessToken, config.secret.accessToken, (error, user) => {
-      if (error) {
-        return reject(
-          getResponseObject(
-            "Access token is invalid. It has either expired or is missing.",
-            403,
-            config.responseType.error
-          )
-        );
-      }
-
-      request.user = user;
-      return resolve(
-        getResponseObject(
-          "Authentication successful.",
-          200,
-          config.responseType.success
-        )
-      );
-    });
-  });
-}
-
 function storeRefreshTokenInDatabase(refreshToken) {
   return new Promise((resolve, reject) => {
     getData(config.db.table.refreshToken)
@@ -76,13 +38,8 @@ function storeRefreshTokenInDatabase(refreshToken) {
           return token === refreshToken;
         });
         if (refreshTokenExist != null) {
-          return resolve(
-            getResponseObject(
-              "Access token already exist.",
-              200,
-              config.responseType.success
-            )
-          );
+          reject(new Error("Access token already exist."));
+          return;
         }
 
         const data = {
@@ -147,13 +104,8 @@ function authenticateRefreshToken(refreshToken) {
         });
 
         if (!refreshTokenExist.length) {
-          return reject(
-            getResponseObject(
-              "Refresh token is invalid.",
-              403,
-              config.responseType.error
-            )
-          );
+          reject(new AuthenticationError("Refresh token is invalid."));
+          return;
         }
 
         jwt.verify(
@@ -161,16 +113,11 @@ function authenticateRefreshToken(refreshToken) {
           config.secret.refreshToken,
           (error, userVerified) => {
             if (error) {
-              return reject(
-                getResponseObject(
-                  "Refresh token is invalid.",
-                  403,
-                  config.responseType.error
-                )
-              );
+              reject(new AuthenticationError("Refresh token is invalid."));
+              return;
             }
 
-            return resolve(createAccessToken(userVerified));
+            resolve(createAccessToken(userVerified));
           }
         );
       })
@@ -185,35 +132,18 @@ function deleteRefreshTokenFromDatabase(refreshToken) {
     getData(config.db.table.refreshToken)
       .then((refreshTokens) => {
         if (refreshTokens.length === 0) {
-          return resolve(
-            getResponseObject(
-              "User is already signed out.",
-              200,
-              config.responseType.success
-            )
-          );
+          return resolve({ message: "User is already signed out." });
         }
 
         return deleteData(config.db.table.refreshToken, refreshToken);
       })
       .then((response) => {
         if (!response) {
-          return reject(
-            getResponseObject(
-              "Could not sign out user.",
-              500,
-              config.responseType.error
-            )
-          );
+          reject(new Error("Could not sign out user."));
+          return;
         }
 
-        return resolve(
-          getResponseObject(
-            "User signed out successfully.",
-            200,
-            config.responseType.success
-          )
-        );
+        resolve({ message: "User signed out successfully." });
       })
       .catch((error) => {
         reject(error);
@@ -222,7 +152,6 @@ function deleteRefreshTokenFromDatabase(refreshToken) {
 }
 
 export {
-  authenticateAccessToken,
   authenticateRefreshToken,
   createAccessToken,
   createRefreshToken,

@@ -1,12 +1,11 @@
+import { GraphQLList } from "graphql";
 import {
-  authenticateAccessToken,
-  AllChallengesResponseModel,
   ChallengeResponseModel,
   ChallengeInputModel,
+  ChallengeModel,
   RewardInputModel,
   categoryCreator,
   challengeCreator,
-  checkPermissionLevel,
   createChallenge,
   createContent,
   createReward,
@@ -15,42 +14,25 @@ import {
   saveChallenge,
 } from "../../../internal.js";
 import config from "../../../Config/config.js";
-
-function getResponseObject(message, statusCode, type) {
-  return {
-    message,
-    status: statusCode,
-    type,
-  };
-}
+import { assertIsAdmin, assertIsAuthenticated } from "../assert.js";
 
 // Root Queries - Used to retrieve data with GET-Requests
 
 const getAllChallengesQuery = {
-  type: AllChallengesResponseModel,
+  type: new GraphQLList(ChallengeModel),
   args: {},
   async resolve(parent, args, context) {
-    try {
-      await authenticateAccessToken(context);
-      const challengesData = await getData(config.db.table.challenge);
-      let challenges = [];
-      challengesData.forEach((challengeData) => {
-        const challenge = challengeCreator();
-        challenges.push(challenge.restoreObject(challenge, challengeData));
-      });
+    assertIsAuthenticated(context.user);
 
-      const response = getResponseObject(
-        "Challenges retrieved successfully",
-        200,
-        config.responseType.success
-      );
+    const challengesData = await getData(config.db.table.challenge);
+    let challenges = [];
+    challengesData.forEach((challengeData) => {
+      const challenge = challengeCreator();
+      challenges.push(challenge.restoreObject(challenge, challengeData));
+    });
 
-      challenges = await Promise.all(challenges);
-      response.data = challenges;
-      return response;
-    } catch (error) {
-      return error;
-    }
+    challenges = await Promise.all(challenges);
+    return challenges;
   },
 };
 
@@ -63,69 +45,49 @@ const createChallengeQuery = {
     reward: { type: RewardInputModel },
   },
   async resolve(parent, args, context) {
-    try {
-      await authenticateAccessToken(context);
-      const response = checkPermissionLevel(
-        config.permissionLevel.admin,
-        context.user
+    assertIsAuthenticated(context.user);
+    assertIsAdmin(context.user);
+
+    const { categoryID, title, image, description, difficulty } =
+      args.challenge;
+    const { maxPoints, firstTryPoints, bonusPoints } = args.reward;
+
+    let categoryData;
+    if (categoryID.trim().length === 0) {
+      throw new Error(
+        "Category you try to add the challenge to does not exist. Please create a Category before creating a Challenge."
       );
-
-      if (response.type === "error") {
-        return response;
-      }
-
-      const { categoryID, title, image, description, difficulty } =
-        args.challenge;
-      const { maxPoints, firstTryPoints, bonusPoints } = args.reward;
-
-      let categoryData;
-      if (categoryID.trim().length === 0) {
-        return getResponseObject(
-          "Category you try to add the challenge to does not exist. Please create a Category before creating a Challenge.",
-          400,
-          config.responseType.error
-        );
-      }
-
-      if (categoryID.trim().length > 0) {
-        const storedCategory = await getDataFromDatabaseByFilter(
-          "id",
-          categoryID,
-          config.db.table.category
-        );
-
-        if (storedCategory == null) {
-          return getResponseObject(
-            "Category you try to add the challenge to does not exist. Please create a Category before creating a Challenge.",
-            400,
-            config.responseType.error
-          );
-        }
-
-        [categoryData] = storedCategory;
-      }
-
-      const category = categoryCreator();
-      await category.restoreObject(category, categoryData);
-
-      const challenge = createChallenge(categoryID, difficulty);
-      const content = createContent(
-        challenge.content,
-        title,
-        image,
-        description
-      );
-      const reward = createReward(
-        challenge.reward,
-        maxPoints,
-        firstTryPoints,
-        bonusPoints
-      );
-
-      return saveChallenge(content, category, challenge, reward);
-    } catch (error) {
-      return error;
     }
+
+    if (categoryID.trim().length > 0) {
+      const storedCategory = await getDataFromDatabaseByFilter(
+        "id",
+        categoryID,
+        config.db.table.category
+      );
+
+      if (storedCategory == null) {
+        throw new Error(
+          "Category you try to add the challenge to does not exist. Please create a Category before creating a Challenge."
+        );
+      }
+
+      [categoryData] = storedCategory;
+    }
+
+    const category = categoryCreator();
+    await category.restoreObject(category, categoryData);
+
+    const challenge = createChallenge(categoryID, difficulty);
+    const content = createContent(challenge.content, title, image, description);
+    const reward = createReward(
+      challenge.reward,
+      maxPoints,
+      firstTryPoints,
+      bonusPoints
+    );
+
+    return saveChallenge(content, category, challenge, reward);
   },
 };
 

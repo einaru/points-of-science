@@ -22,7 +22,7 @@ function useApiClient() {
         cache,
         defaultOptions: {
           watchQuery: {
-            fetchPolicy: "cache-and-network",
+            fetchPolicy: "network-only",
           },
         },
       });

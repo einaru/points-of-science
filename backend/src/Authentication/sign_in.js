@@ -10,15 +10,6 @@ import {
 } from "../internal.js";
 import config from "../Config/config.js";
 
-function getResponseObject(message, statusCode, type, data) {
-  return {
-    message,
-    status: statusCode,
-    type,
-    data,
-  };
-}
-
 function signIn(username, password) {
   return new Promise((resolve, reject) => {
     getUser(username)
@@ -38,14 +29,7 @@ function signIn(username, password) {
       })
       .catch((error) => {
         // TO-DO: Implement error handler to take care of the error and provide a proper response to the user.
-        return reject(
-          getResponseObject(
-            `Something went wrong during sign in. Sign in unsuccessful. ERROR: ${error.message}`,
-            500,
-            config.responseType.error,
-            {}
-          )
-        );
+        reject(error);
       });
   });
 }
@@ -56,17 +40,11 @@ function getUser(username) {
       .then((users) => {
         const user = users.find((user) => user.username === username);
         if (user == null) {
-          return reject(
-            getResponseObject(
-              "User not found. Sign in unsuccessful.",
-              400,
-              config.responseType.error,
-              {}
-            )
-          );
+          reject(new Error("User not found. Sign in unsuccessful."));
+          return;
         }
 
-        return resolve(user);
+        resolve(user);
       })
       .catch((error) => {
         reject(error);
@@ -80,17 +58,11 @@ function checkProfileState(user) {
       user.state === profileState.deactivated.value ||
       user.state === profileState.suspended.value
     ) {
-      return reject(
-        getResponseObject(
-          `The profile is deactivated or suspended.`,
-          400,
-          config.responseType.error,
-          {}
-        )
-      );
+      reject(new Error(`The profile is deactivated or suspended.`));
+      return;
     }
 
-    return resolve(user);
+    resolve(user);
   });
 }
 
@@ -102,27 +74,15 @@ function completeSignIn(result, user) {
     ) {
       const accessToken = createAccessToken(user);
       const refreshToken = createRefreshToken(user);
-      return resolve(
-        getResponseObject(
-          "Sign in successful.",
-          200,
-          config.responseType.success,
-          {
-            user,
-            accessToken,
-            refreshToken,
-          }
-        )
-      );
+      return resolve({
+        user,
+        accessToken,
+        refreshToken,
+      });
     }
 
     return reject(
-      getResponseObject(
-        "Username or password is incorrect. Sign in unsuccessful.",
-        401,
-        config.responseType.error,
-        {}
-      )
+      new Error("Username or password is incorrect. Sign in unsuccessful.")
     );
   });
 }

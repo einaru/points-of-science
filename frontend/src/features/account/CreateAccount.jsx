@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { TextInput } from "react-native-paper";
-import { AuthContext } from "../auth/AuthProvider";
+import AuthContext from "../auth/AuthContext";
 import FormView from "./FormView";
 import FormLink from "./FormLink";
 import { t } from "../i18n";

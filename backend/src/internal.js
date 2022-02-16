@@ -16,7 +16,7 @@ export * from "./API/GraphQL/index.js";
 export * from "./Authentication/sign_in.js";
 export * from "./Authentication/sign_up.js";
 
-export * from "./Authorization/AccessToken/access_token.js";
+export * from "./Authorization/AccessToken/accessToken.js";
 export * from "./Authorization/Permission/permission.js";
 
 export * from "./BusinessLogic/Analytics/analytics.js";

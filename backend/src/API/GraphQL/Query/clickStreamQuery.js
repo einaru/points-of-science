@@ -10,8 +10,8 @@ import { assertIsAdmin, assertIsAuthenticated } from "../assert.js";
 import { UserInputError } from "../error.js";
 import { NormalResponseModel } from "../Model/model.js";
 import {
+  ClickEventInputModel,
   ClickStreamModel,
-  CreateClickStreamModel,
 } from "../Model/dataCollectionModel.js";
 
 // Root Queries - Used to retrieve data with GET-Requests
@@ -41,7 +41,7 @@ const createClickStreamQuery = {
   type: ClickStreamModel,
   args: {
     sessionToken: { type: GraphQLString },
-    clicks: { type: new GraphQLList(CreateClickStreamModel) },
+    clicks: { type: new GraphQLList(ClickEventInputModel) },
   },
   async resolve(parent, args, context) {
     assertIsAuthenticated(context.user);

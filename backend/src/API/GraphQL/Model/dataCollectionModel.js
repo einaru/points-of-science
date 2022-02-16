@@ -5,23 +5,23 @@ import {
   GraphQLList,
 } from "graphql";
 
-const MetaData = {
+const Metadata = {
   challengeID: { type: GraphQLString },
   prevScreen: { type: GraphQLString },
   source: { type: GraphQLString },
 };
 
-const MetaDataModel = new GraphQLObjectType({
-  name: "MetaDataModel",
+const MetadataModel = new GraphQLObjectType({
+  name: "Metadata",
   fields: () => ({
-    ...MetaData,
+    ...Metadata,
   }),
 });
 
-const MetaDataInputModel = new GraphQLInputObjectType({
-  name: "MetaDataInputModel",
+const MetadataInputModel = new GraphQLInputObjectType({
+  name: "MetadataInput",
   fields: () => ({
-    ...MetaData,
+    ...Metadata,
   }),
 });
 
@@ -32,10 +32,10 @@ const ClickStream = {
 };
 
 const ClickStreamItemModel = new GraphQLObjectType({
-  name: "ClickStreamItemModel",
+  name: "ClickStreamItem",
   fields: () => ({
     ...ClickStream,
-    metadata: { type: MetaDataModel },
+    metadata: { type: MetadataModel },
   }),
 });
 
@@ -49,12 +49,12 @@ const ClickStreamModel = new GraphQLObjectType({
   }),
 });
 
-const CreateClickStreamModel = new GraphQLInputObjectType({
-  name: "createClickStream",
+const ClickEventInputModel = new GraphQLInputObjectType({
+  name: "ClickEventInput",
   fields: () => ({
     ...ClickStream,
-    metadata: { type: MetaDataInputModel },
+    metadata: { type: MetadataInputModel },
   }),
 });
 
-export { ClickStreamModel, CreateClickStreamModel };
+export { ClickStreamModel, ClickEventInputModel };

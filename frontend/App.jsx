@@ -9,6 +9,7 @@ import PreferencesContext from "./src/features/preferences/PreferencesContext";
 import useApiClient from "./src/services/api/useApiClient";
 import { LoadingScreen } from "./src/shared/components";
 import usePreferences from "./src/features/preferences/usePreferences";
+import AnalyticsProvider from "./src/services/analytics/AnalyticsProvider";
 
 export default function App() {
   const client = useApiClient();
@@ -26,9 +27,11 @@ export default function App() {
       <ThemeProvider theme={theme}>
         <ApolloProvider client={client}>
           <AuthProvider>
-            <SafeAreaProvider>
-              <Navigation theme={theme} />
-            </SafeAreaProvider>
+            <AnalyticsProvider>
+              <SafeAreaProvider>
+                <Navigation theme={theme} />
+              </SafeAreaProvider>
+            </AnalyticsProvider>
           </AuthProvider>
           <StatusBar style={statusBarStyle} />
         </ApolloProvider>

@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { Image, View } from "react-native";
-import { Text, Title, TouchableRipple } from "react-native-paper";
+import { Title, TouchableRipple } from "react-native-paper";
 import styles from "./CategoryList.style";
-import { Surface } from "../../../shared/components";
+import { NoContent, Surface } from "../../../shared/components";
 import ContentContext from "../../content/ContentContext";
 import { t } from "../../i18n";
 
@@ -29,13 +29,7 @@ function CategoryList({ navigation }) {
   const { categories } = useContext(ContentContext);
 
   if (!categories.length) {
-    return (
-      <View style={styles.noContentContainer}>
-        <Text style={styles.noContentText}>
-          {t("Couldn't find any content")}
-        </Text>
-      </View>
-    );
+    return <NoContent message={t("Couldn't find any content")} />;
   }
 
   return (

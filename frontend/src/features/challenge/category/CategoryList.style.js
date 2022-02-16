@@ -5,15 +5,6 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 8,
   },
-  noContentContainer: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  noContentText: {
-    fontSize: 24,
-    fontWeight: "bold",
-  },
   listItemContainer: {
     flexDirection: "row",
     height: 100,

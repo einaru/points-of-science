@@ -1,7 +1,8 @@
 import React from "react";
 import { Image, ScrollView, View } from "react-native";
 import { Chip, Title, TouchableRipple } from "react-native-paper";
-import { Surface } from "../../shared/components";
+import { NoContent, Surface } from "../../shared/components";
+import { t } from "../i18n";
 import styles from "./ChallengeList.style";
 
 const fallbackImage = require("./assets/challenge.png");
@@ -33,6 +34,10 @@ function ChallengeListItem({ challenge, onPress }) {
 function ChallengeList({ route, navigation }) {
   const { category } = route.params;
   const { challenges } = category;
+
+  if (!challenges.length) {
+    return <NoContent message={t("Couldn't find any challenges")} />;
+  }
 
   return (
     <ScrollView>

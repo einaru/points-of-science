@@ -16,6 +16,7 @@ export default {
   "Confirm password": "Bekreft passord",
   "Contact info": "Kontaktinformasjon",
   "Continue": "Fortsett",
+  "Couldn't find any challenges": "Fant ingen utfordringer",
   "Couldn't find any content": "Fant ikke noe innhold",
   "Create account": "Opprett konto",
   "Dashboard": "Dashbord",

@@ -14,9 +14,9 @@ function createContent(content, title, image, description) {
   return content;
 }
 
-function createChallenge(categoryID, difficulty) {
+function createChallenge(categoryID, difficulty, reflectionType) {
   const id = nextID(config.db.table.challenge);
-  const challenge = challengeCreator();
+  const challenge = challengeCreator(reflectionType);
   const newChallenge = {
     id,
     categoryID,
@@ -27,7 +27,7 @@ function createChallenge(categoryID, difficulty) {
   return challenge;
 }
 
-function saveChallenge(content, category, challenge, reward) {
+function saveChallenge(content, category, challenge, reward, reflection) {
   return new Promise((resolve, reject) => {
     content
       .saveData("content", content, config.db.table.content)
@@ -40,6 +40,13 @@ function saveChallenge(content, category, challenge, reward) {
           "category",
           category,
           config.db.table.category
+        );
+      })
+      .then(() => {
+        reflection.saveData(
+          "reflection",
+          reflection,
+          config.db.table.reflection
         );
       })
       .then((response) => {
@@ -71,4 +78,24 @@ function createReward(reward, maxPoints, firstTryPoints, bonusPoints) {
   return reward;
 }
 
-export { createContent, createChallenge, createReward, saveChallenge };
+function createReflection(reflection, title, solution, choices) {
+  const id = nextID(config.db.table.reflection);
+  reflection.data.id = id;
+  reflection.setTitle(title);
+  reflection.setSolution(solution);
+  if (reflection.data.choices) {
+    choices.forEach((choice) => {
+      reflection.addChoice(choice);
+    });
+  }
+
+  return reflection;
+}
+
+export {
+  createContent,
+  createChallenge,
+  createReflection,
+  createReward,
+  saveChallenge,
+};

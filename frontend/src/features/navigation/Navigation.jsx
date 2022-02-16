@@ -7,6 +7,7 @@ import ContentNavigator from "./ContentNavigator";
 import AccountStack from "../account/AccountStack";
 import AuthContext from "../auth/AuthContext";
 import AnalyticsContext from "../../services/analytics/AnalyticsContext";
+import deviceInfo from "../../services/analytics/deviceInfo";
 
 function Navigation({ theme }) {
   const { refreshToken, isAuthenticated } = useContext(AuthContext);
@@ -31,6 +32,7 @@ function Navigation({ theme }) {
               prevScreen,
               currScreen,
               sessionToken: refreshToken,
+              device: deviceInfo,
             });
           }
           screenNameRef.current = currScreen;

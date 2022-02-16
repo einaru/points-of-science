@@ -7,7 +7,6 @@ import ContentNavigator from "./ContentNavigator";
 import AccountStack from "../account/AccountStack";
 import AuthContext from "../auth/AuthContext";
 import AnalyticsContext from "../../services/analytics/AnalyticsContext";
-import deviceInfo from "../../services/analytics/deviceInfo";
 
 function Navigation({ theme }) {
   const { refreshToken, isAuthenticated } = useContext(AuthContext);
@@ -28,12 +27,15 @@ function Navigation({ theme }) {
           const prevScreen = screenNameRef.current;
           const currScreen = navigationRef.getCurrentRoute().name;
           if (prevScreen !== currScreen) {
-            logEvent({
-              prevScreen,
-              currScreen,
-              sessionToken: refreshToken,
-              device: deviceInfo,
-            });
+            const event = {
+              event: "navigation",
+              screen: currScreen,
+              timestamp: Date.now().toString(),
+              metadata: {
+                prevScreen,
+              },
+            };
+            logEvent(refreshToken, event);
           }
           screenNameRef.current = currScreen;
         }

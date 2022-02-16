@@ -12,14 +12,14 @@ const Metadata = {
 };
 
 const MetadataModel = new GraphQLObjectType({
-  name: "MetadataModel",
+  name: "Metadata",
   fields: () => ({
     ...Metadata,
   }),
 });
 
 const MetadataInputModel = new GraphQLInputObjectType({
-  name: "MetadataInputModel",
+  name: "MetadataInput",
   fields: () => ({
     ...Metadata,
   }),
@@ -32,7 +32,7 @@ const ClickStream = {
 };
 
 const ClickStreamItemModel = new GraphQLObjectType({
-  name: "ClickStreamItemModel",
+  name: "ClickStreamItem",
   fields: () => ({
     ...ClickStream,
     metadata: { type: MetadataModel },

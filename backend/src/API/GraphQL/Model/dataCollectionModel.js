@@ -49,12 +49,12 @@ const ClickStreamModel = new GraphQLObjectType({
   }),
 });
 
-const CreateClickStreamModel = new GraphQLInputObjectType({
-  name: "createClickStream",
+const ClickEventInputModel = new GraphQLInputObjectType({
+  name: "ClickEventInput",
   fields: () => ({
     ...ClickStream,
     metadata: { type: MetaDataInputModel },
   }),
 });
 
-export { ClickStreamModel, CreateClickStreamModel };
+export { ClickStreamModel, ClickEventInputModel };

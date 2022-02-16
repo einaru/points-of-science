@@ -1,8 +1,7 @@
 import { useMutation } from "@apollo/client";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View } from "react-native";
 import { Button, HelperText, Snackbar, TextInput } from "react-native-paper";
-import { useEffect } from "react/cjs/react.development";
 import AuthContext from "../auth/AuthContext";
 import { t } from "../i18n";
 import CHANGE_PASSWORD from "./ChangePassword.gql";

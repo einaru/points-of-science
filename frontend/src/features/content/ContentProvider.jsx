@@ -7,40 +7,35 @@ import ContentContext from "./ContentContext";
 const GET_ALL_CATEGORIES = gql`
   query getAllCategories {
     getAllCategories {
-      type
-      status
-      message
-      data {
+      id
+      name
+      image
+      description
+      challenges {
         id
         name
         image
         description
-        challenges {
-          id
-          name
-          image
-          description
-          difficulty
-          reward {
-            maxPoints
-            firstTryPoints
-            bonusPoints
-          }
-          activity {
-            resource {
-              id
-              title
-              url
-            }
-            hint {
-              id
-              text
-            }
-          }
-          reflection {
+        difficulty
+        reward {
+          maxPoints
+          firstTryPoints
+          bonusPoints
+        }
+        activity {
+          resource {
+            id
             title
-            solution
+            url
           }
+          hint {
+            id
+            text
+          }
+        }
+        reflection {
+          title
+          solution
         }
       }
     }

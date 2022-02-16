@@ -5,7 +5,7 @@ import {
 } from "../../../internal.js";
 
 const ContentResponse = {
-  title: { type: GraphQLString },
+  name: { type: GraphQLString },
   image: { type: GraphQLString },
   description: { type: GraphQLString },
 };

@@ -1,24 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { HelperText, TextInput } from "react-native-paper";
-import { gql, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import AuthContext from "../auth/AuthContext";
 import FormView from "./FormView";
 import FormLink from "./FormLink";
 import { t } from "../i18n";
 import FormAction from "./FormAction";
-
-export const LOGIN = gql`
-  mutation signIn($username: String!, $password: String!) {
-    signIn(username: $username, password: $password) {
-      accessToken
-      refreshToken
-      user {
-        id
-        username
-      }
-    }
-  }
-`;
+import LOGIN from "./Login.gql";
 
 function LoginScreen() {
   const [username, setUsername] = useState("");

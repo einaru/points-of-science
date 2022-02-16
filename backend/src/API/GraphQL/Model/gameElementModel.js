@@ -12,6 +12,7 @@ import {
   ReflectionModel,
   UserModel,
 } from "../../../internal.js";
+import { ActivityModel } from "./contentModel.js";
 
 const RewardModel = new GraphQLObjectType({
   name: "Reward",
@@ -46,7 +47,7 @@ const challengeData = {
   categoryID: { type: GraphQLString },
   difficulty: { type: DifficultyEnum },
   ...ContentResponse,
-  // activity: { type: ActivityModel },
+  activity: { type: ActivityModel },
   reflection: { type: ReflectionModel },
   reward: { type: RewardModel },
 };

@@ -1,17 +1,10 @@
-import { gql, useLazyQuery } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client";
 import React, { useContext, useEffect, useState } from "react";
 import { HelperText, TextInput } from "react-native-paper";
 import { ActivateAccountContext } from "./ActivateAccountProvider";
 import { t } from "../i18n";
 import FormAction from "./FormAction";
-
-const VERIFY_USERNAME = gql`
-  query verifyUsername($username: String!) {
-    verifyUsername(username: $username) {
-      message
-    }
-  }
-`;
+import VERIFY_USERNAME from "./VerifyUsername.gql";
 
 export default function VerifyUsername() {
   const [errorMessage, setErrorMessage] = useState("");

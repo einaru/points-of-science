@@ -3,11 +3,13 @@ import {
   ChallengeResponseModel,
   ChallengeInputModel,
   ChallengeModel,
+  ReflectionInputModel,
   RewardInputModel,
   categoryCreator,
   challengeCreator,
   createChallenge,
   createContent,
+  createReflection,
   createReward,
   getData,
   getDataFromDatabaseByFilter,
@@ -27,7 +29,7 @@ const getAllChallengesQuery = {
     const challengesData = await getData(config.db.table.challenge);
     let challenges = [];
     challengesData.forEach((challengeData) => {
-      const challenge = challengeCreator();
+      const challenge = challengeCreator(challengeData.reflectionType);
       challenges.push(challenge.restoreObject(challenge, challengeData));
     });
 
@@ -43,14 +45,17 @@ const createChallengeQuery = {
   args: {
     challenge: { type: ChallengeInputModel },
     reward: { type: RewardInputModel },
+    reflection: { type: ReflectionInputModel },
   },
   async resolve(parent, args, context) {
     assertIsAuthenticated(context.user);
     assertIsAdmin(context.user);
 
-    const { categoryID, title, image, description, difficulty } =
-      args.challenge;
+    const { categoryID, image, description, difficulty } = args.challenge;
+    const title = args.challenge.name;
     const { maxPoints, firstTryPoints, bonusPoints } = args.reward;
+    const { solution, reflectionType, choices } = args.reflection;
+    const reflectionTitle = args.reflection.title;
 
     let categoryData;
     if (categoryID.trim().length === 0) {
@@ -78,7 +83,7 @@ const createChallengeQuery = {
     const category = categoryCreator();
     await category.restoreObject(category, categoryData);
 
-    const challenge = createChallenge(categoryID, difficulty);
+    const challenge = createChallenge(categoryID, difficulty, reflectionType);
     const content = createContent(challenge.content, title, image, description);
     const reward = createReward(
       challenge.reward,
@@ -86,8 +91,14 @@ const createChallengeQuery = {
       firstTryPoints,
       bonusPoints
     );
+    const reflection = createReflection(
+      challenge.reflection,
+      reflectionTitle,
+      solution,
+      choices
+    );
 
-    return saveChallenge(content, category, challenge, reward);
+    return saveChallenge(content, category, challenge, reward, reflection);
   },
 };
 

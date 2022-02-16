@@ -72,7 +72,14 @@ function restoreObject() {
 
           if (data[1] != null) {
             reflection = data[1][0];
-            challenge.reflection.updateData(reflection);
+            challenge.reflection.data.id = reflection.id;
+            challenge.reflection.setTitle(reflection.title);
+            challenge.reflection.setSolution(reflection.solution);
+            if (challenge.reflection.data.choices) {
+              reflection.choices.forEach((choice) => {
+                challenge.reflection.addChoice(choice);
+              });
+            }
           }
 
           if (data[2] != null) {
@@ -132,6 +139,7 @@ function emptyData() {
       categoryID: "",
       difficulty: DifficultyEnum.beginner,
       difficultyLevels: DifficultyEnum,
+      reflectionType: "",
     },
   };
 }
@@ -141,9 +149,9 @@ function challengeCreator(reflectionType) {
   // const activity =
 
   const reflection = addReflectionType(reflectionType);
-
   const reward = rewardCreator();
   const challenge = emptyData();
+  challenge.data.reflectionType = reflectionType;
 
   return {
     ...content,

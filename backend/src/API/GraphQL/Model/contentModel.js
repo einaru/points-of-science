@@ -1,8 +1,11 @@
-import { GraphQLObjectType, GraphQLString, GraphQLList } from "graphql";
 import {
-  ChallengeModel,
-  ProgressModel,
-} from "../../../internal.js";
+  GraphQLObjectType,
+  GraphQLString,
+  GraphQLList,
+  GraphQLInputObjectType,
+  GraphQLEnumType,
+} from "graphql";
+import { ChallengeModel, ProgressModel } from "../../../internal.js";
 
 const ContentResponse = {
   name: { type: GraphQLString },
@@ -54,12 +57,34 @@ const ActivityModel = new GraphQLObjectType({
   }),
 });
 
+const ReflectionTypeEnum = new GraphQLEnumType({
+  name: "ReflectionType",
+  values: {
+    reflection: { value: true },
+    argument: { value: false },
+  },
+});
+
+const reflectionData = {
+  title: { type: GraphQLString },
+  solution: { type: GraphQLString },
+};
+
 const ReflectionModel = new GraphQLObjectType({
   name: "Reflection",
   fields: () => ({
     id: { type: GraphQLString },
-    title: { type: GraphQLString },
-    solution: { type: GraphQLString },
+    ...reflectionData,
+    choices: { type: new GraphQLList(GraphQLString) },
+  }),
+});
+
+const ReflectionInputModel = new GraphQLInputObjectType({
+  name: "ReflectionInput",
+  fields: () => ({
+    ...reflectionData,
+    reflectionType: { type: ReflectionTypeEnum },
+    choices: { type: new GraphQLList(GraphQLString) },
   }),
 });
 
@@ -69,4 +94,6 @@ export {
   ContentModel,
   ContentResponse,
   ReflectionModel,
+  ReflectionInputModel,
+  ReflectionTypeEnum,
 };

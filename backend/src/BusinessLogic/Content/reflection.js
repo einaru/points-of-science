@@ -1,50 +1,6 @@
-import { createObjectTemplate, saveData } from "../../internal.js";
 import config from "../../Config/config.js";
-
-function setTitle(reflection) {
-  const key = "setTitle";
-  const code = (title) => {
-    // Fill in the blanks
-  };
-
-  return createObjectTemplate(key, code);
-}
-
-function setSolution(reflection) {
-  const key = "setSolution";
-  const code = (solution) => {
-    // Fill in the blanks
-  };
-
-  return createObjectTemplate(key, code);
-}
-
-function addChoice(argument) {
-  const key = "addChoice";
-  const code = (choice) => {
-    // Fill in the blanks
-  };
-
-  return createObjectTemplate(key, code);
-}
-
-function removeChoice(argument) {
-  const key = "removeChoice";
-  const code = (choice) => {
-    // Fill in the blanks
-  };
-
-  return createObjectTemplate(key, code);
-}
-
-function deleteReflection(reflection) {
-  const key = "deleteReflection";
-  const code = () => {
-    // Fill in the blanks
-  };
-
-  return createObjectTemplate(key, code);
-}
+import { createObjectTemplate, deleteData, saveData } from "../../internal.js";
+import { assertTextInput } from "../../API/GraphQL/assert.js";
 
 function emptyData() {
   return {
@@ -56,8 +12,92 @@ function emptyData() {
   };
 }
 
+function setTitle(reflection) {
+  const functionKey = "setTitle";
+  const code = (title) => {
+    assertTextInput(title, "Reflection title");
+
+    reflection.title = title;
+  };
+
+  return createObjectTemplate(functionKey, code);
+}
+
+function setSolution(reflection) {
+  const functionKey = "setSolution";
+  const code = (solution) => {
+    assertTextInput(solution, "Reflection solution");
+
+    reflection.solution = solution;
+  };
+
+  return createObjectTemplate(functionKey, code);
+}
+
+function addChoice(argument) {
+  const functionKey = "addChoice";
+  const code = (choice) => {
+    assertTextInput(choice, "Argument choices");
+    argument.choices.push(choice);
+  };
+
+  return createObjectTemplate(functionKey, code);
+}
+
+function removeChoice(argument) {
+  const functionKey = "removeChoice";
+  const code = (choice) => {
+    if (choice == null) {
+      throw new Error(
+        "The choice to remove must have a value of type integer."
+      );
+    }
+
+    if (choice > argument.choices.length - 1) {
+      throw new Error("The choice to remove does not exist.");
+    }
+
+    argument.choices.splice(choice, 1);
+  };
+
+  return createObjectTemplate(functionKey, code);
+}
+
+function deleteReflection(reflection) {
+  const functionKey = "deleteReflection";
+  const code = (challenge) => {
+    return new Promise((resolve, reject) => {
+      if (challenge == null || challenge !== Object(challenge)) {
+        reject(
+          Error(
+            "Challenge to delete this reflection from has wrong type. Input must be an object."
+          )
+        );
+      }
+
+      deleteData(config.db.table.reflection, reflection.id)
+        .then((response) => {
+          const emptyReflection = emptyData();
+          challenge.reflection.data.setTitle(emptyReflection.data.title);
+          challenge.reflection.data.solution(emptyReflection.data.solution);
+          if (challenge.reflection.data.choices) {
+            const { choices } = challenge.reflection.data;
+            choices.splice(0, choices.length);
+          }
+
+          resolve(response);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  };
+
+  return createObjectTemplate(functionKey, code);
+}
+
 function addEmptyChoiceList(argument) {
-  argument.data.choices = [];
+  argument.choices = [];
 }
 
 function reflectionCreator() {
@@ -76,7 +116,7 @@ function reflectionCreator() {
 
 function argumentCreator() {
   const argument = emptyData();
-  addEmptyChoiceList(argument);
+  addEmptyChoiceList(argument.data);
 
   return {
     reflection: {

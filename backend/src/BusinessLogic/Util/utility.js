@@ -84,6 +84,7 @@ function getChallengeStoredObject(object) {
     categoryID: object.data.categoryID,
     difficulty: object.data.difficulty,
     contentID: object.content.data.id,
+    reflectionType: object.data.reflectionType,
     reflectionID: object.reflection.data.id,
     rewardID: object.reward.data.id,
   };
@@ -119,6 +120,19 @@ function getContentStoredObject(object) {
   };
 }
 
+function getReflectionStoredObject(object) {
+  const entries = {
+    id: object.data.id,
+    title: object.data.title,
+    solution: object.data.solution,
+  };
+  if (object.data.choices) {
+    entries.choices = object.data.choices;
+  }
+
+  return entries;
+}
+
 function getRewardStoredObject(object) {
   return {
     id: object.data.id,
@@ -138,6 +152,8 @@ function convertToStoredObject(key, object) {
       return getClickStreamStoredObject(object);
     case "content":
       return getContentStoredObject(object);
+    case "reflection":
+      return getReflectionStoredObject(object);
     case "reward":
       return getRewardStoredObject(object);
     default:
@@ -159,8 +175,11 @@ function getChallengeResponseObject(object) {
     id: object.data.id,
     categoryID: object.data.categoryID,
     difficulty: object.data.difficulty,
-    ...object.content.data,
+    name: object.content.data.title,
+    description: object.content.data.description,
+    image: object.content.data.image,
     reflection: object.reflection.data,
+    reflectionType: object.data.reflectionType,
     reward: object.reward.data,
   };
 }
@@ -181,7 +200,9 @@ function getCategoryResponseObject(object) {
       object.data.challenges,
       getChallengeResponseObject
     ),
-    ...object.content.data,
+    name: object.content.data.title,
+    description: object.content.data.description,
+    image: object.content.data.image,
     progress: object.progress.data,
   };
 }
@@ -189,10 +210,22 @@ function getCategoryResponseObject(object) {
 function getContentResponseObject(object) {
   return {
     id: object.data.id,
-    title: object.data.title,
+    name: object.data.title,
     image: object.data.image,
     description: object.data.description,
   };
+}
+
+function getReflectionResponseObject(object) {
+  const entries = {
+    id: object.data.id,
+    title: object.data.title,
+  };
+  if (object.data.choices) {
+    entries.choices = object.data.choices;
+  }
+
+  return entries;
 }
 
 function getRewardResponseObject(object){
@@ -214,6 +247,8 @@ function convertToResponseObject(key, object) {
       return getClickStreamResponseObject(object);
     case "content":
       return getContentResponseObject(object);
+    case "reflection":
+      return getReflectionResponseObject(object);
     case "reward":
       return getRewardResponseObject(object);
     default:

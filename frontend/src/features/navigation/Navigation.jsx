@@ -23,7 +23,7 @@ function Navigation({ theme }) {
         screenNameRef.current = navigationRef.getCurrentRoute().name;
       }}
       onStateChange={async () => {
-        if (navigationRef.isReady()) {
+        if (navigationRef.isReady() && refreshToken) {
           const prevScreen = screenNameRef.current;
           const currScreen = navigationRef.getCurrentRoute().name;
           if (prevScreen !== currScreen) {

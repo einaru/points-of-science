@@ -1,4 +1,5 @@
 import {
+  activityCreator,
   contentCreator,
   createObjectTemplate,
   convertToResponseObject,
@@ -38,7 +39,7 @@ function restoreObject() {
   const functionKey = "restoreObject";
   const code = (challenge, challengeData) => {
     return new Promise((resolve, reject) => {
-      const { contentID, reflectionID, rewardID } = challengeData;
+      const { activityID, contentID, reflectionID, rewardID } = challengeData;
 
       const contentData = getDataFromDatabaseByFilter(
         "id",
@@ -58,20 +59,23 @@ function restoreObject() {
         config.db.table.reward
       );
 
-      Promise.all([contentData, reflectionData, rewardData])
+      const activityData = getDataFromDatabaseByFilter(
+        "id",
+        activityID,
+        config.db.table.activity
+      );
+
+      Promise.all([contentData, reflectionData, rewardData, activityData])
         .then((data) => {
           challenge.updateData(challengeData);
 
-          let content = [];
-          let reflection = [];
-          let reward = [];
           if (data[0] != null) {
-            content = data[0][0];
+            const content = data[0][0];
             challenge.content.updateData(content);
           }
 
           if (data[1] != null) {
-            reflection = data[1][0];
+            const reflection = data[1][0];
             challenge.reflection.data.id = reflection.id;
             challenge.reflection.setTitle(reflection.title);
             challenge.reflection.setSolution(reflection.solution);
@@ -83,8 +87,24 @@ function restoreObject() {
           }
 
           if (data[2] != null) {
-            reward = data[2][0];
+            const reward = data[2][0];
             challenge.reward.updateData(reward);
+          }
+
+          if (data[3] != null) {
+            const activity = data[3][0];
+            challenge.activity.setID(activity.id);
+            challenge.activity.setDescription(activity.description);
+            challenge.activity.setType(activity.type);
+            activity.hints.forEach((hint) => {
+              challenge.activity.add(challenge.activity.data.hints, hint);
+            });
+            activity.resources.forEach((resource) => {
+              challenge.activity.add(
+                challenge.activity.data.resources,
+                resource
+              );
+            });
           }
 
           resolve(convertToResponseObject("challenge", challenge));
@@ -146,7 +166,7 @@ function emptyData() {
 
 function challengeCreator(reflectionType) {
   const content = contentCreator();
-  // const activity =
+  const activity = activityCreator();
 
   const reflection = addReflectionType(reflectionType);
   const reward = rewardCreator();
@@ -155,7 +175,7 @@ function challengeCreator(reflectionType) {
 
   return {
     ...content,
-    // ...activity,
+    ...activity,
     ...reflection,
     ...reward,
     ...challenge,

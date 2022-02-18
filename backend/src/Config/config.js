@@ -9,6 +9,7 @@ const config = {
   },
   db: {
     table: {
+      activity: "Activity",
       category: "Category",
       challenge: "Challenge",
       clickStream: "ClickStream",

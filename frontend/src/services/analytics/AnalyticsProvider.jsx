@@ -3,18 +3,31 @@ import React, { useMemo } from "react";
 import AnalyticsContext from "./AnalyticsContext";
 import LOG_CLICK_STREAM from "./AnalyticsProvider.gql";
 
+function getTimestamp() {
+  return Date.now().valueOf().toString();
+}
+
 function AnalyticsProvider({ children }) {
-  const [logClickEvent, { data }] = useMutation(LOG_CLICK_STREAM, {
+  const [logClickEvent] = useMutation(LOG_CLICK_STREAM, {
     onError: (error) => {
       console.error("Error logging click event:", error);
     },
   });
   const analytics = useMemo(
     () => ({
-      logEvent: (sessionToken, event) => {
+      logEvent: (sessionToken, prevScreen, currentScreen) => {
         const payload = {
           sessionToken,
-          clicks: [event],
+          clicks: [
+            {
+              event: "navigation",
+              screen: currentScreen.name,
+              timestamp: getTimestamp(),
+              metadata: {
+                prevScreen: prevScreen.name,
+              },
+            },
+          ],
         };
         logClickEvent({ variables: payload });
         console.debug("Logging click event:", payload);
@@ -22,10 +35,6 @@ function AnalyticsProvider({ children }) {
     }),
     [logClickEvent]
   );
-
-  if (data) {
-    console.debug("Got click event response:", data);
-  }
 
   return (
     <AnalyticsContext.Provider value={analytics}>

@@ -48,12 +48,33 @@ const ResourceModel = new GraphQLObjectType({
   }),
 });
 
+const ActivityTypeEnum = new GraphQLEnumType({
+  name: "ActivityType",
+  values: {
+    external: { value: 1 },
+    inApp: { value: 2 },
+  },
+});
+
+const Activity = {
+  type: { type: ActivityTypeEnum },
+  description: { type: GraphQLString },
+  hints: { type: new GraphQLList(GraphQLString) },
+  resources: { type: new GraphQLList(GraphQLString) },
+};
+
 const ActivityModel = new GraphQLObjectType({
   name: "Activity",
   fields: () => ({
     id: { type: GraphQLString },
-    hint: { type: new GraphQLList(HintModel) },
-    resource: { type: new GraphQLList(ResourceModel) },
+    ...Activity,
+  }),
+});
+
+const ActivityInputModel = new GraphQLInputObjectType({
+  name: "ActivityInput",
+  fields: () => ({
+    ...Activity,
   }),
 });
 
@@ -89,6 +110,7 @@ const ReflectionInputModel = new GraphQLInputObjectType({
 });
 
 export {
+  ActivityInputModel,
   ActivityModel,
   CategoryModel,
   ContentModel,

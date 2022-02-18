@@ -87,6 +87,7 @@ function getChallengeStoredObject(object) {
     reflectionType: object.data.reflectionType,
     reflectionID: object.reflection.data.id,
     rewardID: object.reward.data.id,
+    activityID: object.activity.data.id,
   };
 }
 
@@ -142,8 +143,20 @@ function getRewardStoredObject(object) {
   };
 }
 
+function getActivityStoredObject(object) {
+  return {
+    id: object.data.id,
+    type: object.data.type,
+    description: object.data.description,
+    hints: object.data.hints,
+    resources: object.data.resources,
+  };
+}
+
 function convertToStoredObject(key, object) {
   switch (key) {
+    case "activity":
+      return getActivityStoredObject(object);
     case "category":
       return getCategoryStoredObject(object);
     case "challenge":
@@ -181,6 +194,7 @@ function getChallengeResponseObject(object) {
     reflection: object.reflection.data,
     reflectionType: object.data.reflectionType,
     reward: object.reward.data,
+    activity: object.activity.data,
   };
 }
 
@@ -237,8 +251,20 @@ function getRewardResponseObject(object){
   };
 }
 
+function getActivityResponseObject(object) {
+  return {
+    id: object.data.id,
+    type: object.data.type,
+    description: object.data.description,
+    hints: object.data.hints,
+    resources: object.data.resources,
+  };
+}
+
 function convertToResponseObject(key, object) {
   switch (key) {
+    case "activity":
+      return getActivityResponseObject(object);
     case "category":
       return getCategoryResponseObject(object);
     case "challenge":

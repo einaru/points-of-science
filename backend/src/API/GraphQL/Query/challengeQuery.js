@@ -1,11 +1,13 @@
 import { GraphQLList } from "graphql";
 import {
+  ActivityInputModel,
   ChallengeResponseModel,
   ChallengeInputModel,
   ChallengeModel,
   ReflectionInputModel,
   RewardInputModel,
   categoryCreator,
+  createActivity,
   challengeCreator,
   createChallenge,
   createContent,
@@ -46,6 +48,7 @@ const createChallengeQuery = {
     challenge: { type: ChallengeInputModel },
     reward: { type: RewardInputModel },
     reflection: { type: ReflectionInputModel },
+    activity: { type: ActivityInputModel },
   },
   async resolve(parent, args, context) {
     assertIsAuthenticated(context.user);
@@ -56,6 +59,8 @@ const createChallengeQuery = {
     const { maxPoints, firstTryPoints, bonusPoints } = args.reward;
     const { solution, reflectionType, choices } = args.reflection;
     const reflectionTitle = args.reflection.title;
+    const { type, hints, resources } = args.activity;
+    const activityDescription = args.activity.description;
 
     let categoryData;
     if (categoryID.trim().length === 0) {
@@ -97,8 +102,22 @@ const createChallengeQuery = {
       solution,
       choices
     );
+    const activity = createActivity(
+      challenge.activity,
+      type,
+      activityDescription,
+      hints,
+      resources
+    );
 
-    return saveChallenge(content, category, challenge, reward, reflection);
+    return saveChallenge(
+      content,
+      category,
+      challenge,
+      reward,
+      reflection,
+      activity
+    );
   },
 };
 

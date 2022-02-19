@@ -10,7 +10,7 @@ import AnalyticsContext from "../../services/analytics/AnalyticsContext";
 
 function Navigation({ theme }) {
   const { refreshToken, isAuthenticated } = useContext(AuthContext);
-  const { logEvent } = useContext(AnalyticsContext);
+  const { logNavigationEvent } = useContext(AnalyticsContext);
 
   const navigationRef = useNavigationContainerRef();
   const screenRef = useRef();
@@ -27,7 +27,7 @@ function Navigation({ theme }) {
           const prevScreen = screenRef.current;
           const currScreen = navigationRef.getCurrentRoute();
           if (prevScreen !== currScreen) {
-            logEvent(refreshToken, prevScreen, currScreen);
+            logNavigationEvent(refreshToken, prevScreen, currScreen);
           }
           screenRef.current = currScreen;
         }

@@ -8,32 +8,28 @@ function getTimestamp() {
 }
 
 function AnalyticsProvider({ children }) {
-  const [logClickEvent] = useMutation(LOG_CLICK_STREAM, {
+  const [logEvent] = useMutation(LOG_CLICK_STREAM, {
     onError: (error) => {
       console.error("Error logging click event:", error);
     },
   });
+
   const analytics = useMemo(
     () => ({
-      logEvent: (sessionToken, prevScreen, currentScreen) => {
-        const payload = {
-          sessionToken,
-          clicks: [
-            {
-              event: "navigation",
-              screen: currentScreen.name,
-              timestamp: getTimestamp(),
-              metadata: {
-                prevScreen: prevScreen.name,
-              },
-            },
-          ],
+      logNavigationEvent: (sessionToken, prevScreen, currentScreen) => {
+        const event = {
+          event: "navigation",
+          screen: currentScreen.name,
+          timestamp: getTimestamp(),
+          metadata: {
+            prevScreen: prevScreen.name,
+          },
         };
-        logClickEvent({ variables: payload });
-        console.debug("Logging click event:", payload);
+        logEvent({ variables: { sessionToken, clicks: [event] } });
+        console.debug("Logging event:", event);
       },
     }),
-    [logClickEvent]
+    [logEvent]
   );
 
   return (

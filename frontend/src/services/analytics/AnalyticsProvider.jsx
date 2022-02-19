@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import React, { useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 import AnalyticsContext from "./AnalyticsContext";
 import LOG_CLICK_STREAM from "./AnalyticsProvider.gql";
 
@@ -14,8 +14,27 @@ function AnalyticsProvider({ children }) {
     },
   });
 
+  const doLogEvent = useCallback(
+    (sessionToken, event) => {
+      logEvent({ variables: { sessionToken, clicks: [event] } });
+      console.debug("Logging event:", event);
+    },
+    [logEvent]
+  );
+
   const analytics = useMemo(
     () => ({
+      logClickEvent: (sessionToken, screen, source) => {
+        const event = {
+          event: "click",
+          screen: screen.name,
+          timestamp: getTimestamp(),
+          metadata: {
+            source,
+          },
+        };
+        doLogEvent(sessionToken, event);
+      },
       logNavigationEvent: (sessionToken, prevScreen, currentScreen) => {
         const event = {
           event: "navigation",
@@ -25,11 +44,10 @@ function AnalyticsProvider({ children }) {
             prevScreen: prevScreen.name,
           },
         };
-        logEvent({ variables: { sessionToken, clicks: [event] } });
-        console.debug("Logging event:", event);
+        doLogEvent(sessionToken, event);
       },
     }),
-    [logEvent]
+    [doLogEvent]
   );
 
   return (

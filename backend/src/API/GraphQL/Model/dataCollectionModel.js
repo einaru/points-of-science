@@ -6,6 +6,7 @@ import {
 } from "graphql";
 
 const Metadata = {
+  categoryID: { type: GraphQLString },
   challengeID: { type: GraphQLString },
   prevScreen: { type: GraphQLString },
   source: { type: GraphQLString },

@@ -3,6 +3,7 @@ export default class ClickStream {
     this.id = null;
     this.userID = userID;
     this.sessionToken = sessionToken;
+    this.deviceInfo = {};
     this.clicks = [];
   }
 
@@ -18,6 +19,10 @@ export default class ClickStream {
       });
     }
     return cls;
+  }
+
+  addDeviceInfo(deviceInfo) {
+    this.deviceInfo = deviceInfo;
   }
 
   addClickEvent(event) {

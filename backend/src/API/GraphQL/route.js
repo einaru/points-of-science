@@ -23,6 +23,7 @@ import {
   swapPermissionQuery,
 } from "../../internal.js";
 import {
+  logDeviceInfo,
   logEvent,
   deleteClickStream,
   getAllClickStreams,
@@ -55,6 +56,7 @@ const MUTATION = new GraphQLObjectType({
     deleteClickStream,
     deleteReward: deleteRewardQuery,
     deleteUser: deleteUserQuery,
+    logDeviceInfo,
     logEvent,
     updateUser: updateUserQuery,
     signIn: signInQuery,

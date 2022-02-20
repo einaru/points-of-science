@@ -5,6 +5,7 @@ import { NormalResponseModel } from "../Model/model.js";
 import {
   ClickEventInputModel,
   ClickStreamModel,
+  DeviceInfoInputModel,
 } from "../Model/dataCollectionModel.js";
 import ClickStream from "../../../DataCollection/ClickStream.js";
 
@@ -29,6 +30,30 @@ async function getClickStream(userID, sessionToken, provider) {
 function serialize(cls) {
   return JSON.parse(JSON.stringify(cls));
 }
+
+export const logDeviceInfo = {
+  type: ClickStreamModel,
+  args: {
+    sessionToken: { type: GraphQLString },
+    deviceInfo: { type: DeviceInfoInputModel },
+  },
+  async resolve(_, { sessionToken, deviceInfo }, { user, providers }) {
+    assertIsAuthenticated(user);
+    if (!(await providers.refreshTokens.getByID(sessionToken))) {
+      throw new ApiError("Invalid session token");
+    }
+
+    const clickStream = await getClickStream(
+      user.id,
+      sessionToken,
+      providers.clickStreams
+    );
+    clickStream.addDeviceInfo(deviceInfo);
+
+    const data = serialize(clickStream);
+    await providers.clickStreams.set(sessionToken, data);
+  },
+};
 
 export const logEvent = {
   type: ClickStreamModel,

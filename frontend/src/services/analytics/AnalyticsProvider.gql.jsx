@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-const LOG_EVENT = gql`
+export const LOG_EVENT = gql`
   mutation logEvent($sessionToken: String!, $event: ClickEventInput) {
     logEvent(sessionToken: $sessionToken, event: $event) {
       id
@@ -10,4 +10,10 @@ const LOG_EVENT = gql`
   }
 `;
 
-export default LOG_EVENT;
+export const LOG_DEVICE_INFO = gql`
+  mutation logDeviceInfo($sessionToken: String!, $deviceInfo: DeviceInfoInput) {
+    logDeviceInfo(sessionToken: $sessionToken, deviceInfo: $deviceInfo) {
+      id
+    }
+  }
+`;

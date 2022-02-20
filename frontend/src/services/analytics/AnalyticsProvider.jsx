@@ -1,5 +1,6 @@
 import { useMutation } from "@apollo/client";
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useContext, useMemo } from "react";
+import AuthContext from "../../features/auth/AuthContext";
 import AnalyticsContext from "./AnalyticsContext";
 import LOG_EVENT from "./AnalyticsProvider.gql";
 
@@ -27,6 +28,8 @@ function getTimestamp() {
 }
 
 function AnalyticsProvider({ children }) {
+  const { sessionToken } = useContext(AuthContext);
+
   const [logEvent] = useMutation(LOG_EVENT, {
     onError: (error) => {
       console.error("Error logging click event:", error);
@@ -34,16 +37,16 @@ function AnalyticsProvider({ children }) {
   });
 
   const doLogEvent = useCallback(
-    (sessionToken, event) => {
+    (event) => {
       logEvent({ variables: { sessionToken, event } });
       console.debug("Logging event:", event);
     },
-    [logEvent]
+    [logEvent, sessionToken]
   );
 
   const analytics = useMemo(
     () => ({
-      logClickEvent: (sessionToken, screen, source) => {
+      logClickEvent: (screen, source) => {
         const metadata = extractMetadata(screen);
         const event = {
           event: "click",
@@ -54,9 +57,9 @@ function AnalyticsProvider({ children }) {
             source,
           },
         };
-        doLogEvent(sessionToken, event);
+        doLogEvent(event);
       },
-      logNavigationEvent: (sessionToken, prevScreen, currentScreen) => {
+      logNavigationEvent: (prevScreen, currentScreen) => {
         const metadata = extractMetadata(currentScreen);
         const event = {
           event: "navigation",
@@ -67,7 +70,7 @@ function AnalyticsProvider({ children }) {
             prevScreen: prevScreen.name,
           },
         };
-        doLogEvent(sessionToken, event);
+        doLogEvent(event);
       },
     }),
     [doLogEvent]

@@ -9,7 +9,7 @@ import AuthContext from "../auth/AuthContext";
 import AnalyticsContext from "../../services/analytics/AnalyticsContext";
 
 function Navigation({ theme }) {
-  const { refreshToken, isAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated } = useContext(AuthContext);
   const { logNavigationEvent } = useContext(AnalyticsContext);
 
   const navigationRef = useNavigationContainerRef();
@@ -23,11 +23,11 @@ function Navigation({ theme }) {
         screenRef.current = navigationRef.getCurrentRoute();
       }}
       onStateChange={async () => {
-        if (navigationRef.isReady() && refreshToken) {
+        if (navigationRef.isReady() && isAuthenticated) {
           const prevScreen = screenRef.current;
           const currScreen = navigationRef.getCurrentRoute();
           if (prevScreen !== currScreen) {
-            logNavigationEvent(refreshToken, prevScreen, currScreen);
+            logNavigationEvent(prevScreen, currScreen);
           }
           screenRef.current = currScreen;
         }

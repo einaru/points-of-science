@@ -99,7 +99,7 @@ function Profile() {
               title={t("Log out")}
               left={() => <List.Icon icon="logout" />}
               onPress={() => {
-                logClickEvent(refreshToken, route, "User logging out");
+                logClickEvent(route, "User logging out");
                 logOut({ variables: { refreshToken } }).then(() => {
                   client.clearStore();
                 });

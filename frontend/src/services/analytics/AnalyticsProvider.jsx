@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/client";
 import React, { useCallback, useMemo } from "react";
 import AnalyticsContext from "./AnalyticsContext";
-import LOG_CLICK_STREAM from "./AnalyticsProvider.gql";
+import LOG_EVENT from "./AnalyticsProvider.gql";
 
 function extractMetadata({ params }) {
   const metadata = {};
@@ -27,7 +27,7 @@ function getTimestamp() {
 }
 
 function AnalyticsProvider({ children }) {
-  const [logEvent] = useMutation(LOG_CLICK_STREAM, {
+  const [logEvent] = useMutation(LOG_EVENT, {
     onError: (error) => {
       console.error("Error logging click event:", error);
     },

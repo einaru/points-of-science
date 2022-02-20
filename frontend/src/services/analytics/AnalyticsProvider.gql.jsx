@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-const LOG_CLICK_STREAM = gql`
+const LOG_EVENT = gql`
   mutation logEvent($sessionToken: String!, $event: ClickEventInput) {
     logEvent(sessionToken: $sessionToken, event: $event) {
       id
@@ -10,4 +10,4 @@ const LOG_CLICK_STREAM = gql`
   }
 `;
 
-export default LOG_CLICK_STREAM;
+export default LOG_EVENT;

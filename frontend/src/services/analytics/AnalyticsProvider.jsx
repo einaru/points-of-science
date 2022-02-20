@@ -3,6 +3,21 @@ import React, { useCallback, useMemo } from "react";
 import AnalyticsContext from "./AnalyticsContext";
 import LOG_CLICK_STREAM from "./AnalyticsProvider.gql";
 
+function extractMetadata({ params }) {
+  const metadata = {};
+  if (params) {
+    Object.keys(params).forEach((key) => {
+      switch (key) {
+        case "challenge":
+          metadata.challengeID = params[key].id;
+          break;
+        // no default
+      }
+    });
+  }
+  return metadata;
+}
+
 function getTimestamp() {
   return Date.now().valueOf().toString();
 }
@@ -25,22 +40,26 @@ function AnalyticsProvider({ children }) {
   const analytics = useMemo(
     () => ({
       logClickEvent: (sessionToken, screen, source) => {
+        const metadata = extractMetadata(screen);
         const event = {
           event: "click",
           screen: screen.name,
           timestamp: getTimestamp(),
           metadata: {
+            ...metadata,
             source,
           },
         };
         doLogEvent(sessionToken, event);
       },
       logNavigationEvent: (sessionToken, prevScreen, currentScreen) => {
+        const metadata = extractMetadata(currentScreen);
         const event = {
           event: "navigation",
           screen: currentScreen.name,
           timestamp: getTimestamp(),
           metadata: {
+            ...metadata,
             prevScreen: prevScreen.name,
           },
         };

@@ -6,20 +6,26 @@ import { graphqlHTTP } from "express-graphql";
 import config from "./Config/config.js";
 import { schema, connectToDatabase } from "./internal.js";
 import authMiddleware from "./Authorization/authMiddleware.js";
+import { providers } from "./Database/firestore.js";
 
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
 app.use(cors());
 app.use(authMiddleware);
 
 app.use(
   "/graphql",
-  graphqlHTTP({
-    schema,
-    graphiql: true,
+  graphqlHTTP((req, res, params) => {
+    return {
+      schema,
+      graphiql: true,
+      context: {
+        user: req.user,
+        providers,
+      },
+    };
   })
 );
 

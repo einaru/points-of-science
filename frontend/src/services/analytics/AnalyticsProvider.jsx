@@ -16,7 +16,7 @@ function AnalyticsProvider({ children }) {
 
   const doLogEvent = useCallback(
     (sessionToken, event) => {
-      logEvent({ variables: { sessionToken, clicks: [event] } });
+      logEvent({ variables: { sessionToken, event } });
       console.debug("Logging event:", event);
     },
     [logEvent]

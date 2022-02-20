@@ -43,7 +43,7 @@ function restoreChallenges(challengeList) {
         challengesData.forEach((challengeData) => {
           challenges.push(
             new Promise((resolve, reject) => {
-              const challenge = challengeCreator();
+              const challenge = challengeCreator(challengeData.reflectionType);
               challenge
                 .restoreObject(challenge, challengeData)
                 .then((object) => {

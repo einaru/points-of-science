@@ -58,8 +58,13 @@ function getData(collectionName) {
 
 function storeData(collectionName, obj) {
   return new Promise((resolve, reject) => {
-    const ref = db.collection(collectionName).doc();
-    obj.id = ref.id;
+    let ref;
+    if (Number.isInteger(obj.id)) {
+      ref = db.collection(collectionName).doc();
+      obj.id = ref.id;
+    } else {
+      ref = db.collection(collectionName).doc(`${obj.id}`);
+    }
     ref
       .set(obj)
       .then((response) => {
@@ -112,7 +117,6 @@ function updateData(collectionName, obj) {
 }
 
 function addData(collectionName, save) {
-  console.log(collectionName, save);
   return new Promise((resolve, reject) => {
     updateData(collectionName, save)
       .then((response) => {
@@ -142,4 +146,17 @@ function populateData() {
   });
 }
 
+function generateIDs() {
+  return {
+    CategoryID: db.collection("Category").doc().id,
+    ChallengeID: db.collection("hallenge").doc().id,
+    CategoryContentID: db.collection("Content").doc().id,
+    ChallengeContentID: db.collection("Content").doc().id,
+    ReflectionID: db.collection("Reflection").doc().id,
+    RewardID: db.collection("Reward").doc().id,
+    ActivityID: db.collection("Activity").doc().id,
+  };
+}
+
 populateData();
+console.log(generateIDs());

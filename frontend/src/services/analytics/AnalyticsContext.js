@@ -1,7 +1,8 @@
 import { createContext } from "react";
 
 const AnalyticsContext = createContext({
-  logEvent: () => {},
+  logClickEvent: () => {},
+  logNavigationEvent: () => {},
 });
 
 export default AnalyticsContext;

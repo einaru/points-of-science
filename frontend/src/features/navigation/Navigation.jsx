@@ -9,35 +9,27 @@ import AuthContext from "../auth/AuthContext";
 import AnalyticsContext from "../../services/analytics/AnalyticsContext";
 
 function Navigation({ theme }) {
-  const { refreshToken, isAuthenticated } = useContext(AuthContext);
-  const { logEvent } = useContext(AnalyticsContext);
+  const { isAuthenticated } = useContext(AuthContext);
+  const { logNavigationEvent } = useContext(AnalyticsContext);
 
   const navigationRef = useNavigationContainerRef();
-  const screenNameRef = useRef();
+  const screenRef = useRef();
 
   return (
     <NavigationContainer
       ref={navigationRef}
       theme={theme}
       onReady={() => {
-        screenNameRef.current = navigationRef.getCurrentRoute().name;
+        screenRef.current = navigationRef.getCurrentRoute();
       }}
       onStateChange={async () => {
-        if (navigationRef.isReady()) {
-          const prevScreen = screenNameRef.current;
-          const currScreen = navigationRef.getCurrentRoute().name;
+        if (navigationRef.isReady() && isAuthenticated) {
+          const prevScreen = screenRef.current;
+          const currScreen = navigationRef.getCurrentRoute();
           if (prevScreen !== currScreen) {
-            const event = {
-              event: "navigation",
-              screen: currScreen,
-              timestamp: Date.now().toString(),
-              metadata: {
-                prevScreen,
-              },
-            };
-            logEvent(refreshToken, event);
+            logNavigationEvent(prevScreen, currScreen);
           }
-          screenNameRef.current = currScreen;
+          screenRef.current = currScreen;
         }
       }}
     >

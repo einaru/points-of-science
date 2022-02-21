@@ -1,124 +1,101 @@
 import { GraphQLString, GraphQLList } from "graphql";
-import {
-  clickStreamCreator,
-  getData,
-  getDataFromDatabaseByFilter,
-  nextID,
-} from "../../../internal.js";
-import config from "../../../Config/config.js";
 import { assertIsAdmin, assertIsAuthenticated } from "../assert.js";
-import { UserInputError } from "../error.js";
+import { ApiError, UserInputError } from "../error.js";
 import { NormalResponseModel } from "../Model/model.js";
 import {
-  ClickEventInputModel,
-  ClickStreamModel,
+  ClickEventInput,
+  ClickStreamType,
+  DeviceInfoInput,
 } from "../Model/dataCollectionModel.js";
+import ClickStream from "../../../DataCollection/ClickStream.js";
 
-// Root Queries - Used to retrieve data with GET-Requests
-const getAllClickStreamsQuery = {
-  type: new GraphQLList(ClickStreamModel),
+export const getAllClickStreams = {
+  type: new GraphQLList(ClickStreamType),
   args: {},
-  async resolve(parent, args, context) {
-    assertIsAuthenticated(context.user);
-    assertIsAdmin(context.user);
-
-    const clickStreamsData = await getData(config.db.table.clickStream);
-    let clickStreams = [];
-    clickStreamsData.forEach((clickStreamData) => {
-      const clickStream = clickStreamCreator();
-      clickStreams.push(
-        clickStream.restoreObject(clickStream, clickStreamData)
-      );
-    });
-
-    clickStreams = await Promise.all(clickStreams);
-    return clickStreams;
+  async resolve(_, __, { user, providers }) {
+    assertIsAuthenticated(user);
+    assertIsAdmin(user);
+    await providers.clickStreams.getAll();
   },
 };
 
-// Mutation Queries - Used to update or delete data with PUT- and DELETE-requests
-const createClickStreamQuery = {
-  type: ClickStreamModel,
+async function getClickStream(userID, sessionToken, provider) {
+  const data = await provider.getByID(sessionToken);
+  if (data) {
+    return ClickStream.fromData(data);
+  }
+  return new ClickStream(userID, sessionToken);
+}
+
+function serialize(cls) {
+  return JSON.parse(JSON.stringify(cls));
+}
+
+export const logDeviceInfo = {
+  type: ClickStreamType,
   args: {
     sessionToken: { type: GraphQLString },
-    clicks: { type: new GraphQLList(ClickEventInputModel) },
+    deviceInfo: { type: DeviceInfoInput },
   },
-  async resolve(parent, args, context) {
-    assertIsAuthenticated(context.user);
-
-    const refreshToken = await getDataFromDatabaseByFilter(
-      "id",
-      args.sessionToken,
-      config.db.table.refreshToken
-    );
-
-    if (refreshToken == null) {
-      throw new Error("Session token is not valid.");
+  async resolve(_, { sessionToken, deviceInfo }, { user, providers }) {
+    assertIsAuthenticated(user);
+    if (!(await providers.refreshTokens.getByID(sessionToken))) {
+      throw new ApiError("Invalid session token");
     }
 
-    const clickStreamData = await getDataFromDatabaseByFilter(
-      "sessionToken",
-      args.sessionToken,
-      config.db.table.clickStream
+    const clickStream = await getClickStream(
+      user.id,
+      sessionToken,
+      providers.clickStreams
     );
+    clickStream.addDeviceInfo(deviceInfo);
 
-    let id;
-    let data;
-    const clickStream = clickStreamCreator();
-    if (clickStreamData == null) {
-      id = nextID(config.db.table.clickStream);
-      data = args;
-      data.id = id;
-      data.userID = context.user.id;
-      clickStream.updateData(data);
-    } else {
-      [data] = clickStreamData;
-      clickStream.updateData(data);
-      args.clicks.forEach((click) => {
-        clickStream.addClickNode(click);
-      });
-    }
-    const response = await clickStream.saveData(
-      "clickStream",
-      clickStream,
-      config.db.table.clickStream,
-      "Click stream stored successfully."
-    );
-    return response;
+    const data = serialize(clickStream);
+    await providers.clickStreams.set(sessionToken, data);
   },
 };
 
-const deleteClickStreamQuery = {
+export const logEvent = {
+  type: ClickStreamType,
+  args: {
+    sessionToken: { type: GraphQLString },
+    event: { type: ClickEventInput },
+  },
+  async resolve(_, { sessionToken, event }, { user, providers }) {
+    assertIsAuthenticated(user);
+    if (!(await providers.refreshTokens.getByID(sessionToken))) {
+      throw new ApiError("Invalid session token");
+    }
+
+    const clickStream = await getClickStream(
+      user.id,
+      sessionToken,
+      providers.clickStreams
+    );
+    clickStream.addClickEvent(event);
+
+    const data = serialize(clickStream);
+    await providers.clickStreams.set(sessionToken, data);
+  },
+};
+
+export const deleteClickStream = {
   type: NormalResponseModel,
   args: {
-    clickStreamID: { type: GraphQLString },
+    id: { type: GraphQLString },
   },
-  async resolve(parent, args, context) {
-    assertIsAuthenticated(context.user);
-    assertIsAdmin(context.user);
+  async resolve(_, { id }, { user, providers }) {
+    assertIsAuthenticated(user);
+    assertIsAdmin(user);
 
-    const clickStreamData = await getDataFromDatabaseByFilter(
-      "id",
-      args.clickStreamID,
-      config.db.table.clickStream
-    );
-
-    if (clickStreamData == null || clickStreamData[0] == null) {
-      throw new UserInputError(
-        "The click stream you try to delete does not exist."
-      );
+    try {
+      await providers.clickStreams.delete(id);
+      return { message: "Click stream deleted." };
+    } catch (error) {
+      const message = `Error deleting click stream with ID = ${id}`;
+      console.error(message);
+      console.error(error);
+      throw new UserInputError(message);
     }
-
-    const clickStream = clickStreamCreator();
-    clickStream.updateData(clickStreamData[0]);
-
-    const message = await clickStream.deleteClickStream();
-    return { message };
   },
-};
-
-export {
-  createClickStreamQuery,
-  deleteClickStreamQuery,
-  getAllClickStreamsQuery,
 };

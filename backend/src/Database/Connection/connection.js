@@ -2,13 +2,9 @@
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
-import {
-  connectToFirebaseProduction,
-  connectToFirebaseEmulator,
-  FirebaseProvider,
-  JSONProvider,
-} from "../../internal.js";
+import { FirebaseProvider, JSONProvider } from "../../internal.js";
 import config from "../../Config/config.js";
+import { firestore } from "../firestore.js";
 
 const filename = fileURLToPath(import.meta.url);
 const here = dirname(filename);
@@ -22,7 +18,7 @@ function connectToDatabase() {
   switch (env) {
     case "test":
       if (config.db.test.firestore != null && config.db.test.firestore) {
-        database = connectToFirebaseEmulator();
+        database = firestore;
         provider = FirebaseProvider;
       } else {
         database = connectToNonProductionDatabase(
@@ -34,11 +30,11 @@ function connectToDatabase() {
       }
       break;
     case "development":
-      database = connectToFirebaseEmulator();
+      database = firestore;
       provider = FirebaseProvider;
       break;
     case "production":
-      database = connectToFirebaseProduction();
+      database = firestore;
       provider = FirebaseProvider;
       break;
     default:

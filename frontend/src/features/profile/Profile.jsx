@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { useMutation } from "@apollo/client";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { ScrollView, View } from "react-native";
 import { Avatar, Divider, List, Snackbar, Switch } from "react-native-paper";
@@ -12,9 +12,11 @@ import { LoadingScreen } from "../../shared/components";
 import PreferencesContext from "../preferences/PreferencesContext";
 import LOGOUT from "./Profile.gql";
 import styles from "./Profile.style";
+import AnalyticsContext from "../../services/analytics/AnalyticsContext";
 
 function Profile() {
   const navigation = useNavigation();
+  const route = useRoute();
 
   const [visibleSnackbar, setVisibleSnackbar] = useState(false);
   const showSnackbar = () => setVisibleSnackbar(true);
@@ -22,6 +24,7 @@ function Profile() {
 
   const { preferDarkTheme, toggleTheme } = useContext(PreferencesContext);
   const { user, logOutUser, refreshToken } = useContext(AuthContext);
+  const { logClickEvent } = useContext(AnalyticsContext);
 
   const initials = useMemo(() => {
     return user.username
@@ -96,7 +99,7 @@ function Profile() {
               title={t("Log out")}
               left={() => <List.Icon icon="logout" />}
               onPress={() => {
-                console.debug("Logging out");
+                logClickEvent(route, "User logging out");
                 logOut({ variables: { refreshToken } }).then(() => {
                   client.clearStore();
                 });

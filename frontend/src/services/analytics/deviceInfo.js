@@ -4,7 +4,7 @@ function getDeviceInfo() {
   const props = [
     "isDevice",
     "brand",
-    "modelId",
+    "manufacturer",
     "modelName",
     "osName",
     "osVersion",

@@ -40,7 +40,6 @@ export * from "./BusinessLogic/UserTracker/user_reward.js";
 export * from "./BusinessLogic/Util/utility.js";
 
 export * from "./Database/Connection/connection.js";
-export * from "./Database/Firebase/firebase.js";
 export * as JSONProvider from "./Database/Provider/json_provider.js";
 export * as FirebaseProvider from "./Database/Provider/firebase_provider.js";
 export * from "./Database/Query/query.js";

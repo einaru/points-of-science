@@ -22,7 +22,7 @@ function ChallengeListItem({ challenge, onPress }) {
               {challenge.difficulty}
             </Chip>
             <Chip style={styles.chip} mode="outlined">
-              {challenge.reward.maxPoints} points
+              {challenge.reward.maxPoints} {t("points")}
             </Chip>
           </View>
         </View>

@@ -35,6 +35,7 @@ export default {
   "New password": "Nytt passord",
   "Next": "Neste",
   "Password": "Passord",
+  "points": "poeng",
   "Prefer dark theme": "Foretrekk mørkt tema",
   "Profile": "Profil",
   "Project info": "Prosjekt info",

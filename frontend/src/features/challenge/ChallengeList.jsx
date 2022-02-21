@@ -19,10 +19,10 @@ function ChallengeListItem({ challenge, onPress }) {
           <Image style={styles.image} source={imageSource} />
           <View style={styles.metaContainer}>
             <Chip style={styles.chip} mode="outlined">
-              {challenge.difficulty.name}
+              {challenge.difficulty}
             </Chip>
             <Chip style={styles.chip} mode="outlined">
-              {challenge.reward.value} points
+              {challenge.reward.maxPoints} points
             </Chip>
           </View>
         </View>

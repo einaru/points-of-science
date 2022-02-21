@@ -13,21 +13,17 @@ const GET_ALL_CATEGORIES = gql`
         image
         description
         difficulty
+        categoryID # FIXME Should provide "category { id name }" from backend
         reward {
           maxPoints
           firstTryPoints
           bonusPoints
         }
         activity {
-          resource {
-            id
-            title
-            url
-          }
-          hint {
-            id
-            text
-          }
+          type
+          description
+          resources
+          hints
         }
         reflection {
           title

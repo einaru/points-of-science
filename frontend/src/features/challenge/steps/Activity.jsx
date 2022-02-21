@@ -1,5 +1,5 @@
 import React, { useContext, useLayoutEffect, useState } from "react";
-import { View } from "react-native";
+import { View, ScrollView } from "react-native";
 import {
   Button,
   Dialog,
@@ -52,10 +52,13 @@ function Activity({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.contentContainer}>
-        <Title style={styles.title}>{t("Activity")}</Title>
-        <Paragraph style={styles.text}>{activity.description}</Paragraph>
-      </View>
+      {/* TODO render activity content based on activity type */}
+      <ScrollView>
+        <View style={styles.contentContainer}>
+          <Title style={styles.title}>{t("Activity")}</Title>
+          <Paragraph style={styles.text}>{activity.description}</Paragraph>
+        </View>
+      </ScrollView>
       <View style={styles.helpContainer}>
         <Button onPress={showHint}>{t("Get a hint?")}</Button>
         <Button onPress={openExternalResource}>{t("Watch a video")}</Button>

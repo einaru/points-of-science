@@ -19,6 +19,7 @@ const strings = [
   "Couldn't find any content",
   "Create account",
   "Dashboard",
+  "External resources",
   "Get a hint?",
   "Go back",
   "Haven't activated your account yet?",

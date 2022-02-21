@@ -4,6 +4,7 @@ import {
   Button,
   Dialog,
   IconButton,
+  List,
   Paragraph,
   Portal,
   Title,
@@ -21,8 +22,8 @@ const THUMB_DOWN = "thumb-down";
 function Activity({ navigation }) {
   const challenge = useContext(ChallengeContext);
   const { activity } = challenge;
-  const { hints } = activity;
 
+  const { hints } = activity;
   const [hint, setHint] = useState("");
   const [hintIndex, setHintIndex] = useState(0);
   const [hintIsVisible, setHintIsVisible] = useState(false);
@@ -45,11 +46,22 @@ function Activity({ navigation }) {
     console.debug(`Hint was closed with "${action}"`);
   };
 
-  const openExternalResource = () => {
-    const { resources } = activity;
-    if (resources && resources.length > 0) {
-      Linking.openURL(resources[0].url);
-    }
+  const { resources } = activity;
+  const [resourcesIsVisible, setResourcesIsVisible] = useState(false);
+
+  const showResources = () => {
+    setResourcesIsVisible(true);
+  };
+
+  // TODO Log resource action data somehow
+  const hideResources = (action) => {
+    setResourcesIsVisible(false);
+    console.debug(`Resources was closed with ${action}`);
+  };
+
+  const openResource = (url) => {
+    Linking.openURL(url);
+    console.debug(`Opening resource ${url}`);
   };
 
   useLayoutEffect(() => {
@@ -69,7 +81,7 @@ function Activity({ navigation }) {
       </ScrollView>
       <View style={styles.helpContainer}>
         <Button onPress={showHint}>{t("Get a hint?")}</Button>
-        <Button onPress={openExternalResource}>{t("Watch a video")}</Button>
+        <Button onPress={showResources}>{t("External resources")}</Button>
       </View>
       <Button
         mode="contained"
@@ -90,6 +102,33 @@ function Activity({ navigation }) {
               onPress={() => hideHint(THUMB_DOWN)}
             />
             <IconButton icon="thumb-up" onPress={() => hideHint(THUMB_UP)} />
+          </Dialog.Actions>
+        </Dialog>
+        <Dialog
+          visible={resourcesIsVisible}
+          onDismiss={() => hideResources(DISMISS)}
+        >
+          <Dialog.Title>{t("External resources")}</Dialog.Title>
+          <Dialog.Content>
+            {resources.map((resource) => {
+              return (
+                <List.Item
+                  key={resource}
+                  title={resource}
+                  onPress={() => openResource(resource)}
+                />
+              );
+            })}
+          </Dialog.Content>
+          <Dialog.Actions>
+            <IconButton
+              icon="thumb-down"
+              onPress={() => hideResources(THUMB_DOWN)}
+            />
+            <IconButton
+              icon="thumb-up"
+              onPress={() => hideResources(THUMB_UP)}
+            />
           </Dialog.Actions>
         </Dialog>
       </Portal>

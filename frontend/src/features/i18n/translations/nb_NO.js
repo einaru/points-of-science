@@ -20,6 +20,7 @@ export default {
   "Couldn't find any content": "Fant ikke noe innhold",
   "Create account": "Opprett konto",
   "Dashboard": "Dashbord",
+  "External resources": "Eksterne ressurser",
   "Get a hint?": "Få et hint?",
   "Go back": "Gå tilbake",
   "Haven't activated your account yet?": "Har du ikke aktivert kontoen din enda?",

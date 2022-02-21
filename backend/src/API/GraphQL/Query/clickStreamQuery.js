@@ -3,14 +3,14 @@ import { assertIsAdmin, assertIsAuthenticated } from "../assert.js";
 import { ApiError, UserInputError } from "../error.js";
 import { NormalResponseModel } from "../Model/model.js";
 import {
-  ClickEventInputModel,
-  ClickStreamModel,
-  DeviceInfoInputModel,
+  ClickEventInput,
+  ClickStreamType,
+  DeviceInfoInput,
 } from "../Model/dataCollectionModel.js";
 import ClickStream from "../../../DataCollection/ClickStream.js";
 
 export const getAllClickStreams = {
-  type: new GraphQLList(ClickStreamModel),
+  type: new GraphQLList(ClickStreamType),
   args: {},
   async resolve(_, __, { user, providers }) {
     assertIsAuthenticated(user);
@@ -32,10 +32,10 @@ function serialize(cls) {
 }
 
 export const logDeviceInfo = {
-  type: ClickStreamModel,
+  type: ClickStreamType,
   args: {
     sessionToken: { type: GraphQLString },
-    deviceInfo: { type: DeviceInfoInputModel },
+    deviceInfo: { type: DeviceInfoInput },
   },
   async resolve(_, { sessionToken, deviceInfo }, { user, providers }) {
     assertIsAuthenticated(user);
@@ -56,10 +56,10 @@ export const logDeviceInfo = {
 };
 
 export const logEvent = {
-  type: ClickStreamModel,
+  type: ClickStreamType,
   args: {
     sessionToken: { type: GraphQLString },
-    event: { type: ClickEventInputModel },
+    event: { type: ClickEventInput },
   },
   async resolve(_, { sessionToken, event }, { user, providers }) {
     assertIsAuthenticated(user);

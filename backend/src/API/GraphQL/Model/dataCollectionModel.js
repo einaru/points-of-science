@@ -6,7 +6,7 @@ import {
   GraphQLBoolean,
 } from "graphql";
 
-const DeviceInfo = {
+const deviceInfo = {
   isDevice: { type: GraphQLBoolean },
   brand: { type: GraphQLString },
   manufacturer: { type: GraphQLString },
@@ -16,73 +16,70 @@ const DeviceInfo = {
   osBuildId: { type: GraphQLString },
 };
 
-const DeviceInfoModel = new GraphQLObjectType({
+const DeviceInfoType = new GraphQLObjectType({
   name: "DeviceInfo",
   fields: () => ({
-    ...DeviceInfo,
+    ...deviceInfo,
   }),
 });
 
-export const DeviceInfoInputModel = new GraphQLInputObjectType({
+export const DeviceInfoInput = new GraphQLInputObjectType({
   name: "DeviceInfoInput",
   fields: () => ({
-    ...DeviceInfo,
+    ...deviceInfo,
   }),
 });
 
-const Metadata = {
+const metadata = {
   categoryID: { type: GraphQLString },
   challengeID: { type: GraphQLString },
   prevScreen: { type: GraphQLString },
   source: { type: GraphQLString },
 };
 
-const MetadataModel = new GraphQLObjectType({
+const MetadataType = new GraphQLObjectType({
   name: "Metadata",
   fields: () => ({
-    ...Metadata,
+    ...metadata,
   }),
 });
 
-const MetadataInputModel = new GraphQLInputObjectType({
+const MetadataInput = new GraphQLInputObjectType({
   name: "MetadataInput",
   fields: () => ({
-    ...Metadata,
+    ...metadata,
   }),
 });
 
-const ClickStream = {
+const clickStream = {
   event: { type: GraphQLString },
   screen: { type: GraphQLString },
   timestamp: { type: GraphQLString },
-  deviceInfo: { type: DeviceInfoModel },
 };
 
-const ClickStreamItemModel = new GraphQLObjectType({
-  name: "ClickStreamItem",
+const ClickEventType = new GraphQLObjectType({
+  name: "ClickEvent",
   fields: () => ({
-    ...ClickStream,
-    metadata: { type: MetadataModel },
+    ...clickStream,
+    metadata: { type: MetadataType },
   }),
 });
 
-const ClickStreamModel = new GraphQLObjectType({
+export const ClickEventInput = new GraphQLInputObjectType({
+  name: "ClickEventInput",
+  fields: () => ({
+    ...clickStream,
+    metadata: { type: MetadataInput },
+  }),
+});
+
+export const ClickStreamType = new GraphQLObjectType({
   name: "ClickStream",
   fields: () => ({
     id: { type: GraphQLString },
     sessionToken: { type: GraphQLString },
     userID: { type: GraphQLString },
-    items: { type: new GraphQLList(ClickStreamItemModel) },
+    deviceInfo: { type: DeviceInfoType },
+    clicks: { type: new GraphQLList(ClickEventType) },
   }),
 });
-
-const ClickEventInputModel = new GraphQLInputObjectType({
-  name: "ClickEventInput",
-  fields: () => ({
-    ...ClickStream,
-    deviceInfo: { type: DeviceInfoInputModel },
-    metadata: { type: MetadataInputModel },
-  }),
-});
-
-export { ClickStreamModel, ClickEventInputModel };

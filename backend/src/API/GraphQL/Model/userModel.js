@@ -8,7 +8,6 @@ import {
 } from "graphql";
 
 import { AchievementModel, ChallengeModel } from "../../../internal.js";
-import { ClickStreamType } from "./dataCollectionModel.js";
 
 const UserAchievementModel = new GraphQLObjectType({
   name: "UserAchievement",
@@ -89,7 +88,6 @@ const UserModel = new GraphQLObjectType({
     permission: { type: GraphQLString },
     achievements: { type: new GraphQLList(AchievementModel) },
     challenges: { type: new GraphQLList(ChallengeModel) },
-    dataCollection: { type: ClickStreamType },
   }),
 });
 

@@ -16,15 +16,17 @@ import styles from "./styles";
 function Activity({ navigation }) {
   const challenge = useContext(ChallengeContext);
   const { activity } = challenge;
+  const { hints } = activity;
 
   const [hint, setHint] = useState("");
+  const [hintIndex, setHintIndex] = useState(0);
   const [hintIsVisible, setHintIsVisible] = useState(false);
 
   // TODO Keep track of which hints have been shown
   const getAHint = () => {
-    const { hints } = activity;
-    const index = Math.floor(Math.random() * hints.length);
-    setHint(hints[index].content);
+    const index = hintIndex < hints.length ? hintIndex : 0;
+    setHint(hints[index]);
+    setHintIndex(index + 1);
   };
 
   const showHint = () => {

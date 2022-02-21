@@ -19,7 +19,7 @@ function Reflection({ navigation }) {
     <View style={styles.container}>
       <View style={styles.contentContainer}>
         <Title style={styles.title}>{t("Reflection")}</Title>
-        <Text style={styles.text}>{reflection.question}</Text>
+        <Text style={styles.text}>{reflection.title}</Text>
         <TextInput style={styles.textarea} multiline />
       </View>
       <Button

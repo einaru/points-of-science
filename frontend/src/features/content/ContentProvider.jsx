@@ -10,7 +10,7 @@ function ContentProvider({ children }) {
 
   const content = useMemo(
     () => ({
-      categories: data?.getAllCategories.data ?? [],
+      categories: data?.getAllCategories ?? [],
     }),
     [data]
   );

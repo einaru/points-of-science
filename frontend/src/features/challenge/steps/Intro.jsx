@@ -24,8 +24,11 @@ function Intro({ navigation }) {
     <View style={styles.container}>
       <ImageBackground style={styles.illustrationImage} source={imageSource}>
         <View style={styles.metaContainer}>
-          <Chip style={styles.chip}>{challenge.category.name}</Chip>
-          <Chip style={styles.chip}>{challenge.reward.value} pt.</Chip>
+          {/* FIXME Provide challenge name from backend */}
+          <Chip style={styles.chip}>{challenge.categoryID}</Chip>
+          <Chip style={styles.chip}>
+            {challenge.reward.maxPoints} {t("points")}
+          </Chip>
         </View>
       </ImageBackground>
       <View style={styles.contentContainer}>

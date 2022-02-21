@@ -13,6 +13,11 @@ import { t } from "../../i18n";
 import ChallengeContext from "../ChallengeContext";
 import styles from "./styles";
 
+// Dialog actions
+const DISMISS = "dismiss";
+const THUMB_UP = "thumb-up";
+const THUMB_DOWN = "thumb-down";
+
 function Activity({ navigation }) {
   const challenge = useContext(ChallengeContext);
   const { activity } = challenge;
@@ -34,9 +39,10 @@ function Activity({ navigation }) {
     getAHint();
   };
 
-  const hideHint = (thumbUp) => {
+  // TODO Log hint action data somehow
+  const hideHint = (action) => {
     setHintIsVisible(false);
-    console.log(`The hint was ${thumbUp ? "good \\o/" : "bad /o\\"}`);
+    console.debug(`Hint was closed with "${action}"`);
   };
 
   const openExternalResource = () => {
@@ -73,14 +79,17 @@ function Activity({ navigation }) {
         {t("Continue")}
       </Button>
       <Portal>
-        <Dialog visible={hintIsVisible} onDismiss={hideHint}>
+        <Dialog visible={hintIsVisible} onDismiss={() => hideHint(DISMISS)}>
           <Dialog.Title>{t("Here's a little hint")}</Dialog.Title>
           <Dialog.Content>
             <Paragraph>{hint}</Paragraph>
           </Dialog.Content>
           <Dialog.Actions>
-            <IconButton icon="thumb-down" onPress={() => hideHint(false)} />
-            <IconButton icon="thumb-up" onPress={() => hideHint(true)} />
+            <IconButton
+              icon="thumb-down"
+              onPress={() => hideHint(THUMB_DOWN)}
+            />
+            <IconButton icon="thumb-up" onPress={() => hideHint(THUMB_UP)} />
           </Dialog.Actions>
         </Dialog>
       </Portal>

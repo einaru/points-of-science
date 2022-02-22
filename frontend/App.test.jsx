@@ -6,8 +6,8 @@ import App from "./App";
 jest.useFakeTimers();
 
 describe("<App />", () => {
-  it("has 1 child", () => {
+  it("has 2 children", () => {
     const tree = renderer.create(<App />).toJSON();
-    expect(tree.children.length).toBe(1);
+    expect(tree.children.length).toBe(2);
   });
 });

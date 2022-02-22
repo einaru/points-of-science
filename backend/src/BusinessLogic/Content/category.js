@@ -12,7 +12,6 @@ import config from "../../Config/config.js";
 function updateCategory(category) {
   const functionKey = "updateData";
   const code = (args) => {
-    // Fill in the blanks
     if (args == null || args !== Object(args)) {
       throw new Error(
         "Category could not be updated because of wrong type of input. Input must be an object."
@@ -76,12 +75,7 @@ function restoreObject() {
   const functionKey = "restoreObject";
   const code = (category, categoryData) => {
     return new Promise((resolve, reject) => {
-      const { contentID, progressID, challenges } = categoryData;
-      const contentData = getDataFromDatabaseByFilter(
-        "id",
-        contentID,
-        config.db.table.content
-      );
+      const { progressID, challenges } = categoryData;
       const progressData = getDataFromDatabaseByFilter(
         "id",
         progressID,
@@ -90,25 +84,20 @@ function restoreObject() {
 
       const challengeList = restoreChallenges(challenges);
 
-      Promise.all([contentData, progressData, challengeList])
+      Promise.all([progressData, challengeList])
         .then((data) => {
-          let content = [];
           let progress = [];
 
           if (data[0] != null) {
-            content = data[0][0];
-            category.content.updateData(content);
-          }
-
-          if (data[1] != null) {
-            progress = data[1][0];
+            progress = data[0][0];
             category.progress.updateData(progress);
           }
 
-          if (data[2] != null) {
-            categoryData.challenges = data[2];
+          if (data[1] != null) {
+            categoryData.challenges = data[1];
           }
 
+          category.content.updateData(categoryData.content);
           category.updateData(categoryData);
           resolve(convertToResponseObject("category", category));
         })

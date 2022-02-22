@@ -7,12 +7,12 @@ import {
   List,
   Paragraph,
   Portal,
-  Title,
 } from "react-native-paper";
 import * as Linking from "expo-linking";
 import { t } from "../../i18n";
 import ChallengeContext from "../ChallengeContext";
 import styles from "./styles";
+import HeaderTitle from "./HeaderTitle";
 
 // Dialog actions
 const DISMISS = "dismiss";
@@ -66,7 +66,9 @@ function Activity({ navigation }) {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: challenge.name,
+      headerTitle: () => {
+        return <HeaderTitle subtitle={t("Activity")} title={challenge.name} />;
+      },
     });
   }, [navigation, challenge]);
 
@@ -75,7 +77,6 @@ function Activity({ navigation }) {
       {/* TODO render activity content based on activity type */}
       <ScrollView>
         <View style={styles.contentContainer}>
-          <Title style={styles.title}>{t("Activity")}</Title>
           <Paragraph style={styles.text}>{activity.description}</Paragraph>
         </View>
       </ScrollView>

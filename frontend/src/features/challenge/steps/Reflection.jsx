@@ -20,7 +20,7 @@ function Reflection({ navigation }) {
       <View style={styles.contentContainer}>
         <Title style={styles.title}>{t("Reflection")}</Title>
         <Text style={styles.text}>{reflection.title}</Text>
-        <TextInput style={styles.textarea} multiline />
+        <TextInput style={styles.textarea} multiline autoFocus />
       </View>
       <Button
         mode="contained"

@@ -9,7 +9,7 @@ import * as Clipboard from "expo-clipboard";
 import AuthContext from "../../services/auth/AuthContext";
 import { t } from "../i18n";
 import { LoadingScreen } from "../../shared/components";
-import PreferencesContext from "../preferences/PreferencesContext";
+import PreferencesContext from "../../services/preferences/PreferencesContext";
 import LOGOUT from "./Profile.gql";
 import styles from "./Profile.style";
 import AnalyticsContext from "../../services/analytics/AnalyticsContext";

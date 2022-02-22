@@ -26,6 +26,7 @@ function AuthProvider({ children }) {
 
   useEffect(() => {
     const initState = async () => {
+      dispatch({ type: "loading" });
       const user = JSON.parse(await Storage.getItem("user"));
       const refreshToken = await Storage.getItem("refreshToken");
       const accessToken = await Storage.getItem("accessToken");
@@ -37,7 +38,10 @@ function AuthProvider({ children }) {
           })
           .catch((error) => {
             console.debug(error.message);
+            logOutUser();
           });
+      } else {
+        dispatch({ type: "logout" });
       }
     };
     initState();

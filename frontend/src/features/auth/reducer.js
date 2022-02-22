@@ -7,18 +7,6 @@ export const initialState = {
 
 export function reducer(state, action) {
   switch (action.type) {
-    case "restoreUser":
-      return {
-        ...state,
-        user: action.user,
-        refreshToken: action.refreshToken,
-        sessionToken: action.refreshToken,
-      };
-    case "restoreToken":
-      return {
-        ...state,
-        isAuthenticated: true,
-      };
     case "login":
       return {
         ...state,

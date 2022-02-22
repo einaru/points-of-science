@@ -49,10 +49,6 @@ function AuthProvider({ children }) {
       ...state,
       logInUser,
       logOutUser,
-      createAccount: (data) => {
-        // TODO Link up with backend
-        console.log("Got create account data:", data);
-      },
     }),
     [state]
   );

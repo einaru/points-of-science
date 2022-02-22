@@ -16,7 +16,7 @@ const data = JSON.parse(fs.readFileSync(filePathToDatabase, "utf-8"));
 
 function connectToFirebaseEmulator() {
   admin.initializeApp({
-    projectId: "msc-scienceapp",
+    credential: admin.credential.applicationDefault(),
   });
   return admin.firestore();
 }
@@ -149,7 +149,7 @@ function populateData() {
 function generateIDs() {
   return {
     CategoryID: db.collection("Category").doc().id,
-    ChallengeID: db.collection("hallenge").doc().id,
+    ChallengeID: db.collection("Challenge").doc().id,
     CategoryContentID: db.collection("Content").doc().id,
     ChallengeContentID: db.collection("Content").doc().id,
     ReflectionID: db.collection("Reflection").doc().id,

@@ -1,142 +1,31 @@
-import {
-  createObjectTemplate,
-  convertToResponseObject,
-  deleteData,
-  saveData,
-} from "../internal.js";
-import config from "../Config/config.js";
+export default class ClickStream {
+  constructor(userID, sessionToken) {
+    this.id = null;
+    this.userID = userID;
+    this.sessionToken = sessionToken;
+    this.deviceInfo = {};
+    this.clicks = [];
+  }
 
-function clickNode() {
-  return {
-    event: "",
-    screen: "",
-    timestamp: "",
-    metadata: {
-      challengeID: "",
-      prevScreen: "",
-      source: "",
-    },
-  };
-}
-
-function addClickNode(clickStream) {
-  const functionKey = "addClickNode";
-  const code = (data) => {
-    if (data == null) {
-      throw new Error("Click stream data is missing");
+  static fromData(data) {
+    const cls = new ClickStream();
+    cls.id = data.id || null;
+    cls.userID = data.userID || null;
+    cls.sessionToken = data.sessionToken || null;
+    cls.deviceInfo = data.deviceInfo || {};
+    if (data.clicks) {
+      data.clicks.forEach((event) => {
+        cls.addClickEvent(event);
+      });
     }
+    return cls;
+  }
 
-    const node = clickNode();
-    Object.keys(node).forEach((key) => {
-      if (data[key]) {
-        if (data[key] === "metadata") {
-          Object.keys(node[key]).forEach((metaDataKey) => {
-            node[key][metaDataKey] = data[key][metaDataKey];
-          });
-        } else {
-          node[key] = data[key];
-        }
-      }
-    });
+  addDeviceInfo(deviceInfo) {
+    this.deviceInfo = deviceInfo;
+  }
 
-    clickStream.clicks.push(node);
-  };
-
-  return createObjectTemplate(functionKey, code);
+  addClickEvent(event) {
+    this.clicks.push(event);
+  }
 }
-
-function updateClickStream(clickStream) {
-  const functionKey = "updateData";
-  const code = (args) => {
-    if (args == null || args !== Object(args)) {
-      throw new Error(
-        "Click Stream could not be updated because of wrong type of input. Input must be an object."
-      );
-    }
-
-    Object.keys(args).forEach((key) => {
-      if (key === "clicks") {
-        args[key].forEach((click) => {
-          const node = clickNode();
-          Object.keys(click).forEach((clickKey) => {
-            if (clickKey === "metadata") {
-              Object.keys(click[clickKey]).forEach((metaDataKey) => {
-                node.metadata[metaDataKey] = click[clickKey][metaDataKey];
-              });
-            } else {
-              node[clickKey] = click[clickKey];
-            }
-          });
-          clickStream[key].push(node);
-        });
-      } else {
-        clickStream[key] = args[key];
-      }
-    });
-  };
-
-  return createObjectTemplate(functionKey, code);
-}
-
-function restoreObject() {
-  const functionKey = "restoreObject";
-  const code = (clickStream, clickStreamData) => {
-    return new Promise((resolve, reject) => {
-      try {
-        clickStream.updateData(clickStreamData);
-        resolve(convertToResponseObject("clickStream", clickStream));
-      } catch (error) {
-        reject(error);
-      }
-    });
-  };
-
-  return createObjectTemplate(functionKey, code);
-}
-
-function deleteClickStream(data) {
-  const functionKey = "deleteClickStream";
-  const code = () => {
-    return new Promise((resolve, reject) => {
-      if (data == null) {
-        throw new Error("Click stream object or its data is missing.");
-      }
-
-      deleteData(config.db.table.clickStream, data.id)
-        .then(() => {
-          resolve(`Click stream with id ${data.id} successfully deleted.`);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    });
-  };
-
-  return createObjectTemplate(functionKey, code);
-}
-
-function emptyData() {
-  return {
-    data: {
-      id: "",
-      sessionToken: "",
-      userID: "",
-      clicks: [],
-    },
-  };
-}
-
-function clickStreamCreator() {
-  const clickStream = emptyData();
-
-  return {
-    ...clickStream,
-    ...addClickNode(clickStream.data),
-    ...updateClickStream(clickStream.data),
-    ...restoreObject(),
-    ...deleteClickStream(clickStream.data),
-    ...saveData(),
-  };
-}
-
-export { clickStreamCreator };

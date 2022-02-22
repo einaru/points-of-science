@@ -81,7 +81,7 @@ function AnalyticsProvider({ children }) {
           timestamp: getTimestamp(),
           metadata: {
             ...metadata,
-            prevScreen: prevScreen.name,
+            prevScreen: prevScreen?.name ?? null,
           },
         };
         doLogEvent(event);

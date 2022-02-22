@@ -59,6 +59,12 @@ function Activity({ navigation }) {
     console.debug(`Resources was closed with ${action}`);
   };
 
+  // FIXME Remove/adjust once the resource structure is updated in backend
+  const getResourceTitle = (resource) => {
+    const title = resource.replace(/^https?:\/\//, "");
+    return title.split("/")[0];
+  };
+
   const openResource = (url) => {
     Linking.openURL(url);
     console.debug(`Opening resource ${url}`);
@@ -115,7 +121,11 @@ function Activity({ navigation }) {
               return (
                 <List.Item
                   key={resource}
-                  title={resource}
+                  style={{ padding: 0 }}
+                  title={getResourceTitle(resource)}
+                  description={resource}
+                  descriptionNumberOfLines={1}
+                  right={() => <List.Icon icon="open-in-new" />}
                   onPress={() => openResource(resource)}
                 />
               );

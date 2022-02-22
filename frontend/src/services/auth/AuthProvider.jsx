@@ -1,7 +1,7 @@
 import React, { useReducer, useEffect, useMemo } from "react";
 import { useApolloClient } from "@apollo/client";
 import { reducer, initialState } from "./reducer";
-import * as Storage from "../../services/storage";
+import * as Storage from "../storage";
 import AuthContext from "./AuthContext";
 import VERIFY_TOKEN from "./AuthProvider.gql";
 

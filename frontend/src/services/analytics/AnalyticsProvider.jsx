@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
 import React, { useCallback, useContext, useMemo, useState } from "react";
-import AuthContext from "../../features/auth/AuthContext";
+import AuthContext from "../auth/AuthContext";
 import AnalyticsContext from "./AnalyticsContext";
 import { LOG_EVENT, LOG_DEVICE_INFO } from "./AnalyticsProvider.gql";
 import deviceInfo from "./deviceInfo";

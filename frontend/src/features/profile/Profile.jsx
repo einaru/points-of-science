@@ -6,7 +6,7 @@ import { ScrollView, View } from "react-native";
 import { Avatar, Divider, List, Snackbar, Switch } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as Clipboard from "expo-clipboard";
-import AuthContext from "../auth/AuthContext";
+import AuthContext from "../../services/auth/AuthContext";
 import { t } from "../i18n";
 import { LoadingScreen } from "../../shared/components";
 import PreferencesContext from "../preferences/PreferencesContext";

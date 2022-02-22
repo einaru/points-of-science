@@ -5,7 +5,7 @@ import {
 } from "@react-navigation/native";
 import ContentNavigator from "./ContentNavigator";
 import AccountStack from "../account/AccountStack";
-import AuthContext from "../auth/AuthContext";
+import AuthContext from "../../services/auth/AuthContext";
 import AnalyticsContext from "../../services/analytics/AnalyticsContext";
 
 function Navigation({ theme }) {

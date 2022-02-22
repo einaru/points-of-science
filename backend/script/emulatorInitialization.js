@@ -59,7 +59,7 @@ function getData(collectionName) {
 function storeData(collectionName, obj) {
   return new Promise((resolve, reject) => {
     let ref;
-    if (Number.isInteger(obj.id)) {
+    if (Number.isInteger(obj.id) || !obj.id) {
       ref = db.collection(collectionName).doc();
       obj.id = ref.id;
     } else {

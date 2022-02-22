@@ -3,7 +3,7 @@ import { Image, View } from "react-native";
 import { Title, TouchableRipple } from "react-native-paper";
 import styles from "./CategoryList.style";
 import { NoContent, Surface } from "../../../shared/components";
-import ContentContext from "../../content/ContentContext";
+import ContentContext from "../../../services/content/ContentContext";
 import { t } from "../../i18n";
 
 const fallbackImage = require("../assets/category.png");

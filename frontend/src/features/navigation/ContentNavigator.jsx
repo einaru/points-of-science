@@ -7,7 +7,7 @@ import LeaderboardsScreen from "../leaderboard/LeaderboardsScreen";
 import ProfileStack from "../profile/ProfileStack";
 import { t } from "../i18n";
 import ChallengesStack from "../challenge/ChallengesStack";
-import ContentProvider from "../content/ContentProvider";
+import ContentProvider from "../../services/content/ContentProvider";
 
 const tabIconMap = {
   "tab:challenges": "lightbulb-on",

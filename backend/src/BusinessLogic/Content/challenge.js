@@ -4,7 +4,6 @@ import {
   createObjectTemplate,
   convertToResponseObject,
   deleteData,
-  getDataFromDatabaseByFilter,
   reflectionCreator,
   argumentCreator,
   rewardCreator,
@@ -38,81 +37,35 @@ function updateChallenge(challenge) {
 function restoreObject() {
   const functionKey = "restoreObject";
   const code = (challenge, challengeData) => {
-    return new Promise((resolve, reject) => {
-      const { activityID, contentID, reflectionID, rewardID } = challengeData;
+    try {
+      challenge.updateData(challengeData);
+      challenge.content.updateData(challengeData.content);
 
-      const contentData = getDataFromDatabaseByFilter(
-        "id",
-        contentID,
-        config.db.table.content
-      );
+      challenge.activity.setID(challengeData.activity.id);
+      challenge.activity.setDescription(challengeData.activity.description);
+      challenge.activity.setType(challengeData.activity.type);
+      challengeData.activity.hints.forEach((hint) => {
+        challenge.activity.add(challenge.activity.data.hints, hint);
+      });
+      challengeData.activity.resources.forEach((resource) => {
+        challenge.activity.add(challenge.activity.data.resources, resource);
+      });
 
-      const reflectionData = getDataFromDatabaseByFilter(
-        "id",
-        reflectionID,
-        config.db.table.reflection
-      );
-
-      const rewardData = getDataFromDatabaseByFilter(
-        "id",
-        rewardID,
-        config.db.table.reward
-      );
-
-      const activityData = getDataFromDatabaseByFilter(
-        "id",
-        activityID,
-        config.db.table.activity
-      );
-
-      Promise.all([contentData, reflectionData, rewardData, activityData])
-        .then((data) => {
-          challenge.updateData(challengeData);
-
-          if (data[0] != null) {
-            const content = data[0][0];
-            challenge.content.updateData(content);
-          }
-
-          if (data[1] != null) {
-            const reflection = data[1][0];
-            challenge.reflection.data.id = reflection.id;
-            challenge.reflection.setTitle(reflection.title);
-            challenge.reflection.setSolution(reflection.solution);
-            if (challenge.reflection.data.choices) {
-              reflection.choices.forEach((choice) => {
-                challenge.reflection.addChoice(choice);
-              });
-            }
-          }
-
-          if (data[2] != null) {
-            const reward = data[2][0];
-            challenge.reward.updateData(reward);
-          }
-
-          if (data[3] != null) {
-            const activity = data[3][0];
-            challenge.activity.setID(activity.id);
-            challenge.activity.setDescription(activity.description);
-            challenge.activity.setType(activity.type);
-            activity.hints.forEach((hint) => {
-              challenge.activity.add(challenge.activity.data.hints, hint);
-            });
-            activity.resources.forEach((resource) => {
-              challenge.activity.add(
-                challenge.activity.data.resources,
-                resource
-              );
-            });
-          }
-
-          resolve(convertToResponseObject("challenge", challenge));
-        })
-        .catch((error) => {
-          reject(error);
+      challenge.reflection.setTitle(challengeData.reflection.title);
+      challenge.reflection.data.id = challengeData.reflection.id;
+      challenge.reflection.setSolution(challengeData.reflection.solution);
+      if (challenge.reflection.data.choices) {
+        challengeData.reflection.choices.forEach((choice) => {
+          challenge.reflection.addChoice(choice);
         });
-    });
+      }
+
+      challenge.reward.updateData(challengeData.reward);
+
+      return convertToResponseObject("challenge", challenge);
+    } catch (error) {
+      throw new Error(error);
+    }
   };
 
   return createObjectTemplate(functionKey, code);

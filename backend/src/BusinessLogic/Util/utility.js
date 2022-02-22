@@ -41,26 +41,11 @@ function restoreChallenges(challengeList) {
 
         const challenges = [];
         challengesData.forEach((challengeData) => {
-          challenges.push(
-            new Promise((resolve, reject) => {
-              const challenge = challengeCreator(challengeData.reflectionType);
-              challenge
-                .restoreObject(challenge, challengeData)
-                .then((object) => {
-                  resolve(challenge);
-                })
-                .catch((error) => {
-                  reject(error);
-                });
-            })
-          );
+          const challenge = challengeCreator(challengeData.reflectionType);
+          challenges.push(challenge.restoreObject(challenge, challengeData));
         });
 
-        if (!challenges.length) {
-          resolve(null);
-        } else {
-          resolve(Promise.all(challenges));
-        }
+        resolve(challenges);
       })
       .catch((error) => {
         reject(error);
@@ -83,11 +68,11 @@ function getChallengeStoredObject(object) {
     id: object.data.id,
     categoryID: object.data.categoryID,
     difficulty: object.data.difficulty,
-    contentID: object.content.data.id,
+    content: object.content.data,
     reflectionType: object.data.reflectionType,
-    reflectionID: object.reflection.data.id,
-    rewardID: object.reward.data.id,
-    activityID: object.activity.data.id,
+    reflection: object.reflection.data,
+    reward: object.reward.data,
+    activity: object.activity.data,
   };
 }
 
@@ -107,7 +92,7 @@ function getCategoryStoredObject(object) {
       object.data.challenges,
       getChallengeStoredObject
     ),
-    contentID: object.content.data.id,
+    content: object.content.data,
     progressID: object.content.data.id,
   };
 }
@@ -174,15 +159,6 @@ function convertToStoredObject(key, object) {
   }
 }
 
-function getDataFromResponseObject(list, functionToCall) {
-  const data = [];
-  list.forEach((object) => {
-    data.push(functionToCall(object));
-  });
-
-  return data;
-}
-
 function getChallengeResponseObject(object) {
   return {
     id: object.data.id,
@@ -210,10 +186,7 @@ function getClickStreamResponseObject(object) {
 function getCategoryResponseObject(object) {
   return {
     id: object.data.id,
-    challenges: getDataFromResponseObject(
-      object.data.challenges,
-      getChallengeResponseObject
-    ),
+    challenges: object.data.challenges,
     name: object.content.data.title,
     description: object.content.data.description,
     image: object.content.data.image,

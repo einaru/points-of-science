@@ -36,7 +36,6 @@ const strings = [
   "New password",
   "Next",
   "Password",
-  "points",
   "Prefer dark theme",
   "Profile",
   "Project info",
@@ -50,7 +49,16 @@ const strings = [
   "Verify username",
   "Watch a video",
   "Well done!",
+  "What do you think about the challenge?",
   "Your password is updated",
+  "points",
+
+  // Smiley-o-meter
+  "Awful",
+  "Not very good",
+  "Good",
+  "Really good",
+  "Brilliant",
 ];
 
 const en = {

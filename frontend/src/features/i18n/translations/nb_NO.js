@@ -37,7 +37,6 @@ export default {
   "New password": "Nytt passord",
   "Next": "Neste",
   "Password": "Passord",
-  "points": "poeng",
   "Prefer dark theme": "Foretrekk mørkt tema",
   "Profile": "Profil",
   "Project info": "Prosjekt info",
@@ -51,7 +50,16 @@ export default {
   "Verify username": "Verifiser brukernavn",
   "Watch a video": "Se en video",
   "Well done!": "Bra jobbet!",
+  "What do you think about the challenge?": "Hva synes du om utfordringen?",
   "Your password is updated": "Passordet ditt er oppdatert",
+  "points": "poeng",
+
+  // Smiley-o-meter
+  "Awful": "Fryktelig",
+  "Brilliant": "Strålende",
+  "Good": "Bra",
+  "Not very good": "Ikke veldig bra",
+  "Really good": "Veldig bra",
 
   // Longer text and paragraphs
   aboutContact:

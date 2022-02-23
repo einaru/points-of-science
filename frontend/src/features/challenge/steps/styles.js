@@ -4,12 +4,16 @@ export default StyleSheet.create({
   container: {
     flex: 1,
   },
+  scrollView: {
+    flexGrow: 1,
+    justifyContent: "space-between",
+  },
   contentContainer: {
     flex: 1,
     margin: 8,
   },
   helpContainer: {
-    margin: 8,
+    marginHorizontal: 8,
     flexDirection: "row",
     justifyContent: "space-between",
   },
@@ -24,7 +28,7 @@ export default StyleSheet.create({
     justifyContent: "center",
   },
   shoutOut: {
-    fontSize: 48,
+    fontSize: 32,
     fontWeight: "bold",
   },
   illustrationImage: {
@@ -45,5 +49,26 @@ export default StyleSheet.create({
   },
   action: {
     margin: 8,
+  },
+  rewardContainer: {
+    marginVertical: 16,
+    flexDirection: "row",
+    alignItems: "baseline",
+  },
+  rewardTitle: {
+    fontSize: 64,
+    fontWeight: "bold",
+  },
+  rewardSubtitle: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginStart: 8,
+    lineHeight: 64,
+  },
+  surface: {
+    margin: 8,
+    marginTop: 16,
+    elevation: 1,
+    borderRadius: 4,
   },
 });

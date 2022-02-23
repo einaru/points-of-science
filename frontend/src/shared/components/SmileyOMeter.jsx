@@ -3,7 +3,7 @@ import React from "react";
 import { Image, TouchableOpacity, View } from "react-native";
 import { Subheading, Text } from "react-native-paper";
 import { t } from "../../features/i18n";
-import styles from "./SimleyOMeter.style";
+import styles from "./SmileyOMeter.style";
 
 const smileys = {
   awful: {
@@ -40,7 +40,7 @@ function Smiley({ score, label, asset, onPress }) {
 
   return (
     <TouchableOpacity style={styles.smileyContainer} onPress={handleOnPress}>
-      <Image source={asset} />
+      <Image style={styles.smileyImage} source={asset} />
       <Text style={styles.smileyLabel}>{label}</Text>
     </TouchableOpacity>
   );

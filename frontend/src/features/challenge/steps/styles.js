@@ -46,4 +46,17 @@ export default StyleSheet.create({
   action: {
     margin: 8,
   },
+  rewardContainer: {
+    margin: 24,
+    alignItems: "center",
+  },
+  rewardTitle: {
+    fontSize: 64,
+    fontWeight: "bold",
+  },
+  rewardSubtitle: {
+    fontSize: 32,
+    fontWeight: "bold",
+    lineHeight: 32,
+  },
 });

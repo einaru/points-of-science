@@ -1,5 +1,5 @@
 import React, { useContext, useLayoutEffect } from "react";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { Button, Surface, Text } from "react-native-paper";
 import { SmileyOMeter } from "../../../shared/components";
 import { t } from "../../i18n";
@@ -39,24 +39,28 @@ function Completed({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.shoutOutContainer}>
-        {challenge.reward ? (
-          <Reward title={calculatePoints()} subtitle={t("points")} />
-        ) : null}
-        <Text style={styles.shoutOut}>{t("Well done!")}</Text>
-      </View>
-      <Surface style={{ margin: 8, elevation: 1 }}>
-        <SmileyOMeter
-          message={t("What do you think about the challenge?")}
-          onPress={handleSmileyPress}
-        />
-      </Surface>
-      <Button
-        style={{ padding: 20 }}
-        onPress={() => navigation.navigate("category:list")}
-      >
-        {t("Up for another challenge?")}
-      </Button>
+      <ScrollView contentContainerStyle={styles.scrollView}>
+        <View style={styles.shoutOutContainer}>
+          {challenge.reward ? (
+            <Reward title={calculatePoints()} subtitle={t("points")} />
+          ) : null}
+          <Text style={styles.shoutOut}>{t("Well done!")}</Text>
+        </View>
+        <View>
+          <Surface style={styles.surface}>
+            <SmileyOMeter
+              message={t("What do you think about the challenge?")}
+              onPress={handleSmileyPress}
+            />
+          </Surface>
+          <Button
+            style={styles.action}
+            onPress={() => navigation.navigate("category:list")}
+          >
+            {t("Up for another challenge?")}
+          </Button>
+        </View>
+      </ScrollView>
     </View>
   );
 }

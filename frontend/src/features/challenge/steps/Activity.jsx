@@ -81,15 +81,15 @@ function Activity({ navigation }) {
   return (
     <View style={styles.container}>
       {/* TODO render activity content based on activity type */}
-      <ScrollView>
+      <ScrollView contentContainerStyle={styles.scrollView}>
         <View style={styles.contentContainer}>
           <Paragraph style={styles.text}>{activity.description}</Paragraph>
         </View>
+        <View style={styles.helpContainer}>
+          <Button onPress={showHint}>{t("Get a hint?")}</Button>
+          <Button onPress={showResources}>{t("External resources")}</Button>
+        </View>
       </ScrollView>
-      <View style={styles.helpContainer}>
-        <Button onPress={showHint}>{t("Get a hint?")}</Button>
-        <Button onPress={showResources}>{t("External resources")}</Button>
-      </View>
       <Button
         mode="contained"
         style={styles.action}

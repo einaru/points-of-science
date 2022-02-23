@@ -1,5 +1,5 @@
 import React, { useContext, useLayoutEffect } from "react";
-import { ImageBackground, View } from "react-native";
+import { ImageBackground, View, ScrollView } from "react-native";
 import { Button, Chip, Paragraph } from "react-native-paper";
 import { t } from "../../i18n";
 import ChallengeContext from "../ChallengeContext";
@@ -22,18 +22,20 @@ function Intro({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <ImageBackground style={styles.illustrationImage} source={imageSource}>
-        <View style={styles.metaContainer}>
-          {/* FIXME Provide challenge name from backend */}
-          <Chip style={styles.chip}>{challenge.categoryID}</Chip>
-          <Chip style={styles.chip}>
-            {challenge.reward.maxPoints} {t("points")}
-          </Chip>
+      <ScrollView contentContainerStyle={styles.scrollView}>
+        <ImageBackground style={styles.illustrationImage} source={imageSource}>
+          <View style={styles.metaContainer}>
+            {/* FIXME Provide challenge name from backend */}
+            <Chip style={styles.chip}>{challenge.categoryID}</Chip>
+            <Chip style={styles.chip}>
+              {challenge.reward.maxPoints} {t("points")}
+            </Chip>
+          </View>
+        </ImageBackground>
+        <View style={styles.contentContainer}>
+          <Paragraph>{challenge.description}</Paragraph>
         </View>
-      </ImageBackground>
-      <View style={styles.contentContainer}>
-        <Paragraph>{challenge.description}</Paragraph>
-      </View>
+      </ScrollView>
       <Button
         style={styles.action}
         mode="contained"

@@ -12,12 +12,14 @@ export default StyleSheet.create({
   },
   smileyContainer: {
     alignItems: "center",
+    maxWidth: "20%",
   },
   smileyImage: {
-    maxWidth: 64,
-    maxHeight: 64,
+    width: 64,
+    height: 64,
   },
   smileyLabel: {
     fontSize: 12,
+    textAlign: "center",
   },
 });

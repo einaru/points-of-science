@@ -13,6 +13,10 @@ export default StyleSheet.create({
   smileyContainer: {
     alignItems: "center",
   },
+  smileyImage: {
+    maxWidth: 64,
+    maxHeight: 64,
+  },
   smileyLabel: {
     fontSize: 12,
   },

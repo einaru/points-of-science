@@ -40,7 +40,7 @@ function Smiley({ score, label, asset, onPress }) {
 
   return (
     <TouchableOpacity style={styles.smileyContainer} onPress={handleOnPress}>
-      <Image source={asset} />
+      <Image style={styles.smileyImage} source={asset} />
       <Text style={styles.smileyLabel}>{label}</Text>
     </TouchableOpacity>
   );

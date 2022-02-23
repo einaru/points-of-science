@@ -1,7 +1,7 @@
 import React, { useContext, useLayoutEffect } from "react";
 import { View } from "react-native";
 import { Button, Text } from "react-native-paper";
-import SmileyOMeter from "../../../shared/components/SimleyOMeter";
+import SmileyOMeter from "../../../shared/components/SmileyOMeter";
 import { t } from "../../i18n";
 import ChallengeContext from "../ChallengeContext";
 import styles from "./styles";

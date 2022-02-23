@@ -22,6 +22,9 @@ const withAuth = setContext(async (_, { headers, token }) => {
 
   if (!isTokenValid(accessToken)) {
     accessToken = await getNewToken();
+  }
+
+  if (accessToken) {
     Storage.setItem("accessToken", accessToken);
     cachedToken = accessToken;
   }

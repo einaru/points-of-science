@@ -1,7 +1,6 @@
 import * as React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "./Login";
-import CreateAccount from "./CreateAccount";
 import ActivateAccount from "./ActivateAccount";
 import ActivateAccountProvider from "./ActivateAccountProvider";
 import { t } from "../i18n";
@@ -28,11 +27,6 @@ function AccountStack() {
           name="account:activate"
           component={ActivateAccount}
           options={{ title: t("Activate account") }}
-        />
-        <Stack.Screen
-          name="account:create"
-          component={CreateAccount}
-          options={{ title: t("Create account") }}
         />
       </Stack.Navigator>
     </ActivateAccountProvider>

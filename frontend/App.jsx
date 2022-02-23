@@ -3,12 +3,12 @@ import { ApolloProvider } from "@apollo/client";
 import { StatusBar } from "expo-status-bar";
 import { Provider as ThemeProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import AuthProvider from "./src/features/auth/AuthProvider";
+import AuthProvider from "./src/services/auth/AuthProvider";
 import Navigation from "./src/features/navigation";
-import PreferencesContext from "./src/features/preferences/PreferencesContext";
+import PreferencesContext from "./src/services/preferences/PreferencesContext";
 import useApiClient from "./src/services/api/useApiClient";
 import { LoadingScreen } from "./src/shared/components";
-import usePreferences from "./src/features/preferences/usePreferences";
+import usePreferences from "./src/services/preferences/usePreferences";
 import AnalyticsProvider from "./src/services/analytics/AnalyticsProvider";
 
 export default function App() {

@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import React, { useMemo } from "react";
 import { LoadingScreen } from "../../shared/components";
-import { t } from "../i18n";
+import { t } from "../../features/i18n";
 import ContentContext from "./ContentContext";
 import GET_ALL_CATEGORIES from "./ContentProvider.gql";
 

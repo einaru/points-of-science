@@ -2,7 +2,7 @@ import { useMutation } from "@apollo/client";
 import React, { useContext, useEffect, useState } from "react";
 import { View } from "react-native";
 import { Button, HelperText, Snackbar, TextInput } from "react-native-paper";
-import AuthContext from "../auth/AuthContext";
+import AuthContext from "../../services/auth/AuthContext";
 import { t } from "../i18n";
 import CHANGE_PASSWORD from "./ChangePassword.gql";
 import styles from "./ChangePassword.style";

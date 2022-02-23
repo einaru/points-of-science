@@ -21,6 +21,7 @@ const strings = [
   "Dashboard",
   "External resources",
   "Get a hint?",
+  "Get ready!",
   "Go back",
   "Haven't activated your account yet?",
   "Here's a little hint",

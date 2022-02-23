@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/client";
 import React, { useContext, useEffect, useState } from "react";
 import { HelperText, TextInput } from "react-native-paper";
-import AuthContext from "../auth/AuthContext";
+import AuthContext from "../../services/auth/AuthContext";
 import { ActivateAccountContext } from "./ActivateAccountProvider";
 import { t } from "../i18n";
 import FormAction from "./FormAction";

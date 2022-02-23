@@ -7,12 +7,12 @@ import {
   List,
   Paragraph,
   Portal,
-  Title,
 } from "react-native-paper";
 import * as Linking from "expo-linking";
 import { t } from "../../i18n";
 import ChallengeContext from "../ChallengeContext";
 import styles from "./styles";
+import HeaderTitle from "./HeaderTitle";
 
 // Dialog actions
 const DISMISS = "dismiss";
@@ -59,6 +59,12 @@ function Activity({ navigation }) {
     console.debug(`Resources was closed with ${action}`);
   };
 
+  // FIXME Remove/adjust once the resource structure is updated in backend
+  const getResourceTitle = (resource) => {
+    const title = resource.replace(/^https?:\/\//, "");
+    return title.split("/")[0];
+  };
+
   const openResource = (url) => {
     Linking.openURL(url);
     console.debug(`Opening resource ${url}`);
@@ -66,7 +72,9 @@ function Activity({ navigation }) {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: challenge.name,
+      headerTitle: () => {
+        return <HeaderTitle subtitle={t("Activity")} title={challenge.name} />;
+      },
     });
   }, [navigation, challenge]);
 
@@ -75,7 +83,6 @@ function Activity({ navigation }) {
       {/* TODO render activity content based on activity type */}
       <ScrollView>
         <View style={styles.contentContainer}>
-          <Title style={styles.title}>{t("Activity")}</Title>
           <Paragraph style={styles.text}>{activity.description}</Paragraph>
         </View>
       </ScrollView>
@@ -114,7 +121,11 @@ function Activity({ navigation }) {
               return (
                 <List.Item
                   key={resource}
-                  title={resource}
+                  style={{ padding: 0 }}
+                  title={getResourceTitle(resource)}
+                  description={resource}
+                  descriptionNumberOfLines={1}
+                  right={() => <List.Icon icon="open-in-new" />}
                   onPress={() => openResource(resource)}
                 />
               );

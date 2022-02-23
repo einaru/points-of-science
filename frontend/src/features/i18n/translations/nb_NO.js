@@ -22,6 +22,7 @@ export default {
   "Dashboard": "Dashbord",
   "External resources": "Eksterne ressurser",
   "Get a hint?": "Få et hint?",
+  "Get ready!": "Gjør deg klar!",
   "Go back": "Gå tilbake",
   "Haven't activated your account yet?": "Har du ikke aktivert kontoen din enda?",
   "Here's a little hint": "Her er et lite hint",

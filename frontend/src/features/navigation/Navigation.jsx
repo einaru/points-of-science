@@ -5,15 +5,21 @@ import {
 } from "@react-navigation/native";
 import ContentNavigator from "./ContentNavigator";
 import AccountStack from "../account/AccountStack";
-import AuthContext from "../auth/AuthContext";
+import AuthContext from "../../services/auth/AuthContext";
 import AnalyticsContext from "../../services/analytics/AnalyticsContext";
+import { LoadingScreen } from "../../shared/components";
+import { t } from "../i18n";
 
 function Navigation({ theme }) {
-  const { isAuthenticated } = useContext(AuthContext);
+  const { loading, isAuthenticated } = useContext(AuthContext);
   const { logNavigationEvent } = useContext(AnalyticsContext);
 
   const navigationRef = useNavigationContainerRef();
   const screenRef = useRef();
+
+  if (loading) {
+    return <LoadingScreen message={t("Get ready!")} />;
+  }
 
   return (
     <NavigationContainer

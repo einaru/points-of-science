@@ -1,7 +1,7 @@
 import React, { useReducer, useEffect, useMemo } from "react";
 import { useApolloClient } from "@apollo/client";
 import { reducer, initialState } from "./reducer";
-import * as Storage from "../../services/storage";
+import * as Storage from "../storage";
 import AuthContext from "./AuthContext";
 import VERIFY_TOKEN from "./AuthProvider.gql";
 
@@ -10,21 +10,38 @@ function AuthProvider({ children }) {
 
   const client = useApolloClient();
 
+  const logInUser = (user, accessToken, refreshToken) => {
+    Storage.setItem("user", JSON.stringify(user));
+    Storage.setItem("accessToken", accessToken);
+    Storage.setItem("refreshToken", refreshToken);
+    dispatch({ type: "login", user, refreshToken });
+  };
+
+  const logOutUser = () => {
+    Storage.removeItem("accessToken");
+    Storage.removeItem("refreshToken");
+    Storage.removeItem("user");
+    dispatch({ type: "logout" });
+  };
+
   useEffect(() => {
     const initState = async () => {
+      dispatch({ type: "loading" });
       const user = JSON.parse(await Storage.getItem("user"));
       const refreshToken = await Storage.getItem("refreshToken");
-      console.log("Restore user:", user);
-      dispatch({ type: "restoreUser", user, refreshToken });
+      const accessToken = await Storage.getItem("accessToken");
       if (user) {
         client
           .query({ query: VERIFY_TOKEN, fetchPolicy: "network-only" })
           .then(() => {
-            dispatch({ type: "restoreToken" });
+            logInUser(user, accessToken, refreshToken);
           })
           .catch((error) => {
             console.debug(error.message);
+            logOutUser();
           });
+      } else {
+        dispatch({ type: "logout" });
       }
     };
     initState();
@@ -34,24 +51,10 @@ function AuthProvider({ children }) {
   const authContext = useMemo(
     () => ({
       ...state,
-      logInUser: (user, accessToken, refreshToken) => {
-        Storage.setItem("user", JSON.stringify(user));
-        Storage.setItem("accessToken", accessToken);
-        Storage.setItem("refreshToken", refreshToken);
-        dispatch({ type: "login", user, refreshToken });
-      },
-      logOutUser: () => {
-        Storage.removeItem("accessToken");
-        Storage.removeItem("refreshToken");
-        Storage.removeItem("user");
-        dispatch({ type: "logout" });
-      },
-      createAccount: (data) => {
-        // TODO Link up with backend
-        console.log("Got create account data:", data);
-      },
+      logInUser,
+      logOutUser,
     }),
-    [state, dispatch]
+    [state]
   );
 
   return (

@@ -6,7 +6,7 @@ export default StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
-    marginHorizontal: 8,
+    margin: 8,
   },
   helpContainer: {
     margin: 8,

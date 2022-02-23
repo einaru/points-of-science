@@ -1,4 +1,5 @@
 export const initialState = {
+  loading: false,
   isAuthenticated: false,
   refreshToken: null,
   sessionToken: null,
@@ -7,17 +8,10 @@ export const initialState = {
 
 export function reducer(state, action) {
   switch (action.type) {
-    case "restoreUser":
+    case "loading":
       return {
         ...state,
-        user: action.user,
-        refreshToken: action.refreshToken,
-        sessionToken: action.refreshToken,
-      };
-    case "restoreToken":
-      return {
-        ...state,
-        isAuthenticated: true,
+        loading: true,
       };
     case "login":
       return {
@@ -26,6 +20,7 @@ export function reducer(state, action) {
         refreshToken: action.refreshToken,
         sessionToken: action.refreshToken,
         isAuthenticated: true,
+        loading: false,
       };
     case "logout":
       return initialState;

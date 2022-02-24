@@ -1,5 +1,5 @@
-import { createObjectTemplate, deleteData, saveData } from "../../internal.js";
-import config from "../../Config/config.js";
+import { createObjectTemplate } from "../../internal.js";
+
 import { assertTextInput } from "../../API/GraphQL/assert.js";
 
 function emptyData() {
@@ -82,39 +82,6 @@ function remove() {
   return createObjectTemplate(functionKey, code);
 }
 
-function deleteActivity(activity) {
-  const functionKey = "deleteActivity";
-  const code = (challenge) => {
-    return new Promise((resolve, reject) => {
-      if (challenge == null || challenge !== Object(challenge)) {
-        reject(
-          Error(
-            "Challenge to delete this activity from has wrong type. Input must be an object."
-          )
-        );
-      }
-
-      deleteData(config.db.table.activity, activity.id)
-        .then((response) => {
-          const emptyActivity = emptyData();
-          challenge.activity.setID(emptyActivity.data.id);
-          challenge.activity.setDescription(emptyActivity.data.description);
-          challenge.activity.setType(emptyActivity.data.type);
-          const { hints, resources } = challenge.activity.data;
-          hints.splice(0, hints.length);
-          resources.splice(0, resources.length);
-
-          resolve(response);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    });
-  };
-
-  return createObjectTemplate(functionKey, code);
-}
-
 function activityCreator() {
   const activity = emptyData();
 
@@ -126,8 +93,6 @@ function activityCreator() {
       ...setDescription(activity.data),
       ...add(),
       ...remove(),
-      ...deleteActivity(activity.data),
-      ...saveData(),
     },
   };
 }

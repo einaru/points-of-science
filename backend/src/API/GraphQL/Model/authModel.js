@@ -3,6 +3,7 @@ import {
   GraphQLEnumType,
   GraphQLString,
   GraphQLInt,
+  GraphQLInputObjectType,
 } from "graphql";
 import { UserModel } from "../../../internal.js";
 
@@ -38,11 +39,19 @@ const PermissionEnum = new GraphQLEnumType({
   },
 });
 
+export const PermissionInputModel = new GraphQLInputObjectType({
+  name: "PermissionInput",
+  fields: () => ({
+    userID: { type: GraphQLString },
+    permission: { type: PermissionEnum },
+  }),
+});
+
 export const PermissionModel = new GraphQLObjectType({
   name: "Permission",
   fields: () => ({
-    ADMIN: { type: GraphQLInt },
-    EXPERIMENTAL: { type: GraphQLInt },
-    CONTROL: { type: GraphQLInt },
+    admin: { type: GraphQLInt },
+    experimental: { type: GraphQLInt },
+    control: { type: GraphQLInt },
   }),
 });

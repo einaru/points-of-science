@@ -3,39 +3,17 @@ import {
   checkPassword,
   errorsInPassword,
   generateErrorMessage,
-  getFilter,
-  getDataByFilter,
   hashPassword,
   isValidPassword,
-  nextID,
   profileCreator,
   profileState,
-  signIn,
-  updateData,
   validatePassword,
 } from "../internal.js";
-import config from "../Config/config.js";
 
-function signUp(args) {
+function signUp(args, validUsername, userObject) {
   return new Promise((resolve, reject) => {
     const { password, confirmPassword, username } = args;
-    let validUsername = getDataFromDatabaseByFilter(
-      config.db.table.validUsername,
-      "username",
-      username
-    );
-
-    let userObject = getDataFromDatabaseByFilter(
-      config.db.table.user,
-      "username",
-      username
-    );
-
-    Promise.all([validUsername, userObject])
-      .then((data) => {
-        [validUsername, userObject] = data;
-        return validateSignUp(data[0], data[1], password, confirmPassword);
-      })
+    validateSignUp(validUsername, userObject, password, confirmPassword)
       .then(() => {
         return hashPassword(password);
       })
@@ -51,14 +29,7 @@ function signUp(args) {
         );
       })
       .then((user) => {
-        return Promise.all([updateData(config.db.table.user, user.data), user]);
-      })
-      .then((data) => {
-        const user = data[1];
-        return signIn(user.data.username, password);
-      })
-      .then((response) => {
-        resolve(response);
+        resolve(user);
       })
       .catch((error) => {
         reject(error);
@@ -108,30 +79,6 @@ function isUserDeativated(user) {
   return user.state === profileState.deactivated.value;
 }
 
-function getDataFromDatabaseByFilter(table, key, value) {
-  return new Promise((resolve, reject) => {
-    const filter = getFilter({
-      key,
-      operator: "==",
-      value,
-    });
-    getDataByFilter(table, filter)
-      .then((data) => {
-        if (data == null) {
-          resolve([]);
-        }
-        resolve(data[0]);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
-}
-
-function getNextID() {
-  return nextID(config.db.table.user);
-}
-
 function updateExistingUser(existingUser, hashedPassword) {
   existingUser.password = hashedPassword;
   existingUser.state = profileState.active.value;
@@ -142,10 +89,8 @@ function updateExistingUser(existingUser, hashedPassword) {
 
 function updateNewUser(username, hashedPassword, permission) {
   try {
-    const id = getNextID();
     const user = profileCreator();
     user.updateData({
-      id,
       username,
       permission,
       password: hashedPassword,

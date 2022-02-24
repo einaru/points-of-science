@@ -1,21 +1,17 @@
-import { GraphQLString, GraphQLInt } from "graphql";
+import { GraphQLString } from "graphql";
 import {
   authenticateRefreshToken,
-  deleteRefreshTokenFromDatabase,
-  getData,
-  getDataByFilter,
-  getFilter,
   profileCreator,
   setPermissionLevel,
   signIn,
   signUp,
   swapPermissionGroup,
-  updateData,
 } from "../../../internal.js";
 import config from "../../../Config/config.js";
 import { assertIsAdmin, assertIsAuthenticated } from "../assert.js";
 import {
   AccessTokenModel,
+  PermissionInputModel,
   PermissionModel,
   SignInModel,
   MessageResponseModel,
@@ -28,8 +24,13 @@ const authRefreshTokenQuery = {
   args: {
     refreshToken: { type: GraphQLString },
   },
-  async resolve(parent, args) {
-    const accessToken = await authenticateRefreshToken(args.refreshToken);
+  async resolve(_, args, { providers }) {
+    const refreshTokens = await providers.refreshTokens.getAll();
+    const accessToken = await authenticateRefreshToken(
+      args.refreshToken,
+      refreshTokens
+    );
+
     return { accessToken };
   },
 };
@@ -37,8 +38,8 @@ const authRefreshTokenQuery = {
 const authAccessTokenQuery = {
   type: MessageResponseModel,
   args: {},
-  async resolve(parent, args, context) {
-    assertIsAuthenticated(context.user);
+  async resolve(_, __, { user }) {
+    assertIsAuthenticated(user);
     return { message: "Authentication successful." };
   },
 };
@@ -46,9 +47,9 @@ const authAccessTokenQuery = {
 const getPermissionsQuery = {
   type: PermissionModel,
   args: {},
-  async resolve(parent, args, context) {
-    assertIsAuthenticated(context.user);
-    assertIsAdmin(context.user);
+  async resolve(_, __, { user }) {
+    assertIsAuthenticated(user);
+    assertIsAdmin(user);
     return config.permissionLevel;
   },
 };
@@ -61,29 +62,47 @@ const activateAccountQuery = {
     password: { type: GraphQLString },
     confirmPassword: { type: GraphQLString },
   },
-  async resolve(parent, args) {
-    return signUp(args);
+  async resolve(_, args, { providers }) {
+    const validUsernames = await providers.validUsernames.getAll();
+    const users = await providers.users.getAll();
+
+    const validUsername = validUsernames.filter((object) => {
+      return object.username === args.username;
+    })[0];
+
+    let user = users.filter((object) => {
+      return object.username === args.username;
+    })[0];
+
+    user = await signUp(args, validUsername, user);
+    if (user.data.id.trim().length === 0) {
+      await providers.users.add(user.data);
+    } else {
+      await providers.users.update(user.data.id, user.data);
+    }
+
+    return signIn(args.password, user.data, providers);
   },
 };
 
 const setPermissionQuery = {
   type: MessageResponseModel,
-  args: { userID: { type: GraphQLString }, permission: { type: GraphQLInt } },
-  async resolve(parent, args, context) {
-    assertIsAuthenticated(context.user);
-    assertIsAdmin(context.user);
+  args: {
+    permission: { type: PermissionInputModel },
+  },
+  async resolve(_, args, { user, providers }) {
+    assertIsAuthenticated(user);
+    assertIsAdmin(user);
 
-    const filter = getFilter({
-      key: "id",
-      operator: "==",
-      value: args.userID,
-    });
-    const userData = await getDataByFilter(config.db.table.user, filter)[0];
+    const users = await providers.users.getAll();
+    const userData = users.filter((object) => {
+      return object.id === args.permission.userID;
+    })[0];
 
-    const user = profileCreator();
-    user.updateData(userData);
-    setPermissionLevel(args.permission, user);
-    await updateData(config.db.table.user, user.data);
+    const userProfile = profileCreator();
+    userProfile.updateData(userData);
+    setPermissionLevel(args.permission.permission, userProfile);
+    await providers.users.update(userProfile.data.id, userProfile.data);
     return { message: "Permission level updated successfully." };
   },
 };
@@ -94,8 +113,15 @@ const signInQuery = {
     username: { type: GraphQLString },
     password: { type: GraphQLString },
   },
-  async resolve(parent, args) {
-    return signIn(args.username, args.password);
+  async resolve(_, args, { providers }) {
+    const users = await providers.users.getAll();
+    const user = users.filter((object) => object.username === args.username)[0];
+
+    if (user == null) {
+      throw new Error("User not found. Sign in unsuccessful.");
+    }
+
+    return signIn(args.password, user, providers);
   },
 };
 
@@ -104,30 +130,37 @@ const signOutQuery = {
   args: {
     refreshToken: { type: GraphQLString },
   },
-  async resolve(parent, args, context) {
-    assertIsAuthenticated(context.user);
-    return deleteRefreshTokenFromDatabase(args.refreshToken);
+  async resolve(_, args, { user, providers }) {
+    assertIsAuthenticated(user);
+    const refreshTokens = await providers.refreshTokens.getAll();
+
+    if (refreshTokens.length === 0) {
+      throw new Error("User is already signed out.");
+    }
+
+    await providers.refreshTokens.delete(args.refreshToken);
+    return { message: "User signed out successfully." };
   },
 };
 
 const swapPermissionQuery = {
   type: MessageResponseModel,
   args: {},
-  async resolve(parent, args, context) {
-    assertIsAuthenticated(context.user);
-    assertIsAdmin(context.user);
+  async resolve(_, __, { user, providers }) {
+    assertIsAuthenticated(user);
+    assertIsAdmin(user);
 
-    const userData = await getData(config.db.table.user);
+    const userData = await providers.users.getAll();
     const users = [];
     userData.forEach((userObject) => {
-      const user = profileCreator();
-      user.updateData(userObject);
-      users.push(user);
+      const userProfile = profileCreator();
+      userProfile.updateData(userObject);
+      users.push(userProfile);
     });
 
     swapPermissionGroup(users);
-    users.forEach((user) => {
-      updateData(config.db.table.user, user.data);
+    users.forEach((userObject) => {
+      providers.users.update(userObject.data.id, userObject.data);
     });
     return { message: "Swapped permission groups successfully." };
   },

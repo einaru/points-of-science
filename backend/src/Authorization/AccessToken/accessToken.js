@@ -1,11 +1,8 @@
 /* eslint-disable import/no-cycle */
 // Server directory imports:
 import jwt from "jsonwebtoken";
-import { getData, updateData, deleteData } from "../../internal.js";
 import config from "../../Config/config.js";
 import { AuthenticationError } from "../../API/GraphQL/error.js";
-
-// Other third party dependencies:
 
 function getResponseObject(message, statusCode, type) {
   return {
@@ -27,9 +24,10 @@ function createAccessToken(user) {
   });
 }
 
-function storeRefreshTokenInDatabase(refreshToken) {
+function storeRefreshTokenInDatabase(refreshToken, providers) {
   return new Promise((resolve, reject) => {
-    getData(config.db.table.refreshToken)
+    providers.refreshTokens
+      .getAll()
       .then((refreshTokens) => {
         const refreshTokenExist = refreshTokens.find((token) => {
           if (token === Object(token)) {
@@ -45,7 +43,7 @@ function storeRefreshTokenInDatabase(refreshToken) {
         const data = {
           id: refreshToken,
         };
-        return updateData(config.db.table.refreshToken, data);
+        return providers.refreshTokens.update(data.id, data);
       })
       .then(() => {
         return resolve(
@@ -62,7 +60,7 @@ function storeRefreshTokenInDatabase(refreshToken) {
   });
 }
 
-function createRefreshToken(user) {
+function createRefreshToken(user, providers) {
   return new Promise((resolve, reject) => {
     try {
       const userData = {
@@ -73,7 +71,7 @@ function createRefreshToken(user) {
       };
 
       const refreshToken = jwt.sign(userData, config.secret.refreshToken);
-      storeRefreshTokenInDatabase(refreshToken)
+      storeRefreshTokenInDatabase(refreshToken, providers)
         .then((response) => {
           if (response.type === "error") {
             return reject(
@@ -92,68 +90,27 @@ function createRefreshToken(user) {
   });
 }
 
-function authenticateRefreshToken(refreshToken) {
-  return new Promise((resolve, reject) => {
-    getData(config.db.table.refreshToken)
-      .then((refreshTokens) => {
-        const refreshTokenExist = refreshTokens.filter((token) => {
-          if (token === Object(token)) {
-            return token.id === refreshToken;
-          }
-          return token === refreshToken;
-        });
-
-        if (!refreshTokenExist.length) {
-          reject(new AuthenticationError("Refresh token is invalid."));
-          return;
-        }
-
-        jwt.verify(
-          refreshToken,
-          config.secret.refreshToken,
-          (error, userVerified) => {
-            if (error) {
-              reject(new AuthenticationError("Refresh token is invalid."));
-              return;
-            }
-
-            resolve(createAccessToken(userVerified));
-          }
-        );
-      })
-      .catch((error) => {
-        reject(error);
-      });
+async function authenticateRefreshToken(refreshToken, refreshTokens) {
+  const refreshTokenExist = refreshTokens.filter((token) => {
+    if (token === Object(token)) {
+      return token.id === refreshToken;
+    }
+    return token === refreshToken;
   });
+
+  if (!refreshTokenExist.length) {
+    throw new AuthenticationError("Refresh token is invalid.");
+  }
+
+  try {
+    const verifiedUser = await jwt.verify(
+      refreshToken,
+      config.secret.refreshToken
+    );
+    return createAccessToken(verifiedUser);
+  } catch (error) {
+    throw new AuthenticationError("Refresh token is invalid.");
+  }
 }
 
-function deleteRefreshTokenFromDatabase(refreshToken) {
-  return new Promise((resolve, reject) => {
-    getData(config.db.table.refreshToken)
-      .then((refreshTokens) => {
-        if (refreshTokens.length === 0) {
-          return resolve({ message: "User is already signed out." });
-        }
-
-        return deleteData(config.db.table.refreshToken, refreshToken);
-      })
-      .then((response) => {
-        if (!response) {
-          reject(new Error("Could not sign out user."));
-          return;
-        }
-
-        resolve({ message: "User signed out successfully." });
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
-}
-
-export {
-  authenticateRefreshToken,
-  createAccessToken,
-  createRefreshToken,
-  deleteRefreshTokenFromDatabase,
-};
+export { authenticateRefreshToken, createAccessToken, createRefreshToken };

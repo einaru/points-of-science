@@ -1,4 +1,4 @@
-const { gql } = require("@apollo/client");
+import { gql } from "@apollo/client";
 
 const ACTIVATE_ACCOUNT = gql`
   mutation activateAccount(

@@ -1,4 +1,4 @@
-const { gql } = require("@apollo/client");
+import { gql } from "@apollo/client";
 
 const VERIFY_USERNAME = gql`
   query verifyUsername($username: String!) {

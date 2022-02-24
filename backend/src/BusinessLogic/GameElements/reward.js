@@ -1,5 +1,4 @@
-import { createObjectTemplate, deleteData, saveData } from "../../internal.js";
-import config from "../../Config/config.js";
+import { createObjectTemplate } from "../../internal.js";
 
 function emptyData() {
   return {
@@ -29,33 +28,6 @@ function updateData(reward) {
   return createObjectTemplate(functionKey, code);
 }
 
-function deleteReward(reward) {
-  const functionKey = "deleteReward";
-  const code = (challenge) => {
-    return new Promise((resolve, reject) => {
-      if (challenge == null || challenge !== Object(challenge)) {
-        reject(
-          Error(
-            "Challenge to delete this reward from has wrong type. Input must be an object."
-          )
-        );
-      }
-
-      deleteData(config.db.table.reward, reward.id)
-        .then((response) => {
-          const emptyReward = emptyData();
-          challenge.reward.updateData(emptyReward.data);
-          resolve(response);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    });
-  };
-
-  return createObjectTemplate(functionKey, code);
-}
-
 function rewardCreator() {
   const reward = emptyData();
 
@@ -63,8 +35,6 @@ function rewardCreator() {
     reward: {
       ...reward,
       ...updateData(reward.data),
-      ...deleteReward(reward.data),
-      ...saveData(),
     },
   };
 }

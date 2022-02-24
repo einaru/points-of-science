@@ -7,17 +7,13 @@ import {
   ReflectionInputModel,
   RewardInputModel,
   categoryCreator,
-  createActivity,
   challengeCreator,
+  createActivity,
   createChallenge,
   createContent,
   createReflection,
   createReward,
-  getData,
-  getDataFromDatabaseByFilter,
-  saveChallenge,
 } from "../../../internal.js";
-import config from "../../../Config/config.js";
 import { assertIsAdmin, assertIsAuthenticated } from "../assert.js";
 
 // Root Queries - Used to retrieve data with GET-Requests
@@ -25,17 +21,16 @@ import { assertIsAdmin, assertIsAuthenticated } from "../assert.js";
 const getAllChallengesQuery = {
   type: new GraphQLList(ChallengeModel),
   args: {},
-  async resolve(parent, args, context) {
-    assertIsAuthenticated(context.user);
-
-    const challengesData = await getData(config.db.table.challenge);
-    let challenges = [];
+  async resolve(_, __, { user, providers }) {
+    assertIsAuthenticated(user);
+    const challengesData = await providers.challenges.getAll();
+    const challenges = [];
     challengesData.forEach((challengeData) => {
       const challenge = challengeCreator(challengeData.reflectionType);
-      challenges.push(challenge.restoreObject(challenge, challengeData));
+      challenge.restoreObject(challenge, challengeData);
+      challenges.push(challenge.convertToResponseObject(challenge));
     });
 
-    challenges = await Promise.all(challenges);
     return challenges;
   },
 };
@@ -50,9 +45,9 @@ const createChallengeQuery = {
     reflection: { type: ReflectionInputModel },
     activity: { type: ActivityInputModel },
   },
-  async resolve(parent, args, context) {
-    assertIsAuthenticated(context.user);
-    assertIsAdmin(context.user);
+  async resolve(_, args, { user, providers }) {
+    assertIsAuthenticated(user);
+    assertIsAdmin(user);
 
     const { categoryID, image, description, difficulty } = args.challenge;
     const title = args.challenge.name;
@@ -70,39 +65,25 @@ const createChallengeQuery = {
     }
 
     if (categoryID.trim().length > 0) {
-      const storedCategory = await getDataFromDatabaseByFilter(
-        "id",
-        categoryID,
-        config.db.table.category
-      );
-
+      const storedCategory = await providers.categories.getByID(categoryID);
       if (storedCategory == null) {
         throw new Error(
           "Category you try to add the challenge to does not exist. Please create a Category before creating a Challenge."
         );
       }
 
-      [categoryData] = storedCategory;
+      categoryData = storedCategory;
     }
 
     const category = categoryCreator();
-    await category.restoreObject(category, categoryData);
+    const challenges = await providers.challenges.getAll();
+    await category.restoreObject(category, categoryData, challenges);
 
     const challenge = createChallenge(categoryID, difficulty, reflectionType);
-    const content = createContent(challenge.content, title, image, description);
-    const reward = createReward(
-      challenge.reward,
-      maxPoints,
-      firstTryPoints,
-      bonusPoints
-    );
-    const reflection = createReflection(
-      challenge.reflection,
-      reflectionTitle,
-      solution,
-      choices
-    );
-    const activity = createActivity(
+    createContent(challenge.content, title, image, description);
+    createReward(challenge.reward, maxPoints, firstTryPoints, bonusPoints);
+    createReflection(challenge.reflection, reflectionTitle, solution, choices);
+    createActivity(
       challenge.activity,
       type,
       activityDescription,
@@ -110,14 +91,14 @@ const createChallengeQuery = {
       resources
     );
 
-    return saveChallenge(
-      content,
-      category,
-      challenge,
-      reward,
-      reflection,
-      activity
-    );
+    category.addChallenge(challenge);
+    const data = challenge.convertToStoredObject(challenge);
+    const object = await providers.challenges.add(data);
+    challenge.data.id = object.id;
+    const categoryObject = category.convertToStoredObject(category);
+    await providers.categories.update(categoryObject.id, categoryObject);
+
+    return challenge.convertToResponseObject(challenge);
   },
 };
 

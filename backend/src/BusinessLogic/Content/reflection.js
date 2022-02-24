@@ -1,5 +1,4 @@
-import config from "../../Config/config.js";
-import { createObjectTemplate, deleteData, saveData } from "../../internal.js";
+import { createObjectTemplate } from "../../internal.js";
 import { assertTextInput } from "../../API/GraphQL/assert.js";
 
 function emptyData() {
@@ -63,39 +62,6 @@ function removeChoice(argument) {
   return createObjectTemplate(functionKey, code);
 }
 
-function deleteReflection(reflection) {
-  const functionKey = "deleteReflection";
-  const code = (challenge) => {
-    return new Promise((resolve, reject) => {
-      if (challenge == null || challenge !== Object(challenge)) {
-        reject(
-          Error(
-            "Challenge to delete this reflection from has wrong type. Input must be an object."
-          )
-        );
-      }
-
-      deleteData(config.db.table.reflection, reflection.id)
-        .then((response) => {
-          const emptyReflection = emptyData();
-          challenge.reflection.data.setTitle(emptyReflection.data.title);
-          challenge.reflection.data.solution(emptyReflection.data.solution);
-          if (challenge.reflection.data.choices) {
-            const { choices } = challenge.reflection.data;
-            choices.splice(0, choices.length);
-          }
-
-          resolve(response);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    });
-  };
-
-  return createObjectTemplate(functionKey, code);
-}
-
 function addEmptyChoiceList(argument) {
   argument.choices = [];
 }
@@ -108,8 +74,6 @@ function reflectionCreator() {
       ...reflection,
       ...setTitle(reflection.data),
       ...setSolution(reflection.data),
-      ...deleteReflection(reflection.data),
-      ...saveData(),
     },
   };
 }
@@ -125,8 +89,6 @@ function argumentCreator() {
       ...setSolution(argument.data),
       ...addChoice(argument.data),
       ...removeChoice(argument.data),
-      ...deleteReflection(argument.data),
-      ...saveData(),
     },
   };
 }

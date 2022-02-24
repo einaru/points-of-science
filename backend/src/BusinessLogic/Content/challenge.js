@@ -2,14 +2,10 @@ import {
   activityCreator,
   contentCreator,
   createObjectTemplate,
-  convertToResponseObject,
-  deleteData,
   reflectionCreator,
   argumentCreator,
   rewardCreator,
-  saveData,
-} from "../../internal.js";
-import config from "../../Config/config.js";
+} from "../../internal.js";;
 
 const DifficultyEnum = Object.freeze({
   beginner: 1,
@@ -61,8 +57,6 @@ function restoreObject() {
       }
 
       challenge.reward.updateData(challengeData.reward);
-
-      return convertToResponseObject("challenge", challenge);
     } catch (error) {
       throw new Error(error);
     }
@@ -72,8 +66,8 @@ function restoreObject() {
 }
 
 function deleteChallenge(challenge) {
-  const key = "deleteChallenge";
-  const code = (category) => {
+  const functionKey = "deleteChallenge";
+  const code = (category, providers) => {
     return new Promise((resolve, reject) => {
       if (category == null || category !== Object(category)) {
         reject(
@@ -84,17 +78,49 @@ function deleteChallenge(challenge) {
       }
 
       category.removeChallenge(challenge);
-      deleteData(config.db.table.challenge, challenge.data.id)
-        .then((response) => {
-          resolve(response);
-        })
-        .catch((error) => {
-          reject(error);
-        });
+      resolve(providers.challenges.delete(challenge.id));
     });
   };
 
-  return createObjectTemplate(key, code);
+  return createObjectTemplate(functionKey, code);
+}
+
+function convertToStoredObject() {
+  const functionKey = "convertToStoredObject";
+  const code = (object) => {
+    return {
+      id: object.data.id,
+      categoryID: object.data.categoryID,
+      difficulty: object.data.difficulty,
+      content: object.content.data,
+      reflectionType: object.data.reflectionType,
+      reflection: object.reflection.data,
+      reward: object.reward.data,
+      activity: object.activity.data,
+    };
+  };
+
+  return createObjectTemplate(functionKey, code);
+}
+
+function convertToResponseObject() {
+  const functionKey = "convertToResponseObject";
+  const code = (object) => {
+    return {
+      id: object.data.id,
+      categoryID: object.data.categoryID,
+      difficulty: object.data.difficulty,
+      name: object.content.data.title,
+      description: object.content.data.description,
+      image: object.content.data.image,
+      reflection: object.reflection.data,
+      reflectionType: object.data.reflectionType,
+      reward: object.reward.data,
+      activity: object.activity.data,
+    };
+  };
+
+  return createObjectTemplate(functionKey, code);
 }
 
 function addReflectionType(reflectionType) {
@@ -135,7 +161,8 @@ function challengeCreator(reflectionType) {
     ...updateChallenge(challenge.data),
     ...restoreObject(),
     ...deleteChallenge(challenge.data),
-    ...saveData(),
+    ...convertToStoredObject(),
+    ...convertToResponseObject(),
   };
 }
 

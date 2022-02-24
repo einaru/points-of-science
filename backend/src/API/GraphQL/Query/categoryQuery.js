@@ -1,11 +1,5 @@
 import { GraphQLList, GraphQLString } from "graphql";
-import {
-  CategoryModel,
-  categoryCreator,
-  getData,
-  nextID,
-} from "../../../internal.js";
-import config from "../../../Config/config.js";
+import { CategoryModel, categoryCreator } from "../../../internal.js";
 import { assertIsAdmin, assertIsAuthenticated } from "../assert.js";
 
 // Root Queries - Used to retrieve data with GET-Requests
@@ -13,17 +7,49 @@ import { assertIsAdmin, assertIsAuthenticated } from "../assert.js";
 const getAllCategoriesQuery = {
   type: new GraphQLList(CategoryModel),
   args: {},
-  async resolve(parent, args, context) {
-    assertIsAuthenticated(context.user);
+  async resolve(_, __, { user, providers }) {
+    assertIsAuthenticated(user);
 
-    const categoriesData = await getData(config.db.table.category);
+    const categoriesData = await providers.categories.getAll();
+    const challengesData = await providers.challenges.getAll();
     let categories = [];
     categoriesData.forEach((categoryData) => {
-      const category = categoryCreator();
-      categories.push(category.restoreObject(category, categoryData));
+      categories.push(
+        new Promise((resolve, reject) => {
+          const category = categoryCreator();
+          let progress = null;
+          if (categoryData.progressID.trim().length > 0) {
+            progress = providers.progresses.getByID(categoryData.progressID);
+          }
+
+          Promise.all([progress])
+            .then((data) => {
+              return category.restoreObject(
+                category,
+                categoryData,
+                challengesData,
+                data
+              );
+            })
+            .then(() => {
+              resolve(category.convertToResponseObject(category));
+            })
+            .catch((error) => {
+              reject(error);
+            });
+        })
+      );
     });
 
     categories = await Promise.all(categories);
+    categories.forEach((element) => {
+      const challenges = [];
+      element.challenges.forEach((challenge) => {
+        challenges.push(challenge.convertToResponseObject(challenge));
+      });
+      element.challenges = challenges;
+    });
+
     return categories;
   },
 };
@@ -37,32 +63,22 @@ const createCategoryQuery = {
     image: { type: GraphQLString },
     description: { type: GraphQLString },
   },
-  async resolve(parent, args, context) {
-    assertIsAuthenticated(context.user);
-    assertIsAdmin(context.user);
-
-    const categoryID = nextID(config.db.table.category);
-    const contentID = nextID(config.db.table.content);
+  async resolve(_, args, { user, providers }) {
+    assertIsAuthenticated(user);
+    assertIsAdmin(user);
 
     const category = categoryCreator();
-    const newCategory = {
-      id: categoryID,
-    };
-    category.updateData(newCategory);
 
     const newContent = {
-      id: contentID,
       title: args.title,
       image: args.image,
       description: args.description,
     };
     category.content.updateData(newContent);
-    await category.content.saveData(
-      "content",
-      category.content,
-      config.db.table.content
-    );
-    return category.saveData("category", category, config.db.table.category);
+    const storedCategory = category.convertToStoredObject(category);
+    const object = await providers.categories.add(storedCategory);
+    category.updateData(object);
+    return category.convertToResponseObject(category);
   },
 };
 

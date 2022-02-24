@@ -24,7 +24,11 @@ function createObjectTemplate(functionKey, code) {
 function updateData(profile) {
   const functionKey = "updateData";
   const code = (args) => {
-    // Fill in the blanks
+    if (args == null || args !== Object(args)) {
+      throw new Error(
+        "Profile could not be updated because of wrong type of input. Input must be an object."
+      );
+    }
     Object.keys(args).forEach((key) => {
       profile[key] = args[key];
     });

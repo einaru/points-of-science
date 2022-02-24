@@ -1,13 +1,9 @@
 import {
+  challengeCreator,
   contentCreator,
-  convertToResponseObject,
   createObjectTemplate,
-  getDataFromDatabaseByFilter,
   progressCreator,
-  saveData,
-  restoreChallenges,
 } from "../../internal.js";
-import config from "../../Config/config.js";
 
 function updateCategory(category) {
   const functionKey = "updateData";
@@ -42,7 +38,7 @@ function addChallenge(category) {
     }
 
     category.challenges.push(challenge);
-    return "Challnge successfully added.";
+    return "Challenge successfully added.";
   };
 
   return createObjectTemplate(functionKey, code);
@@ -71,40 +67,37 @@ function removeChallenge(category) {
   return createObjectTemplate(functionKey, code);
 }
 
+function restoreChallenges(data, challengeList) {
+  const challengesData = data.filter((challenge) => {
+    return challengeList.includes(challenge.id);
+  });
+
+  const challenges = [];
+  challengesData.forEach((challengeData) => {
+    const challenge = challengeCreator(challengeData.reflectionType);
+    challenge.restoreObject(challenge, challengeData);
+    challenges.push(challenge);
+  });
+
+  return challenges;
+}
+
 function restoreObject() {
   const functionKey = "restoreObject";
-  const code = (category, categoryData) => {
-    return new Promise((resolve, reject) => {
-      const { progressID, challenges } = categoryData;
-      const progressData = getDataFromDatabaseByFilter(
-        "id",
-        progressID,
-        config.db.table.progress
-      );
+  const code = (category, categoryData, storedChallenges, progress) => {
+    const { challenges } = categoryData;
+    const challengeList = restoreChallenges(storedChallenges, challenges);
 
-      const challengeList = restoreChallenges(challenges);
+    if (progress != null) {
+      category.progress.updateData(progress);
+    }
 
-      Promise.all([progressData, challengeList])
-        .then((data) => {
-          let progress = [];
+    if (challengeList.length > 0) {
+      categoryData.challenges = challengeList;
+    }
 
-          if (data[0] != null) {
-            progress = data[0][0];
-            category.progress.updateData(progress);
-          }
-
-          if (data[1] != null) {
-            categoryData.challenges = data[1];
-          }
-
-          category.content.updateData(categoryData.content);
-          category.updateData(categoryData);
-          resolve(convertToResponseObject("category", category));
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    });
+    category.content.updateData(categoryData.content);
+    category.updateData(categoryData);
   };
 
   return createObjectTemplate(functionKey, code);
@@ -114,6 +107,36 @@ function deleteCategory(category) {
   const functionKey = "deleteCategory";
   const code = () => {
     // Fill in the blanks
+  };
+
+  return createObjectTemplate(functionKey, code);
+}
+
+function convertToResponseObject() {
+  const functionKey = "convertToResponseObject";
+  const code = (object) => {
+    return {
+      id: object.data.id,
+      challenges: object.data.challenges,
+      name: object.content.data.title,
+      description: object.content.data.description,
+      image: object.content.data.image,
+      progress: object.progress.data,
+    };
+  };
+
+  return createObjectTemplate(functionKey, code);
+}
+
+function convertToStoredObject() {
+  const functionKey = "convertToStoredObject";
+  const code = (object) => {
+    return {
+      id: object.data.id,
+      challenges: object.data.challenges.map((item) => item.data.id),
+      content: object.content.data,
+      progressID: object.content.data.id,
+    };
   };
 
   return createObjectTemplate(functionKey, code);
@@ -140,8 +163,9 @@ function categoryCreator() {
     ...updateCategory(category.data),
     ...addChallenge(category.data),
     ...removeChallenge(category.data),
+    ...convertToResponseObject(),
+    ...convertToStoredObject(),
     ...restoreObject(),
-    ...saveData(),
     ...deleteCategory(category.data),
   };
 }

@@ -1,4 +1,4 @@
-import { createObjectTemplate, saveData } from "../../internal.js";
+import { createObjectTemplate } from "../../internal.js";
 
 function emptyData() {
   return {
@@ -28,15 +28,6 @@ function updateContent(content) {
   return createObjectTemplate(functionKey, code);
 }
 
-function deleteContent(content) {
-  const functionKey = "deleteContent";
-  const code = () => {
-    // Fill in the blanks
-  };
-
-  return createObjectTemplate(functionKey, code);
-}
-
 function contentCreator() {
   const content = emptyData();
 
@@ -44,8 +35,6 @@ function contentCreator() {
     content: {
       ...content,
       ...updateContent(content.data),
-      ...saveData(),
-      ...deleteContent(content.data),
     },
   };
 }

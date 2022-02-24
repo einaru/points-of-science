@@ -10,6 +10,9 @@ const Stack = createNativeStackNavigator();
 
 function Challenge({ route }) {
   const { challenge } = route.params;
+  const analyticsParams = {
+    challenge,
+  };
 
   return (
     <ChallengeContext.Provider value={challenge}>
@@ -19,21 +22,25 @@ function Challenge({ route }) {
             name="challenge:intro"
             options={{ title: t("Intro") }}
             component={Intro}
+            initialParams={analyticsParams}
           />
           <Stack.Screen
             name="challenge:activity"
             options={{ title: t("Activity") }}
             component={Activity}
+            initialParams={analyticsParams}
           />
           <Stack.Screen
             name="challenge:reflection"
             options={{ title: t("Reflection") }}
             component={Reflection}
+            initialParams={analyticsParams}
           />
           <Stack.Screen
             name="challenge:completed"
             options={{ title: t("Challenge completed") }}
             component={Completed}
+            initialParams={analyticsParams}
           />
         </Stack.Navigator>
       </View>

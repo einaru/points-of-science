@@ -37,11 +37,6 @@ export * from "./BusinessLogic/UserTracker/user_reflection.js";
 export * from "./BusinessLogic/UserTracker/user_reward.js";
 export * from "./BusinessLogic/Util/utility.js";
 
-export * from "./Database/Connection/connection.js";
-export * as JSONProvider from "./Database/Provider/json_provider.js";
-export * as FirebaseProvider from "./Database/Provider/firebase_provider.js";
-export * from "./Database/Query/query.js";
-
 export * from "./ErrorHandler/error_handler.js";
 
 export * from "./Logger/logger.js";

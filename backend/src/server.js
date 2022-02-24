@@ -4,7 +4,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import { graphqlHTTP } from "express-graphql";
 import config from "./Config/config.js";
-import { schema, connectToDatabase } from "./internal.js";
+import { schema } from "./internal.js";
 import authMiddleware from "./Authorization/authMiddleware.js";
 import { providers } from "./Database/firestore.js";
 
@@ -42,8 +42,6 @@ Object.entries(config.secret).forEach(([key, value]) => {
     console.error(`Error: Secret key for ${key} is not set!`);
   }
 });
-
-connectToDatabase();
 
 app.listen(config.port, () => {
   console.log(`Running in "${config.env}" mode`);

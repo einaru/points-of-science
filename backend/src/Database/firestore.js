@@ -8,6 +8,11 @@ admin.initializeApp({
 export const firestore = admin.firestore();
 
 export const providers = {
+  categories: new FirestoreProvider(firestore, "Category"),
+  challenges: new FirestoreProvider(firestore, "Challenge"),
   clickStreams: new FirestoreProvider(firestore, "ClickStream"),
+  progresses: new FirestoreProvider(firestore, "Progress"),
   refreshTokens: new FirestoreProvider(firestore, "RefreshToken"),
+  users: new FirestoreProvider(firestore, "User"),
+  validUsernames: new FirestoreProvider(firestore, "ValidUsername"),
 };

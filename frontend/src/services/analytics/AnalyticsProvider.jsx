@@ -28,6 +28,14 @@ function getTimestamp() {
   return Date.now().valueOf().toString();
 }
 
+function debug(tag, data) {
+  // eslint-disable-next-line no-undef
+  if (__DEV__) {
+    // eslint-disable-next-line no-console
+    console.debug(`[${tag}]: ${JSON.stringify(data)}`);
+  }
+}
+
 function AnalyticsProvider({ children }) {
   const [isDeviceInfoLogged, setIsDeviceInfoLogged] = useState(false);
   const { sessionToken } = useContext(AuthContext);
@@ -41,7 +49,7 @@ function AnalyticsProvider({ children }) {
   const doLogEvent = useCallback(
     (event) => {
       logEvent({ variables: { sessionToken, event } });
-      console.debug("Logging event:", event);
+      debug("click-event", event);
     },
     [logEvent, sessionToken]
   );
@@ -54,7 +62,7 @@ function AnalyticsProvider({ children }) {
 
   const doLogDeviceInfo = useCallback(() => {
     logDeviceInfo({ variables: { sessionToken, deviceInfo } });
-    console.debug("Logging device info:", deviceInfo);
+    debug("device-info", deviceInfo);
     setIsDeviceInfoLogged(true);
   }, [logDeviceInfo, sessionToken]);
 

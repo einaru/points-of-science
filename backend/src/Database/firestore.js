@@ -15,4 +15,5 @@ export const providers = {
   refreshTokens: new FirestoreProvider(firestore, "RefreshToken"),
   users: new FirestoreProvider(firestore, "User"),
   validUsernames: new FirestoreProvider(firestore, "ValidUsername"),
+  userChallenges: new FirestoreProvider(firestore, "UserChallenge"),
 };

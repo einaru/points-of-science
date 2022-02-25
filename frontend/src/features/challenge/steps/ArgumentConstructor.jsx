@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { View } from "react-native";
 import { DraxProvider, DraxView } from "react-native-drax";
-import { Button, Text } from "react-native-paper";
+import { Button, Text, useTheme } from "react-native-paper";
 import { MaterialCommunityIcons } from "react-native-vector-icons";
 import { t } from "../../i18n";
-import styles from "./ArgumentConstructor.style";
+import themedStyles from "./ArgumentConstructor.style";
 
 function getColor(i, n, alpha = 1) {
   const multiplier = 255 / (n - 1);
@@ -12,7 +12,7 @@ function getColor(i, n, alpha = 1) {
   return `rgba(${value}, ${Math.abs(128 - value)}, ${255 - value}, ${alpha})`;
 }
 
-function DraggableItem({ item }) {
+function DraggableItem({ styles, item }) {
   return (
     <DraxView
       style={[styles.item, { backgroundColor: item.backgroundColor }]}
@@ -27,6 +27,8 @@ function DraggableItem({ item }) {
 }
 
 export default function ArgumentConstructor({ question, choices }) {
+  const theme = useTheme();
+  const styles = themedStyles(theme);
   const initialData = new Set();
   const initialChoices = new Set(
     choices.map((label, index) => ({
@@ -68,7 +70,9 @@ export default function ArgumentConstructor({ question, choices }) {
               <Text>{t("No more items to choose from!")}</Text>
             </View>
           ) : (
-            items.map((item) => <DraggableItem key={item.key} item={item} />)
+            items.map((item) => (
+              <DraggableItem key={item.key} item={item} styles={styles} />
+            ))
           );
         }}
         onReceiveDragDrop={(event) => {
@@ -80,7 +84,11 @@ export default function ArgumentConstructor({ question, choices }) {
         }}
       />
       <View style={styles.divider}>
-        <MaterialCommunityIcons name="arrow-up-down" size={24} />
+        <MaterialCommunityIcons
+          style={styles.icon}
+          name="arrow-up-down"
+          size={24}
+        />
       </View>
       <DraxView
         id="destination"
@@ -97,7 +105,9 @@ export default function ArgumentConstructor({ question, choices }) {
               <Text style={styles.text}>{t("howToFormAnArgumentText2")}</Text>
             </View>
           ) : (
-            items.map((item) => <DraggableItem key={item.key} item={item} />)
+            items.map((item) => (
+              <DraggableItem key={item.key} item={item} styles={styles} />
+            ))
           );
         }}
         onReceiveDragDrop={(event) => {

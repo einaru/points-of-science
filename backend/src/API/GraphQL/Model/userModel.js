@@ -1,8 +1,8 @@
 import {
   GraphQLObjectType,
+  GraphQLInputObjectType,
   GraphQLEnumType,
   GraphQLString,
-  GraphQLInt,
   GraphQLBoolean,
   GraphQLList,
 } from "graphql";
@@ -19,14 +19,12 @@ const UserAchievementModel = new GraphQLObjectType({
   }),
 });
 
-const UserActivityModel = new GraphQLObjectType({
+const UserActivityInputModel = new GraphQLInputObjectType({
   name: "UserActivity",
   fields: () => ({
-    id: { type: GraphQLString },
-    activityID: { type: GraphQLString },
+    hasOpenHints: { type: GraphQLBoolean },
+    hasOpenResources: { type: GraphQLBoolean },
     dateStarted: { type: GraphQLString },
-    dateCompleted: { type: GraphQLString },
-    answer: { type: GraphQLString },
   }),
 });
 
@@ -39,43 +37,20 @@ const VoteEnum = new GraphQLEnumType({
   },
 });
 
-const UserReflectionModel = new GraphQLObjectType({
+const UserReflectionInputModel = new GraphQLInputObjectType({
   name: "UserReflection",
   fields: () => ({
-    id: { type: GraphQLString },
-    userID: { type: GraphQLString },
-    reflectionID: { type: GraphQLString },
-    dateStarted: { type: GraphQLString },
     dateCompleted: { type: GraphQLString },
-    answer: { type: GraphQLString },
-    vote: { type: VoteEnum },
-    voteChoices: { type: VoteEnum },
+    answer: { type: new GraphQLList(GraphQLString) },
   }),
 });
 
-const UserRewardModel = new GraphQLObjectType({
-  name: "UserReward",
-  fields: () => ({
-    id: { type: GraphQLString },
-    userID: { type: GraphQLString },
-    rewardID: { type: GraphQLString },
-    points: { type: GraphQLInt },
-    bonusPoints: { type: GraphQLInt },
-  }),
-});
-
-const UserChallengeModel = new GraphQLObjectType({
+const UserChallengeInputModel = new GraphQLInputObjectType({
   name: "UserChallenge",
   fields: () => ({
-    id: { type: GraphQLString },
-    title: { type: GraphQLString },
     challengeID: { type: GraphQLString },
-    userID: { type: GraphQLString },
-    completed: { type: GraphQLBoolean },
-    answeredCorrect: { type: GraphQLBoolean },
-    activity: { type: UserActivityModel },
-    reflection: { type: UserReflectionModel },
-    reward: { type: UserRewardModel },
+    activity: { type: UserActivityInputModel },
+    reflection: { type: UserReflectionInputModel },
   }),
 });
 
@@ -91,11 +66,4 @@ const UserModel = new GraphQLObjectType({
   }),
 });
 
-export {
-  UserAchievementModel,
-  UserActivityModel,
-  UserReflectionModel,
-  UserRewardModel,
-  UserChallengeModel,
-  UserModel,
-};
+export { UserAchievementModel, UserChallengeInputModel, UserModel };

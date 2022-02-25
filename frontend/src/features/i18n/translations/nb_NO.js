@@ -21,6 +21,7 @@ export default {
   "Create account": "Opprett konto",
   "Dashboard": "Dashbord",
   "External resources": "Eksterne ressurser",
+  "Form your argument here": "Sett sammen argumentet ditt her",
   "Get a hint?": "Få et hint?",
   "Get ready!": "Gjør deg klar!",
   "Go back": "Gå tilbake",
@@ -36,6 +37,7 @@ export default {
   "Logout": "Utlogging",
   "New password": "Nytt passord",
   "Next": "Neste",
+  "No more items to choose from!": "Ingen flere elementer å velge fra!",
   "Password": "Passord",
   "Prefer dark theme": "Foretrekk mørkt tema",
   "Profile": "Profil",
@@ -44,6 +46,7 @@ export default {
   "Reflection": "Refleksjon",
   "Reset": "Nullstill",
   "Start": "Start",
+  "Undo": "Angre",
   "Up for another challenge?": "Klar for en annen utfordring?",
   "Username copied to clipboard": "Brukernavnet er kopiert til utklippstavlen",
   "Username": "Brukernavn",
@@ -71,4 +74,10 @@ export default {
     "hvordan bruken av spillelementer i en mobilapplikasjon kan være med på " +
     "å påvirke ungdoms interesse for og holdning til naturvitenskap og " +
     "forskning.",
+
+  howToFormAnArgumentText1:
+    "Bruk elementer fra boksen ovenfor ved å dra dem inn i denne boksen. " +
+    "Hvis du ombestemmer deg, kan du dra dem tilbake til boksen ovenfor.",
+  howToFormAnArgumentText2:
+    "Husk at rekkefølgen du legger til elementer har betydning.",
 };

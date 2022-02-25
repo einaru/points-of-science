@@ -20,6 +20,7 @@ const strings = [
   "Create account",
   "Dashboard",
   "External resources",
+  "Form your argument here",
   "Get a hint?",
   "Get ready!",
   "Go back",
@@ -35,6 +36,7 @@ const strings = [
   "Logout",
   "New password",
   "Next",
+  "No more items to choose from!",
   "Password",
   "Prefer dark theme",
   "Profile",
@@ -43,6 +45,7 @@ const strings = [
   "Reflection",
   "Reset",
   "Start",
+  "Undo",
   "Up for another challenge?",
   "Username copied to clipboard",
   "Username",
@@ -70,6 +73,13 @@ const en = {
     "IDI at NTNU in Trondheim. The purpose of the project is to investigate " +
     "how the use of game elements in a mobile application can influence " +
     "young people's interest in and attitude towards science.",
+
+  howToFormAnArgumentText1:
+    "Use the items from the box above by dragging them and dropping them " +
+    "into this box. If you change your mind you can drop them back into the " +
+    "box above.",
+  howToFormAnArgumentText2:
+    "Remember that the order in which you add items matters.",
 };
 
 export default strings.reduce((obj, value, index, array) => {

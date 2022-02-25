@@ -5,6 +5,7 @@ import {
 } from "@react-navigation/native";
 import { Linking, Platform } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import ContentNavigator from "./ContentNavigator";
 import AccountStack from "../account/AccountStack";
 import AuthContext from "../../services/auth/AuthContext";
@@ -55,27 +56,29 @@ function Navigation({ theme }) {
   }
 
   return (
-    <NavigationContainer
-      ref={navigationRef}
-      theme={theme}
-      onReady={() => {
-        screenRef.current = navigationRef.getCurrentRoute();
-      }}
-      initialState={initialState}
-      onStateChange={async (state) => {
-        AsyncStorage.setItem(PERSITENCE_KEY, JSON.stringify(state));
-        if (navigationRef.isReady() && isAuthenticated) {
-          const prevScreen = screenRef.current;
-          const currScreen = navigationRef.getCurrentRoute();
-          if (prevScreen !== currScreen) {
-            logNavigationEvent(prevScreen, currScreen);
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <NavigationContainer
+        ref={navigationRef}
+        theme={theme}
+        onReady={() => {
+          screenRef.current = navigationRef.getCurrentRoute();
+        }}
+        initialState={initialState}
+        onStateChange={async (state) => {
+          AsyncStorage.setItem(PERSITENCE_KEY, JSON.stringify(state));
+          if (navigationRef.isReady() && isAuthenticated) {
+            const prevScreen = screenRef.current;
+            const currScreen = navigationRef.getCurrentRoute();
+            if (prevScreen !== currScreen) {
+              logNavigationEvent(prevScreen, currScreen);
+            }
+            screenRef.current = currScreen;
           }
-          screenRef.current = currScreen;
-        }
-      }}
-    >
-      {isAuthenticated ? <ContentNavigator /> : <AccountStack />}
-    </NavigationContainer>
+        }}
+      >
+        {isAuthenticated ? <ContentNavigator /> : <AccountStack />}
+      </NavigationContainer>
+    </GestureHandlerRootView>
   );
 }
 

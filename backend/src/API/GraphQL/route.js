@@ -1,10 +1,12 @@
 import { GraphQLSchema, GraphQLObjectType } from "graphql";
 import {
+  addUserChallengeQuery,
   activateAccountQuery,
   authAccessTokenQuery,
   authRefreshTokenQuery,
   createCategoryQuery,
   createChallengeQuery,
+  deleteUserChallengeQuery,
   changePasswordQuery,
   getAllCategoriesQuery,
   getAllChallengesQuery,
@@ -45,11 +47,13 @@ const ROOTQUERY = new GraphQLObjectType({
 const MUTATION = new GraphQLObjectType({
   name: "Mutation",
   fields: {
+    addUserChallenge: addUserChallengeQuery,
     activateAccount: activateAccountQuery,
     changePassword: changePasswordQuery,
     createCategory: createCategoryQuery,
     createChallenge: createChallengeQuery,
     createUser: createUserQuery,
+    deleteUserChallenge: deleteUserChallengeQuery,
     deleteClickStream,
     deleteUser: deleteUserQuery,
     logDeviceInfo,

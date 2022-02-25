@@ -1,11 +1,13 @@
-import { GraphQLList } from "graphql";
+import { GraphQLList, GraphQLString } from "graphql";
 import {
   ActivityInputModel,
   ChallengeResponseModel,
   ChallengeInputModel,
   ChallengeModel,
+  NormalResponseModel,
   ReflectionInputModel,
   RewardInputModel,
+  UserChallengeInputModel,
   categoryCreator,
   challengeCreator,
   createActivity,
@@ -13,8 +15,10 @@ import {
   createContent,
   createReflection,
   createReward,
+  userChallengeCreator,
 } from "../../../internal.js";
 import { assertIsAdmin, assertIsAuthenticated } from "../assert.js";
+import { UserInputError } from "../error.js";
 
 // Root Queries - Used to retrieve data with GET-Requests
 
@@ -102,4 +106,88 @@ const createChallengeQuery = {
   },
 };
 
-export { createChallengeQuery, getAllChallengesQuery };
+const addUserChallengeQuery = {
+  type: NormalResponseModel,
+  args: {
+    userChallenge: { type: UserChallengeInputModel },
+  },
+  async resolve(_, args, { user, providers }) {
+    assertIsAuthenticated(user);
+
+    const challenge = await providers.challenges.getByID(
+      args.userChallenge.challengeID
+    );
+
+    if (challenge == null) {
+      throw new Error(
+        "Could not add user challenge as challenge does not exist."
+      );
+    }
+
+    const userChallengeData = args.userChallenge;
+    const userChallenge = userChallengeCreator();
+    userChallengeData.userID = user.id;
+    userChallenge.updateData(userChallengeData);
+    const { userActivity, userReflection } = userChallenge;
+    userActivity.updateData(userChallengeData.activity);
+    userReflection.updateData(userChallengeData.reflection);
+
+    let userChallenges = await providers.userChallenges.getAll();
+    userChallenges = userChallenges.filter((object) => {
+      return challenge.id === object.challengeID && object.userID === user.id;
+    });
+
+    const isFirstTry = !userChallenges.length;
+    const allPoints = userChallenges.filter((object) => {
+      return object.reward.points >= challenge.reward.maxPoints;
+    });
+
+    const hasNotAllPoints = !allPoints.length;
+    userChallenge.calculatePoints(
+      userChallenge,
+      challenge,
+      isFirstTry,
+      hasNotAllPoints
+    );
+    userChallenge.isAnsweredCorrect(userChallenge, challenge);
+    userChallenge.isCompleted(userChallenge);
+
+    await providers.userChallenges.add(
+      userChallenge.convertToStoredObject(userChallenge)
+    );
+    return { message: `User challenge added successfully.` };
+  },
+};
+
+const deleteUserChallengeQuery = {
+  type: NormalResponseModel,
+  args: {
+    userChallengeID: { type: GraphQLString },
+  },
+  async resolve(_, args, { user, providers }) {
+    assertIsAuthenticated(user);
+    assertIsAdmin(user);
+    if (args.userChallengeID === null) {
+      throw new UserInputError("User challenge ID must have a value.");
+    }
+
+    const userChallenge = await providers.userChallenges.getByID(
+      args.userChallengeID
+    );
+    if (userChallenge === null) {
+      throw new Error("User challenge does not exist.");
+    }
+
+    await providers.userChallenges.delete(userChallenge.id);
+    return {
+      message: `User challenge with ID ${userChallenge.id} successfully deleted.`,
+    };
+  },
+};
+
+export {
+  addUserChallengeQuery,
+  createChallengeQuery,
+  deleteUserChallengeQuery,
+  getAllChallengesQuery,
+};

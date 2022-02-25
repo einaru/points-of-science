@@ -30,11 +30,11 @@ export * from "./BusinessLogic/GameElements/achievement.js";
 export * from "./BusinessLogic/GameElements/progress.js";
 export * from "./BusinessLogic/GameElements/reward.js";
 export * from "./BusinessLogic/Profile/profile.js";
-export * from "./BusinessLogic/UserTracker/user_achievement.js";
-export * from "./BusinessLogic/UserTracker/user_activity.js";
-export * from "./BusinessLogic/UserTracker/user_challenge.js";
-export * from "./BusinessLogic/UserTracker/user_reflection.js";
-export * from "./BusinessLogic/UserTracker/user_reward.js";
+export * from "./BusinessLogic/UserTracker/userAchievement.js";
+export * from "./BusinessLogic/UserTracker/userActivity.js";
+export * from "./BusinessLogic/UserTracker/userChallenge.js";
+export * from "./BusinessLogic/UserTracker/userReflection.js";
+export * from "./BusinessLogic/UserTracker/userReward.js";
 export * from "./BusinessLogic/Util/utility.js";
 
 export * from "./ErrorHandler/error_handler.js";

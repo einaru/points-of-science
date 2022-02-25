@@ -20,11 +20,9 @@ function updateData(userActivity) {
 function emptyData() {
   return {
     data: {
-      id: "",
-      activityID: "",
-      date_started: "0000-00-00T00:00:00.000Z",
-      date_completed: "0000-00-00T00:00:00.000Z",
-      answer: "",
+      hasOpenHints: false,
+      hasOpenResources: false,
+      dateStarted: "",
     },
   };
 }
@@ -33,8 +31,10 @@ function userActivityCreator() {
   const userActivity = emptyData();
 
   return {
-    ...userActivity,
-    ...updateData(userActivity.data),
+    userActivity: {
+      ...userActivity,
+      ...updateData(userActivity.data),
+    },
   };
 }
 

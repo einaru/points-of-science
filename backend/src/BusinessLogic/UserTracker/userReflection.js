@@ -1,4 +1,5 @@
 import { createObjectTemplate } from "../../internal.js";
+import { UserInputError } from "../../API/GraphQL/error.js";
 
 const VoteEnum = Object.freeze({ neutral: -1, up: 1, down: 2 });
 
@@ -19,10 +20,40 @@ function updateData(userReflection) {
   return createObjectTemplate(functionKey, code);
 }
 
+function checkAnswer(userReflection) {
+  const functionKey = "checkAnswer";
+  const code = (reflection) => {
+    if (reflection.solution.trim().length === 0) {
+      return true;
+    }
+
+    const answer = userReflection.answer.reduce((text) => `${text}`);
+    const lowerCaseAnswer = reflection.solution.toLowerCase();
+    return lowerCaseAnswer === answer;
+  };
+
+  return createObjectTemplate(functionKey, code);
+}
+
 function vote(userReflection) {
   const functionKey = "vote";
-  const code = (vote) => {
-    // Fill in the blanks
+  const code = (data) => {
+    if (data == null) {
+      throw new UserInputError(
+        `Vote must be an integer. A vote can have one of the following values: ${VoteEnum}.`
+      );
+    }
+
+    userReflection.vote = data;
+  };
+
+  return createObjectTemplate(functionKey, code);
+}
+
+function isCompleted(userReflection) {
+  const functionKey = "isCompleted";
+  const code = () => {
+    return userReflection.dateCompleted.trim().length > 0;
   };
 
   return createObjectTemplate(functionKey, code);
@@ -31,14 +62,9 @@ function vote(userReflection) {
 function emptyData() {
   return {
     data: {
-      id: "",
-      userID: "",
-      reflectionID: "",
-      date_started: "0000-00-00T00:00:00.000Z",
-      date_completed: "0000-00-00T00:00:00.000Z",
-      answer: "",
+      dateCompleted: "",
+      answer: [],
       vote: -1,
-      vote_choices: VoteEnum,
     },
   };
 }
@@ -47,9 +73,13 @@ function userReflectionCreator() {
   const userReflection = emptyData();
 
   return {
-    ...userReflection,
-    ...updateData(userReflection.data),
-    ...vote(userReflection.data),
+    userReflection: {
+      ...userReflection,
+      ...updateData(userReflection.data),
+      ...checkAnswer(userReflection.data),
+      ...vote(userReflection.data),
+      ...isCompleted(userReflection.data),
+    },
   };
 }
 

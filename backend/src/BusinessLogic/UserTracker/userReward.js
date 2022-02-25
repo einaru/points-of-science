@@ -20,11 +20,8 @@ function updateData(userReward) {
 function emptyData() {
   return {
     data: {
-      id: "",
-      userID: "",
-      rewardID: "",
-      points: "",
-      bonusPoints: "",
+      points: 0,
+      bonusPoints: 0,
     },
   };
 }
@@ -33,8 +30,10 @@ function userRewardCreator() {
   const userReward = emptyData();
 
   return {
-    ...userReward,
-    ...updateData(userReward.data),
+    userReward: {
+      ...userReward,
+      ...updateData(userReward.data),
+    },
   };
 }
 

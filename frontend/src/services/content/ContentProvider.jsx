@@ -15,10 +15,6 @@ function ContentProvider({ children }) {
     [data]
   );
 
-  if (data) {
-    console.log("Got data:", data);
-  }
-
   if (loading) {
     return <LoadingScreen message={t("Loading content…")} />;
   }

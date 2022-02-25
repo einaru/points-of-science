@@ -25,9 +25,11 @@ const GET_ALL_CATEGORIES = gql`
           resources
           hints
         }
+        reflectionType # FIXME Move this into the reflection object
         reflection {
           title
           solution
+          choices
         }
       }
     }

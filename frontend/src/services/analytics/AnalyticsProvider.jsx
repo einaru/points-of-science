@@ -4,28 +4,18 @@ import AuthContext from "../auth/AuthContext";
 import AnalyticsContext from "./AnalyticsContext";
 import { LOG_EVENT, LOG_DEVICE_INFO } from "./AnalyticsProvider.gql";
 import deviceInfo from "./deviceInfo";
-
-function extractMetadata({ params }) {
-  const metadata = {};
-  if (params) {
-    Object.keys(params).forEach((key) => {
-      switch (key) {
-        case "category":
-          metadata.categoryID = params[key].id;
-          break;
-        case "challenge":
-          metadata.challengeID = params[key].id;
-          metadata.categoryID = params[key].category.id;
-          break;
-        // no default
-      }
-    });
-  }
-  return metadata;
-}
+import extractMetadata from "./extractMetadata";
 
 function getTimestamp() {
   return Date.now().valueOf().toString();
+}
+
+function debug(tag, data) {
+  // eslint-disable-next-line no-undef
+  if (__DEV__) {
+    // eslint-disable-next-line no-console
+    console.debug(`[${tag}]: ${JSON.stringify(data)}`);
+  }
 }
 
 function AnalyticsProvider({ children }) {
@@ -41,7 +31,7 @@ function AnalyticsProvider({ children }) {
   const doLogEvent = useCallback(
     (event) => {
       logEvent({ variables: { sessionToken, event } });
-      console.debug("Logging event:", event);
+      debug("click-event", event);
     },
     [logEvent, sessionToken]
   );
@@ -54,7 +44,7 @@ function AnalyticsProvider({ children }) {
 
   const doLogDeviceInfo = useCallback(() => {
     logDeviceInfo({ variables: { sessionToken, deviceInfo } });
-    console.debug("Logging device info:", deviceInfo);
+    debug("device-info", deviceInfo);
     setIsDeviceInfoLogged(true);
   }, [logDeviceInfo, sessionToken]);
 

@@ -20,7 +20,6 @@ export default function VerifyUsername() {
 
   useEffect(() => {
     if (data?.verifyUsername) {
-      console.log("Verify username got data:", data);
       setIsVerified(true);
       setErrorMessage("");
     }

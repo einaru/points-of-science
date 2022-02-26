@@ -1,6 +1,7 @@
-import React, { useContext, useLayoutEffect } from "react";
-import { ScrollView, View } from "react-native";
-import { Button, Surface, Text } from "react-native-paper";
+import React, { useCallback, useContext, useLayoutEffect } from "react";
+import { BackHandler, ScrollView, View } from "react-native";
+import { Button, IconButton, Surface, Text } from "react-native-paper";
+import { useFocusEffect } from "@react-navigation/native";
 import { SmileyOMeter } from "../../../shared/components";
 import { t } from "../../i18n";
 import ChallengeContext from "../ChallengeContext";
@@ -18,11 +19,31 @@ function Reward({ title, subtitle }) {
 function Completed({ navigation }) {
   const challenge = useContext(ChallengeContext);
 
+  // The challenge is considered completed when we reach this screen.
+  // In order to prevent going back through the various challenge step screens,
+  // we navigate to the category list screen when users wants to "go back".
+  const goBack = useCallback(() => {
+    navigation.navigate("category:list");
+  }, [navigation]);
+
+  // Override the hardware back action on Android and send users to the screen
+  // indicated in the goBack function above.
+  useFocusEffect(
+    useCallback(() => {
+      const handler = BackHandler.addEventListener("hardwareBackPress", () => {
+        goBack();
+        return true;
+      });
+      return () => handler.remove();
+    }, [goBack])
+  );
+
   useLayoutEffect(() => {
     navigation.setOptions({
       title: challenge.name,
+      headerLeft: () => <IconButton icon="check" onPress={goBack} />,
     });
-  }, [navigation, challenge]);
+  }, [navigation, challenge, goBack]);
 
   const handleSmileyPress = (score) => {
     console.debug(`User rated challenge ${score}`);
@@ -53,10 +74,7 @@ function Completed({ navigation }) {
               onPress={handleSmileyPress}
             />
           </Surface>
-          <Button
-            style={styles.action}
-            onPress={() => navigation.navigate("category:list")}
-          >
+          <Button style={styles.action} onPress={goBack}>
             {t("Up for another challenge?")}
           </Button>
         </View>

@@ -65,7 +65,9 @@ function Navigation({ theme }) {
         }}
         initialState={initialState}
         onStateChange={async (state) => {
-          AsyncStorage.setItem(PERSITENCE_KEY, JSON.stringify(state));
+          if (state) {
+            AsyncStorage.setItem(PERSITENCE_KEY, JSON.stringify(state));
+          }
           if (navigationRef.isReady() && isAuthenticated) {
             const prevScreen = screenRef.current;
             const currScreen = navigationRef.getCurrentRoute();

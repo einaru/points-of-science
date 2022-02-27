@@ -84,13 +84,9 @@ function restoreChallenges(data, challengeList) {
 
 function restoreObject() {
   const functionKey = "restoreObject";
-  const code = (category, categoryData, storedChallenges, progress) => {
+  const code = (category, categoryData, storedChallenges) => {
     const { challenges } = categoryData;
     const challengeList = restoreChallenges(storedChallenges, challenges);
-
-    if (progress != null) {
-      category.progress.updateData(progress);
-    }
 
     if (challengeList.length > 0) {
       categoryData.challenges = challengeList;

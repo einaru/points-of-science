@@ -15,6 +15,7 @@ import {
   createContent,
   createReflection,
   createReward,
+  profileCreator,
   userChallengeCreator,
 } from "../../../internal.js";
 import { assertIsAdmin, assertIsAuthenticated } from "../assert.js";
@@ -132,7 +133,8 @@ const addUserChallengeQuery = {
     userActivity.updateData(userChallengeData.activity);
     userReflection.updateData(userChallengeData.reflection);
 
-    let userChallenges = await providers.userChallenges.getAll();
+    const userData = await providers.users.getByID(user.id);
+    let userChallenges = userData.challenges;
     userChallenges = userChallenges.filter((object) => {
       return challenge.id === object.challengeID && object.userID === user.id;
     });
@@ -152,9 +154,14 @@ const addUserChallengeQuery = {
     userChallenge.isAnsweredCorrect(userChallenge, challenge);
     userChallenge.isCompleted(userChallenge);
 
-    await providers.userChallenges.add(
+    const profile = profileCreator();
+    profile.updateData(userData);
+    profile.add(
+      profile.data.challenges,
       userChallenge.convertToStoredObject(userChallenge)
     );
+
+    await providers.users.update(profile.data.id, profile.data);
     return { message: `User challenge added successfully.` };
   },
 };

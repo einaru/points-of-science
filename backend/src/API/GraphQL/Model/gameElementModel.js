@@ -100,7 +100,6 @@ const AchievementModel = new GraphQLObjectType({
 const ProgressModel = new GraphQLObjectType({
   name: "Progress",
   fields: () => ({
-    id: { type: GraphQLString },
     percentage: { type: GraphQLInt },
   }),
 });

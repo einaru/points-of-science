@@ -1,56 +1,51 @@
-function createObjectTemplate(functionKey, code) {
-  const object = {};
-  object[functionKey] = code;
-  return object;
-}
+import { createObjectTemplate } from "../../internal.js";
 
 function emptyData() {
   return {
     data: {
-      id: 0,
       percentage: 0,
     },
   };
 }
 
-function updateProgress(progress) {
-  const functionKey = "updateData";
-  const code = (args) => {
-    // Fill in the blanks
-    if (args == null) {
-      return;
-    }
-
-    Object.keys(args).forEach((key) => {
-      progress[key] = args[key];
-    });
-  };
-
-  return createObjectTemplate(functionKey, code);
-}
-
 function setProgress(progress) {
   const functionKey = "setProgress";
   const code = (percentage) => {
-    // Fill in the blanks
+    if (!Number.isInteger(percentage)) {
+      throw new Error("Progress must be an integer.");
+    }
+
+    progress.percentage = percentage;
   };
 
   return createObjectTemplate(functionKey, code);
 }
 
-function calculateProgress(progress) {
+function calculateProgress() {
   const functionKey = "calculateProgress";
   const code = (completeList, totalList) => {
-    // Fill in the blanks
-  };
+    if (!Array.isArray(completeList)) {
+      throw new Error(
+        "The list with completed challenges must be of type Array."
+      );
+    }
 
-  return createObjectTemplate(functionKey, code);
-}
+    if (!Array.isArray(totalList)) {
+      throw new Error("The list with all challenges must be of type Array.");
+    }
 
-function deleteProgress(progress) {
-  const functionKey = "deleteProgress";
-  const code = () => {
-    // Fill in the blanks
+    const uniqueChallenges = completeList.filter((value, index, self) => {
+      return (
+        self.map((object) => object.challengeID).indexOf(value.challengeID) ===
+          index && totalList.includes(value.challengeID)
+      );
+    });
+
+    if (!totalList.length || !uniqueChallenges.length) {
+      return 0;
+    }
+
+    return (uniqueChallenges.length / totalList.length) * 100;
   };
 
   return createObjectTemplate(functionKey, code);
@@ -62,10 +57,8 @@ function progressCreator() {
   return {
     progress: {
       ...progress,
-      ...updateProgress(progress.data),
       ...setProgress(progress.data),
-      ...calculateProgress(progress.data),
-      ...deleteProgress(progress.data),
+      ...calculateProgress(),
     },
   };
 }

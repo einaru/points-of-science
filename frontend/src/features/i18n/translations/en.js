@@ -20,7 +20,6 @@ const strings = [
   "Create account",
   "Dashboard",
   "External resources",
-  "Form your argument here",
   "Get a hint?",
   "Get ready!",
   "Go back",
@@ -74,12 +73,10 @@ const en = {
     "how the use of game elements in a mobile application can influence " +
     "young people's interest in and attitude towards science.",
 
-  howToFormAnArgumentText1:
-    "Use the items from the box above by dragging them and dropping them " +
-    "into this box. If you change your mind you can drop them back into the " +
-    "box above.",
-  howToFormAnArgumentText2:
-    "Remember that the order in which you add items matters.",
+  howToFormAnArgumentTitle: "Put together an argument here",
+  howToFormAnArgumentText:
+    "Drag items from the box above and drop them here to form an argument. " +
+    "Remember that order is crucial!",
 };
 
 export default strings.reduce((obj, value, index, array) => {

@@ -100,9 +100,8 @@ export default function ArgumentConstructor({ question, choices }) {
           const items = Array.from(argumentData);
           return items.length === 0 ? (
             <View style={[styles.placeholder, { padding: 32 }]}>
-              <Text style={styles.title}>{t("Form your argument here")}</Text>
-              <Text style={styles.text}>{t("howToFormAnArgumentText1")}</Text>
-              <Text style={styles.text}>{t("howToFormAnArgumentText2")}</Text>
+              <Text style={styles.title}>{t("howToFormAnArgumentTitle")}</Text>
+              <Text style={styles.text}>{t("howToFormAnArgumentText")}</Text>
             </View>
           ) : (
             items.map((item) => (

@@ -144,7 +144,7 @@ function userChallengeCreator() {
     ...updateData(userChallenge.data),
     ...isCompleted(),
     ...isAnsweredCorrect(),
-    ...calculatePoints(userChallenge.data),
+    ...calculatePoints(),
     ...convertToStoredObject(),
   };
 }

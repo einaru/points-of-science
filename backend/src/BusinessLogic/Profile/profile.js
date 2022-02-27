@@ -5,6 +5,7 @@ import {
   isValidPassword,
   errorsInPassword,
   generateErrorMessage,
+  createObjectTemplate,
 } from "../../internal.js";
 
 const profileState = {
@@ -14,12 +15,6 @@ const profileState = {
 };
 
 Object.freeze(profileState);
-
-function createObjectTemplate(functionKey, code) {
-  const object = {};
-  object[functionKey] = code;
-  return object;
-}
 
 function updateData(profile) {
   const functionKey = "updateData";
@@ -46,12 +41,28 @@ function getPoints(profile) {
   return createObjectTemplate(functionKey, code);
 }
 
+function add() {
+  const functionKey = "add";
+  const code = (list, element) => {
+    if (!Array.isArray(list)) {
+      throw new Error("The list to add an element to is not an Array.");
+    }
+
+    if (!list.includes(element)) {
+      list.push(element);
+    }
+  };
+
+  return createObjectTemplate(functionKey, code);
+}
+
 function changePassword(profile) {
   const functionKey = "changePassword";
   const code = (password, confirmPassword) => {
     return new Promise((resolve, reject) => {
       if (!checkPassword(password, confirmPassword)) {
-        return reject("The passwords does not match");
+        reject(new Error("The passwords does not match"));
+        return;
       }
 
       validatePassword(password)
@@ -66,7 +77,7 @@ function changePassword(profile) {
         })
         .then((result) => {
           profile.password = result.data.hashedPassword;
-          return resolve("Password updated successfully.");
+          resolve("Password updated successfully.");
         })
         .catch((error) => {
           reject(error);
@@ -80,7 +91,6 @@ function changePassword(profile) {
 function hasState(profile) {
   const functionKey = "hasState";
   const code = (stateText) => {
-    // Fill in the blancs
     const stateValue = profileState[stateText].value;
     return profile.state === stateValue;
   };
@@ -127,6 +137,7 @@ function profileCreator() {
     ...profile,
     ...updateData(profile.data),
     ...getPoints(profile.data),
+    ...add(),
     ...changePassword(profile.data),
     ...hasState(profile.data),
     ...deleteProfile(profile.data),

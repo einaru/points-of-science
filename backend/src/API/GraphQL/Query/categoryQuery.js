@@ -10,38 +10,23 @@ const getAllCategoriesQuery = {
   async resolve(_, __, { user, providers }) {
     assertIsAuthenticated(user);
 
+    const userData = await providers.users.getByID(user.id);
+
     const categoriesData = await providers.categories.getAll();
     const challengesData = await providers.challenges.getAll();
-    let categories = [];
+    const categories = [];
     categoriesData.forEach((categoryData) => {
-      categories.push(
-        new Promise((resolve, reject) => {
-          const category = categoryCreator();
-          let progress = null;
-          if (categoryData.progressID.trim().length > 0) {
-            progress = providers.progresses.getByID(categoryData.progressID);
-          }
-
-          Promise.all([progress])
-            .then((data) => {
-              return category.restoreObject(
-                category,
-                categoryData,
-                challengesData,
-                data
-              );
-            })
-            .then(() => {
-              resolve(category.convertToResponseObject(category));
-            })
-            .catch((error) => {
-              reject(error);
-            });
-        })
+      const category = categoryCreator();
+      category.restoreObject(category, categoryData, challengesData);
+      const challengeIDs = category.data.challenges.map((item) => item.data.id);
+      const progress = category.progress.calculateProgress(
+        userData.challenges,
+        challengeIDs
       );
+      category.progress.setProgress(progress);
+      categories.push(category.convertToResponseObject(category));
     });
 
-    categories = await Promise.all(categories);
     categories.forEach((element) => {
       const challenges = [];
       element.challenges.forEach((challenge) => {

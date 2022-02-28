@@ -6,13 +6,13 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   smileyometer: {
-    padding: 8,
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
   },
   smileyContainer: {
     alignItems: "center",
-    maxWidth: "20%",
+    justifyContent: "center",
+    width: 64,
   },
   smileyImage: {
     width: 64,
@@ -20,6 +20,7 @@ export default StyleSheet.create({
   },
   smileyLabel: {
     fontSize: 12,
+    height: 36,
     textAlign: "center",
   },
 });

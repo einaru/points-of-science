@@ -13,7 +13,7 @@ import AnalyticsContext from "../../services/analytics/AnalyticsContext";
 import { LoadingScreen } from "../../shared/components";
 import { t } from "../i18n";
 
-const PERSITENCE_KEY = "NAVIGATION_STATE";
+const PERSISTENCE_KEY = "NAVIGATION_STATE";
 function Navigation({ theme }) {
   const { loading, isAuthenticated } = useContext(AuthContext);
   const { logNavigationEvent } = useContext(AnalyticsContext);
@@ -25,8 +25,8 @@ function Navigation({ theme }) {
   const [initialState, setInitialState] = useState();
 
   useEffect(() => {
-    // Enables state persitance for app navigation.
-    // According to React Navigation this feaure is considered experimental,
+    // Enables state persistence for app navigation.
+    // According to React Navigation this feature is considered experimental,
     // and all route params must be serializable for this to work properly.
     // See: https://reactnavigation.org/docs/state-persistence/#warning-serializable-state
     const restoreState = async () => {
@@ -34,7 +34,7 @@ function Navigation({ theme }) {
         const url = await Linking.getInitialURL();
 
         if (Platform.OS !== "web" && url == null) {
-          const savedStateString = await AsyncStorage.getItem(PERSITENCE_KEY);
+          const savedStateString = await AsyncStorage.getItem(PERSISTENCE_KEY);
           const state = savedStateString ? JSON.parse(savedStateString) : null;
 
           if (state !== undefined) {
@@ -65,7 +65,9 @@ function Navigation({ theme }) {
         }}
         initialState={initialState}
         onStateChange={async (state) => {
-          AsyncStorage.setItem(PERSITENCE_KEY, JSON.stringify(state));
+          if (state) {
+            AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state));
+          }
           if (navigationRef.isReady() && isAuthenticated) {
             const prevScreen = screenRef.current;
             const currScreen = navigationRef.getCurrentRoute();

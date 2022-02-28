@@ -43,7 +43,7 @@ export default function themedStyles(theme) {
       backgroundColor: "magenta",
       borderRadius: 2,
       margin: 2,
-      padding: 8,
+      padding: 4,
     },
     placeholder: {
       flex: 1,
@@ -55,10 +55,14 @@ export default function themedStyles(theme) {
       justifyContent: "center",
     },
     title: {
+      color: colors.placeholder,
       fontWeight: "bold",
+      textAlign: "center",
     },
     text: {
+      color: colors.placeholder,
       marginTop: 8,
+      textAlign: "center",
     },
     dragging: {
       opacity: 0.2,

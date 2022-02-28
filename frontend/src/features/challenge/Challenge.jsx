@@ -38,7 +38,7 @@ function Challenge({ route }) {
           />
           <Stack.Screen
             name="challenge:completed"
-            options={{ title: t("Challenge completed") }}
+            options={{ title: t("Challenge completed"), headerShown: false }}
             component={Completed}
             initialParams={analyticsParams}
           />

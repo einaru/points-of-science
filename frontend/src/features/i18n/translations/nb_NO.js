@@ -21,7 +21,6 @@ export default {
   "Create account": "Opprett konto",
   "Dashboard": "Dashbord",
   "External resources": "Eksterne ressurser",
-  "Form your argument here": "Sett sammen argumentet ditt her",
   "Get a hint?": "Få et hint?",
   "Get ready!": "Gjør deg klar!",
   "Go back": "Gå tilbake",
@@ -75,9 +74,8 @@ export default {
     "å påvirke ungdoms interesse for og holdning til naturvitenskap og " +
     "forskning.",
 
-  howToFormAnArgumentText1:
-    "Bruk elementer fra boksen ovenfor ved å dra dem inn i denne boksen. " +
-    "Hvis du ombestemmer deg, kan du dra dem tilbake til boksen ovenfor.",
-  howToFormAnArgumentText2:
-    "Husk at rekkefølgen du legger til elementer har betydning.",
+  howToFormAnArgumentTitle: "Sett sammen et argument her",
+  howToFormAnArgumentText:
+    "Dra elementer fra boksen ovenfor ned hit for å danne et argument. " +
+    "Husk at rekkefølgen er avgjørende!",
 };

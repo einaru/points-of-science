@@ -11,8 +11,8 @@ function emptyData() {
 function setProgress(progress) {
   const functionKey = "setProgress";
   const code = (percentage) => {
-    if (!Number.isInteger(percentage)) {
-      throw new Error("Progress must be an integer.");
+    if (!Number(percentage) === percentage && percentage % 1 !== 0) {
+      throw new Error("Progress must be a float.");
     }
 
     progress.percentage = percentage;
@@ -45,7 +45,7 @@ function calculateProgress() {
       return 0;
     }
 
-    return (uniqueChallenges.length / totalList.length) * 100;
+    return uniqueChallenges.length / totalList.length;
   };
 
   return createObjectTemplate(functionKey, code);

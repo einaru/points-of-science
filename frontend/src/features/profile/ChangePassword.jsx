@@ -66,9 +66,10 @@ function ChangePassword() {
         <Button
           mode="contained"
           loading={loading}
-          onPress={() =>
-            changePassword({ variables: { password, confirmPassword } })
-          }
+          onPress={() => {
+            setErrorMessage("");
+            changePassword({ variables: { password, confirmPassword } });
+          }}
         >
           {t("Change password")}
         </Button>

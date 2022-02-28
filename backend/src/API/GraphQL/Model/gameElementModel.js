@@ -1,13 +1,13 @@
 import {
   GraphQLObjectType,
   GraphQLEnumType,
+  GraphQLFloat,
   GraphQLString,
   GraphQLInt,
   GraphQLList,
   GraphQLInputObjectType,
 } from "graphql";
 import {
-  ContentModel,
   ContentResponse,
   ReflectionModel,
   ReflectionTypeEnum,
@@ -79,6 +79,13 @@ const ChallengeResponseModel = new GraphQLObjectType({
   }),
 });
 
+const ProgressModel = new GraphQLObjectType({
+  name: "Progress",
+  fields: () => ({
+    percentage: { type: GraphQLFloat },
+  }),
+});
+
 const AchievementTypeEnum = new GraphQLEnumType({
   name: "AchievementType",
   values: {
@@ -91,16 +98,19 @@ const AchievementModel = new GraphQLObjectType({
   name: "Achievement",
   fields: () => ({
     id: { type: GraphQLString },
-    condition: { type: new GraphQLList(ChallengeModel) },
+    condition: { type: new GraphQLList(GraphQLString) },
     type: { type: AchievementTypeEnum },
-    content: { type: ContentModel },
+    ...ContentResponse,
+    progress: { type: ProgressModel },
   }),
 });
 
-const ProgressModel = new GraphQLObjectType({
-  name: "Progress",
+const AchievementInputModel = new GraphQLInputObjectType({
+  name: "AchievementInput",
   fields: () => ({
-    percentage: { type: GraphQLInt },
+    condition: { type: new GraphQLList(GraphQLString) },
+    type: { type: AchievementTypeEnum },
+    ...ContentResponse,
   }),
 });
 
@@ -115,6 +125,8 @@ const LeaderboardModel = new GraphQLObjectType({
 
 export {
   AchievementModel,
+  AchievementInputModel,
+  AchievementTypeEnum,
   ChallengeInputModel,
   RewardModel,
   RewardInputModel,

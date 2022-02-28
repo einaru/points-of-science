@@ -24,7 +24,7 @@ function AnalyticsProvider({ children }) {
 
   const [logEvent] = useMutation(LOG_EVENT, {
     onError: (error) => {
-      console.error("Error logging click event:", error);
+      console.debug("Error logging click event:", error);
     },
   });
 
@@ -38,7 +38,7 @@ function AnalyticsProvider({ children }) {
 
   const [logDeviceInfo] = useMutation(LOG_DEVICE_INFO, {
     onError: (error) => {
-      console.error("Error logging device info:", error);
+      console.debug("Error logging device info:", error);
     },
   });
 

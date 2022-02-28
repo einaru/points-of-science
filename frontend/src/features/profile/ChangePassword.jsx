@@ -1,15 +1,12 @@
 import { useMutation } from "@apollo/client";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import { Button, HelperText, Snackbar, TextInput } from "react-native-paper";
-import AuthContext from "../../services/auth/AuthContext";
 import { t } from "../i18n";
 import CHANGE_PASSWORD from "./ChangePassword.gql";
 import styles from "./ChangePassword.style";
 
 function ChangePassword() {
-  const { user } = useContext(AuthContext);
-
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -69,11 +66,9 @@ function ChangePassword() {
         <Button
           mode="contained"
           loading={loading}
-          onPress={() => {
-            changePassword({
-              variables: { userID: user.id, password, confirmPassword },
-            });
-          }}
+          onPress={() =>
+            changePassword({ variables: { password, confirmPassword } })
+          }
         >
           {t("Change password")}
         </Button>

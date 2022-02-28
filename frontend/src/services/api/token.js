@@ -12,7 +12,7 @@ export function isTokenValid(token) {
       valid = false;
     }
   } catch (error) {
-    console.error("Error decoding access token:", error);
+    console.debug("Error decoding access token:", error);
     valid = false;
   }
   return valid;

@@ -35,7 +35,7 @@ function Profile() {
 
   const [logOut, { loading, client }] = useMutation(LOGOUT, {
     onError: (error) => {
-      console.error("Error login out:", error.message);
+      console.debug("Error login out:", error.message);
     },
   });
 

@@ -1,13 +1,16 @@
 import { GraphQLSchema, GraphQLObjectType } from "graphql";
 import {
+  addUserAchievementQuery,
   addUserChallengeQuery,
   activateAccountQuery,
   authAccessTokenQuery,
   authRefreshTokenQuery,
+  createAchievementQuery,
   createCategoryQuery,
   createChallengeQuery,
   deleteUserChallengeQuery,
   changePasswordQuery,
+  getAllAchievementsQuery,
   getAllCategoriesQuery,
   getAllChallengesQuery,
   getAllUsersQuery,
@@ -32,6 +35,7 @@ import {
 const ROOTQUERY = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
+    getAllAchievements: getAllAchievementsQuery,
     getAllCategories: getAllCategoriesQuery,
     getAllChallenges: getAllChallengesQuery,
     getAllClickStreams,
@@ -47,9 +51,11 @@ const ROOTQUERY = new GraphQLObjectType({
 const MUTATION = new GraphQLObjectType({
   name: "Mutation",
   fields: {
+    addUserAchievement: addUserAchievementQuery,
     addUserChallenge: addUserChallengeQuery,
     activateAccount: activateAccountQuery,
     changePassword: changePasswordQuery,
+    createAchievement: createAchievementQuery,
     createCategory: createCategoryQuery,
     createChallenge: createChallengeQuery,
     createUser: createUserQuery,

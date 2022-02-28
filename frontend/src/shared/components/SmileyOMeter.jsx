@@ -1,5 +1,5 @@
 /* eslint-disable global-require */
-import React from "react";
+import React, { useState } from "react";
 import { Image, TouchableOpacity, View } from "react-native";
 import { Subheading, Text } from "react-native-paper";
 import { t } from "../../features/i18n";
@@ -33,15 +33,11 @@ const smileys = {
   },
 };
 
-function Smiley({ score, label, asset, onPress }) {
-  const handleOnPress = () => {
-    onPress(score);
-  };
-
+function Smiley({ item, onPress }) {
   return (
-    <TouchableOpacity style={styles.smileyContainer} onPress={handleOnPress}>
-      <Image style={styles.smileyImage} source={asset} />
-      <Text style={styles.smileyLabel}>{label}</Text>
+    <TouchableOpacity style={styles.smileyContainer} onPress={onPress}>
+      <Image style={styles.smileyImage} source={item.asset} />
+      <Text style={styles.smileyLabel}>{item.label}</Text>
     </TouchableOpacity>
   );
 }
@@ -49,19 +45,26 @@ function Smiley({ score, label, asset, onPress }) {
 // A Smiley-o-meter implementation based on the Fun Toolkit from Janet C. Read
 // See: https://dl.acm.org/doi/pdf/10.1145/1139073.1139096
 export default function SmileyOMeter({ message, style, onPress }) {
+  const [selected, setSelected] = useState(null);
+
+  const handleOnPress = (key, item) => {
+    onPress(item.score);
+    setSelected(key);
+  };
+
   return (
     <View style={[styles.container, style]}>
       <Subheading>{message}</Subheading>
       <View style={styles.smileyometer}>
-        {Object.entries(smileys).map(([key, item]) => (
-          <Smiley
-            key={key}
-            score={item.score}
-            label={item.label}
-            asset={item.asset}
-            onPress={onPress}
-          />
-        ))}
+        {Object.entries(smileys).map(([key, item]) =>
+          selected && selected !== key ? null : (
+            <Smiley
+              key={key}
+              item={item}
+              onPress={() => handleOnPress(key, item)}
+            />
+          )
+        )}
       </View>
     </View>
   );

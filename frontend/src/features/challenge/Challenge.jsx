@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import { View } from "react-native";
 import { t } from "../i18n";
-import ChallengeContext from "./ChallengeContext";
+import ChallengeProvider from "./ChallengeProvider";
 import { Activity, Completed, Intro, Reflection } from "./steps";
 
 const Stack = createNativeStackNavigator();
@@ -15,7 +15,7 @@ function Challenge({ route }) {
   };
 
   return (
-    <ChallengeContext.Provider value={challenge}>
+    <ChallengeProvider challenge={challenge}>
       <View style={{ flex: 1 }} collapsable={false}>
         <Stack.Navigator>
           <Stack.Screen
@@ -44,7 +44,7 @@ function Challenge({ route }) {
           />
         </Stack.Navigator>
       </View>
-    </ChallengeContext.Provider>
+    </ChallengeProvider>
   );
 }
 

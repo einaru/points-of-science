@@ -1,4 +1,4 @@
-import React, { useContext, useLayoutEffect, useState } from "react";
+import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
 import { View, ScrollView } from "react-native";
 import {
   Button,
@@ -13,6 +13,7 @@ import { t } from "../../i18n";
 import ChallengeContext from "../ChallengeContext";
 import styles from "./styles";
 import HeaderTitle from "./HeaderTitle";
+import { getTimestamp } from "../../../shared/timestamp";
 
 // Dialog actions
 const DISMISS = "dismiss";
@@ -20,8 +21,17 @@ const THUMB_UP = "thumb-up";
 const THUMB_DOWN = "thumb-down";
 
 function Activity({ navigation }) {
-  const challenge = useContext(ChallengeContext);
+  const dateStarted = getTimestamp();
+
+  const { challenge, setActivityData } = useContext(ChallengeContext);
   const { activity } = challenge;
+
+  const [answer, setAnswer] = useState();
+  useEffect(() => {
+    if (activity.type === "external") {
+      setAnswer(null);
+    }
+  }, [activity]);
 
   const { hints } = activity;
   const [hint, setHint] = useState("");
@@ -93,7 +103,10 @@ function Activity({ navigation }) {
       <Button
         mode="contained"
         style={styles.action}
-        onPress={() => navigation.navigate("challenge:reflection")}
+        onPress={() => {
+          setActivityData(answer, dateStarted);
+          navigation.navigate("challenge:reflection");
+        }}
       >
         {t("Continue")}
       </Button>

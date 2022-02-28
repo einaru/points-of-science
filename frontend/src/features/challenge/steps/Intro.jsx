@@ -8,7 +8,7 @@ import styles from "./styles";
 const fallbackImage = require("../assets/experiment.jpg");
 
 function Intro({ navigation }) {
-  const challenge = useContext(ChallengeContext);
+  const { challenge } = useContext(ChallengeContext);
 
   const imageSource = challenge.image
     ? { uri: challenge.image }

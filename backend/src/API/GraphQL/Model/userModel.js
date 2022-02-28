@@ -25,6 +25,7 @@ const UserActivityInputModel = new GraphQLInputObjectType({
     hasOpenHints: { type: GraphQLBoolean },
     hasOpenResources: { type: GraphQLBoolean },
     dateStarted: { type: GraphQLString },
+    answer: { type: GraphQLString },
   }),
 });
 
@@ -46,7 +47,7 @@ const UserReflectionInputModel = new GraphQLInputObjectType({
 });
 
 const UserChallengeInputModel = new GraphQLInputObjectType({
-  name: "UserChallenge",
+  name: "UserChallengeInput",
   fields: () => ({
     challengeID: { type: GraphQLString },
     activity: { type: UserActivityInputModel },

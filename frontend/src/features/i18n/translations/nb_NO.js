@@ -6,6 +6,7 @@ export default {
   "Activity": "Aktivitet",
   "Already activated your account?": "Har du allerede aktivert kontoen din?",
   "Already have an account?": "Har du allerede en konto?",
+  "Calculating points": "Kalkulerer poeng…",
   "Categories": "Kategorier",
   "Challenge completed": "Utfordring fullført",
   "Challenge": "Utfordring",

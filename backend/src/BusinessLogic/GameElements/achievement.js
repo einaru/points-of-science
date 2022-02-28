@@ -11,7 +11,7 @@ function setType(achievement) {
       throw new Error("The achievement must be of type category or challenge.");
     }
 
-    achievement.data.type = type;
+    achievement.type = type;
   };
 
   return createObjectTemplate(functionKey, code);
@@ -35,7 +35,16 @@ function addCondition(achievement) {
 function removeCondition(achievement) {
   const functionKey = "removeCondition";
   const code = (conditions) => {
-    // Fill in the blanks
+    if (!Array.isArray(conditions)) {
+      throw new Error("Conditions to add to an achievement must be an Array.");
+    }
+
+    conditions.forEach((condition) => {
+      const position = achievement.condition.indexOf(condition);
+      if (position > -1) {
+        achievement.condition.splice(position, 1);
+      }
+    });
   };
 
   return createObjectTemplate(functionKey, code);
@@ -43,8 +52,46 @@ function removeCondition(achievement) {
 
 function checkCondition(achievement) {
   const functionKey = "checkCondition";
-  const code = () => {
-    // Fill in the blanks
+  const code = (userChallenges) => {
+    if (!Array.isArray(userChallenges)) {
+      throw new Error(
+        "User challenges must be an Array when checking an achievement's condition."
+      );
+    }
+
+    const challengeIDs = userChallenges.map((item) => item.data.id);
+    return achievement.condition.every((id) => challengeIDs.includes(id));
+  };
+
+  return createObjectTemplate(functionKey, code);
+}
+
+function convertToResponseObject() {
+  const functionKey = "convertToResponseObject";
+  const code = (object) => {
+    return {
+      id: object.data.id,
+      condition: object.data.condition,
+      type: object.data.type,
+      progress: object.progress.data,
+      name: object.content.data.title,
+      description: object.content.data.description,
+      image: object.content.data.image,
+    };
+  };
+
+  return createObjectTemplate(functionKey, code);
+}
+
+function convertToStoredObject() {
+  const functionKey = "convertToStoredObject";
+  const code = (object) => {
+    return {
+      content: object.content.data,
+      condition: object.data.condition,
+      type: object.data.type,
+      progress: object.progress.data.percentage,
+    };
   };
 
   return createObjectTemplate(functionKey, code);
@@ -62,7 +109,7 @@ function deleteAchievement(achievement) {
 function emptyData() {
   return {
     data: {
-      id: 0,
+      id: "",
       condition: [],
       type: -1,
     },
@@ -82,6 +129,8 @@ function achievementCreator() {
     ...addCondition(achievement.data),
     ...removeCondition(achievement.data),
     ...checkCondition(achievement.data),
+    ...convertToResponseObject(),
+    ...convertToStoredObject(),
     ...deleteAchievement(achievement.data),
   };
 }

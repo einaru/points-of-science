@@ -1,5 +1,17 @@
-import React, { useCallback, useContext, useLayoutEffect } from "react";
-import { BackHandler, ScrollView, View } from "react-native";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+} from "react";
+import {
+  Animated,
+  BackHandler,
+  Dimensions,
+  ScrollView,
+  View,
+} from "react-native";
 import { Button, IconButton, Surface, Text } from "react-native-paper";
 import { useFocusEffect } from "@react-navigation/native";
 import { SmileyOMeter } from "../../../shared/components";
@@ -15,6 +27,11 @@ function Reward({ title, subtitle }) {
     </View>
   );
 }
+
+const Direction = {
+  IN: "in",
+  OUT: "out",
+};
 
 function Completed({ navigation }) {
   const challenge = useContext(ChallengeContext);
@@ -45,8 +62,28 @@ function Completed({ navigation }) {
     });
   }, [navigation, challenge, goBack]);
 
+  const slideFrom = useRef(new Animated.Value(0)).current;
+
+  const slide = useCallback(
+    (direction, duration) => {
+      const [from, to] = direction === Direction.IN ? [0, 1] : [1, 0];
+      slideFrom.current = from;
+      Animated.timing(slideFrom, {
+        duration,
+        toValue: to,
+        useNativeDriver: true,
+      }).start();
+    },
+    [slideFrom]
+  );
+
+  useEffect(() => {
+    slide(Direction.IN, 350);
+  });
+
   const handleSmileyPress = (score) => {
     console.debug(`User rated challenge ${score}`);
+    slide(Direction.OUT, 750);
   };
 
   // FIXME Properly calculate points for the challenge
@@ -68,7 +105,21 @@ function Completed({ navigation }) {
           <Text style={styles.shoutOut}>{t("Well done!")}</Text>
         </View>
         <View>
-          <Surface style={styles.surface}>
+          <Surface
+            style={[
+              styles.surface,
+              {
+                transform: [
+                  {
+                    translateX: slideFrom.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [-Dimensions.get("window").width, 0],
+                    }),
+                  },
+                ],
+              },
+            ]}
+          >
             <SmileyOMeter
               message={t("What do you think about the challenge?")}
               onPress={handleSmileyPress}

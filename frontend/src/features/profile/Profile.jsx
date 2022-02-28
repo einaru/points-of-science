@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { useMutation } from "@apollo/client";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import { ScrollView, View } from "react-native";
 import { Avatar, Divider, List, Snackbar, Switch } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -33,17 +33,11 @@ function Profile() {
       .join("");
   }, [user.username]);
 
-  const [logOut, { data, loading, client }] = useMutation(LOGOUT, {
+  const [logOut, { loading, client }] = useMutation(LOGOUT, {
     onError: (error) => {
       console.error("Error login out:", error.message);
     },
   });
-
-  useEffect(() => {
-    if (data?.signOut) {
-      logOutUser();
-    }
-  }, [data, logOutUser]);
 
   if (loading) {
     return <LoadingScreen message={t("Logging out…")} />;
@@ -100,8 +94,9 @@ function Profile() {
               left={() => <List.Icon icon="logout" />}
               onPress={() => {
                 logClickEvent(route, "User logging out");
-                logOut({ variables: { refreshToken } }).then(() => {
+                logOut({ variables: { refreshToken } }).finally(() => {
                   client.clearStore();
+                  logOutUser();
                 });
               }}
             />

@@ -83,7 +83,7 @@ function Completed({ navigation }) {
 
   const handleSmileyPress = (score) => {
     console.debug(`User rated challenge ${score}`);
-    slide(Direction.OUT, 750);
+    slide(Direction.OUT, 350);
   };
 
   // FIXME Properly calculate points for the challenge

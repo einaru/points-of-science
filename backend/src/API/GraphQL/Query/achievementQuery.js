@@ -6,7 +6,11 @@ import {
   achievementCreator,
   profileCreator,
 } from "../../../internal.js";
-import { assertIsAdmin, assertIsAuthenticated } from "../assert.js";
+import {
+  assertIsAdmin,
+  assertIsExperimental,
+  assertIsAuthenticated,
+} from "../assert.js";
 
 // Root Queries - Used to retrieve data with GET-Requests
 
@@ -15,6 +19,7 @@ const getAllAchievementsQuery = {
   args: {},
   async resolve(_, __, { user, providers }) {
     assertIsAuthenticated(user);
+    assertIsExperimental(user);
 
     const userData = await providers.users.getByID(user.id);
     const achievements = await providers.achievements.getAll();
@@ -74,6 +79,7 @@ const addUserAchievementQuery = {
   },
   async resolve(_, args, { user, providers }) {
     assertIsAuthenticated(user);
+    assertIsExperimental(user);
 
     const userData = await providers.users.getByID(user.id);
     const profile = profileCreator();
@@ -103,7 +109,7 @@ const addUserAchievementQuery = {
             content: achievement.content,
             condition: achievement.data.condition,
             type: achievement.data.type,
-            completed: new Date().getTime(),
+            completed: Date.now().valueOf().toString(),
           };
           profile.add(profile.data.achievements, userAchievement);
           const { title, image, description } = achievement.content.data;

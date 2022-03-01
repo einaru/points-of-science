@@ -27,9 +27,7 @@ function checkAnswer(userReflection) {
       return true;
     }
 
-    const answer = userReflection.answer.reduce((text) => `${text}`);
-    const lowerCaseAnswer = reflection.solution.toLowerCase();
-    return lowerCaseAnswer === answer;
+    return userReflection.answer === reflection.solution;
   };
 
   return createObjectTemplate(functionKey, code);

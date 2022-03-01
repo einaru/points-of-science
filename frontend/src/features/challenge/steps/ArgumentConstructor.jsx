@@ -26,7 +26,11 @@ function DraggableItem({ styles, item }) {
   );
 }
 
-export default function ArgumentConstructor({ question, choices }) {
+export default function ArgumentConstructor({
+  question,
+  choices,
+  onChangeArgument,
+}) {
   const theme = useTheme();
   const styles = themedStyles(theme);
   const initialData = new Set();
@@ -111,7 +115,12 @@ export default function ArgumentConstructor({ question, choices }) {
         }}
         onReceiveDragDrop={(event) => {
           const item = event.dragged.payload;
-          setArgumentData((state) => new Set(state).add(item));
+          setArgumentData((oldState) => {
+            const state = new Set(oldState).add(item);
+            const answer = Array.from(state).map((arg) => arg.label);
+            onChangeArgument(JSON.stringify(answer));
+            return state;
+          });
           const otherState = argumentChoices;
           otherState.delete(item);
           setArgumentChoices(otherState);

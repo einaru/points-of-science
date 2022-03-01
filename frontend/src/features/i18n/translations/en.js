@@ -5,6 +5,7 @@ const strings = [
   "Activate account",
   "Activity",
   "Already activated your account?",
+  "Calculating points…",
   "Categories",
   "Challenge completed",
   "Challenge",

@@ -11,6 +11,15 @@ function ChallengeListItem({ challenge, onPress }) {
   const imageSource = challenge.image
     ? { uri: challenge.image }
     : fallbackImage;
+
+  const renderReward = () => {
+    return !challenge.reward ? null : (
+      <Chip style={styles.chip} mode="outlined">
+        {challenge.reward.maxPoints} {t("points")}
+      </Chip>
+    );
+  };
+
   return (
     <Surface style={styles.surface}>
       <TouchableRipple onPress={onPress}>
@@ -21,9 +30,7 @@ function ChallengeListItem({ challenge, onPress }) {
             <Chip style={styles.chip} mode="outlined">
               {challenge.difficulty}
             </Chip>
-            <Chip style={styles.chip} mode="outlined">
-              {challenge.reward.maxPoints} {t("points")}
-            </Chip>
+            {renderReward()}
           </View>
         </View>
       </TouchableRipple>

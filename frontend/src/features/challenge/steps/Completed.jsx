@@ -14,10 +14,13 @@ import {
 } from "react-native";
 import { Button, IconButton, Surface, Text } from "react-native-paper";
 import { useFocusEffect } from "@react-navigation/native";
-import { SmileyOMeter } from "../../../shared/components";
+import { useMutation } from "@apollo/client";
+import { LoadingScreen, SmileyOMeter } from "../../../shared/components";
 import { t } from "../../i18n";
 import ChallengeContext from "../ChallengeContext";
 import styles from "./styles";
+import ADD_USER_CHALLENGE from "./Completed.gql";
+import ContentContext from "../../../services/content/ContentContext";
 
 function Reward({ title, subtitle }) {
   return (
@@ -34,7 +37,36 @@ const Direction = {
 };
 
 function Completed({ navigation }) {
-  const challenge = useContext(ChallengeContext);
+  const { user } = useContext(ContentContext);
+  const { challenge, userData } = useContext(ChallengeContext);
+  const [addUserChallenge, { called, loading }] = useMutation(
+    ADD_USER_CHALLENGE,
+    {
+      onError: (error) => {
+        console.debug("Error adding user challenge:", error);
+      },
+    }
+  );
+
+  useEffect(() => {
+    if (!called) {
+      addUserChallenge({
+        variables: {
+          data: {
+            challengeID: challenge.id,
+            activity: {
+              dateStarted: userData.dateStarted,
+              answer: userData.activityAnswer,
+            },
+            reflection: {
+              dateCompleted: userData.dateCompleted,
+              answer: userData.reflectionAnswer,
+            },
+          },
+        },
+      });
+    }
+  });
 
   // The challenge is considered completed when we reach this screen.
   // In order to prevent going back through the various challenge step screens,
@@ -83,25 +115,62 @@ function Completed({ navigation }) {
 
   const handleSmileyPress = (score) => {
     console.debug(`User rated challenge ${score}`);
-    slide(Direction.OUT, 750);
+    slide(Direction.OUT, 350);
   };
 
-  // FIXME Properly calculate points for the challenge
-  const calculatePoints = () => {
-    const points = challenge.reward.maxPoints;
-    if (points === 0) {
-      return points;
-    }
-    return points > 0 ? `+${points}` : `-${points}`;
+  const hasAnsweredCorrect = () => {
+    const activitySolution = challenge.activity?.solution ?? null;
+    const reflectionSolution = challenge.reflection.solution;
+    return (
+      reflectionSolution === userData.reflectionAnswer &&
+      activitySolution === userData.activityAnswer
+    );
   };
+
+  const calculatePoints = () => {
+    if (!challenge.reward) {
+      return null;
+    }
+
+    const userChallenge = user.challenges.filter(
+      ({ challengeID }) => challengeID === challenge.id
+    )[0];
+    const isFirstTry = userChallenge === undefined;
+
+    let points = 0;
+    const { firstTryPoints, maxPoints, bonusPoints } = challenge.reward;
+
+    if (isFirstTry) {
+      points += firstTryPoints;
+      if (hasAnsweredCorrect()) {
+        points += maxPoints + bonusPoints;
+      }
+    } else if (!userChallenge.answeredCorrect && hasAnsweredCorrect) {
+      points += maxPoints;
+    }
+
+    return points;
+  };
+
+  const renderReward = () => {
+    const points = calculatePoints();
+    if (!points) {
+      return null;
+    }
+    return <Reward title={points} subtitle={t("points")} />;
+  };
+
+  if (loading) {
+    return (
+      <LoadingScreen loading={loading} message={t("Calculating points…")} />
+    );
+  }
 
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollView}>
         <View style={styles.shoutOutContainer}>
-          {challenge.reward ? (
-            <Reward title={calculatePoints()} subtitle={t("points")} />
-          ) : null}
+          {renderReward()}
           <Text style={styles.shoutOut}>{t("Well done!")}</Text>
         </View>
         <View>

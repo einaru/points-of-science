@@ -8,11 +8,19 @@ import styles from "./styles";
 const fallbackImage = require("../assets/experiment.jpg");
 
 function Intro({ navigation }) {
-  const challenge = useContext(ChallengeContext);
+  const { challenge } = useContext(ChallengeContext);
 
   const imageSource = challenge.image
     ? { uri: challenge.image }
     : fallbackImage;
+
+  const renderReward = () => {
+    return !challenge.reward ? null : (
+      <Chip style={styles.chip} mode="outlined">
+        {challenge.reward.maxPoints} {t("points")}
+      </Chip>
+    );
+  };
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -27,9 +35,7 @@ function Intro({ navigation }) {
           <View style={styles.metaContainer}>
             {/* FIXME Provide challenge name from backend */}
             <Chip style={styles.chip}>{challenge.categoryID}</Chip>
-            <Chip style={styles.chip}>
-              {challenge.reward.maxPoints} {t("points")}
-            </Chip>
+            {renderReward()}
           </View>
         </ImageBackground>
         <View style={styles.contentContainer}>

@@ -1,14 +1,11 @@
 import { useMutation } from "@apollo/client";
 import React, { useCallback, useContext, useMemo, useState } from "react";
+import { getTimestamp } from "../../shared/timestamp";
 import AuthContext from "../auth/AuthContext";
 import AnalyticsContext from "./AnalyticsContext";
 import { LOG_EVENT, LOG_DEVICE_INFO } from "./AnalyticsProvider.gql";
 import deviceInfo from "./deviceInfo";
 import extractMetadata from "./extractMetadata";
-
-function getTimestamp() {
-  return Date.now().valueOf().toString();
-}
 
 function debug(tag, data) {
   // eslint-disable-next-line no-undef

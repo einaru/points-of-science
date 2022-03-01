@@ -49,16 +49,24 @@ const UserReflectionInputModel = new GraphQLInputObjectType({
   name: "UserReflection",
   fields: () => ({
     dateCompleted: { type: GraphQLString },
-    answer: { type: new GraphQLList(GraphQLString) },
+    answer: { type: GraphQLString },
   }),
 });
 
 const UserChallengeInputModel = new GraphQLInputObjectType({
-  name: "UserChallenge",
+  name: "UserChallengeInput",
   fields: () => ({
     challengeID: { type: GraphQLString },
     activity: { type: UserActivityInputModel },
     reflection: { type: UserReflectionInputModel },
+  }),
+});
+
+const UserChallengeModel = new GraphQLObjectType({
+  name: "UserChallenge",
+  fields: () => ({
+    challengeID: { type: GraphQLString },
+    answeredCorrect: { type: GraphQLBoolean },
   }),
 });
 
@@ -70,7 +78,7 @@ const UserModel = new GraphQLObjectType({
     username: { type: GraphQLString },
     permission: { type: GraphQLString },
     achievements: { type: new GraphQLList(AchievementModel) },
-    challenges: { type: new GraphQLList(ChallengeModel) },
+    challenges: { type: new GraphQLList(UserChallengeModel) },
   }),
 });
 

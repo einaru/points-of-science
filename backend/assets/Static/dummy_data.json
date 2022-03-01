@@ -988,9 +988,19 @@
       "id": "uhQTzXWaocEFAQOxl5dT",
       "reflection": {
         "id": "B7HpOyaKs16VvUmy41LE",
-        "solution": "varmt vann har mindre massetetthet enn kaldt vann på grunn av forskjellen i molekylenes bevegelser.",
+        "solution": "[\"varmt vann\",\"har mindre\",\"massetetthet enn\",\"kaldt vann\",\"på grunn av\",\"forskjellen\",\"i molekylenes bevegelser\"]",
         "title": "Hvorfor blander ikke vannet seg når varmt vann er på toppen?",
-        "choices": ["varmt vann", "kaldt vann", "har mindre", "molekylær beveglese", "massetetthet enn", "på grunn av", "forskjellen", "likheten", "i molekylenes bevegelser"]
+        "choices": [
+          "varmt vann",
+          "kaldt vann",
+          "har mindre",
+          "molekylær beveglese",
+          "massetetthet enn",
+          "på grunn av",
+          "forskjellen",
+          "likheten",
+          "i molekylenes bevegelser"
+        ]
       },
       "reflectionType": false,
       "reward": {

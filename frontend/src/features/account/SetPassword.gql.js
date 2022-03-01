@@ -1,6 +1,9 @@
 import { gql } from "@apollo/client";
+import { USER_PROFILE } from "./fragments.gql";
 
 const ACTIVATE_ACCOUNT = gql`
+  ${USER_PROFILE}
+
   mutation activateAccount(
     $username: String!
     $password: String!
@@ -14,8 +17,7 @@ const ACTIVATE_ACCOUNT = gql`
       accessToken
       refreshToken
       user {
-        id
-        username
+        ...UserProfile
       }
     }
   }

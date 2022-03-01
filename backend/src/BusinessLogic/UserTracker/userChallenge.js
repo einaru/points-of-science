@@ -104,7 +104,6 @@ function convertToStoredObject() {
   const functionKey = "convertToStoredObject";
   const code = (object) => {
     return {
-      id: object.data.id,
       challengeID: object.data.challengeID,
       userID: object.data.userID,
       completed: object.data.completed,
@@ -121,7 +120,6 @@ function convertToStoredObject() {
 function emptyData() {
   return {
     data: {
-      id: "",
       challengeID: "",
       userID: "",
       completed: false,

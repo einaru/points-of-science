@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { HelperText, TextInput } from "react-native-paper";
 import { useMutation } from "@apollo/client";
 import AuthContext from "../../services/auth/AuthContext";
@@ -33,18 +33,29 @@ function LoginScreen() {
     }
   }, [data, logInUser]);
 
+  const passwordRef = useRef();
+
+  const doLogIn = () => {
+    logIn({ variables: { username, password } });
+  };
+
   return (
     <FormView>
       <TextInput
         label={t("Username")}
         value={username}
         onChangeText={setUsername}
+        returnKeyType="next"
+        onSubmitEditing={() => passwordRef.current.focus()}
+        blurOnSubmit={false}
       />
       <TextInput
+        ref={passwordRef}
         label={t("Password")}
         value={password}
         onChangeText={setPassword}
         secureTextEntry={!showPassword}
+        onSubmitEditing={doLogIn}
         right={
           <TextInput.Icon
             icon={showPassword ? "eye-off" : "eye"}
@@ -59,9 +70,7 @@ function LoginScreen() {
         label={t("Log in")}
         loading={loading}
         disabled={isDisabled}
-        onPress={() => {
-          logIn({ variables: { username, password } });
-        }}
+        onPress={doLogIn}
       />
       <FormLink
         message={t("Haven't activated your account yet?")}

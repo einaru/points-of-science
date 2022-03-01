@@ -28,12 +28,17 @@ export default function VerifyUsername() {
     }
   }, [data, error, username, setIsVerified]);
 
+  const doVerifyUsername = () => {
+    verifyUsername({ variables: { username } });
+  };
+
   return (
     <>
       <TextInput
         label={t("Username")}
         value={username}
         onChangeText={(text) => setUsername(text)}
+        onSubmitEditing={doVerifyUsername}
       />
       <HelperText type="error" visible={errorMessage}>
         {errorMessage}
@@ -42,9 +47,7 @@ export default function VerifyUsername() {
         label={t("Verify username")}
         loading={called && loading}
         disabled={isDisabled}
-        onPress={() => {
-          verifyUsername({ variables: { username } });
-        }}
+        onPress={doVerifyUsername}
       />
     </>
   );

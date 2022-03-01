@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { HelperText, TextInput } from "react-native-paper";
 import AuthContext from "../../services/auth/AuthContext";
 import { ActivateAccountContext } from "./ActivateAccountProvider";
@@ -37,6 +37,14 @@ export default function SetPassword() {
     }
   }, [data, logInUser]);
 
+  const confirmRef = useRef();
+
+  const doActivateAccount = () => {
+    activateAccount({
+      variables: { username, password, confirmPassword },
+    });
+  };
+
   return (
     <>
       <TextInput
@@ -51,6 +59,9 @@ export default function SetPassword() {
         value={password}
         onChangeText={setPassword}
         secureTextEntry={!showPassword}
+        returnKeyType="next"
+        onSubmitEditing={() => confirmRef.current.focus()}
+        blurOnSubmit={false}
         right={
           <TextInput.Icon
             icon={showPassword ? "eye-off" : "eye"}
@@ -59,10 +70,12 @@ export default function SetPassword() {
         }
       />
       <TextInput
+        ref={confirmRef}
         label={t("Confirm password")}
         value={confirmPassword}
         onChangeText={setConfirmPassword}
         secureTextEntry={!showConfirmPassword}
+        onSubmitEditing={doActivateAccount}
         right={
           <TextInput.Icon
             icon={showConfirmPassword ? "eye-off" : "eye"}
@@ -77,11 +90,7 @@ export default function SetPassword() {
         label={t("Activate account")}
         loading={loading}
         disabled={isDisabled}
-        onPress={() => {
-          activateAccount({
-            variables: { username, password, confirmPassword },
-          });
-        }}
+        onPress={doActivateAccount}
       />
     </>
   );

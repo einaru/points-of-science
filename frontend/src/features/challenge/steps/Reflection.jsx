@@ -12,7 +12,7 @@ function Reflection({ navigation }) {
   const { challenge, setReflectionData } = useContext(ChallengeContext);
   const { reflection, reflectionType } = challenge;
 
-  const [answer, setAnswer] = useState();
+  const [answer, setAnswer] = useState("");
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -51,8 +51,7 @@ function Reflection({ navigation }) {
         mode="contained"
         style={styles.action}
         onPress={() => {
-          const data = !Array.isArray(answer) ? [answer] : answer;
-          setReflectionData(data, getTimestamp());
+          setReflectionData(answer, getTimestamp());
           navigation.navigate("challenge:completed");
         }}
       >

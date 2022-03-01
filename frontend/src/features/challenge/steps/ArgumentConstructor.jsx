@@ -117,7 +117,8 @@ export default function ArgumentConstructor({
           const item = event.dragged.payload;
           setArgumentData((oldState) => {
             const state = new Set(oldState).add(item);
-            onChangeArgument(Array.from(state).map((arg) => arg.label));
+            const answer = Array.from(state).map((arg) => arg.label);
+            onChangeArgument(JSON.stringify(answer));
             return state;
           });
           const otherState = argumentChoices;

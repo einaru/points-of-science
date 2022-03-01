@@ -42,7 +42,7 @@ const UserReflectionInputModel = new GraphQLInputObjectType({
   name: "UserReflection",
   fields: () => ({
     dateCompleted: { type: GraphQLString },
-    answer: { type: new GraphQLList(GraphQLString) },
+    answer: { type: GraphQLString },
   }),
 });
 

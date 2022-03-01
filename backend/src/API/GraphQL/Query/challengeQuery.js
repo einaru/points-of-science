@@ -9,6 +9,7 @@ import {
   RewardInputModel,
   UserChallengeInputModel,
   categoryCreator,
+  isPermissionGroup,
   challengeCreator,
   createActivity,
   createChallenge,
@@ -33,7 +34,11 @@ const getAllChallengesQuery = {
     challengesData.forEach((challengeData) => {
       const challenge = challengeCreator(challengeData.reflectionType);
       challenge.restoreObject(challenge, challengeData);
-      challenges.push(challenge.convertToResponseObject(challenge));
+      const response = challenge.convertToResponseObject(challenge);
+      if (user.permission === 3) {
+        delete response.reward;
+      }
+      challenges.push(response);
     });
 
     return challenges;
@@ -154,12 +159,16 @@ const addUserChallengeQuery = {
     userChallenge.isAnsweredCorrect(userChallenge, challenge);
     userChallenge.isCompleted(userChallenge);
 
+    const storedUserChallenge =
+      userChallenge.convertToStoredObject(userChallenge);
     const profile = profileCreator();
     profile.updateData(userData);
-    profile.add(
-      profile.data.challenges,
-      userChallenge.convertToStoredObject(userChallenge)
-    );
+
+    if (isPermissionGroup(profile, 3)) {
+      delete storedUserChallenge.reward;
+    }
+
+    profile.add(profile.data.challenges, storedUserChallenge);
 
     await providers.users.update(profile.data.id, profile.data);
     return { message: `User challenge added successfully.` };

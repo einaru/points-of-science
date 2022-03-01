@@ -7,15 +7,22 @@ import {
   GraphQLList,
 } from "graphql";
 
-import { AchievementModel, ChallengeModel } from "../../../internal.js";
+import {
+  AchievementModel,
+  AchievementTypeEnum,
+  ChallengeModel,
+  ContentResponse,
+} from "../../../internal.js";
 
 const UserAchievementModel = new GraphQLObjectType({
   name: "UserAchievement",
   fields: () => ({
     id: { type: GraphQLString },
-    userID: { type: GraphQLString },
     achievementID: { type: GraphQLString },
-    completed: { type: GraphQLBoolean },
+    ...ContentResponse,
+    condition: { type: new GraphQLList(GraphQLString) },
+    type: { type: AchievementTypeEnum },
+    completed: { type: GraphQLString },
   }),
 });
 
@@ -25,6 +32,7 @@ const UserActivityInputModel = new GraphQLInputObjectType({
     hasOpenHints: { type: GraphQLBoolean },
     hasOpenResources: { type: GraphQLBoolean },
     dateStarted: { type: GraphQLString },
+    answer: { type: GraphQLString },
   }),
 });
 

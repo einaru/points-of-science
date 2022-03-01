@@ -55,6 +55,14 @@ const UserChallengeInputModel = new GraphQLInputObjectType({
   }),
 });
 
+const UserChallengeModel = new GraphQLObjectType({
+  name: "UserChallenge",
+  fields: () => ({
+    challengeID: { type: GraphQLString },
+    answeredCorrect: { type: GraphQLBoolean },
+  }),
+});
+
 const UserModel = new GraphQLObjectType({
   name: "User",
   fields: () => ({
@@ -63,7 +71,7 @@ const UserModel = new GraphQLObjectType({
     username: { type: GraphQLString },
     permission: { type: GraphQLString },
     achievements: { type: new GraphQLList(AchievementModel) },
-    challenges: { type: new GraphQLList(ChallengeModel) },
+    challenges: { type: new GraphQLList(UserChallengeModel) },
   }),
 });
 

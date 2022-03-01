@@ -1,24 +1,13 @@
 import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
 import { View, ScrollView } from "react-native";
-import {
-  Button,
-  Dialog,
-  IconButton,
-  List,
-  Paragraph,
-  Portal,
-} from "react-native-paper";
-import * as Linking from "expo-linking";
+import { Button, Paragraph, Portal } from "react-native-paper";
 import { t } from "../../i18n";
 import ChallengeContext from "../ChallengeContext";
 import styles from "./styles";
 import HeaderTitle from "./HeaderTitle";
 import { getTimestamp } from "../../../shared/timestamp";
-
-// Dialog actions
-const DISMISS = "dismiss";
-const THUMB_UP = "thumb-up";
-const THUMB_DOWN = "thumb-down";
+import HintDialog from "./HintDialog";
+import ResourceDialog from "./ResourceDialog";
 
 function Activity({ navigation }) {
   const dateStarted = getTimestamp();
@@ -46,12 +35,12 @@ function Activity({ navigation }) {
   };
 
   const showHint = () => {
-    setHintIsVisible(true);
     getAHint();
+    setHintIsVisible(true);
   };
 
   // TODO Log hint action data somehow
-  const hideHint = (action) => {
+  const onHideHint = (action) => {
     setHintIsVisible(false);
     console.debug(`Hint was closed with "${action}"`);
   };
@@ -64,20 +53,9 @@ function Activity({ navigation }) {
   };
 
   // TODO Log resource action data somehow
-  const hideResources = (action) => {
+  const onHideResources = (action) => {
     setResourcesIsVisible(false);
     console.debug(`Resources was closed with ${action}`);
-  };
-
-  // FIXME Remove/adjust once the resource structure is updated in backend
-  const getResourceTitle = (resource) => {
-    const title = resource.replace(/^https?:\/\//, "");
-    return title.split("/")[0];
-  };
-
-  const openResource = (url) => {
-    Linking.openURL(url);
-    console.debug(`Opening resource ${url}`);
   };
 
   useLayoutEffect(() => {
@@ -111,50 +89,16 @@ function Activity({ navigation }) {
         {t("Continue")}
       </Button>
       <Portal>
-        <Dialog visible={hintIsVisible} onDismiss={() => hideHint(DISMISS)}>
-          <Dialog.Title>{t("Here's a little hint")}</Dialog.Title>
-          <Dialog.Content>
-            <Paragraph>{hint}</Paragraph>
-          </Dialog.Content>
-          <Dialog.Actions>
-            <IconButton
-              icon="thumb-down"
-              onPress={() => hideHint(THUMB_DOWN)}
-            />
-            <IconButton icon="thumb-up" onPress={() => hideHint(THUMB_UP)} />
-          </Dialog.Actions>
-        </Dialog>
-        <Dialog
+        <HintDialog
+          hint={hint}
+          visible={hintIsVisible}
+          onDismiss={onHideHint}
+        />
+        <ResourceDialog
+          resources={resources}
           visible={resourcesIsVisible}
-          onDismiss={() => hideResources(DISMISS)}
-        >
-          <Dialog.Title>{t("External resources")}</Dialog.Title>
-          <Dialog.Content>
-            {resources.map((resource) => {
-              return (
-                <List.Item
-                  key={resource}
-                  style={{ padding: 0 }}
-                  title={getResourceTitle(resource)}
-                  description={resource}
-                  descriptionNumberOfLines={1}
-                  right={() => <List.Icon icon="open-in-new" />}
-                  onPress={() => openResource(resource)}
-                />
-              );
-            })}
-          </Dialog.Content>
-          <Dialog.Actions>
-            <IconButton
-              icon="thumb-down"
-              onPress={() => hideResources(THUMB_DOWN)}
-            />
-            <IconButton
-              icon="thumb-up"
-              onPress={() => hideResources(THUMB_UP)}
-            />
-          </Dialog.Actions>
-        </Dialog>
+          onDismiss={onHideResources}
+        />
       </Portal>
     </View>
   );

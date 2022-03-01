@@ -14,6 +14,14 @@ function Intro({ navigation }) {
     ? { uri: challenge.image }
     : fallbackImage;
 
+  const renderReward = () => {
+    return !challenge.reward ? null : (
+      <Chip style={styles.chip} mode="outlined">
+        {challenge.reward.maxPoints} {t("points")}
+      </Chip>
+    );
+  };
+
   useLayoutEffect(() => {
     navigation.setOptions({
       title: challenge.name,
@@ -27,9 +35,7 @@ function Intro({ navigation }) {
           <View style={styles.metaContainer}>
             {/* FIXME Provide challenge name from backend */}
             <Chip style={styles.chip}>{challenge.categoryID}</Chip>
-            <Chip style={styles.chip}>
-              {challenge.reward.maxPoints} {t("points")}
-            </Chip>
+            {renderReward()}
           </View>
         </ImageBackground>
         <View style={styles.contentContainer}>

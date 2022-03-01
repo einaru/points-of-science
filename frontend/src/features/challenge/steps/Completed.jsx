@@ -20,6 +20,7 @@ import { t } from "../../i18n";
 import ChallengeContext from "../ChallengeContext";
 import styles from "./styles";
 import ADD_USER_CHALLENGE from "./Completed.gql";
+import ContentContext from "../../../services/content/ContentContext";
 
 function Reward({ title, subtitle }) {
   return (
@@ -36,6 +37,7 @@ const Direction = {
 };
 
 function Completed({ navigation }) {
+  const { user } = useContext(ContentContext);
   const { challenge, userData } = useContext(ChallengeContext);
   const [addUserChallenge, { called, loading }] = useMutation(
     ADD_USER_CHALLENGE,
@@ -116,13 +118,46 @@ function Completed({ navigation }) {
     slide(Direction.OUT, 350);
   };
 
-  // FIXME Properly calculate points for the challenge
+  const hasAnsweredCorrect = () => {
+    const activitySolution = challenge.activity?.solution ?? null;
+    const reflectionSolution = challenge.reflection.solution;
+    return (
+      reflectionSolution === userData.reflectionAnswer &&
+      activitySolution === userData.activityAnswer
+    );
+  };
+
   const calculatePoints = () => {
-    const points = challenge.reward.maxPoints;
-    if (points === 0) {
-      return points;
+    if (!challenge.reward) {
+      return null;
     }
-    return points > 0 ? `+${points}` : `-${points}`;
+
+    const userChallenge = user.challenges.filter(
+      ({ challengeID }) => challengeID === challenge.id
+    )[0];
+    const isFirstTry = userChallenge === undefined;
+
+    let points = 0;
+    const { firstTryPoints, maxPoints, bonusPoints } = challenge.reward;
+
+    if (isFirstTry) {
+      points += firstTryPoints;
+      if (hasAnsweredCorrect()) {
+        points += maxPoints + bonusPoints;
+      }
+    } else if (!userChallenge.answeredCorrect && hasAnsweredCorrect) {
+      points += maxPoints;
+    }
+
+    return points;
+  };
+
+  const renderReward = () => {
+    const points = calculatePoints();
+    if (!points) {
+      return null;
+    }
+    return <Reward title={points} subtitle={t("points")} />;
   };
 
   if (loading) {
@@ -135,9 +170,7 @@ function Completed({ navigation }) {
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollView}>
         <View style={styles.shoutOutContainer}>
-          {challenge.reward ? (
-            <Reward title={calculatePoints()} subtitle={t("points")} />
-          ) : null}
+          {renderReward()}
           <Text style={styles.shoutOut}>{t("Well done!")}</Text>
         </View>
         <View>

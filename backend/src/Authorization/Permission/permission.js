@@ -37,7 +37,7 @@ function swapPermissionGroup(users) {
 }
 
 function isPermissionGroup(user, permissionLevel) {
-  return user.data.permission == permissionLevels[permissionLevel].value;
+  return user.data.permission === permissionLevels[permissionLevel].value;
 }
 
 function getResponseObject(message, statusCode, type) {
@@ -48,4 +48,9 @@ function getResponseObject(message, statusCode, type) {
   };
 }
 
-export { getPermissionLevels, setPermissionLevel, swapPermissionGroup };
+export {
+  getPermissionLevels,
+  setPermissionLevel,
+  swapPermissionGroup,
+  isPermissionGroup,
+};

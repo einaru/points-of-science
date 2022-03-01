@@ -1,5 +1,10 @@
 import { GraphQLList, GraphQLString } from "graphql";
-import { CategoryModel, categoryCreator } from "../../../internal.js";
+import {
+  CategoryModel,
+  categoryCreator,
+  isPermissionGroup,
+  profileCreator,
+} from "../../../internal.js";
 import { assertIsAdmin, assertIsAuthenticated } from "../assert.js";
 
 // Root Queries - Used to retrieve data with GET-Requests
@@ -11,6 +16,11 @@ const getAllCategoriesQuery = {
     assertIsAuthenticated(user);
 
     const userData = await providers.users.getByID(user.id);
+    if (userData == null) {
+      throw new Error("User does not exist.");
+    }
+    const profile = profileCreator();
+    profile.updateData(userData);
 
     const categoriesData = await providers.categories.getAll();
     const challengesData = await providers.challenges.getAll();
@@ -24,13 +34,21 @@ const getAllCategoriesQuery = {
         challengeIDs
       );
       category.progress.setProgress(progress);
-      categories.push(category.convertToResponseObject(category));
+      const response = category.convertToResponseObject(category);
+      if (isPermissionGroup(profile, 3)) {
+        delete response.progress;
+      }
+      categories.push(response);
     });
 
     categories.forEach((element) => {
       const challenges = [];
       element.challenges.forEach((challenge) => {
-        challenges.push(challenge.convertToResponseObject(challenge));
+        const challengeResponse = challenge.convertToResponseObject(challenge);
+        if (isPermissionGroup(profile, 3)) {
+          delete challengeResponse.reward;
+        }
+        challenges.push(challengeResponse);
       });
       element.challenges = challenges;
     });

@@ -1,13 +1,12 @@
 import React from "react";
-import { View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { View, ScrollView } from "react-native";
 import styles from "./FormView.style";
 
 function FormView({ children }) {
   return (
-    <SafeAreaView style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.formContainer}>{children}</View>
-    </SafeAreaView>
+    </ScrollView>
   );
 }
 

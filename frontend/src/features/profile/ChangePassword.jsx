@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
 import React, { useEffect, useRef, useState } from "react";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { Button, HelperText, Snackbar, TextInput } from "react-native-paper";
 import { t } from "../i18n";
 import CHANGE_PASSWORD from "./ChangePassword.gql";
@@ -41,7 +41,7 @@ function ChangePassword() {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.formContainer}>
         <TextInput
           label={t("New password")}
@@ -86,7 +86,7 @@ function ChangePassword() {
       >
         {t("Your password is updated")}
       </Snackbar>
-    </View>
+    </ScrollView>
   );
 }
 

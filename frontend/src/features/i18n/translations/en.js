@@ -19,7 +19,6 @@ const strings = [
   "Couldn't find any challenges",
   "Couldn't find any content",
   "Create account",
-  "Dashboard",
   "External resources",
   "Get a hint?",
   "Get ready!",

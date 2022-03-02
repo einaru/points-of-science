@@ -20,7 +20,6 @@ export default {
   "Couldn't find any challenges": "Fant ingen utfordringer",
   "Couldn't find any content": "Fant ikke noe innhold",
   "Create account": "Opprett konto",
-  "Dashboard": "Dashbord",
   "External resources": "Eksterne ressurser",
   "Get a hint?": "Få et hint?",
   "Get ready!": "Gjør deg klar!",

@@ -39,6 +39,7 @@ export default {
   "Next": "Neste",
   "No more items to choose from!": "Ingen flere elementer å velge fra!",
   "Password": "Passord",
+  "Permission level": "Tillatelsesnivå",
   "Prefer dark theme": "Foretrekk mørkt tema",
   "Profile": "Profil",
   "Project info": "Prosjekt info",

@@ -13,6 +13,7 @@ import PreferencesContext from "../../services/preferences/PreferencesContext";
 import LOGOUT from "./Profile.gql";
 import styles from "./Profile.style";
 import AnalyticsContext from "../../services/analytics/AnalyticsContext";
+import { PermissionName } from "../../shared/permission";
 
 function Profile() {
   const navigation = useNavigation();
@@ -32,6 +33,10 @@ function Profile() {
       .map((word) => word[0])
       .join("");
   }, [user.username]);
+
+  const permissionLabel = useMemo(() => {
+    return `${user.permission}:${PermissionName[user.permission]}`;
+  }, [user.permission]);
 
   const [logOut, { loading, client }] = useMutation(LOGOUT, {
     onError: (error) => {
@@ -61,6 +66,13 @@ function Profile() {
                 showSnackbar(true);
               }}
             />
+            {__DEV__ && (
+              <List.Item
+                title={permissionLabel}
+                description={t("Permission level")}
+                left={() => <List.Icon icon="security" />}
+              />
+            )}
           </List.Section>
           <Divider />
           <List.Section>

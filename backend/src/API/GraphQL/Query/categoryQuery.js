@@ -14,7 +14,6 @@ const getAllCategoriesQuery = {
   args: {},
   async resolve(_, __, { user, providers }) {
     assertIsAuthenticated(user);
-    console.debug(`[DEBUG] getAllCategoriesQuery for ${user.username}`);
 
     const userData = await providers.users.getByID(user.id);
     if (userData == null) {

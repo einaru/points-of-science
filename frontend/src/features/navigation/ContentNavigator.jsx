@@ -39,11 +39,6 @@ function ContentNavigator() {
         })}
       >
         <Tab.Screen
-          name="tab:profile"
-          options={{ title: t("Profile") }}
-          component={ProfileStack}
-        />
-        <Tab.Screen
           name="tab:challenges"
           options={{ title: t("Challenges") }}
           component={ChallengesStack}
@@ -62,6 +57,11 @@ function ContentNavigator() {
             />
           </>
         )}
+        <Tab.Screen
+          name="tab:profile"
+          options={{ title: t("Profile") }}
+          component={ProfileStack}
+        />
       </Tab.Navigator>
     </ContentProvider>
   );

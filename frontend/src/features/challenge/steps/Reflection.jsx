@@ -24,6 +24,11 @@ function Reflection({ navigation }) {
     });
   }, [navigation, challenge]);
 
+  const doCompleteReflection = () => {
+    setReflectionData(answer, getTimestamp());
+    navigation.navigate("challenge:completed");
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
@@ -50,10 +55,7 @@ function Reflection({ navigation }) {
       <Button
         mode="contained"
         style={styles.action}
-        onPress={() => {
-          setReflectionData(answer, getTimestamp());
-          navigation.navigate("challenge:completed");
-        }}
+        onPress={doCompleteReflection}
       >
         {t("Complete challenge")}
       </Button>

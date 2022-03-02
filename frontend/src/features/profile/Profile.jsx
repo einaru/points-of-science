@@ -75,7 +75,11 @@ function Profile() {
               title={t("Prefer dark theme")}
               left={() => <List.Icon icon="theme-light-dark" />}
               right={() => (
-                <Switch value={preferDarkTheme} onValueChange={toggleTheme} />
+                <Switch
+                  style={{ alignSelf: "center" }}
+                  value={preferDarkTheme}
+                  onValueChange={toggleTheme}
+                />
               )}
             />
           </List.Section>

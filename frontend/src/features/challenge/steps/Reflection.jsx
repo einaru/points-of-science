@@ -1,5 +1,5 @@
 import React, { useContext, useLayoutEffect, useState } from "react";
-import { View } from "react-native";
+import { Keyboard, TouchableWithoutFeedback, View } from "react-native";
 import { Button, Text, TextInput } from "react-native-paper";
 import { getTimestamp } from "../../../shared/timestamp";
 import { t } from "../../i18n";
@@ -39,17 +39,19 @@ function Reflection({ navigation }) {
             onChangeArgument={setAnswer}
           />
         ) : (
-          <>
-            <Text style={styles.text}>{reflection.title}</Text>
-            <TextInput
-              style={styles.textarea}
-              multiline
-              autoFocus
-              label={t("Reflection")}
-              value={answer}
-              onChangeText={setAnswer}
-            />
-          </>
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={styles.container}>
+              <Text style={styles.text}>{reflection.title}</Text>
+              <TextInput
+                style={styles.textarea}
+                multiline
+                autoFocus
+                label={t("Reflection")}
+                value={answer}
+                onChangeText={setAnswer}
+              />
+            </View>
+          </TouchableWithoutFeedback>
         )}
       </View>
       <Button

@@ -13,6 +13,7 @@ import {
   ChallengeModel,
   ContentResponse,
 } from "../../../internal.js";
+import { PermissionEnum } from "./authModel.js";
 
 const UserAchievementModel = new GraphQLObjectType({
   name: "UserAchievement",
@@ -76,7 +77,7 @@ const UserModel = new GraphQLObjectType({
     id: { type: GraphQLString },
     password: { type: GraphQLString },
     username: { type: GraphQLString },
-    permission: { type: GraphQLString },
+    permission: { type: PermissionEnum },
     achievements: { type: new GraphQLList(AchievementModel) },
     challenges: { type: new GraphQLList(UserChallengeModel) },
   }),

@@ -61,6 +61,13 @@ function Profile() {
                 showSnackbar(true);
               }}
             />
+            {__DEV__ && (
+              <List.Item
+                title={user.permission}
+                description={t("Permission level")}
+                left={() => <List.Icon icon="security" />}
+              />
+            )}
           </List.Section>
           <Divider />
           <List.Section>

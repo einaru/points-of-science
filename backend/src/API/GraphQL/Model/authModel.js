@@ -30,12 +30,12 @@ export const MessageResponseModel = new GraphQLObjectType({
   }),
 });
 
-const PermissionEnum = new GraphQLEnumType({
+export const PermissionEnum = new GraphQLEnumType({
   name: "PermissionEnum",
   values: {
-    ADMIN: { value: 1 },
-    EXPERIMENTAL: { value: 2 },
-    CONTROL: { value: 3 },
+    admin: { value: 1 },
+    experiment: { value: 2 },
+    control: { value: 3 },
   },
 });
 
@@ -51,7 +51,7 @@ export const PermissionModel = new GraphQLObjectType({
   name: "Permission",
   fields: () => ({
     admin: { type: GraphQLInt },
-    experimental: { type: GraphQLInt },
+    experiment: { type: GraphQLInt },
     control: { type: GraphQLInt },
   }),
 });

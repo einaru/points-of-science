@@ -38,6 +38,7 @@ const strings = [
   "Next",
   "No more items to choose from!",
   "Password",
+  "Permission level",
   "Prefer dark theme",
   "Profile",
   "Project info",

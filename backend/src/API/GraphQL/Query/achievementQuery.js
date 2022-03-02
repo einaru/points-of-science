@@ -8,7 +8,7 @@ import {
 } from "../../../internal.js";
 import {
   assertIsAdmin,
-  assertIsExperimental,
+  assertHasExperimentPermission,
   assertIsAuthenticated,
 } from "../assert.js";
 
@@ -19,7 +19,7 @@ const getAllAchievementsQuery = {
   args: {},
   async resolve(_, __, { user, providers }) {
     assertIsAuthenticated(user);
-    assertIsExperimental(user);
+    assertHasExperimentPermission(user);
 
     const userData = await providers.users.getByID(user.id);
     const achievements = await providers.achievements.getAll();
@@ -79,7 +79,7 @@ const addUserAchievementQuery = {
   },
   async resolve(_, args, { user, providers }) {
     assertIsAuthenticated(user);
-    assertIsExperimental(user);
+    assertHasExperimentPermission(user);
 
     const userData = await providers.users.getByID(user.id);
     const profile = profileCreator();

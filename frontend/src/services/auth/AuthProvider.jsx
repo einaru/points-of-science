@@ -45,7 +45,7 @@ function AuthProvider({ children }) {
       }
     };
     initState();
-    return () => {};
+    return () => client.stop();
   }, [client]);
 
   const authContext = useMemo(

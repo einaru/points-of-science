@@ -1,20 +1,10 @@
 import { setContext } from "@apollo/client/link/context";
-import { onError } from "@apollo/client/link/error";
 import * as Storage from "../storage";
 import { getNewToken, isTokenValid } from "./token";
 
-// Cached access token to avoid async calls for every request
-// This will be reset upon 401 server error's
-let cachedToken;
-
-const withToken = setContext(() => {
-  if (cachedToken) {
-    return { token: cachedToken };
-  }
-  return Storage.getItem("accessToken").then((accessToken) => {
-    cachedToken = accessToken;
-    return { token: cachedToken };
-  });
+const withToken = setContext(async () => {
+  const accessToken = await Storage.getItem("accessToken");
+  return { token: accessToken };
 });
 
 const withAuth = setContext(async (_, { headers, token }) => {
@@ -26,7 +16,6 @@ const withAuth = setContext(async (_, { headers, token }) => {
 
   if (accessToken) {
     Storage.setItem("accessToken", accessToken);
-    cachedToken = accessToken;
   }
 
   return {
@@ -37,16 +26,6 @@ const withAuth = setContext(async (_, { headers, token }) => {
   };
 });
 
-const resetToken = onError(({ networkError }) => {
-  if (
-    networkError &&
-    networkError.name === "ServerError" &&
-    networkError.statusCode === 401
-  ) {
-    cachedToken = null;
-  }
-});
-
-const authLink = withToken.concat(withAuth).concat(resetToken);
+const authLink = withToken.concat(withAuth);
 
 export default authLink;

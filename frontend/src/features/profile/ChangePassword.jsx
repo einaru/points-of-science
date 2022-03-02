@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { View } from "react-native";
 import { Button, HelperText, Snackbar, TextInput } from "react-native-paper";
 import { t } from "../i18n";
@@ -33,6 +33,13 @@ function ChangePassword() {
     }
   }, [data]);
 
+  const confirmRef = useRef();
+
+  const doChangePassword = () => {
+    setErrorMessage("");
+    changePassword({ variables: { password, confirmPassword } });
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.formContainer}>
@@ -41,6 +48,9 @@ function ChangePassword() {
           value={password}
           onChangeText={setPassword}
           secureTextEntry={!showPassword}
+          returnKeyType="next"
+          onSubmitEditing={() => confirmRef.current.focus()}
+          blurOnSubmit={false}
           right={
             <TextInput.Icon
               icon={showPassword ? "eye-off" : "eye"}
@@ -49,10 +59,12 @@ function ChangePassword() {
           }
         />
         <TextInput
+          ref={confirmRef}
           label={t("Confirm new password")}
           value={confirmPassword}
           onChangeText={setConfirmPassword}
           secureTextEntry={!showConfirmPassword}
+          onSubmitEditing={doChangePassword}
           right={
             <TextInput.Icon
               icon={showConfirmPassword ? "eye-off" : "eye"}
@@ -63,14 +75,7 @@ function ChangePassword() {
         <HelperText type="error" visible={errorMessage}>
           {errorMessage}
         </HelperText>
-        <Button
-          mode="contained"
-          loading={loading}
-          onPress={() => {
-            setErrorMessage("");
-            changePassword({ variables: { password, confirmPassword } });
-          }}
-        >
+        <Button mode="contained" loading={loading} onPress={doChangePassword}>
           {t("Change password")}
         </Button>
       </View>

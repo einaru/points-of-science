@@ -33,5 +33,8 @@
       "allowAsProps": true
     }],
     "react/prop-types": ["off"]
+  },
+  "globals": {
+    "__DEV__": true
   }
 }

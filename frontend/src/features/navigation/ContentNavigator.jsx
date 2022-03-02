@@ -9,7 +9,7 @@ import { t } from "../i18n";
 import ChallengesStack from "../challenge/ChallengesStack";
 import ContentProvider from "../../services/content/ContentProvider";
 import AuthContext from "../../services/auth/AuthContext";
-import { Permission } from "../../shared/permission";
+import Permission from "../../shared/permission";
 
 const tabIconMap = {
   "tab:challenges": "lightbulb-on",

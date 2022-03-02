@@ -3,7 +3,7 @@ import config from "../../Config/config.js";
 
 const permissionLevels = {
   1: { text: "admin", value: 1 },
-  2: { text: "experimental", value: 2 },
+  2: { text: "experiment", value: 2 },
   3: { text: "control", value: 3 },
 };
 

@@ -1,4 +1,8 @@
-import { AuthenticationError, ForbiddenError, UserInputError } from "./error.js";
+import {
+  AuthenticationError,
+  ForbiddenError,
+  UserInputError,
+} from "./error.js";
 import config from "../../Config/config.js";
 
 export function assertIsAuthenticated(user) {
@@ -13,9 +17,9 @@ export function assertIsAdmin(user) {
   }
 }
 
-export function assertIsExperimental(user) {
-  if(user && user.permission !== config.permissionLevel.experimental) {
-    throw new ForbiddenError("Expermental permission is required.");
+export function assertHasExperimentPermission(user) {
+  if (user && user.permission !== config.permissionLevel.experiment) {
+    throw new ForbiddenError('Permission level "experiment" is required.');
   }
 }
 

@@ -1,12 +1,7 @@
-export const Permission = Object.freeze({
-  ADMIN: 1,
-  CONTROL: 2,
-  EXPERIMENT: 3,
+const Permission = Object.freeze({
+  ADMIN: "admin",
+  EXPERIMENT: "experiment",
+  CONTROL: "control",
 });
 
-export const PermissionName = Object.keys(Permission).reduce((obj, key) => {
-  return {
-    ...obj,
-    [Permission[key]]: key,
-  };
-}, {});
+export default Permission;

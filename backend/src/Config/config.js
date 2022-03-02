@@ -36,7 +36,7 @@ const config = {
   },
   permissionLevel: {
     admin: 1,
-    experimental: 2,
+    experiment: 2,
     control: 3,
   },
 };

@@ -1,6 +1,8 @@
 import React from "react";
 import { ImageBackground, ScrollView, View } from "react-native";
 import { Chip, Text, TouchableRipple, withTheme } from "react-native-paper";
+import { MaterialCommunityIcons } from "react-native-vector-icons";
+import colors from "../../shared/colors";
 import { NoContent, Surface } from "../../shared/components";
 import Permission from "../../shared/permission";
 import { t } from "../i18n";
@@ -14,6 +16,28 @@ function ChallengeListItem({ challenge, user, theme, onPress }) {
   const imageSource = challenge.image
     ? { uri: challenge.image }
     : fallbackImage;
+
+  const isAlreadyCompleted = user.challenges
+    .map(({ challengeID }) => challengeID)
+    .includes(challenge.id);
+
+  const renderHeader = () => {
+    const headerStyle = isAlreadyCompleted
+      ? { ...styles.header, backgroundColor: colors.green.fade(0.3).string() }
+      : styles.header;
+    return (
+      <View style={headerStyle}>
+        <Text style={styles.title}>{challenge.name}</Text>
+        {isAlreadyCompleted && (
+          <MaterialCommunityIcons
+            color={theme.colors.text}
+            name="check-decagram"
+            size={24}
+          />
+        )}
+      </View>
+    );
+  };
 
   const renderDifficulty = () => {
     const color = getDifficultyColor(challenge.difficulty);
@@ -47,9 +71,7 @@ function ChallengeListItem({ challenge, user, theme, onPress }) {
       <TouchableRipple borderless style={styles.ripple} onPress={onPress}>
         <ImageBackground style={styles.image} source={imageSource}>
           <View style={styles.content}>
-            <View style={styles.header}>
-              <Text style={styles.title}>{challenge.name}</Text>
-            </View>
+            {renderHeader()}
             <View style={styles.meta}>
               {renderDifficulty()}
               {renderReward()}

@@ -7,6 +7,7 @@ export default function themedStyles(theme) {
   const overlayRow = {
     backgroundColor: Color(colors.background).fade(0.3).string(),
     flexDirection: "row",
+    alignItems: "center",
     justifyContent: "space-between",
     padding: 8,
   };

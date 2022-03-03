@@ -81,6 +81,11 @@ const en = {
   howToFormAnArgumentText:
     "Drag items from the box above and drop them here to form an argument. " +
     "Remember that order is crucial!",
+
+  // Challenge difficulty levels
+  beginner: "Beginner",
+  intermediate: "Intermediate",
+  expert: "Expert",
 };
 
 export default strings.reduce((obj, value, index, array) => {

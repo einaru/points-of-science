@@ -1,28 +1,46 @@
+import Color from "color";
 import { StyleSheet } from "react-native";
 
-export default StyleSheet.create({
-  listContainer: {
-    flex: 1,
-    margin: 8,
-  },
-  metaContainer: {
+export default function themedStyles(theme) {
+  const { colors } = theme;
+
+  const overlayRow = {
+    backgroundColor: Color(colors.background).fade(0.3).string(),
     flexDirection: "row",
     justifyContent: "space-between",
-    margin: 8,
-  },
-  title: {
-    marginVertical: 8,
-    marginHorizontal: 8,
-  },
-  image: {
-    width: "100%",
-    height: 100,
-  },
-  chip: {
-    marginEnd: 4,
-  },
-  surface: {
-    marginBottom: 8,
-    elevation: 2,
-  },
-});
+    padding: 8,
+  };
+  return StyleSheet.create({
+    list: {
+      flex: 1,
+      margin: 8,
+    },
+    surface: {
+      borderRadius: theme.roundness,
+      elevation: 2,
+      marginBottom: 8,
+    },
+    ripple: {
+      borderRadius: theme.roundness,
+    },
+    image: {
+      width: "100%",
+      height: 200,
+    },
+    content: {
+      flex: 1,
+      justifyContent: "space-between",
+    },
+    header: {
+      ...overlayRow,
+    },
+    title: {
+      fontSize: 20,
+      fontWeight: "bold",
+    },
+    meta: {
+      ...overlayRow,
+      backgroundColor: null,
+    },
+  });
+}

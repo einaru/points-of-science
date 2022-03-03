@@ -82,4 +82,9 @@ export default {
   howToFormAnArgumentText:
     "Dra elementer fra boksen ovenfor ned hit for å danne et argument. " +
     "Husk at rekkefølgen er avgjørende!",
+
+  // Challenge difficulty levels
+  beginner: "Nybegynner",
+  intermediate: "Viderekommende",
+  expert: "Ekspert",
 };

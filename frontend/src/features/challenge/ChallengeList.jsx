@@ -45,11 +45,11 @@ function ChallengeListItem({ challenge, user, theme, onPress }) {
       color: color.isLight() ? "#000" : "#fff",
     };
     const style = {
+      ...styles.chip,
       backgroundColor: color.string(),
-      borderColor: color.darken(0.4).string(),
     };
     return (
-      <Chip style={style} textStyle={textStyle} mode="outlined">
+      <Chip style={style} textStyle={textStyle}>
         {t(challenge.difficulty)}
       </Chip>
     );

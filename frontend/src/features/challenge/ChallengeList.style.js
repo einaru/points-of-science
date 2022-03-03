@@ -11,6 +11,7 @@ export default function themedStyles(theme) {
     justifyContent: "space-between",
     padding: 8,
   };
+
   return StyleSheet.create({
     list: {
       flex: 1,
@@ -41,7 +42,9 @@ export default function themedStyles(theme) {
     },
     meta: {
       ...overlayRow,
-      backgroundColor: null,
+    },
+    chip: {
+      elevation: 2,
     },
   });
 }

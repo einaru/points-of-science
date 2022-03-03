@@ -10,6 +10,10 @@ export default function themedStyles(theme) {
     : color(colors.background).darken(0.06).rgb().string();
 
   return StyleSheet.create({
+    content: {
+      flex: 1,
+      margin: 8,
+    },
     question: {
       marginBottom: 8,
     },

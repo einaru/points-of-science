@@ -1,11 +1,12 @@
 import React, { useContext, useLayoutEffect, useState } from "react";
-import { Keyboard, TouchableWithoutFeedback, View } from "react-native";
-import { Button, Text, TextInput } from "react-native-paper";
+import { View } from "react-native";
+import { Button } from "react-native-paper";
 import { getTimestamp } from "../../../shared/timestamp";
 import { t } from "../../i18n";
 import ChallengeContext from "../ChallengeContext";
 import ArgumentConstructor from "./ArgumentConstructor";
 import HeaderTitle from "./HeaderTitle";
+import OpenReflection from "./OpenReflection";
 import styles from "./styles";
 
 function Reflection({ navigation }) {
@@ -31,29 +32,15 @@ function Reflection({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.contentContainer}>
-        {reflectionType === "argument" ? (
-          <ArgumentConstructor
-            question={reflection.title}
-            choices={reflection.choices}
-            onChangeArgument={setAnswer}
-          />
-        ) : (
-          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <View style={styles.container}>
-              <Text style={styles.text}>{reflection.title}</Text>
-              <TextInput
-                style={styles.textarea}
-                multiline
-                autoFocus
-                label={t("Reflection")}
-                value={answer}
-                onChangeText={setAnswer}
-              />
-            </View>
-          </TouchableWithoutFeedback>
-        )}
-      </View>
+      {reflectionType === "argument" ? (
+        <ArgumentConstructor
+          question={reflection.title}
+          choices={reflection.choices}
+          onChangeArgument={setAnswer}
+        />
+      ) : (
+        <OpenReflection title={reflection.title} onChange={setAnswer} />
+      )}
       <Button
         mode="contained"
         style={styles.action}

@@ -22,6 +22,7 @@ import styles from "./styles";
 import ADD_USER_CHALLENGE from "./Completed.gql";
 import ContentContext from "../../../services/content/ContentContext";
 import Permission from "../../../shared/permission";
+import HeroBackgroundImage from "../../../shared/components/HeroBackgroundImage";
 
 function Reward({ title, subtitle }) {
   return (
@@ -170,35 +171,37 @@ function Completed({ navigation }) {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollView}>
-        <View style={styles.shoutOutContainer}>
-          {renderReward()}
-          <Text style={styles.shoutOut}>{t("Well done!")}</Text>
-        </View>
-        <View>
-          <Surface
-            style={[
-              styles.surface,
-              {
-                transform: [
-                  {
-                    translateX: slideFrom.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: [-Dimensions.get("window").width, 0],
-                    }),
-                  },
-                ],
-              },
-            ]}
-          >
-            <SmileyOMeter
-              message={t("What do you think about the challenge?")}
-              onPress={handleSmileyPress}
-            />
-          </Surface>
-          <Button style={styles.action} onPress={goBack}>
-            {t("Up for another challenge?")}
-          </Button>
-        </View>
+        <HeroBackgroundImage name="graduation">
+          <View style={styles.shoutOutContainer}>
+            {renderReward()}
+            <Text style={styles.shoutOut}>{t("Well done!")}</Text>
+          </View>
+          <View>
+            <Surface
+              style={[
+                styles.surface,
+                {
+                  transform: [
+                    {
+                      translateX: slideFrom.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [-Dimensions.get("window").width, 0],
+                      }),
+                    },
+                  ],
+                },
+              ]}
+            >
+              <SmileyOMeter
+                message={t("What do you think about the challenge?")}
+                onPress={handleSmileyPress}
+              />
+            </Surface>
+            <Button style={styles.action} onPress={goBack}>
+              {t("Up for another challenge?")}
+            </Button>
+          </View>
+        </HeroBackgroundImage>
       </ScrollView>
     </View>
   );

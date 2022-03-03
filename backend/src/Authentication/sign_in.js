@@ -52,6 +52,9 @@ function completeSignIn(result, user, providers) {
     ) {
       const accessToken = createAccessToken(user);
       const refreshToken = createRefreshToken(user, providers);
+      if (user.permission === 3) {
+        delete user.progress;
+      }
       resolve({
         user,
         accessToken,

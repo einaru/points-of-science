@@ -1,8 +1,9 @@
 /* eslint-disable global-require */
 import { openURL } from "expo-linking";
 import React from "react";
-import { View, Image, ScrollView } from "react-native";
+import { View, ScrollView } from "react-native";
 import { List, Paragraph, Subheading } from "react-native-paper";
+import HeroImage from "../../shared/components/HeroImage";
 import { t } from "../i18n";
 import styles from "./ProjectInfo.style";
 
@@ -25,7 +26,7 @@ function ProjectInfo() {
 
   return (
     <ScrollView>
-      <Image style={styles.heroImage} source={require("./question.png")} />
+      <HeroImage name="questions" />
       <View style={styles.content}>
         <Subheading style={styles.heading}>{t("Purpose")}</Subheading>
         <Paragraph>{t("aboutPurpose")}</Paragraph>

@@ -1,10 +1,9 @@
 import React from "react";
 import Color from "color";
 import { ProgressBar as PaperProgressBar } from "react-native-paper";
+import colors from "../../../shared/colors";
 
-const RED = Color.rgb(192, 28, 40);
-const YELLOW = Color.rgb(245, 194, 17);
-const GREEN = Color.rgb(46, 194, 126);
+const { red, yellow, green } = colors;
 
 function interpolate(start, end, frac) {
   switch (frac) {
@@ -23,9 +22,9 @@ function interpolate(start, end, frac) {
 
 function getColor(progress) {
   if (progress < 0.5) {
-    return interpolate(RED, YELLOW, progress * 2);
+    return interpolate(red, yellow, progress * 2);
   }
-  return interpolate(YELLOW, GREEN, progress - (1 - progress));
+  return interpolate(yellow, green, progress - (1 - progress));
 }
 
 export default function ProgressBar({ progress }) {

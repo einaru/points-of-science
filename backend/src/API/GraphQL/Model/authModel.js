@@ -55,3 +55,11 @@ export const PermissionModel = new GraphQLObjectType({
     control: { type: GraphQLInt },
   }),
 });
+
+export const SwapPermissionPayload = new GraphQLObjectType({
+  name: "SwapPermissionPayload",
+  fields: () => ({
+    id: { type: GraphQLString },
+    permission: { type: PermissionEnum },
+  }),
+});

@@ -2,13 +2,14 @@ import React from "react";
 import { ImageBackground, ScrollView, View } from "react-native";
 import { Chip, Text, TouchableRipple, withTheme } from "react-native-paper";
 import { NoContent, Surface } from "../../shared/components";
+import Permission from "../../shared/permission";
 import { t } from "../i18n";
 import themedStyles from "./ChallengeList.style";
 import { getDifficultyColor } from "./difficulty";
 
 const fallbackImage = require("./assets/challenge.png");
 
-function ChallengeListItem({ challenge, theme, onPress }) {
+function ChallengeListItem({ challenge, user, theme, onPress }) {
   const styles = themedStyles(theme);
   const imageSource = challenge.image
     ? { uri: challenge.image }
@@ -31,11 +32,14 @@ function ChallengeListItem({ challenge, theme, onPress }) {
   };
 
   const renderReward = () => {
-    return !challenge.reward ? null : (
-      <Chip style={styles.chip}>
-        {challenge.reward.maxPoints} {t("points")}
-      </Chip>
-    );
+    if (user.permission === Permission.EXPERIMENT) {
+      return (
+        <Chip style={styles.chip}>
+          {challenge.reward.maxPoints} {t("points")}
+        </Chip>
+      );
+    }
+    return null;
   };
 
   return (
@@ -58,7 +62,7 @@ function ChallengeListItem({ challenge, theme, onPress }) {
 }
 
 function ChallengeList({ route, navigation, theme }) {
-  const { category } = route.params;
+  const { category, user } = route.params;
   const { challenges } = category;
 
   if (!challenges.length) {
@@ -75,6 +79,7 @@ function ChallengeList({ route, navigation, theme }) {
             <ChallengeListItem
               key={challenge.id}
               challenge={challenge}
+              user={user}
               theme={theme}
               onPress={() => {
                 navigation.navigate("challenge:main", {

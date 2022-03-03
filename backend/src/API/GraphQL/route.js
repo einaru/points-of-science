@@ -24,6 +24,8 @@ import {
   getPermissionsQuery,
   setPermissionQuery,
   swapPermissionQuery,
+  subscribeSwappedPermission,
+  subscribeUpdatedUser,
 } from "../../internal.js";
 import {
   logDeviceInfo,
@@ -72,4 +74,16 @@ const MUTATION = new GraphQLObjectType({
   },
 });
 
-export default new GraphQLSchema({ query: ROOTQUERY, mutation: MUTATION });
+const SUBSCRIPTION = new GraphQLObjectType({
+  name: "Subscription",
+  fields: () => ({
+    swappedPermission: subscribeSwappedPermission,
+    updateUserProfile: subscribeUpdatedUser,
+  }),
+});
+
+export default new GraphQLSchema({
+  query: ROOTQUERY,
+  mutation: MUTATION,
+  subscription: SUBSCRIPTION,
+});

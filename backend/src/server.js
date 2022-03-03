@@ -1,10 +1,15 @@
 import "dotenv/config";
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
 import cors from "cors";
 import express from "express";
+import { createServer } from "http";
 import bodyParser from "body-parser";
 import { graphqlHTTP } from "express-graphql";
+import { WebSocketServer } from "ws";
+import { useServer } from "graphql-ws/lib/use/ws";
 import config from "./Config/config.js";
-import { schema } from "./internal.js";
+import { schema, pubsub } from "./internal.js";
 import authMiddleware from "./Authorization/authMiddleware.js";
 import { providers } from "./Database/firestore.js";
 
@@ -15,6 +20,16 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(authMiddleware);
 
+app.get("/graphiql", (req, res, next) => {
+  if (config.env !== "development") {
+    next();
+  } else {
+    const fileName = fileURLToPath(import.meta.url);
+    const here = dirname(fileName);
+    res.sendFile(path.resolve(here, "../graphiql-over-ws.html"));
+  }
+});
+
 app.use(
   "/graphql",
   graphqlHTTP((req, res, params) => {
@@ -24,6 +39,7 @@ app.use(
       context: {
         user: req.user,
         providers,
+        pubsub,
       },
     };
   })
@@ -43,7 +59,16 @@ Object.entries(config.secret).forEach(([key, value]) => {
   }
 });
 
-app.listen(config.port, () => {
+const server = createServer(app);
+server.listen(config.port);
+
+const wsServer = new WebSocketServer({
+  server,
+  path: "/graphql",
+});
+
+server.on("listening", () => {
+  useServer({ schema }, wsServer);
   console.log(`Running in "${config.env}" mode`);
   console.log(`Server listening on port ${config.port}`);
 });

@@ -17,6 +17,7 @@ import {
   createReflection,
   createReward,
   profileCreator,
+  progressCreator,
   userChallengeCreator,
 } from "../../../internal.js";
 import { assertIsAdmin, assertIsAuthenticated } from "../assert.js";
@@ -117,7 +118,7 @@ const addUserChallengeQuery = {
   args: {
     userChallenge: { type: UserChallengeInputModel },
   },
-  async resolve(_, args, { user, providers }) {
+  async resolve(_, args, { user, providers, pubsub }) {
     assertIsAuthenticated(user);
 
     const challenge = await providers.challenges.getByID(
@@ -161,16 +162,53 @@ const addUserChallengeQuery = {
 
     const storedUserChallenge =
       userChallenge.convertToStoredObject(userChallenge);
+
+    const { calculateProgress } = progressCreator().progress;
+    const categoriesData = await providers.categories.getAll();
+    const userProgress = {
+      progress: {
+        categories: [],
+        achievements: [],
+      },
+    };
+
+    categoriesData.forEach((categoryData) => {
+      const challengeIDs = categoryData.challenges;
+      const progress = calculateProgress(userData.challenges, challengeIDs);
+
+      userProgress.progress.categories.push({ id: categoryData.id, progress });
+    });
+
+    const achievements = await providers.achievements.getAll();
+    achievements.forEach((achievementData) => {
+      const progress = calculateProgress(
+        userData.challenges,
+        achievementData.condition
+      );
+
+      userProgress.progress.achievements.push({
+        id: achievementData.id,
+        progress,
+      });
+    });
+
     const profile = profileCreator();
     profile.updateData(userData);
+    profile.updateData(userProgress);
 
     if (isPermissionGroup(profile, 3)) {
       delete storedUserChallenge.reward;
+      delete profile.data.progress;
     }
 
     profile.add(profile.data.challenges, storedUserChallenge);
 
     await providers.users.update(profile.data.id, profile.data);
+
+    delete profile.data.password;
+    pubsub.publish("UserProfile", profile.data);
+    // pubsub.publish("Leaderboard", );
+
     return { message: `User challenge added successfully.` };
   },
 };

@@ -21,7 +21,6 @@ const getAllAchievementsQuery = {
     assertIsAuthenticated(user);
     assertHasExperimentPermission(user);
 
-    const userData = await providers.users.getByID(user.id);
     const achievements = await providers.achievements.getAll();
 
     const result = [];
@@ -31,11 +30,6 @@ const getAllAchievementsQuery = {
       achievement.setType(achievementData.type);
       achievement.addCondition(achievementData.condition);
       achievement.content.updateData(achievementData.content);
-      const progress = achievement.progress.calculateProgress(
-        userData.challenges,
-        achievement.data.condition
-      );
-      achievement.progress.setProgress(progress);
       result.push(achievement.convertToResponseObject(achievement));
     });
 
@@ -113,13 +107,13 @@ const addUserAchievementQuery = {
           };
           profile.add(profile.data.achievements, userAchievement);
           const { title, image, description } = achievement.content.data;
-          delete userAchievement.content;
           const response = {
             ...userAchievement,
             name: title,
             image,
             description,
           };
+          delete response.content;
           userAchievements.push(response);
         }
       }

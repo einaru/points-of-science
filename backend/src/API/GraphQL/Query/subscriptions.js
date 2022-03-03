@@ -1,12 +1,24 @@
-import {
-  UserModel,
-  SwapPermissionPayload,
-  pubsub,
-} from "../../../internal.js";
+import { GraphQLString } from "graphql";
+import { withFilter } from "graphql-subscriptions";
+import jwt from "jsonwebtoken";
+import config from "../../../Config/config.js";
+
+import { UserModel, SwapPermissionPayload, pubsub } from "../../../internal.js";
 
 const subscribeUpdatedUser = {
   type: UserModel,
-  subscribe: () => pubsub.asyncIterator("UserProfile"),
+  args: { accessToken: { type: GraphQLString } },
+  subscribe: withFilter(
+    () => pubsub.asyncIterator("UserProfile"),
+    (payload, variables) => {
+      const verifiedUser = jwt.verify(
+        variables.accessToken,
+        config.secret.accessToken
+      );
+
+      return payload.id === verifiedUser.id;
+    }
+  ),
   resolve: (payload) => {
     return payload;
   },

@@ -103,10 +103,7 @@ async function authenticateRefreshToken(refreshToken, refreshTokens) {
   }
 
   try {
-    const verifiedUser = await jwt.verify(
-      refreshToken,
-      config.secret.refreshToken
-    );
+    const verifiedUser = jwt.verify(refreshToken, config.secret.refreshToken);
     return createAccessToken(verifiedUser);
   } catch (error) {
     throw new AuthenticationError("Refresh token is invalid.");

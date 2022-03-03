@@ -21,6 +21,7 @@ import ChallengeContext from "../ChallengeContext";
 import styles from "./styles";
 import ADD_USER_CHALLENGE from "./Completed.gql";
 import ContentContext from "../../../services/content/ContentContext";
+import Permission from "../../../shared/permission";
 
 function Reward({ title, subtitle }) {
   return (
@@ -128,7 +129,7 @@ function Completed({ navigation }) {
   };
 
   const calculatePoints = () => {
-    if (!challenge.reward) {
+    if (user.permission !== Permission.EXPERIMENT) {
       return null;
     }
 

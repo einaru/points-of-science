@@ -9,7 +9,9 @@ const strings = [
   "Categories",
   "Challenge completed",
   "Challenge",
+  "challenge",
   "Challenges",
+  "challenges",
   "Change password",
   "Complete challenge",
   "Confirm new password",
@@ -36,8 +38,10 @@ const strings = [
   "New password",
   "Next",
   "No more items to choose from!",
+  "of",
   "Password",
   "Permission level",
+  "points",
   "Prefer dark theme",
   "Profile",
   "Project info",
@@ -54,7 +58,6 @@ const strings = [
   "Well done!",
   "What do you think about the challenge?",
   "Your password is updated",
-  "points",
 
   // Smiley-o-meter
   "Awful",
@@ -78,6 +81,11 @@ const en = {
   howToFormAnArgumentText:
     "Drag items from the box above and drop them here to form an argument. " +
     "Remember that order is crucial!",
+
+  // Challenge difficulty levels
+  beginner: "Beginner",
+  intermediate: "Intermediate",
+  expert: "Expert",
 };
 
 export default strings.reduce((obj, value, index, array) => {

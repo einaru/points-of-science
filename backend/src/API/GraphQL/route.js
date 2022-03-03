@@ -78,7 +78,7 @@ const SUBSCRIPTION = new GraphQLObjectType({
   name: "Subscription",
   fields: () => ({
     swappedPermission: subscribeSwappedPermission,
-    updateUserProfile: subscribeUpdatedUser,
+    userChallengeAdded: subscribeUpdatedUser,
   }),
 });
 

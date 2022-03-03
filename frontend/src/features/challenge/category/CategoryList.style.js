@@ -1,25 +1,44 @@
 import { StyleSheet } from "react-native";
 
-export default StyleSheet.create({
-  listContainer: {
-    flex: 1,
-    margin: 8,
-  },
-  listItemContainer: {
-    flexDirection: "row",
-    height: 100,
-    padding: 8,
-  },
-  listItemContent: {
-    flexDirection: "column",
-    marginStart: 16,
-  },
-  image: {
-    width: 84,
-    height: 84,
-  },
-  surface: {
-    marginBottom: 8,
-    elevation: 2,
-  },
-});
+const itemHeight = 100;
+
+export default function themedStyles(theme) {
+  return StyleSheet.create({
+    list: {
+      flex: 1,
+      margin: 8,
+    },
+    surface: {
+      borderRadius: theme.roundness,
+      elevation: 2,
+      marginBottom: 8,
+    },
+    ripple: {
+      borderRadius: theme.roundness,
+    },
+    item: {
+      flexDirection: "row",
+      height: itemHeight,
+    },
+    image: {
+      borderBottomLeftRadius: theme.roundness,
+      borderTopLeftRadius: theme.roundness,
+      height: itemHeight,
+      width: itemHeight,
+    },
+    content: {
+      flex: 1,
+      flexDirection: "column",
+      justifyContent: "space-between",
+      margin: 8,
+    },
+    title: {
+      fontSize: 20,
+      fontWeight: "bold",
+    },
+    progressRow: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+    },
+  });
+}

@@ -10,7 +10,9 @@ export default {
   "Categories": "Kategorier",
   "Challenge completed": "Utfordring fullført",
   "Challenge": "Utfordring",
+  "challenge": "utfordring",
   "Challenges": "Utfordringer",
+  "challenges": "utfordringer",
   "Change password": "Bytt passord",
   "Complete challenge": "Fullfør utfordringen",
   "Confirm new password": "Bekreft nytt passord",
@@ -37,8 +39,10 @@ export default {
   "New password": "Nytt passord",
   "Next": "Neste",
   "No more items to choose from!": "Ingen flere elementer å velge fra!",
+  "of": "av",
   "Password": "Passord",
   "Permission level": "Tillatelsesnivå",
+  "points": "poeng",
   "Prefer dark theme": "Foretrekk mørkt tema",
   "Profile": "Profil",
   "Project info": "Prosjekt info",
@@ -55,7 +59,6 @@ export default {
   "Well done!": "Bra jobbet!",
   "What do you think about the challenge?": "Hva synes du om utfordringen?",
   "Your password is updated": "Passordet ditt er oppdatert",
-  "points": "poeng",
 
   // Smiley-o-meter
   "Awful": "Fryktelig",

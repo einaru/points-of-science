@@ -101,7 +101,6 @@ const AchievementModel = new GraphQLObjectType({
     condition: { type: new GraphQLList(GraphQLString) },
     type: { type: AchievementTypeEnum },
     ...ContentResponse,
-    progress: { type: ProgressModel },
   }),
 });
 

@@ -16,9 +16,9 @@ function CategoryListItem({ category, user, onPress, theme }) {
   const imageSource = category.image ? { uri: category.image } : fallbackImage;
   const challengeIDs = category.challenges.map((item) => item.id);
   const numChallenges = category.challenges.length;
-  const numUserChallenges = user.challenges.filter(({ challengeID }) =>
-    challengeIDs.includes(challengeID)
-  ).length;
+  const numUserChallenges = Array.from(
+    new Set(user.challenges.map(({ challengeID }) => challengeID))
+  ).filter((id) => challengeIDs.includes(id)).length;
 
   const numChallengesLabel = `${numChallenges} ${
     numChallenges === 1 ? t("challenge") : t("challenges")

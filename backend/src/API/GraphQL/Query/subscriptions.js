@@ -7,13 +7,13 @@ import { UserModel, SwapPermissionPayload, pubsub } from "../../../internal.js";
 
 const subscribeUpdatedUser = {
   type: UserModel,
-  args: { accessToken: { type: GraphQLString } },
+  args: { subscribeToken: { type: GraphQLString } },
   subscribe: withFilter(
     () => pubsub.asyncIterator("UserProfile"),
     (payload, variables) => {
       const verifiedUser = jwt.verify(
-        variables.accessToken,
-        config.secret.accessToken
+        variables.subscribeToken,
+        config.secret.subscribeToken
       );
 
       return payload.id === verifiedUser.id;

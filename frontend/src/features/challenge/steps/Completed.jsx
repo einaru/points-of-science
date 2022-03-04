@@ -15,14 +15,17 @@ import {
 import { Button, IconButton, Surface, Text } from "react-native-paper";
 import { useFocusEffect } from "@react-navigation/native";
 import { useMutation } from "@apollo/client";
-import { LoadingScreen, SmileyOMeter } from "../../../shared/components";
+import {
+  HeroBackgroundImage,
+  LoadingScreen,
+  SmileyOMeter,
+} from "../../../shared/components";
 import { t } from "../../i18n";
 import ChallengeContext from "../ChallengeContext";
 import styles from "./styles";
 import ADD_USER_CHALLENGE from "./Completed.gql";
 import ContentContext from "../../../services/content/ContentContext";
 import Permission from "../../../shared/permission";
-import HeroBackgroundImage from "../../../shared/components/HeroBackgroundImage";
 
 function Reward({ title, subtitle }) {
   return (

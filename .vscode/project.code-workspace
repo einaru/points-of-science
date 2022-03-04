@@ -23,5 +23,6 @@
     "editor.codeActionsOnSave": {
       "source.fixAll.eslint": true
     },
+    "sort-imports.default-sort-style": "module-compact",
   }
 }

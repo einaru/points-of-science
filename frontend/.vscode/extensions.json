@@ -1,6 +1,7 @@
 {
     "recommendations": [
-        "msjsdiag.vscode-react-native",
-        "byCedric.vscode-expo"
+        "amatiasq.sort-imports",
+        "bycedric.vscode-expo",
+        "msjsdiag.vscode-react-native"
     ]
 }

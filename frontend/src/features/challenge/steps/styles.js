@@ -22,15 +22,6 @@ export default StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-start",
   },
-  shoutOutContainer: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  shoutOut: {
-    fontSize: 32,
-    fontWeight: "bold",
-  },
   illustrationImage: {
     width: "100%",
     height: 200,
@@ -49,26 +40,5 @@ export default StyleSheet.create({
   },
   action: {
     margin: 8,
-  },
-  rewardContainer: {
-    marginVertical: 16,
-    flexDirection: "row",
-    alignItems: "baseline",
-  },
-  rewardTitle: {
-    fontSize: 64,
-    fontWeight: "bold",
-  },
-  rewardSubtitle: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginStart: 8,
-    lineHeight: 64,
-  },
-  surface: {
-    margin: 8,
-    marginTop: 16,
-    elevation: 1,
-    borderRadius: 4,
   },
 });

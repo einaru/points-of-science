@@ -12,7 +12,13 @@ import {
   ScrollView,
   View,
 } from "react-native";
-import { Button, IconButton, Surface, Text } from "react-native-paper";
+import {
+  Button,
+  IconButton,
+  Surface,
+  Text,
+  withTheme,
+} from "react-native-paper";
 import { useFocusEffect } from "@react-navigation/native";
 import { useMutation } from "@apollo/client";
 import {
@@ -22,26 +28,17 @@ import {
 } from "../../../shared/components";
 import { t } from "../../i18n";
 import ChallengeContext from "../ChallengeContext";
-import styles from "./styles";
+import themedStyles from "./Completed.style";
 import ADD_USER_CHALLENGE from "./Completed.gql";
 import ContentContext from "../../../services/content/ContentContext";
 import Permission from "../../../shared/permission";
-
-function Reward({ title, subtitle }) {
-  return (
-    <View style={styles.rewardContainer}>
-      <Text style={styles.rewardTitle}>{title}</Text>
-      <Text style={styles.rewardSubtitle}>{subtitle}</Text>
-    </View>
-  );
-}
 
 const Direction = {
   IN: "in",
   OUT: "out",
 };
 
-function Completed({ navigation }) {
+function Completed({ navigation, theme }) {
   const { user } = useContext(ContentContext);
   const { challenge, userData } = useContext(ChallengeContext);
   const [addUserChallenge, { called, loading }] = useMutation(
@@ -157,12 +154,16 @@ function Completed({ navigation }) {
     return points;
   };
 
+  const styles = themedStyles(theme);
+
   const renderReward = () => {
     const points = calculatePoints();
-    if (!points) {
-      return null;
-    }
-    return <Reward title={points} subtitle={t("points")} />;
+    return points ? (
+      <View style={styles.rewardContainer}>
+        <Text style={styles.rewardTitle}>{points}</Text>
+        <Text style={styles.rewardSubtitle}>{t("points")}</Text>
+      </View>
+    ) : null;
   };
 
   if (loading) {
@@ -210,4 +211,4 @@ function Completed({ navigation }) {
   );
 }
 
-export default Completed;
+export default withTheme(Completed);

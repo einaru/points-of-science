@@ -5,15 +5,16 @@ import { LoadingScreen } from "~shared/components";
 import { t } from "~shared/i18n";
 
 import ContentContext from "./ContentContext";
-import GET_ALL_CATEGORIES from "./ContentProvider.gql";
+import GET_ALL_CONTENT from "./ContentProvider.gql";
 
 function ContentProvider({ children }) {
-  const { loading, data } = useQuery(GET_ALL_CATEGORIES);
+  const { loading, data } = useQuery(GET_ALL_CONTENT);
 
   const content = React.useMemo(
     () => ({
       user: data?.userProfile,
       categories: data?.getAllCategories ?? [],
+      achievements: data?.getAllAchievements ?? [],
     }),
     [data]
   );

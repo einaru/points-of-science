@@ -1,55 +1,77 @@
 import { gql } from "@apollo/client";
 
-const GET_ALL_CATEGORIES = gql`
-  query getAllCategories {
+const GET_ALL_CONTENT = gql`
+  query GetAllContent {
+    userProfile {
+      ...UserData
+    }
     getAllCategories {
-      id
-      name
-      image
-      description
+      ...CategoryData
       challenges {
-        id
-        name
-        image
-        description
-        difficulty
-        categoryID # FIXME Should provide "category { id name }" from backend
-        reward {
-          maxPoints
-          firstTryPoints
-          bonusPoints
-        }
-        activity {
-          type
-          description
-          resources
-          hints
-        }
-        reflectionType # FIXME Move this into the reflection object
-        reflection {
-          title
-          solution
-          choices
-        }
+        ...ChallengeData
       }
     }
+    getAllAchievements {
+      ...AchievementData
+    }
+  }
 
-    userProfile {
-      id
-      username
-      permission
-      challenges {
-        challengeID
-        answeredCorrect
-      }
-      progress {
-        categories {
-          id
-          progress
-        }
+  fragment UserData on User {
+    id
+    username
+    permission
+    challenges {
+      challengeID
+      answeredCorrect
+    }
+    progress {
+      categories {
+        id
+        progress
       }
     }
   }
-`;
 
-export default GET_ALL_CATEGORIES;
+  fragment CategoryData on Category {
+    id
+    name
+    image
+    description
+  }
+
+  fragment ChallengeData on Challenge {
+    id
+    name
+    image
+    description
+    difficulty
+    categoryID # FIXME Should provide "category { id name }" from backend
+    reward {
+      maxPoints
+      firstTryPoints
+      bonusPoints
+    }
+    activity {
+      type
+      description
+      resources
+      hints
+    }
+    reflectionType # FIXME Move this into the reflection object
+    reflection {
+      title
+      solution
+      choices
+    }
+  }
+
+  fragment AchievementData on Achievement {
+    id
+    name
+    image
+    description
+    type
+    condition
+  }
+`;
+export default GET_ALL_CONTENT;

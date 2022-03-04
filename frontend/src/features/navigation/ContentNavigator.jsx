@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from "react";
+import React from "react";
 import { MaterialCommunityIcons } from "react-native-vector-icons";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import AchievementsScreen from "../achievement/AchievementsScreen";
@@ -20,9 +20,9 @@ const tabIconMap = {
 const Tab = createMaterialBottomTabNavigator();
 
 function ContentNavigator() {
-  const { user } = useContext(AuthContext);
+  const { user } = React.useContext(AuthContext);
 
-  const isGameElementsEnabled = useMemo(() => {
+  const isGameElementsEnabled = React.useMemo(() => {
     return user.permission === Permission.EXPERIMENT;
   }, [user]);
 

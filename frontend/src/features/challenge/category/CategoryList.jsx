@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Image, View } from "react-native";
 import { Text, TouchableRipple, withTheme } from "react-native-paper";
 import themedStyles from "./CategoryList.style";
@@ -58,7 +58,7 @@ function CategoryListItem({ category, user, onPress, theme }) {
 }
 
 function CategoryList({ navigation, theme }) {
-  const { categories, user } = useContext(ContentContext);
+  const { categories, user } = React.useContext(ContentContext);
 
   if (!categories.length) {
     return <NoContent message={t("Couldn't find any content")} />;

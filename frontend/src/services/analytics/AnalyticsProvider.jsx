@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import React, { useCallback, useContext, useMemo, useState } from "react";
+import React from "react";
 import { getTimestamp } from "../../shared/timestamp";
 import AuthContext from "../auth/AuthContext";
 import AnalyticsContext from "./AnalyticsContext";
@@ -16,8 +16,8 @@ function debug(tag, data) {
 }
 
 function AnalyticsProvider({ children }) {
-  const [isDeviceInfoLogged, setIsDeviceInfoLogged] = useState(false);
-  const { sessionToken } = useContext(AuthContext);
+  const [isDeviceInfoLogged, setIsDeviceInfoLogged] = React.useState(false);
+  const { sessionToken } = React.useContext(AuthContext);
 
   const [logEvent] = useMutation(LOG_EVENT, {
     onError: (error) => {
@@ -25,7 +25,7 @@ function AnalyticsProvider({ children }) {
     },
   });
 
-  const doLogEvent = useCallback(
+  const doLogEvent = React.useCallback(
     (event) => {
       logEvent({ variables: { sessionToken, event } });
       debug("click-event", event);
@@ -39,13 +39,13 @@ function AnalyticsProvider({ children }) {
     },
   });
 
-  const doLogDeviceInfo = useCallback(() => {
+  const doLogDeviceInfo = React.useCallback(() => {
     logDeviceInfo({ variables: { sessionToken, deviceInfo } });
     debug("device-info", deviceInfo);
     setIsDeviceInfoLogged(true);
   }, [logDeviceInfo, sessionToken]);
 
-  const analytics = useMemo(
+  const analytics = React.useMemo(
     () => ({
       logClickEvent: (screen, source) => {
         const metadata = extractMetadata(screen);

@@ -1,6 +1,6 @@
-const { createContext } = require("react");
+import React from "react";
 
-const PreferencesContext = createContext({
+const PreferencesContext = React.createContext({
   toggleTheme: () => {},
   prefersDarkTheme: false,
 });

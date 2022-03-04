@@ -1,4 +1,4 @@
-import React, { useContext, useLayoutEffect, useState } from "react";
+import React from "react";
 import { View } from "react-native";
 import { Button } from "react-native-paper";
 import { getTimestamp } from "../../../shared/timestamp";
@@ -10,12 +10,12 @@ import OpenReflection from "./OpenReflection";
 import styles from "./styles";
 
 function Reflection({ navigation }) {
-  const { challenge, setReflectionData } = useContext(ChallengeContext);
+  const { challenge, setReflectionData } = React.useContext(ChallengeContext);
   const { reflection, reflectionType } = challenge;
 
-  const [answer, setAnswer] = useState("");
+  const [answer, setAnswer] = React.useState("");
 
-  useLayoutEffect(() => {
+  React.useLayoutEffect(() => {
     navigation.setOptions({
       headerTitle: () => {
         return (

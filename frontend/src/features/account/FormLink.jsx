@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity, View } from "react-native";
 import { Text, useTheme } from "react-native-paper";

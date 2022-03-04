@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React from "react";
 import {
   NavigationContainer,
   useNavigationContainerRef,
@@ -15,16 +15,16 @@ import { t } from "../i18n";
 
 const PERSISTENCE_KEY = "NAVIGATION_STATE";
 function Navigation({ theme }) {
-  const { loading, isAuthenticated } = useContext(AuthContext);
-  const { logNavigationEvent } = useContext(AnalyticsContext);
+  const { loading, isAuthenticated } = React.useContext(AuthContext);
+  const { logNavigationEvent } = React.useContext(AnalyticsContext);
 
   const navigationRef = useNavigationContainerRef();
-  const screenRef = useRef();
+  const screenRef = React.useRef();
 
-  const [isReady, setIsReady] = useState(false);
-  const [initialState, setInitialState] = useState();
+  const [isReady, setIsReady] = React.useState(false);
+  const [initialState, setInitialState] = React.useState();
 
-  useEffect(() => {
+  React.useEffect(() => {
     // Enables state persistence for app navigation.
     // According to React Navigation this feature is considered experimental,
     // and all route params must be serializable for this to work properly.

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
+import React from "react";
 import { View, ScrollView } from "react-native";
 import { Button, Paragraph, Portal } from "react-native-paper";
 import { t } from "../../i18n";
@@ -12,20 +12,20 @@ import ResourceDialog from "./ResourceDialog";
 function Activity({ navigation }) {
   const dateStarted = getTimestamp();
 
-  const { challenge, setActivityData } = useContext(ChallengeContext);
+  const { challenge, setActivityData } = React.useContext(ChallengeContext);
   const { activity } = challenge;
 
-  const [answer, setAnswer] = useState();
-  useEffect(() => {
+  const [answer, setAnswer] = React.useState();
+  React.useEffect(() => {
     if (activity.type === "external") {
       setAnswer(null);
     }
   }, [activity]);
 
   const { hints } = activity;
-  const [hint, setHint] = useState("");
-  const [hintIndex, setHintIndex] = useState(0);
-  const [hintIsVisible, setHintIsVisible] = useState(false);
+  const [hint, setHint] = React.useState("");
+  const [hintIndex, setHintIndex] = React.useState(0);
+  const [hintIsVisible, setHintIsVisible] = React.useState(false);
 
   // TODO Keep track of which hints have been shown
   const getAHint = () => {
@@ -46,7 +46,7 @@ function Activity({ navigation }) {
   };
 
   const { resources } = activity;
-  const [resourcesIsVisible, setResourcesIsVisible] = useState(false);
+  const [resourcesIsVisible, setResourcesIsVisible] = React.useState(false);
 
   const showResources = () => {
     setResourcesIsVisible(true);
@@ -58,7 +58,7 @@ function Activity({ navigation }) {
     console.debug(`Resources was closed with ${action}`);
   };
 
-  useLayoutEffect(() => {
+  React.useLayoutEffect(() => {
     navigation.setOptions({
       headerTitle: () => {
         return <HeaderTitle subtitle={t("Activity")} title={challenge.name} />;

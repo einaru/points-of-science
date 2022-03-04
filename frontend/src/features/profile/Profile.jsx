@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { useMutation } from "@apollo/client";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import React, { useContext, useMemo, useState } from "react";
+import React from "react";
 import { ScrollView, View } from "react-native";
 import { Avatar, Divider, List, Snackbar, Switch } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -18,15 +18,15 @@ function Profile() {
   const navigation = useNavigation();
   const route = useRoute();
 
-  const [visibleSnackbar, setVisibleSnackbar] = useState(false);
+  const [visibleSnackbar, setVisibleSnackbar] = React.useState(false);
   const showSnackbar = () => setVisibleSnackbar(true);
   const hideSnackbar = () => setVisibleSnackbar(false);
 
-  const { preferDarkTheme, toggleTheme } = useContext(PreferencesContext);
-  const { user, logOutUser, refreshToken } = useContext(AuthContext);
-  const { logClickEvent } = useContext(AnalyticsContext);
+  const { preferDarkTheme, toggleTheme } = React.useContext(PreferencesContext);
+  const { user, logOutUser, refreshToken } = React.useContext(AuthContext);
+  const { logClickEvent } = React.useContext(AnalyticsContext);
 
-  const initials = useMemo(() => {
+  const initials = React.useMemo(() => {
     return user.username
       .split(" ")
       .map((word) => word[0])

@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect, useMemo } from "react";
+import React from "react";
 import { useApolloClient } from "@apollo/client";
 import { reducer, initialState } from "./reducer";
 import * as Storage from "../storage";
@@ -6,7 +6,7 @@ import AuthContext from "./AuthContext";
 import VERIFY_TOKEN from "./AuthProvider.gql";
 
 function AuthProvider({ children }) {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = React.useReducer(reducer, initialState);
 
   const client = useApolloClient();
 
@@ -24,7 +24,7 @@ function AuthProvider({ children }) {
     dispatch({ type: "logout" });
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     const initState = async () => {
       dispatch({ type: "loading" });
       const user = JSON.parse(await Storage.getItem("user"));
@@ -48,7 +48,7 @@ function AuthProvider({ children }) {
     return () => client.stop();
   }, [client]);
 
-  const authContext = useMemo(
+  const authContext = React.useMemo(
     () => ({
       ...state,
       logInUser,

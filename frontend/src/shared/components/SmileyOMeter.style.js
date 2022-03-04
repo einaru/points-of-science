@@ -2,8 +2,9 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   container: {
-    margin: 16,
     alignItems: "center",
+    marginHorizontal: 4,
+    marginVertical: 8,
   },
   smileyometer: {
     flexDirection: "row",
@@ -15,8 +16,8 @@ export default StyleSheet.create({
     width: 64,
   },
   smileyImage: {
-    width: 64,
     height: 64,
+    width: 64,
   },
   smileyLabel: {
     fontSize: 12,

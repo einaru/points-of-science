@@ -6,12 +6,11 @@ import {
   GraphQLBoolean,
   GraphQLList,
   GraphQLFloat,
+  GraphQLInt,
 } from "graphql";
 
 import {
-  AchievementModel,
   AchievementTypeEnum,
-  ChallengeModel,
   ContentResponse,
   PermissionEnum,
 } from "../../../internal.js";
@@ -64,11 +63,21 @@ const UserChallengeInputModel = new GraphQLInputObjectType({
   }),
 });
 
+const UserRewardModel = new GraphQLObjectType({
+  name: "UserReward",
+  fields: () => ({
+    points: { type: GraphQLInt },
+    bonusPoints: { type: GraphQLInt },
+  }),
+});
+
 const UserChallengeModel = new GraphQLObjectType({
   name: "UserChallenge",
   fields: () => ({
     challengeID: { type: GraphQLString },
     answeredCorrect: { type: GraphQLBoolean },
+    completed: { type: GraphQLString },
+    reward: { type: UserRewardModel },
   }),
 });
 
@@ -103,7 +112,7 @@ const UserModel = new GraphQLObjectType({
     username: { type: GraphQLString },
     permission: { type: PermissionEnum },
     achievements: { type: new GraphQLList(UserAchievementModel) },
-    challenges: { type: new GraphQLList(ChallengeModel) },
+    challenges: { type: new GraphQLList(UserChallengeModel) },
     progress: { type: UserProgressModel },
   }),
 });

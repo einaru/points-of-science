@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import Color from "color";
 import commonStyles from "./styles";
 
 export default function themedStyles(theme) {
@@ -12,6 +13,10 @@ export default function themedStyles(theme) {
 
   return StyleSheet.create({
     ...commonStyles,
+    backgroundOverlay: {
+      backgroundColor: Color(colors.background).rgb().fade(0.9).string(),
+      flex: 1,
+    },
     shoutOutContainer: {
       alignItems: "center",
       flex: 1,

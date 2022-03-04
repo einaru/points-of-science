@@ -176,34 +176,36 @@ function Completed({ navigation, theme }) {
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollView}>
         <HeroBackgroundImage name="graduation">
-          <View style={styles.shoutOutContainer}>
-            {renderReward()}
-            <Text style={styles.shoutOut}>{t("Well done!")}</Text>
-          </View>
-          <View>
-            <Surface
-              style={[
-                styles.surface,
-                {
-                  transform: [
-                    {
-                      translateX: slideFrom.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [-Dimensions.get("window").width, 0],
-                      }),
-                    },
-                  ],
-                },
-              ]}
-            >
-              <SmileyOMeter
-                message={t("What do you think about the challenge?")}
-                onPress={handleSmileyPress}
-              />
-            </Surface>
-            <Button style={styles.action} onPress={goBack}>
-              {t("Up for another challenge?")}
-            </Button>
+          <View style={styles.backgroundOverlay}>
+            <View style={styles.shoutOutContainer}>
+              {renderReward()}
+              <Text style={styles.shoutOut}>{t("Well done!")}</Text>
+            </View>
+            <View>
+              <Surface
+                style={[
+                  styles.surface,
+                  {
+                    transform: [
+                      {
+                        translateX: slideFrom.interpolate({
+                          inputRange: [0, 1],
+                          outputRange: [-Dimensions.get("window").width, 0],
+                        }),
+                      },
+                    ],
+                  },
+                ]}
+              >
+                <SmileyOMeter
+                  message={t("What do you think about the challenge?")}
+                  onPress={handleSmileyPress}
+                />
+              </Surface>
+              <Button style={styles.action} onPress={goBack}>
+                {t("Up for another challenge?")}
+              </Button>
+            </View>
           </View>
         </HeroBackgroundImage>
       </ScrollView>

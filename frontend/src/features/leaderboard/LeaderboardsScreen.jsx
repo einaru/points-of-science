@@ -1,12 +1,12 @@
 import React from "react";
-import { Text } from "react-native-paper";
-import { Container } from "../../shared/components";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { HeroBackgroundImage } from "../../shared/components";
 
 function LeaderboardsScreen() {
   return (
-    <Container>
-      <Text>Leaderboards</Text>
-    </Container>
+    <SafeAreaView style={{ flex: 1 }}>
+      <HeroBackgroundImage name="winners" />
+    </SafeAreaView>
   );
 }
 

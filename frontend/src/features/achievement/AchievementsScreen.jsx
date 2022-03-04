@@ -1,12 +1,12 @@
 import React from "react";
-import { Text } from "react-native-paper";
-import { Container } from "../../shared/components";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { HeroBackgroundImage } from "../../shared/components";
 
 function AchievementsScreen() {
   return (
-    <Container>
-      <Text>Achievements</Text>
-    </Container>
+    <SafeAreaView style={{ flex: 1 }}>
+      <HeroBackgroundImage name="appreciation" />
+    </SafeAreaView>
   );
 }
 

@@ -1,6 +1,7 @@
 /* eslint-disable global-require */
 
 export default {
+  appreciation: require("./assets/appreciation.png"),
   graduation: require("./assets/graduation.png"),
   learning: require("./assets/learning.png"),
   lesson: require("./assets/lesson.png"),

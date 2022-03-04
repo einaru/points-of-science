@@ -51,7 +51,7 @@ function vote(userReflection) {
 function isCompleted(userReflection) {
   const functionKey = "isCompleted";
   const code = () => {
-    return userReflection.dateCompleted.trim().length > 0;
+    return userReflection.dateCompleted.trim().length >= 0;
   };
 
   return createObjectTemplate(functionKey, code);

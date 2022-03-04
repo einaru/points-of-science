@@ -70,7 +70,11 @@ function isCompleted() {
       );
     }
 
-    userChallenge.data.completed = userChallenge.userReflection.isCompleted();
+    if (userChallenge.userReflection.isCompleted()) {
+      userChallenge.data.completed = Date.now().valueOf().toString();
+    } else {
+      userChallenge.data.completed = "";
+    }
   };
 
   return createObjectTemplate(functionKey, code);

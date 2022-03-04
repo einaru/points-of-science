@@ -5,6 +5,7 @@ import Profile from "./Profile";
 import ChangePassword from "./ChangePassword";
 import ProjectInfo from "./ProjectInfo";
 import { t } from "../i18n";
+import Attributions from "./Attributions";
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +27,11 @@ function ProfileStack() {
           name="profile:project-info"
           options={{ title: t("Project info") }}
           component={ProjectInfo}
+        />
+        <Stack.Screen
+          name="profile:attributions"
+          options={{ title: t("Attributions") }}
+          component={Attributions}
         />
       </Stack.Navigator>
     </View>

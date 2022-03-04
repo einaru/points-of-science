@@ -97,6 +97,12 @@ function Profile() {
               right={() => <List.Icon icon="chevron-right" />}
               onPress={() => navigation.navigate("profile:project-info")}
             />
+            <List.Item
+              title={t("Attributions")}
+              left={() => <List.Icon icon="copyright" />}
+              right={() => <List.Icon icon="chevron-right" />}
+              onPress={() => navigation.navigate("profile:attributions")}
+            />
           </List.Section>
           <Divider />
           <List.Section>

@@ -3,7 +3,7 @@ import { useApolloClient } from "@apollo/client";
 import * as Storage from "../storage";
 import AuthContext from "./AuthContext";
 import VERIFY_TOKEN from "./AuthProvider.gql";
-import { initialState, reducer } from "./reducer";
+import { initialState, reducer } from "./AuthProvider.reducer";
 
 function AuthProvider({ children }) {
   const [state, dispatch] = React.useReducer(reducer, initialState);

@@ -1,6 +1,6 @@
 import React from "react";
-import { ActivityIndicator, Text } from "react-native-paper";
 import { View } from "react-native";
+import { ActivityIndicator, Text } from "react-native-paper";
 import styles from "./LoadingScreen.style";
 
 function LoadingScreen({ animating = true, message = "" }) {

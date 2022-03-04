@@ -1,12 +1,12 @@
 import React from "react";
 import { Image, View } from "react-native";
 import { Text, TouchableRipple, withTheme } from "react-native-paper";
-import themedStyles from "./CategoryList.style";
-import { NoContent, Surface } from "../../../shared/components";
 import ContentContext from "../../../services/content/ContentContext";
-import { t } from "../../i18n";
-import ProgressBar from "./ProgressBar";
+import { NoContent, Surface } from "../../../shared/components";
 import Permission from "../../../shared/permission";
+import { t } from "../../i18n";
+import themedStyles from "./CategoryList.style";
+import ProgressBar from "./ProgressBar";
 
 const fallbackImage = require("../assets/category.png");
 

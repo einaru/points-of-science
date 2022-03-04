@@ -1,7 +1,7 @@
-import { useMutation } from "@apollo/client";
 import React from "react";
 import { ScrollView, View } from "react-native";
 import { Button, HelperText, Snackbar, TextInput } from "react-native-paper";
+import { useMutation } from "@apollo/client";
 import { t } from "../i18n";
 import CHANGE_PASSWORD from "./ChangePassword.gql";
 import styles from "./ChangePassword.style";

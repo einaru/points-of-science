@@ -13,19 +13,19 @@ import {
   Text,
   withTheme,
 } from "react-native-paper";
-import { useFocusEffect } from "@react-navigation/native";
 import { useMutation } from "@apollo/client";
+import { useFocusEffect } from "@react-navigation/native";
+import ContentContext from "../../../services/content/ContentContext";
 import {
   HeroBackgroundImage,
   LoadingScreen,
   SmileyOMeter,
 } from "../../../shared/components";
+import Permission from "../../../shared/permission";
 import { t } from "../../i18n";
 import ChallengeContext from "../ChallengeContext";
-import themedStyles from "./Completed.style";
 import ADD_USER_CHALLENGE from "./Completed.gql";
-import ContentContext from "../../../services/content/ContentContext";
-import Permission from "../../../shared/permission";
+import themedStyles from "./Completed.style";
 
 const Direction = {
   IN: "in",

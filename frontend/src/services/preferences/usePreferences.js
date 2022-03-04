@@ -1,6 +1,6 @@
+import * as NavigationBar from "expo-navigation-bar";
 import React from "react";
 import { Platform } from "react-native";
-import * as NavigationBar from "expo-navigation-bar";
 import { darkTheme, defaultTheme } from "../../shared/theme";
 
 function usePreferences() {

@@ -1,18 +1,18 @@
 /* eslint-disable no-console */
-import { useMutation } from "@apollo/client";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import * as Clipboard from "expo-clipboard";
 import React from "react";
 import { ScrollView, View } from "react-native";
 import { Avatar, Divider, List, Snackbar, Switch } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
-import * as Clipboard from "expo-clipboard";
+import { useMutation } from "@apollo/client";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import AnalyticsContext from "../../services/analytics/AnalyticsContext";
 import AuthContext from "../../services/auth/AuthContext";
-import { t } from "../i18n";
-import { LoadingScreen } from "../../shared/components";
 import PreferencesContext from "../../services/preferences/PreferencesContext";
+import { LoadingScreen } from "../../shared/components";
+import { t } from "../i18n";
 import LOGOUT from "./Profile.gql";
 import styles from "./Profile.style";
-import AnalyticsContext from "../../services/analytics/AnalyticsContext";
 
 function Profile() {
   const navigation = useNavigation();

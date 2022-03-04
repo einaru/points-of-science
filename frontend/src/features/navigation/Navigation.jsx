@@ -1,17 +1,17 @@
 import React from "react";
+import { Linking, Platform } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   NavigationContainer,
   useNavigationContainerRef,
 } from "@react-navigation/native";
-import { Linking, Platform } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import ContentNavigator from "./ContentNavigator";
-import AccountStack from "../account/AccountStack";
-import AuthContext from "../../services/auth/AuthContext";
 import AnalyticsContext from "../../services/analytics/AnalyticsContext";
+import AuthContext from "../../services/auth/AuthContext";
 import { LoadingScreen } from "../../shared/components";
+import AccountStack from "../account/AccountStack";
 import { t } from "../i18n";
+import ContentNavigator from "./ContentNavigator";
 
 const PERSISTENCE_KEY = "NAVIGATION_STATE";
 function Navigation({ theme }) {

@@ -1,11 +1,11 @@
 import React from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View } from "react-native";
-import Profile from "./Profile";
-import ChangePassword from "./ChangePassword";
-import ProjectInfo from "./ProjectInfo";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { t } from "../i18n";
 import Attributions from "./Attributions";
+import ChangePassword from "./ChangePassword";
+import Profile from "./Profile";
+import ProjectInfo from "./ProjectInfo";
 
 const Stack = createNativeStackNavigator();
 

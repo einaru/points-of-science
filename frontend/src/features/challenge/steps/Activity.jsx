@@ -1,13 +1,13 @@
 import React from "react";
-import { View, ScrollView } from "react-native";
+import { ScrollView, View } from "react-native";
 import { Button, Paragraph, Portal } from "react-native-paper";
+import { getTimestamp } from "../../../shared/timestamp";
 import { t } from "../../i18n";
 import ChallengeContext from "../ChallengeContext";
-import styles from "./styles";
 import HeaderTitle from "./HeaderTitle";
-import { getTimestamp } from "../../../shared/timestamp";
 import HintDialog from "./HintDialog";
 import ResourceDialog from "./ResourceDialog";
+import styles from "./styles";
 
 function Activity({ navigation }) {
   const dateStarted = getTimestamp();

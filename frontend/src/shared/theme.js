@@ -1,11 +1,11 @@
 import {
-  DefaultTheme as NavigationDefaultTheme,
-  DarkTheme as NavigationDarkTheme,
-} from "@react-navigation/native";
-import {
-  DefaultTheme as PaperDefaultTheme,
   DarkTheme as PaperDarkTheme,
+  DefaultTheme as PaperDefaultTheme,
 } from "react-native-paper";
+import {
+  DarkTheme as NavigationDarkTheme,
+  DefaultTheme as NavigationDefaultTheme,
+} from "@react-navigation/native";
 import { colorStrings } from "./colors";
 
 const defaultTheme = {

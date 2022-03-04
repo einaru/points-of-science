@@ -1,9 +1,9 @@
-import { useMutation } from "@apollo/client";
 import React from "react";
+import { useMutation } from "@apollo/client";
 import { getTimestamp } from "../../shared/timestamp";
 import AuthContext from "../auth/AuthContext";
 import AnalyticsContext from "./AnalyticsContext";
-import { LOG_EVENT, LOG_DEVICE_INFO } from "./AnalyticsProvider.gql";
+import { LOG_DEVICE_INFO, LOG_EVENT } from "./AnalyticsProvider.gql";
 import deviceInfo from "./deviceInfo";
 import extractMetadata from "./extractMetadata";
 

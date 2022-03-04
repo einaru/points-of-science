@@ -1,10 +1,10 @@
 import React from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View } from "react-native";
-import CategoryList from "./category/CategoryList";
-import ChallengeList from "./ChallengeList";
-import Challenge from "./Challenge";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { t } from "../i18n";
+import Challenge from "./Challenge";
+import ChallengeList from "./ChallengeList";
+import CategoryList from "./category/CategoryList";
 
 const Stack = createNativeStackNavigator();
 

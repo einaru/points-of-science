@@ -1,6 +1,6 @@
 import fetch from "cross-fetch";
-import { HttpLink } from "@apollo/client";
 import Constants from "expo-constants";
+import { HttpLink } from "@apollo/client";
 
 const { apiEndpoint } = Constants.manifest.extra;
 

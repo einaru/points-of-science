@@ -1,7 +1,7 @@
 import React from "react";
-import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity, View } from "react-native";
 import { Text, useTheme } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
 import styles from "./FormLink.style";
 
 function FormLink({ message, label, screenName }) {

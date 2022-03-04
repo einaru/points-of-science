@@ -2,10 +2,10 @@ import React from "react";
 import { HelperText, TextInput } from "react-native-paper";
 import { useMutation } from "@apollo/client";
 import AuthContext from "../../services/auth/AuthContext";
-import FormView from "./FormView";
-import FormLink from "./FormLink";
 import { t } from "../i18n";
 import FormAction from "./FormAction";
+import FormLink from "./FormLink";
+import FormView from "./FormView";
 import LOGIN from "./Login.gql";
 
 function LoginScreen() {

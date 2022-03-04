@@ -1,6 +1,5 @@
 import { GraphQLSchema, GraphQLObjectType } from "graphql";
 import {
-  addUserAchievementQuery,
   addUserChallengeQuery,
   activateAccountQuery,
   authAccessTokenQuery,
@@ -53,7 +52,6 @@ const ROOTQUERY = new GraphQLObjectType({
 const MUTATION = new GraphQLObjectType({
   name: "Mutation",
   fields: {
-    addUserAchievement: addUserAchievementQuery,
     addUserChallenge: addUserChallengeQuery,
     activateAccount: activateAccountQuery,
     changePassword: changePasswordQuery,

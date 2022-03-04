@@ -165,6 +165,10 @@ const addUserChallengeQuery = {
 
     const { calculateProgress } = progressCreator().progress;
     const categoriesData = await providers.categories.getAll();
+
+    const profile = profileCreator();
+    profile.updateData(userData);
+    profile.add(profile.data.challenges, storedUserChallenge);
     const userProgress = {
       progress: {
         categories: [],
@@ -174,15 +178,18 @@ const addUserChallengeQuery = {
 
     categoriesData.forEach((categoryData) => {
       const challengeIDs = categoryData.challenges;
-      const progress = calculateProgress(userData.challenges, challengeIDs);
+      const progress = calculateProgress(profile.data.challenges, challengeIDs);
 
       userProgress.progress.categories.push({ id: categoryData.id, progress });
     });
 
     const achievements = await providers.achievements.getAll();
+    const achievedAchievements = profile.data.achievements.map(
+      (item) => item.id
+    );
     achievements.forEach((achievementData) => {
       const progress = calculateProgress(
-        userData.challenges,
+        profile.data.challenges,
         achievementData.condition
       );
 
@@ -190,18 +197,26 @@ const addUserChallengeQuery = {
         id: achievementData.id,
         progress,
       });
+
+      if (progress >= 1 && !achievedAchievements.includes(achievementData.id)) {
+        const userAchievement = {
+          id: achievementData.id,
+          ...achievementData.content,
+          condition: achievementData.condition,
+          type: achievementData.type,
+          completed: Date.now().valueOf().toString(),
+        };
+
+        profile.add(profile.data.achievements, userAchievement);
+      }
     });
 
-    const profile = profileCreator();
-    profile.updateData(userData);
     profile.updateData(userProgress);
 
     if (isPermissionGroup(profile, 3)) {
       delete storedUserChallenge.reward;
       delete profile.data.progress;
     }
-
-    profile.add(profile.data.challenges, storedUserChallenge);
 
     await providers.users.update(profile.data.id, profile.data);
 

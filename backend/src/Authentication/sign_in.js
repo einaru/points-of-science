@@ -2,7 +2,7 @@
 import {
   comparePassword,
   createAccessToken,
-  createRefreshToken,
+  createToken,
   profileState,
 } from "../internal.js";
 import config from "../Config/config.js";
@@ -46,26 +46,40 @@ function checkProfileState(user) {
 
 function completeSignIn(result, user, providers) {
   return new Promise((resolve, reject) => {
-    if (
-      result.type === config.responseType.success &&
-      result.data.is_matching
-    ) {
-      const accessToken = createAccessToken(user);
-      const refreshToken = createRefreshToken(user, providers);
-      if (user.permission === 3) {
-        delete user.progress;
+    try {
+      if (
+        result.type === config.responseType.success &&
+        result.data.is_matching
+      ) {
+        const accessToken = createAccessToken(user);
+        const refreshToken = createToken(
+          user,
+          providers.refreshTokens,
+          config.secret.refreshToken
+        );
+        const subscribeToken = createToken(
+          user,
+          providers.subscribeTokens,
+          config.secret.subscribeToken
+        );
+        if (user.permission === 3) {
+          delete user.progress;
+        }
+        resolve({
+          user,
+          accessToken,
+          refreshToken,
+          subscribeToken,
+        });
+        return;
       }
-      resolve({
-        user,
-        accessToken,
-        refreshToken,
-      });
-      return;
-    }
 
-    reject(
-      new Error("Username or password is incorrect. Sign in unsuccessful.")
-    );
+      reject(
+        new Error("Username or password is incorrect. Sign in unsuccessful.")
+      );
+    } catch (error) {
+      reject(error);
+    }
   });
 }
 

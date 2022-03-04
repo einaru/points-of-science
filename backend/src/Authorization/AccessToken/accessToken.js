@@ -4,14 +4,6 @@ import jwt from "jsonwebtoken";
 import config from "../../Config/config.js";
 import { AuthenticationError } from "../../API/GraphQL/error.js";
 
-function getResponseObject(message, statusCode, type) {
-  return {
-    message,
-    status: statusCode,
-    type,
-  };
-}
-
 function createAccessToken(user) {
   const userData = {
     id: user.id,
@@ -21,72 +13,6 @@ function createAccessToken(user) {
 
   return jwt.sign(userData, config.secret.accessToken, {
     expiresIn: "900s",
-  });
-}
-
-function storeRefreshTokenInDatabase(refreshToken, providers) {
-  return new Promise((resolve, reject) => {
-    providers.refreshTokens
-      .getAll()
-      .then((refreshTokens) => {
-        const refreshTokenExist = refreshTokens.find((token) => {
-          if (token === Object(token)) {
-            return token.id === refreshToken;
-          }
-          return token === refreshToken;
-        });
-        if (refreshTokenExist != null) {
-          reject(new Error("Access token already exist."));
-          return;
-        }
-
-        const data = {
-          id: refreshToken,
-        };
-        return providers.refreshTokens.update(data.id, data);
-      })
-      .then(() => {
-        return resolve(
-          getResponseObject(
-            "Access token stored to database successfully.",
-            200,
-            config.responseType.success
-          )
-        );
-      })
-      .catch((error) => {
-        return reject(error);
-      });
-  });
-}
-
-function createRefreshToken(user, providers) {
-  return new Promise((resolve, reject) => {
-    try {
-      const userData = {
-        id: user.id,
-        username: user.username,
-        permission: user.permission,
-        state: user.state,
-      };
-
-      const refreshToken = jwt.sign(userData, config.secret.refreshToken);
-      storeRefreshTokenInDatabase(refreshToken, providers)
-        .then((response) => {
-          if (response.type === "error") {
-            return reject(
-              new Error("Refresh token was not stored in database.")
-            );
-          }
-
-          return resolve(refreshToken);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    } catch (error) {
-      reject(error);
-    }
   });
 }
 
@@ -110,4 +36,64 @@ async function authenticateRefreshToken(refreshToken, refreshTokens) {
   }
 }
 
-export { authenticateRefreshToken, createAccessToken, createRefreshToken };
+function storeTokenInDatabase(token, provider, userID) {
+  return new Promise((resolve, reject) => {
+    provider
+      .getAll()
+      .then((tokens) => {
+        const tokenExist = tokens.find((element) => {
+          if (element === Object(element)) {
+            return element.id === token;
+          }
+          return element === token;
+        });
+        if (tokenExist != null) {
+          reject(new Error("Token already exist."));
+          return;
+        }
+
+        const data = {
+          id: token,
+          userID,
+          created: Date.now().valueOf().toString(),
+        };
+        return provider.update(data.id, data);
+      })
+      .then(() => {
+        return resolve("success");
+      })
+      .catch((error) => {
+        return reject(error);
+      });
+  });
+}
+
+function createToken(user, provider, secret) {
+  return new Promise((resolve, reject) => {
+    try {
+      const userData = {
+        id: user.id,
+        username: user.username,
+        permission: user.permission,
+        state: user.state,
+      };
+
+      const token = jwt.sign(userData, secret);
+      storeTokenInDatabase(token, provider, user.id)
+        .then((response) => {
+          if (response === "error") {
+            return reject(new Error("Token was not stored in database."));
+          }
+
+          return resolve(token);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+
+export { authenticateRefreshToken, createAccessToken, createToken };

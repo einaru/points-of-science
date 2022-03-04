@@ -12,6 +12,7 @@ export const SignInModel = new GraphQLObjectType({
   fields: () => ({
     accessToken: { type: GraphQLString },
     refreshToken: { type: GraphQLString },
+    subscribeToken: { type: GraphQLString },
     user: { type: UserModel },
   }),
 });

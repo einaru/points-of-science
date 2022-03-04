@@ -5,10 +5,11 @@ thesis in the spring of 2022.
 
 ## Prerequisites
 
-The application runs on [Node.js][] and uses [Firestore][] to persist data.
+The application runs on [Node.js][] and uses [Firestore][] to persist data. It uses [Redis][] as publish subscribe provider
 
 [Node.js]: https://nodejs.org/
 [Firestore]: https://cloud.google.com/firestore
+[Redis]: https://redis.io
 
 ### Development mode
 
@@ -53,12 +54,39 @@ the following command will import the latest exported data and export on exit:
 yarn firestore
 ```
 
+You also need to install redis-server before you can hoste the application on your local machine.
+If you have a PC with Windows as OS, you will need to install Windows Subsystem for Linux for the backend to work.
+[WSL]: https://docs.microsoft.com/en-us/windows/wsl/install 
+
+Once WSL is installed run the following command to initialize WSL in a terminal:
+```
+wsl
+```
+
+Once WSL is running in the terminal you can type the following commands for Ubuntu into the terminal:
+```
+sudo add-apt-repository ppa:redislabs/redis
+sudo apt-get update
+sudo apt-get install redis
+```
+
+When Redis is finished installing, you could type the following command in to the terminal:
+```
+sudo service redis-server start
+```
+
+To stop the Redis server when you are finished with development, type the following command into the terminal:
+```
+sudo service redis-server stop
+```
+
 You should also remember to set secret keys for both access and refresh tokens.
 These secrets can be set in the `.env` file as well:
 
 ```env
 ACCESS_TOKEN_SECRET=SuPeRsEcReT
 REFRESH_TOKEN_SECRET=EvEnMoReSeCrEt
+SUBSCRIBE_TOKEN_SECRET=<secret_token>
 ```
 
 Now you should be able run `yarn dev` to fire up the application.

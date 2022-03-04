@@ -60,79 +60,83 @@ export default function ArgumentConstructor({
 
   return (
     <DraxProvider>
-      <Text style={styles.question}>{question}</Text>
-      <DraxView
-        id="source"
-        style={styles.bin}
-        payload={argumentChoices}
-        receivingStyle={styles.receiving}
-        draggable={false}
-        renderContent={() => {
-          const items = Array.from(argumentChoices);
-          return items.length === 0 ? (
-            <View style={[styles.placeholder, styles.centered]}>
-              <Text>{t("No more items to choose from!")}</Text>
-            </View>
-          ) : (
-            items.map((item) => (
-              <DraggableItem key={item.key} item={item} styles={styles} />
-            ))
-          );
-        }}
-        onReceiveDragDrop={(event) => {
-          const item = event.dragged.payload;
-          setArgumentChoices((state) => new Set(state).add(item));
-          const otherState = argumentData;
-          otherState.delete(item);
-          setArgumentData(otherState);
-        }}
-      />
-      <View style={styles.divider}>
-        <MaterialCommunityIcons
-          style={styles.icon}
-          name="arrow-up-down"
-          size={24}
+      <View style={styles.content}>
+        <Text style={styles.question}>{question}</Text>
+        <DraxView
+          id="source"
+          style={styles.bin}
+          payload={argumentChoices}
+          receivingStyle={styles.receiving}
+          draggable={false}
+          renderContent={() => {
+            const items = Array.from(argumentChoices);
+            return items.length === 0 ? (
+              <View style={[styles.placeholder, styles.centered]}>
+                <Text>{t("No more items to choose from!")}</Text>
+              </View>
+            ) : (
+              items.map((item) => (
+                <DraggableItem key={item.key} item={item} styles={styles} />
+              ))
+            );
+          }}
+          onReceiveDragDrop={(event) => {
+            const item = event.dragged.payload;
+            setArgumentChoices((state) => new Set(state).add(item));
+            const otherState = argumentData;
+            otherState.delete(item);
+            setArgumentData(otherState);
+          }}
         />
-      </View>
-      <DraxView
-        id="destination"
-        style={styles.bin}
-        payload={argumentData}
-        receivingStyle={styles.receiving}
-        draggable={false}
-        renderContent={() => {
-          const items = Array.from(argumentData);
-          return items.length === 0 ? (
-            <View style={[styles.placeholder, { padding: 32 }]}>
-              <Text style={styles.title}>{t("howToFormAnArgumentTitle")}</Text>
-              <Text style={styles.text}>{t("howToFormAnArgumentText")}</Text>
-            </View>
-          ) : (
-            items.map((item) => (
-              <DraggableItem key={item.key} item={item} styles={styles} />
-            ))
-          );
-        }}
-        onReceiveDragDrop={(event) => {
-          const item = event.dragged.payload;
-          setArgumentData((oldState) => {
-            const state = new Set(oldState).add(item);
-            const answer = Array.from(state).map((arg) => arg.label);
-            onChangeArgument(JSON.stringify(answer));
-            return state;
-          });
-          const otherState = argumentChoices;
-          otherState.delete(item);
-          setArgumentChoices(otherState);
-        }}
-      />
-      <View style={styles.actions}>
-        <Button mode="outlined" icon="delete" onPress={() => reset()}>
-          {t("Reset")}
-        </Button>
-        <Button mode="outlined" icon="undo" onPress={() => undo()}>
-          {t("Undo")}
-        </Button>
+        <View style={styles.divider}>
+          <MaterialCommunityIcons
+            style={styles.icon}
+            name="arrow-up-down"
+            size={24}
+          />
+        </View>
+        <DraxView
+          id="destination"
+          style={styles.bin}
+          payload={argumentData}
+          receivingStyle={styles.receiving}
+          draggable={false}
+          renderContent={() => {
+            const items = Array.from(argumentData);
+            return items.length === 0 ? (
+              <View style={[styles.placeholder, { padding: 32 }]}>
+                <Text style={styles.title}>
+                  {t("howToFormAnArgumentTitle")}
+                </Text>
+                <Text style={styles.text}>{t("howToFormAnArgumentText")}</Text>
+              </View>
+            ) : (
+              items.map((item) => (
+                <DraggableItem key={item.key} item={item} styles={styles} />
+              ))
+            );
+          }}
+          onReceiveDragDrop={(event) => {
+            const item = event.dragged.payload;
+            setArgumentData((oldState) => {
+              const state = new Set(oldState).add(item);
+              const answer = Array.from(state).map((arg) => arg.label);
+              onChangeArgument(JSON.stringify(answer));
+              return state;
+            });
+            const otherState = argumentChoices;
+            otherState.delete(item);
+            setArgumentChoices(otherState);
+          }}
+        />
+        <View style={styles.actions}>
+          <Button mode="outlined" icon="delete" onPress={() => reset()}>
+            {t("Reset")}
+          </Button>
+          <Button mode="outlined" icon="undo" onPress={() => undo()}>
+            {t("Undo")}
+          </Button>
+        </View>
       </View>
     </DraxProvider>
   );

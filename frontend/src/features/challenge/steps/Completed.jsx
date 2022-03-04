@@ -12,32 +12,33 @@ import {
   ScrollView,
   View,
 } from "react-native";
-import { Button, IconButton, Surface, Text } from "react-native-paper";
+import {
+  Button,
+  IconButton,
+  Surface,
+  Text,
+  withTheme,
+} from "react-native-paper";
 import { useFocusEffect } from "@react-navigation/native";
 import { useMutation } from "@apollo/client";
-import { LoadingScreen, SmileyOMeter } from "../../../shared/components";
+import {
+  HeroBackgroundImage,
+  LoadingScreen,
+  SmileyOMeter,
+} from "../../../shared/components";
 import { t } from "../../i18n";
 import ChallengeContext from "../ChallengeContext";
-import styles from "./styles";
+import themedStyles from "./Completed.style";
 import ADD_USER_CHALLENGE from "./Completed.gql";
 import ContentContext from "../../../services/content/ContentContext";
 import Permission from "../../../shared/permission";
-
-function Reward({ title, subtitle }) {
-  return (
-    <View style={styles.rewardContainer}>
-      <Text style={styles.rewardTitle}>{title}</Text>
-      <Text style={styles.rewardSubtitle}>{subtitle}</Text>
-    </View>
-  );
-}
 
 const Direction = {
   IN: "in",
   OUT: "out",
 };
 
-function Completed({ navigation }) {
+function Completed({ navigation, theme }) {
   const { user } = useContext(ContentContext);
   const { challenge, userData } = useContext(ChallengeContext);
   const [addUserChallenge, { called, loading }] = useMutation(
@@ -153,12 +154,16 @@ function Completed({ navigation }) {
     return points;
   };
 
+  const styles = themedStyles(theme);
+
   const renderReward = () => {
     const points = calculatePoints();
-    if (!points) {
-      return null;
-    }
-    return <Reward title={points} subtitle={t("points")} />;
+    return points ? (
+      <View style={styles.rewardContainer}>
+        <Text style={styles.rewardTitle}>{points}</Text>
+        <Text style={styles.rewardSubtitle}>{t("points")}</Text>
+      </View>
+    ) : null;
   };
 
   if (loading) {
@@ -170,38 +175,42 @@ function Completed({ navigation }) {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollView}>
-        <View style={styles.shoutOutContainer}>
-          {renderReward()}
-          <Text style={styles.shoutOut}>{t("Well done!")}</Text>
-        </View>
-        <View>
-          <Surface
-            style={[
-              styles.surface,
-              {
-                transform: [
+        <HeroBackgroundImage name="graduation">
+          <View style={styles.backgroundOverlay}>
+            <View style={styles.shoutOutContainer}>
+              {renderReward()}
+              <Text style={styles.shoutOut}>{t("Well done!")}</Text>
+            </View>
+            <View>
+              <Surface
+                style={[
+                  styles.surface,
                   {
-                    translateX: slideFrom.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: [-Dimensions.get("window").width, 0],
-                    }),
+                    transform: [
+                      {
+                        translateX: slideFrom.interpolate({
+                          inputRange: [0, 1],
+                          outputRange: [-Dimensions.get("window").width, 0],
+                        }),
+                      },
+                    ],
                   },
-                ],
-              },
-            ]}
-          >
-            <SmileyOMeter
-              message={t("What do you think about the challenge?")}
-              onPress={handleSmileyPress}
-            />
-          </Surface>
-          <Button style={styles.action} onPress={goBack}>
-            {t("Up for another challenge?")}
-          </Button>
-        </View>
+                ]}
+              >
+                <SmileyOMeter
+                  message={t("What do you think about the challenge?")}
+                  onPress={handleSmileyPress}
+                />
+              </Surface>
+              <Button style={styles.action} onPress={goBack}>
+                {t("Up for another challenge?")}
+              </Button>
+            </View>
+          </View>
+        </HeroBackgroundImage>
       </ScrollView>
     </View>
   );
 }
 
-export default Completed;
+export default withTheme(Completed);

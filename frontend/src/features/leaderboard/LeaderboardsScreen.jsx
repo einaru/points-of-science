@@ -1,5 +1,6 @@
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
+
 import { HeroBackgroundImage } from "../../shared/components";
 
 function LeaderboardsScreen() {

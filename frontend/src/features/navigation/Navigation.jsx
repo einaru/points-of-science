@@ -1,11 +1,12 @@
-import React from "react";
-import { Linking, Platform } from "react-native";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   NavigationContainer,
   useNavigationContainerRef,
 } from "@react-navigation/native";
+import React from "react";
+import { Linking, Platform } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+
 import AnalyticsContext from "../../services/analytics/AnalyticsContext";
 import AuthContext from "../../services/auth/AuthContext";
 import { LoadingScreen } from "../../shared/components";

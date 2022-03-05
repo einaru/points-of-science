@@ -1,8 +1,9 @@
+import { ApolloProvider } from "@apollo/client";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { Provider as ThemeProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { ApolloProvider } from "@apollo/client";
+
 import Navigation from "./src/features/navigation";
 import AnalyticsProvider from "./src/services/analytics/AnalyticsProvider";
 import useApiClient from "./src/services/api/useApiClient";

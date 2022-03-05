@@ -1,5 +1,6 @@
-import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import React from "react";
+
 import { t } from "../../shared/i18n";
 import ActivateAccount from "./ActivateAccount";
 import ActivateAccountProvider from "./ActivateAccountProvider";

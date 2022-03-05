@@ -1,6 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import { Text, useTheme } from "react-native-paper";
+
 import styles from "./HeaderTitle.style";
 
 export default function HeaderTitle({ title, subtitle }) {

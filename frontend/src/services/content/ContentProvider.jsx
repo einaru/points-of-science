@@ -1,5 +1,6 @@
-import React from "react";
 import { useQuery } from "@apollo/client";
+import React from "react";
+
 import { LoadingScreen } from "../../shared/components";
 import { t } from "../../shared/i18n";
 import AuthContext from "../auth/AuthContext";

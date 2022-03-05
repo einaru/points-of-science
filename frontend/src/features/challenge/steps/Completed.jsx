@@ -1,3 +1,5 @@
+import { useMutation } from "@apollo/client";
+import { useFocusEffect } from "@react-navigation/native";
 import React from "react";
 import {
   Animated,
@@ -13,8 +15,7 @@ import {
   Text,
   withTheme,
 } from "react-native-paper";
-import { useMutation } from "@apollo/client";
-import { useFocusEffect } from "@react-navigation/native";
+
 import ContentContext from "../../../services/content/ContentContext";
 import {
   HeroBackgroundImage,

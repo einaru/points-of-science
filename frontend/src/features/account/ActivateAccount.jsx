@@ -1,4 +1,5 @@
 import React from "react";
+
 import { t } from "../../shared/i18n";
 import { ActivateAccountContext } from "./ActivateAccountProvider";
 import FormAction from "./FormAction";

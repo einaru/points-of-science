@@ -1,4 +1,5 @@
 import { NativeModulesProxy } from "expo-modules-core";
+
 import * as Storage from "./storage";
 
 describe("Native storage", () => {

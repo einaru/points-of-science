@@ -2,6 +2,7 @@ import { openURL } from "expo-linking";
 import React from "react";
 import { ScrollView } from "react-native";
 import { List } from "react-native-paper";
+
 import { t } from "../../shared/i18n";
 
 const attributions = {

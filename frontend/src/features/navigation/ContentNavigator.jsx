@@ -1,6 +1,7 @@
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import React from "react";
 import { MaterialCommunityIcons } from "react-native-vector-icons";
-import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+
 import AuthContext from "../../services/auth/AuthContext";
 import ContentProvider from "../../services/content/ContentProvider";
 import { t } from "../../shared/i18n";

@@ -1,6 +1,7 @@
 import * as Linking from "expo-linking";
 import React from "react";
 import { Dialog, IconButton, List } from "react-native-paper";
+
 import { t } from "../../../shared/i18n";
 import DialogAction from "./DialogAction";
 

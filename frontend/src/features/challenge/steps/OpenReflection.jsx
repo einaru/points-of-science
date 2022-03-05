@@ -2,7 +2,7 @@ import React from "react";
 import { ScrollView, View } from "react-native";
 import { Text, TextInput } from "react-native-paper";
 import { HeroImage } from "../../../shared/components";
-import { t } from "../../i18n";
+import { t } from "../../../shared/i18n";
 import styles from "./OpenReflection.style";
 
 export default function OpenReflection({ title, onChange }) {

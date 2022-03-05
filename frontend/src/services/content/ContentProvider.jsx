@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
-import { t } from "../../features/i18n";
 import { LoadingScreen } from "../../shared/components";
+import { t } from "../../shared/i18n";
 import AuthContext from "../auth/AuthContext";
 import ContentContext from "./ContentContext";
 import GET_ALL_CATEGORIES from "./ContentProvider.gql";

@@ -1,7 +1,7 @@
 import React from "react";
 import { HelperText, TextInput } from "react-native-paper";
 import { useLazyQuery } from "@apollo/client";
-import { t } from "../i18n";
+import { t } from "../../shared/i18n";
 import { ActivateAccountContext } from "./ActivateAccountProvider";
 import FormAction from "./FormAction";
 import VERIFY_USERNAME from "./VerifyUsername.gql";

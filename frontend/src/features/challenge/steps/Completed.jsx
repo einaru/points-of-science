@@ -21,8 +21,8 @@ import {
   LoadingScreen,
   SmileyOMeter,
 } from "../../../shared/components";
+import { t } from "../../../shared/i18n";
 import Permission from "../../../shared/permission";
-import { t } from "../../i18n";
 import ChallengeContext from "../ChallengeContext";
 import ADD_USER_CHALLENGE from "./Completed.gql";
 import themedStyles from "./Completed.style";

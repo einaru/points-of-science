@@ -9,8 +9,8 @@ import {
 import AnalyticsContext from "../../services/analytics/AnalyticsContext";
 import AuthContext from "../../services/auth/AuthContext";
 import { LoadingScreen } from "../../shared/components";
+import { t } from "../../shared/i18n";
 import AccountStack from "../account/AccountStack";
-import { t } from "../i18n";
 import ContentNavigator from "./ContentNavigator";
 
 const PERSISTENCE_KEY = "NAVIGATION_STATE";

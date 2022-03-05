@@ -4,8 +4,8 @@ import { Chip, Text, TouchableRipple, withTheme } from "react-native-paper";
 import { MaterialCommunityIcons } from "react-native-vector-icons";
 import colors from "../../shared/colors";
 import { NoContent, Surface } from "../../shared/components";
+import { t } from "../../shared/i18n";
 import Permission from "../../shared/permission";
-import { t } from "../i18n";
 import themedStyles from "./ChallengeList.style";
 import { getDifficultyColor } from "./difficulty";
 

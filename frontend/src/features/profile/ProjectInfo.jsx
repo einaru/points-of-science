@@ -4,7 +4,7 @@ import React from "react";
 import { ScrollView, View } from "react-native";
 import { List, Paragraph, Subheading } from "react-native-paper";
 import { HeroImage } from "../../shared/components";
-import { t } from "../i18n";
+import { t } from "../../shared/i18n";
 import styles from "./ProjectInfo.style";
 
 function ProjectInfo() {

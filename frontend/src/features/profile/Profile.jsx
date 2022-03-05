@@ -10,7 +10,7 @@ import AnalyticsContext from "../../services/analytics/AnalyticsContext";
 import AuthContext from "../../services/auth/AuthContext";
 import PreferencesContext from "../../services/preferences/PreferencesContext";
 import { LoadingScreen } from "../../shared/components";
-import { t } from "../i18n";
+import { t } from "../../shared/i18n";
 import LOGOUT from "./Profile.gql";
 import styles from "./Profile.style";
 

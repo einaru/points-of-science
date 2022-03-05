@@ -10,6 +10,8 @@
     "eject": "expo eject",
     "lint": "eslint . --ext .js,.jsx",
     "lint:fix": "eslint . --ext .js,.jsx --fix",
+    "sort-imports": "import-sort App.jsx ./src/**/*.{js,jsx} --list-different",
+    "sort-imports:fix": "import-sort App.jsx ./src/**/*.{js,jsx} --write",
     "test": "yarn node --experimental-vm-modules $(yarn bin jest)",
     "test:coverage": "yarn node --experimental-vm-modules $(yarn bin jest) --coverage"
   },
@@ -64,8 +66,24 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "import-sort-cli": "^6.0.0",
+    "import-sort-style": "^6.0.0",
+    "import-sort-style-module-alias": "^1.1.0",
     "prettier": "^2.5.1",
     "react-test-renderer": "17"
+  },
+  "importSort": {
+    ".js, .jsx": {
+      "parser": "babylon",
+      "style": "module-alias",
+      "options": {
+        "alias": [
+          "~features",
+          "~services",
+          "~shared"
+        ]
+      }
+    }
   },
   "private": true
 }

@@ -31,8 +31,8 @@ function ChallengeListItem({ challenge, user, theme, onPress }) {
 
   const renderHeader = () => {
     const headerStyle = isAlreadyCompleted
-      ? { ...styles.header, backgroundColor: colors.green.fade(0.3).string() }
-      : styles.header;
+      ? [styles.header, { backgroundColor: colors.green.fade(0.3).string() }]
+      : [styles.header];
     return (
       <View style={headerStyle}>
         <Text style={styles.title}>{challenge.name}</Text>

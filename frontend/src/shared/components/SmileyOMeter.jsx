@@ -1,4 +1,3 @@
-/* eslint-disable global-require */
 import React from "react";
 import { Image, TouchableOpacity, View } from "react-native";
 import { Subheading, Text } from "react-native-paper";

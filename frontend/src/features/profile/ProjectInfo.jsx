@@ -1,4 +1,3 @@
-/* eslint-disable global-require */
 import { openURL } from "expo-linking";
 import React from "react";
 import { ScrollView, View } from "react-native";

@@ -1,5 +1,3 @@
-/* eslint-disable global-require */
-
 export default {
   appreciation: require("./assets/appreciation.png"),
   graduation: require("./assets/graduation.png"),

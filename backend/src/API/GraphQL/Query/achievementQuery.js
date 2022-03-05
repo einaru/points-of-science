@@ -64,7 +64,4 @@ const createAchievementQuery = {
   },
 };
 
-export {
-  createAchievementQuery,
-  getAllAchievementsQuery,
-};
+export { createAchievementQuery, getAllAchievementsQuery };

@@ -1,9 +1,7 @@
 {
-  "name": "frontend",
-  "slug": "msc-mobile-app",
   "expo": {
     "name": "frontend",
-    "slug": "frontend",
+    "slug": "msc-mobile-app",
     "version": "1.0.0",
     "sdkVersion": "44.0.0",
     "orientation": "portrait",

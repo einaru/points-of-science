@@ -1,11 +1,19 @@
 import React from "react";
 import { ImageBackground, ScrollView, View } from "react-native";
-import { Chip, Text, TouchableRipple, withTheme } from "react-native-paper";
+import {
+  Chip,
+  Surface,
+  Text,
+  TouchableRipple,
+  withTheme,
+} from "react-native-paper";
 import { MaterialCommunityIcons } from "react-native-vector-icons";
-import colors from "../../shared/colors";
-import { NoContent, Surface } from "../../shared/components";
-import Permission from "../../shared/permission";
-import { t } from "../i18n";
+
+import colors from "~shared/colors";
+import { NoContent } from "~shared/components";
+import { t } from "~shared/i18n";
+import Permission from "~shared/permission";
+
 import themedStyles from "./ChallengeList.style";
 import { getDifficultyColor } from "./difficulty";
 
@@ -23,8 +31,8 @@ function ChallengeListItem({ challenge, user, theme, onPress }) {
 
   const renderHeader = () => {
     const headerStyle = isAlreadyCompleted
-      ? { ...styles.header, backgroundColor: colors.green.fade(0.3).string() }
-      : styles.header;
+      ? [styles.header, { backgroundColor: colors.green.fade(0.3).string() }]
+      : [styles.header];
     return (
       <View style={headerStyle}>
         <Text style={styles.title}>{challenge.name}</Text>

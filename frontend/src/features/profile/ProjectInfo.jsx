@@ -1,10 +1,11 @@
-/* eslint-disable global-require */
 import { openURL } from "expo-linking";
 import React from "react";
-import { View, ScrollView } from "react-native";
+import { ScrollView, View } from "react-native";
 import { List, Paragraph, Subheading } from "react-native-paper";
-import { HeroImage } from "../../shared/components";
-import { t } from "../i18n";
+
+import { HeroImage } from "~shared/components";
+import { t } from "~shared/i18n";
+
 import styles from "./ProjectInfo.style";
 
 function ProjectInfo() {

@@ -1,4 +1,4 @@
-import color from "color";
+import Color from "color";
 import { StyleSheet } from "react-native";
 
 export default function themedStyles(theme) {
@@ -6,8 +6,8 @@ export default function themedStyles(theme) {
 
   // Match the background colors used react-native-paper TextInput
   const binBgColor = theme.dark
-    ? color(colors.background).lighten(0.24).rgb().string()
-    : color(colors.background).darken(0.06).rgb().string();
+    ? Color(colors.background).lighten(0.24).rgb().string()
+    : Color(colors.background).darken(0.06).rgb().string();
 
   return StyleSheet.create({
     content: {

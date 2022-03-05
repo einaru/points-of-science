@@ -1,5 +1,6 @@
-import { StyleSheet } from "react-native";
 import Color from "color";
+import { StyleSheet } from "react-native";
+
 import commonStyles from "./styles";
 
 export default function themedStyles(theme) {
@@ -45,6 +46,7 @@ export default function themedStyles(theme) {
     },
     rewardSubtitle: {
       ...textShadow,
+
       fontSize: 24,
       fontWeight: "bold",
       lineHeight: 64,

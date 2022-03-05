@@ -1,8 +1,9 @@
-/* eslint-disable global-require */
-import React, { useState } from "react";
+import React from "react";
 import { Image, TouchableOpacity, View } from "react-native";
 import { Subheading, Text } from "react-native-paper";
-import { t } from "../../features/i18n";
+
+import { t } from "~shared/i18n";
+
 import styles from "./SmileyOMeter.style";
 
 const smileys = {
@@ -45,7 +46,7 @@ function Smiley({ item, onPress }) {
 // A Smiley-o-meter implementation based on the Fun Toolkit from Janet C. Read
 // See: https://dl.acm.org/doi/pdf/10.1145/1139073.1139096
 export default function SmileyOMeter({ message, style, onPress }) {
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = React.useState(null);
 
   const handleOnPress = (key, item) => {
     onPress(item.score);

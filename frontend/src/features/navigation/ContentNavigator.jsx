@@ -1,14 +1,15 @@
-import React, { useContext, useMemo } from "react";
-import { MaterialCommunityIcons } from "react-native-vector-icons";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-import AchievementsScreen from "../achievement/AchievementsScreen";
-import LeaderboardsScreen from "../leaderboard/LeaderboardsScreen";
-import ProfileStack from "../profile/ProfileStack";
-import { t } from "../i18n";
-import ChallengesStack from "../challenge/ChallengesStack";
-import ContentProvider from "../../services/content/ContentProvider";
-import AuthContext from "../../services/auth/AuthContext";
-import Permission from "../../shared/permission";
+import React from "react";
+import { MaterialCommunityIcons } from "react-native-vector-icons";
+
+import AchievementsScreen from "~features/achievement/AchievementsScreen";
+import ChallengesStack from "~features/challenge/ChallengesStack";
+import LeaderboardsScreen from "~features/leaderboard/LeaderboardsScreen";
+import ProfileStack from "~features/profile/ProfileStack";
+import AuthContext from "~services/auth/AuthContext";
+import ContentProvider from "~services/content/ContentProvider";
+import { t } from "~shared/i18n";
+import Permission from "~shared/permission";
 
 const tabIconMap = {
   "tab:challenges": "lightbulb-on",
@@ -20,9 +21,9 @@ const tabIconMap = {
 const Tab = createMaterialBottomTabNavigator();
 
 function ContentNavigator() {
-  const { user } = useContext(AuthContext);
+  const { user } = React.useContext(AuthContext);
 
-  const isGameElementsEnabled = useMemo(() => {
+  const isGameElementsEnabled = React.useMemo(() => {
     return user.permission === Permission.EXPERIMENT;
   }, [user]);
 

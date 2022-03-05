@@ -1,18 +1,19 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { Platform } from "react-native";
 import * as NavigationBar from "expo-navigation-bar";
-import { darkTheme, defaultTheme } from "../../shared/theme";
+import React from "react";
+import { Platform } from "react-native";
+
+import { darkTheme, defaultTheme } from "~shared/theme";
 
 function usePreferences() {
-  const [preferDarkTheme, setPreferDarkTheme] = useState("");
+  const [preferDarkTheme, setPreferDarkTheme] = React.useState("");
 
   const theme = preferDarkTheme ? darkTheme : defaultTheme;
 
-  const toggleTheme = useCallback(() => {
+  const toggleTheme = React.useCallback(() => {
     return setPreferDarkTheme(!preferDarkTheme);
   }, [preferDarkTheme]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (Platform.OS === "android") {
       // According to the documentation the BottomNavigation component is
       // supposed to use the surface color in dark theme with adaptive mode,
@@ -22,7 +23,7 @@ function usePreferences() {
     }
   }, [preferDarkTheme, theme]);
 
-  const preferences = useMemo(
+  const preferences = React.useMemo(
     () => ({
       theme,
       preferDarkTheme,

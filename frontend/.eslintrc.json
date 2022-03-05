@@ -25,6 +25,7 @@
     "prettier"
   ],
   "rules": {
+    "global-require": "off",
     "prettier/prettier": "error",
     "react/style-prop-object": [1, {
       "allow": ["StatusBar"]
@@ -33,6 +34,18 @@
       "allowAsProps": true
     }],
     "react/prop-types": ["off"]
+  },
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["~features", "./src/features"],
+          ["~services", "./src/services"],
+          ["~shared", "./src/shared"]
+        ],
+        "extensions": [".js", ".jsx"]
+      }
+    }
   },
   "globals": {
     "__DEV__": true

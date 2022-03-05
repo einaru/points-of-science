@@ -1,30 +1,32 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   NavigationContainer,
   useNavigationContainerRef,
 } from "@react-navigation/native";
+import React from "react";
 import { Linking, Platform } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+
+import AccountStack from "~features/account/AccountStack";
+import AnalyticsContext from "~services/analytics/AnalyticsContext";
+import AuthContext from "~services/auth/AuthContext";
+import { LoadingScreen } from "~shared/components";
+import { t } from "~shared/i18n";
+
 import ContentNavigator from "./ContentNavigator";
-import AccountStack from "../account/AccountStack";
-import AuthContext from "../../services/auth/AuthContext";
-import AnalyticsContext from "../../services/analytics/AnalyticsContext";
-import { LoadingScreen } from "../../shared/components";
-import { t } from "../i18n";
 
 const PERSISTENCE_KEY = "NAVIGATION_STATE";
 function Navigation({ theme }) {
-  const { loading, isAuthenticated } = useContext(AuthContext);
-  const { logNavigationEvent } = useContext(AnalyticsContext);
+  const { loading, isAuthenticated } = React.useContext(AuthContext);
+  const { logNavigationEvent } = React.useContext(AnalyticsContext);
 
   const navigationRef = useNavigationContainerRef();
-  const screenRef = useRef();
+  const screenRef = React.useRef();
 
-  const [isReady, setIsReady] = useState(false);
-  const [initialState, setInitialState] = useState();
+  const [isReady, setIsReady] = React.useState(false);
+  const [initialState, setInitialState] = React.useState();
 
-  useEffect(() => {
+  React.useEffect(() => {
     // Enables state persistence for app navigation.
     // According to React Navigation this feature is considered experimental,
     // and all route params must be serializable for this to work properly.

@@ -1,32 +1,34 @@
-/* eslint-disable no-console */
 import { useMutation } from "@apollo/client";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import React, { useContext, useMemo, useState } from "react";
+/* eslint-disable no-console */
+import * as Clipboard from "expo-clipboard";
+import React from "react";
 import { ScrollView, View } from "react-native";
 import { Avatar, Divider, List, Snackbar, Switch } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
-import * as Clipboard from "expo-clipboard";
-import AuthContext from "../../services/auth/AuthContext";
-import { t } from "../i18n";
-import { LoadingScreen } from "../../shared/components";
-import PreferencesContext from "../../services/preferences/PreferencesContext";
+
+import AnalyticsContext from "~services/analytics/AnalyticsContext";
+import AuthContext from "~services/auth/AuthContext";
+import PreferencesContext from "~services/preferences/PreferencesContext";
+import { LoadingScreen } from "~shared/components";
+import { t } from "~shared/i18n";
+
 import LOGOUT from "./Profile.gql";
 import styles from "./Profile.style";
-import AnalyticsContext from "../../services/analytics/AnalyticsContext";
 
 function Profile() {
   const navigation = useNavigation();
   const route = useRoute();
 
-  const [visibleSnackbar, setVisibleSnackbar] = useState(false);
+  const [visibleSnackbar, setVisibleSnackbar] = React.useState(false);
   const showSnackbar = () => setVisibleSnackbar(true);
   const hideSnackbar = () => setVisibleSnackbar(false);
 
-  const { preferDarkTheme, toggleTheme } = useContext(PreferencesContext);
-  const { user, logOutUser, refreshToken } = useContext(AuthContext);
-  const { logClickEvent } = useContext(AnalyticsContext);
+  const { preferDarkTheme, toggleTheme } = React.useContext(PreferencesContext);
+  const { user, logOutUser, refreshToken } = React.useContext(AuthContext);
+  const { logClickEvent } = React.useContext(AnalyticsContext);
 
-  const initials = useMemo(() => {
+  const initials = React.useMemo(() => {
     return user.username
       .split(" ")
       .map((word) => word[0])

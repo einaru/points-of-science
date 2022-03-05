@@ -1,15 +1,17 @@
 import { useLazyQuery } from "@apollo/client";
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 import { HelperText, TextInput } from "react-native-paper";
+
+import { t } from "~shared/i18n";
+
 import { ActivateAccountContext } from "./ActivateAccountProvider";
-import { t } from "../i18n";
 import FormAction from "./FormAction";
 import VERIFY_USERNAME from "./VerifyUsername.gql";
 
 export default function VerifyUsername() {
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = React.useState("");
 
-  const { username, setUsername, setIsVerified } = useContext(
+  const { username, setUsername, setIsVerified } = React.useContext(
     ActivateAccountContext
   );
 
@@ -18,7 +20,7 @@ export default function VerifyUsername() {
   const [verifyUsername, { called, loading, data, error }] =
     useLazyQuery(VERIFY_USERNAME);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (data?.verifyUsername) {
       setIsVerified(true);
       setErrorMessage("");

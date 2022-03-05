@@ -1,12 +1,12 @@
-import React, { createContext, useMemo, useState } from "react";
+import React from "react";
 
-export const ActivateAccountContext = createContext();
+export const ActivateAccountContext = React.createContext();
 
 function ActivateAccountProvider({ children }) {
-  const [username, setUsername] = useState("");
-  const [isVerified, setIsVerified] = useState(false);
+  const [username, setUsername] = React.useState("");
+  const [isVerified, setIsVerified] = React.useState(false);
 
-  const accountContext = useMemo(
+  const accountContext = React.useMemo(
     () => ({
       username,
       isVerified,

@@ -1,22 +1,24 @@
 import { useMutation } from "@apollo/client";
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { ScrollView, View } from "react-native";
 import { Button, HelperText, Snackbar, TextInput } from "react-native-paper";
-import { t } from "../i18n";
+
+import { t } from "~shared/i18n";
+
 import CHANGE_PASSWORD from "./ChangePassword.gql";
 import styles from "./ChangePassword.style";
 
 function ChangePassword() {
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [visibleSnackbar, setVisibleSnackbar] = useState(false);
+  const [password, setPassword] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState("");
+  const [errorMessage, setErrorMessage] = React.useState("");
+  const [visibleSnackbar, setVisibleSnackbar] = React.useState(false);
 
   const showSnackbar = () => setVisibleSnackbar(true);
   const hideSnackbar = () => setVisibleSnackbar(false);
 
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
   const toggleShowPassword = () => setShowPassword(!showPassword);
   const toggleShowConfirmPassword = () =>
     setShowConfirmPassword(!showConfirmPassword);
@@ -27,13 +29,13 @@ function ChangePassword() {
     },
   });
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (data?.changePassword) {
       showSnackbar();
     }
   }, [data]);
 
-  const confirmRef = useRef();
+  const confirmRef = React.useRef();
 
   const doChangePassword = () => {
     setErrorMessage("");

@@ -1,10 +1,6 @@
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-} from "react";
+import { useMutation } from "@apollo/client";
+import { useFocusEffect } from "@react-navigation/native";
+import React from "react";
 import {
   Animated,
   BackHandler,
@@ -19,19 +15,19 @@ import {
   Text,
   withTheme,
 } from "react-native-paper";
-import { useFocusEffect } from "@react-navigation/native";
-import { useMutation } from "@apollo/client";
+
+import ContentContext from "~services/content/ContentContext";
 import {
   HeroBackgroundImage,
   LoadingScreen,
   SmileyOMeter,
-} from "../../../shared/components";
-import { t } from "../../i18n";
+} from "~shared/components";
+import { t } from "~shared/i18n";
+import Permission from "~shared/permission";
+
 import ChallengeContext from "../ChallengeContext";
-import themedStyles from "./Completed.style";
 import ADD_USER_CHALLENGE from "./Completed.gql";
-import ContentContext from "../../../services/content/ContentContext";
-import Permission from "../../../shared/permission";
+import themedStyles from "./Completed.style";
 
 const Direction = {
   IN: "in",
@@ -39,8 +35,8 @@ const Direction = {
 };
 
 function Completed({ navigation, theme }) {
-  const { user } = useContext(ContentContext);
-  const { challenge, userData } = useContext(ChallengeContext);
+  const { user } = React.useContext(ContentContext);
+  const { challenge, userData } = React.useContext(ChallengeContext);
   const [addUserChallenge, { called, loading }] = useMutation(
     ADD_USER_CHALLENGE,
     {
@@ -50,7 +46,7 @@ function Completed({ navigation, theme }) {
     }
   );
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!called) {
       addUserChallenge({
         variables: {
@@ -73,14 +69,14 @@ function Completed({ navigation, theme }) {
   // The challenge is considered completed when we reach this screen.
   // In order to prevent going back through the various challenge step screens,
   // we navigate to the category list screen when users wants to "go back".
-  const goBack = useCallback(() => {
+  const goBack = React.useCallback(() => {
     navigation.navigate("category:list");
   }, [navigation]);
 
   // Override the hardware back action on Android and send users to the screen
   // indicated in the goBack function above.
   useFocusEffect(
-    useCallback(() => {
+    React.useCallback(() => {
       const handler = BackHandler.addEventListener("hardwareBackPress", () => {
         goBack();
         return true;
@@ -89,16 +85,16 @@ function Completed({ navigation, theme }) {
     }, [goBack])
   );
 
-  useLayoutEffect(() => {
+  React.useLayoutEffect(() => {
     navigation.setOptions({
       title: challenge.name,
       headerLeft: () => <IconButton icon="check" onPress={goBack} />,
     });
   }, [navigation, challenge, goBack]);
 
-  const slideFrom = useRef(new Animated.Value(0)).current;
+  const slideFrom = React.useRef(new Animated.Value(0)).current;
 
-  const slide = useCallback(
+  const slide = React.useCallback(
     (direction, duration) => {
       const [from, to] = direction === Direction.IN ? [0, 1] : [1, 0];
       slideFrom.current = from;
@@ -111,7 +107,7 @@ function Completed({ navigation, theme }) {
     [slideFrom]
   );
 
-  useEffect(() => {
+  React.useEffect(() => {
     slide(Direction.IN, 350);
   });
 

@@ -1,27 +1,29 @@
 import { useMutation } from "@apollo/client";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React from "react";
 import { HelperText, TextInput } from "react-native-paper";
-import AuthContext from "../../services/auth/AuthContext";
+
+import AuthContext from "~services/auth/AuthContext";
+import { t } from "~shared/i18n";
+
 import { ActivateAccountContext } from "./ActivateAccountProvider";
-import { t } from "../i18n";
 import FormAction from "./FormAction";
 import ACTIVATE_ACCOUNT from "./SetPassword.gql";
 
 export default function SetPassword() {
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [password, setPassword] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState("");
+  const [errorMessage, setErrorMessage] = React.useState("");
 
   const isDisabled = !password && !confirmPassword;
 
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
   const toggleShowPassword = () => setShowPassword(!showPassword);
   const toggleShowConfirmPassword = () =>
     setShowConfirmPassword(!showConfirmPassword);
 
-  const { username } = useContext(ActivateAccountContext);
-  const { logInUser } = useContext(AuthContext);
+  const { username } = React.useContext(ActivateAccountContext);
+  const { logInUser } = React.useContext(AuthContext);
 
   const [activateAccount, { data, loading }] = useMutation(ACTIVATE_ACCOUNT, {
     onError: (error) => {
@@ -29,7 +31,7 @@ export default function SetPassword() {
     },
   });
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (data?.activateAccount) {
       const { user, accessToken, refreshToken } = data.activateAccount;
       logInUser(user, accessToken, refreshToken);
@@ -37,7 +39,7 @@ export default function SetPassword() {
     }
   }, [data, logInUser]);
 
-  const confirmRef = useRef();
+  const confirmRef = React.useRef();
 
   const doActivateAccount = () => {
     activateAccount({

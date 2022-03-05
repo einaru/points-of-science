@@ -1,5 +1,6 @@
 /* eslint-disable react/static-property-placement */
 /* eslint-disable react/prefer-stateless-function */
+
 import React from "react";
 import { Animated } from "react-native";
 
@@ -7,7 +8,7 @@ import { Animated } from "react-native";
  * Workaround solution for app crashing when toggling dark theme.
  *
  * The crash happens when `NavigationBar.setBackgroundColorAsync() is called,
- * and for example the Surface component from react-native-paper is used.
+ * and for example the Card component from react-native-paper is used.
  *
  * ## Usage
  * ```js

@@ -1,9 +1,11 @@
-import * as React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Login from "./Login";
+import React from "react";
+
+import { t } from "~shared/i18n";
+
 import ActivateAccount from "./ActivateAccount";
 import ActivateAccountProvider from "./ActivateAccountProvider";
-import { t } from "../i18n";
+import Login from "./Login";
 
 const Stack = createNativeStackNavigator();
 

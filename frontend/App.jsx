@@ -1,15 +1,16 @@
-import React from "react";
 import { ApolloProvider } from "@apollo/client";
 import { StatusBar } from "expo-status-bar";
+import React from "react";
 import { Provider as ThemeProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import AuthProvider from "./src/services/auth/AuthProvider";
-import Navigation from "./src/features/navigation";
-import PreferencesContext from "./src/services/preferences/PreferencesContext";
-import useApiClient from "./src/services/api/useApiClient";
-import { LoadingScreen } from "./src/shared/components";
-import usePreferences from "./src/services/preferences/usePreferences";
-import AnalyticsProvider from "./src/services/analytics/AnalyticsProvider";
+
+import Navigation from "~features/navigation";
+import AnalyticsProvider from "~services/analytics/AnalyticsProvider";
+import useApiClient from "~services/api/useApiClient";
+import AuthProvider from "~services/auth/AuthProvider";
+import PreferencesContext from "~services/preferences/PreferencesContext";
+import usePreferences from "~services/preferences/usePreferences";
+import { LoadingScreen } from "~shared/components";
 
 export default function App() {
   const client = useApiClient();

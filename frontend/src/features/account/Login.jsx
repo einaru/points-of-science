@@ -1,19 +1,21 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { HelperText, TextInput } from "react-native-paper";
 import { useMutation } from "@apollo/client";
-import AuthContext from "../../services/auth/AuthContext";
-import FormView from "./FormView";
-import FormLink from "./FormLink";
-import { t } from "../i18n";
+import React from "react";
+import { HelperText, TextInput } from "react-native-paper";
+
+import AuthContext from "~services/auth/AuthContext";
+import { t } from "~shared/i18n";
+
 import FormAction from "./FormAction";
+import FormLink from "./FormLink";
+import FormView from "./FormView";
 import LOGIN from "./Login.gql";
 
 function LoginScreen() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [errorMessage, setErrorMessage] = React.useState("");
 
-  const { logInUser } = useContext(AuthContext);
+  const { logInUser } = React.useContext(AuthContext);
   const [logIn, { data, loading }] = useMutation(LOGIN, {
     onError: (error) => {
       setErrorMessage(error.message);
@@ -22,10 +24,10 @@ function LoginScreen() {
 
   const isDisabled = !username && !password;
 
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = React.useState(false);
   const toggleShowPassword = () => setShowPassword(!showPassword);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (data?.signIn) {
       const { user, accessToken, refreshToken } = data.signIn;
       logInUser(user, accessToken, refreshToken);
@@ -33,7 +35,7 @@ function LoginScreen() {
     }
   }, [data, logInUser]);
 
-  const passwordRef = useRef();
+  const passwordRef = React.useRef();
 
   const doLogIn = () => {
     logIn({ variables: { username, password } });

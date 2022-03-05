@@ -1,12 +1,14 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Image, View } from "react-native";
-import { Text, TouchableRipple, withTheme } from "react-native-paper";
+import { Surface, Text, TouchableRipple, withTheme } from "react-native-paper";
+
+import ContentContext from "~services/content/ContentContext";
+import { NoContent } from "~shared/components";
+import { t } from "~shared/i18n";
+import Permission from "~shared/permission";
+
 import themedStyles from "./CategoryList.style";
-import { NoContent, Surface } from "../../../shared/components";
-import ContentContext from "../../../services/content/ContentContext";
-import { t } from "../../i18n";
 import ProgressBar from "./ProgressBar";
-import Permission from "../../../shared/permission";
 
 const fallbackImage = require("../assets/category.png");
 
@@ -58,7 +60,7 @@ function CategoryListItem({ category, user, onPress, theme }) {
 }
 
 function CategoryList({ navigation, theme }) {
-  const { categories, user } = useContext(ContentContext);
+  const { categories, user } = React.useContext(ContentContext);
 
   if (!categories.length) {
     return <NoContent message={t("Couldn't find any content")} />;

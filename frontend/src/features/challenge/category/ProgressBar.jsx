@@ -1,7 +1,8 @@
-import React from "react";
 import Color from "color";
+import React from "react";
 import { ProgressBar as PaperProgressBar } from "react-native-paper";
-import colors from "../../../shared/colors";
+
+import colors from "~shared/colors";
 
 const { red, yellow, green } = colors;
 

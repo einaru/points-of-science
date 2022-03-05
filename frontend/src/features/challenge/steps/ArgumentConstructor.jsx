@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { View } from "react-native";
 import { DraxProvider, DraxView } from "react-native-drax";
 import { Button, Text, useTheme } from "react-native-paper";
 import { MaterialCommunityIcons } from "react-native-vector-icons";
-import { t } from "../../i18n";
+
+import { t } from "~shared/i18n";
+
 import themedStyles from "./ArgumentConstructor.style";
 
 function getColor(i, n, alpha = 1) {
@@ -42,8 +44,8 @@ export default function ArgumentConstructor({
     }))
   );
 
-  const [argumentData, setArgumentData] = useState(initialData);
-  const [argumentChoices, setArgumentChoices] = useState(initialChoices);
+  const [argumentData, setArgumentData] = React.useState(initialData);
+  const [argumentChoices, setArgumentChoices] = React.useState(initialChoices);
 
   const reset = () => {
     setArgumentData(initialData);

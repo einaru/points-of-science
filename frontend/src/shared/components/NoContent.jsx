@@ -1,6 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import { Text } from "react-native-paper";
+
 import styles from "./NoContent.style";
 
 function NoContent({ message }) {

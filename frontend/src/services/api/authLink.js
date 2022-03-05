@@ -1,5 +1,7 @@
 import { setContext } from "@apollo/client/link/context";
-import * as Storage from "../storage";
+
+import * as Storage from "~services/storage";
+
 import { getNewToken, isTokenValid } from "./token";
 
 const withToken = setContext(async () => {

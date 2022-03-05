@@ -1,14 +1,16 @@
-import React, { useContext, useLayoutEffect } from "react";
-import { ImageBackground, View, ScrollView } from "react-native";
+import React from "react";
+import { ImageBackground, ScrollView, View } from "react-native";
 import { Button, Chip, Paragraph } from "react-native-paper";
-import { t } from "../../i18n";
+
+import { t } from "~shared/i18n";
+
 import ChallengeContext from "../ChallengeContext";
 import styles from "./styles";
 
 const fallbackImage = require("../assets/experiment.jpg");
 
 function Intro({ navigation }) {
-  const { challenge } = useContext(ChallengeContext);
+  const { challenge } = React.useContext(ChallengeContext);
 
   const imageSource = challenge.image
     ? { uri: challenge.image }
@@ -22,7 +24,7 @@ function Intro({ navigation }) {
     );
   };
 
-  useLayoutEffect(() => {
+  React.useLayoutEffect(() => {
     navigation.setOptions({
       title: challenge.name,
     });

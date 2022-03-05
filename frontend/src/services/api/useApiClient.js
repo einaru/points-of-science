@@ -1,7 +1,8 @@
 import { ApolloClient, InMemoryCache } from "@apollo/client";
-import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AsyncStorageWrapper, CachePersistor } from "apollo3-cache-persist";
+import { useEffect, useState } from "react";
+
 import link from "./link";
 
 const cache = new InMemoryCache();

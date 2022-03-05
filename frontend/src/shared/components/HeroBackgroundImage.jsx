@@ -1,5 +1,6 @@
 import React from "react";
 import { ImageBackground } from "react-native";
+
 import heroImages from "./heroImages";
 
 export default function HeroBackgroundImage({ name, width, height, children }) {

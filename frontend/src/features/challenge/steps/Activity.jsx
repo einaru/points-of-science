@@ -2,8 +2,9 @@ import React from "react";
 import { ScrollView, View } from "react-native";
 import { Button, Paragraph, Portal } from "react-native-paper";
 
-import { t } from "../../../shared/i18n";
-import { getTimestamp } from "../../../shared/timestamp";
+import { t } from "~shared/i18n";
+import { getTimestamp } from "~shared/timestamp";
+
 import ChallengeContext from "../ChallengeContext";
 import HeaderTitle from "./HeaderTitle";
 import HintDialog from "./HintDialog";

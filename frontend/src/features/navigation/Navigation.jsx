@@ -7,11 +7,12 @@ import React from "react";
 import { Linking, Platform } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
-import AnalyticsContext from "../../services/analytics/AnalyticsContext";
-import AuthContext from "../../services/auth/AuthContext";
-import { LoadingScreen } from "../../shared/components";
-import { t } from "../../shared/i18n";
-import AccountStack from "../account/AccountStack";
+import AccountStack from "~features/account/AccountStack";
+import AnalyticsContext from "~services/analytics/AnalyticsContext";
+import AuthContext from "~services/auth/AuthContext";
+import { LoadingScreen } from "~shared/components";
+import { t } from "~shared/i18n";
+
 import ContentNavigator from "./ContentNavigator";
 
 const PERSISTENCE_KEY = "NAVIGATION_STATE";

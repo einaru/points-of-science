@@ -4,7 +4,8 @@ import { DraxProvider, DraxView } from "react-native-drax";
 import { Button, Text, useTheme } from "react-native-paper";
 import { MaterialCommunityIcons } from "react-native-vector-icons";
 
-import { t } from "../../../shared/i18n";
+import { t } from "~shared/i18n";
+
 import themedStyles from "./ArgumentConstructor.style";
 
 function getColor(i, n, alpha = 1) {

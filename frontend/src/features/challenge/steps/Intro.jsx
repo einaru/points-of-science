@@ -2,7 +2,8 @@ import React from "react";
 import { ImageBackground, ScrollView, View } from "react-native";
 import { Button, Chip, Paragraph } from "react-native-paper";
 
-import { t } from "../../../shared/i18n";
+import { t } from "~shared/i18n";
+
 import ChallengeContext from "../ChallengeContext";
 import styles from "./styles";
 

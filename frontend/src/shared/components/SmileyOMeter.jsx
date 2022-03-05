@@ -3,7 +3,8 @@ import React from "react";
 import { Image, TouchableOpacity, View } from "react-native";
 import { Subheading, Text } from "react-native-paper";
 
-import { t } from "../i18n";
+import { t } from "~shared/i18n";
+
 import styles from "./SmileyOMeter.style";
 
 const smileys = {

@@ -1,4 +1,4 @@
-import colors from "../../shared/colors";
+import colors from "~shared/colors";
 
 export const Difficulty = Object.freeze({
   BEGINNER: "beginner",

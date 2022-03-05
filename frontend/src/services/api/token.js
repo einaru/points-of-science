@@ -1,7 +1,8 @@
 import fetch from "cross-fetch";
 import Constants from "expo-constants";
 import jwtDecode from "jwt-decode";
-import * as Storage from "../storage";
+
+import * as Storage from "~services/storage";
 
 export function isTokenValid(token) {
   let valid = true;

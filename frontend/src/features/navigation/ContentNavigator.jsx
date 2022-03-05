@@ -2,14 +2,14 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import React from "react";
 import { MaterialCommunityIcons } from "react-native-vector-icons";
 
-import AuthContext from "../../services/auth/AuthContext";
-import ContentProvider from "../../services/content/ContentProvider";
-import { t } from "../../shared/i18n";
-import Permission from "../../shared/permission";
-import AchievementsScreen from "../achievement/AchievementsScreen";
-import ChallengesStack from "../challenge/ChallengesStack";
-import LeaderboardsScreen from "../leaderboard/LeaderboardsScreen";
-import ProfileStack from "../profile/ProfileStack";
+import AchievementsScreen from "~features/achievement/AchievementsScreen";
+import ChallengesStack from "~features/challenge/ChallengesStack";
+import LeaderboardsScreen from "~features/leaderboard/LeaderboardsScreen";
+import ProfileStack from "~features/profile/ProfileStack";
+import AuthContext from "~services/auth/AuthContext";
+import ContentProvider from "~services/content/ContentProvider";
+import { t } from "~shared/i18n";
+import Permission from "~shared/permission";
 
 const tabIconMap = {
   "tab:challenges": "lightbulb-on",

@@ -16,14 +16,15 @@ import {
   withTheme,
 } from "react-native-paper";
 
-import ContentContext from "../../../services/content/ContentContext";
+import ContentContext from "~services/content/ContentContext";
 import {
   HeroBackgroundImage,
   LoadingScreen,
   SmileyOMeter,
-} from "../../../shared/components";
-import { t } from "../../../shared/i18n";
-import Permission from "../../../shared/permission";
+} from "~shared/components";
+import { t } from "~shared/i18n";
+import Permission from "~shared/permission";
+
 import ChallengeContext from "../ChallengeContext";
 import ADD_USER_CHALLENGE from "./Completed.gql";
 import themedStyles from "./Completed.style";

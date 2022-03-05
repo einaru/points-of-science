@@ -1,8 +1,9 @@
 import { useMutation } from "@apollo/client";
 import React from "react";
 
-import { getTimestamp } from "../../shared/timestamp";
-import AuthContext from "../auth/AuthContext";
+import AuthContext from "~services/auth/AuthContext";
+import { getTimestamp } from "~shared/timestamp";
+
 import AnalyticsContext from "./AnalyticsContext";
 import { LOG_DEVICE_INFO, LOG_EVENT } from "./AnalyticsProvider.gql";
 import deviceInfo from "./deviceInfo";

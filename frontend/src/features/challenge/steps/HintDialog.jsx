@@ -1,7 +1,8 @@
 import React from "react";
 import { Dialog, IconButton, Paragraph } from "react-native-paper";
 
-import { t } from "../../../shared/i18n";
+import { t } from "~shared/i18n";
+
 import DialogAction from "./DialogAction";
 
 export default function HintDialog({ hint, visible, onDismiss }) {

@@ -1,7 +1,8 @@
 import * as NavigationBar from "expo-navigation-bar";
 import React from "react";
 import { Platform } from "react-native";
-import { darkTheme, defaultTheme } from "../../shared/theme";
+
+import { darkTheme, defaultTheme } from "~shared/theme";
 
 function usePreferences() {
   const [preferDarkTheme, setPreferDarkTheme] = React.useState("");

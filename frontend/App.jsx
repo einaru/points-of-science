@@ -4,13 +4,13 @@ import React from "react";
 import { Provider as ThemeProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-import Navigation from "./src/features/navigation";
-import AnalyticsProvider from "./src/services/analytics/AnalyticsProvider";
-import useApiClient from "./src/services/api/useApiClient";
-import AuthProvider from "./src/services/auth/AuthProvider";
-import PreferencesContext from "./src/services/preferences/PreferencesContext";
-import usePreferences from "./src/services/preferences/usePreferences";
-import { LoadingScreen } from "./src/shared/components";
+import Navigation from "~features/navigation";
+import AnalyticsProvider from "~services/analytics/AnalyticsProvider";
+import useApiClient from "~services/api/useApiClient";
+import AuthProvider from "~services/auth/AuthProvider";
+import PreferencesContext from "~services/preferences/PreferencesContext";
+import usePreferences from "~services/preferences/usePreferences";
+import { LoadingScreen } from "~shared/components";
 
 export default function App() {
   const client = useApiClient();

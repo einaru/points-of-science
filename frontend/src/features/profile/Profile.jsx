@@ -7,11 +7,12 @@ import { ScrollView, View } from "react-native";
 import { Avatar, Divider, List, Snackbar, Switch } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import AnalyticsContext from "../../services/analytics/AnalyticsContext";
-import AuthContext from "../../services/auth/AuthContext";
-import PreferencesContext from "../../services/preferences/PreferencesContext";
-import { LoadingScreen } from "../../shared/components";
-import { t } from "../../shared/i18n";
+import AnalyticsContext from "~services/analytics/AnalyticsContext";
+import AuthContext from "~services/auth/AuthContext";
+import PreferencesContext from "~services/preferences/PreferencesContext";
+import { LoadingScreen } from "~shared/components";
+import { t } from "~shared/i18n";
+
 import LOGOUT from "./Profile.gql";
 import styles from "./Profile.style";
 

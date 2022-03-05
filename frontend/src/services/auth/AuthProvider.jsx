@@ -1,7 +1,8 @@
 import { useApolloClient } from "@apollo/client";
 import React from "react";
 
-import * as Storage from "../storage";
+import * as Storage from "~services/storage";
+
 import AuthContext from "./AuthContext";
 import VERIFY_TOKEN from "./AuthProvider.gql";
 import { initialState, reducer } from "./AuthProvider.reducer";

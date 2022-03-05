@@ -2,8 +2,9 @@ import React from "react";
 import { View } from "react-native";
 import { Button } from "react-native-paper";
 
-import { t } from "../../../shared/i18n";
-import { getTimestamp } from "../../../shared/timestamp";
+import { t } from "~shared/i18n";
+import { getTimestamp } from "~shared/timestamp";
+
 import ChallengeContext from "../ChallengeContext";
 import ArgumentConstructor from "./ArgumentConstructor";
 import HeaderTitle from "./HeaderTitle";

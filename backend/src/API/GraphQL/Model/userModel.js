@@ -14,7 +14,6 @@ import {
   ContentResponse,
   PermissionEnum,
 } from "../../../internal.js";
-import { PermissionEnum } from "./authModel.js";
 
 const UserAchievementModel = new GraphQLObjectType({
   name: "UserAchievement",
@@ -117,4 +116,4 @@ const UserModel = new GraphQLObjectType({
   }),
 });
 
-export { UserAchievementModel, UserChallengeInputModel, UserModel };
+export { UserAchievementModel, UserChallengeInputModel, UserChallengeModel, UserModel };

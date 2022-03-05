@@ -8,6 +8,7 @@ import {
   ReflectionInputModel,
   RewardInputModel,
   UserChallengeInputModel,
+  UserChallengeModel,
   categoryCreator,
   isPermissionGroup,
   challengeCreator,
@@ -114,7 +115,7 @@ const createChallengeQuery = {
 };
 
 const addUserChallengeQuery = {
-  type: NormalResponseModel,
+  type: UserChallengeModel,
   args: {
     userChallenge: { type: UserChallengeInputModel },
   },
@@ -224,7 +225,7 @@ const addUserChallengeQuery = {
     pubsub.publish("UserProfile", profile.data);
     // pubsub.publish("Leaderboard", );
 
-    return { message: `User challenge added successfully.` };
+    return userChallenge.convertToResponseObject(userChallenge);
   },
 };
 

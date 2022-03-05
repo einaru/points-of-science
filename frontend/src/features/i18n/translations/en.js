@@ -92,9 +92,9 @@ const en = {
   expert: "Expert",
 };
 
-export default strings.reduce((obj, value, index, array) => {
+export default strings.reduce((obj, value) => {
   return {
     ...obj,
-    [array[index]]: value,
+    [value]: value,
   };
 }, en);

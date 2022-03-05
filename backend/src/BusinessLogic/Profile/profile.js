@@ -125,6 +125,10 @@ function emptyData() {
       permission: "",
       achievements: [],
       challenges: [],
+      progress: {
+        categories: [{}],
+        achievements: [{}],
+      },
       state: profileState.deactivated.value,
     },
   };

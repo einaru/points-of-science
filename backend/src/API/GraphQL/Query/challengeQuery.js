@@ -8,6 +8,7 @@ import {
   ReflectionInputModel,
   RewardInputModel,
   UserChallengeInputModel,
+  UserChallengeModel,
   categoryCreator,
   isPermissionGroup,
   challengeCreator,
@@ -17,6 +18,7 @@ import {
   createReflection,
   createReward,
   profileCreator,
+  progressCreator,
   userChallengeCreator,
 } from "../../../internal.js";
 import { assertIsAdmin, assertIsAuthenticated } from "../assert.js";
@@ -113,11 +115,11 @@ const createChallengeQuery = {
 };
 
 const addUserChallengeQuery = {
-  type: NormalResponseModel,
+  type: UserChallengeModel,
   args: {
     userChallenge: { type: UserChallengeInputModel },
   },
-  async resolve(_, args, { user, providers }) {
+  async resolve(_, args, { user, providers, pubsub }) {
     assertIsAuthenticated(user);
 
     const challenge = await providers.challenges.getByID(
@@ -161,17 +163,69 @@ const addUserChallengeQuery = {
 
     const storedUserChallenge =
       userChallenge.convertToStoredObject(userChallenge);
+
+    const { calculateProgress } = progressCreator().progress;
+    const categoriesData = await providers.categories.getAll();
+
     const profile = profileCreator();
     profile.updateData(userData);
+    profile.add(profile.data.challenges, storedUserChallenge);
+    const userProgress = {
+      progress: {
+        categories: [],
+        achievements: [],
+      },
+    };
+
+    categoriesData.forEach((categoryData) => {
+      const challengeIDs = categoryData.challenges;
+      const progress = calculateProgress(profile.data.challenges, challengeIDs);
+
+      userProgress.progress.categories.push({ id: categoryData.id, progress });
+    });
+
+    const achievements = await providers.achievements.getAll();
+    const achievedAchievements = profile.data.achievements.map(
+      (item) => item.id
+    );
+    achievements.forEach((achievementData) => {
+      const progress = calculateProgress(
+        profile.data.challenges,
+        achievementData.condition
+      );
+
+      userProgress.progress.achievements.push({
+        id: achievementData.id,
+        progress,
+      });
+
+      if (progress >= 1 && !achievedAchievements.includes(achievementData.id)) {
+        const userAchievement = {
+          id: achievementData.id,
+          ...achievementData.content,
+          condition: achievementData.condition,
+          type: achievementData.type,
+          completed: Date.now().valueOf().toString(),
+        };
+
+        profile.add(profile.data.achievements, userAchievement);
+      }
+    });
+
+    profile.updateData(userProgress);
 
     if (isPermissionGroup(profile, 3)) {
       delete storedUserChallenge.reward;
+      delete profile.data.progress;
     }
 
-    profile.add(profile.data.challenges, storedUserChallenge);
-
     await providers.users.update(profile.data.id, profile.data);
-    return { message: `User challenge added successfully.` };
+
+    delete profile.data.password;
+    pubsub.publish("UserProfile", profile.data);
+    // pubsub.publish("Leaderboard", );
+
+    return userChallenge.convertToResponseObject(userChallenge);
   },
 };
 

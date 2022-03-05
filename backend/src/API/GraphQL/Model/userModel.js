@@ -5,21 +5,20 @@ import {
   GraphQLString,
   GraphQLBoolean,
   GraphQLList,
+  GraphQLFloat,
+  GraphQLInt,
 } from "graphql";
 
 import {
-  AchievementModel,
   AchievementTypeEnum,
-  ChallengeModel,
   ContentResponse,
+  PermissionEnum,
 } from "../../../internal.js";
-import { PermissionEnum } from "./authModel.js";
 
 const UserAchievementModel = new GraphQLObjectType({
   name: "UserAchievement",
   fields: () => ({
     id: { type: GraphQLString },
-    achievementID: { type: GraphQLString },
     ...ContentResponse,
     condition: { type: new GraphQLList(GraphQLString) },
     type: { type: AchievementTypeEnum },
@@ -63,11 +62,45 @@ const UserChallengeInputModel = new GraphQLInputObjectType({
   }),
 });
 
+const UserRewardModel = new GraphQLObjectType({
+  name: "UserReward",
+  fields: () => ({
+    points: { type: GraphQLInt },
+    bonusPoints: { type: GraphQLInt },
+  }),
+});
+
 const UserChallengeModel = new GraphQLObjectType({
   name: "UserChallenge",
   fields: () => ({
     challengeID: { type: GraphQLString },
     answeredCorrect: { type: GraphQLBoolean },
+    completed: { type: GraphQLString },
+    reward: { type: UserRewardModel },
+  }),
+});
+
+const UserCategoriesProgress = new GraphQLObjectType({
+  name: "UserCategoriesProgress",
+  fields: () => ({
+    id: { type: GraphQLString },
+    progress: { type: GraphQLFloat },
+  }),
+});
+
+const UserAchievementProgress = new GraphQLObjectType({
+  name: "UserAchievementProgress",
+  fields: () => ({
+    id: { type: GraphQLString },
+    progress: { type: GraphQLFloat },
+  }),
+});
+
+const UserProgressModel = new GraphQLObjectType({
+  name: "UserProgress",
+  fields: () => ({
+    categories: { type: new GraphQLList(UserCategoriesProgress) },
+    achievements: { type: new GraphQLList(UserAchievementProgress) },
   }),
 });
 
@@ -75,12 +108,12 @@ const UserModel = new GraphQLObjectType({
   name: "User",
   fields: () => ({
     id: { type: GraphQLString },
-    password: { type: GraphQLString },
     username: { type: GraphQLString },
     permission: { type: PermissionEnum },
-    achievements: { type: new GraphQLList(AchievementModel) },
+    achievements: { type: new GraphQLList(UserAchievementModel) },
     challenges: { type: new GraphQLList(UserChallengeModel) },
+    progress: { type: UserProgressModel },
   }),
 });
 
-export { UserAchievementModel, UserChallengeInputModel, UserModel };
+export { UserAchievementModel, UserChallengeInputModel, UserChallengeModel, UserModel };

@@ -1,10 +1,8 @@
-import { GraphQLList, GraphQLString } from "graphql";
+import { GraphQLList } from "graphql";
 import {
   AchievementModel,
   AchievementInputModel,
-  UserAchievementModel,
   achievementCreator,
-  profileCreator,
 } from "../../../internal.js";
 import {
   assertIsAdmin,
@@ -21,7 +19,6 @@ const getAllAchievementsQuery = {
     assertIsAuthenticated(user);
     assertHasExperimentPermission(user);
 
-    const userData = await providers.users.getByID(user.id);
     const achievements = await providers.achievements.getAll();
 
     const result = [];
@@ -31,11 +28,6 @@ const getAllAchievementsQuery = {
       achievement.setType(achievementData.type);
       achievement.addCondition(achievementData.condition);
       achievement.content.updateData(achievementData.content);
-      const progress = achievement.progress.calculateProgress(
-        userData.challenges,
-        achievement.data.condition
-      );
-      achievement.progress.setProgress(progress);
       result.push(achievement.convertToResponseObject(achievement));
     });
 
@@ -72,66 +64,4 @@ const createAchievementQuery = {
   },
 };
 
-const addUserAchievementQuery = {
-  type: new GraphQLList(UserAchievementModel),
-  args: {
-    achievementIDs: { type: new GraphQLList(GraphQLString) },
-  },
-  async resolve(_, args, { user, providers }) {
-    assertIsAuthenticated(user);
-    assertHasExperimentPermission(user);
-
-    const userData = await providers.users.getByID(user.id);
-    const profile = profileCreator();
-    profile.updateData(userData);
-
-    const achievements = await providers.achievements.getAll();
-
-    const userAchievements = [];
-    args.achievementIDs.forEach((achievementID) => {
-      const achievementData = achievements.find(
-        (achievement) => achievement.id === achievementID
-      );
-
-      if (achievementData != null) {
-        const achievement = achievementCreator();
-        achievement.content.updateData(achievementData.content);
-        achievement.setType(achievementData.type);
-        achievement.addCondition(achievementData.condition);
-        const progress = achievement.progress.calculateProgress(
-          userData.challenges,
-          achievement.data.condition
-        );
-        achievement.progress.setProgress(progress);
-        if (progress >= 1) {
-          const userAchievement = {
-            id: achievementData.id,
-            content: achievement.content,
-            condition: achievement.data.condition,
-            type: achievement.data.type,
-            completed: Date.now().valueOf().toString(),
-          };
-          profile.add(profile.data.achievements, userAchievement);
-          const { title, image, description } = achievement.content.data;
-          delete userAchievement.content;
-          const response = {
-            ...userAchievement,
-            name: title,
-            image,
-            description,
-          };
-          userAchievements.push(response);
-        }
-      }
-    });
-
-    await providers.users.update(user.id, profile.data);
-    return userAchievements;
-  },
-};
-
-export {
-  addUserAchievementQuery,
-  createAchievementQuery,
-  getAllAchievementsQuery,
-};
+export { createAchievementQuery, getAllAchievementsQuery };

@@ -9,6 +9,7 @@ export * from "./API/GraphQL/Query/authQuery.js";
 export * from "./API/GraphQL/Query/categoryQuery.js";
 export * from "./API/GraphQL/Query/challengeQuery.js";
 export * from "./API/GraphQL/Query/clickStreamQuery.js";
+export * from "./API/GraphQL/Query/subscriptions.js";
 export * from "./API/GraphQL/Query/userQuery.js";
 export * from "./API/GraphQL/Query/Util/utility.js";
 export * from "./API/GraphQL/index.js";

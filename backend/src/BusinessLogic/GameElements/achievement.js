@@ -1,7 +1,6 @@
 import {
   contentCreator,
   createObjectTemplate,
-  progressCreator,
 } from "../../internal.js";
 
 function setType(achievement) {
@@ -73,7 +72,6 @@ function convertToResponseObject() {
       id: object.data.id,
       condition: object.data.condition,
       type: object.data.type,
-      progress: object.progress.data,
       name: object.content.data.title,
       description: object.content.data.description,
       image: object.content.data.image,
@@ -90,7 +88,6 @@ function convertToStoredObject() {
       content: object.content.data,
       condition: object.data.condition,
       type: object.data.type,
-      progress: object.progress.data.percentage,
     };
   };
 
@@ -118,12 +115,10 @@ function emptyData() {
 
 function achievementCreator() {
   const content = contentCreator();
-  const progress = progressCreator();
   const achievement = emptyData();
 
   return {
     ...content,
-    ...progress,
     ...achievement,
     ...setType(achievement.data),
     ...addCondition(achievement.data),

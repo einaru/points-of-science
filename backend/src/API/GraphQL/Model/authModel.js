@@ -12,6 +12,7 @@ export const SignInModel = new GraphQLObjectType({
   fields: () => ({
     accessToken: { type: GraphQLString },
     refreshToken: { type: GraphQLString },
+    subscribeToken: { type: GraphQLString },
     user: { type: UserModel },
   }),
 });
@@ -53,5 +54,13 @@ export const PermissionModel = new GraphQLObjectType({
     admin: { type: GraphQLInt },
     experiment: { type: GraphQLInt },
     control: { type: GraphQLInt },
+  }),
+});
+
+export const SwapPermissionPayload = new GraphQLObjectType({
+  name: "SwapPermissionPayload",
+  fields: () => ({
+    id: { type: GraphQLString },
+    permission: { type: PermissionEnum },
   }),
 });

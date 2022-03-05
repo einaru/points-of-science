@@ -6,6 +6,7 @@ const config = {
   secret: {
     accessToken: process.env.ACCESS_TOKEN_SECRET || null,
     refreshToken: process.env.REFRESH_TOKEN_SECRET || null,
+    subscribeToken: process.env.SUBSCRIBE_TOKEN_SECRET || null,
   },
   db: {
     table: {

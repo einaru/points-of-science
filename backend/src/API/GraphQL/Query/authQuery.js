@@ -90,7 +90,7 @@ const setPermissionQuery = {
   args: {
     permission: { type: PermissionInputModel },
   },
-  async resolve(_, args, { user, providers }) {
+  async resolve(_, args, { user, providers, pubsub }) {
     assertIsAuthenticated(user);
     assertIsAdmin(user);
 
@@ -103,6 +103,12 @@ const setPermissionQuery = {
     userProfile.updateData(userData);
     setPermissionLevel(args.permission.permission, userProfile);
     await providers.users.update(userProfile.data.id, userProfile.data);
+
+    pubsub.publish("SwapPermission", {
+      id: userProfile.data.id,
+      permission: userProfile.data.permission,
+    });
+
     return { message: "Permission level updated successfully." };
   },
 };

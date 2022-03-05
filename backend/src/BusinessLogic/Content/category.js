@@ -2,7 +2,6 @@ import {
   challengeCreator,
   contentCreator,
   createObjectTemplate,
-  progressCreator,
 } from "../../internal.js";
 
 function updateCategory(category) {
@@ -117,7 +116,6 @@ function convertToResponseObject() {
       name: object.content.data.title,
       description: object.content.data.description,
       image: object.content.data.image,
-      progress: object.progress.data,
     };
   };
 
@@ -131,7 +129,6 @@ function convertToStoredObject() {
       id: object.data.id,
       challenges: object.data.challenges.map((item) => item.data.id),
       content: object.content.data,
-      progressID: object.content.data.id,
     };
   };
 
@@ -150,11 +147,9 @@ function emptyData() {
 function categoryCreator() {
   const content = contentCreator();
   const category = emptyData();
-  const progress = progressCreator();
 
   return {
     ...content,
-    ...progress,
     ...category,
     ...updateCategory(category.data),
     ...addChallenge(category.data),

@@ -28,16 +28,7 @@ const getAllCategoriesQuery = {
     categoriesData.forEach((categoryData) => {
       const category = categoryCreator();
       category.restoreObject(category, categoryData, challengesData);
-      const challengeIDs = category.data.challenges.map((item) => item.data.id);
-      const progress = category.progress.calculateProgress(
-        userData.challenges,
-        challengeIDs
-      );
-      category.progress.setProgress(progress);
       const response = category.convertToResponseObject(category);
-      if (isPermissionGroup(profile, 3)) {
-        delete response.progress;
-      }
       categories.push(response);
     });
 

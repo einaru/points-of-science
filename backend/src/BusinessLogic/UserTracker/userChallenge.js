@@ -70,7 +70,11 @@ function isCompleted() {
       );
     }
 
-    userChallenge.data.completed = userChallenge.userReflection.isCompleted();
+    if (userChallenge.userReflection.isCompleted()) {
+      userChallenge.data.completed = Date.now().valueOf().toString();
+    } else {
+      userChallenge.data.completed = "";
+    }
   };
 
   return createObjectTemplate(functionKey, code);
@@ -117,12 +121,27 @@ function convertToStoredObject() {
   return createObjectTemplate(functionKey, code);
 }
 
+function convertToResponseObject() {
+  const functionKey = "convertToResponseObject";
+  const code = (object) => {
+    return {
+      challengeID: object.data.challengeID,
+      userID: object.data.userID,
+      completed: object.data.completed,
+      answeredCorrect: object.data.answeredCorrect,
+      reward: object.userReward.data,
+    };
+  };
+
+  return createObjectTemplate(functionKey, code);
+}
+
 function emptyData() {
   return {
     data: {
       challengeID: "",
       userID: "",
-      completed: false,
+      completed: "",
       answeredCorrect: false,
     },
   };
@@ -144,6 +163,7 @@ function userChallengeCreator() {
     ...isAnsweredCorrect(),
     ...calculatePoints(),
     ...convertToStoredObject(),
+    ...convertToResponseObject(),
   };
 }
 

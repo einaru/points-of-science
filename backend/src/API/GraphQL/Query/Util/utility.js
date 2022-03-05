@@ -1,4 +1,7 @@
+import { RedisPubSub } from 'graphql-redis-subscriptions'
 import { challengeCreator } from "../../../../internal.js";
+
+const pubsub = new RedisPubSub();
 
 function createContent(content, title = "", image = "", description = "") {
   const newContent = {
@@ -63,4 +66,5 @@ export {
   createChallenge,
   createReflection,
   createReward,
+  pubsub,
 };

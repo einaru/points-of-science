@@ -1,6 +1,5 @@
 import { GraphQLSchema, GraphQLObjectType } from "graphql";
 import {
-  addUserAchievementQuery,
   addUserChallengeQuery,
   activateAccountQuery,
   authAccessTokenQuery,
@@ -24,6 +23,8 @@ import {
   getPermissionsQuery,
   setPermissionQuery,
   swapPermissionQuery,
+  subscribeSwappedPermission,
+  subscribeUpdatedUser,
 } from "../../internal.js";
 import {
   logDeviceInfo,
@@ -51,7 +52,6 @@ const ROOTQUERY = new GraphQLObjectType({
 const MUTATION = new GraphQLObjectType({
   name: "Mutation",
   fields: {
-    addUserAchievement: addUserAchievementQuery,
     addUserChallenge: addUserChallengeQuery,
     activateAccount: activateAccountQuery,
     changePassword: changePasswordQuery,
@@ -72,4 +72,16 @@ const MUTATION = new GraphQLObjectType({
   },
 });
 
-export default new GraphQLSchema({ query: ROOTQUERY, mutation: MUTATION });
+const SUBSCRIPTION = new GraphQLObjectType({
+  name: "Subscription",
+  fields: () => ({
+    swappedPermission: subscribeSwappedPermission,
+    userChallengeAdded: subscribeUpdatedUser,
+  }),
+});
+
+export default new GraphQLSchema({
+  query: ROOTQUERY,
+  mutation: MUTATION,
+  subscription: SUBSCRIPTION,
+});

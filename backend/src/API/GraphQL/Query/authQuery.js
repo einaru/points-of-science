@@ -1,6 +1,7 @@
 import { GraphQLString } from "graphql";
 import {
   authenticateRefreshToken,
+  initializeProgress,
   profileCreator,
   setPermissionLevel,
   signIn,
@@ -75,6 +76,7 @@ const activateAccountQuery = {
     })[0];
 
     user = await signUp(args, validUsername, user);
+    user = await initializeProgress(user, providers);
     if (user.data.id.trim().length === 0) {
       await providers.users.add(user.data);
     } else {

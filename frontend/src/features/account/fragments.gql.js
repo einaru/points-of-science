@@ -10,5 +10,11 @@ export const USER_PROFILE = gql`
       challengeID
       answeredCorrect
     }
+    progress {
+      categories {
+        id
+        progress
+      }
+    }
   }
 `;

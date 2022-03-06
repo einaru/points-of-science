@@ -15,6 +15,14 @@ const fallbackImage = require("../assets/category.png");
 function CategoryListItem({ category, user, onPress, theme }) {
   const styles = themedStyles(theme);
 
+  const progress = React.useMemo(() => {
+    return user.progress.categories
+      .filter(({ id }) => id === category.id)
+      .reduce((_, item) => {
+        return item.progress || 0;
+      }, 0);
+  }, [category, user.progress.categories]);
+
   const imageSource = category.image ? { uri: category.image } : fallbackImage;
   const challengeIDs = category.challenges.map((item) => item.id);
   const numChallenges = category.challenges.length;
@@ -28,7 +36,6 @@ function CategoryListItem({ category, user, onPress, theme }) {
 
   const renderProgress = () => {
     if (user.permission === Permission.EXPERIMENT) {
-      const progress = category.progress.percentage;
       return (
         <>
           <View style={styles.progressRow}>

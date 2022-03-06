@@ -33,6 +33,22 @@ const GET_ALL_CATEGORIES = gql`
         }
       }
     }
+
+    userProfile {
+      id
+      username
+      permission
+      challenges {
+        challengeID
+        answeredCorrect
+      }
+      progress {
+        categories {
+          id
+          progress
+        }
+      }
+    }
   }
 `;
 

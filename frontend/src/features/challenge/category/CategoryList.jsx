@@ -1,16 +1,16 @@
 import React from "react";
 import { Image, View } from "react-native";
 import { Surface, Text, TouchableRipple, withTheme } from "react-native-paper";
+import { MaterialCommunityIcons } from "react-native-vector-icons";
 
 import ContentContext from "~services/content/ContentContext";
+import { stringToColor } from "~shared/colors";
 import { NoContent } from "~shared/components";
 import { t } from "~shared/i18n";
 import Permission from "~shared/permission";
 
 import themedStyles from "./CategoryList.style";
 import ProgressBar from "./ProgressBar";
-
-const fallbackImage = require("../assets/category.png");
 
 function CategoryListItem({ category, user, onPress, theme }) {
   const styles = themedStyles(theme);
@@ -25,7 +25,6 @@ function CategoryListItem({ category, user, onPress, theme }) {
       : null;
   }, [category, user.progress]);
 
-  const imageSource = category.image ? { uri: category.image } : fallbackImage;
   const challengeIDs = category.challenges.map((item) => item.id);
   const numChallenges = category.challenges.length;
   const numUserChallenges = Array.from(
@@ -53,11 +52,26 @@ function CategoryListItem({ category, user, onPress, theme }) {
     return <Text>{numChallengesLabel}</Text>;
   };
 
+  const renderImage = () => {
+    if (!category.image) {
+      const bgColor = stringToColor(category.id);
+      const color = bgColor.isDark()
+        ? bgColor.lighten(0.5).string()
+        : bgColor.darken(0.5).string();
+      return (
+        <View style={[styles.image, { backgroundColor: bgColor.string() }]}>
+          <MaterialCommunityIcons name="cube-outline" size={72} color={color} />
+        </View>
+      );
+    }
+    return <Image style={styles.image} source={{ uri: category.image }} />;
+  };
+
   return (
     <Surface style={styles.surface}>
       <TouchableRipple borderless style={styles.ripple} onPress={onPress}>
         <View style={styles.item}>
-          <Image style={styles.image} source={imageSource} />
+          {renderImage()}
           <View style={styles.content}>
             <Text style={styles.title}>{category.name}</Text>
             {renderProgress()}

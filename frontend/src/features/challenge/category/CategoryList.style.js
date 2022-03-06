@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-const itemHeight = 100;
+const itemHeight = 104;
 
 export default function themedStyles(theme) {
   return StyleSheet.create({
@@ -21,9 +21,11 @@ export default function themedStyles(theme) {
       height: itemHeight,
     },
     image: {
+      alignItems: "center",
       borderBottomLeftRadius: theme.roundness,
       borderTopLeftRadius: theme.roundness,
       height: itemHeight,
+      justifyContent: "center",
       width: itemHeight,
     },
     content: {

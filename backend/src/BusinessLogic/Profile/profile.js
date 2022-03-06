@@ -126,8 +126,8 @@ function emptyData() {
       achievements: [],
       challenges: [],
       progress: {
-        categories: [{}],
-        achievements: [{}],
+        categories: [],
+        achievements: [],
       },
       state: profileState.deactivated.value,
     },

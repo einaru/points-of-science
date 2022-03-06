@@ -29,3 +29,11 @@ export function stringToColor(string) {
   const color = (hash & 0x00ffffff).toString(16).toUpperCase();
   return Color(`#${"00000".substring(0, 6 - color.length)}${color}`);
 }
+
+export function getColorsFromString(string, lighten = 0.5, darken = 0.5) {
+  const bgColor = stringToColor(string);
+  const fgColor = bgColor.isDark()
+    ? bgColor.lighten(lighten)
+    : bgColor.darken(darken);
+  return { bgColor, fgColor };
+}

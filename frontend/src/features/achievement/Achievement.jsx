@@ -3,17 +3,15 @@
 import React from "react";
 import { Avatar, TouchableRipple } from "react-native-paper";
 
-import { stringToColor } from "~shared/colors";
+import { getColorsFromString } from "~shared/colors";
 
 function Achievement({ achievement, size, margin, onPress }) {
-  const color = stringToColor(achievement.id);
+  const { bgColor, fgColor } = getColorsFromString(achievement.id);
   const props = {
     size,
-    color: color.isDark()
-      ? color.lighten(0.5).string()
-      : color.darken(0.5).string(),
+    color: fgColor.string(),
     style: {
-      backgroundColor: color.string(),
+      backgroundColor: bgColor.string(),
       elevation: 4,
       margin,
     },

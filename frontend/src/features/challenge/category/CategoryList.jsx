@@ -4,7 +4,7 @@ import { Surface, Text, TouchableRipple, withTheme } from "react-native-paper";
 import { MaterialCommunityIcons } from "react-native-vector-icons";
 
 import ContentContext from "~services/content/ContentContext";
-import { stringToColor } from "~shared/colors";
+import { getColorsFromString } from "~shared/colors";
 import { NoContent } from "~shared/components";
 import { t } from "~shared/i18n";
 import Permission from "~shared/permission";
@@ -54,13 +54,14 @@ function CategoryListItem({ category, user, onPress, theme }) {
 
   const renderImage = () => {
     if (!category.image) {
-      const bgColor = stringToColor(category.id);
-      const color = bgColor.isDark()
-        ? bgColor.lighten(0.5).string()
-        : bgColor.darken(0.5).string();
+      const { bgColor, fgColor } = getColorsFromString(category.id);
       return (
         <View style={[styles.image, { backgroundColor: bgColor.string() }]}>
-          <MaterialCommunityIcons name="cube-outline" size={72} color={color} />
+          <MaterialCommunityIcons
+            name="cube-outline"
+            size={72}
+            color={fgColor.string()}
+          />
         </View>
       );
     }

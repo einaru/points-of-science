@@ -1,6 +1,18 @@
 import { gql } from "@apollo/client";
 
+import {
+  ACHIEVEMENT_DATA,
+  CATEGORY_DATA,
+  CHALLENGE_DATA,
+  USER_PROFILE,
+} from "~shared/fragments";
+
 const GET_ALL_CONTENT = gql`
+  ${USER_PROFILE}
+  ${CATEGORY_DATA}
+  ${CHALLENGE_DATA}
+  ${ACHIEVEMENT_DATA}
+
   query GetAllContent {
     userProfile {
       ...UserProfile
@@ -14,64 +26,6 @@ const GET_ALL_CONTENT = gql`
     achievements {
       ...AchievementData
     }
-  }
-
-  fragment UserProfile on User {
-    id
-    username
-    permission
-    challenges {
-      challengeID
-      answeredCorrect
-    }
-    progress {
-      categories {
-        id
-        progress
-      }
-    }
-  }
-
-  fragment CategoryData on Category {
-    id
-    name
-    image
-    description
-  }
-
-  fragment ChallengeData on Challenge {
-    id
-    name
-    image
-    description
-    difficulty
-    categoryID # FIXME Should provide "category { id name }" from backend
-    reward {
-      maxPoints
-      firstTryPoints
-      bonusPoints
-    }
-    activity {
-      type
-      description
-      resources
-      hints
-    }
-    reflectionType # FIXME Move this into the reflection object
-    reflection {
-      title
-      solution
-      choices
-    }
-  }
-
-  fragment AchievementData on Achievement {
-    id
-    name
-    image
-    description
-    type
-    condition
   }
 `;
 export default GET_ALL_CONTENT;

@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-import { USER_DATA } from "./fragments.gql";
+import { USER_DATA } from "~shared/fragments";
 
 const LOGIN = gql`
   ${USER_DATA}

@@ -3,7 +3,7 @@ import { gql } from "@apollo/client";
 const GET_ALL_CONTENT = gql`
   query GetAllContent {
     userProfile {
-      ...UserData
+      ...UserProfile
     }
     categories {
       ...CategoryData
@@ -16,7 +16,7 @@ const GET_ALL_CONTENT = gql`
     }
   }
 
-  fragment UserData on User {
+  fragment UserProfile on User {
     id
     username
     permission

@@ -11,7 +11,6 @@ import {
   ContentResponse,
   ReflectionModel,
   ReflectionTypeEnum,
-  UserModel,
 } from "../../../internal.js";
 import { ActivityModel } from "./contentModel.js";
 
@@ -113,12 +112,28 @@ const AchievementInputModel = new GraphQLInputObjectType({
   }),
 });
 
+const LeaderboardData = new GraphQLObjectType({
+  name: "LeaderboardData",
+  fields: () => ({
+    username: { type: GraphQLString },
+    score: { type: GraphQLString },
+  }),
+});
+
+const LeaderboardType = new GraphQLObjectType({
+  name: "LeaderboardType",
+  fields: () => ({
+    highscore: { type: new GraphQLList(LeaderboardData) },
+    category: { type: new GraphQLList(LeaderboardData) },
+    difficulty: { type: new GraphQLList(LeaderboardData) },
+  }),
+});
+
 const LeaderboardModel = new GraphQLObjectType({
   name: "Leaderboard",
   fields: () => ({
-    id: { type: GraphQLString },
-    title: { type: GraphQLString },
-    leaderboard: { type: new GraphQLList(UserModel) },
+    name: { type: GraphQLString },
+    leaderboards: { type: LeaderboardType },
   }),
 });
 

@@ -17,6 +17,7 @@ import {
   createContent,
   createReflection,
   createReward,
+  leaderboardCreator,
   profileCreator,
   progressCreator,
   userChallengeCreator,
@@ -135,6 +136,8 @@ const addUserChallengeQuery = {
     const userChallengeData = args.userChallenge;
     const userChallenge = userChallengeCreator();
     userChallengeData.userID = user.id;
+    userChallengeData.categoryID = challenge.categoryID;
+    userChallengeData.difficulty = challenge.difficulty;
     userChallenge.updateData(userChallengeData);
     const { userActivity, userReflection } = userChallenge;
     userActivity.updateData(userChallengeData.activity);
@@ -223,7 +226,16 @@ const addUserChallengeQuery = {
 
     delete profile.data.password;
     pubsub.publish("UserProfile", profile.data);
-    // pubsub.publish("Leaderboard", );
+
+    const leaderboard = leaderboardCreator();
+    leaderboard.setName("Leaderboard");
+    leaderboard.addToLeaderboard(profile, leaderboard.data.profiles);
+    leaderboard.calculateTotalPoints();
+    leaderboard.calculatePointsForCategory(userChallenge.data.categoryID);
+    leaderboard.calculateTotalPointsForDifficulty(
+      userChallenge.data.difficulty
+    );
+    pubsub.publish("Leaderboard", leaderboard.data);
 
     return userChallenge.convertToResponseObject(userChallenge);
   },

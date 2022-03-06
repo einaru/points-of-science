@@ -120,12 +120,30 @@ const LeaderboardData = new GraphQLObjectType({
   }),
 });
 
+const LeaderboardCategoryData = new GraphQLObjectType({
+  name: "LeaderboardCategoryData",
+  fields: () => ({
+    categoryID: { type: GraphQLString },
+    username: { type: GraphQLString },
+    score: { type: GraphQLString },
+  }),
+});
+
+const LeaderboardDifficultyData = new GraphQLObjectType({
+  name: "LeaderboardDifficultyData",
+  fields: () => ({
+    difficulty: { type: DifficultyEnum },
+    username: { type: GraphQLString },
+    score: { type: GraphQLString },
+  }),
+});
+
 const LeaderboardType = new GraphQLObjectType({
   name: "LeaderboardType",
   fields: () => ({
     highscore: { type: new GraphQLList(LeaderboardData) },
-    category: { type: new GraphQLList(LeaderboardData) },
-    difficulty: { type: new GraphQLList(LeaderboardData) },
+    category: { type: new GraphQLList(LeaderboardCategoryData) },
+    difficulty: { type: new GraphQLList(LeaderboardDifficultyData) },
   }),
 });
 

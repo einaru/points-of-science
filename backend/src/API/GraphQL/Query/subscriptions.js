@@ -1,9 +1,15 @@
 import { GraphQLString } from "graphql";
 import { withFilter } from "graphql-subscriptions";
 import jwt from "jsonwebtoken";
+import { assertHasExperimentPermission } from "../assert.js";
 import config from "../../../Config/config.js";
 
-import { UserModel, SwapPermissionPayload, pubsub } from "../../../internal.js";
+import {
+  LeaderboardModel,
+  UserModel,
+  SwapPermissionPayload,
+  pubsub,
+} from "../../../internal.js";
 
 const subscribeUpdatedUser = {
   type: UserModel,
@@ -24,6 +30,26 @@ const subscribeUpdatedUser = {
   },
 };
 
+const subscribeLeaderboard = {
+  type: LeaderboardModel,
+  args: { subscribeToken: { type: GraphQLString } },
+  subscribe: withFilter(
+    () => pubsub.asyncIterator("Leaderboard"),
+    (_, variables) => {
+      const verifiedUser = jwt.verify(
+        variables.subscribeToken,
+        config.secret.subscribeToken
+      );
+
+      assertHasExperimentPermission(verifiedUser);
+      return verifiedUser === Object(verifiedUser);
+    }
+  ),
+  resolve: (payload) => {
+    return payload;
+  },
+};
+
 const subscribeSwappedPermission = {
   type: SwapPermissionPayload,
   subscribe: () => pubsub.asyncIterator("SwapPermission"),
@@ -32,4 +58,8 @@ const subscribeSwappedPermission = {
   },
 };
 
-export { subscribeSwappedPermission, subscribeUpdatedUser };
+export {
+  subscribeLeaderboard,
+  subscribeSwappedPermission,
+  subscribeUpdatedUser,
+};

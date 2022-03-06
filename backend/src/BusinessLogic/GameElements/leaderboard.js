@@ -80,6 +80,7 @@ function calculatePointsForCategory(leaderboard) {
     leaderboard.leaderboards.category = [];
     leaderboard.profiles.forEach((profile) => {
       leaderboard.leaderboards.category.push({
+        categoryID,
         username: profile.data.username,
         score: profile.getPoints("categoryID", categoryID),
       });
@@ -95,28 +96,11 @@ function calculateTotalPointsForDifficulty(leaderboard) {
     leaderboard.leaderboards.difficulty = [];
     leaderboard.profiles.forEach((profile) => {
       leaderboard.leaderboards.difficulty.push({
+        difficulty,
         username: profile.data.username,
         score: profile.getPoints("diffculty", difficulty),
       });
     });
-  };
-
-  return createObjectTemplate(key, code);
-}
-
-function calculatePointsForDifficultyWithinCategory(leaderboard) {
-  const key = "calculatePointsForDifficultyWithinCategory";
-  const code = () => {
-    // Fill in the blanks
-  };
-
-  return createObjectTemplate(key, code);
-}
-
-function deleteLeaderboard(leaderboard) {
-  const key = "deleteLeaderboard";
-  const code = () => {
-    // Fill in the blanks
   };
 
   return createObjectTemplate(key, code);
@@ -143,8 +127,6 @@ function leaderboardCreator() {
     ...calculateTotalPoints(leaderboard.data),
     ...calculatePointsForCategory(leaderboard.data),
     ...calculateTotalPointsForDifficulty(leaderboard.data),
-    ...calculatePointsForDifficultyWithinCategory(leaderboard.data),
-    ...deleteLeaderboard(leaderboard.data),
   };
 }
 

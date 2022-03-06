@@ -1,9 +1,5 @@
 import { GraphQLString, GraphQLList } from "graphql";
-import {
-  profileCreator,
-  profileState,
-  UserModel,
-} from "../../../internal.js";
+import { profileCreator, profileState, UserModel } from "../../../internal.js";
 import config from "../../../Config/config.js";
 import { assertIsAuthenticated } from "../assert.js";
 import { UserInputError } from "../error.js";
@@ -18,11 +14,13 @@ const getAllUsersQuery = {
   },
 };
 
-const getUserByIDQuery = {
-  type: new GraphQLList(UserModel),
-  args: { id: { type: GraphQLString } },
-  resolve(_, args, { providers }) {
-    return providers.users.getByID(args.id);
+const getUserProfile = {
+  type: UserModel,
+  args: {},
+  async resolve(_, __, { user, providers }) {
+    assertIsAuthenticated(user);
+    const data = await providers.users.getByID(user.id);
+    return data;
   },
 };
 
@@ -145,7 +143,7 @@ export {
   createUserQuery,
   deleteUserQuery,
   getAllUsersQuery,
-  getUserByIDQuery,
+  getUserProfile,
   updateUserQuery,
   verifyUsernameQuery,
 };

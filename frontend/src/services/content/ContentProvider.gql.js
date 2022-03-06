@@ -5,13 +5,13 @@ const GET_ALL_CONTENT = gql`
     userProfile {
       ...UserData
     }
-    getAllCategories {
+    categories {
       ...CategoryData
       challenges {
         ...ChallengeData
       }
     }
-    getAllAchievements {
+    achievements {
       ...AchievementData
     }
   }

@@ -13,8 +13,8 @@ function ContentProvider({ children }) {
   const content = React.useMemo(
     () => ({
       user: data?.userProfile,
-      categories: data?.getAllCategories ?? [],
-      achievements: data?.getAllAchievements ?? [],
+      categories: data?.categories ?? [],
+      achievements: data?.achievements ?? [],
     }),
     [data]
   );

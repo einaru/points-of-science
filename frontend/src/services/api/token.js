@@ -27,8 +27,8 @@ export async function getNewToken() {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       query: `
-        query getNewToken($refreshToken: String!) {
-          getNewToken(refreshToken: $refreshToken) {
+        query GetNewToken($refreshToken: String!) {
+          accessToken(refreshToken: $refreshToken) {
             accessToken
           }
         }
@@ -38,7 +38,7 @@ export async function getNewToken() {
   })
     .then((response) => response.json())
     .then(({ data }) => {
-      return data?.getNewToken.accessToken;
+      return data?.accessToken.accessToken;
     });
   return token;
 }

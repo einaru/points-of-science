@@ -16,12 +16,14 @@ function CategoryListItem({ category, user, onPress, theme }) {
   const styles = themedStyles(theme);
 
   const progress = React.useMemo(() => {
-    return user.progress.categories
-      .filter(({ id }) => id === category.id)
-      .reduce((_, item) => {
-        return item.progress || 0;
-      }, 0);
-  }, [category, user.progress.categories]);
+    return user.progress
+      ? user.progress.categories
+          .filter(({ id }) => id === category.id)
+          .reduce((_, item) => {
+            return item.progress || 0;
+          }, 0)
+      : null;
+  }, [category, user.progress]);
 
   const imageSource = category.image ? { uri: category.image } : fallbackImage;
   const challengeIDs = category.challenges.map((item) => item.id);

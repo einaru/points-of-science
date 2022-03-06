@@ -60,11 +60,40 @@ function createActivity(activity, type, description, hints, resources) {
   }
 }
 
+async function initializeProgress(user, providers) {
+  const copyUser = user;
+  const categoriesData = await providers.categories.getAll();
+
+  const userProgress = {
+    progress: {
+      categories: [],
+      achievements: [],
+    },
+  };
+
+  categoriesData.forEach((categoryData) => {
+    userProgress.progress.categories.push({ id: categoryData.id, progress: 0 });
+  });
+
+  const achievements = await providers.achievements.getAll();
+  achievements.forEach((achievementData) => {
+    userProgress.progress.achievements.push({
+      id: achievementData.id,
+      progress: 0,
+    });
+  });
+
+  copyUser.updateData(userProgress);
+
+  return copyUser;
+}
+
 export {
   createActivity,
   createContent,
   createChallenge,
   createReflection,
   createReward,
+  initializeProgress,
   pubsub,
 };

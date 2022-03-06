@@ -7,9 +7,6 @@ const GET_ALL_CATEGORIES = gql`
       name
       image
       description
-      progress {
-        percentage
-      }
       challenges {
         id
         name

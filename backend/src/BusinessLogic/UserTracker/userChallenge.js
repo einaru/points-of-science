@@ -109,6 +109,8 @@ function convertToStoredObject() {
   const code = (object) => {
     return {
       challengeID: object.data.challengeID,
+      categoryID: object.data.categoryID,
+      difficulty: object.data.difficulty,
       userID: object.data.userID,
       completed: object.data.completed,
       answeredCorrect: object.data.answeredCorrect,
@@ -139,7 +141,9 @@ function convertToResponseObject() {
 function emptyData() {
   return {
     data: {
+      categoryID: "",
       challengeID: "",
+      difficulty: 1,
       userID: "",
       completed: "",
       answeredCorrect: false,

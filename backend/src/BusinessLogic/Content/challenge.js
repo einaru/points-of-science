@@ -166,4 +166,4 @@ function challengeCreator(reflectionType) {
   };
 }
 
-export { challengeCreator };
+export { challengeCreator, DifficultyEnum };

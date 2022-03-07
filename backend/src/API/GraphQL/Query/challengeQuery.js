@@ -17,6 +17,7 @@ import {
   createContent,
   createReflection,
   createReward,
+  leaderboardCreator,
   profileCreator,
   progressCreator,
   userChallengeCreator,
@@ -135,6 +136,8 @@ const addUserChallengeQuery = {
     const userChallengeData = args.userChallenge;
     const userChallenge = userChallengeCreator();
     userChallengeData.userID = user.id;
+    userChallengeData.categoryID = challenge.categoryID;
+    userChallengeData.difficulty = challenge.difficulty;
     userChallenge.updateData(userChallengeData);
     const { userActivity, userReflection } = userChallenge;
     userActivity.updateData(userChallengeData.activity);
@@ -148,7 +151,9 @@ const addUserChallengeQuery = {
 
     const isFirstTry = !userChallenges.length;
     const allPoints = userChallenges.filter((object) => {
-      return object.reward.points >= challenge.reward.maxPoints;
+      if (object.reward) {
+        return object.reward.points >= challenge.reward.maxPoints;
+      }
     });
 
     const hasNotAllPoints = !allPoints.length;
@@ -181,7 +186,10 @@ const addUserChallengeQuery = {
       const challengeIDs = categoryData.challenges;
       const progress = calculateProgress(profile.data.challenges, challengeIDs);
 
-      userProgress.progress.categories.push({ id: categoryData.id, progress });
+      userProgress.progress.categories.push({
+        id: categoryData.id,
+        progress,
+      });
     });
 
     const achievements = await providers.achievements.getAll();
@@ -223,9 +231,25 @@ const addUserChallengeQuery = {
 
     delete profile.data.password;
     pubsub.publish("UserProfile", profile.data);
-    // pubsub.publish("Leaderboard", );
 
-    return userChallenge.convertToResponseObject(userChallenge);
+    if (hasNotAllPoints && isPermissionGroup(profile, 2)) {
+      const leaderboard = leaderboardCreator();
+      leaderboard.setName("Leaderboard");
+      leaderboard.addToLeaderboard(profile, leaderboard.data.profiles);
+      leaderboard.calculateTotalPoints();
+      leaderboard.calculatePointsForCategory(userChallenge.data.categoryID);
+      leaderboard.calculateTotalPointsForDifficulty(
+        userChallenge.data.difficulty
+      );
+
+      pubsub.publish("Leaderboard", leaderboard.data);
+    }
+
+    const response = userChallenge.convertToResponseObject(userChallenge);
+    if (isPermissionGroup(profile, 3)) {
+      delete response.reward;
+    }
+    return response;
   },
 };
 

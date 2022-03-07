@@ -34,8 +34,25 @@ function updateData(profile) {
 
 function getPoints(profile) {
   const functionKey = "getPoints";
-  const code = () => {
-    // Fill in the blanks
+  const code = (filter, criteria) => {
+    let { challenges } = profile;
+    if (filter != null && criteria != null) {
+      challenges = challenges.filter(
+        (challenge) => challenge[filter] === criteria
+      );
+    }
+
+    const filteredChallenges = challenges.filter((challenge) => {
+      return challenge.reward != null;
+    });
+    const rewards = filteredChallenges.map((challenge) => {
+      if (challenge.reward != null) {
+        return challenge.reward;
+      }
+    });
+    return rewards.reduce((currentTotal, object) => {
+      return object.points + object.bonusPoints + currentTotal;
+    }, 0);
   };
 
   return createObjectTemplate(functionKey, code);

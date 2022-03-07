@@ -11,7 +11,6 @@ import {
   ContentResponse,
   ReflectionModel,
   ReflectionTypeEnum,
-  UserModel,
 } from "../../../internal.js";
 import { ActivityModel } from "./contentModel.js";
 
@@ -113,12 +112,46 @@ const AchievementInputModel = new GraphQLInputObjectType({
   }),
 });
 
+const LeaderboardData = new GraphQLObjectType({
+  name: "LeaderboardData",
+  fields: () => ({
+    username: { type: GraphQLString },
+    score: { type: GraphQLString },
+  }),
+});
+
+const LeaderboardCategoryData = new GraphQLObjectType({
+  name: "LeaderboardCategoryData",
+  fields: () => ({
+    categoryID: { type: GraphQLString },
+    username: { type: GraphQLString },
+    score: { type: GraphQLString },
+  }),
+});
+
+const LeaderboardDifficultyData = new GraphQLObjectType({
+  name: "LeaderboardDifficultyData",
+  fields: () => ({
+    difficulty: { type: DifficultyEnum },
+    username: { type: GraphQLString },
+    score: { type: GraphQLString },
+  }),
+});
+
+const LeaderboardType = new GraphQLObjectType({
+  name: "LeaderboardType",
+  fields: () => ({
+    highscore: { type: new GraphQLList(LeaderboardData) },
+    category: { type: new GraphQLList(LeaderboardCategoryData) },
+    difficulty: { type: new GraphQLList(LeaderboardDifficultyData) },
+  }),
+});
+
 const LeaderboardModel = new GraphQLObjectType({
   name: "Leaderboard",
   fields: () => ({
-    id: { type: GraphQLString },
-    title: { type: GraphQLString },
-    leaderboard: { type: new GraphQLList(UserModel) },
+    name: { type: GraphQLString },
+    leaderboards: { type: LeaderboardType },
   }),
 });
 

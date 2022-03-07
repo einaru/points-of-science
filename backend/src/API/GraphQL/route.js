@@ -14,6 +14,7 @@ import {
   getAllChallengesQuery,
   getAllUsersQuery,
   getUserProfile,
+  getLeaderboardQuery,
   createUserQuery,
   deleteUserQuery,
   updateUserQuery,
@@ -23,6 +24,7 @@ import {
   getPermissionsQuery,
   setPermissionQuery,
   swapPermissionQuery,
+  subscribeLeaderboard,
   subscribeSwappedPermission,
   subscribeUpdatedUser,
 } from "../../internal.js";
@@ -41,6 +43,7 @@ const ROOTQUERY = new GraphQLObjectType({
     getAllChallenges: getAllChallengesQuery,
     getAllClickStreams,
     getAllUsers: getAllUsersQuery,
+    leaderboard: getLeaderboardQuery,
     getNewToken: authRefreshTokenQuery,
     getPermissions: getPermissionsQuery,
     userProfile: getUserProfile,
@@ -75,6 +78,7 @@ const MUTATION = new GraphQLObjectType({
 const SUBSCRIPTION = new GraphQLObjectType({
   name: "Subscription",
   fields: () => ({
+    leaderboard: subscribeLeaderboard,
     swappedPermission: subscribeSwappedPermission,
     userChallengeAdded: subscribeUpdatedUser,
   }),

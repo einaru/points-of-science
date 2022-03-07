@@ -151,7 +151,9 @@ const addUserChallengeQuery = {
 
     const isFirstTry = !userChallenges.length;
     const allPoints = userChallenges.filter((object) => {
-      return object.reward.points >= challenge.reward.maxPoints;
+      if (object.reward) {
+        return object.reward.points >= challenge.reward.maxPoints;
+      }
     });
 
     const hasNotAllPoints = !allPoints.length;
@@ -184,7 +186,10 @@ const addUserChallengeQuery = {
       const challengeIDs = categoryData.challenges;
       const progress = calculateProgress(profile.data.challenges, challengeIDs);
 
-      userProgress.progress.categories.push({ id: categoryData.id, progress });
+      userProgress.progress.categories.push({
+        id: categoryData.id,
+        progress,
+      });
     });
 
     const achievements = await providers.achievements.getAll();
@@ -227,17 +232,24 @@ const addUserChallengeQuery = {
     delete profile.data.password;
     pubsub.publish("UserProfile", profile.data);
 
-    const leaderboard = leaderboardCreator();
-    leaderboard.setName("Leaderboard");
-    leaderboard.addToLeaderboard(profile, leaderboard.data.profiles);
-    leaderboard.calculateTotalPoints();
-    leaderboard.calculatePointsForCategory(userChallenge.data.categoryID);
-    leaderboard.calculateTotalPointsForDifficulty(
-      userChallenge.data.difficulty
-    );
-    pubsub.publish("Leaderboard", leaderboard.data);
+    if (hasNotAllPoints && isPermissionGroup(profile, 2)) {
+      const leaderboard = leaderboardCreator();
+      leaderboard.setName("Leaderboard");
+      leaderboard.addToLeaderboard(profile, leaderboard.data.profiles);
+      leaderboard.calculateTotalPoints();
+      leaderboard.calculatePointsForCategory(userChallenge.data.categoryID);
+      leaderboard.calculateTotalPointsForDifficulty(
+        userChallenge.data.difficulty
+      );
 
-    return userChallenge.convertToResponseObject(userChallenge);
+      pubsub.publish("Leaderboard", leaderboard.data);
+    }
+
+    const response = userChallenge.convertToResponseObject(userChallenge);
+    if (isPermissionGroup(profile, 3)) {
+      delete response.reward;
+    }
+    return response;
   },
 };
 

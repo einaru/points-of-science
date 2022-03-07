@@ -23,13 +23,6 @@ const config = {
       user: "User",
       validUsername: "ValidUsername",
     },
-    // FIXME Remove these attributes when tests are updated.
-    test: {
-      file: process.env.DATABASE_TEST_FILE,
-      folder: process.env.DATABASE_TEST_FOLDER,
-      data: process.env.DATABASE_TEST_DATA,
-      firestore: process.env.FIRESTORE,
-    },
   },
   responseType: {
     success: "success",

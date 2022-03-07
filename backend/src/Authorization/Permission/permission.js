@@ -1,5 +1,4 @@
 import { UserInputError } from "../../API/GraphQL/error.js";
-import config from "../../Config/config.js";
 
 const permissionLevels = {
   1: { text: "admin", value: 1 },
@@ -19,11 +18,7 @@ function setPermissionLevel(permissionLevel, user) {
   }
 
   user.updateData({ permission: permissionLevel });
-  return getResponseObject(
-    `Permission for user ${user.data.username} was updated.`,
-    200,
-    config.responseType.success
-  );
+  return `Permission for user ${user.data.username} was updated.`;
 }
 
 function swapPermissionGroup(users) {
@@ -38,14 +33,6 @@ function swapPermissionGroup(users) {
 
 function isPermissionGroup(user, permissionLevel) {
   return user.data.permission === permissionLevels[permissionLevel].value;
-}
-
-function getResponseObject(message, statusCode, type) {
-  return {
-    message,
-    status: statusCode,
-    type,
-  };
 }
 
 export {

@@ -45,13 +45,6 @@ app.use(
   })
 );
 
-app.use((error, request, response, next) => {
-  if (error) {
-    return response.status(500).send(error);
-  }
-  next();
-});
-
 // Provide feedback on missing secret keys
 Object.entries(config.secret).forEach(([key, value]) => {
   if (!value) {

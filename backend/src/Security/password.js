@@ -34,7 +34,8 @@ function isInString(text, checkFor) {
 function validatePassword(password) {
   return new Promise((resolve, reject) => {
     if (password === null) {
-      return reject("Password cannot be null.");
+      reject(Error("Password cannot be null."));
+      return;
     }
     let { len, upperCase, lowerCase, numberCase, specialChar } = false;
     len = isValidLength(password, 8, 64);

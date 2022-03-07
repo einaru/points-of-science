@@ -113,11 +113,14 @@ const setPermissionQuery = {
     await providers.users.update(userProfile.data.id, userProfile.data);
 
     const refreshTokens = await providers.refreshTokens.getAll();
-    refreshTokens.filter((token) => {
-      if (token.userID !== userData.id) {
-        providers.refreshTokens.delete(token.id);
-      }
+    const refreshToken = refreshTokens.filter((token) => {
+      return token.userID === userData.id;
     });
+
+    const { id } = refreshToken[0];
+    if (id != null) {
+      await providers.refreshTokens.delete(id);
+    }
 
     pubsub.publish("UpdatePermission", {
       id: userProfile.data.id,

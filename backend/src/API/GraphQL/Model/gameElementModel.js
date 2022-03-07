@@ -45,6 +45,7 @@ const DifficultyEnum = new GraphQLEnumType({
 const challengeData = {
   id: { type: GraphQLString },
   categoryID: { type: GraphQLString },
+  categoryName: { type: GraphQLString },
   difficulty: { type: DifficultyEnum },
   ...ContentResponse,
   activity: { type: ActivityModel },

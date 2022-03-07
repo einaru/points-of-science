@@ -4,6 +4,7 @@ import {
   ACHIEVEMENT_DATA,
   CATEGORY_DATA,
   CHALLENGE_DATA,
+  LEADERBOARD_DATA,
   USER_PROFILE,
 } from "~shared/fragments";
 
@@ -12,6 +13,7 @@ export const GET_ALL_CONTENT = gql`
   ${CATEGORY_DATA}
   ${CHALLENGE_DATA}
   ${ACHIEVEMENT_DATA}
+  ${LEADERBOARD_DATA}
 
   query GetAllContent {
     userProfile {
@@ -25,6 +27,9 @@ export const GET_ALL_CONTENT = gql`
     }
     achievements {
       ...AchievementData
+    }
+    leaderboards {
+      ...LeaderboardData
     }
   }
 `;

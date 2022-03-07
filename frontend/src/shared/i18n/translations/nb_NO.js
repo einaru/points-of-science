@@ -30,6 +30,7 @@ export default {
   "Graphics": "Grafikk",
   "Haven't activated your account yet?": "Har du ikke aktivert kontoen din enda?",
   "Here's a little hint": "Her er et lite hint",
+  "High score": "Høyeste poengsum",
   "Illustrations by": "Illustrasjoner av",
   "Intro": "Intro",
   "Leaderboards": "Ledertavler",

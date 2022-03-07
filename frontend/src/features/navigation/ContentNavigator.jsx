@@ -4,7 +4,7 @@ import { MaterialCommunityIcons } from "react-native-vector-icons";
 
 import AchievementStack from "~features/achievement/AchievementStack";
 import ChallengesStack from "~features/challenge/ChallengesStack";
-import LeaderboardsScreen from "~features/leaderboard/LeaderboardsScreen";
+import LeaderboardStack from "~features/leaderboard/LeaderboardStack";
 import ProfileStack from "~features/profile/ProfileStack";
 import AuthContext from "~services/auth/AuthContext";
 import ContentProvider from "~services/content/ContentProvider";
@@ -49,7 +49,7 @@ function ContentNavigator() {
             <Tab.Screen
               name="tab:leaderboards"
               options={{ title: t("Leaderboards") }}
-              component={LeaderboardsScreen}
+              component={LeaderboardStack}
             />
             <Tab.Screen
               name="tab:achievements"

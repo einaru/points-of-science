@@ -234,15 +234,14 @@ const addUserChallengeQuery = {
 
     if (hasNotAllPoints && isPermissionGroup(profile, 2)) {
       const leaderboard = leaderboardCreator();
-      leaderboard.setName("Leaderboard");
-      leaderboard.addToLeaderboard(profile, leaderboard.data.profiles);
+      leaderboard.addToLeaderboard(profile, leaderboard.profiles);
       leaderboard.calculateTotalPoints();
       leaderboard.calculatePointsForCategory(userChallenge.data.categoryID);
       leaderboard.calculateTotalPointsForDifficulty(
         userChallenge.data.difficulty
       );
 
-      pubsub.publish("Leaderboard", leaderboard.data);
+      pubsub.publish("Leaderboard", leaderboard);
     }
 
     const response = userChallenge.convertToResponseObject(userChallenge);

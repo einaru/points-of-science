@@ -32,30 +32,38 @@ function updateData(profile) {
   return createObjectTemplate(functionKey, code);
 }
 
+function calculatePoints(challenges) {
+  return challenges
+    .filter((challenge) => challenge.reward)
+    .reduce((points, challenge) => {
+      const { reward } = challenge;
+      return points + reward.points + reward.bonusPoints;
+    }, 0);
+}
+
 function getPoints(profile) {
   const functionKey = "getPoints";
   const code = (filter, criteria) => {
     let { challenges } = profile;
-    if (filter != null && criteria != null) {
+    if (filter && criteria) {
       challenges = challenges.filter(
         (challenge) => challenge[filter] === criteria
       );
     }
-
-    const filteredChallenges = challenges.filter((challenge) => {
-      return challenge.reward != null;
-    });
-    const rewards = filteredChallenges.map((challenge) => {
-      if (challenge.reward != null) {
-        return challenge.reward;
-      }
-    });
-    return rewards.reduce((currentTotal, object) => {
-      return object.points + object.bonusPoints + currentTotal;
-    }, 0);
+    return calculatePoints(challenges);
   };
 
   return createObjectTemplate(functionKey, code);
+}
+
+function getPointsByCategory(profile) {
+  const func = (category) => {
+    const challenges = profile.challenges.filter(
+      (challenge) => challenge.categoryID === category.id
+    );
+    return calculatePoints(challenges);
+  };
+  return createObjectTemplate("getPointsByCategory", func);
 }
 
 function add() {
@@ -158,6 +166,7 @@ function profileCreator() {
     ...profile,
     ...updateData(profile.data),
     ...getPoints(profile.data),
+    ...getPointsByCategory(profile.data),
     ...add(),
     ...changePassword(profile.data),
     ...hasState(profile.data),

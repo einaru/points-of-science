@@ -1,18 +1,5 @@
 import { createObjectTemplate } from "../../internal.js";
 
-function setName(leaderboard) {
-  const key = "setName";
-  const code = (name) => {
-    if (name == null || typeof name !== "string") {
-      throw new Error("Name must be a string.");
-    }
-
-    leaderboard.name = name;
-  };
-
-  return createObjectTemplate(key, code);
-}
-
 function addToLeaderboard() {
   const key = "addToLeaderboard";
   const code = (profile, list) => {
@@ -62,11 +49,10 @@ function removeFromLeaderboard() {
 function calculateTotalPoints(leaderboard) {
   const key = "calculateTotalPoints";
   const code = () => {
-    leaderboard.leaderboards.highscore = [];
     leaderboard.profiles.forEach((profile) => {
-      leaderboard.leaderboards.highscore.push({
+      leaderboard.highscore.push({
         username: profile.data.username,
-        score: profile.getPoints(null, null),
+        score: profile.getPoints(),
       });
     });
   };
@@ -76,13 +62,12 @@ function calculateTotalPoints(leaderboard) {
 
 function calculatePointsForCategory(leaderboard) {
   const key = "calculatePointsForCategory";
-  const code = (categoryID) => {
-    leaderboard.leaderboards.category = [];
+  const code = (category) => {
     leaderboard.profiles.forEach((profile) => {
-      leaderboard.leaderboards.category.push({
-        categoryID,
+      leaderboard.category.push({
+        categoryID: category.id,
         username: profile.data.username,
-        score: profile.getPoints("categoryID", categoryID),
+        score: profile.getPointsByCategory(category),
       });
     });
   };
@@ -93,12 +78,11 @@ function calculatePointsForCategory(leaderboard) {
 function calculateTotalPointsForDifficulty(leaderboard) {
   const key = "calculateTotalPointsForDifficulty";
   const code = (difficulty) => {
-    leaderboard.leaderboards.difficulty = [];
     leaderboard.profiles.forEach((profile) => {
-      leaderboard.leaderboards.difficulty.push({
+      leaderboard.difficulty.push({
         difficulty,
         username: profile.data.username,
-        score: profile.getPoints("diffculty", difficulty),
+        score: profile.getPoints("difficulty", difficulty),
       });
     });
   };
@@ -108,25 +92,23 @@ function calculateTotalPointsForDifficulty(leaderboard) {
 
 function emptyData() {
   return {
-    data: {
-      name: "",
-      profiles: [],
-      leaderboards: {},
-    },
+    profiles: [],
+    highscore: [],
+    category: [],
+    difficulty: [],
   };
 }
 
 function leaderboardCreator() {
-  const leaderboard = emptyData();
+  const props = emptyData();
 
   return {
-    ...leaderboard,
-    ...setName(leaderboard.data),
+    ...props,
     ...addToLeaderboard(),
     ...removeFromLeaderboard(),
-    ...calculateTotalPoints(leaderboard.data),
-    ...calculatePointsForCategory(leaderboard.data),
-    ...calculateTotalPointsForDifficulty(leaderboard.data),
+    ...calculateTotalPoints(props),
+    ...calculatePointsForCategory(props),
+    ...calculateTotalPointsForDifficulty(props),
   };
 }
 

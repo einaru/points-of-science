@@ -1,5 +1,5 @@
 import {
-  LeaderboardModel,
+  LeaderboardType,
   DifficultyEnum,
   leaderboardCreator,
   profileCreator,
@@ -7,20 +7,16 @@ import {
 import {
   assertHasExperimentPermission,
   assertIsAuthenticated,
-
 } from "../assert.js";
 
-// Root Queries - Used to retrieve data with GET-Requests
-
-const getLeaderboardQuery = {
-  type: LeaderboardModel,
+const getLeaderboardsQuery = {
+  type: LeaderboardType,
   args: {},
   async resolve(_, __, { user, providers }) {
     assertIsAuthenticated(user);
     assertHasExperimentPermission(user);
 
     const leaderboard = leaderboardCreator();
-    leaderboard.setName("Leaderboard");
 
     const userData = await providers.users.getAll();
     const users = userData.filter((data) => {
@@ -30,22 +26,22 @@ const getLeaderboardQuery = {
     users.forEach((data) => {
       const profile = profileCreator();
       profile.updateData(data);
-      leaderboard.addToLeaderboard(profile, leaderboard.data.profiles);
+      leaderboard.addToLeaderboard(profile, leaderboard.profiles);
     });
 
     leaderboard.calculateTotalPoints();
 
     const categories = await providers.categories.getAll();
     categories.forEach((category) => {
-      leaderboard.calculatePointsForCategory(category.id);
+      leaderboard.calculatePointsForCategory(category);
     });
 
     Object.keys(DifficultyEnum).forEach((key) => {
       leaderboard.calculateTotalPointsForDifficulty(DifficultyEnum[key]);
     });
 
-    return leaderboard.data;
+    return leaderboard;
   },
 };
 
-export { getLeaderboardQuery };
+export { getLeaderboardsQuery };

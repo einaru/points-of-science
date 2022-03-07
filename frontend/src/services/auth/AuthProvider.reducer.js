@@ -3,6 +3,7 @@ export const initialState = {
   isAuthenticated: false,
   refreshToken: null,
   sessionToken: null,
+  subscribeToken: null,
   user: null,
 };
 
@@ -19,6 +20,7 @@ export function reducer(state, action) {
         user: action.user,
         refreshToken: action.refreshToken,
         sessionToken: action.refreshToken,
+        subscribeToken: action.subscribeToken,
         isAuthenticated: true,
         loading: false,
       };

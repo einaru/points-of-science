@@ -26,6 +26,9 @@
   ],
   "rules": {
     "global-require": "off",
+    "import/prefer-default-export": "off",
+    "no-bitwise": "off",
+    "no-plusplus": "off",
     "prettier/prettier": "error",
     "react/style-prop-object": [1, {
       "allow": ["StatusBar"]

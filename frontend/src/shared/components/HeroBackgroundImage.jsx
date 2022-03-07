@@ -1,9 +1,26 @@
+import Color from "color";
 import React from "react";
-import { ImageBackground } from "react-native";
+import { ImageBackground, View } from "react-native";
+import { withTheme } from "react-native-paper";
 
 import heroImages from "./heroImages";
 
-export default function HeroBackgroundImage({ name, width, height, children }) {
+function HeroBackgroundImage({ name, width, height, fade, theme, children }) {
+  const renderChildren = () => {
+    return fade ? (
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: Color(theme.colors.background).fade(fade).string(),
+        }}
+      >
+        {children}
+      </View>
+    ) : (
+      children
+    );
+  };
+
   return (
     <ImageBackground
       style={{
@@ -12,7 +29,9 @@ export default function HeroBackgroundImage({ name, width, height, children }) {
       }}
       source={heroImages[name]}
     >
-      {children}
+      {renderChildren()}
     </ImageBackground>
   );
 }
+
+export default withTheme(HeroBackgroundImage);

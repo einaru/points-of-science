@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-import { USER_DATA } from "./fragments.gql";
+import { USER_DATA } from "~shared/fragments";
 
 const ACTIVATE_ACCOUNT = gql`
   ${USER_DATA}
@@ -17,6 +17,7 @@ const ACTIVATE_ACCOUNT = gql`
     ) {
       accessToken
       refreshToken
+      subscribeToken
       user {
         ...UserData
       }

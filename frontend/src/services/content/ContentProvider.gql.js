@@ -1,55 +1,40 @@
 import { gql } from "@apollo/client";
 
-const GET_ALL_CATEGORIES = gql`
-  query getAllCategories {
-    getAllCategories {
-      id
-      name
-      image
-      description
+import {
+  ACHIEVEMENT_DATA,
+  CATEGORY_DATA,
+  CHALLENGE_DATA,
+  USER_PROFILE,
+} from "~shared/fragments";
+
+export const GET_ALL_CONTENT = gql`
+  ${USER_PROFILE}
+  ${CATEGORY_DATA}
+  ${CHALLENGE_DATA}
+  ${ACHIEVEMENT_DATA}
+
+  query GetAllContent {
+    userProfile {
+      ...UserProfile
+    }
+    categories {
+      ...CategoryData
       challenges {
-        id
-        name
-        image
-        description
-        difficulty
-        categoryID # FIXME Should provide "category { id name }" from backend
-        reward {
-          maxPoints
-          firstTryPoints
-          bonusPoints
-        }
-        activity {
-          type
-          description
-          resources
-          hints
-        }
-        reflectionType # FIXME Move this into the reflection object
-        reflection {
-          title
-          solution
-          choices
-        }
+        ...ChallengeData
       }
     }
-
-    userProfile {
-      id
-      username
-      permission
-      challenges {
-        challengeID
-        answeredCorrect
-      }
-      progress {
-        categories {
-          id
-          progress
-        }
-      }
+    achievements {
+      ...AchievementData
     }
   }
 `;
 
-export default GET_ALL_CATEGORIES;
+export const USER_CHALLENGE_ADDED = gql`
+  ${USER_PROFILE}
+
+  subscription UserChallengeAdded($subscribeToken: String!) {
+    userChallengeAdded(subscribeToken: $subscribeToken) {
+      ...UserProfile
+    }
+  }
+`;

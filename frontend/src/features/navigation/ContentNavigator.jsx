@@ -2,7 +2,7 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import React from "react";
 import { MaterialCommunityIcons } from "react-native-vector-icons";
 
-import AchievementsScreen from "~features/achievement/AchievementsScreen";
+import AchievementStack from "~features/achievement/AchievementStack";
 import ChallengesStack from "~features/challenge/ChallengesStack";
 import LeaderboardsScreen from "~features/leaderboard/LeaderboardsScreen";
 import ProfileStack from "~features/profile/ProfileStack";
@@ -54,7 +54,7 @@ function ContentNavigator() {
             <Tab.Screen
               name="tab:achievements"
               options={{ title: t("Achievements") }}
-              component={AchievementsScreen}
+              component={AchievementStack}
             />
           </>
         )}

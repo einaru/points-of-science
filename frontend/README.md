@@ -14,12 +14,14 @@ The application is developed with [React Native][] and [Expo][]. Follow the
 
 Install dependencies by running `yarn`.
 
-You also need to set the `API_ENDPOINT` environment variable, and point it
-towards the GraphQL endpoint served by the backend. You can put this variable
+You also need to set the `HTTP_ENDPOINT` and `SUBSCRIPTION_ENDPOINT` environment
+variables. These should point to the GraphQL URL's where the backend handles
+HTTP and WebSocket requests respectively. You can put these variables
 in a `.env` file or export it on the command line:
 
 ```bash
-export API_ENDPOINT="http://192.168.1.43:5000/graphql"
+export HTTP_ENDPOINT="http://HOSTNAME:PORT/graphql"
+export SUBSCRIPTION_ENDPOINT="ws://HOSTNAME:PORT/graphql"
 ```
 
 Now you can run `yarn start` to fire up the application.

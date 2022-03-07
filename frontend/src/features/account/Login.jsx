@@ -29,8 +29,8 @@ function LoginScreen() {
 
   React.useEffect(() => {
     if (data?.signIn) {
-      const { user, accessToken, refreshToken } = data.signIn;
-      logInUser(user, accessToken, refreshToken);
+      const { user, accessToken, refreshToken, subscribeToken } = data.signIn;
+      logInUser(user, accessToken, refreshToken, subscribeToken);
       setErrorMessage("");
     }
   }, [data, logInUser]);

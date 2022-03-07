@@ -17,6 +17,7 @@ const ACTIVATE_ACCOUNT = gql`
     ) {
       accessToken
       refreshToken
+      subscribeToken
       user {
         ...UserData
       }

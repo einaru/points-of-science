@@ -12,17 +12,19 @@ function AuthProvider({ children }) {
 
   const client = useApolloClient();
 
-  const logInUser = (user, accessToken, refreshToken) => {
+  const logInUser = (user, accessToken, refreshToken, subscribeToken) => {
     Storage.setItem("user", JSON.stringify(user));
     Storage.setItem("accessToken", accessToken);
     Storage.setItem("refreshToken", refreshToken);
-    dispatch({ type: "login", user, refreshToken });
+    Storage.setItem("subscribeToken", subscribeToken);
+    dispatch({ type: "login", user, refreshToken, subscribeToken });
   };
 
   const logOutUser = () => {
+    Storage.removeItem("user");
     Storage.removeItem("accessToken");
     Storage.removeItem("refreshToken");
-    Storage.removeItem("user");
+    Storage.removeItem("subscribeToken");
     dispatch({ type: "logout" });
   };
 
@@ -30,13 +32,14 @@ function AuthProvider({ children }) {
     const initState = async () => {
       dispatch({ type: "loading" });
       const user = JSON.parse(await Storage.getItem("user"));
-      const refreshToken = await Storage.getItem("refreshToken");
       const accessToken = await Storage.getItem("accessToken");
+      const refreshToken = await Storage.getItem("refreshToken");
+      const subscribeToken = await Storage.getItem("subscribeToken");
       if (user) {
         client
           .query({ query: VERIFY_TOKEN, fetchPolicy: "network-only" })
           .then(() => {
-            logInUser(user, accessToken, refreshToken);
+            logInUser(user, accessToken, refreshToken, subscribeToken);
           })
           .catch((error) => {
             console.debug(error.message);

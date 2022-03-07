@@ -33,8 +33,9 @@ export default function SetPassword() {
 
   React.useEffect(() => {
     if (data?.activateAccount) {
-      const { user, accessToken, refreshToken } = data.activateAccount;
-      logInUser(user, accessToken, refreshToken);
+      const { user, accessToken, refreshToken, subscribeToken } =
+        data.activateAccount;
+      logInUser(user, accessToken, refreshToken, subscribeToken);
       setErrorMessage("");
     }
   }, [data, logInUser]);

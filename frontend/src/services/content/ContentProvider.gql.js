@@ -7,7 +7,7 @@ import {
   USER_PROFILE,
 } from "~shared/fragments";
 
-const GET_ALL_CONTENT = gql`
+export const GET_ALL_CONTENT = gql`
   ${USER_PROFILE}
   ${CATEGORY_DATA}
   ${CHALLENGE_DATA}
@@ -28,4 +28,13 @@ const GET_ALL_CONTENT = gql`
     }
   }
 `;
-export default GET_ALL_CONTENT;
+
+export const USER_CHALLENGE_ADDED = gql`
+  ${USER_PROFILE}
+
+  subscription UserChallengeAdded($subscribeToken: String!) {
+    userChallengeAdded(subscribeToken: $subscribeToken) {
+      ...UserProfile
+    }
+  }
+`;

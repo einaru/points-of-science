@@ -20,9 +20,9 @@ export function isTokenValid(token) {
 }
 
 export async function getNewToken() {
-  const { apiEndpoint } = Constants.manifest.extra;
+  const { httpEndpoint } = Constants.manifest.extra;
   const refreshToken = await Storage.getItem("refreshToken");
-  const token = await fetch(apiEndpoint, {
+  const token = await fetch(httpEndpoint, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({

@@ -5,6 +5,7 @@ const AuthContext = createContext({
   isAuthenticated: false,
   refreshToken: null,
   sessionToken: null,
+  subscribeToken: null,
   logInUser: () => {},
   logOutUser: () => {},
 });

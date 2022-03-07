@@ -4,7 +4,8 @@ export default ({ config }) => {
   return {
     ...config,
     extra: {
-      apiEndpoint: process.env.API_ENDPOINT,
+      httpEndpoint: process.env.HTTP_ENDPOINT,
+      wsEndpoint: process.env.SUBSCRIPTION_ENDPOINT,
     },
   };
 };

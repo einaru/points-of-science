@@ -1,7 +1,6 @@
 import { GraphQLString } from "graphql";
 import { withFilter } from "graphql-subscriptions";
 import jwt from "jsonwebtoken";
-import { assertHasExperimentPermission } from "../assert.js";
 import config from "../../../Config/config.js";
 
 import {
@@ -41,8 +40,7 @@ const subscribeLeaderboard = {
         config.secret.subscribeToken
       );
 
-      assertHasExperimentPermission(verifiedUser);
-      return verifiedUser === Object(verifiedUser);
+      return verifiedUser.permission === 2;
     }
   ),
   resolve: (payload) => {

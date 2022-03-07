@@ -42,10 +42,17 @@ const DifficultyEnum = new GraphQLEnumType({
   },
 });
 
+const CategoryLightweightModel = new GraphQLObjectType({
+  name: "CategoryLightweightModel",
+  fields: () => ({
+    id: { type: GraphQLString },
+    name: { type: GraphQLString },
+  }),
+});
+
 const challengeData = {
   id: { type: GraphQLString },
-  categoryID: { type: GraphQLString },
-  categoryName: { type: GraphQLString },
+  category: { type: CategoryLightweightModel },
   difficulty: { type: DifficultyEnum },
   ...ContentResponse,
   activity: { type: ActivityModel },

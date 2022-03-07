@@ -21,14 +21,11 @@ export * from "./Authentication/sign_up.js";
 export * from "./Authorization/AccessToken/accessToken.js";
 export * from "./Authorization/Permission/permission.js";
 
-export * from "./BusinessLogic/Analytics/analytics.js";
 export * from "./BusinessLogic/Content/activity.js";
 export * from "./BusinessLogic/Content/content.js";
 export * from "./BusinessLogic/Content/category.js";
 export * from "./BusinessLogic/Content/challenge.js";
 export * from "./BusinessLogic/Content/reflection.js";
-export * from "./BusinessLogic/Content/resource.js";
-export * from "./BusinessLogic/Content/hint.js";
 export * from "./BusinessLogic/GameElements/achievement.js";
 export * from "./BusinessLogic/GameElements/leaderboard.js";
 export * from "./BusinessLogic/GameElements/progress.js";
@@ -39,10 +36,6 @@ export * from "./BusinessLogic/UserTracker/userChallenge.js";
 export * from "./BusinessLogic/UserTracker/userReflection.js";
 export * from "./BusinessLogic/UserTracker/userReward.js";
 export * from "./BusinessLogic/Util/utility.js";
-
-export * from "./ErrorHandler/error_handler.js";
-
-export * from "./Logger/logger.js";
 
 export * from "./Security/hashing.js";
 export * from "./Security/password.js";

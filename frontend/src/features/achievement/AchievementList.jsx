@@ -9,7 +9,8 @@ import Achievement from "./Achievement";
 import AchievementInfo from "./AchievementInfo";
 
 function AchievementList() {
-  const { achievements } = React.useContext(ContentContext);
+  const { achievements, user } = React.useContext(ContentContext);
+  const userAchievements = user.achievements.map(({ id }) => id);
 
   const [achievement, setAchievement] = React.useState();
   const [infoIsVisible, setInfoIsVisible] = React.useState(false);
@@ -35,6 +36,7 @@ function AchievementList() {
         size={avatarSize}
         margin={gutterSize / 2}
         onPress={() => showAchievementInfo(item)}
+        locked={!userAchievements.includes(item.id)}
       />
     );
   };

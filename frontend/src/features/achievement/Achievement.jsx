@@ -1,21 +1,48 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
+import Color from "color";
 import React from "react";
-import { Avatar, TouchableRipple } from "react-native-paper";
+import { Avatar, TouchableRipple, withTheme } from "react-native-paper";
 
 import { getColorsFromString } from "~shared/colors";
 
-function Achievement({ achievement, size, margin, onPress }) {
-  const { bgColor, fgColor } = getColorsFromString(achievement.id);
-  const props = {
-    size,
-    color: fgColor.string(),
-    style: {
-      backgroundColor: bgColor.string(),
-      elevation: 4,
-      margin,
-    },
-  };
+function Achievement({
+  achievement,
+  size,
+  margin,
+  onPress,
+  theme,
+  locked = true,
+}) {
+  const [icon, setIcon] = React.useState("lock");
+  const [colors, setColors] = React.useState({
+    foreground: Color(theme.colors.gray).lighten(0.5).string(),
+    background: theme.colors.gray,
+  });
+
+  React.useEffect(() => {
+    if (!locked) {
+      const { bgColor, fgColor } = getColorsFromString(achievement.id);
+      setIcon("star-circle");
+      setColors({
+        background: bgColor.string(),
+        foreground: fgColor.string(),
+      });
+    }
+  }, [locked, achievement]);
+
+  const props = React.useMemo(
+    () => ({
+      size,
+      color: colors.foreground,
+      style: {
+        backgroundColor: colors.background,
+        elevation: 4,
+        margin,
+      },
+    }),
+    [size, margin, colors]
+  );
 
   return (
     <TouchableRipple
@@ -26,10 +53,10 @@ function Achievement({ achievement, size, margin, onPress }) {
       {achievement.image ? (
         <Avatar.Image image={achievement.image} {...props} />
       ) : (
-        <Avatar.Icon icon="star-circle" {...props} />
+        <Avatar.Icon icon={icon} {...props} />
       )}
     </TouchableRipple>
   );
 }
 
-export default Achievement;
+export default withTheme(Achievement);

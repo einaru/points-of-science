@@ -17,6 +17,9 @@ export const USER_PROFILE = gql`
       challengeID
       answeredCorrect
     }
+    achievements {
+      id
+    }
     progress {
       categories {
         id

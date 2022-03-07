@@ -8,6 +8,7 @@ const colors = {
   blue: Color.rgb(53, 132, 228),
   purple: Color.rgb(145, 65, 172),
   brown: Color.rgb(152, 106, 68),
+  gray: Color.rgb(94, 92, 100),
 };
 
 export default colors;

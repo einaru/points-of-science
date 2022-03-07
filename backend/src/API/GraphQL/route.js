@@ -7,6 +7,7 @@ import {
   createAchievementQuery,
   createCategoryQuery,
   createChallengeQuery,
+  createProjectInfoQuery,
   deleteUserChallengeQuery,
   changePasswordQuery,
   getAllAchievementsQuery,
@@ -18,6 +19,7 @@ import {
   createUserQuery,
   deleteUserQuery,
   updateUserQuery,
+  projectInfoQuery,
   signInQuery,
   signOutQuery,
   verifyUsernameQuery,
@@ -45,6 +47,7 @@ const ROOTQUERY = new GraphQLObjectType({
     users: getAllUsersQuery,
     leaderboard: getLeaderboardQuery,
     accessToken: authRefreshTokenQuery,
+    projectInfo: projectInfoQuery,
     permissions: getPermissionsQuery,
     userProfile: getUserProfile,
     verifyToken: authAccessTokenQuery,
@@ -55,6 +58,7 @@ const ROOTQUERY = new GraphQLObjectType({
 const MUTATION = new GraphQLObjectType({
   name: "Mutation",
   fields: {
+    addProjectInfo: createProjectInfoQuery,
     addUserChallenge: addUserChallengeQuery,
     activateAccount: activateAccountQuery,
     changePassword: changePasswordQuery,

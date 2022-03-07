@@ -1,4 +1,10 @@
-import { GraphQLObjectType, GraphQLString, GraphQLInt } from "graphql";
+import {
+  GraphQLObjectType,
+  GraphQLString,
+  GraphQLInt,
+  GraphQLInputObjectType,
+  GraphQLList,
+} from "graphql";
 
 const ResponseModel = {
   message: { type: GraphQLString },
@@ -13,4 +19,37 @@ const NormalResponseModel = new GraphQLObjectType({
   }),
 });
 
-export { NormalResponseModel, ResponseModel };
+const ContactInfo = {
+  name: { type: GraphQLString },
+  role: { type: GraphQLString },
+  phone: { type: GraphQLString },
+  email: { type: GraphQLString },
+};
+
+const ContactsInfoInputModel = new GraphQLInputObjectType({
+  name: "ContactsInfoInputModel",
+  fields: () => ({
+    ...ContactInfo,
+  }),
+});
+
+const ContactsInfoModel = new GraphQLObjectType({
+  name: "ContactsInfoModel",
+  fields: () => ({
+    ...ContactInfo,
+  }),
+});
+
+const ProjectInfoModel = new GraphQLObjectType({
+  name: "ProjectInfoModel",
+  fields: () => ({
+    contacts: { type: new GraphQLList(ContactsInfoModel) },
+  }),
+});
+
+export {
+  ContactsInfoInputModel,
+  NormalResponseModel,
+  ProjectInfoModel,
+  ResponseModel,
+};

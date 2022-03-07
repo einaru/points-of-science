@@ -106,7 +106,14 @@ const setPermissionQuery = {
     setPermissionLevel(args.permission.permission, userProfile);
     await providers.users.update(userProfile.data.id, userProfile.data);
 
-    pubsub.publish("SwapPermission", {
+    const refreshTokens = await providers.refreshTokens.getAll();
+    refreshTokens.filter((token) => {
+      if (token.userID !== userData.id) {
+        providers.refreshTokens.delete(token.id);
+      }
+    });
+
+    pubsub.publish("UpdatePermission", {
       id: userProfile.data.id,
       permission: userProfile.data.permission,
     });
@@ -154,7 +161,7 @@ const signOutQuery = {
 const swapPermissionQuery = {
   type: MessageResponseModel,
   args: {},
-  async resolve(_, __, { user, providers }) {
+  async resolve(_, __, { user, providers, pubsub }) {
     assertIsAuthenticated(user);
     assertIsAdmin(user);
 
@@ -170,6 +177,19 @@ const swapPermissionQuery = {
     users.forEach((userObject) => {
       providers.users.update(userObject.data.id, userObject.data);
     });
+
+    const refreshTokens = await providers.refreshTokens.getAll();
+    refreshTokens.forEach((token) => {
+      if (token.userID !== user.id) {
+        providers.refreshTokens.delete(token.id);
+      }
+    });
+
+    pubsub.publish("SwapPermission", {
+      message:
+        "You have been logged out and assigned to new permission group for the next part of the experiment.",
+    });
+
     return { message: "Swapped permission groups successfully." };
   },
 };

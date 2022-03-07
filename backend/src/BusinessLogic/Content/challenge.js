@@ -108,7 +108,10 @@ function convertToResponseObject() {
   const code = (object) => {
     return {
       id: object.data.id,
-      categoryID: object.data.categoryID,
+      category: {
+        id: object.data.categoryID,
+        name: "",
+      },
       difficulty: object.data.difficulty,
       name: object.content.data.title,
       description: object.content.data.description,

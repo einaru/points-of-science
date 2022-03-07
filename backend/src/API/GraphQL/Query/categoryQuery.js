@@ -36,7 +36,7 @@ const getAllCategoriesQuery = {
       const challenges = [];
       element.challenges.forEach((challenge) => {
         const challengeResponse = challenge.convertToResponseObject(challenge);
-        challengeResponse.categoryName = element.name;
+        challengeResponse.category.name = element.name;
         if (isPermissionGroup(profile, 3)) {
           delete challengeResponse.reward;
         }

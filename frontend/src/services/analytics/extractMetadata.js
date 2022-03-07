@@ -8,8 +8,7 @@ export default function extractMetadata({ params }) {
           break;
         case "challenge":
           metadata.challengeID = params[key].id;
-          // FIXME Update when backend returns a resolved category object
-          metadata.categoryID = params[key].categoryID;
+          metadata.categoryID = params[key].category.id;
           break;
         // no default
       }

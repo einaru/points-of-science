@@ -7,7 +7,10 @@ export const CHALLENGE_DATA = gql`
     image
     description
     difficulty
-    categoryID # FIXME Should provide "category { id name }" from backend
+    category {
+      id
+      name
+    }
     reward {
       maxPoints
       firstTryPoints

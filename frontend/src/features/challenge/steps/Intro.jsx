@@ -35,8 +35,7 @@ function Intro({ navigation }) {
       <ScrollView contentContainerStyle={styles.scrollView}>
         <ImageBackground style={styles.illustrationImage} source={imageSource}>
           <View style={styles.metaContainer}>
-            {/* FIXME Provide challenge name from backend */}
-            <Chip style={styles.chip}>{challenge.categoryID}</Chip>
+            <Chip style={styles.chip}>{challenge.category.name}</Chip>
             {renderReward()}
           </View>
         </ImageBackground>

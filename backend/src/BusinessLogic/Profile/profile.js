@@ -42,7 +42,14 @@ function getPoints(profile) {
       );
     }
 
-    const rewards = challenges.map((challenge) => challenge.reward);
+    const filteredChallenges = challenges.filter((challenge) => {
+      return challenge.reward != null;
+    });
+    const rewards = filteredChallenges.map((challenge) => {
+      if (challenge.reward != null) {
+        return challenge.reward;
+      }
+    });
     return rewards.reduce((currentTotal, object) => {
       return object.points + object.bonusPoints + currentTotal;
     }, 0);

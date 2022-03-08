@@ -1,6 +1,9 @@
 {
   "name": "science_interest_research_application",
   "version": "1.0.0",
+  "engines": {
+    "node": ">=14.16.0"
+  },
   "description": "",
   "type": "module",
   "main": "server.js",

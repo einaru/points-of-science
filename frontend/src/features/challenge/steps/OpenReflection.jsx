@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView, View, Platform, Dimensions } from "react-native";
+import { Dimensions, Platform, ScrollView, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Text, TextInput, withTheme } from "react-native-paper";
 

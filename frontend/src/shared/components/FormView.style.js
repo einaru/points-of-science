@@ -4,7 +4,7 @@ export default StyleSheet.create({
   container: {
     flex: 1,
   },
-  formContainer: {
+  contentContainer: {
     flex: 1,
     margin: 24,
     justifyContent: "center",

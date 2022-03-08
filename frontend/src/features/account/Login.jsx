@@ -3,11 +3,9 @@ import React from "react";
 import { HelperText, TextInput } from "react-native-paper";
 
 import AuthContext from "~services/auth/AuthContext";
+import { FormAction, FormLink, FormView } from "~shared/components";
 import { t } from "~shared/i18n";
 
-import FormAction from "./FormAction";
-import FormLink from "./FormLink";
-import FormView from "./FormView";
 import LOGIN from "./Login.gql";
 
 function LoginScreen() {

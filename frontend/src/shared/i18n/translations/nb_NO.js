@@ -7,7 +7,7 @@ export default {
   "Already activated your account?": "Har du allerede aktivert kontoen din?",
   "Already have an account?": "Har du allerede en konto?",
   "Attributions": "Attribusjoner",
-  "Calculating points": "Kalkulerer poeng…",
+  "Calculating points…": "Kalkulerer poeng…",
   "Categories": "Kategorier",
   "Challenge completed": "Utfordring fullført",
   "Challenge": "Utfordring",

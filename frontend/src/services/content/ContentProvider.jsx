@@ -13,7 +13,7 @@ function ContentProvider({ children }) {
   const [categories, setCategories] = React.useState([]);
   const [achievements, setAchievements] = React.useState([]);
 
-  const { loading, data } = useQuery(GET_ALL_CONTENT);
+  const { loading, data } = useQuery(GET_ALL_CONTENT, { errorPolicy: "all" });
 
   React.useEffect(() => {
     if (data) {

@@ -30,7 +30,6 @@ const { wsEndpoint } = Constants.manifest.extra;
 
 const wsLink = new WebSocketLink({
   url: wsEndpoint,
-  lazy: false,
 });
 
 export default wsLink;

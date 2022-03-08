@@ -62,6 +62,7 @@ export default function SetPassword() {
         value={password}
         onChangeText={setPassword}
         secureTextEntry={!showPassword}
+        autoFocus
         returnKeyType="next"
         onSubmitEditing={() => confirmRef.current.focus()}
         blurOnSubmit={false}

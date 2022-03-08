@@ -74,7 +74,9 @@ export default function ArgumentConstructor({
             const items = Array.from(argumentChoices);
             return items.length === 0 ? (
               <View style={[styles.placeholder, styles.centered]}>
-                <Text>{t("No more items to choose from!")}</Text>
+                <Text style={styles.title}>
+                  {t("No more items to choose from!")}
+                </Text>
               </View>
             ) : (
               items.map((item) => (
@@ -106,7 +108,7 @@ export default function ArgumentConstructor({
           renderContent={() => {
             const items = Array.from(argumentData);
             return items.length === 0 ? (
-              <View style={[styles.placeholder, { padding: 32 }]}>
+              <View style={[styles.placeholder, styles.centered]}>
                 <Text style={styles.title}>
                   {t("howToFormAnArgumentTitle")}
                 </Text>

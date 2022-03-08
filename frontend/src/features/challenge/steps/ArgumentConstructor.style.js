@@ -52,7 +52,7 @@ export default function themedStyles(theme) {
     placeholder: {
       flex: 1,
       justifyContent: "center",
-      padding: 32,
+      padding: 8,
     },
     centered: {
       alignItems: "center",

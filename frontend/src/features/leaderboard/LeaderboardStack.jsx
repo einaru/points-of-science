@@ -4,7 +4,7 @@ import { View } from "react-native";
 
 import { t } from "~shared/i18n";
 
-import Leaderboard from "./Leaderboard";
+import HighScoreList from "./HighScoreList";
 
 const Stack = createNativeStackNavigator();
 
@@ -13,8 +13,8 @@ export default function LeaderboardStack() {
     <View style={{ flex: 1 }} collapsable={false}>
       <Stack.Navigator>
         <Stack.Screen
-          name="leaderboard:screen"
-          component={Leaderboard}
+          name="leaderboard:highscore"
+          component={HighScoreList}
           options={{ title: t("High score") }}
         />
       </Stack.Navigator>

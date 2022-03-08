@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView, View, KeyboardAvoidingView, Platform } from "react-native";
+import { KeyboardAvoidingView, Platform, ScrollView, View } from "react-native";
 
 import styles from "./FormView.style";
 
@@ -7,7 +7,7 @@ function FormView({ children }) {
   const renderView = () => {
     return (
       <ScrollView style={styles.container} keyboardShouldPersistTaps="handled">
-        <View style={styles.formContainer}>{children}</View>
+        <View style={styles.contentContainer}>{children}</View>
       </ScrollView>
     );
   };

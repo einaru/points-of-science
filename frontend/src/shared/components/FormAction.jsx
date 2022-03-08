@@ -1,4 +1,5 @@
 import React from "react";
+import { Keyboard } from "react-native";
 import { Button } from "react-native-paper";
 
 function FormAction({
@@ -7,14 +8,21 @@ function FormAction({
   mode = "contained",
   loading = false,
   disabled = false,
+  dismissKeyboard = true,
 }) {
+  const handleOnPress = () => {
+    if (dismissKeyboard) {
+      Keyboard.dismiss();
+    }
+    onPress();
+  };
   return (
     <Button
       mode={mode}
       style={{ marginTop: 8 }}
       loading={loading}
       disabled={disabled}
-      onPress={onPress}
+      onPress={handleOnPress}
     >
       {label}
     </Button>

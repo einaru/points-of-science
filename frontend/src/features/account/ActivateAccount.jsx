@@ -1,11 +1,9 @@
 import React from "react";
 
+import { FormAction, FormLink, FormView } from "~shared/components";
 import { t } from "~shared/i18n";
 
 import { ActivateAccountContext } from "./ActivateAccountProvider";
-import FormAction from "./FormAction";
-import FormLink from "./FormLink";
-import FormView from "./FormView";
 import SetPassword from "./SetPassword";
 import VerifyUsername from "./VerifyUsername";
 

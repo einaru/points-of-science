@@ -120,39 +120,38 @@ const AchievementInputModel = new GraphQLInputObjectType({
   }),
 });
 
-const HighScoreType = new GraphQLObjectType({
+const HighScore = new GraphQLObjectType({
   name: "HighScore",
   fields: () => ({
+    rank: { type: GraphQLInt },
     username: { type: GraphQLString },
     score: { type: GraphQLInt },
   }),
 });
 
-const CategoryScoreType = new GraphQLObjectType({
-  name: "CategoryScore",
+const CategoryHighScores = new GraphQLObjectType({
+  name: "CategoryHighScores",
   fields: () => ({
     categoryID: { type: GraphQLString },
     categoryName: { type: GraphQLString },
-    username: { type: GraphQLString },
-    score: { type: GraphQLInt },
+    highScores: { type: new GraphQLList(HighScore) },
   }),
 });
 
-const DifficultyScoreType = new GraphQLObjectType({
-  name: "DifficultyScore",
+const DifficultyHighScores = new GraphQLObjectType({
+  name: "DifficultyHighScores",
   fields: () => ({
     difficulty: { type: DifficultyEnum },
-    username: { type: GraphQLString },
-    score: { type: GraphQLInt },
+    highScores: { type: new GraphQLList(HighScore) },
   }),
 });
 
-const LeaderboardType = new GraphQLObjectType({
+const LeaderboardsType = new GraphQLObjectType({
   name: "Leaderboards",
   fields: () => ({
-    highscore: { type: new GraphQLList(HighScoreType) },
-    category: { type: new GraphQLList(CategoryScoreType) },
-    difficulty: { type: new GraphQLList(DifficultyScoreType) },
+    highScores: { type: new GraphQLList(HighScore) },
+    categories: { type: new GraphQLList(CategoryHighScores) },
+    difficulties: { type: new GraphQLList(DifficultyHighScores) },
   }),
 });
 
@@ -164,7 +163,7 @@ export {
   RewardModel,
   RewardInputModel,
   ProgressModel,
-  LeaderboardType,
+  LeaderboardsType,
   ChallengeModel,
   ChallengeResponseModel,
 };

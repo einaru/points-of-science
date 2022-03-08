@@ -16,16 +16,13 @@ function HighScoreList() {
             <DataTable.Title>User</DataTable.Title>
             <DataTable.Title numeric>Score</DataTable.Title>
           </DataTable.Header>
-          {leaderboards.highscore.map((entry, index) => {
-            const rank = index + 1;
-            return (
-              <DataTable.Row key={entry.username}>
-                <DataTable.Cell>{rank}</DataTable.Cell>
-                <DataTable.Cell>{entry.username}</DataTable.Cell>
-                <DataTable.Cell numeric>{entry.score}</DataTable.Cell>
-              </DataTable.Row>
-            );
-          })}
+          {leaderboards.highScores.map((entry) => (
+            <DataTable.Row key={entry.username}>
+              <DataTable.Cell>{entry.rank}</DataTable.Cell>
+              <DataTable.Cell>{entry.username}</DataTable.Cell>
+              <DataTable.Cell numeric>{entry.score}</DataTable.Cell>
+            </DataTable.Row>
+          ))}
         </DataTable>
       </ScrollView>
     </HeroBackgroundImage>

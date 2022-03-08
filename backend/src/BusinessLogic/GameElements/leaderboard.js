@@ -1,115 +1,61 @@
-import { createObjectTemplate } from "../../internal.js";
+/* eslint-disable import/prefer-default-export */
 
-function addToLeaderboard() {
-  const key = "addToLeaderboard";
-  const code = (profile, list) => {
-    if (!Array.isArray(list)) {
-      throw new Error("The list to add an element to is not an Array.");
-    }
-
-    if (profile !== Object(profile)) {
-      throw new Error(
-        "The profile to add to the leaderboard is not an object."
-      );
-    }
-
-    const found = list.filter((element) => element.data.id === profile.data.id);
-
-    if (!found.length) {
-      list.push(profile);
-    }
-  };
-
-  return createObjectTemplate(key, code);
+function rankScores(scores) {
+  return scores
+    .sort((a, b) => b.score - a.score)
+    .map(({ username, score }, index) => ({
+      rank: index + 1,
+      username,
+      score,
+    }));
 }
 
-function removeFromLeaderboard() {
-  const key = "removeFromLeaderboard";
-  const code = (profile, list) => {
-    if (!Array.isArray(list)) {
-      throw new Error("The list to add an element to is not an Array.");
-    }
-
-    if (profile !== Object(profile)) {
-      throw new Error(
-        "The profile to remove from the leaderboard is not an object."
-      );
-    }
-
-    const ids = list.map((element) => element.data.id);
-    const position = ids.indexOf(profile.data.id);
-    if (position > -1) {
-      list.splice(position, 1);
-    }
-  };
-
-  return createObjectTemplate(key, code);
+function calculatePoints(users) {
+  return rankScores(
+    users.map((user) => ({
+      username: user.data.username,
+      score: user.getPoints(),
+    }))
+  );
 }
 
-function calculateTotalPoints(leaderboard) {
-  const key = "calculateTotalPoints";
-  const code = () => {
-    leaderboard.profiles.forEach((profile) => {
-      leaderboard.highscore.push({
-        username: profile.data.username,
-        score: profile.getPoints(),
-      });
-    });
-  };
-
-  return createObjectTemplate(key, code);
+function calculatePointsByCategory(users, category) {
+  return rankScores(
+    users.map((user) => ({
+      username: user.data.username,
+      score: user.getPointsByCategory(category),
+    }))
+  );
 }
 
-function calculatePointsForCategory(leaderboard) {
-  const key = "calculatePointsForCategory";
-  const code = (category) => {
-    leaderboard.profiles.forEach((profile) => {
-      leaderboard.category.push({
-        categoryID: category.id,
-        username: profile.data.username,
-        score: profile.getPointsByCategory(category),
-      });
-    });
-  };
-
-  return createObjectTemplate(key, code);
+function calculatePointsByDifficulty(users, difficulty) {
+  return rankScores(
+    users.map((user) => ({
+      username: user.data.username,
+      score: user.getPoints("difficulty", difficulty),
+    }))
+  );
 }
 
-function calculateTotalPointsForDifficulty(leaderboard) {
-  const key = "calculateTotalPointsForDifficulty";
-  const code = (difficulty) => {
-    leaderboard.profiles.forEach((profile) => {
-      leaderboard.difficulty.push({
-        difficulty,
-        username: profile.data.username,
-        score: profile.getPoints("difficulty", difficulty),
-      });
-    });
+export function createLeaderboards(users, categories, difficulties) {
+  const asArray = (a) => (Array.isArray(a) ? a : [a]);
+
+  // Ensure that all parameters are arrays
+  const userArray = asArray(users);
+  const categoryArray = asArray(categories);
+  const difficultyArray = asArray(difficulties);
+
+  const leaderboards = {
+    highScores: calculatePoints(userArray),
+    categories: categoryArray.map((category) => ({
+      id: category.id,
+      name: category.content.title,
+      scores: calculatePointsByCategory(userArray, category),
+    })),
+    difficulties: difficultyArray.map((difficulty) => ({
+      difficulty,
+      scores: calculatePointsByDifficulty(userArray, difficulty),
+    })),
   };
-
-  return createObjectTemplate(key, code);
+  return leaderboards;
 }
-
-function emptyData() {
-  return {
-    profiles: [],
-    highscore: [],
-    category: [],
-    difficulty: [],
-  };
-}
-
-function leaderboardCreator() {
-  const props = emptyData();
-
-  return {
-    ...props,
-    ...addToLeaderboard(),
-    ...removeFromLeaderboard(),
-    ...calculateTotalPoints(props),
-    ...calculatePointsForCategory(props),
-    ...calculateTotalPointsForDifficulty(props),
-  };
-}
-
-export { leaderboardCreator };

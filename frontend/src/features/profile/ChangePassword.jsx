@@ -1,18 +1,19 @@
 import { useMutation } from "@apollo/client";
 import React from "react";
-import { ScrollView, View } from "react-native";
-import { Button, HelperText, Snackbar, TextInput } from "react-native-paper";
+import { HelperText, Snackbar, TextInput } from "react-native-paper";
 
+import { FormAction, FormView } from "~shared/components";
 import { t } from "~shared/i18n";
 
 import CHANGE_PASSWORD from "./ChangePassword.gql";
-import styles from "./ChangePassword.style";
 
 function ChangePassword() {
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
   const [errorMessage, setErrorMessage] = React.useState("");
   const [visibleSnackbar, setVisibleSnackbar] = React.useState(false);
+
+  const isDisabled = !password && !confirmPassword;
 
   const showSnackbar = () => setVisibleSnackbar(true);
   const hideSnackbar = () => setVisibleSnackbar(false);
@@ -43,8 +44,8 @@ function ChangePassword() {
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.formContainer}>
+    <>
+      <FormView>
         <TextInput
           label={t("New password")}
           value={password}
@@ -77,10 +78,13 @@ function ChangePassword() {
         <HelperText type="error" visible={errorMessage}>
           {errorMessage}
         </HelperText>
-        <Button mode="contained" loading={loading} onPress={doChangePassword}>
-          {t("Change password")}
-        </Button>
-      </View>
+        <FormAction
+          label={t("Change password")}
+          loading={loading}
+          disabled={isDisabled}
+          onPress={doChangePassword}
+        />
+      </FormView>
       <Snackbar
         visible={visibleSnackbar}
         duration={5000}
@@ -88,7 +92,7 @@ function ChangePassword() {
       >
         {t("Your password is updated")}
       </Snackbar>
-    </ScrollView>
+    </>
   );
 }
 

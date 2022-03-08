@@ -116,7 +116,7 @@ function Completed({ navigation, theme }) {
     slide(Direction.OUT, 350);
   };
 
-  const hasAnsweredCorrect = () => {
+  const isAnswerCorrect = () => {
     const activitySolution = challenge.activity?.solution ?? null;
     const reflectionSolution = challenge.reflection.solution;
     return (
@@ -130,21 +130,25 @@ function Completed({ navigation, theme }) {
       return null;
     }
 
-    const userChallenge = user.challenges.filter(
+    const userChallenges = user.challenges.filter(
       ({ challengeID }) => challengeID === challenge.id
-    )[0];
-    const isFirstTry = userChallenge === undefined;
+    );
+    const isFirstTry = userChallenges.length === 0;
 
     let points = 0;
     const { firstTryPoints, maxPoints, bonusPoints } = challenge.reward;
 
     if (isFirstTry) {
       points += firstTryPoints;
-      if (hasAnsweredCorrect()) {
+      if (isAnswerCorrect()) {
         points += maxPoints + bonusPoints;
       }
-    } else if (!userChallenge.answeredCorrect && hasAnsweredCorrect) {
-      points += maxPoints;
+    } else {
+      const hasAnsweredCorrectPreviously =
+        userChallenges.filter((item) => item.answeredCorrect).length > 0;
+      if (hasAnsweredCorrectPreviously && isAnswerCorrect) {
+        points += maxPoints;
+      }
     }
 
     return points;

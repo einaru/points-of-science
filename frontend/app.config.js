@@ -1,4 +1,7 @@
-import "dotenv/config";
+import dotenv from "dotenv";
+import { expand } from "dotenv-expand";
+
+expand(dotenv.config());
 
 export default ({ config }) => {
   return {

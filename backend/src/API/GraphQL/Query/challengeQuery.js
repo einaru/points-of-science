@@ -1,28 +1,29 @@
-import { GraphQLList, GraphQLString } from "graphql";
 import {
   ActivityInputModel,
-  ChallengeResponseModel,
   ChallengeInputModel,
   ChallengeModel,
+  ChallengeResponseModel,
   NormalResponseModel,
   ReflectionInputModel,
   RewardInputModel,
   UserChallengeInputModel,
   UserChallengeModel,
   categoryCreator,
-  isPermissionGroup,
   challengeCreator,
   createActivity,
   createChallenge,
   createContent,
+  createLeaderboards,
   createReflection,
   createReward,
-  createLeaderboards,
+  isPermissionGroup,
   profileCreator,
   progressCreator,
   userChallengeCreator,
 } from "../../../internal.js";
+import { GraphQLList, GraphQLString } from "graphql";
 import { assertIsAdmin, assertIsAuthenticated } from "../assert.js";
+
 import { UserInputError } from "../error.js";
 
 // Root Queries - Used to retrieve data with GET-Requests
@@ -248,10 +249,8 @@ const addUserChallengeQuery = {
     pubsub.publish("UserProfile", profile.data);
 
     if (hasNotAllPoints && isPermissionGroup(profile, 2)) {
-      const { categoryID, difficulty } = userChallenge.data;
-      const category = await providers.categories.getByID(categoryID);
-      const leaderboards = createLeaderboards(profile, category, difficulty);
-      pubsub.publish("Leaderboard", leaderboards);
+      const leaderboards = createLeaderboards(profile);
+      pubsub.publish("Leaderboards", leaderboards);
     }
 
     const response = userChallenge.convertToResponseObject(userChallenge);

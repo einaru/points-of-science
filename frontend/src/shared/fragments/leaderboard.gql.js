@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 export const HIGH_SCORE_DATA = gql`
   fragment HighScoreData on HighScore {
-    rank
+    userID
     username
     score
   }

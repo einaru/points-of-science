@@ -7,6 +7,18 @@ import { HeroBackgroundImage } from "~shared/components";
 
 function HighScoreList() {
   const { leaderboards } = React.useContext(ContentContext);
+
+  const rankedHighScores = React.useMemo(
+    () =>
+      leaderboards.highScores
+        .sort((a, b) => b.score - a.score)
+        .map((item, index) => ({
+          ...item,
+          rank: index + 1,
+        })),
+    [leaderboards.highScores]
+  );
+
   return (
     <HeroBackgroundImage name="winners" fade={0.2}>
       <ScrollView style={{ flex: 1 }}>
@@ -16,8 +28,8 @@ function HighScoreList() {
             <DataTable.Title>User</DataTable.Title>
             <DataTable.Title numeric>Score</DataTable.Title>
           </DataTable.Header>
-          {leaderboards.highScores.map((entry) => (
-            <DataTable.Row key={entry.username}>
+          {rankedHighScores.map((entry) => (
+            <DataTable.Row key={entry.userID}>
               <DataTable.Cell>{entry.rank}</DataTable.Cell>
               <DataTable.Cell>{entry.username}</DataTable.Cell>
               <DataTable.Cell numeric>{entry.score}</DataTable.Cell>

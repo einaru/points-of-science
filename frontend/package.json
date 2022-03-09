@@ -12,8 +12,8 @@
     "lint:fix": "eslint . --ext .js,.jsx --fix",
     "sort-imports": "import-sort App.jsx ./src/**/*.{js,jsx} --list-different",
     "sort-imports:fix": "import-sort App.jsx ./src/**/*.{js,jsx} --write",
-    "test": "yarn node --experimental-vm-modules $(yarn bin jest)",
-    "test:coverage": "yarn node --experimental-vm-modules $(yarn bin jest) --coverage"
+    "test": "jest",
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "@apollo/client": "^3.5.7",

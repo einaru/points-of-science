@@ -7,7 +7,6 @@ import {
   createAchievementQuery,
   createCategoryQuery,
   createChallengeQuery,
-  createProjectInfoQuery,
   deleteUserChallengeQuery,
   changePasswordQuery,
   getAllAchievementsQuery,
@@ -19,7 +18,6 @@ import {
   createUserQuery,
   deleteUserQuery,
   updateUserQuery,
-  projectInfoQuery,
   signInQuery,
   signOutQuery,
   verifyUsernameQuery,
@@ -36,7 +34,7 @@ import {
   deleteClickStream,
   getAllClickStreams,
 } from "./Query/clickStreamQuery.js";
-import { getAllContacts } from "./Query/contactQuery.js";
+import { getAllContacts, addContact } from "./Query/contactQuery.js";
 
 const ROOTQUERY = new GraphQLObjectType({
   name: "RootQueryType",
@@ -49,7 +47,6 @@ const ROOTQUERY = new GraphQLObjectType({
     leaderboard: getLeaderboardQuery,
     accessToken: authRefreshTokenQuery,
     contacts: getAllContacts,
-    projectInfo: projectInfoQuery,
     permissions: getPermissionsQuery,
     userProfile: getUserProfile,
     verifyToken: authAccessTokenQuery,
@@ -60,7 +57,7 @@ const ROOTQUERY = new GraphQLObjectType({
 const MUTATION = new GraphQLObjectType({
   name: "Mutation",
   fields: {
-    addProjectInfo: createProjectInfoQuery,
+    addContact,
     addUserChallenge: addUserChallengeQuery,
     activateAccount: activateAccountQuery,
     changePassword: changePasswordQuery,

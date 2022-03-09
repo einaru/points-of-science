@@ -13,7 +13,6 @@ export const providers = {
   challenges: new FirestoreProvider(firestore, "Challenge"),
   clickStreams: new FirestoreProvider(firestore, "ClickStream"),
   contacts: new FirestoreProvider(firestore, "Contact"),
-  projectInfo: new FirestoreProvider(firestore, "ProjectInfo"),
   refreshTokens: new FirestoreProvider(firestore, "RefreshToken"),
   subscribeTokens: new FirestoreProvider(firestore, "SubscribeToken"),
   users: new FirestoreProvider(firestore, "User"),

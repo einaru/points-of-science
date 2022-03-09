@@ -6,12 +6,17 @@ import { LoadingScreen } from "~shared/components";
 import { t } from "~shared/i18n";
 
 import ContentContext from "./ContentContext";
-import { GET_ALL_CONTENT, USER_CHALLENGE_ADDED } from "./ContentProvider.gql";
+import {
+  GET_ALL_CONTENT,
+  GET_ALL_CONTACTS,
+  USER_CHALLENGE_ADDED,
+} from "./ContentProvider.gql";
 
 function ContentProvider({ children }) {
   const [user, setUser] = React.useState({});
   const [categories, setCategories] = React.useState([]);
   const [achievements, setAchievements] = React.useState([]);
+  const [contacts, setContacts] = React.useState([]);
 
   const { loading, data } = useQuery(GET_ALL_CONTENT, { errorPolicy: "all" });
 
@@ -22,6 +27,14 @@ function ContentProvider({ children }) {
       setAchievements(data.achievements);
     }
   }, [data]);
+
+  useQuery(GET_ALL_CONTACTS, {
+    onCompleted: (resp) => {
+      if (resp.contacts) {
+        setContacts(resp.contacts);
+      }
+    },
+  });
 
   const { subscribeToken } = React.useContext(AuthContext);
   useSubscription(USER_CHALLENGE_ADDED, {
@@ -37,8 +50,9 @@ function ContentProvider({ children }) {
       user,
       categories,
       achievements,
+      contacts,
     }),
-    [user, categories, achievements]
+    [user, categories, achievements, contacts]
   );
 
   if (loading) {

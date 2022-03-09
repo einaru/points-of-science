@@ -36,6 +36,7 @@ import {
   deleteClickStream,
   getAllClickStreams,
 } from "./Query/clickStreamQuery.js";
+import { getAllContacts } from "./Query/contactQuery.js";
 
 const ROOTQUERY = new GraphQLObjectType({
   name: "RootQueryType",
@@ -47,6 +48,7 @@ const ROOTQUERY = new GraphQLObjectType({
     users: getAllUsersQuery,
     leaderboard: getLeaderboardQuery,
     accessToken: authRefreshTokenQuery,
+    contacts: getAllContacts,
     projectInfo: projectInfoQuery,
     permissions: getPermissionsQuery,
     userProfile: getUserProfile,

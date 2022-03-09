@@ -2,6 +2,7 @@ import { openURL } from "expo-linking";
 import React from "react";
 import { ScrollView, View } from "react-native";
 import { List, Paragraph, Subheading } from "react-native-paper";
+import ContentContext from "~services/content/ContentContext";
 
 import { HeroImage } from "~shared/components";
 import { t } from "~shared/i18n";
@@ -9,21 +10,7 @@ import { t } from "~shared/i18n";
 import styles from "./ProjectInfo.style";
 
 function ProjectInfo() {
-  // TODO persist this somewhere else
-  const contacts = [
-    {
-      name: "Andreas N. Digernes",
-      role: "Master student",
-      phone: "+4712345678",
-      email: "andrend@stud.ntnu.no",
-    },
-    {
-      name: "Einar Uvsløkk",
-      role: "Master student",
-      phone: "+4712345678",
-      email: "einaru@stud.ntnu.no",
-    },
-  ];
+  const { contacts } = React.useContext(ContentContext);
 
   return (
     <ScrollView>
@@ -41,18 +28,22 @@ function ProjectInfo() {
             title={contact.name}
             description={contact.role}
           >
-            <List.Item
-              left={() => <List.Icon icon="phone" />}
-              right={() => <List.Icon icon="open-in-new" />}
-              title={contact.phone}
-              onPress={() => openURL(`tel:${contact.phone}`)}
-            />
-            <List.Item
-              left={() => <List.Icon icon="email" />}
-              right={() => <List.Icon icon="open-in-new" />}
-              title={contact.email}
-              onPress={() => openURL(`mailto:${contact.email}`)}
-            />
+            {contact.phone && (
+              <List.Item
+                left={() => <List.Icon icon="phone" />}
+                right={() => <List.Icon icon="open-in-new" />}
+                title={contact.phone}
+                onPress={() => openURL(`tel:${contact.phone}`)}
+              />
+            )}
+            {contact.email && (
+              <List.Item
+                left={() => <List.Icon icon="email" />}
+                right={() => <List.Icon icon="open-in-new" />}
+                title={contact.email}
+                onPress={() => openURL(`mailto:${contact.email}`)}
+              />
+            )}
           </List.Accordion>
         );
       })}

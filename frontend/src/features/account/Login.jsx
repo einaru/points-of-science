@@ -20,7 +20,7 @@ function LoginScreen() {
     },
   });
 
-  const isDisabled = !username && !password;
+  const isDisabled = !username || !password;
 
   const [showPassword, setShowPassword] = React.useState(false);
   const toggleShowPassword = () => setShowPassword(!showPassword);

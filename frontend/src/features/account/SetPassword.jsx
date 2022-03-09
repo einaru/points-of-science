@@ -14,7 +14,7 @@ export default function SetPassword() {
   const [confirmPassword, setConfirmPassword] = React.useState("");
   const [errorMessage, setErrorMessage] = React.useState("");
 
-  const isDisabled = !password && !confirmPassword;
+  const isDisabled = !password || !confirmPassword;
 
   const [showPassword, setShowPassword] = React.useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);

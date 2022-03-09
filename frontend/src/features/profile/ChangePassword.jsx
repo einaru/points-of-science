@@ -13,7 +13,7 @@ function ChangePassword() {
   const [errorMessage, setErrorMessage] = React.useState("");
   const [visibleSnackbar, setVisibleSnackbar] = React.useState(false);
 
-  const isDisabled = !password && !confirmPassword;
+  const isDisabled = !password || !confirmPassword;
 
   const showSnackbar = () => setVisibleSnackbar(true);
   const hideSnackbar = () => setVisibleSnackbar(false);

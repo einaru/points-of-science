@@ -29,6 +29,17 @@ export const GET_ALL_CONTENT = gql`
   }
 `;
 
+export const GET_ALL_CONTACTS = gql`
+  query GetContactInfo {
+    contacts {
+      name
+      role
+      phone
+      email
+    }
+  }
+`;
+
 export const USER_CHALLENGE_ADDED = gql`
   ${USER_PROFILE}
 

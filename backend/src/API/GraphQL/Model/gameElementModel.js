@@ -120,46 +120,38 @@ const AchievementInputModel = new GraphQLInputObjectType({
   }),
 });
 
-const LeaderboardData = new GraphQLObjectType({
-  name: "LeaderboardData",
+const HighScore = new GraphQLObjectType({
+  name: "HighScore",
   fields: () => ({
+    rank: { type: GraphQLInt },
     username: { type: GraphQLString },
-    score: { type: GraphQLString },
+    score: { type: GraphQLInt },
   }),
 });
 
-const LeaderboardCategoryData = new GraphQLObjectType({
-  name: "LeaderboardCategoryData",
+const CategoryHighScores = new GraphQLObjectType({
+  name: "CategoryHighScores",
   fields: () => ({
     categoryID: { type: GraphQLString },
-    username: { type: GraphQLString },
-    score: { type: GraphQLString },
+    categoryName: { type: GraphQLString },
+    highScores: { type: new GraphQLList(HighScore) },
   }),
 });
 
-const LeaderboardDifficultyData = new GraphQLObjectType({
-  name: "LeaderboardDifficultyData",
+const DifficultyHighScores = new GraphQLObjectType({
+  name: "DifficultyHighScores",
   fields: () => ({
     difficulty: { type: DifficultyEnum },
-    username: { type: GraphQLString },
-    score: { type: GraphQLString },
+    highScores: { type: new GraphQLList(HighScore) },
   }),
 });
 
-const LeaderboardType = new GraphQLObjectType({
-  name: "LeaderboardType",
+const LeaderboardsType = new GraphQLObjectType({
+  name: "Leaderboards",
   fields: () => ({
-    highscore: { type: new GraphQLList(LeaderboardData) },
-    category: { type: new GraphQLList(LeaderboardCategoryData) },
-    difficulty: { type: new GraphQLList(LeaderboardDifficultyData) },
-  }),
-});
-
-const LeaderboardModel = new GraphQLObjectType({
-  name: "Leaderboard",
-  fields: () => ({
-    name: { type: GraphQLString },
-    leaderboards: { type: LeaderboardType },
+    highScores: { type: new GraphQLList(HighScore) },
+    categories: { type: new GraphQLList(CategoryHighScores) },
+    difficulties: { type: new GraphQLList(DifficultyHighScores) },
   }),
 });
 
@@ -171,7 +163,7 @@ export {
   RewardModel,
   RewardInputModel,
   ProgressModel,
-  LeaderboardModel,
+  LeaderboardsType,
   ChallengeModel,
   ChallengeResponseModel,
 };

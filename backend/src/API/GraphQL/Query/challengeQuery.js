@@ -17,7 +17,7 @@ import {
   createContent,
   createReflection,
   createReward,
-  leaderboardCreator,
+  createLeaderboards,
   profileCreator,
   progressCreator,
   userChallengeCreator,
@@ -233,16 +233,10 @@ const addUserChallengeQuery = {
     pubsub.publish("UserProfile", profile.data);
 
     if (hasNotAllPoints && isPermissionGroup(profile, 2)) {
-      const leaderboard = leaderboardCreator();
-      leaderboard.setName("Leaderboard");
-      leaderboard.addToLeaderboard(profile, leaderboard.data.profiles);
-      leaderboard.calculateTotalPoints();
-      leaderboard.calculatePointsForCategory(userChallenge.data.categoryID);
-      leaderboard.calculateTotalPointsForDifficulty(
-        userChallenge.data.difficulty
-      );
-
-      pubsub.publish("Leaderboard", leaderboard.data);
+      const { categoryID, difficulty } = userChallenge.data;
+      const category = await providers.categories.getByID(categoryID);
+      const leaderboards = createLeaderboards(profile, category, difficulty);
+      pubsub.publish("Leaderboard", leaderboards);
     }
 
     const response = userChallenge.convertToResponseObject(userChallenge);

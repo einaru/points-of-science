@@ -1,51 +1,41 @@
 import {
-  LeaderboardModel,
+  LeaderboardsType,
   DifficultyEnum,
-  leaderboardCreator,
+  createLeaderboards,
   profileCreator,
 } from "../../../internal.js";
 import {
   assertHasExperimentPermission,
   assertIsAuthenticated,
-
 } from "../assert.js";
 
-// Root Queries - Used to retrieve data with GET-Requests
-
-const getLeaderboardQuery = {
-  type: LeaderboardModel,
+const getLeaderboardsQuery = {
+  type: LeaderboardsType,
   args: {},
-  async resolve(_, __, { user, providers }) {
-    assertIsAuthenticated(user);
-    assertHasExperimentPermission(user);
+  async resolve(_, __, context) {
+    assertIsAuthenticated(context.user);
+    assertHasExperimentPermission(context.user);
 
-    const leaderboard = leaderboardCreator();
-    leaderboard.setName("Leaderboard");
+    const { providers } = context;
 
-    const userData = await providers.users.getAll();
-    const users = userData.filter((data) => {
-      return data.state === 2 && data.permission === 2;
-    });
-
-    users.forEach((data) => {
-      const profile = profileCreator();
-      profile.updateData(data);
-      leaderboard.addToLeaderboard(profile, leaderboard.data.profiles);
-    });
-
-    leaderboard.calculateTotalPoints();
-
+    const difficulties = Object.keys(DifficultyEnum);
     const categories = await providers.categories.getAll();
-    categories.forEach((category) => {
-      leaderboard.calculatePointsForCategory(category.id);
-    });
+    const users = await providers.users.getAll();
+    const userProfiles = users
+      .filter((user) => user.state === 2 && user.permission === 2)
+      .map((user) => {
+        const profile = profileCreator();
+        profile.updateData(user);
+        return profile;
+      });
 
-    Object.keys(DifficultyEnum).forEach((key) => {
-      leaderboard.calculateTotalPointsForDifficulty(DifficultyEnum[key]);
-    });
-
-    return leaderboard.data;
+    const leaderboards = createLeaderboards(
+      userProfiles,
+      categories,
+      difficulties
+    );
+    return leaderboards;
   },
 };
 
-export { getLeaderboardQuery };
+export { getLeaderboardsQuery };

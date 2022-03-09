@@ -16,6 +16,7 @@ function ContentProvider({ children }) {
   const [user, setUser] = React.useState({});
   const [categories, setCategories] = React.useState([]);
   const [achievements, setAchievements] = React.useState([]);
+  const [leaderboards, setLeaderboards] = React.useState([]);
   const [contacts, setContacts] = React.useState([]);
 
   const { loading, data } = useQuery(GET_ALL_CONTENT, { errorPolicy: "all" });
@@ -25,6 +26,7 @@ function ContentProvider({ children }) {
       setUser(data.userProfile);
       setCategories(data.categories);
       setAchievements(data.achievements);
+      setLeaderboards(data.leaderboards);
     }
   }, [data]);
 
@@ -50,9 +52,10 @@ function ContentProvider({ children }) {
       user,
       categories,
       achievements,
+      leaderboards,
       contacts,
     }),
-    [user, categories, achievements, contacts]
+    [user, categories, achievements, leaderboards, contacts]
   );
 
   if (loading) {

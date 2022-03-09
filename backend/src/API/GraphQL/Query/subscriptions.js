@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import config from "../../../Config/config.js";
 
 import {
-  LeaderboardModel,
+  LeaderboardsType,
   NormalResponseModel,
   UserModel,
   SwapPermissionPayload,
@@ -31,7 +31,7 @@ const subscribeUpdatedUser = {
 };
 
 const subscribeLeaderboard = {
-  type: LeaderboardModel,
+  type: LeaderboardsType,
   args: { subscribeToken: { type: GraphQLString } },
   subscribe: withFilter(
     () => pubsub.asyncIterator("Leaderboard"),

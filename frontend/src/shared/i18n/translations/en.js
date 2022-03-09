@@ -30,6 +30,7 @@ const strings = [
   "Graphics",
   "Haven't activated your account yet?",
   "Here's a little hint",
+  "High score",
   "Illustrations by",
   "Intro",
   "Leaderboards",

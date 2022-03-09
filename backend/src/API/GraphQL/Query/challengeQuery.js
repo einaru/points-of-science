@@ -136,6 +136,7 @@ const addUserChallengeQuery = {
     const userChallengeData = args.userChallenge;
     const userChallenge = userChallengeCreator();
     userChallengeData.userID = user.id;
+    userChallengeData.permission = user.permission;
     userChallengeData.categoryID = challenge.categoryID;
     userChallengeData.difficulty = challenge.difficulty;
     userChallenge.updateData(userChallengeData);
@@ -146,7 +147,11 @@ const addUserChallengeQuery = {
     const userData = await providers.users.getByID(user.id);
     let userChallenges = userData.challenges;
     userChallenges = userChallenges.filter((object) => {
-      return challenge.id === object.challengeID && object.userID === user.id;
+      return (
+        challenge.id === object.challengeID &&
+        object.userID === user.id &&
+        object.permission === user.permission
+      );
     });
 
     const isFirstTry = !userChallenges.length;
@@ -182,9 +187,13 @@ const addUserChallengeQuery = {
       },
     };
 
+    const filteredChallenges = profile.data.challenges.filter((object) => {
+      return object.userID === user.id && object.permission === user.permission;
+    });
+
     categoriesData.forEach((categoryData) => {
       const challengeIDs = categoryData.challenges;
-      const progress = calculateProgress(profile.data.challenges, challengeIDs);
+      const progress = calculateProgress(filteredChallenges, challengeIDs);
 
       userProgress.progress.categories.push({
         id: categoryData.id,
@@ -192,33 +201,38 @@ const addUserChallengeQuery = {
       });
     });
 
-    const achievements = await providers.achievements.getAll();
-    const achievedAchievements = profile.data.achievements.map(
-      (item) => item.id
-    );
-    achievements.forEach((achievementData) => {
-      const progress = calculateProgress(
-        profile.data.challenges,
-        achievementData.condition
+    if (isPermissionGroup(profile, 2)) {
+      const achievements = await providers.achievements.getAll();
+      const achievedAchievements = profile.data.achievements.map(
+        (item) => item.id
       );
+      achievements.forEach((achievementData) => {
+        const progress = calculateProgress(
+          filteredChallenges,
+          achievementData.condition
+        );
 
-      userProgress.progress.achievements.push({
-        id: achievementData.id,
-        progress,
-      });
-
-      if (progress >= 1 && !achievedAchievements.includes(achievementData.id)) {
-        const userAchievement = {
+        userProgress.progress.achievements.push({
           id: achievementData.id,
-          ...achievementData.content,
-          condition: achievementData.condition,
-          type: achievementData.type,
-          completed: Date.now().valueOf().toString(),
-        };
+          progress,
+        });
 
-        profile.add(profile.data.achievements, userAchievement);
-      }
-    });
+        if (
+          progress >= 1 &&
+          !achievedAchievements.includes(achievementData.id)
+        ) {
+          const userAchievement = {
+            id: achievementData.id,
+            ...achievementData.content,
+            condition: achievementData.condition,
+            type: achievementData.type,
+            completed: Date.now().valueOf().toString(),
+          };
+
+          profile.add(profile.data.achievements, userAchievement);
+        }
+      });
+    }
 
     profile.updateData(userProgress);
 
@@ -229,6 +243,7 @@ const addUserChallengeQuery = {
 
     await providers.users.update(profile.data.id, profile.data);
 
+    profile.updateData({ challenges: userChallenges });
     delete profile.data.password;
     pubsub.publish("UserProfile", profile.data);
 

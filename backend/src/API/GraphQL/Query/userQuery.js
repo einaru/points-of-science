@@ -20,6 +20,10 @@ const getUserProfile = {
   async resolve(_, __, { user, providers }) {
     assertIsAuthenticated(user);
     const data = await providers.users.getByID(user.id);
+    const userChallenges = data.challenges.filter((object) => {
+      return object.userID === user.id && object.permission === user.permission;
+    });
+    data.challenges = userChallenges;
     return data;
   },
 };

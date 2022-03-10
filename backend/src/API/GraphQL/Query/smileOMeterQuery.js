@@ -14,6 +14,12 @@ const logSmileOMeterQuery = {
       throw new UserInputError("Challenge does not exist.");
     }
 
+    if (value < -2 || value > 2) {
+      throw new UserInputError(
+        "Value from evaluation must be an integer from -2 to 2."
+      );
+    }
+
     let data = {};
     const smileOMeterData = await providers.smileOMeters.getByID(challengeID);
     if (smileOMeterData) {

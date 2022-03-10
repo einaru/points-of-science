@@ -13,6 +13,9 @@ function getHighScores(users) {
 export function createLeaderboards(users) {
   const asArray = (a) => (Array.isArray(a) ? a : [a]);
   return {
-    highScores: getHighScores(asArray(users)),
+    highScores: {
+      id: "highScores",
+      scores: getHighScores(asArray(users)),
+    },
   };
 }

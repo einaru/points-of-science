@@ -11,8 +11,9 @@ export const HIGH_SCORE_DATA = gql`
 export const LEADERBOARD_DATA = gql`
   ${HIGH_SCORE_DATA}
 
-  fragment LeaderboardData on Leaderboards {
-    highScores {
+  fragment LeaderboardData on Leaderboard {
+    id
+    scores {
       ...HighScoreData
     }
   }

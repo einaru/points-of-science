@@ -16,9 +16,17 @@ const HighScore = new GraphQLObjectType({
   }),
 });
 
+const Leaderboard = new GraphQLObjectType({
+  name: "Leaderboard",
+  fields: () => ({
+    id: { type: GraphQLString },
+    scores: { type: new GraphQLList(HighScore) },
+  }),
+});
+
 export const LeaderboardsType = new GraphQLObjectType({
   name: "Leaderboards",
   fields: () => ({
-    highScores: { type: new GraphQLList(HighScore) },
+    highScores: { type: Leaderboard },
   }),
 });

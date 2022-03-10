@@ -29,7 +29,9 @@ export const GET_ALL_CONTENT = gql`
       ...AchievementData
     }
     leaderboards {
-      ...LeaderboardData
+      highScores {
+        ...LeaderboardData
+      }
     }
   }
 `;

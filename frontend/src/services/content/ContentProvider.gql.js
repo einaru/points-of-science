@@ -56,3 +56,15 @@ export const USER_CHALLENGE_ADDED = gql`
     }
   }
 `;
+
+export const LEADERBOARDS_UPDATE = gql`
+  ${LEADERBOARD_DATA}
+
+  subscription LeaderboardsUpdate($subscribeToken: String!) {
+    leaderboards(subscribeToken: $subscribeToken) {
+      highScores {
+        ...LeaderboardData
+      }
+    }
+  }
+`;

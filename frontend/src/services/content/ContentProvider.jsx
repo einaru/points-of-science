@@ -10,6 +10,7 @@ import {
   GET_ALL_CONTENT,
   GET_ALL_CONTACTS,
   USER_CHALLENGE_ADDED,
+  LEADERBOARDS_UPDATE,
 } from "./ContentProvider.gql";
 
 function ContentProvider({ children }) {
@@ -39,11 +40,19 @@ function ContentProvider({ children }) {
   });
 
   const { subscribeToken } = React.useContext(AuthContext);
+
   useSubscription(USER_CHALLENGE_ADDED, {
     variables: { subscribeToken },
     onSubscriptionData: ({ subscriptionData }) => {
       const { userChallengeAdded: userProfile } = subscriptionData.data;
       setUser(userProfile);
+    },
+  });
+
+  useSubscription(LEADERBOARDS_UPDATE, {
+    variables: { subscribeToken },
+    onSubscriptionData: ({ subscriptionData }) => {
+      console.debug("Got leaderboards update:", subscriptionData);
     },
   });
 

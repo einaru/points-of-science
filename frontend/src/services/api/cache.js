@@ -2,6 +2,15 @@ import { InMemoryCache } from "@apollo/client";
 
 export default new InMemoryCache({
   typePolicies: {
+    User: {
+      fields: {
+        challenges: {
+          merge(_, incoming) {
+            return incoming;
+          },
+        },
+      },
+    },
     Leaderboard: {
       fields: {
         scores: {

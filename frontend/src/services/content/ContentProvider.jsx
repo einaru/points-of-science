@@ -40,21 +40,9 @@ function ContentProvider({ children }) {
   });
 
   const { subscribeToken } = React.useContext(AuthContext);
-
-  useSubscription(USER_CHALLENGE_ADDED, {
-    variables: { subscribeToken },
-    onSubscriptionData: ({ subscriptionData }) => {
-      const { userChallengeAdded: userProfile } = subscriptionData.data;
-      setUser(userProfile);
-    },
-  });
-
-  useSubscription(LEADERBOARDS_UPDATE, {
-    variables: { subscribeToken },
-    onSubscriptionData: ({ subscriptionData }) => {
-      console.debug("Got leaderboards update:", subscriptionData);
-    },
-  });
+  const subscriptionPayload = { variables: { subscribeToken } };
+  useSubscription(USER_CHALLENGE_ADDED, subscriptionPayload);
+  useSubscription(LEADERBOARDS_UPDATE, subscriptionPayload);
 
   const content = React.useMemo(
     () => ({

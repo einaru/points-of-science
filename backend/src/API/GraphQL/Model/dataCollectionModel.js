@@ -4,6 +4,7 @@ import {
   GraphQLString,
   GraphQLList,
   GraphQLBoolean,
+  GraphQLEnumType,
 } from "graphql";
 
 const deviceInfo = {
@@ -81,5 +82,24 @@ export const ClickStreamType = new GraphQLObjectType({
     userID: { type: GraphQLString },
     deviceInfo: { type: DeviceInfoType },
     clicks: { type: new GraphQLList(ClickEventType) },
+  }),
+});
+
+const LikertScale = new GraphQLEnumType({
+  name: "LikertScale",
+  values: {
+    stronglyDisagree: { value: -2 },
+    disagree: { value: -1 },
+    neutral: { value: 0 },
+    agree: { value: 1 },
+    stronglyAgree: { value: 2 },
+  },
+});
+
+export const SmileOMeterInput = new GraphQLInputObjectType({
+  name: "SmileOMeterInput",
+  fields: () => ({
+    challengeID: { type: GraphQLString },
+    value: { type: LikertScale },
   }),
 });

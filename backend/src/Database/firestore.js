@@ -14,6 +14,7 @@ export const providers = {
   clickStreams: new FirestoreProvider(firestore, "ClickStream"),
   contacts: new FirestoreProvider(firestore, "Contact"),
   refreshTokens: new FirestoreProvider(firestore, "RefreshToken"),
+  smileOMeters: new FirestoreProvider(firestore, "SmileOMeter"),
   subscribeTokens: new FirestoreProvider(firestore, "SubscribeToken"),
   users: new FirestoreProvider(firestore, "User"),
   validUsernames: new FirestoreProvider(firestore, "ValidUsername"),

@@ -17,7 +17,7 @@ function ContentProvider({ children }) {
   const [user, setUser] = React.useState({});
   const [categories, setCategories] = React.useState([]);
   const [achievements, setAchievements] = React.useState([]);
-  const [leaderboards, setLeaderboards] = React.useState({ highScores: {} });
+  const [leaderboards, setLeaderboards] = React.useState({ highScore: {} });
   const [contacts, setContacts] = React.useState([]);
 
   const { loading, data } = useQuery(GET_ALL_CONTENT, { errorPolicy: "all" });

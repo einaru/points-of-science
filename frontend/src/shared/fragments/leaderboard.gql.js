@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
-export const HIGH_SCORE_DATA = gql`
-  fragment HighScoreData on HighScore {
+export const USER_SCORE_DATA = gql`
+  fragment UserScoreData on UserScore {
     userID
     username
     score
@@ -9,12 +9,12 @@ export const HIGH_SCORE_DATA = gql`
 `;
 
 export const LEADERBOARD_DATA = gql`
-  ${HIGH_SCORE_DATA}
+  ${USER_SCORE_DATA}
 
   fragment LeaderboardData on Leaderboard {
     id
     scores {
-      ...HighScoreData
+      ...UserScoreData
     }
   }
 `;

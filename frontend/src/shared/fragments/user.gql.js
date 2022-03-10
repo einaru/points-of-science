@@ -16,6 +16,11 @@ export const USER_PROFILE = gql`
     challenges {
       challengeID
       answeredCorrect
+      completed
+      reward {
+        points
+        bonusPoints
+      }
     }
     achievements {
       id

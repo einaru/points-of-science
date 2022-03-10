@@ -9,15 +9,15 @@ import { HeroBackgroundImage } from "~shared/components";
 function HighScoreList() {
   const { user, leaderboards } = React.useContext(ContentContext);
 
-  const rankedHighScores = React.useMemo(
+  const rankedUserScores = React.useMemo(
     () =>
-      leaderboards.highScores.scores
+      leaderboards.highScore.scores
         .sort((a, b) => b.score - a.score)
         .map((item, index) => ({
           ...item,
           rank: index + 1,
         })),
-    [leaderboards.highScores]
+    [leaderboards.highScore]
   );
 
   return (
@@ -29,7 +29,7 @@ function HighScoreList() {
             <DataTable.Title>User</DataTable.Title>
             <DataTable.Title numeric>Score</DataTable.Title>
           </DataTable.Header>
-          {rankedHighScores.map((entry) => {
+          {rankedUserScores.map((entry) => {
             const style =
               entry.userID === user.id
                 ? { backgroundColor: colors.yellow.fade(0.5).string() }

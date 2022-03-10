@@ -7,8 +7,8 @@ import {
   GraphQLString,
 } from "graphql";
 
-const HighScore = new GraphQLObjectType({
-  name: "HighScore",
+const UserScore = new GraphQLObjectType({
+  name: "UserScore",
   fields: () => ({
     userID: { type: GraphQLString },
     username: { type: GraphQLString },
@@ -20,13 +20,13 @@ const Leaderboard = new GraphQLObjectType({
   name: "Leaderboard",
   fields: () => ({
     id: { type: GraphQLString },
-    scores: { type: new GraphQLList(HighScore) },
+    scores: { type: new GraphQLList(UserScore) },
   }),
 });
 
 export const LeaderboardsType = new GraphQLObjectType({
   name: "Leaderboards",
   fields: () => ({
-    highScores: { type: Leaderboard },
+    highScore: { type: Leaderboard },
   }),
 });

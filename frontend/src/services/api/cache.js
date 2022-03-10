@@ -9,18 +9,18 @@ export default new InMemoryCache({
             const merged = existing ? existing.slice(0) : [];
             const userToIndex = Object.create(null);
             if (existing) {
-              existing.forEach((highScore, index) => {
-                userToIndex[readField("userID", highScore)] = index;
+              existing.forEach((userScore, index) => {
+                userToIndex[readField("userID", userScore)] = index;
               });
             }
-            incoming.forEach((highScore) => {
-              const id = readField("userID", highScore);
+            incoming.forEach((userScore) => {
+              const id = readField("userID", userScore);
               const index = userToIndex[id];
               if (typeof index === "number") {
-                merged[index] = mergeObjects(merged[index], highScore);
+                merged[index] = mergeObjects(merged[index], userScore);
               } else {
                 userToIndex[id] = merged.length;
-                merged.push(highScore);
+                merged.push(userScore);
               }
             });
             return merged;

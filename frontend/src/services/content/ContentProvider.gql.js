@@ -29,7 +29,7 @@ export const GET_ALL_CONTENT = gql`
       ...AchievementData
     }
     leaderboards {
-      highScores {
+      highScore {
         ...LeaderboardData
       }
     }
@@ -62,7 +62,7 @@ export const LEADERBOARDS_UPDATE = gql`
 
   subscription LeaderboardsUpdate($subscribeToken: String!) {
     leaderboards(subscribeToken: $subscribeToken) {
-      highScores {
+      highScore {
         ...LeaderboardData
       }
     }

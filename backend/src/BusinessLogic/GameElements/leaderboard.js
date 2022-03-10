@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 
-function getHighScores(users) {
+function getUserScores(users) {
   return users
     .map((user) => ({
       userID: user.data.id,
@@ -13,9 +13,9 @@ function getHighScores(users) {
 export function createLeaderboards(users) {
   const asArray = (a) => (Array.isArray(a) ? a : [a]);
   return {
-    highScores: {
-      id: "highScores",
-      scores: getHighScores(asArray(users)),
+    highScore: {
+      id: "highScore",
+      scores: getUserScores(asArray(users)),
     },
   };
 }

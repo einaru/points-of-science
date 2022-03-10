@@ -1,3 +1,4 @@
+import { GraphQLList, GraphQLString } from "graphql";
 import {
   ActivityInputModel,
   ChallengeInputModel,
@@ -21,7 +22,6 @@ import {
   progressCreator,
   userChallengeCreator,
 } from "../../../internal.js";
-import { GraphQLList, GraphQLString } from "graphql";
 import { assertIsAdmin, assertIsAuthenticated } from "../assert.js";
 
 import { UserInputError } from "../error.js";
@@ -242,9 +242,9 @@ const addUserChallengeQuery = {
       delete profile.data.progress;
     }
 
-    await providers.users.update(profile.data.id, profile.data);
+    const doc = await providers.users.update(profile.data.id, profile.data);
 
-    profile.updateData({ challenges: userChallenges });
+    profile.updateData({ challenges: doc.challenges });
     delete profile.data.password;
     pubsub.publish("UserProfile", profile.data);
 

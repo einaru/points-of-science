@@ -47,7 +47,7 @@ export const GET_ALL_CONTACTS = gql`
   }
 `;
 
-export const USER_CHALLENGE_ADDED = gql`
+export const USER_PROFILE_UPDATE = gql`
   ${USER_PROFILE}
 
   subscription UserChallengeAdded($subscribeToken: String!) {

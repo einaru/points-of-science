@@ -9,7 +9,7 @@ import ContentContext from "./ContentContext";
 import {
   GET_ALL_CONTENT,
   GET_ALL_CONTACTS,
-  USER_CHALLENGE_ADDED,
+  USER_PROFILE_UPDATE,
   LEADERBOARDS_UPDATE,
 } from "./ContentProvider.gql";
 
@@ -41,7 +41,7 @@ function ContentProvider({ children }) {
 
   const { subscribeToken } = React.useContext(AuthContext);
   const subscriptionPayload = { variables: { subscribeToken } };
-  useSubscription(USER_CHALLENGE_ADDED, subscriptionPayload);
+  useSubscription(USER_PROFILE_UPDATE, subscriptionPayload);
   useSubscription(LEADERBOARDS_UPDATE, subscriptionPayload);
 
   const content = React.useMemo(

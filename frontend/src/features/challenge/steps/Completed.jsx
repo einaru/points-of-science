@@ -16,14 +16,12 @@ import {
   withTheme,
 } from "react-native-paper";
 
-import ContentContext from "~services/content/ContentContext";
 import {
   HeroBackgroundImage,
   LoadingScreen,
   SmileyOMeter,
 } from "~shared/components";
 import { t } from "~shared/i18n";
-import Permission from "~shared/permission";
 
 import ChallengeContext from "../ChallengeContext";
 import ADD_USER_CHALLENGE from "./Completed.gql";
@@ -35,13 +33,22 @@ const Direction = {
 };
 
 function Completed({ navigation, theme }) {
-  const { user } = React.useContext(ContentContext);
   const { challenge, userData } = React.useContext(ChallengeContext);
+
+  const [points, setPoints] = React.useState(0);
+  const [bonusPoints, setBonusPoints] = React.useState(0);
   const [addUserChallenge, { called, loading }] = useMutation(
     ADD_USER_CHALLENGE,
     {
       onError: (error) => {
         console.debug("Error adding user challenge:", error);
+      },
+      onCompleted: (data) => {
+        if (data?.addUserChallenge.reward) {
+          const { reward } = data.addUserChallenge;
+          setPoints(reward.points);
+          setBonusPoints(reward.bonusPoints);
+        }
       },
     }
   );
@@ -116,66 +123,26 @@ function Completed({ navigation, theme }) {
     slide(Direction.OUT, 350);
   };
 
-  const isAnswerCorrect = () => {
-    const activitySolution = challenge.activity?.solution ?? null;
-    const reflectionSolution = challenge.reflection.solution;
-    return (
-      reflectionSolution === userData.reflectionAnswer &&
-      activitySolution === userData.activityAnswer
-    );
-  };
-
-  const calculatePoints = () => {
-    if (user.permission !== Permission.EXPERIMENT) {
-      return null;
-    }
-
-    const userChallenges = user.challenges.filter(
-      ({ challengeID }) => challengeID === challenge.id
-    );
-    const isFirstTry = userChallenges.length === 0;
-
-    let points = 0;
-    const { firstTryPoints, maxPoints, bonusPoints } = challenge.reward;
-
-    if (isFirstTry) {
-      points += firstTryPoints;
-      if (isAnswerCorrect()) {
-        points += maxPoints + bonusPoints;
-      }
-    } else {
-      const hasAnsweredCorrectPreviously =
-        userChallenges.filter((item) => item.answeredCorrect).length > 0;
-      if (hasAnsweredCorrectPreviously && isAnswerCorrect) {
-        points += maxPoints;
-      }
-    }
-
-    return points;
-  };
-
   const styles = themedStyles(theme);
 
   const renderReward = () => {
-    const points = calculatePoints();
-    return points ? (
+    const reward = points + bonusPoints;
+    return reward ? (
       <View style={styles.rewardContainer}>
-        <Text style={styles.rewardTitle}>{points}</Text>
+        <Text style={styles.rewardTitle}>{reward}</Text>
         <Text style={styles.rewardSubtitle}>{t("points")}</Text>
       </View>
     ) : null;
   };
 
   if (loading) {
-    return (
-      <LoadingScreen loading={loading} message={t("Calculating points…")} />
-    );
+    return <LoadingScreen loading={loading} />;
   }
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollView}>
-        <HeroBackgroundImage name="graduation">
+      <HeroBackgroundImage name="graduation" fade={0.5}>
+        <ScrollView contentContainerStyle={styles.scrollView}>
           <View style={styles.backgroundOverlay}>
             <View style={styles.shoutOutContainer}>
               {renderReward()}
@@ -207,8 +174,8 @@ function Completed({ navigation, theme }) {
               </Button>
             </View>
           </View>
-        </HeroBackgroundImage>
-      </ScrollView>
+        </ScrollView>
+      </HeroBackgroundImage>
     </View>
   );
 }

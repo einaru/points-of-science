@@ -24,7 +24,7 @@ import {
 import { t } from "~shared/i18n";
 
 import ChallengeContext from "../ChallengeContext";
-import ADD_USER_CHALLENGE from "./Completed.gql";
+import { ADD_USER_CHALLENGE, LOG_CHALLENGE_RATING } from "./Completed.gql";
 import themedStyles from "./Completed.style";
 
 const Direction = {
@@ -99,6 +99,13 @@ function Completed({ navigation, theme }) {
     });
   }, [navigation, challenge, goBack]);
 
+  const [isRated, setIsRated] = React.useState(false);
+  const [logChallengeRating] = useMutation(LOG_CHALLENGE_RATING, {
+    onError: (error) => {
+      console.debug(error);
+    },
+  });
+
   const slideFrom = React.useRef(new Animated.Value(0)).current;
 
   const slide = React.useCallback(
@@ -114,14 +121,22 @@ function Completed({ navigation, theme }) {
     [slideFrom]
   );
 
-  React.useEffect(() => {
-    slide(Direction.IN, 350);
-  });
-
   const handleSmileyPress = (score) => {
-    console.debug(`User rated challenge ${score}`);
+    setIsRated(true);
     slide(Direction.OUT, 350);
+    logChallengeRating({
+      variables: {
+        evaluation: {
+          challengeID: challenge.id,
+          value: score,
+        },
+      },
+    });
   };
+
+  if (!isRated) {
+    slide(Direction.IN, 250);
+  }
 
   const styles = themedStyles(theme);
 

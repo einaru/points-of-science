@@ -4,7 +4,6 @@ import {
   GraphQLString,
   GraphQLList,
   GraphQLBoolean,
-  GraphQLInt,
 } from "graphql";
 
 const deviceInfo = {
@@ -82,13 +81,5 @@ export const ClickStreamType = new GraphQLObjectType({
     userID: { type: GraphQLString },
     deviceInfo: { type: DeviceInfoType },
     clicks: { type: new GraphQLList(ClickEventType) },
-  }),
-});
-
-export const SmileOMeterInput = new GraphQLInputObjectType({
-  name: "SmileOMeterInput",
-  fields: () => ({
-    challengeID: { type: GraphQLString },
-    value: { type: GraphQLInt },
   }),
 });

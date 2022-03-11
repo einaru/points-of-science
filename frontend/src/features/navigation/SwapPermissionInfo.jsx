@@ -10,6 +10,13 @@ function SwapPermissionModal({ visible, onDismiss, theme }) {
     onDismiss();
   };
 
+  React.useEffect(() => {
+    setTimeout(() => {
+      handleDismiss();
+    }, 10000);
+    return () => clearTimeout();
+  });
+
   return (
     <Modal
       visible={visible}

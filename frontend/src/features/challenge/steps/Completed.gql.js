@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
-const ADD_USER_CHALLENGE = gql`
-  mutation addUserChallenge($data: UserChallengeInput!) {
+export const ADD_USER_CHALLENGE = gql`
+  mutation AddUserChallenge($data: UserChallengeInput!) {
     addUserChallenge(userChallenge: $data) {
       answeredCorrect
       completed
@@ -13,4 +13,10 @@ const ADD_USER_CHALLENGE = gql`
   }
 `;
 
-export default ADD_USER_CHALLENGE;
+export const LOG_CHALLENGE_RATING = gql`
+  mutation LogChallengeRating($evaluation: SmileOMeterInput!) {
+    logSmileOMeter(evaluation: $evaluation) {
+      message
+    }
+  }
+`;

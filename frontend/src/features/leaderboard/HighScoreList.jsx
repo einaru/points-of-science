@@ -8,16 +8,19 @@ import { HeroBackgroundImage } from "~shared/components";
 
 function HighScoreList() {
   const { user, leaderboards } = React.useContext(ContentContext);
+  const { highScore } = leaderboards;
 
   const rankedUserScores = React.useMemo(
     () =>
-      leaderboards.highScore.scores
-        .sort((a, b) => b.score - a.score)
-        .map((item, index) => ({
-          ...item,
-          rank: index + 1,
-        })),
-    [leaderboards.highScore]
+      highScore.scores
+        ? highScore.scores
+            .sort((a, b) => b.score - a.score)
+            .map((item, index) => ({
+              ...item,
+              rank: index + 1,
+            }))
+        : [],
+    [highScore]
   );
 
   return (

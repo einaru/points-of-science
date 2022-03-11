@@ -49,7 +49,7 @@ export default function SmileyOMeter({ message, style, onPress }) {
   const [selected, setSelected] = React.useState(null);
 
   const handleOnPress = (key, item) => {
-    onPress(item.score);
+    onPress(item.score, item.label);
     setSelected(key);
   };
 

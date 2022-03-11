@@ -63,6 +63,7 @@ const strings = [
   "Well done!",
   "What do you think about the challenge?",
   "Your password is updated",
+  "Thank you so much for participating!",
 
   // Smiley-o-meter
   "Awful",
@@ -86,6 +87,14 @@ const en = {
   howToFormAnArgumentText:
     "Drag items from the box above and drop them here to form an argument. " +
     "Remember that order is crucial!",
+
+  swapPermissionTitle: "This part of the experiment have ended",
+  swapPermissionParagraph1:
+    "For the next part of the experiment, you have been assigned a new group. " +
+    "In order for the necessary changes to take effect, you will now be logged " +
+    "out of the application.",
+  swapPermissionParagraph2:
+    "You will be asked to log in again to participate in the next part.",
 
   // Challenge difficulty levels
   beginner: "Beginner",

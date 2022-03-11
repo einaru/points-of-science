@@ -1,5 +1,7 @@
+import { useSubscription } from "@apollo/client";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import React from "react";
+import { Portal } from "react-native-paper";
 import { MaterialCommunityIcons } from "react-native-vector-icons";
 
 import AchievementStack from "~features/achievement/AchievementStack";
@@ -10,6 +12,8 @@ import AuthContext from "~services/auth/AuthContext";
 import ContentProvider from "~services/content/ContentProvider";
 import { t } from "~shared/i18n";
 import Permission from "~shared/permission";
+import { PERMISSION_SWAP } from "./SwapPermission.gql";
+import SwapPermissionModal from "./SwapPermissionInfo";
 
 const tabIconMap = {
   "tab:challenges": "lightbulb-on",
@@ -21,7 +25,20 @@ const tabIconMap = {
 const Tab = createMaterialBottomTabNavigator();
 
 function ContentNavigator() {
-  const { user } = React.useContext(AuthContext);
+  const { user, subscribeToken, logOutUser } = React.useContext(AuthContext);
+  const [isModalVisible, setIsModalVisible] = React.useState(false);
+
+  useSubscription(PERMISSION_SWAP, {
+    variables: { subscribeToken },
+    onSubscriptionData: () => {
+      setIsModalVisible(true);
+    },
+  });
+
+  const hideModal = () => {
+    setIsModalVisible(false);
+    logOutUser();
+  };
 
   const isGameElementsEnabled = React.useMemo(() => {
     return user.permission === Permission.EXPERIMENT;
@@ -64,6 +81,9 @@ function ContentNavigator() {
           component={ProfileStack}
         />
       </Tab.Navigator>
+      <Portal>
+        <SwapPermissionModal visible={isModalVisible} onDismiss={hideModal} />
+      </Portal>
     </ContentProvider>
   );
 }

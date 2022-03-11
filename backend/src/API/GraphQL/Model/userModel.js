@@ -70,6 +70,27 @@ const UserRewardModel = new GraphQLObjectType({
   }),
 });
 
+const userChallengeRating = {
+  label: { type: GraphQLString },
+  score: { type: GraphQLInt },
+};
+
+const UserChallengeRatingType = new GraphQLObjectType({
+  name: "UserChallengeRating",
+  fields: () => ({
+    ...userChallengeRating,
+  }),
+});
+
+const UserChallengeRatingInputType = new GraphQLInputObjectType({
+  name: "UserChallengeRatingInput",
+  fields: () => ({
+    challengeID: { type: GraphQLString },
+    dateCompleted: { type: GraphQLString },
+    ...userChallengeRating,
+  }),
+});
+
 const UserChallengeModel = new GraphQLObjectType({
   name: "UserChallenge",
   fields: () => ({
@@ -77,6 +98,7 @@ const UserChallengeModel = new GraphQLObjectType({
     answeredCorrect: { type: GraphQLBoolean },
     completed: { type: GraphQLString },
     reward: { type: UserRewardModel },
+    rating: { type: UserChallengeRatingType },
   }),
 });
 
@@ -116,4 +138,10 @@ const UserModel = new GraphQLObjectType({
   }),
 });
 
-export { UserAchievementModel, UserChallengeInputModel, UserChallengeModel, UserModel };
+export {
+  UserAchievementModel,
+  UserChallengeInputModel,
+  UserChallengeModel,
+  UserChallengeRatingInputType,
+  UserModel,
+};

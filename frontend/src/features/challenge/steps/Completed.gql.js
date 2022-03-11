@@ -13,9 +13,9 @@ export const ADD_USER_CHALLENGE = gql`
   }
 `;
 
-export const LOG_CHALLENGE_RATING = gql`
-  mutation LogChallengeRating($evaluation: SmileOMeterInput!) {
-    logSmileOMeter(evaluation: $evaluation) {
+export const ADD_USER_CHALLENGE_RATING = gql`
+  mutation AddUserChallengeRating($rating: UserChallengeRatingInput) {
+    addUserChallengeRating(rating: $rating) {
       message
     }
   }

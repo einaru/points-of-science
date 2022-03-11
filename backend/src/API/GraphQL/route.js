@@ -1,6 +1,7 @@
 import { GraphQLSchema, GraphQLObjectType } from "graphql";
 import {
   addUserChallengeQuery,
+  addUserChallengeRating,
   activateAccountQuery,
   authAccessTokenQuery,
   authRefreshTokenQuery,
@@ -15,7 +16,6 @@ import {
   getAllUsersQuery,
   getUserProfile,
   getLeaderboardsQuery,
-  logSmileOMeterQuery,
   createUserQuery,
   deleteUserQuery,
   updateUserQuery,
@@ -60,6 +60,7 @@ const MUTATION = new GraphQLObjectType({
   fields: {
     addContact,
     addUserChallenge: addUserChallengeQuery,
+    addUserChallengeRating,
     activateAccount: activateAccountQuery,
     changePassword: changePasswordQuery,
     createAchievement: createAchievementQuery,
@@ -71,7 +72,6 @@ const MUTATION = new GraphQLObjectType({
     deleteUser: deleteUserQuery,
     logDeviceInfo,
     logEvent,
-    logSmileOMeter: logSmileOMeterQuery,
     updateUser: updateUserQuery,
     signIn: signInQuery,
     setPermission: setPermissionQuery,

@@ -24,7 +24,7 @@ import {
 import { t } from "~shared/i18n";
 
 import ChallengeContext from "../ChallengeContext";
-import { ADD_USER_CHALLENGE, LOG_CHALLENGE_RATING } from "./Completed.gql";
+import { ADD_USER_CHALLENGE, ADD_USER_CHALLENGE_RATING } from "./Completed.gql";
 import themedStyles from "./Completed.style";
 
 const Direction = {
@@ -100,7 +100,7 @@ function Completed({ navigation, theme }) {
   }, [navigation, challenge, goBack]);
 
   const [isRated, setIsRated] = React.useState(false);
-  const [logChallengeRating] = useMutation(LOG_CHALLENGE_RATING, {
+  const [addChallengeRating] = useMutation(ADD_USER_CHALLENGE_RATING, {
     onError: (error) => {
       console.debug(error);
     },
@@ -121,14 +121,16 @@ function Completed({ navigation, theme }) {
     [slideFrom]
   );
 
-  const handleSmileyPress = (score) => {
+  const handleSmileyPress = (score, label) => {
     setIsRated(true);
     slide(Direction.OUT, 350);
-    logChallengeRating({
+    addChallengeRating({
       variables: {
-        evaluation: {
+        rating: {
           challengeID: challenge.id,
-          value: score,
+          dateCompleted: userData.dateCompleted,
+          label,
+          score,
         },
       },
     });

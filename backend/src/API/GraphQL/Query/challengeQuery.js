@@ -1,3 +1,5 @@
+/* eslint-disable no-bitwise */
+
 import { GraphQLList, GraphQLString } from "graphql";
 import {
   ActivityInputModel,
@@ -9,6 +11,7 @@ import {
   RewardInputModel,
   UserChallengeInputModel,
   UserChallengeModel,
+  UserChallengeRatingInputType,
   categoryCreator,
   challengeCreator,
   createActivity,
@@ -24,7 +27,7 @@ import {
 } from "../../../internal.js";
 import { assertIsAdmin, assertIsAuthenticated } from "../assert.js";
 
-import { UserInputError } from "../error.js";
+import { ApiError, UserInputError } from "../error.js";
 
 // Root Queries - Used to retrieve data with GET-Requests
 
@@ -258,6 +261,47 @@ const addUserChallengeQuery = {
       delete response.reward;
     }
     return response;
+  },
+};
+
+export const addUserChallengeRating = {
+  type: NormalResponseModel,
+  args: {
+    rating: { type: UserChallengeRatingInputType },
+  },
+  async resolve(_, { rating }, context) {
+    assertIsAuthenticated(context.user);
+    const { providers } = context;
+    const { challengeID, dateCompleted, label, score } = rating;
+
+    const filterFunc = (challenge) =>
+      challenge.challengeID === challengeID &&
+      challenge.reflection.dateCompleted === dateCompleted;
+
+    const user = await providers.users.getByID(context.user.id);
+    const userChallenge = user.challenges.filter(filterFunc)[0];
+
+    if (!userChallenge) {
+      throw new UserInputError("Unable to find user challenge.", {
+        challengeID,
+        dateCompleted,
+      });
+    }
+
+    const index = user.challenges.findIndex(filterFunc);
+    if (!~index) {
+      throw new ApiError("Unable to find index of user challenge.", {
+        challengeID,
+        dateCompleted,
+        index,
+      });
+    }
+    userChallenge.rating = { label, score };
+    user.challenges[index] = userChallenge;
+    await providers.users.update(user.id, user);
+    return {
+      message: `User challenge with ID = ${challengeID} successfully rated.`,
+    };
   },
 };
 

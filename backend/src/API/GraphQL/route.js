@@ -25,7 +25,7 @@ import {
   getPermissionsQuery,
   setPermissionQuery,
   swapPermissionQuery,
-  subscribeLeaderboard,
+  subscribeLeaderboards,
   subscribeSwappedPermission,
   subscribeUpdatedUser,
 } from "../../internal.js";
@@ -83,7 +83,7 @@ const MUTATION = new GraphQLObjectType({
 const SUBSCRIPTION = new GraphQLObjectType({
   name: "Subscription",
   fields: () => ({
-    leaderboard: subscribeLeaderboard,
+    leaderboards: subscribeLeaderboards,
     swappedPermission: subscribeSwappedPermission,
     userChallengeAdded: subscribeUpdatedUser,
   }),

@@ -120,41 +120,6 @@ const AchievementInputModel = new GraphQLInputObjectType({
   }),
 });
 
-const HighScore = new GraphQLObjectType({
-  name: "HighScore",
-  fields: () => ({
-    rank: { type: GraphQLInt },
-    username: { type: GraphQLString },
-    score: { type: GraphQLInt },
-  }),
-});
-
-const CategoryHighScores = new GraphQLObjectType({
-  name: "CategoryHighScores",
-  fields: () => ({
-    categoryID: { type: GraphQLString },
-    categoryName: { type: GraphQLString },
-    highScores: { type: new GraphQLList(HighScore) },
-  }),
-});
-
-const DifficultyHighScores = new GraphQLObjectType({
-  name: "DifficultyHighScores",
-  fields: () => ({
-    difficulty: { type: DifficultyEnum },
-    highScores: { type: new GraphQLList(HighScore) },
-  }),
-});
-
-const LeaderboardsType = new GraphQLObjectType({
-  name: "Leaderboards",
-  fields: () => ({
-    highScores: { type: new GraphQLList(HighScore) },
-    categories: { type: new GraphQLList(CategoryHighScores) },
-    difficulties: { type: new GraphQLList(DifficultyHighScores) },
-  }),
-});
-
 export {
   AchievementModel,
   AchievementInputModel,
@@ -163,7 +128,6 @@ export {
   RewardModel,
   RewardInputModel,
   ProgressModel,
-  LeaderboardsType,
   ChallengeModel,
   ChallengeResponseModel,
 };

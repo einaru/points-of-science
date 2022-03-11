@@ -1,15 +1,19 @@
-import {
-  LeaderboardsType,
-  DifficultyEnum,
-  createLeaderboards,
-  profileCreator,
-} from "../../../internal.js";
+/* eslint-disable import/prefer-default-export */
+
 import {
   assertHasExperimentPermission,
   assertIsAuthenticated,
 } from "../assert.js";
 
-const getLeaderboardsQuery = {
+import { LeaderboardsType } from "../Model/leaderboardModel.js";
+import { createLeaderboards } from "../../../BusinessLogic/GameElements/leaderboard.js";
+import { profileCreator } from "../../../internal.js";
+
+function isActiveAndPartOfExperiment(user) {
+  return user.state === 2 && user.permission === 2;
+}
+
+export const getLeaderboardsQuery = {
   type: LeaderboardsType,
   args: {},
   async resolve(_, __, context) {
@@ -18,24 +22,15 @@ const getLeaderboardsQuery = {
 
     const { providers } = context;
 
-    const difficulties = Object.keys(DifficultyEnum);
-    const categories = await providers.categories.getAll();
     const users = await providers.users.getAll();
     const userProfiles = users
-      .filter((user) => user.state === 2 && user.permission === 2)
+      .filter((user) => isActiveAndPartOfExperiment(user))
       .map((user) => {
         const profile = profileCreator();
         profile.updateData(user);
         return profile;
       });
 
-    const leaderboards = createLeaderboards(
-      userProfiles,
-      categories,
-      difficulties
-    );
-    return leaderboards;
+    return createLeaderboards(userProfiles);
   },
 };
-
-export { getLeaderboardsQuery };

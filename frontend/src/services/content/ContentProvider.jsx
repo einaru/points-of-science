@@ -9,14 +9,17 @@ import ContentContext from "./ContentContext";
 import {
   GET_ALL_CONTENT,
   GET_ALL_CONTACTS,
-  USER_CHALLENGE_ADDED,
+  USER_PROFILE_UPDATE,
+  LEADERBOARDS_UPDATE,
 } from "./ContentProvider.gql";
 
 function ContentProvider({ children }) {
   const [user, setUser] = React.useState({});
   const [categories, setCategories] = React.useState([]);
   const [achievements, setAchievements] = React.useState([]);
-  const [leaderboards, setLeaderboards] = React.useState([]);
+  const [leaderboards, setLeaderboards] = React.useState({
+    highScore: { id: "highScore", scores: [] },
+  });
   const [contacts, setContacts] = React.useState([]);
 
   const { loading, data } = useQuery(GET_ALL_CONTENT, { errorPolicy: "all" });
@@ -39,13 +42,9 @@ function ContentProvider({ children }) {
   });
 
   const { subscribeToken } = React.useContext(AuthContext);
-  useSubscription(USER_CHALLENGE_ADDED, {
-    variables: { subscribeToken },
-    onSubscriptionData: ({ subscriptionData }) => {
-      const { userChallengeAdded: userProfile } = subscriptionData.data;
-      setUser(userProfile);
-    },
-  });
+  const subscriptionPayload = { variables: { subscribeToken } };
+  useSubscription(USER_PROFILE_UPDATE, subscriptionPayload);
+  useSubscription(LEADERBOARDS_UPDATE, subscriptionPayload);
 
   const content = React.useMemo(
     () => ({

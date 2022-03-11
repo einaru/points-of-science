@@ -29,7 +29,9 @@ export const GET_ALL_CONTENT = gql`
       ...AchievementData
     }
     leaderboards {
-      ...LeaderboardData
+      highScore {
+        ...LeaderboardData
+      }
     }
   }
 `;
@@ -45,12 +47,24 @@ export const GET_ALL_CONTACTS = gql`
   }
 `;
 
-export const USER_CHALLENGE_ADDED = gql`
+export const USER_PROFILE_UPDATE = gql`
   ${USER_PROFILE}
 
   subscription UserChallengeAdded($subscribeToken: String!) {
     userChallengeAdded(subscribeToken: $subscribeToken) {
       ...UserProfile
+    }
+  }
+`;
+
+export const LEADERBOARDS_UPDATE = gql`
+  ${LEADERBOARD_DATA}
+
+  subscription LeaderboardsUpdate($subscribeToken: String!) {
+    leaderboards(subscribeToken: $subscribeToken) {
+      highScore {
+        ...LeaderboardData
+      }
     }
   }
 `;

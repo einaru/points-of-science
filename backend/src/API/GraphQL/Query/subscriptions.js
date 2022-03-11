@@ -4,14 +4,14 @@ import jwt from "jsonwebtoken";
 import config from "../../../Config/config.js";
 
 import {
-  LeaderboardsType,
   NormalResponseModel,
   UserModel,
   SwapPermissionPayload,
   pubsub,
 } from "../../../internal.js";
+import { LeaderboardsType } from "../Model/leaderboardModel.js";
 
-const subscribeUpdatedUser = {
+export const subscribeUpdatedUser = {
   type: UserModel,
   args: { subscribeToken: { type: GraphQLString } },
   subscribe: withFilter(
@@ -30,11 +30,11 @@ const subscribeUpdatedUser = {
   },
 };
 
-const subscribeLeaderboard = {
+export const subscribeLeaderboards = {
   type: LeaderboardsType,
   args: { subscribeToken: { type: GraphQLString } },
   subscribe: withFilter(
-    () => pubsub.asyncIterator("Leaderboard"),
+    () => pubsub.asyncIterator("Leaderboards"),
     (_, variables) => {
       const verifiedUser = jwt.verify(
         variables.subscribeToken,
@@ -49,7 +49,7 @@ const subscribeLeaderboard = {
   },
 };
 
-const subscribeUpdatePermission = {
+export const subscribeUpdatePermission = {
   type: SwapPermissionPayload,
   args: { subscribeToken: { type: GraphQLString } },
   subscribe: withFilter(
@@ -68,7 +68,7 @@ const subscribeUpdatePermission = {
   },
 };
 
-const subscribeSwappedPermission = {
+export const subscribeSwappedPermission = {
   type: NormalResponseModel,
   args: { subscribeToken: { type: GraphQLString } },
   subscribe: withFilter(
@@ -85,11 +85,4 @@ const subscribeSwappedPermission = {
   resolve: (payload) => {
     return payload;
   },
-};
-
-export {
-  subscribeLeaderboard,
-  subscribeSwappedPermission,
-  subscribeUpdatePermission,
-  subscribeUpdatedUser,
 };

@@ -2,6 +2,7 @@ import React from "react";
 import { Image, TouchableOpacity, View } from "react-native";
 import { Subheading, Text } from "react-native-paper";
 
+import { emojis } from "~shared/assets";
 import { t } from "~shared/i18n";
 
 import styles from "./SmileyOMeter.style";
@@ -10,27 +11,27 @@ const smileys = {
   awful: {
     score: -2,
     label: t("Awful"),
-    asset: require("./assets/smiley-awful.png"),
+    asset: emojis.vomitingFace,
   },
   notGood: {
     score: -1,
     label: t("Not very good"),
-    asset: require("./assets/smiley-not-good.png"),
+    asset: emojis.tiredFace,
   },
   good: {
     score: 0,
     label: t("Good"),
-    asset: require("./assets/smiley-good.png"),
+    asset: emojis.slightlySmilingFace,
   },
   reallyGood: {
     score: 1,
     label: t("Really good"),
-    asset: require("./assets/smiley-really-good.png"),
+    asset: emojis.grinningFace,
   },
   brilliant: {
     score: 2,
     label: t("Brilliant"),
-    asset: require("./assets/smiley-brilliant.png"),
+    asset: emojis.starStruck,
   },
 };
 

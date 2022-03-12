@@ -3,7 +3,7 @@ import React from "react";
 import { ImageBackground, View } from "react-native";
 import { withTheme } from "react-native-paper";
 
-import heroImages from "./heroImages";
+import { illustrations } from "~shared/assets";
 
 function HeroBackgroundImage({ name, width, height, fade, theme, children }) {
   const renderChildren = () => {
@@ -27,7 +27,7 @@ function HeroBackgroundImage({ name, width, height, fade, theme, children }) {
         width: width || "100%",
         height: height || "100%",
       }}
-      source={heroImages[name]}
+      source={illustrations[name]}
     >
       {renderChildren()}
     </ImageBackground>

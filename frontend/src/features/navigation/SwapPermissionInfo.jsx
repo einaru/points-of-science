@@ -5,7 +5,7 @@ import Emoji from "~shared/components/Emoji";
 import { t } from "~shared/i18n";
 import themedStyles from "./SwapPermissionInfo.style";
 
-function SwapPermissionModal({ visible, onDismiss, theme }) {
+function SwapPermissionInfo({ visible, onDismiss, theme }) {
   const styles = themedStyles(theme);
 
   const handleDismiss = () => {
@@ -40,4 +40,4 @@ function SwapPermissionModal({ visible, onDismiss, theme }) {
   );
 }
 
-export default withTheme(SwapPermissionModal);
+export default withTheme(SwapPermissionInfo);

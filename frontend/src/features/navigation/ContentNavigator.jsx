@@ -13,7 +13,7 @@ import ContentProvider from "~services/content/ContentProvider";
 import { t } from "~shared/i18n";
 import Permission from "~shared/permission";
 import { PERMISSION_SWAP } from "./SwapPermission.gql";
-import SwapPermissionModal from "./SwapPermissionInfo";
+import SwapPermissionInfo from "./SwapPermissionInfo";
 
 const tabIconMap = {
   "tab:challenges": "lightbulb-on",
@@ -82,7 +82,7 @@ function ContentNavigator() {
         />
       </Tab.Navigator>
       <Portal>
-        <SwapPermissionModal visible={isModalVisible} onDismiss={hideModal} />
+        <SwapPermissionInfo visible={isModalVisible} onDismiss={hideModal} />
       </Portal>
     </ContentProvider>
   );

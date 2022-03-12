@@ -1,11 +1,11 @@
 export { default as Container } from "./Container";
 export { default as Emoji } from "./Emoji";
+export { default as FormAction } from "./FormAction";
+export { default as FormLink } from "./FormLink";
+export { default as FormView } from "./FormView";
 export { default as HeroBackgroundImage } from "./HeroBackgroundImage";
 export { default as HeroImage } from "./HeroImage";
 export { default as LoadingScreen } from "./LoadingScreen";
 export { default as NoContent } from "./NoContent";
 export { default as SmileyOMeter } from "./SmileyOMeter";
 export { default as withAnimated } from "./withAnimated";
-export { default as FormAction } from "./FormAction";
-export { default as FormLink } from "./FormLink";
-export { default as FormView } from "./FormView";

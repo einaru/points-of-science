@@ -2,8 +2,8 @@ import { openURL } from "expo-linking";
 import React from "react";
 import { ScrollView, View } from "react-native";
 import { List, Paragraph, Subheading } from "react-native-paper";
-import ContentContext from "~services/content/ContentContext";
 
+import ContentContext from "~services/content/ContentContext";
 import { HeroImage } from "~shared/components";
 import { t } from "~shared/i18n";
 

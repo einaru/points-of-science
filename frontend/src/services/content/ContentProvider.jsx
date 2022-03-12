@@ -7,10 +7,10 @@ import { t } from "~shared/i18n";
 
 import ContentContext from "./ContentContext";
 import {
-  GET_ALL_CONTENT,
   GET_ALL_CONTACTS,
-  USER_PROFILE_UPDATE,
+  GET_ALL_CONTENT,
   LEADERBOARDS_UPDATE,
+  USER_PROFILE_UPDATE,
 } from "./ContentProvider.gql";
 
 function ContentProvider({ children }) {

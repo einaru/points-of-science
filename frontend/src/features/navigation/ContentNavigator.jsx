@@ -12,6 +12,7 @@ import AuthContext from "~services/auth/AuthContext";
 import ContentProvider from "~services/content/ContentProvider";
 import { t } from "~shared/i18n";
 import Permission from "~shared/permission";
+
 import { PERMISSION_SWAP } from "./SwapPermission.gql";
 import SwapPermissionInfo from "./SwapPermissionInfo";
 

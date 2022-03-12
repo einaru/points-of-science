@@ -7,7 +7,10 @@ export default StyleSheet.create({
   avatarContainer: {
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 32,
-    margin: 16,
+    margin: 8,
+    paddingTop: 8,
+  },
+  avatar: {
+    elevation: 4,
   },
 });

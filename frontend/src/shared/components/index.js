@@ -1,4 +1,5 @@
 export { default as Container } from "./Container";
+export { default as Emoji } from "./Emoji";
 export { default as HeroBackgroundImage } from "./HeroBackgroundImage";
 export { default as HeroImage } from "./HeroImage";
 export { default as LoadingScreen } from "./LoadingScreen";

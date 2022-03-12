@@ -116,7 +116,7 @@ function convertToResponseObject() {
       difficulty: object.data.difficulty,
       name: object.content.data.title,
       description: object.content.data.description,
-      image: object.content.data.image,
+      images: object.content.data.images,
       reflection: object.reflection.data,
       reward: object.reward.data,
       activity: object.activity.data,

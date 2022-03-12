@@ -1,11 +1,10 @@
 import React from "react";
 import { Image, View } from "react-native";
 import { Surface, Text, TouchableRipple, withTheme } from "react-native-paper";
-import { MaterialCommunityIcons } from "react-native-vector-icons";
 
 import ContentContext from "~services/content/ContentContext";
 import { getColorsFromString } from "~shared/colors";
-import { NoContent } from "~shared/components";
+import { IconImage, NoContent } from "~shared/components";
 import { t } from "~shared/i18n";
 import Permission from "~shared/permission";
 
@@ -56,13 +55,13 @@ function CategoryListItem({ category, user, onPress, theme }) {
     if (!category.image) {
       const { bgColor, fgColor } = getColorsFromString(category.id);
       return (
-        <View style={[styles.image, { backgroundColor: bgColor.string() }]}>
-          <MaterialCommunityIcons
-            name="cube-outline"
-            size={72}
-            color={fgColor.string()}
-          />
-        </View>
+        <IconImage
+          iconName="cube-outline"
+          iconSize={72}
+          iconColor={fgColor.string()}
+          backgroundColor={bgColor.string()}
+          style={styles.image}
+        />
       );
     }
     return <Image style={styles.image} source={{ uri: category.image }} />;

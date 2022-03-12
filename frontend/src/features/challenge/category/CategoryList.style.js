@@ -21,11 +21,9 @@ export default function themedStyles(theme) {
       height: itemHeight,
     },
     image: {
-      alignItems: "center",
       borderBottomLeftRadius: theme.roundness,
       borderTopLeftRadius: theme.roundness,
       height: itemHeight,
-      justifyContent: "center",
       width: itemHeight,
     },
     content: {

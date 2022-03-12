@@ -27,6 +27,11 @@
   "rules": {
     "global-require": "off",
     "import/prefer-default-export": "off",
+    "import/no-extraneous-dependencies": ["error",
+      {
+        "devDependencies": ["jest/setup.js", "**/*.test.js{,x}"]
+      }
+    ],
     "no-bitwise": "off",
     "no-plusplus": "off",
     "prettier/prettier": "error",

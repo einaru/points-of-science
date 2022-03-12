@@ -4,7 +4,7 @@ function emptyData() {
   return {
     data: {
       title: "",
-      image: "",
+      images: [],
       description: "",
     },
   };

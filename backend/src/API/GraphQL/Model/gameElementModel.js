@@ -71,7 +71,7 @@ const ChallengeInputModel = new GraphQLInputObjectType({
   fields: () => ({
     categoryID: { type: GraphQLString },
     name: { type: GraphQLString },
-    image: { type: GraphQLString },
+    images: { type: new GraphQLList(GraphQLString) },
     description: { type: GraphQLString },
     difficulty: { type: DifficultyEnum },
   }),

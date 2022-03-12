@@ -1,5 +1,6 @@
 import "dotenv/config";
 import admin from "firebase-admin";
+import { getStorage } from "firebase-admin/storage";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
@@ -17,11 +18,13 @@ const data = JSON.parse(fs.readFileSync(filePathToDatabase, "utf-8"));
 function connectToFirebaseEmulator() {
   admin.initializeApp({
     credential: admin.credential.applicationDefault(),
+    storageBucket: process.env.GOOGLE_STORAGE_BUCKET,
   });
   return admin.firestore();
 }
 
 const db = connectToFirebaseEmulator();
+const bucket = getStorage().bucket();
 
 function getSnapshot(collectionName) {
   return new Promise((resolve, reject) => {
@@ -128,10 +131,51 @@ function addData(collectionName, save) {
   });
 }
 
-function populateData() {
+async function uploadFiles(filePath) {
+  const ref = await bucket.upload(filePath);
+  return ref;
+}
+
+async function preprocessImage(key, obj) {
+  if (key !== "Category" && key !== "Challenge" && key !== "Achievement") {
+    return null;
+  }
+
+  if (!obj.content.images) {
+    return null;
+  }
+
+  if (Array.isArray(obj.content.images)) {
+    const promises = [];
+    await obj.content.images.forEach((image) => {
+      if (image.endsWith(".jpg") || image.endsWith(".png")) {
+        const imagePath = `../assets/Static/images/${image}`;
+        const filePath = path.resolve(here, imagePath);
+        promises.push(uploadFiles(filePath));
+      }
+    });
+
+    const refs = await Promise.all(promises);
+    const urls = [];
+    refs.forEach((ref) => {
+      urls.push(ref[0].publicUrl());
+    });
+    return urls;
+  }
+}
+
+async function populateData() {
   Object.keys(data).forEach((key) => {
     data[key].forEach((obj) => {
-      getData(key).then((table) => {
+      const promises = [getData(key)];
+      if (obj.content) {
+        promises.push(preprocessImage(key, obj));
+      }
+      Promise.all(promises).then(([table, URL]) => {
+        if (URL != null) {
+          obj.content.images = URL;
+        }
+
         if (table.length === 0) {
           addData(key, obj)
             .then((docRef) => {
@@ -159,4 +203,4 @@ function generateIDs() {
 }
 
 populateData();
-console.log(generateIDs());
+// console.log(generateIDs());

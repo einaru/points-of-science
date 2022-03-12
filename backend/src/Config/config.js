@@ -35,6 +35,9 @@ const config = {
     success: "success",
     error: "error",
   },
+  storage: {
+    bucket: process.env.GOOGLE_STORAGE_BUCKET,
+  },
   permissionLevel: {
     admin: 1,
     experiment: 2,

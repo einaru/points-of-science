@@ -83,6 +83,7 @@ function Profile() {
                   onValueChange={toggleTheme}
                 />
               )}
+              onPress={toggleTheme}
             />
           </List.Section>
           <Divider />

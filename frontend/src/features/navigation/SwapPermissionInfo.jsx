@@ -1,5 +1,7 @@
 import React from "react";
+import { View } from "react-native";
 import { Modal, Paragraph, Title, withTheme } from "react-native-paper";
+import Emoji from "~shared/components/Emoji";
 import { t } from "~shared/i18n";
 import themedStyles from "./SwapPermissionInfo.style";
 
@@ -23,10 +25,15 @@ function SwapPermissionModal({ visible, onDismiss, theme }) {
       onDismiss={handleDismiss}
       contentContainerStyle={styles.contentContainer}
     >
-      <Title>{t("swapPermissionTitle")}</Title>
+      <Title style={styles.title}>{t("swapPermissionTitle")}</Title>
       <Paragraph>{t("swapPermissionParagraph1")}</Paragraph>
       <Paragraph>{t("swapPermissionParagraph2")}</Paragraph>
-      <Paragraph style={styles.bold}>
+      <View style={styles.emojiContainer}>
+        <Emoji name="rocket" />
+        <Emoji name="partyingFace" />
+        <Emoji name="unicorn" />
+      </View>
+      <Paragraph style={styles.thanks}>
         {t("Thank you so much for participating!")}
       </Paragraph>
     </Modal>

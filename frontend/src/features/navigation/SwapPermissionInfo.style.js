@@ -8,12 +8,22 @@ export default function themedStyles(theme) {
       borderRadius: theme.roundness,
       elevation: 4,
       margin: 16,
-      paddingBottom: 24,
-      paddingHorizontal: 24,
+      padding: 20,
       paddingTop: 16,
     },
-    bold: {
+    emojiContainer: {
+      alignItems: "center",
+      flexDirection: "row",
+      justifyContent: "center",
+      paddingVertical: 8,
+    },
+    title: {
       fontWeight: "bold",
+      paddingBottom: 8,
+    },
+    thanks: {
+      fontWeight: "bold",
+      textAlign: "center",
     },
   });
 }

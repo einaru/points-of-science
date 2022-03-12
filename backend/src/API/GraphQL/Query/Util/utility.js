@@ -3,10 +3,10 @@ import { challengeCreator } from "../../../../internal.js";
 
 const pubsub = new RedisPubSub();
 
-function createContent(content, title = "", image = "", description = "") {
+function createContent(content, title = "", images = [], description = "") {
   const newContent = {
     title,
-    image,
+    images,
     description,
   };
 

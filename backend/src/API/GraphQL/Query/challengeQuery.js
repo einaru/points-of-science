@@ -68,7 +68,7 @@ const createChallengeQuery = {
     assertIsAuthenticated(user);
     assertIsAdmin(user);
 
-    const { categoryID, image, description, difficulty } = args.challenge;
+    const { categoryID, images, description, difficulty } = args.challenge;
     const title = args.challenge.name;
     const { maxPoints, firstTryPoints, bonusPoints } = args.reward;
     const { solution, reflectionType, choices } = args.reflection;
@@ -99,7 +99,7 @@ const createChallengeQuery = {
     await category.restoreObject(category, categoryData, challenges);
 
     const challenge = createChallenge(categoryID, difficulty, reflectionType);
-    createContent(challenge.content, title, image, description);
+    createContent(challenge.content, title, images, description);
     createReward(challenge.reward, maxPoints, firstTryPoints, bonusPoints);
     createReflection(
       challenge.reflection,

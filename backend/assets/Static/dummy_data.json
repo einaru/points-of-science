@@ -920,22 +920,20 @@
       "content": {
         "description": "",
         "id": "Emr8tdBnJRqOqRrm1nhY",
-        "image": "",
+        "images": ["test_images.jpg"],
         "title": "Molekylær Bevegelse"
       },
-      "id": "7E9Z37Z07xzbkfBqJg1f",
-      "progressID": ""
+      "id": "7E9Z37Z07xzbkfBqJg1f"
     },
     {
       "challenges": ["kruAnNew6mHOS1qgJna1", "gSZtkJvdewTQvEae50aJ"],
       "content": {
         "description": "",
         "id": "eYygihbnUHlca5IOLWDi",
-        "image": "",
+        "images": [],
         "title": "Kjemiske Reaksjoner"
       },
-      "id": "pTIETOOCSI0gjDqpxkYy",
-      "progressID": ""
+      "id": "pTIETOOCSI0gjDqpxkYy"
     }
   ],
   "Challenge": [
@@ -951,7 +949,7 @@
       "content": {
         "description": "I denne utfordringen skal du studere kapillærkrefter. Kapillærkrefter kan oppstå mellom to ikke-blandbare væsker eller mellom en væske og en gass. Kapillærkrefter er årsaken til at hvis man setter et sugerør i ett tynt glass, vil høyden på væsken i sugerøret være høyere eller lavere enn nivået på væsken utenfor. Høyden på vesken i sugerøret avhenger av type væske den settes i. I dette eksperimentet kan du lære hvordan kapilærkreftene kan flytte væsker.",
         "id": "SCMIN2g1LV9tJPrJMkmo",
-        "image": "",
+        "images": [],
         "title": "Å få vann til å gå"
       },
       "difficulty": 3,
@@ -981,7 +979,7 @@
       "content": {
         "description": "Utfordringen tar for seg hvordan temperatur påvirker massetetthet. Har du noen gang lurt på hvorfor en væske kan flyte oppå en annen væske eller blander seg bedre hvis man endrer rekkefølge? I denne utfordringen kan du lære hvordan temperatur påvirker massetettheten til en væske.",
         "id": "OeovcWVkbHj0ULAgxvhy",
-        "image": "",
+        "images": [],
         "title": "Massetetthet"
       },
       "difficulty": 1,
@@ -1022,7 +1020,7 @@
       "content": {
         "description": "Som vi har sett i ett av de andre eksperimentene med vann kan temperatur påvirke massetetthet til en væske, men også type væske har forskjellig massetetthet. I dette eksperimentet kan du lære om massetetthet til forskjellige væsker og hvordan du kan bruke denne kunnskapen til å kunne forklare massetettheten til andre gjenstander.",
         "id": "cxJY5vD0f5erc5vtSq62",
-        "image": "",
+        "images": [],
         "title": "Lag på lag"
       },
       "difficulty": 2,
@@ -1052,7 +1050,7 @@
       "content": {
         "description": "I dette eksperimentet skal du bruke kunnskapen du har lært fra andre eksperimenter om massetetthet, men benytte kontroll og eksperiment metodikk til å validere og forklare hypotesene dine. ",
         "id": "Rk9okCn8AkwrSW1KwBRQ",
-        "image": "",
+        "images": [],
         "title": "Saltvann med kontroll"
       },
       "difficulty": 1,
@@ -1083,7 +1081,7 @@
       "content": {
         "description": "Eksperimentet tar for seg hva som kan skje med tenner hvis de blir eksponert for sukkerholdig og sukkerfri drikke over lengre tid. Du vil kunne tilegne deg kunnskap om kjemiske reaksjoner mellom kalsium og syrlig drikke. Hvis du vil ha en utfordring kan du prøve dette eksperimentet omigjen, men tilføre tannkrem på eggene for å se beskyttelseseffekten den gir tennene.",
         "id": "63O3lSWkjwABSUWVDoMi",
-        "image": "",
+        "images": [],
         "title": "Tenner og sukkerholdig drikke"
       },
       "difficulty": 1,
@@ -1114,7 +1112,7 @@
       "content": {
         "description": "Dette eksperimentet viser hvordan tre kjemiske reaksjoner som all er avhengig av varme, reagerer med hverandre. Resultatet er at det vokser en 'slange' ut av sanden. Ved å forstå egenskapene til de ulike komponentene brukt i eksperimentet, skal du kunne forklare hvorfor 'slangen' vokser frem.",
         "id": "HnTUeBCY2DAODBRnFHXe",
-        "image": "",
+        "images": [],
         "title": "Karbonslange"
       },
       "difficulty": 3,

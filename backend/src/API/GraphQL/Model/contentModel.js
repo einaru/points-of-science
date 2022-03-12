@@ -9,7 +9,7 @@ import { ChallengeModel, ProgressModel } from "../../../internal.js";
 
 const ContentResponse = {
   name: { type: GraphQLString },
-  image: { type: GraphQLString },
+  images: { type: new GraphQLList(GraphQLString) },
   description: { type: GraphQLString },
 };
 

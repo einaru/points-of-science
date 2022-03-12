@@ -87,6 +87,15 @@ const en = {
     "Drag items from the box above and drop them here to form an argument. " +
     "Remember that order is crucial!",
 
+  swapPermissionTitle: "This part of the experiment has now ended",
+  swapPermissionParagraph1:
+    "You have been assigned a new group for the next part of the experiment. " +
+    "In order for the necessary changes to take effect, you will now be " +
+    "logged out of the application.",
+  swapPermissionParagraph2:
+    "You will be asked to log in again to participate in the next part.",
+  swapPermissionThanks: "Thank you so much for participating!",
+
   // Challenge difficulty levels
   beginner: "Beginner",
   intermediate: "Intermediate",

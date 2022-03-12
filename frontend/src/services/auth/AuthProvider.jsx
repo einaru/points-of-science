@@ -43,6 +43,7 @@ function AuthProvider({ children }) {
           })
           .catch((error) => {
             console.debug(error.message);
+            client.clearStore();
             logOutUser();
           });
       } else {

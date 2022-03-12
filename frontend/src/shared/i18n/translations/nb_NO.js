@@ -87,6 +87,15 @@ export default {
     "Dra elementer fra boksen ovenfor ned hit for å danne et argument. " +
     "Husk at rekkefølgen er avgjørende!",
 
+  swapPermissionTitle: "Denne delen av eksperimentet er nå avsluttet",
+  swapPermissionParagraph1:
+    "Du har blitt tildelt en ny gruppe til neste del av eksperimentet. " +
+    "For at nødvendige endringer skal kunne tre i kraft blir du nå " +
+    "logget ut av applikasjonen.",
+  swapPermissionParagraph2:
+    "Du blir bedt om å logge inn igjen på nytt for å delta i neste del.",
+  swapPermissionThanks: "Tusen takk for at du deltar!",
+
   // Challenge difficulty levels
   beginner: "Nybegynner",
   intermediate: "Viderekommende",

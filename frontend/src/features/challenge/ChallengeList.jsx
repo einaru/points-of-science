@@ -47,7 +47,9 @@ function ChallengeListItem({ challenge, user, theme, onPress }) {
   const renderDifficulty = () => {
     const color = getDifficultyColor(challenge.difficulty);
     const textStyle = {
-      color: color.isLight() ? "#000" : "#fff",
+      color: color.isLight()
+        ? color.darken(0.6).string()
+        : color.lighten(0.6).string(),
     };
     const style = {
       ...styles.chip,

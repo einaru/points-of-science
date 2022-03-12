@@ -5,7 +5,7 @@ export default function themedStyles(theme) {
   const { colors } = theme;
 
   const overlayRow = {
-    backgroundColor: Color(colors.background).fade(0.3).string(),
+    backgroundColor: Color(colors.text).fade(0.9).string(),
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
@@ -43,6 +43,7 @@ export default function themedStyles(theme) {
     },
     meta: {
       ...overlayRow,
+      backgroundColor: null,
     },
     chip: {
       elevation: 2,

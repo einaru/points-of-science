@@ -10,20 +10,15 @@ import {
 import { MaterialCommunityIcons } from "react-native-vector-icons";
 
 import colors from "~shared/colors";
-import { NoContent } from "~shared/components";
+import { IconBackgroundImage, NoContent } from "~shared/components";
 import { t } from "~shared/i18n";
 import Permission from "~shared/permission";
 
 import themedStyles from "./ChallengeList.style";
 import { getDifficultyColor } from "./difficulty";
 
-const fallbackImage = require("./assets/challenge.png");
-
 function ChallengeListItem({ challenge, user, theme, onPress }) {
   const styles = themedStyles(theme);
-  const imageSource = challenge.image
-    ? { uri: challenge.image }
-    : fallbackImage;
 
   const isAlreadyCompleted = user.challenges
     .map(({ challengeID }) => challengeID)
@@ -76,18 +71,37 @@ function ChallengeListItem({ challenge, user, theme, onPress }) {
     return null;
   };
 
+  const renderContent = () => {
+    return (
+      <View style={styles.content}>
+        {renderHeader()}
+        <View style={styles.meta}>
+          {renderDifficulty()}
+          {renderReward()}
+        </View>
+      </View>
+    );
+  };
+
   return (
     <Surface style={styles.surface}>
       <TouchableRipple borderless style={styles.ripple} onPress={onPress}>
-        <ImageBackground style={styles.image} source={imageSource}>
-          <View style={styles.content}>
-            {renderHeader()}
-            <View style={styles.meta}>
-              {renderDifficulty()}
-              {renderReward()}
-            </View>
-          </View>
-        </ImageBackground>
+        {challenge.image ? (
+          <ImageBackground
+            source={{ uri: challenge.image }}
+            style={styles.image}
+          >
+            {renderContent()}
+          </ImageBackground>
+        ) : (
+          <IconBackgroundImage
+            iconName="lightbulb-on-outline"
+            iconSize={104}
+            style={styles.image}
+          >
+            {renderContent()}
+          </IconBackgroundImage>
+        )}
       </TouchableRipple>
     </Surface>
   );

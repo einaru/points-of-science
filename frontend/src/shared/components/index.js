@@ -5,6 +5,7 @@ export { default as FormLink } from "./FormLink";
 export { default as FormView } from "./FormView";
 export { default as HeroBackgroundImage } from "./HeroBackgroundImage";
 export { default as HeroImage } from "./HeroImage";
+export { default as IconBackgroundImage } from "./IconBackgroundImage";
 export { default as IconImage } from "./IconImage";
 export { default as LoadingScreen } from "./LoadingScreen";
 export { default as NoContent } from "./NoContent";

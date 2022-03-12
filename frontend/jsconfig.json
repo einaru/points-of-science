@@ -4,7 +4,7 @@
     "paths": {
       "~features/*": ["./src/features/*"],
       "~services/*": ["./src/services/*"],
-      "~shared/*": ["./src/shared/*"],
+      "~shared/*": ["./src/shared/*"]
     }
   },
   "typeAcquisition": {

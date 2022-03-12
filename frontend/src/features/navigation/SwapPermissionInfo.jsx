@@ -33,9 +33,7 @@ function SwapPermissionInfo({ visible, onDismiss, theme }) {
         <Emoji name="partyingFace" />
         <Emoji name="unicorn" />
       </View>
-      <Paragraph style={styles.thanks}>
-        {t("Thank you so much for participating!")}
-      </Paragraph>
+      <Paragraph style={styles.thanks}>{t("swapPermissionThanks")}</Paragraph>
     </Modal>
   );
 }

@@ -11,6 +11,9 @@ export default function themedStyles(theme) {
       padding: 20,
       paddingTop: 16,
     },
+    progress: {
+      marginVertical: 8,
+    },
     emojiContainer: {
       alignItems: "center",
       flexDirection: "row",
@@ -19,7 +22,6 @@ export default function themedStyles(theme) {
     },
     title: {
       fontWeight: "bold",
-      paddingBottom: 8,
     },
     thanks: {
       fontWeight: "bold",

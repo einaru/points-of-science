@@ -1,6 +1,5 @@
 import { useMutation } from "@apollo/client";
 import { useNavigation, useRoute } from "@react-navigation/native";
-/* eslint-disable no-console */
 import * as Clipboard from "expo-clipboard";
 import React from "react";
 import { Dimensions, ScrollView, View } from "react-native";

@@ -37,6 +37,7 @@ export default function themedStyles(theme) {
       ...overlayRow,
     },
     title: {
+      flex: 1,
       fontSize: 20,
       fontWeight: "bold",
     },

@@ -35,7 +35,9 @@ function ChallengeListItem({ challenge, user, theme, onPress }) {
       : [styles.header];
     return (
       <View style={headerStyle}>
-        <Text style={styles.title}>{challenge.name}</Text>
+        <Text style={styles.title} numberOfLines={1}>
+          {challenge.name}
+        </Text>
         {isAlreadyCompleted && (
           <MaterialCommunityIcons
             color={theme.colors.text}

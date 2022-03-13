@@ -20,15 +20,12 @@ export default StyleSheet.create({
   },
   meta: {
     flexDirection: "row",
-    justifyContent: "flex-start",
+    justifyContent: "space-between",
     padding: 8,
   },
   image: {
     height: 200,
     width: "100%",
-  },
-  chip: {
-    marginEnd: 8,
   },
   title: {
     marginVertical: 8,

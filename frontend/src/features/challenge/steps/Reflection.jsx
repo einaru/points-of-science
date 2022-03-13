@@ -13,7 +13,7 @@ import styles from "./styles";
 
 function Reflection({ navigation }) {
   const { challenge, setReflectionData } = React.useContext(ChallengeContext);
-  const { reflection, reflectionType } = challenge;
+  const { reflection } = challenge;
 
   const [answer, setAnswer] = React.useState("");
 
@@ -34,7 +34,7 @@ function Reflection({ navigation }) {
 
   return (
     <View style={styles.container}>
-      {reflectionType === "argument" ? (
+      {reflection.reflectionType === "argument" ? (
         <ArgumentConstructor
           question={reflection.title}
           choices={reflection.choices}

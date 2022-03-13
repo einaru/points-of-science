@@ -22,8 +22,8 @@ export const CHALLENGE_DATA = gql`
       resources
       hints
     }
-    reflectionType # FIXME Move this into the reflection object
     reflection {
+      reflectionType # FIXME Rename to type
       title
       solution
       choices

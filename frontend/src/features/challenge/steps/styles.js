@@ -4,27 +4,27 @@ export default StyleSheet.create({
   container: {
     flex: 1,
   },
-  scrollView: {
+  scroll: {
     flexGrow: 1,
     justifyContent: "space-between",
   },
-  contentContainer: {
+  content: {
     flex: 1,
     margin: 8,
   },
-  helpContainer: {
-    marginHorizontal: 8,
+  help: {
     flexDirection: "row",
     justifyContent: "space-between",
+    marginHorizontal: 8,
   },
-  metaContainer: {
-    padding: 8,
+  meta: {
     flexDirection: "row",
     justifyContent: "flex-start",
+    padding: 8,
   },
-  illustrationImage: {
-    width: "100%",
+  image: {
     height: 200,
+    width: "100%",
   },
   chip: {
     marginEnd: 8,

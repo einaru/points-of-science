@@ -27,7 +27,7 @@ function Intro({ navigation }) {
 
   const renderMeta = () => {
     return (
-      <View style={styles.metaContainer}>
+      <View style={styles.meta}>
         <Chip style={styles.chip} mode="outlined">
           {challenge.category.name}
         </Chip>
@@ -38,10 +38,10 @@ function Intro({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollView}>
+      <ScrollView contentContainerStyle={styles.scroll}>
         {challenge.image ? (
           <ImageBackground
-            style={styles.illustrationImage}
+            style={styles.image}
             source={{ uri: challenge.image }}
           >
             {renderMeta()}
@@ -50,12 +50,12 @@ function Intro({ navigation }) {
           <IconBackgroundImage
             iconName="lightbulb-on-outline"
             iconSize={104}
-            style={styles.illustrationImage}
+            style={styles.image}
           >
             {renderMeta()}
           </IconBackgroundImage>
         )}
-        <View style={styles.contentContainer}>
+        <View style={styles.content}>
           <Paragraph>{challenge.description}</Paragraph>
         </View>
       </ScrollView>

@@ -20,6 +20,11 @@ import { getDifficultyColor } from "./difficulty";
 function ChallengeListItem({ challenge, user, theme, onPress }) {
   const styles = themedStyles(theme);
 
+  // Just one challenge image is render here.
+  // The first image in the array is picked as default,
+  // falling back on a custom icon image if no images are provided.
+  const challengeImage = challenge.images?.[0];
+
   const isAlreadyCompleted = user.challenges
     .map(({ challengeID }) => challengeID)
     .includes(challenge.id);
@@ -88,9 +93,9 @@ function ChallengeListItem({ challenge, user, theme, onPress }) {
   return (
     <Surface style={styles.surface}>
       <TouchableRipple borderless style={styles.ripple} onPress={onPress}>
-        {challenge.image ? (
+        {challengeImage ? (
           <ImageBackground
-            source={{ uri: challenge.image }}
+            source={{ uri: challengeImage }}
             style={styles.image}
           >
             {renderContent()}

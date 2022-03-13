@@ -1,5 +1,7 @@
 import { StyleSheet } from "react-native";
 
+const imageHeight = 200;
+
 export default StyleSheet.create({
   container: {
     flex: 1,
@@ -23,8 +25,13 @@ export default StyleSheet.create({
     justifyContent: "space-between",
     padding: 8,
   },
+  pagerView: {
+    flex: 1,
+    height: imageHeight,
+  },
   image: {
-    height: 200,
+    flex: 1,
+    height: imageHeight,
     width: "100%",
   },
   title: {

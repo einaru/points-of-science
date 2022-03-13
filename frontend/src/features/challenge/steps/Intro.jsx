@@ -1,5 +1,6 @@
 import React from "react";
 import { ImageBackground, ScrollView, View } from "react-native";
+import PagerView from "react-native-pager-view";
 import { Button, Chip, Paragraph } from "react-native-paper";
 
 import { IconBackgroundImage } from "~shared/components";
@@ -36,25 +37,36 @@ function Intro({ navigation }) {
     );
   };
 
+  const renderImages = () => (
+    <PagerView style={styles.pagerView}>
+      {challenge.images.map((image, index) => (
+        <ImageBackground
+          key={index.toString()}
+          style={styles.image}
+          source={{ uri: image }}
+        >
+          {renderMeta()}
+        </ImageBackground>
+      ))}
+    </PagerView>
+  );
+
+  const renderFallbackImage = () => (
+    <IconBackgroundImage
+      iconName="lightbulb-on-outline"
+      iconSize={104}
+      style={styles.image}
+    >
+      {renderMeta()}
+    </IconBackgroundImage>
+  );
+
+  const hasImages = challenge.images?.length > 0;
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scroll}>
-        {challenge.image ? (
-          <ImageBackground
-            style={styles.image}
-            source={{ uri: challenge.image }}
-          >
-            {renderMeta()}
-          </ImageBackground>
-        ) : (
-          <IconBackgroundImage
-            iconName="lightbulb-on-outline"
-            iconSize={104}
-            style={styles.image}
-          >
-            {renderMeta()}
-          </IconBackgroundImage>
-        )}
+        {hasImages ? renderImages() : renderFallbackImage()}
         <View style={styles.content}>
           <Paragraph>{challenge.description}</Paragraph>
         </View>

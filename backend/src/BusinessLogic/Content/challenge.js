@@ -1,6 +1,6 @@
 import {
   activityCreator,
-  contentCreator,
+  challengeContentCreator,
   createObjectTemplate,
   reflectionTypeCreator,
   rewardCreator,
@@ -139,7 +139,7 @@ function emptyData() {
 }
 
 function challengeCreator(reflectionType) {
-  const content = contentCreator();
+  const content = challengeContentCreator();
   const activity = activityCreator();
 
   const reflection = reflectionTypeCreator(reflectionType);

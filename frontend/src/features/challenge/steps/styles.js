@@ -14,7 +14,8 @@ export default StyleSheet.create({
   },
   help: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    flexWrap: "wrap",
+    justifyContent: "center",
     marginHorizontal: 8,
   },
   meta: {

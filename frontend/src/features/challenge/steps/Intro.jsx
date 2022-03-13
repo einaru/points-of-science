@@ -2,19 +2,20 @@ import React from "react";
 import { ImageBackground, ScrollView, View } from "react-native";
 import { Button, Chip, Paragraph } from "react-native-paper";
 
+import { IconBackgroundImage } from "~shared/components";
 import { t } from "~shared/i18n";
 
 import ChallengeContext from "../ChallengeContext";
 import styles from "./styles";
 
-const fallbackImage = require("../assets/experiment.jpg");
-
 function Intro({ navigation }) {
   const { challenge } = React.useContext(ChallengeContext);
 
-  const imageSource = challenge.image
-    ? { uri: challenge.image }
-    : fallbackImage;
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      title: challenge.name,
+    });
+  }, [navigation, challenge]);
 
   const renderReward = () => {
     return !challenge.reward ? null : (
@@ -24,21 +25,36 @@ function Intro({ navigation }) {
     );
   };
 
-  React.useLayoutEffect(() => {
-    navigation.setOptions({
-      title: challenge.name,
-    });
-  }, [navigation, challenge]);
+  const renderMeta = () => {
+    return (
+      <View style={styles.metaContainer}>
+        <Chip style={styles.chip} mode="outlined">
+          {challenge.category.name}
+        </Chip>
+        {renderReward()}
+      </View>
+    );
+  };
 
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollView}>
-        <ImageBackground style={styles.illustrationImage} source={imageSource}>
-          <View style={styles.metaContainer}>
-            <Chip style={styles.chip}>{challenge.category.name}</Chip>
-            {renderReward()}
-          </View>
-        </ImageBackground>
+        {challenge.image ? (
+          <ImageBackground
+            style={styles.illustrationImage}
+            source={{ uri: challenge.image }}
+          >
+            {renderMeta()}
+          </ImageBackground>
+        ) : (
+          <IconBackgroundImage
+            iconName="lightbulb-on-outline"
+            iconSize={104}
+            style={styles.illustrationImage}
+          >
+            {renderMeta()}
+          </IconBackgroundImage>
+        )}
         <View style={styles.contentContainer}>
           <Paragraph>{challenge.description}</Paragraph>
         </View>

@@ -28,8 +28,8 @@ function Activity({ navigation }) {
   const [hint, setHint] = React.useState("");
   const [hintIndex, setHintIndex] = React.useState(0);
   const [hintIsVisible, setHintIsVisible] = React.useState(false);
+  const [hasUsedHints, setHasUsedHints] = React.useState(false);
 
-  // TODO Keep track of which hints have been shown
   const getAHint = () => {
     const index = hintIndex < hints.length ? hintIndex : 0;
     setHint(hints[index]);
@@ -39,6 +39,7 @@ function Activity({ navigation }) {
   const showHint = () => {
     getAHint();
     setHintIsVisible(true);
+    setHasUsedHints(true);
   };
 
   // TODO Log hint action data somehow
@@ -49,9 +50,11 @@ function Activity({ navigation }) {
 
   const { resources } = activity;
   const [resourcesIsVisible, setResourcesIsVisible] = React.useState(false);
+  const [hasUsedResources, setHasUsedResources] = React.useState(false);
 
   const showResources = () => {
     setResourcesIsVisible(true);
+    setHasUsedResources(true);
   };
 
   // TODO Log resource action data somehow
@@ -71,11 +74,11 @@ function Activity({ navigation }) {
   return (
     <View style={styles.container}>
       {/* TODO render activity content based on activity type */}
-      <ScrollView contentContainerStyle={styles.scrollView}>
-        <View style={styles.contentContainer}>
+      <ScrollView contentContainerStyle={styles.scroll}>
+        <View style={styles.content}>
           <Paragraph style={styles.text}>{activity.description}</Paragraph>
         </View>
-        <View style={styles.helpContainer}>
+        <View style={styles.help}>
           <Button onPress={showHint}>{t("Get a hint?")}</Button>
           <Button onPress={showResources}>{t("External resources")}</Button>
         </View>
@@ -84,7 +87,7 @@ function Activity({ navigation }) {
         mode="contained"
         style={styles.action}
         onPress={() => {
-          setActivityData(answer, dateStarted);
+          setActivityData(answer, dateStarted, hasUsedHints, hasUsedResources);
           navigation.navigate("challenge:reflection");
         }}
       >

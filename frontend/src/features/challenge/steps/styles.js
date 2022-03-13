@@ -4,30 +4,28 @@ export default StyleSheet.create({
   container: {
     flex: 1,
   },
-  scrollView: {
+  scroll: {
     flexGrow: 1,
     justifyContent: "space-between",
   },
-  contentContainer: {
+  content: {
     flex: 1,
     margin: 8,
   },
-  helpContainer: {
+  help: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
     marginHorizontal: 8,
+  },
+  meta: {
     flexDirection: "row",
     justifyContent: "space-between",
-  },
-  metaContainer: {
     padding: 8,
-    flexDirection: "row",
-    justifyContent: "flex-start",
   },
-  illustrationImage: {
-    width: "100%",
+  image: {
     height: 200,
-  },
-  chip: {
-    marginEnd: 8,
+    width: "100%",
   },
   title: {
     marginVertical: 8,

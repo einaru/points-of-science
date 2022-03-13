@@ -7,8 +7,10 @@ import {
   Title,
   withTheme,
 } from "react-native-paper";
-import Emoji from "~shared/components/Emoji";
+
+import { Emoji } from "~shared/components";
 import { t } from "~shared/i18n";
+
 import themedStyles from "./SwapPermissionInfo.style";
 
 function SwapPermissionInfo({ visible, onDismiss, theme }) {

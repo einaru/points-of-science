@@ -4,7 +4,7 @@ import React from "react";
 import { Provider as ThemeProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-import Navigation from "~features/navigation";
+import Navigation from "~features/navigation/Navigation";
 import AnalyticsProvider from "~services/analytics/AnalyticsProvider";
 import useApiClient from "~services/api/useApiClient";
 import AuthProvider from "~services/auth/AuthProvider";

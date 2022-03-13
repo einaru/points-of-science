@@ -62,6 +62,8 @@ function Completed({ navigation, theme }) {
             activity: {
               dateStarted: userData.dateStarted,
               answer: userData.activityAnswer,
+              hasOpenHints: userData.hasUsedHints,
+              hasOpenResources: userData.hasUsedResources,
             },
             reflection: {
               dateCompleted: userData.dateCompleted,
@@ -159,7 +161,7 @@ function Completed({ navigation, theme }) {
   return (
     <View style={styles.container}>
       <HeroBackgroundImage name="graduation" fade={0.5}>
-        <ScrollView contentContainerStyle={styles.scrollView}>
+        <ScrollView contentContainerStyle={styles.scroll}>
           <View style={styles.backgroundOverlay}>
             <View style={styles.shoutOutContainer}>
               {renderReward()}

@@ -1,20 +1,22 @@
 import { useMutation } from "@apollo/client";
 import { useNavigation, useRoute } from "@react-navigation/native";
-/* eslint-disable no-console */
 import * as Clipboard from "expo-clipboard";
 import React from "react";
-import { ScrollView, View } from "react-native";
+import { Dimensions, ScrollView, View } from "react-native";
 import { Avatar, Divider, List, Snackbar, Switch } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import AnalyticsContext from "~services/analytics/AnalyticsContext";
 import AuthContext from "~services/auth/AuthContext";
 import PreferencesContext from "~services/preferences/PreferencesContext";
+import { getColorsFromString } from "~shared/colors";
 import { LoadingScreen } from "~shared/components";
 import { t } from "~shared/i18n";
 
 import LOGOUT from "./Profile.gql";
 import styles from "./Profile.style";
+
+const WINDOW_WIDTH = Dimensions.get("window").width;
 
 function Profile() {
   const navigation = useNavigation();
@@ -41,6 +43,20 @@ function Profile() {
     },
   });
 
+  const renderAvatar = () => {
+    const { bgColor, fgColor } = getColorsFromString(user.id, 0.9);
+    return (
+      <View style={styles.avatarContainer}>
+        <Avatar.Text
+          size={WINDOW_WIDTH / 3}
+          label={initials}
+          color={fgColor.string()}
+          style={[styles.avatar, { backgroundColor: bgColor.string() }]}
+        />
+      </View>
+    );
+  };
+
   if (loading) {
     return <LoadingScreen message={t("Logging out…")} />;
   }
@@ -48,9 +64,7 @@ function Profile() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        <View style={styles.avatarContainer}>
-          <Avatar.Text size={96} label={initials} />
-        </View>
+        {renderAvatar()}
         <View style={styles.container}>
           <List.Section>
             <List.Item
@@ -83,6 +97,7 @@ function Profile() {
                   onValueChange={toggleTheme}
                 />
               )}
+              onPress={toggleTheme}
             />
           </List.Section>
           <Divider />

@@ -10,9 +10,7 @@ import deviceInfo from "./deviceInfo";
 import extractMetadata from "./extractMetadata";
 
 function debug(tag, data) {
-  // eslint-disable-next-line no-undef
   if (__DEV__) {
-    // eslint-disable-next-line no-console
     console.debug(`[${tag}]: ${JSON.stringify(data)}`);
   }
 }

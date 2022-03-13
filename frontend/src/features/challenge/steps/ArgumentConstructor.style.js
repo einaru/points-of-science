@@ -44,7 +44,7 @@ export default function themedStyles(theme) {
     },
     item: {
       alignItems: "center",
-      backgroundColor: "magenta",
+      backgroundColor: colors.accent,
       borderRadius: 2,
       margin: 2,
       padding: 4,
@@ -73,7 +73,7 @@ export default function themedStyles(theme) {
     },
     hoverDragging: {},
     receiving: {
-      borderColor: "tomato",
+      borderColor: colors.red,
       borderStyle: "dashed",
       borderWidth: 2,
     },

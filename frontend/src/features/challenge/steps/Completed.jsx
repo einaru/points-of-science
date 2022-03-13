@@ -62,6 +62,8 @@ function Completed({ navigation, theme }) {
             activity: {
               dateStarted: userData.dateStarted,
               answer: userData.activityAnswer,
+              hasOpenHints: userData.hasUsedHints,
+              hasOpenResources: userData.hasUsedResources,
             },
             reflection: {
               dateCompleted: userData.dateCompleted,

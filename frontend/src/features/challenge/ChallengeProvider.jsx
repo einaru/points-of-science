@@ -6,11 +6,18 @@ import { initialState, reducer } from "./ChallengeProvider.reducer";
 export default function ChallengeProvider({ challenge, children }) {
   const [userData, dispatch] = useReducer(reducer, initialState);
 
-  const setActivityData = (answer, dateStarted) => {
+  const setActivityData = (
+    answer,
+    dateStarted,
+    hasUsedHints,
+    hasUsedResources
+  ) => {
     dispatch({
       type: "activityCompleted",
       dateStarted,
       answer,
+      hasUsedHints,
+      hasUsedResources,
     });
   };
 

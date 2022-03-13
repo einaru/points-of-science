@@ -3,6 +3,8 @@ export const initialState = {
   dateCompleted: null,
   activityAnswer: null,
   reflectionAnswer: null,
+  hasUsedHints: false,
+  hasUsedResources: false,
 };
 
 export const reducer = (state, action) => {
@@ -12,6 +14,8 @@ export const reducer = (state, action) => {
         ...state,
         dateStarted: action.dateStarted,
         activityAnswer: action.answer,
+        hasUsedHints: action.hasUsedHints,
+        hasUsedResources: action.hasUsedResources,
       };
     case "reflectionCompleted":
       return {

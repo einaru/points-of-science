@@ -28,6 +28,7 @@ function Activity({ navigation }) {
   const [hint, setHint] = React.useState("");
   const [hintIndex, setHintIndex] = React.useState(0);
   const [hintIsVisible, setHintIsVisible] = React.useState(false);
+  const [hasUsedHints, setHasUsedHints] = React.useState(false);
 
   // TODO Keep track of which hints have been shown
   const getAHint = () => {
@@ -39,6 +40,7 @@ function Activity({ navigation }) {
   const showHint = () => {
     getAHint();
     setHintIsVisible(true);
+    setHasUsedHints(true);
   };
 
   // TODO Log hint action data somehow
@@ -49,9 +51,11 @@ function Activity({ navigation }) {
 
   const { resources } = activity;
   const [resourcesIsVisible, setResourcesIsVisible] = React.useState(false);
+  const [hasUsedResources, setHasUsedResources] = React.useState(false);
 
   const showResources = () => {
     setResourcesIsVisible(true);
+    setHasUsedResources(true);
   };
 
   // TODO Log resource action data somehow
@@ -84,7 +88,7 @@ function Activity({ navigation }) {
         mode="contained"
         style={styles.action}
         onPress={() => {
-          setActivityData(answer, dateStarted);
+          setActivityData(answer, dateStarted, hasUsedHints, hasUsedResources);
           navigation.navigate("challenge:reflection");
         }}
       >

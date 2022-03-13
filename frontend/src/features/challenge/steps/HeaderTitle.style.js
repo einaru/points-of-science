@@ -17,7 +17,6 @@ export default StyleSheet.create({
       fontWeight: "500",
     },
   }),
-  // TODO Adjust ios style once we have iOS devices to test on
   subtitle: Platform.select({
     android: {
       fontSize: 12,

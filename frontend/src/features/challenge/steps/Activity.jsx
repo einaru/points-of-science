@@ -30,7 +30,6 @@ function Activity({ navigation }) {
   const [hintIsVisible, setHintIsVisible] = React.useState(false);
   const [hasUsedHints, setHasUsedHints] = React.useState(false);
 
-  // TODO Keep track of which hints have been shown
   const getAHint = () => {
     const index = hintIndex < hints.length ? hintIndex : 0;
     setHint(hints[index]);

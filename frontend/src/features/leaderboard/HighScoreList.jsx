@@ -17,10 +17,13 @@ function HighScoreList() {
             .sort((a, b) => b.score - a.score)
             .map((item, index) => ({
               ...item,
-              rank: index + 1,
+              rank: item.score > 0 ? index + 1 : "-",
             }))
+            .filter(({ score, userID }) => {
+              return score > 0 || userID === user.id;
+            })
         : [],
-    [highScore]
+    [highScore, user.id]
   );
 
   return (

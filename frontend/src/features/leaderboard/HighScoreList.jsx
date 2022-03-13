@@ -32,7 +32,7 @@ function HighScoreList() {
         <DataTable>
           <DataTable.Header>
             <DataTable.Title>Rank</DataTable.Title>
-            <DataTable.Title>User</DataTable.Title>
+            <DataTable.Title style={{ flex: 3 }}>User</DataTable.Title>
             <DataTable.Title numeric>Score</DataTable.Title>
           </DataTable.Header>
           {rankedUserScores.map((entry) => {
@@ -43,7 +43,9 @@ function HighScoreList() {
             return (
               <DataTable.Row key={entry.userID} style={style}>
                 <DataTable.Cell>{entry.rank}</DataTable.Cell>
-                <DataTable.Cell>{entry.username}</DataTable.Cell>
+                <DataTable.Cell style={{ flex: 3 }}>
+                  {entry.username}
+                </DataTable.Cell>
                 <DataTable.Cell numeric>{entry.score}</DataTable.Cell>
               </DataTable.Row>
             );

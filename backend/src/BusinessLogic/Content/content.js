@@ -1,15 +1,5 @@
 import { createObjectTemplate } from "../../internal.js";
 
-function emptyData() {
-  return {
-    data: {
-      title: "",
-      images: [],
-      description: "",
-    },
-  };
-}
-
 function updateContent(content) {
   const functionKey = "updateData";
   const code = (args) => {
@@ -28,7 +18,13 @@ function updateContent(content) {
 }
 
 function contentCreator() {
-  const content = emptyData();
+  const content = {
+    data: {
+      title: "",
+      image: "",
+      description: "",
+    },
+  };
 
   return {
     content: {
@@ -38,4 +34,21 @@ function contentCreator() {
   };
 }
 
-export { contentCreator };
+function challengeContentCreator() {
+  const content = {
+    data: {
+      title: "",
+      images: [],
+      description: "",
+    },
+  };
+
+  return {
+    content: {
+      ...content,
+      ...updateContent(content.data),
+    },
+  };
+}
+
+export { contentCreator, challengeContentCreator };

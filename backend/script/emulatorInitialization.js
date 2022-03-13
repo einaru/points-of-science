@@ -136,16 +136,16 @@ async function uploadFiles(filePath) {
   return ref;
 }
 
-async function preprocessImage(key, obj) {
+async function preprocessImage(key, obj, images) {
   if (key !== "Category" && key !== "Challenge" && key !== "Achievement") {
     return null;
   }
 
-  if (!obj.content.images) {
+  if (!images) {
     return null;
   }
 
-  if (Array.isArray(obj.content.images)) {
+  if (Array.isArray(images)) {
     const promises = [];
     await obj.content.images.forEach((image) => {
       if (image.endsWith(".jpg") || image.endsWith(".png")) {
@@ -162,6 +162,18 @@ async function preprocessImage(key, obj) {
     });
     return urls;
   }
+
+  if (
+    images.trim().length === 0 &&
+    (!images.endsWith(".jpg") || !images.endsWith(".png"))
+  ) {
+    return null;
+  }
+
+  const imagePath = `../assets/Static/images/${images}`;
+  const filePath = path.resolve(here, imagePath);
+  const ref = await uploadFiles(filePath);
+  return ref[0].publicUrl();
 }
 
 async function populateData() {
@@ -169,11 +181,19 @@ async function populateData() {
     data[key].forEach((obj) => {
       const promises = [getData(key)];
       if (obj.content) {
-        promises.push(preprocessImage(key, obj));
+        if (obj.content.images) {
+          promises.push(preprocessImage(key, obj, obj.content.images));
+        } else if (obj.content.image) {
+          promises.push(preprocessImage(key, obj, obj.content.image));
+        }
       }
       Promise.all(promises).then(([table, URL]) => {
         if (URL != null) {
-          obj.content.images = URL;
+          if (obj.content.images) {
+            obj.content.images = URL;
+          } else if (obj.content.image) {
+            obj.content.image = URL;
+          }
         }
 
         if (table.length === 0) {

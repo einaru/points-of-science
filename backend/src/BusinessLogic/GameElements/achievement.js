@@ -74,7 +74,7 @@ function convertToResponseObject() {
       type: object.data.type,
       name: object.content.data.title,
       description: object.content.data.description,
-      images: object.content.data.images,
+      image: object.content.data.image,
     };
   };
 

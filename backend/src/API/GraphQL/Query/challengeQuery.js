@@ -39,7 +39,9 @@ const getAllChallengesQuery = {
     const challengesData = await providers.challenges.getAll();
     const challenges = [];
     challengesData.forEach((challengeData) => {
-      const challenge = challengeCreator(challengeData.reflectionType);
+      const challenge = challengeCreator(
+        challengeData.reflection.reflectionType
+      );
       challenge.restoreObject(challenge, challengeData);
       const response = challenge.convertToResponseObject(challenge);
       if (user.permission === 3) {
@@ -99,7 +101,13 @@ const createChallengeQuery = {
     const challenge = createChallenge(categoryID, difficulty, reflectionType);
     createContent(challenge.content, title, image, description);
     createReward(challenge.reward, maxPoints, firstTryPoints, bonusPoints);
-    createReflection(challenge.reflection, reflectionTitle, solution, choices);
+    createReflection(
+      challenge.reflection,
+      reflectionTitle,
+      solution,
+      choices,
+      reflectionType
+    );
     createActivity(
       challenge.activity,
       type,

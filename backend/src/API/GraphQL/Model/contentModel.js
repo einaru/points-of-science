@@ -81,14 +81,15 @@ const ActivityInputModel = new GraphQLInputObjectType({
 const ReflectionTypeEnum = new GraphQLEnumType({
   name: "ReflectionType",
   values: {
-    reflection: { value: true },
-    argument: { value: false },
+    reflection: { value: 1 },
+    argument: { value: 2 },
   },
 });
 
 const reflectionData = {
   title: { type: GraphQLString },
   solution: { type: GraphQLString },
+  reflectionType: { type: ReflectionTypeEnum },
 };
 
 const ReflectionModel = new GraphQLObjectType({

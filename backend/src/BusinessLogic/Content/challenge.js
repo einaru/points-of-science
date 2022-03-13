@@ -2,10 +2,9 @@ import {
   activityCreator,
   contentCreator,
   createObjectTemplate,
-  reflectionCreator,
-  argumentCreator,
+  reflectionTypeCreator,
   rewardCreator,
-} from "../../internal.js";;
+} from "../../internal.js";
 
 const DifficultyEnum = Object.freeze({
   beginner: 1,
@@ -50,7 +49,10 @@ function restoreObject() {
       challenge.reflection.setTitle(challengeData.reflection.title);
       challenge.reflection.data.id = challengeData.reflection.id;
       challenge.reflection.setSolution(challengeData.reflection.solution);
-      if (challenge.reflection.data.choices) {
+      challenge.reflection.setReflectionType(
+        challengeData.reflection.reflectionType
+      );
+      if (challenge.reflection.data.reflectionType === 2) {
         challengeData.reflection.choices.forEach((choice) => {
           challenge.reflection.addChoice(choice);
         });
@@ -93,7 +95,6 @@ function convertToStoredObject() {
       categoryID: object.data.categoryID,
       difficulty: object.data.difficulty,
       content: object.content.data,
-      reflectionType: object.data.reflectionType,
       reflection: object.reflection.data,
       reward: object.reward.data,
       activity: object.activity.data,
@@ -117,21 +118,12 @@ function convertToResponseObject() {
       description: object.content.data.description,
       image: object.content.data.image,
       reflection: object.reflection.data,
-      reflectionType: object.data.reflectionType,
       reward: object.reward.data,
       activity: object.activity.data,
     };
   };
 
   return createObjectTemplate(functionKey, code);
-}
-
-function addReflectionType(reflectionType) {
-  if (reflectionType) {
-    return reflectionCreator();
-  }
-
-  return argumentCreator();
 }
 
 function emptyData() {
@@ -150,7 +142,7 @@ function challengeCreator(reflectionType) {
   const content = contentCreator();
   const activity = activityCreator();
 
-  const reflection = addReflectionType(reflectionType);
+  const reflection = reflectionTypeCreator(reflectionType);
   const reward = rewardCreator();
   const challenge = emptyData();
   challenge.data.reflectionType = reflectionType;

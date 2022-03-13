@@ -10,7 +10,6 @@ import {
 import {
   ContentResponse,
   ReflectionModel,
-  ReflectionTypeEnum,
 } from "../../../internal.js";
 import { ActivityModel } from "./contentModel.js";
 
@@ -56,7 +55,6 @@ const challengeData = {
   difficulty: { type: DifficultyEnum },
   ...ContentResponse,
   activity: { type: ActivityModel },
-  reflectionType: { type: ReflectionTypeEnum },
   reflection: { type: ReflectionModel },
   reward: { type: RewardModel },
 };

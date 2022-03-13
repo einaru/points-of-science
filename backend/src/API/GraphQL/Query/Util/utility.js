@@ -1,4 +1,4 @@
-import { RedisPubSub } from 'graphql-redis-subscriptions'
+import { RedisPubSub } from "graphql-redis-subscriptions";
 import { challengeCreator } from "../../../../internal.js";
 
 const pubsub = new RedisPubSub();
@@ -34,9 +34,16 @@ function createReward(reward, maxPoints, firstTryPoints, bonusPoints) {
   reward.updateData(newReward);
 }
 
-function createReflection(reflection, title, solution, choices) {
+function createReflection(
+  reflection,
+  title,
+  solution,
+  choices,
+  reflectionType
+) {
   reflection.setTitle(title);
   reflection.setSolution(solution);
+  reflection.setReflectionType(reflectionType);
   if (reflection.data.choices) {
     choices.forEach((choice) => {
       reflection.addChoice(choice);

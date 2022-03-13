@@ -959,9 +959,9 @@
       "reflection": {
         "id": "nfbTjkQb2LUIO1TpCwqm",
         "solution": "Væsken beveger seg inn i kjøkkenpapiret og over i ett annet glass ved at molekylene i væsken trekker på hverandre.",
-        "title": "Hvorfor beveger væsken seg fra ett glass til ett annet?"
+        "title": "Hvorfor beveger væsken seg fra ett glass til ett annet?",
+        "reflectionType": 1
       },
-      "reflectionType": true,
       "reward": {
         "bonusPoints": 5,
         "firstTryPoints": 2,
@@ -1000,9 +1000,9 @@
           "forskjellen",
           "likheten",
           "i molekylenes bevegelser"
-        ]
+        ],
+        "reflectionType": 2
       },
-      "reflectionType": false,
       "reward": {
         "bonusPoints": 2,
         "firstTryPoints": 2,
@@ -1030,9 +1030,9 @@
       "reflection": {
         "id": "h4rKLFAoVF0BG665vhZ4",
         "solution": "",
-        "title": "Hva var dine hypoteser? Prøv å forklare hva du observerte."
+        "title": "Hva var dine hypoteser? Prøv å forklare hva du observerte.",
+        "reflectionType": 1
       },
-      "reflectionType": true,
       "reward": {
         "bonusPoints": 5,
         "firstTryPoints": 2,
@@ -1061,9 +1061,9 @@
         "id": "n4Joab3yzzcvSs0804Pe",
         "solution": "Vann tilsatt bakepulver eller salt får mer massetetthet enn naturlig vann, og mer massetetthet enn gjenstandene. Derfor flytter gjenstandene. ",
         "title": "Hvorfor flyter egget eller druene i vann som er tilsatt bakepulver eller salt, men ikke i glasset med rent vann i?",
-        "choices": []
+        "choices": [],
+        "reflectionType": 2
       },
-      "reflectionType": false,
       "reward": {
         "bonusPoints": 2,
         "firstTryPoints": 2,
@@ -1092,9 +1092,9 @@
         "id": "moj6uCdgcuOBsK3rEGwu",
         "solution": "mer syreholdig drikke får kalsium til å oppløses, mens sukkeret bidrar til nedbrytning.",
         "title": "Sett sammen en argumentasjon med noen av ordene nedenfor som forklarer hvorfor eggene blir misfarget.",
-        "choices": ["mer baseholdig", "mer syreholdig", "drikke får kalsium", "til å forsterkes", "får kalsium", "til å oppløses", "mens sukker bidrar", "til nedbrytning"]
+        "choices": ["mer baseholdig", "mer syreholdig", "drikke får kalsium", "til å forsterkes", "får kalsium", "til å oppløses", "mens sukker bidrar", "til nedbrytning"],
+        "reflectionType": 2
       },
-      "reflectionType": true,
       "reward": {
         "bonusPoints": 5,
         "firstTryPoints": 2,
@@ -1122,9 +1122,9 @@
       "reflection": {
         "id": "agDo4iV2W7rT7FncP1rR",
         "solution": "",
-        "title": "Kan du forklare hvilke kjemiske reaksjoner som får slangen til å vokse?"
+        "title": "Kan du forklare hvilke kjemiske reaksjoner som får slangen til å vokse?",
+        "reflectionType": 1
       },
-      "reflectionType": true,
       "reward": {
         "bonusPoints": 5,
         "firstTryPoints": 2,

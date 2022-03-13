@@ -73,7 +73,7 @@ function restoreChallenges(data, challengeList) {
 
   const challenges = [];
   challengesData.forEach((challengeData) => {
-    const challenge = challengeCreator(challengeData.reflectionType);
+    const challenge = challengeCreator(challengeData.reflection.reflectionType);
     challenge.restoreObject(challenge, challengeData);
     challenges.push(challenge);
   });

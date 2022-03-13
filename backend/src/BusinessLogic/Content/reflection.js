@@ -7,6 +7,7 @@ function emptyData() {
       id: "",
       title: "",
       solution: "",
+      reflectionType: 1,
     },
   };
 }
@@ -62,6 +63,19 @@ function removeChoice(argument) {
   return createObjectTemplate(functionKey, code);
 }
 
+function setReflectionType(reflection) {
+  const functionKey = "setReflectionType";
+  const code = (reflectionType) => {
+    if (typeof reflectionType !== "number") {
+      throw new Error("Reflection type must be reflection or argument.");
+    }
+
+    reflection.reflectionType = reflectionType;
+  };
+
+  return createObjectTemplate(functionKey, code);
+}
+
 function addEmptyChoiceList(argument) {
   argument.choices = [];
 }
@@ -74,6 +88,7 @@ function reflectionCreator() {
       ...reflection,
       ...setTitle(reflection.data),
       ...setSolution(reflection.data),
+      ...setReflectionType(reflection.data),
     },
   };
 }
@@ -89,8 +104,17 @@ function argumentCreator() {
       ...setSolution(argument.data),
       ...addChoice(argument.data),
       ...removeChoice(argument.data),
+      ...setReflectionType(argument.data),
     },
   };
 }
 
-export { reflectionCreator, argumentCreator };
+function reflectionTypeCreator(reflectionType) {
+  if (reflectionType === 1) {
+    return reflectionCreator();
+  }
+
+  return argumentCreator();
+}
+
+export { reflectionTypeCreator };

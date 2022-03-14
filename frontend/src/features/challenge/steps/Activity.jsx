@@ -29,6 +29,7 @@ function Activity({ navigation }) {
   const [hintIndex, setHintIndex] = React.useState(0);
   const [hintIsVisible, setHintIsVisible] = React.useState(false);
   const [hasUsedHints, setHasUsedHints] = React.useState(false);
+  const [hintResponse, setHintResponse] = React.useState(0);
 
   const getAHint = () => {
     const index = hintIndex < hints.length ? hintIndex : 0;
@@ -42,25 +43,24 @@ function Activity({ navigation }) {
     setHasUsedHints(true);
   };
 
-  // TODO Log hint action data somehow
   const onHideHint = (action) => {
     setHintIsVisible(false);
-    console.debug(`Hint was closed with "${action}"`);
+    setHintResponse(action);
   };
 
   const { resources } = activity;
   const [resourcesIsVisible, setResourcesIsVisible] = React.useState(false);
   const [hasUsedResources, setHasUsedResources] = React.useState(false);
+  const [resourcesResponse, setResourcesResponse] = React.useState(0);
 
   const showResources = () => {
     setResourcesIsVisible(true);
     setHasUsedResources(true);
   };
 
-  // TODO Log resource action data somehow
   const onHideResources = (action) => {
     setResourcesIsVisible(false);
-    console.debug(`Resources was closed with ${action}`);
+    setResourcesResponse(action);
   };
 
   React.useLayoutEffect(() => {
@@ -87,7 +87,14 @@ function Activity({ navigation }) {
         mode="contained"
         style={styles.action}
         onPress={() => {
-          setActivityData(answer, dateStarted, hasUsedHints, hasUsedResources);
+          setActivityData(
+            answer,
+            dateStarted,
+            hasUsedHints,
+            hintResponse,
+            hasUsedResources,
+            resourcesResponse
+          );
           navigation.navigate("challenge:reflection");
         }}
       >

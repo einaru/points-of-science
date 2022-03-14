@@ -4,7 +4,14 @@ import { createContext } from "react";
 const ChallengeContext = createContext({
   challenge: {},
   userData: {},
-  setActivityData: (answer, dateStarted, hasUsedHints, hasUsedResources) => {},
+  setActivityData: (
+    answer,
+    dateStarted,
+    hasUsedHints,
+    hintResponse,
+    hasUsedResources,
+    resourcesResponse
+  ) => {},
   setReflectionData: (answer, dateCompleted) => {},
 });
 

@@ -10,14 +10,18 @@ export default function ChallengeProvider({ challenge, children }) {
     answer,
     dateStarted,
     hasUsedHints,
-    hasUsedResources
+    hintResponse,
+    hasUsedResources,
+    resourcesResponse
   ) => {
     dispatch({
       type: "activityCompleted",
       dateStarted,
       answer,
       hasUsedHints,
+      hintResponse,
       hasUsedResources,
+      resourcesResponse,
     });
   };
 

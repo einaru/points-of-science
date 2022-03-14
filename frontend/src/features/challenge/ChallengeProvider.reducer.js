@@ -15,7 +15,9 @@ export const reducer = (state, action) => {
         dateStarted: action.dateStarted,
         activityAnswer: action.answer,
         hasUsedHints: action.hasUsedHints,
+        hintResponse: action.hintResponse,
         hasUsedResources: action.hasUsedResources,
+        resourcesResponse: action.resourcesResponse,
       };
     case "reflectionCompleted":
       return {

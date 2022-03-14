@@ -1,7 +1,7 @@
 const DialogAction = {
   DISMISS: "dismiss",
-  THUMB_UP: "thumb-up",
-  THUMB_DOWN: "thumb-down",
+  THUMB_UP: "thumbUp",
+  THUMB_DOWN: "thumbDown",
 };
 Object.freeze(DialogAction);
 

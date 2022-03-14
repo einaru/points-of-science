@@ -1,0 +1,43 @@
+id: 76cq97Qjo48ONgmd8H5U
+categoryID: 7E9Z37Z07xzbkfBqJg1f
+difficulty: 1
+activity:
+    description: > 
+      Det du trenger til dette eksperimentet:
+      1) Fire egg eller druer
+      2) Fire gjennomsiktige glass fylt med vann 
+      3) Salt 
+      4) Sukker 
+      5) Bakepulver eller Natron
+      Utførelse av eksperimentet: 
+      1) Tilsett to spiseskjeer med salt i et av glassene med vann 
+      2) Tilsett to spiseskjeer med sukker i ett av de andre glassene 
+      3) Tilsett to spiseskjeer med bakepulver i det tredje glasset
+      4) Det fjerde glasset med vann skal være som det er, for det skal være din kontrollvariabel
+      5) Gi hvert glass en merkelapp med hva glasset er tilsatt for å holde kontroll på eksperimentet
+      6) Skriv ned hva du tror vil skje med druene eller eggene når de slippes ned i glassene
+      7) Observer hva som skjer!
+    hints: 
+      - Ved å tilsette stoffer som oppløses i vann medfører at vannet får høyere massetetthet 
+      - Natron kan danne karbondioksid gass, som danner luftbobler i vann
+      - Bruk glasset som kun består av vann til å sammenligne og forklare hva som skjer i de andre glassene
+    id: ipZNbvv66gPWg6egjrXt
+    resources: 
+      - https://www.sciencekiddo.com/salt-water-experiment-ocean-science/
+    type: 1
+content:
+    description: I dette eksperimentet skal du bruke kunnskapen du har lært fra andre eksperimenter om massetetthet, men benytte kontroll og eksperiment metodikk til å validere og forklare hypotesene dine.
+    id: Rk9okCn8AkwrSW1KwBRQ
+    images: []
+    title: Saltvann med kontroll
+reflection: 
+    id: n4Joab3yzzcvSs0804Pe
+    solution: Vann tilsatt bakepulver eller salt får mer massetetthet enn naturlig vann, og mer massetetthet enn gjenstandene. Derfor flytter gjenstandene.
+    title: Hvorfor flyter egget eller druene i vann som er tilsatt bakepulver eller salt, men ikke i glasset med rent vann i?
+    choices: []
+    reflectionType: 2
+reward:
+    bonusPoints: 2
+    firstTryPoints: 2
+    id: yepYiQdENAfvClvtfBWk
+    maxPoints: 5

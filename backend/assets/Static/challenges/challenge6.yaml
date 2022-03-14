@@ -1,0 +1,52 @@
+id: gSZtkJvdewTQvEae50aJ
+categoryID: pTIETOOCSI0gjDqpxkYy
+difficulty: 3
+activity:
+    description: > 
+      Det du trenger til dette eksperimentet: 
+      1) En aluminiumsbolle 
+      2) Liten skål 
+      3) Melis 
+      4) Natron 
+      5) Sand til å fylle aluminiumsbollen med 
+      6) Lighter gass eller sprit (for eksempel vodka) 
+      7) Sukker 
+      8) Natron 
+      9) Tennstav eller fyrstikk 
+      10) Foreldre som kan hjelpe til 
+      Utførelse av eksperimentet: 
+      1) Bland sammen fire teskjeer med melis og en teskjee med natron i den lille skålen 
+      2) Fyll aluminiumsbollen med sand 
+      3) Bruk en finger til å lage en liten grop i midten av sanden 
+      4) Hell på lighter gass eller sprit hvor du lagde gropen. Unngå å søle med lighter gass eller sprit
+      5) Legg noe av blandingen med melis og natron i gropen 
+      7) NB!: Fjern alle brennbare materialer rundt aluminiumsbollen og ha klar en bøtte med vann om nødvendig 
+      8) Bruk tennstaven til å tenne på melisblandingen og la den brenne i 20 minutter. Ikke forlat eksperimentet uten oppsyn 
+      9) Observer hva som skjer!
+    hints: 
+      - Antenning av sukkeret er det som starter prosessen 
+      - Melis som varmes opp men som ikke har tilgang på oksygen, brenner ikke, men gjennomgår en kjemisk reaksjon kalt termisk dekomposisjon 
+      - Finn ut hvilke to gasser som dannes når melis og natron brenner 
+      - Hva er sanden sin hensikt i dette eksperimentet?
+    id: GlcJsRMxEV1gzTdXanpk,
+    resources: 
+      - https://www.kiwico.com/diy/stem/crazy-chemistry/carbon-sugar-snake
+    type: 1
+content:
+    description: > 
+      Dette eksperimentet viser hvordan tre kjemiske reaksjoner som all er avhengig av varme, reagerer med hverandre. 
+      Resultatet er at det vokser en 'slange' ut av sanden. 
+      Ved å forstå egenskapene til de ulike komponentene brukt i eksperimentet, skal du kunne forklare hvorfor 'slangen' vokser frem.
+    id: HnTUeBCY2DAODBRnFHXe
+    images: []
+    title: Karbonslange
+reflection: 
+    id: agDo4iV2W7rT7FncP1rR
+    solution: ""
+    title: Kan du forklare hvilke kjemiske reaksjoner som får slangen til å vokse?
+    reflectionType: 1
+reward:
+    bonusPoints: 5
+    firstTryPoints: 2
+    id: dhTqTDdJDc3H3GKVcrLj
+    maxPoints: 15

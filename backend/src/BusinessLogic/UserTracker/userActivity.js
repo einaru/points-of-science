@@ -21,7 +21,9 @@ function emptyData() {
   return {
     data: {
       hasOpenHints: false,
+      hintResponse: 0,
       hasOpenResources: false,
+      resourcesResponse: 0,
       dateStarted: "",
     },
   };

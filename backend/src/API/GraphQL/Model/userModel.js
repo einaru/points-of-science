@@ -26,11 +26,22 @@ const UserAchievementModel = new GraphQLObjectType({
   }),
 });
 
+const ResourceResponseEnum = new GraphQLEnumType({
+  name: "ResourceResponseEnum",
+  values: {
+    thumbDown: { value: -1 },
+    dismiss: { value: 0 },
+    thumbUp: { value: 1 },
+  },
+});
+
 const UserActivityInputModel = new GraphQLInputObjectType({
   name: "UserActivity",
   fields: () => ({
     hasOpenHints: { type: GraphQLBoolean },
+    hintResponse: { type: ResourceResponseEnum },
     hasOpenResources: { type: GraphQLBoolean },
+    resourcesResponse: { type: ResourceResponseEnum },
     dateStarted: { type: GraphQLString },
     answer: { type: GraphQLString },
   }),

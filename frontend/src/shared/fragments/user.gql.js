@@ -30,6 +30,10 @@ export const USER_PROFILE = gql`
         id
         progress
       }
+      achievements {
+        id
+        progress
+      }
     }
   }
 `;

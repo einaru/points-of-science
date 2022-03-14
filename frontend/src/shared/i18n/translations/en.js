@@ -49,6 +49,7 @@ const strings = [
   "points",
   "Prefer dark theme",
   "Profile",
+  "Progress",
   "Project info",
   "Purpose",
   "Reflection",

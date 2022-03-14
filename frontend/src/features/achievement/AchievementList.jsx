@@ -10,9 +10,25 @@ import AchievementInfo from "./AchievementInfo";
 
 function AchievementList() {
   const { achievements, user } = React.useContext(ContentContext);
-  const userAchievements = user.achievements?.map(({ id }) => id);
 
-  const [achievement, setAchievement] = React.useState();
+  const userAchievements = React.useMemo(
+    () => user.achievements?.map(({ id }) => id),
+    [user?.achievements]
+  );
+
+  const userProgress = React.useMemo(
+    () =>
+      user.progress?.achievements.reduce(
+        (obj, { id, progress }) => ({
+          ...obj,
+          [id]: progress,
+        }),
+        {}
+      ),
+    [user.progress?.achievements]
+  );
+
+  const [info, setInfo] = React.useState();
   const [infoIsVisible, setInfoIsVisible] = React.useState(false);
 
   const showInfo = () => setInfoIsVisible(true);
@@ -25,7 +41,8 @@ function AchievementList() {
   const avatarSize = (windowWidth - gutterSize * numGutters) / numColumns;
 
   const showAchievementInfo = (item) => {
-    setAchievement(item);
+    const progress = userProgress[item.id];
+    setInfo({ achievement: item, progress });
     showInfo();
   };
 
@@ -52,9 +69,9 @@ function AchievementList() {
       />
       <Portal>
         <AchievementInfo
+          info={info}
           visible={infoIsVisible}
           onDismiss={hideInfo}
-          achievement={achievement}
         />
       </Portal>
     </HeroBackgroundImage>

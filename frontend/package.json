@@ -79,6 +79,7 @@
     "import-sort-style-module-alias": "^1.1.0",
     "prettier": "^2.5.1",
     "react-test-renderer": "17",
+    "sentry-testkit": "^3.3.7",
     "ws": "^8.5.0"
   },
   "importSort": {

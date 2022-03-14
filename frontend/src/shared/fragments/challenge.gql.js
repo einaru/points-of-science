@@ -4,7 +4,7 @@ export const CHALLENGE_DATA = gql`
   fragment ChallengeData on Challenge {
     id
     name
-    image
+    images
     description
     difficulty
     category {

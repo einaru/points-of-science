@@ -1,6 +1,6 @@
 import {
   activityCreator,
-  contentCreator,
+  challengeContentCreator,
   createObjectTemplate,
   reflectionTypeCreator,
   rewardCreator,
@@ -116,7 +116,7 @@ function convertToResponseObject() {
       difficulty: object.data.difficulty,
       name: object.content.data.title,
       description: object.content.data.description,
-      image: object.content.data.image,
+      images: object.content.data.images,
       reflection: object.reflection.data,
       reward: object.reward.data,
       activity: object.activity.data,
@@ -139,7 +139,7 @@ function emptyData() {
 }
 
 function challengeCreator(reflectionType) {
-  const content = contentCreator();
+  const content = challengeContentCreator();
   const activity = activityCreator();
 
   const reflection = reflectionTypeCreator(reflectionType);

@@ -80,7 +80,7 @@ To stop the Redis server when you are finished with development, type the follow
 sudo service redis-server stop
 ```
 
-You should also remember to set secret keys for both access and refresh tokens.
+You should also remember to set secret keys for both access, refresh, and subscribe tokens.
 These secrets can be set in the `.env` file as well:
 
 ```env
@@ -88,8 +88,6 @@ ACCESS_TOKEN_SECRET=SuPeRsEcReT
 REFRESH_TOKEN_SECRET=EvEnMoReSeCrEt
 SUBSCRIBE_TOKEN_SECRET=<secret_token>
 ```
-
-Now you should be able run `yarn dev` to fire up the application.
 
 Remember to create a new folder in ./assets/Static which should be named "seed". 
 This folder must exist before proceeding with exporting of data from Firestore emulator. 
@@ -100,6 +98,23 @@ in the emulator. To do so, run the following command in a terminal:
 ```
 firebase emulators:export ./assets/Static/seed
 ```
+
+To enable the Storage Emulator, change directory until you are in /backend directory and type the following into a terminal:
+
+```
+firebase init storage
+```
+
+This will install and enable the Storage Emulator.
+
+Now you need to add two more environment variables in the `.env` file:
+
+```env
+FIREBASE_STORAGE_EMULATOR_HOST = localhost:9199
+GOOGLE_STORAGE_BUCKET = <your_google_project_id>
+```
+
+Now you should be able run `yarn dev` to fire up the application.
 
 ### Production mode
 

@@ -85,7 +85,7 @@ function CategoryListItem({ category, user, onPress, theme }) {
 function CategoryList({ navigation, theme }) {
   const { categories, user } = React.useContext(ContentContext);
 
-  if (!categories.length) {
+  if (!categories?.length) {
     return <NoContent message={t("Couldn't find any content")} />;
   }
 

@@ -50,7 +50,7 @@ const createAchievementQuery = {
 
     const content = {
       title: args.achievement.name,
-      image: args.achievement.image,
+      image: args.achievement.images,
       description: args.achievement.description,
     };
 

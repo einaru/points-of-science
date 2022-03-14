@@ -1,14 +1,8 @@
 import React from "react";
 import { View } from "react-native";
-import {
-  Modal,
-  Paragraph,
-  ProgressBar,
-  Text,
-  Title,
-  withTheme,
-} from "react-native-paper";
+import { Modal, Paragraph, Text, Title, withTheme } from "react-native-paper";
 
+import { ProgressBar } from "~shared/components";
 import { t } from "~shared/i18n";
 
 import themedStyle from "./AchievementInfo.style";

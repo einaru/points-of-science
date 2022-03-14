@@ -9,7 +9,7 @@ import ChallengesStack from "~features/challenge/ChallengesStack";
 import LeaderboardStack from "~features/leaderboard/LeaderboardStack";
 import ProfileStack from "~features/profile/ProfileStack";
 import AuthContext from "~services/auth/AuthContext";
-import ContentProvider from "~services/content/ContentProvider";
+import ContentContext from "~services/content/ContentContext";
 import { t } from "~shared/i18n";
 import Permission from "~shared/permission";
 
@@ -27,6 +27,7 @@ const Tab = createMaterialBottomTabNavigator();
 
 function ContentNavigator() {
   const { user, subscribeToken, logOutUser } = React.useContext(AuthContext);
+  const { hasNewAchievements } = React.useContext(ContentContext);
   const [isModalVisible, setIsModalVisible] = React.useState(false);
 
   useSubscription(PERMISSION_SWAP, {
@@ -46,7 +47,7 @@ function ContentNavigator() {
   }, [user]);
 
   return (
-    <ContentProvider>
+    <>
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ color }) => {
@@ -71,7 +72,10 @@ function ContentNavigator() {
             />
             <Tab.Screen
               name="tab:achievements"
-              options={{ title: t("Achievements") }}
+              options={{
+                title: t("Achievements"),
+                tabBarBadge: hasNewAchievements,
+              }}
               component={AchievementStack}
             />
           </>
@@ -85,7 +89,7 @@ function ContentNavigator() {
       <Portal>
         <SwapPermissionInfo visible={isModalVisible} onDismiss={hideModal} />
       </Portal>
-    </ContentProvider>
+    </>
   );
 }
 

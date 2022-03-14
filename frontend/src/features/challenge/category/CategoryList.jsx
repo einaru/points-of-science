@@ -4,12 +4,11 @@ import { Surface, Text, TouchableRipple, withTheme } from "react-native-paper";
 
 import ContentContext from "~services/content/ContentContext";
 import { getColorsFromString } from "~shared/colors";
-import { IconImage, NoContent } from "~shared/components";
+import { IconImage, NoContent, ProgressBar } from "~shared/components";
 import { t } from "~shared/i18n";
 import Permission from "~shared/permission";
 
 import themedStyles from "./CategoryList.style";
-import ProgressBar from "./ProgressBar";
 
 function CategoryListItem({ category, user, onPress, theme }) {
   const styles = themedStyles(theme);

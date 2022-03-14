@@ -49,6 +49,7 @@ export default {
   "points": "poeng",
   "Prefer dark theme": "Foretrekk mørkt tema",
   "Profile": "Profil",
+  "Progress": "Progresjon",
   "Project info": "Prosjekt info",
   "Purpose": "Formål",
   "Reflection": "Refleksjon",

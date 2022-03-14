@@ -10,6 +10,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import AccountStack from "~features/account/AccountStack";
 import AnalyticsContext from "~services/analytics/AnalyticsContext";
 import AuthContext from "~services/auth/AuthContext";
+import ContentProvider from "~services/content/ContentProvider";
 import { LoadingScreen } from "~shared/components";
 import { t } from "~shared/i18n";
 
@@ -80,7 +81,13 @@ function Navigation({ theme }) {
           }
         }}
       >
-        {isAuthenticated ? <ContentNavigator /> : <AccountStack />}
+        {isAuthenticated ? (
+          <ContentProvider>
+            <ContentNavigator />
+          </ContentProvider>
+        ) : (
+          <AccountStack />
+        )}
       </NavigationContainer>
     </GestureHandlerRootView>
   );

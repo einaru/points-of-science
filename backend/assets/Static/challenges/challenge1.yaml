@@ -1,0 +1,43 @@
+id: z095TCsRHDjjXVtNkOJ2
+categoryID: 7E9Z37Z07xzbkfBqJg1f
+difficulty: 3
+activity:
+    description: > 
+      Det du trenger til dette eksperimentet:
+      1) Syv glass 
+      2) Matfarging i tre forskjellige farger 
+      3) Kjøkkenpapir 
+      Utførelse av eksperimentet: 
+      1) Still glassene opp på en rekke ved siden av hverandre
+      2) Fyll glass 1, 3, 5 og 7 nesten helt opp med vann
+      3) Fyll glass 2, 4 og 6 med litt vann
+      4) Velg en av matfargene dine og tilsett 5 til 10 dråper med farge i glass 1 of 7
+      5) Velg en annen farge og tilsett 15 dråper i glass 3 
+      6) Velg den siste fargen av de tre du har og tilsett 8 dråper i glass 5 
+      7) Riv av 6 ark med kjøkkenpapir og brett dem på midten 4 ganger 
+      8) Skriv ned hva du tror blir resultatet av eksperimentet og hvorfor 
+      9) Plasser ett av kjøkkenpapirene du brettet sine ender ned i glass 1 og 2, gjenta mellom glass 2 og 3, 3 og 4, osv. 
+      10) Observer hva som skjer!
+    hints: 
+      - Start med å finne ut hvilke krefter som får vannet til å bevege seg mellom koppene. 
+      - Finn ut hvordan de ulike kreftene påvirker vannet. 
+      - Hvilke rolle har molekylene til vannet i dette eksperimentet?
+    id: qBNJEPCZ3u729m2JtqJu
+    resources: 
+      - https://no.wikipedia.org/wiki/Kapillarkrefter 
+      - https://www.123homeschool4me.com/capillary-action-science-experiment_15/ 
+      - https://www.youtube.com/watch?v=9gm81GghMrk 
+      - https://www.youtube.com/watch?v=3Yybg3oSxR0&t=516s
+    type: 1
+reflection:
+    id: nfbTjkQb2LUIO1TpCwqm
+    solution: > 
+      Væsken beveger seg inn i kjøkkenpapiret og over i ett annet glass ved at molekylene i væsken trekker på hverandre.
+    title: Hvorfor beveger væsken seg fra ett glass til ett annet?
+    reflectionType: 1
+reward:
+    bonusPoints: 5
+    firstTryPoints: 2
+    id: TymTg5ADZsoAIFDYniFP
+    maxPoints: 15
+      

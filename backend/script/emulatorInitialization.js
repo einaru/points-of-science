@@ -4,6 +4,7 @@ import { getStorage } from "firebase-admin/storage";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
+import yaml from "js-yaml";
 
 const filename = fileURLToPath(import.meta.url);
 const here = dirname(filename);
@@ -132,8 +133,7 @@ function addData(collectionName, save) {
 }
 
 async function uploadFiles(filePath) {
-  const ref = await bucket.upload(filePath);
-  return ref;
+  return bucket.upload(filePath);
 }
 
 async function preprocessImage(key, obj, images) {
@@ -176,9 +176,22 @@ async function preprocessImage(key, obj, images) {
   return ref[0].publicUrl();
 }
 
+function processYaml(challenge) {
+  const filePath = path.resolve(
+    here,
+    `../assets/Static/challenges/${challenge}`
+  );
+  const fileContent = fs.readFileSync(filePath);
+  return yaml.load(fileContent);
+}
+
 async function populateData() {
   Object.keys(data).forEach((key) => {
-    data[key].forEach((obj) => {
+    data[key].forEach((obj, index) => {
+      if (key === "Challenges") {
+        obj = processYaml(obj);
+      }
+
       const promises = [getData(key)];
       if (obj.content) {
         if (obj.content.images) {

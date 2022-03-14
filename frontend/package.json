@@ -22,6 +22,7 @@
     "@react-navigation/material-bottom-tabs": "^6.0.9",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/native-stack": "^6.2.5",
+    "@sentry/react-native": "^3.3.2",
     "apollo3-cache-persist": "^0.13.0",
     "color": "3.2.0",
     "cross-fetch": "^3.1.5",
@@ -29,6 +30,7 @@
     "dotenv-expand": "^8.0.1",
     "eslint-plugin-react-native": "^4.0.0",
     "expo": "~44.0.0",
+    "expo-application": "~4.0.1",
     "expo-clipboard": "~2.1.0",
     "expo-constants": "~13.0.1",
     "expo-device": "~4.1.0",
@@ -38,6 +40,7 @@
     "expo-navigation-bar": "~1.1.1",
     "expo-secure-store": "~11.1.0",
     "expo-status-bar": "~1.2.0",
+    "expo-updates": "~0.11.6",
     "graphql": "^16.2.0",
     "graphql-ws": "^5.6.2",
     "i18n-js": "^3.8.0",
@@ -55,7 +58,8 @@
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "~3.10.1",
     "react-native-vector-icons": "^9.0.0",
-    "react-native-web": "0.17.1"
+    "react-native-web": "0.17.1",
+    "sentry-expo": "^4.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

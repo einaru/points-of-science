@@ -1,3 +1,5 @@
+import "~services/sentry";
+
 import { ApolloProvider } from "@apollo/client";
 import { StatusBar } from "expo-status-bar";
 import React from "react";

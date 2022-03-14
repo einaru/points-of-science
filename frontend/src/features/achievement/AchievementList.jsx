@@ -12,20 +12,22 @@ function AchievementList() {
   const { achievements, user } = React.useContext(ContentContext);
 
   const userAchievements = React.useMemo(
-    () => user.achievements?.map(({ id }) => id),
-    [user?.achievements]
+    () => (user.achievements ? user.achievements?.map(({ id }) => id) : []),
+    [user.achievements]
   );
 
   const userProgress = React.useMemo(
     () =>
-      user.progress?.achievements.reduce(
-        (obj, { id, progress }) => ({
-          ...obj,
-          [id]: progress,
-        }),
-        {}
-      ),
-    [user.progress?.achievements]
+      user.progress
+        ? user.progress.achievements.reduce(
+            (obj, { id, progress }) => ({
+              ...obj,
+              [id]: progress,
+            }),
+            {}
+          )
+        : {},
+    [user.progress]
   );
 
   const [info, setInfo] = React.useState();

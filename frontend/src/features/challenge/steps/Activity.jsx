@@ -6,10 +6,13 @@ import { t } from "~shared/i18n";
 import { getTimestamp } from "~shared/timestamp";
 
 import ChallengeContext from "../ChallengeContext";
+import DialogAction from "./DialogAction";
 import HeaderTitle from "./HeaderTitle";
 import HintDialog from "./HintDialog";
 import ResourceDialog from "./ResourceDialog";
 import styles from "./styles";
+
+const { DISMISS } = DialogAction;
 
 function Activity({ navigation }) {
   const dateStarted = getTimestamp();
@@ -29,7 +32,7 @@ function Activity({ navigation }) {
   const [hintIndex, setHintIndex] = React.useState(0);
   const [hintIsVisible, setHintIsVisible] = React.useState(false);
   const [hasUsedHints, setHasUsedHints] = React.useState(false);
-  const [hintResponse, setHintResponse] = React.useState(0);
+  const [hintResponse, setHintResponse] = React.useState(DISMISS);
 
   const getAHint = () => {
     const index = hintIndex < hints.length ? hintIndex : 0;
@@ -51,7 +54,7 @@ function Activity({ navigation }) {
   const { resources } = activity;
   const [resourcesIsVisible, setResourcesIsVisible] = React.useState(false);
   const [hasUsedResources, setHasUsedResources] = React.useState(false);
-  const [resourcesResponse, setResourcesResponse] = React.useState(0);
+  const [resourcesResponse, setResourcesResponse] = React.useState(DISMISS);
 
   const showResources = () => {
     setResourcesIsVisible(true);

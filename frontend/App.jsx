@@ -1,5 +1,3 @@
-import "~services/sentry";
-
 import { ApolloProvider } from "@apollo/client";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
@@ -12,6 +10,7 @@ import useApiClient from "~services/api/useApiClient";
 import AuthProvider from "~services/auth/AuthProvider";
 import PreferencesContext from "~services/preferences/PreferencesContext";
 import usePreferences from "~services/preferences/usePreferences";
+import Sentry, { ErrorScreen } from "~services/sentry";
 import { LoadingScreen } from "~shared/components";
 
 export default function App() {
@@ -26,19 +25,21 @@ export default function App() {
   }
 
   return (
-    <PreferencesContext.Provider value={preferences}>
-      <ThemeProvider theme={theme}>
-        <ApolloProvider client={client}>
-          <AuthProvider>
-            <AnalyticsProvider>
-              <SafeAreaProvider>
-                <Navigation theme={theme} />
-              </SafeAreaProvider>
-            </AnalyticsProvider>
-          </AuthProvider>
-          <StatusBar style={statusBarStyle} />
-        </ApolloProvider>
-      </ThemeProvider>
-    </PreferencesContext.Provider>
+    <Sentry.Native.ErrorBoundary fallback={ErrorScreen}>
+      <PreferencesContext.Provider value={preferences}>
+        <ThemeProvider theme={theme}>
+          <ApolloProvider client={client}>
+            <AuthProvider>
+              <AnalyticsProvider>
+                <SafeAreaProvider>
+                  <Navigation theme={theme} />
+                </SafeAreaProvider>
+              </AnalyticsProvider>
+            </AuthProvider>
+            <StatusBar style={statusBarStyle} />
+          </ApolloProvider>
+        </ThemeProvider>
+      </PreferencesContext.Provider>
+    </Sentry.Native.ErrorBoundary>
   );
 }

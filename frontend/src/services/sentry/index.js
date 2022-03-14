@@ -12,5 +12,6 @@ if (enableSentry) {
 }
 
 export const isEnabled = enableSentry;
+export { default as ErrorScreen } from "./ErrorScreen";
 
 export default Sentry;

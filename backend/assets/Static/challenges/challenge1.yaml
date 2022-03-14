@@ -29,6 +29,16 @@ activity:
       - https://www.youtube.com/watch?v=9gm81GghMrk 
       - https://www.youtube.com/watch?v=3Yybg3oSxR0&t=516s
     type: 1
+content:
+    description: > 
+      I denne utfordringen skal du studere kapillærkrefter. 
+      Kapillærkrefter kan oppstå mellom to ikke-blandbare væsker eller mellom en væske og en gass. 
+      Kapillærkrefter er årsaken til at hvis man setter et sugerør i ett tynt glass, vil høyden på væsken i sugerøret være høyere eller lavere enn nivået på væsken utenfor. 
+      Høyden på vesken i sugerøret avhenger av type væske den settes i. 
+      I dette eksperimentet kan du lære hvordan kapilærkreftene kan flytte væsker.
+    id: SCMIN2g1LV9tJPrJMkmo
+    images: []
+    title: Å få vann til å gå
 reflection:
     id: nfbTjkQb2LUIO1TpCwqm
     solution: > 

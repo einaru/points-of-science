@@ -25,7 +25,7 @@ function setTitle(reflection) {
 
 function setSolution(reflection) {
   const functionKey = "setSolution";
-  const code = (solution) => {
+  const code = (solution = "") => {
     assertTextInput(solution, "Reflection solution");
 
     reflection.solution = solution;

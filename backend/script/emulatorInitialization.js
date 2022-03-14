@@ -188,7 +188,7 @@ function processYaml(challenge) {
 async function populateData() {
   Object.keys(data).forEach((key) => {
     data[key].forEach((obj, index) => {
-      if (key === "Challenges") {
+      if (key === "Challenge") {
         obj = processYaml(obj);
       }
 

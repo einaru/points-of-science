@@ -4,6 +4,9 @@ import { expand } from "dotenv-expand";
 expand(dotenv.config());
 
 function asBool(value) {
+  if (!value) {
+    return false;
+  }
   if (typeof value === "number") {
     return value === 1;
   }

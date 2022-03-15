@@ -1,9 +1,8 @@
 import React from "react";
-import { ImageBackground, ScrollView, View } from "react-native";
-import PagerView from "react-native-pager-view";
+import { ScrollView, View } from "react-native";
 import { Button, Chip, Paragraph } from "react-native-paper";
 
-import { IconBackgroundImage } from "~shared/components";
+import { IconBackgroundImage, ImageCarousel } from "~shared/components";
 import { t } from "~shared/i18n";
 
 import ChallengeContext from "../ChallengeContext";
@@ -38,17 +37,9 @@ function Intro({ navigation }) {
   };
 
   const renderImages = () => (
-    <PagerView style={styles.pagerView}>
-      {challenge.images.map((image, index) => (
-        <ImageBackground
-          key={index.toString()}
-          style={styles.image}
-          source={{ uri: image }}
-        >
-          {renderMeta()}
-        </ImageBackground>
-      ))}
-    </PagerView>
+    <ImageCarousel images={challenge.images} height={150}>
+      {renderMeta()}
+    </ImageCarousel>
   );
 
   const renderFallbackImage = () => (

@@ -10,7 +10,7 @@ import useApiClient from "~services/api/useApiClient";
 import AuthProvider from "~services/auth/AuthProvider";
 import PreferencesContext from "~services/preferences/PreferencesContext";
 import usePreferences from "~services/preferences/usePreferences";
-import Sentry, { ErrorScreen } from "~services/sentry";
+import { ErrorBoundary, ErrorScreen } from "~services/sentry";
 import { LoadingScreen } from "~shared/components";
 
 export default function App() {
@@ -25,7 +25,7 @@ export default function App() {
   }
 
   return (
-    <Sentry.Native.ErrorBoundary fallback={ErrorScreen}>
+    <ErrorBoundary fallback={ErrorScreen}>
       <PreferencesContext.Provider value={preferences}>
         <ThemeProvider theme={theme}>
           <ApolloProvider client={client}>
@@ -40,6 +40,6 @@ export default function App() {
           </ApolloProvider>
         </ThemeProvider>
       </PreferencesContext.Provider>
-    </Sentry.Native.ErrorBoundary>
+    </ErrorBoundary>
   );
 }

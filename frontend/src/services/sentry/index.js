@@ -1,5 +1,6 @@
 import Constants from "expo-constants";
-import * as Sentry from "sentry-expo";
+
+import Sentry from "./sentry";
 
 const { sentryDSN, enableSentry } = Constants.manifest.extra;
 
@@ -19,5 +20,6 @@ if (!isJestTest && enableSentry) {
 
 export const isEnabled = enableSentry;
 export { default as ErrorScreen } from "./ErrorScreen";
+export { ErrorBoundary } from "./sentry";
 
 export default Sentry;

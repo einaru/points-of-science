@@ -2,7 +2,7 @@ import { useMutation } from "@apollo/client";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import * as Clipboard from "expo-clipboard";
 import React from "react";
-import { Dimensions, ScrollView, View } from "react-native";
+import { ScrollView, View, useWindowDimensions } from "react-native";
 import { Avatar, Divider, List, Snackbar, Switch } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -17,11 +17,11 @@ import { t } from "~shared/i18n";
 import LOGOUT from "./Profile.gql";
 import styles from "./Profile.style";
 
-const WINDOW_WIDTH = Dimensions.get("window").width;
-
 function Profile() {
   const navigation = useNavigation();
   const route = useRoute();
+
+  const { width: windowWidth } = useWindowDimensions();
 
   const [visibleSnackbar, setVisibleSnackbar] = React.useState(false);
   const showSnackbar = () => setVisibleSnackbar(true);
@@ -49,7 +49,7 @@ function Profile() {
     return (
       <View style={styles.avatarContainer}>
         <Avatar.Text
-          size={WINDOW_WIDTH / 3}
+          size={windowWidth / 4}
           label={initials}
           color={fgColor.string()}
           style={[styles.avatar, { backgroundColor: bgColor.string() }]}

@@ -4,9 +4,9 @@ import React from "react";
 import {
   Animated,
   BackHandler,
-  Dimensions,
   ScrollView,
   View,
+  useWindowDimensions,
 } from "react-native";
 import {
   Button,
@@ -35,6 +35,7 @@ const Direction = {
 
 function Completed({ navigation, theme }) {
   const { challenge, userData } = React.useContext(ChallengeContext);
+  const { width: windowWidth } = useWindowDimensions();
 
   const [points, setPoints] = React.useState(0);
   const [bonusPoints, setBonusPoints] = React.useState(0);
@@ -179,7 +180,7 @@ function Completed({ navigation, theme }) {
                       {
                         translateX: slideFrom.interpolate({
                           inputRange: [0, 1],
-                          outputRange: [-Dimensions.get("window").width, 0],
+                          outputRange: [-windowWidth, 0],
                         }),
                       },
                     ],

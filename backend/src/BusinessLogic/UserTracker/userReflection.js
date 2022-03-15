@@ -23,7 +23,7 @@ function updateData(userReflection) {
 function checkAnswer(userReflection) {
   const functionKey = "checkAnswer";
   const code = (reflection) => {
-    if (reflection.solution.trim().length === 0) {
+    if (reflection.solution.length === 0) {
       return true;
     }
 

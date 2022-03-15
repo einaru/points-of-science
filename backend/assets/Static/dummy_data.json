@@ -936,5 +936,196 @@
       "id": "pTIETOOCSI0gjDqpxkYy"
     }
   ],
-  "Challenge": ["challenge1.yaml", "challenge2.yaml", "challenge3.yaml", "challenge4.yaml", "challenge5.yaml", "challenge6.yaml"]
+  "Challenge": ["challenge1.yaml", "challenge2.yaml", "challenge3.yaml", "challenge4.yaml", "challenge5.yaml", "challenge6.yaml"],
+  "Achievements": [
+    {
+      "condition": [""],
+      "content": {
+        "description": "Fullfør alle kategoriene",
+        "image": "",
+        "title": "100% Gjennomført"
+      },
+      "type": 1
+    },
+    {
+      "condition": [""],
+      "content": {
+        "description": "Fullfør alle utfordringer i kategorien ...",
+        "image": "",
+        "title": "Kategorisk"
+      },
+      "type": 1
+    },
+    {
+      "condition": [""],
+      "content": {
+        "description": "Fullfør alle utfordringer i kategorien ...",
+        "image": "",
+        "title": "Samleren"
+      },
+      "type": 1
+    },
+    {
+      "condition": [""],
+      "content": {
+        "description": "Fullfør alle utfordringer i kategorien ...",
+        "image": "",
+        "title": "Støvsuger alt"
+      },
+      "type": 1
+    },
+    {
+      "condition": [""],
+      "content": {
+        "description": "Fullfør alle utfordringer i kategorien ...",
+        "image": "",
+        "title": "Medaljisten"
+      },
+      "type": 1
+    },
+    {
+      "condition": [""],
+      "content": {
+        "description": "Fullfør alle utfordringer i kategorien ...",
+        "image": "",
+        "title": "Mye vil ha mer"
+      },
+      "type": 1
+    },
+    {
+      "condition": [""],
+      "content": {
+        "description": "Fullfør alle utfordringer med nivået nybegynner.",
+        "image": "",
+        "title": "En enkel utfordring"
+      },
+      "type": 1
+    },
+    {
+      "condition": [""],
+      "content": {
+        "description": "Fullfør alle utfordringer i kategorien ... med nivået nybegynner.",
+        "image": "",
+        "title": "Ikke en nybegynner feil"
+      },
+      "type": 1
+    },
+    {
+      "condition": [""],
+      "content": {
+        "description": "Fullfør alle utfordringer i kategorien ... med nivået nybegynner.",
+        "image": "",
+        "title": "Begynn med det grunnleggende"
+      },
+      "type": 1
+    },
+    {
+      "condition": [""],
+      "content": {
+        "description": "Fullfør alle utfordringer i kategorien ... med nivået nybegynner.",
+        "image": "",
+        "title": "En solid grunnmur"
+      },
+      "type": 1
+    },
+    {
+      "condition": [""],
+      "content": {
+        "description": "Fullfør alle utfordringer i kategorien ... med nivået nybegynner.",
+        "image": "",
+        "title": "Alle må begynne en plass"
+      },
+      "type": 1
+    },
+    {
+      "condition": [""],
+      "content": {
+        "description": "Fullfør alle utfordringer med nivået viderekommen.",
+        "image": "",
+        "title": "Det neste steget"
+      },
+      "type": 1
+    },
+    {
+      "condition": [""],
+      "content": {
+        "description": "Fullfør alle utfordringer i kategorien ... med nivået viderekommen.",
+        "image": "",
+        "title": "Kunnskapstørst"
+      },
+      "type": 1
+    },
+    {
+      "condition": [""],
+      "content": {
+        "description": "Fullfør alle utfordringer i kategorien ... med nivået viderekommen.",
+        "image": "",
+        "title": "Veien videre"
+      },
+      "type": 1
+    },
+    {
+      "condition": [""],
+      "content": {
+        "description": "Fullfør alle utfordringer i kategorien ... med nivået viderekommen.",
+        "image": "",
+        "title": "Takler en utfordring"
+      },
+      "type": 1
+    },
+    {
+      "condition": [""],
+      "content": {
+        "description": "Fullfør alle utfordringer i kategorien ... med nivået viderekommen.",
+        "image": "",
+        "title": "Fra viderekommen til fullkommen"
+      },
+      "type": 1
+    },
+    {
+      "condition": [""],
+      "content": {
+        "description": "Fullfør alle utfordringer med nivået ekspert.",
+        "image": "",
+        "title": "Det neste steg"
+      },
+      "type": 1
+    },
+    {
+      "condition": [""],
+      "content": {
+        "description": "Fullfør alle utfordringer i kategorien ... med nivået ekspert.",
+        "image": "",
+        "title": "Gjennomkjørt"
+      },
+      "type": 1
+    },
+    {
+      "condition": [""],
+      "content": {
+        "description": "Fullfør alle utfordringer i kategorien ... med nivået ekspert.",
+        "image": "",
+        "title": "Kunnskapsgenerator"
+      },
+      "type": 1
+    },
+    {
+      "condition": [""],
+      "content": {
+        "description": "Fullfør alle utfordringer i kategorien ... med nivået ekspert.",
+        "image": "",
+        "title": "Ekspertise"
+      },
+      "type": 1
+    },
+    {
+      "condition": [""],
+      "content": {
+        "description": "Fullfør alle utfordringer i kategorien ... med nivået ekspert.",
+        "image": "",
+        "title": "Bezzerwizzer"
+      },
+      "type": 1
+    }
+  ]
 }

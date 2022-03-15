@@ -10,12 +10,6 @@ import { LOG_DEVICE_INFO, LOG_EVENT } from "./AnalyticsProvider.gql";
 import deviceInfo from "./deviceInfo";
 import extractMetadata from "./extractMetadata";
 
-function debug(tag, data) {
-  if (__DEV__) {
-    console.debug(`[${tag}]: ${JSON.stringify(data)}`);
-  }
-}
-
 function AnalyticsProvider({ children }) {
   const [isDeviceInfoLogged, setIsDeviceInfoLogged] = React.useState(false);
   const { sessionToken } = React.useContext(AuthContext);
@@ -29,7 +23,6 @@ function AnalyticsProvider({ children }) {
   const doLogEvent = React.useCallback(
     (event) => {
       logEvent({ variables: { sessionToken, event } });
-      debug("click-event", event);
     },
     [logEvent, sessionToken]
   );
@@ -42,7 +35,6 @@ function AnalyticsProvider({ children }) {
 
   const doLogDeviceInfo = React.useCallback(() => {
     logDeviceInfo({ variables: { sessionToken, deviceInfo } });
-    debug("device-info", deviceInfo);
     setIsDeviceInfoLogged(true);
   }, [logDeviceInfo, sessionToken]);
 

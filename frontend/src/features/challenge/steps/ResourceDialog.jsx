@@ -15,7 +15,6 @@ export default function ResourceDialog({ resources, visible, onDismiss }) {
 
   const openResource = (url) => {
     Linking.openURL(url);
-    console.debug(`Opening resource ${url}`);
   };
 
   return (

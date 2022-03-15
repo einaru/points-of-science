@@ -1,7 +1,9 @@
+import { useRoute } from "@react-navigation/native";
 import React from "react";
 import { ScrollView, View } from "react-native";
 import { Button, Paragraph, Portal } from "react-native-paper";
 
+import AnalyticsContext from "~services/analytics/AnalyticsContext";
 import { t } from "~shared/i18n";
 import { getTimestamp } from "~shared/timestamp";
 
@@ -16,7 +18,9 @@ const { DISMISS } = DialogAction;
 
 function Activity({ navigation }) {
   const dateStarted = getTimestamp();
+  const route = useRoute();
 
+  const { logClickEvent } = React.useContext(AnalyticsContext);
   const { challenge, setActivityData } = React.useContext(ChallengeContext);
   const { activity } = challenge;
 
@@ -41,12 +45,14 @@ function Activity({ navigation }) {
   };
 
   const showHint = () => {
+    logClickEvent(route, "Hints dialog opened");
     getAHint();
     setHintIsVisible(true);
     setHasUsedHints(true);
   };
 
   const onHideHint = (action) => {
+    logClickEvent(route, `Hints dialog dismissed: ${action}`);
     setHintIsVisible(false);
     setHintResponse(action);
   };
@@ -57,13 +63,19 @@ function Activity({ navigation }) {
   const [resourcesResponse, setResourcesResponse] = React.useState(DISMISS);
 
   const showResources = () => {
+    logClickEvent(route, "Resources dialog opened");
     setResourcesIsVisible(true);
     setHasUsedResources(true);
   };
 
   const onHideResources = (action) => {
+    logClickEvent(route, `Resources dialog dismissed: ${action}`);
     setResourcesIsVisible(false);
     setResourcesResponse(action);
+  };
+
+  const onResourceVisited = (resource) => {
+    logClickEvent(route, `Resource visited: ${resource}`);
   };
 
   React.useLayoutEffect(() => {
@@ -113,6 +125,7 @@ function Activity({ navigation }) {
           resources={resources}
           visible={resourcesIsVisible}
           onDismiss={onHideResources}
+          onResourceVisited={onResourceVisited}
         />
       </Portal>
     </View>

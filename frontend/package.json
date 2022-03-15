@@ -22,6 +22,7 @@
     "@react-navigation/material-bottom-tabs": "^6.0.9",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/native-stack": "^6.2.5",
+    "@sentry/react": "^6.18.2",
     "@sentry/react-native": "^3.3.2",
     "apollo3-cache-persist": "^0.13.0",
     "color": "3.2.0",

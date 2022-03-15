@@ -10,10 +10,10 @@ import useApiClient from "~services/api/useApiClient";
 import AuthProvider from "~services/auth/AuthProvider";
 import PreferencesContext from "~services/preferences/PreferencesContext";
 import usePreferences from "~services/preferences/usePreferences";
-import { ErrorBoundary, ErrorScreen } from "~services/sentry";
+import Sentry, { ErrorBoundary, ErrorScreen } from "~services/sentry";
 import { LoadingScreen } from "~shared/components";
 
-export default function App() {
+function App() {
   const client = useApiClient();
   const preferences = usePreferences();
 
@@ -43,3 +43,5 @@ export default function App() {
     </ErrorBoundary>
   );
 }
+
+export default Sentry.wrap(App);

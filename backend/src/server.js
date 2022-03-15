@@ -35,7 +35,7 @@ app.use(
   graphqlHTTP((req, res, params) => {
     return {
       schema,
-      graphiql: true,
+      graphiql: false,
       context: {
         user: req.user,
         providers,

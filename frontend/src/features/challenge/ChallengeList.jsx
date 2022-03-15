@@ -1,5 +1,5 @@
 import React from "react";
-import { ImageBackground, ScrollView, View } from "react-native";
+import { FlatList, ImageBackground, View } from "react-native";
 import {
   Chip,
   Surface,
@@ -124,26 +124,26 @@ function ChallengeList({ route, navigation, theme }) {
 
   const styles = themedStyles(theme);
 
+  const renderChallenge = ({ item: challenge }) => (
+    <ChallengeListItem
+      challenge={challenge}
+      user={user}
+      theme={theme}
+      onPress={() => {
+        navigation.navigate("challenge:main", {
+          challenge,
+        });
+      }}
+    />
+  );
+
   return (
-    <ScrollView>
-      <View style={styles.list}>
-        {challenges.map((challenge) => {
-          return (
-            <ChallengeListItem
-              key={challenge.id}
-              challenge={challenge}
-              user={user}
-              theme={theme}
-              onPress={() => {
-                navigation.navigate("challenge:main", {
-                  challenge,
-                });
-              }}
-            />
-          );
-        })}
-      </View>
-    </ScrollView>
+    <FlatList
+      contentContainerStyle={styles.list}
+      data={challenges}
+      renderItem={renderChallenge}
+      keyExtractor={(item) => item.id}
+    />
   );
 }
 

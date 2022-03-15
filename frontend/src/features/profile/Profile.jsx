@@ -9,6 +9,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import AnalyticsContext from "~services/analytics/AnalyticsContext";
 import AuthContext from "~services/auth/AuthContext";
 import PreferencesContext from "~services/preferences/PreferencesContext";
+import Sentry from "~services/sentry";
 import { getColorsFromString } from "~shared/colors";
 import { LoadingScreen } from "~shared/components";
 import { t } from "~shared/i18n";
@@ -39,7 +40,7 @@ function Profile() {
 
   const [logOut, { loading, client }] = useMutation(LOGOUT, {
     onError: (error) => {
-      console.debug("Error login out:", error.message);
+      Sentry.captureException(error);
     },
   });
 

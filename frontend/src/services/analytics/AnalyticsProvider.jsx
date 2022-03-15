@@ -2,6 +2,7 @@ import { useMutation } from "@apollo/client";
 import React from "react";
 
 import AuthContext from "~services/auth/AuthContext";
+import Sentry from "~services/sentry";
 import { getTimestamp } from "~shared/timestamp";
 
 import AnalyticsContext from "./AnalyticsContext";
@@ -21,7 +22,7 @@ function AnalyticsProvider({ children }) {
 
   const [logEvent] = useMutation(LOG_EVENT, {
     onError: (error) => {
-      console.debug("Error logging click event:", error);
+      Sentry.captureException(error);
     },
   });
 
@@ -35,7 +36,7 @@ function AnalyticsProvider({ children }) {
 
   const [logDeviceInfo] = useMutation(LOG_DEVICE_INFO, {
     onError: (error) => {
-      console.debug("Error logging device info:", error);
+      Sentry.captureException(error);
     },
   });
 

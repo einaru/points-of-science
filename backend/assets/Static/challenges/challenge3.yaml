@@ -2,36 +2,42 @@ id: 9nYnavMPlPq98031tuMT
 categoryID: 7E9Z37Z07xzbkfBqJg1f
 difficulty: 2
 activity:
-    description: > 
-      Det du trenger til dette eksperimentet: 
-      1) Ett høyt glass eller ett Norgesglass 
-      2) Matfarging i forskjellige farger for å gjøre væskene forskjellige i farge for lettere å studere resultatet
-      3) Honning 
-      4) Sirup 
-      5) Zalo 
-      6) Vann med matfarging 
-      7) Vegetabilsk olje 
-      Utførelse av eksperimentet: 
-      1) Legg honning i bunn av glasset, men ikke få honning på sidene 
-      2) Bland sirup med en matfarge og legg sirupen forsiktig oppå honningen for å unngå at de blandes 
-      3) Legg Zalo oppå sirupen og unngå å få Zalo på siden av glasset 
-      4) Bland vann og matfarge, og drypp vannet langs veggen på innsiden av glasset. Det skal legge seg som ett lag på toppen av Zaloen 
-      5) Legg til den vegetabilske oljen på toppen av vannet ved å dryppe den ned langs siden av glasset 
-      7) Finn en mutter, en cherry tomat, en klinkekule eller andre gjenstander du vil teste. 
-      8) Skriv ned hypotesene dine for hvor gjestandene vil legge seg i den lagvise strukturen og hvilke gjenstander du valgte som du tror har mer massetetthet enn en annen av gjenstandene 
-      9) Slipp en og en gjenstand ned i den lagvise strukturen og observer hva som skjer!
-    hints: 
-      - Hvis du kun vurderer væskene i glasset, kan du rangere hvilke væske som har høyest til lavest massetetthet? 
-      - Hvis cherry tomaten stanser i laget med Zalo betyr det at de har veldig lik massetetthet. 
+    description: |
+      # Det du trenger til dette eksperimentet
+
+      - Ett høyt glass eller ett Norgesglass
+      - Matfarging i forskjellige farger for å gjøre væskene forskjellige i farge for lettere å studere resultatet
+      - Honning
+      - Sirup
+      - Zalo
+      - Vann med matfarging
+      - Vegetabilsk olje
+
+      # Utførelse av eksperimentet
+
+      1. Legg honning i bunn av glasset, men ikke få honning på sidene.
+      2. Bland sirup med en matfarge og legg sirupen forsiktig oppå honningen for å unngå at de blandes.
+      3. Legg Zalo oppå sirupen og unngå å få Zalo på siden av glasset.
+      4. Bland vann og matfarge, og drypp vannet langs veggen på innsiden av glasset. Det skal legge seg som ett lag på toppen av Zaloen.
+      5. Legg til den vegetabilske oljen på toppen av vannet ved å dryppe den ned langs siden av glasset.
+      7. Finn en mutter, en cherry tomat, en klinkekule eller andre gjenstander du vil teste.
+      8. Skriv ned hypotesene dine for hvor gjenstandene vil legge seg i den lagvise strukturen og hvilke gjenstander du valgte som du tror har mer massetetthet enn en annen av gjenstandene.
+      9. Slipp en og en gjenstand ned i den lagvise strukturen og observer hva som skjer!
+    hints:
+      - Hvis du kun vurderer væskene i glasset, kan du rangere hvilke væske som har høyest til lavest massetetthet?
+      - Hvis cherry tomaten stanser i laget med Zalo betyr det at de har veldig lik massetetthet.
       - Hvis du vet at en væske har høyere massetetthet enn en annen, hva kan du da si om massetettheten til to gjenstander som legger seg i to ulike lag?
     id: KKf5WPRCCxejtYufoHRL,
-    resources: 
+    resources:
       - https://www.youtube.com/watch?v=KgZ7JtmOgHI
     type: 1
 content:
-    description: > 
-      Som vi har sett i ett av de andre eksperimentene med vann kan temperatur påvirke massetetthet til en væske, men også type væske har forskjellig massetetthet.
-      I dette eksperimentet kan du lære om massetetthet til forskjellige væsker og hvordan du kan bruke denne kunnskapen til å kunne forklare massetettheten til andre gjenstander.
+    description: >
+      Som vi har sett i ett av de andre eksperimentene med vann kan temperatur
+      påvirke massetetthet til en væske, men også type væske har forskjellig
+      massetetthet. I dette eksperimentet kan du lære om massetetthet til
+      forskjellige væsker og hvordan du kan bruke denne kunnskapen til å kunne
+      forklare massetettheten til andre gjenstander.
     id: cxJY5vD0f5erc5vtSq62
     images: []
     title: Lag på lag

@@ -1,8 +1,12 @@
 import React from "react";
 import { ScrollView, View } from "react-native";
-import { Button, Chip, Paragraph } from "react-native-paper";
+import { Button, Chip } from "react-native-paper";
 
-import { IconBackgroundImage, ImageCarousel } from "~shared/components";
+import {
+  IconBackgroundImage,
+  ImageCarousel,
+  MarkdownView,
+} from "~shared/components";
 import { t } from "~shared/i18n";
 
 import ChallengeContext from "../ChallengeContext";
@@ -59,7 +63,7 @@ function Intro({ navigation }) {
       <ScrollView contentContainerStyle={styles.scroll}>
         {hasImages ? renderImages() : renderFallbackImage()}
         <View style={styles.content}>
-          <Paragraph>{challenge.description}</Paragraph>
+          <MarkdownView>{challenge.description}</MarkdownView>
         </View>
       </ScrollView>
       <Button

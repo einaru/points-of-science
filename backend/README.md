@@ -11,7 +11,7 @@ The application runs on [Node.js][] and uses [Firestore][] to persist data. It u
 [Firestore]: https://cloud.google.com/firestore
 [Redis]: https://redis.io
 
-### Development mode
+### Firebase emulators
 
 In order to run the application in development mode you must first install the
 [Firebase Emulator Suite][]. Start by installing the [Firebase CLI][]:
@@ -30,88 +30,78 @@ the emulators by running
 
     firebase emulators:start
 
-In order to connect the the backend application to the Firebase Emulator, you
-must remember to set the `FIRESTORE_EMULATOR_HOST` variable. You can set this
-variable in a `.env` file or export in on the command line:
+In order to connect the backend application to the Firebase emulators, you must
+remember to set the `FIRESTORE_EMULATOR_HOST`,
+`FIREBASE_STORAGE_EMULATOR_HOST`, and `GOOGLE_STORAGE_BUCKET` variables. You
+can set this variable in a `.env` file or export in on the command line:
 
 ```bash
 export FIRESTORE_EMULATOR_HOST=localhost:8080
+export FIREBASE_STORAGE_EMULATOR_HOST=localhost:9199
+export GOOGLE_STORAGE_BUCKET="Your Google project ID"
 ```
 
-When the emulator starts you can run a script which will populate the emulator for you the
-first time. The script is located in the script folder. To run the script, enter the following 
-into a terminal:
+When the emulator starts you can run a script which will populate the emulator
+for you the first time. The script is located in the script folder. To run the
+script, enter the following into a terminal:
 
-```
-node .\script\emulatorInitialization.js
-```
+    node .\script\emulatorInitialization.js
 
-If this is not the first time you start the emulator, it can be populated from the previously exported data
-which assumes you ran the firebase export command the first time you shut down, 
-the following command will import the latest exported data and export on exit:
+If this is not the first time you start the emulator, it can be populated from
+the previously exported data which assumes you ran the firebase export command
+the first time you shut down, the following command will import the latest
+exported data and export on exit:
 
-```
-yarn firestore
-```
+    yarn firestore
 
-You also need to install redis-server before you can hoste the application on your local machine.
-If you have a PC with Windows as OS, you will need to install Windows Subsystem for Linux for the backend to work.
-[WSL]: https://docs.microsoft.com/en-us/windows/wsl/install 
+Remember to create a new folder in ./assets/Static which should be named
+`seed`. This folder must exist before proceeding with exporting of data from
+Firestore emulator.
 
-Once WSL is installed run the following command to initialize WSL in a terminal:
-```
-wsl
-```
+Before shutting down the Firestore emulator for the first time you will have to
+export the stored data in the emulator. To do so, run the following command in
+a terminal:
 
-Once WSL is running in the terminal you can type the following commands for Ubuntu into the terminal:
-```
-sudo add-apt-repository ppa:redislabs/redis
-sudo apt-get update
-sudo apt-get install redis
-```
+    firebase emulators:export ./assets/Static/seed
 
-When Redis is finished installing, you could type the following command in to the terminal:
-```
-sudo service redis-server start
-```
+### Redis
 
-To stop the Redis server when you are finished with development, type the following command into the terminal:
-```
-sudo service redis-server stop
-```
+You also need to install redis-server before you can hoste the application on
+your local machine. If you have a PC with Windows as OS, you will need to
+install [Windows Subsystem for Linux][] for the backend to work. Once
+installed, run the following command in a terminal to initialize it:
 
-You should also remember to set secret keys for both access, refresh, and subscribe tokens.
-These secrets can be set in the `.env` file as well:
+    wsl
 
-```env
-ACCESS_TOKEN_SECRET=SuPeRsEcReT
-REFRESH_TOKEN_SECRET=EvEnMoReSeCrEt
-SUBSCRIBE_TOKEN_SECRET=<secret_token>
-```
+[Windows Subsystem for Linux]: https://docs.microsoft.com/en-us/windows/wsl/install
 
-Remember to create a new folder in ./assets/Static which should be named "seed". 
-This folder must exist before proceeding with exporting of data from Firestore emulator. 
+Once WSL is running in the terminal you can type the following commands for
+Ubuntu into the terminal:
 
-Before shutting down the Firestore emulator for the first time you will have to export the stored data
-in the emulator. To do so, run the following command in a terminal:
+    sudo add-apt-repository ppa:redislabs/redis
+    sudo apt-get update
+    sudo apt-get install redis
 
-```
-firebase emulators:export ./assets/Static/seed
-```
+When Redis is finished installing, you could type the following command in to
+the terminal:
 
-To enable the Storage Emulator, change directory until you are in /backend directory and type the following into a terminal:
+    sudo service redis-server start
 
-```
-firebase init storage
-```
+To stop the Redis server when you are finished with development, type the
+following command into the terminal:
 
-This will install and enable the Storage Emulator.
+    sudo service redis-server stop
 
-Now you need to add two more environment variables in the `.env` file:
+### Running the application
 
-```env
-FIREBASE_STORAGE_EMULATOR_HOST = localhost:9199
-GOOGLE_STORAGE_BUCKET = <your_google_project_id>
+You should also remember to set secret keys for both access, refresh, and
+subscribe tokens. These secrets can be set in the `.env` file or exported on
+the command line:
+
+```bash
+export ACCESS_TOKEN_SECRET=SuPeRsEcReT
+export REFRESH_TOKEN_SECRET=EvEnMoReSeCrEt
+export SUBSCRIBE_TOKEN_SECRET=UnBeLiEvAbLySeCrEt
 ```
 
 Now you should be able run `yarn dev` to fire up the application.
@@ -140,37 +130,25 @@ You should now be able to run `yarn start` to fire up the application.
 
 ### Testing
 
-To run unit tests, make sure you have followed the instruction under the section Development Mode of this README file 
-before you proceed.
+To start with testing the initial data must have been exported once manually by
+first populating the Firestore emulator and run the following command:
 
-To start with testing the initial data must have been exported once manually by first populating the Firestore emulator and ran 
-the following command:
+    firebase emulators:export ./assets/Static/test
 
-```
-firebase emulators:export ./assets/Static/test
-```
+If the initial data is exported correctly, then from now on you can run the
+following command in a terminal before you start running the test to import the
+initial test data:
 
-If the initial data is exported correctly, then from now on you can run the following command in a terminal before you
-start running the test to import the initial test data:
-
-```
-yarn firestore:test
-```
+    yarn firestore:test
 
 To run a all tests you can run the following command in a terminal:
 
-```
-yarn test:firestore
-```
+    yarn test:firestore
 
 To run tests in a single file you can run the following command:
 
-```
-yarn test:firestore <name_of_file>
-```
+    yarn test:firestore <name_of_file>
 
 To run test with coverage report, run the following command:
 
-```
-yarn test:firestore:coverage
-```
+    yarn test:firestore:coverage

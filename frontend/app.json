@@ -15,7 +15,10 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "assets/*",
+      "src/shared/assets/**/*"
+    ],
     "ios": {
       "bundleIdentifier": "no.uvslokk.msc.ScienceApp",
       "supportsTablet": true

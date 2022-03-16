@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, Platform, ScrollView, View } from "react-native";
+import { Platform, ScrollView, View, useWindowDimensions } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Text, TextInput, withTheme } from "react-native-paper";
 
@@ -10,6 +10,7 @@ import styles from "./OpenReflection.style";
 
 function OpenReflection({ title, onChange, theme }) {
   const [text, setText] = React.useState("");
+  const { width: windowWidth } = useWindowDimensions();
 
   const handleChange = (value) => {
     setText(value);
@@ -17,10 +18,9 @@ function OpenReflection({ title, onChange, theme }) {
   };
 
   const renderContent = () => {
-    const window = Dimensions.get("window");
     return (
       <View style={styles.content}>
-        <HeroImage name="science" size={window.width - 16} />
+        <HeroImage name="science" size={windowWidth - 16} />
         <Text style={styles.title}>{title}</Text>
         <TextInput
           multiline

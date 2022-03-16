@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, FlatList } from "react-native";
+import { FlatList, useWindowDimensions } from "react-native";
 import { Portal } from "react-native-paper";
 
 import ContentContext from "~services/content/ContentContext";
@@ -10,6 +10,7 @@ import AchievementInfo from "./AchievementInfo";
 
 function AchievementList() {
   const { achievements, user } = React.useContext(ContentContext);
+  const { width: windowWidth } = useWindowDimensions();
 
   const userAchievements = React.useMemo(
     () => (user.achievements ? user.achievements?.map(({ id }) => id) : []),
@@ -39,7 +40,6 @@ function AchievementList() {
   const numColumns = 4;
   const numGutters = numColumns + 1;
   const gutterSize = 8;
-  const windowWidth = Dimensions.get("window").width;
   const avatarSize = (windowWidth - gutterSize * numGutters) / numColumns;
 
   const showAchievementInfo = (item) => {

@@ -20,7 +20,6 @@ const tabIconMap = {
   "tab:challenges": "lightbulb-on",
   "tab:leaderboards": "trophy",
   "tab:achievements": "medal",
-  "tab:dashboard": "view-dashboard",
   "tab:profile": "account",
 };
 const Tab = createMaterialBottomTabNavigator();

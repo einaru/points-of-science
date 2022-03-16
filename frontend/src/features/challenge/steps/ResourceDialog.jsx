@@ -6,7 +6,12 @@ import { t } from "~shared/i18n";
 
 import DialogAction from "./DialogAction";
 
-export default function ResourceDialog({ resources, visible, onDismiss }) {
+export default function ResourceDialog({
+  resources,
+  visible,
+  onDismiss,
+  onResourceVisited,
+}) {
   // FIXME Remove/adjust once the resource structure is updated in backend
   const getResourceTitle = (resource) => {
     const title = resource.replace(/^https?:\/\//, "");
@@ -14,8 +19,8 @@ export default function ResourceDialog({ resources, visible, onDismiss }) {
   };
 
   const openResource = (url) => {
+    onResourceVisited(url);
     Linking.openURL(url);
-    console.debug(`Opening resource ${url}`);
   };
 
   return (

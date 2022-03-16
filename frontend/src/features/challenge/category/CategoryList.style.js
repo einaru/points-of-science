@@ -5,8 +5,7 @@ const itemHeight = 104;
 export default function themedStyles(theme) {
   return StyleSheet.create({
     list: {
-      flex: 1,
-      margin: 8,
+      padding: 8,
     },
     surface: {
       borderRadius: theme.roundness,

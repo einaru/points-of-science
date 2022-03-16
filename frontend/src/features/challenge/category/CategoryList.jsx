@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, View } from "react-native";
+import { FlatList, Image, View } from "react-native";
 import { Surface, Text, TouchableRipple, withTheme } from "react-native-paper";
 
 import ContentContext from "~services/content/ContentContext";
@@ -90,25 +90,27 @@ function CategoryList({ navigation, theme }) {
 
   const styles = themedStyles(theme);
 
+  const renderCategory = ({ item: category }) => (
+    <CategoryListItem
+      category={category}
+      user={user}
+      theme={theme}
+      onPress={() => {
+        navigation.navigate("category:challenge-list", {
+          category,
+          user,
+        });
+      }}
+    />
+  );
+
   return (
-    <View style={styles.list}>
-      {categories.map((category) => {
-        return (
-          <CategoryListItem
-            key={category.id}
-            category={category}
-            user={user}
-            theme={theme}
-            onPress={() => {
-              navigation.navigate("category:challenge-list", {
-                category,
-                user,
-              });
-            }}
-          />
-        );
-      })}
-    </View>
+    <FlatList
+      contentContainerStyle={styles.list}
+      data={categories}
+      renderItem={renderCategory}
+      keyExtractor={(item) => item.id}
+    />
   );
 }
 

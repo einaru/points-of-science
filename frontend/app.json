@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "frontend",
-    "slug": "msc-mobile-app",
+    "name": "Science App",
+    "slug": "msc-science-app",
     "version": "1.0.0",
     "sdkVersion": "44.0.0",
     "orientation": "portrait",

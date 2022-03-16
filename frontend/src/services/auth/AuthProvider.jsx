@@ -1,6 +1,7 @@
 import { useApolloClient } from "@apollo/client";
 import React from "react";
 
+import Sentry from "~services/sentry";
 import * as Storage from "~services/storage";
 
 import AuthContext from "./AuthContext";
@@ -42,7 +43,7 @@ function AuthProvider({ children }) {
             logInUser(user, accessToken, refreshToken, subscribeToken);
           })
           .catch((error) => {
-            console.debug(error.message);
+            Sentry.captureException(error);
             client.clearStore();
             logOutUser();
           });

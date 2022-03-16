@@ -16,6 +16,7 @@ import {
   withTheme,
 } from "react-native-paper";
 
+import Sentry from "~services/sentry";
 import {
   HeroBackgroundImage,
   LoadingScreen,
@@ -41,7 +42,7 @@ function Completed({ navigation, theme }) {
     ADD_USER_CHALLENGE,
     {
       onError: (error) => {
-        console.debug("Error adding user challenge:", error);
+        Sentry.captureException(error);
       },
       onCompleted: (data) => {
         if (data?.addUserChallenge.reward) {
@@ -106,7 +107,7 @@ function Completed({ navigation, theme }) {
   const [isRated, setIsRated] = React.useState(false);
   const [addChallengeRating] = useMutation(ADD_USER_CHALLENGE_RATING, {
     onError: (error) => {
-      console.debug(error);
+      Sentry.captureException(error);
     },
   });
 

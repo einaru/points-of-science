@@ -937,7 +937,7 @@
     }
   ],
   "Challenge": ["challenge1.yaml", "challenge2.yaml", "challenge3.yaml", "challenge4.yaml", "challenge5.yaml", "challenge6.yaml"],
-  "Achievements": [
+  "Achievement": [
     {
       "condition": [""],
       "content": {

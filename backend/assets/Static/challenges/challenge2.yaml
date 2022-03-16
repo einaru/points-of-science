@@ -2,37 +2,41 @@ id: uhQTzXWaocEFAQOxl5dT
 categoryID: 7E9Z37Z07xzbkfBqJg1f
 difficulty: 1
 activity:
-  description: > 
-    Det du trenger til dette eksperimentet: 
-    1) Minimum to Norgesglass 
-    2) Matfarging i to forskjellige farger 
-    3) Ett laminert kort som er litt større enn åpningen på Norgesglasset 
-    4) Varmt og kaldt vann 
-    Utførelse av eksperimentet: 
-    1) Kok opp vann, men ikke kok det så varmt at man kan brenne seg 
-    2) Fyll opp en mugge med vann og ta isbiter i vannet og vent til det blir kaldt 
-    3) Skriv ned hva du resultatet av eksperimentet blir og hvorfor 
-    4) Velg en av matfargene dine og tilsett 8 dråper i det kalde vannet 
-    5) Hell det kaldet vannet opp i ett av Norgesglassene slik at vannet er fylt opp helt til kanten, men ikke flyter over 
-    6) Velg en av matfargene dine og tilsett 8 dråper i det varme vannet. 
-    7) Hell varmt vann over i det andre Norgesglasset slik at det fylles helt opp til kanten 
-    8) Legg det laminerte kortet over åpningen til Norgesglasset med varmt vann i. Kortet skal forhindre at vann renner ut når du skal snu glasset 
-    9) Press det laminerte kortet mot åpningen slik ikke varmt vann renner 
-    10) Snu Norgesglasset med varmt vann opp ned og plasser åpningen på glasset oppå åpningen til Norgesglasset med kaldt vann i 
-    11) Dra det laminerte kortet som er mellom åpningene på Norgesglassene forsiktig vekk slik at ingen av glassene velter. 
-    12) Observer hva som skjer!
-  hints: 
-    - Væsken, som er vann i dette tilfellet, er like. Forskjellen ligger i molekylene. Finn ut hva forskjellen innebærer. 
-    - Kaldt vann har høyere massetetthet enn varmt vann. 
+  description: |
+    # Det du trenger til dette eksperimentet
+
+    - Minimum to Norgesglass
+    - Matfarging i to forskjellige farger
+    - Ett laminert kort som er litt større enn åpningen på Norgesglasset
+    - Varmt og kaldt vann
+
+    # Utførelse av eksperimentet
+
+    1. Kok opp vann, men ikke kok det så varmt at man kan brenne seg.
+    2. Fyll opp en mugge med vann og ta isbiter i vannet og vent til det blir kaldt.
+    3. Skriv ned hva du resultatet av eksperimentet blir og hvorfor.
+    4. Velg en av matfargene dine og tilsett 8 dråper i det kalde vannet.
+    5. Hell det kaldet vannet opp i ett av Norgesglassene slik at vannet er fylt opp helt til kanten, men ikke flyter over.
+    6. Velg en av matfargene dine og tilsett 8 dråper i det varme vannet.
+    7. Hell varmt vann over i det andre Norgesglasset slik at det fylles helt opp til kanten.
+    8. Legg det laminerte kortet over åpningen til Norgesglasset med varmt vann i. Kortet skal forhindre at vann renner ut når du skal snu glasset.
+    9. Press det laminerte kortet mot åpningen slik ikke varmt vann renner.
+    10. Snu Norgesglasset med varmt vann opp ned og plasser åpningen på glasset oppå åpningen til Norgesglasset med kaldt vann i.
+    11. Dra det laminerte kortet som er mellom åpningene på Norgesglassene forsiktig vekk slik at ingen av glassene velter.
+    12. Observer hva som skjer!
+  hints:
+    - Væsken, som er vann i dette tilfellet, er like. Forskjellen ligger i molekylene. Finn ut hva forskjellen innebærer.
+    - Kaldt vann har høyere massetetthet enn varmt vann.
     - Molekyler som blir oppvarmet beveger seg raskere og har større avstand mellom molekylene.
   id: 4IjfUeeQ1fPrMDd1bSdO
   resources: []
   type: 1
 content:
-  description: > 
-    Utfordringen tar for seg hvordan temperatur påvirker massetetthet. 
-    Har du noen gang lurt på hvorfor en væske kan flyte oppå en annen væske eller blander seg bedre hvis man endrer rekkefølge? 
-    I denne utfordringen kan du lære hvordan temperatur påvirker massetettheten til en væske.
+  description: >
+    Utfordringen tar for seg hvordan temperatur påvirker massetetthet. Har du
+    noen gang lurt på hvorfor en væske kan flyte oppå en annen væske eller
+    blander seg bedre hvis man endrer rekkefølge? I denne utfordringen kan du
+    lære hvordan temperatur påvirker massetettheten til en væske.
   id: OeovcWVkbHj0ULAgxvhy
   images: []
   title: Massetetthet
@@ -44,7 +48,7 @@ reflection:
       - varmt vann
       - kaldt vann
       - har mindre
-      - molekylær beveglese
+      - molekylær bevegelse
       - massetetthet enn
       - på grunn av
       - forskjellen

@@ -2,50 +2,56 @@ id: kruAnNew6mHOS1qgJna1
 categoryID: pTIETOOCSI0gjDqpxkYy
 difficulty: 1
 activity:
-    description: > 
-      Det du trenger til dette eksperimentet: 
-      1) Fem egg 
-      2) Fem glass 
-      3) Brus med sukker 
-      4) Brus uten sukker 
-      5) Juice 
-      6) Energidrikk (Redd bull, Monster, etc) 
-      7) Vann 
-      Utførelse av eksperimentet: 
-      1) Fyll de fem glassene med hver sin væske. Ett av glassene må inneholde vann for dette skal fungere som din kontrollvariabel 
-      2) Gi hvert glass en merkelapp med hva glasset inneholder for å holde kontroll på eksperimentet 
-      3) Legg de fem eggene oppi hver sitt glass 
-      4) Skriv ned hva du tror vil skje med eggene ut fra hvilke væske de ligger i 
-      5) La eggene ligge i 24 timer. Du kan observere eggene med 6 timers mellomrom 
-      6) Observer hva som skjer!
-    hints: 
-      - Eggeskall og tenner består begge av hard kalsium på utsiden og er myke innover mot kjernen 
-      - Syre oppløser kalsium som gjør eggene sin kjerne mer utsatt 
+    description: |
+      # Det du trenger til dette eksperimentet
+
+      - Fem egg
+      - Fem glass
+      - Brus med sukker
+      - Brus uten sukker
+      - Juice
+      - Energidrikk (Redd bull, Monster, etc)
+      - Vann
+
+      # Utførelse av eksperimentet
+
+      1. Fyll de fem glassene med hver sin væske. Ett av glassene må inneholde vann for dette skal fungere som din kontrollvariabel.
+      2. Gi hvert glass en merkelapp med hva glasset inneholder for å holde kontroll på eksperimentet.
+      3. Legg de fem eggene oppi hver sitt glass.
+      4. Skriv ned hva du tror vil skje med eggene ut fra hvilke væske de ligger i.
+      5. La eggene ligge i 24 timer. Du kan observere eggene med 6 timers mellomrom.
+      6. Observer hva som skjer!
+    hints:
+      - Eggeskall og tenner består begge av hard kalsium på utsiden og er myke innover mot kjernen
+      - Syre oppløser kalsium som gjør eggene sin kjerne mer utsatt
       - Sammenlign eggene med egget i glasset med vann for å kunne sammenligne resultatene
     id: B1d7yU99Auu1ycR5T9N5
-    resources: 
+    resources:
       - https://feelslikehomeblog.com/what-do-sugary-drinks-do-to-your-teeth-kids-science-experiment/
     type: 1
 content:
-    description: > 
-      Eksperimentet tar for seg hva som kan skje med tenner hvis de blir eksponert for sukkerholdig og sukkerfri drikke over lengre tid. 
-      Du vil kunne tilegne deg kunnskap om kjemiske reaksjoner mellom kalsium og syrlig drikke. 
-      Hvis du vil ha en utfordring kan du prøve dette eksperimentet omigjen, men tilføre tannkrem på eggene for å se beskyttelseseffekten den gir tennene.
+    description: >
+      Eksperimentet tar for seg hva som kan skje med tenner hvis de blir
+      eksponert for sukkerholdig og sukkerfri drikke over lengre tid. Du vil
+      kunne tilegne deg kunnskap om kjemiske reaksjoner mellom kalsium og
+      syrlig drikke. Hvis du vil ha en utfordring kan du prøve dette
+      eksperimentet om igjen, men tilføre tannkrem på eggene for å se
+      beskyttelseseffekten den gir tennene.
     id: 63O3lSWkjwABSUWVDoMi
     images": []
     title: Tenner og sukkerholdig drikke
-reflection: 
+reflection:
     id: moj6uCdgcuOBsK3rEGwu
     solution: mer syreholdig drikke får kalsium til å oppløses, mens sukkeret bidrar til nedbrytning.
     title: Sett sammen en argumentasjon med noen av ordene nedenfor som forklarer hvorfor eggene blir misfarget
-    choices: 
-      - mer baseholdig 
-      - mer syreholdig  
-      - drikke får kalsium 
-      - til å forsterkes 
-      - får kalsium 
-      - til å oppløses 
-      - mens sukker bidrar 
+    choices:
+      - mer baseholdig
+      - mer syreholdig
+      - drikke får kalsium
+      - til å forsterkes
+      - får kalsium
+      - til å oppløses
+      - mens sukker bidrar
       - til nedbrytning
     reflectionType: 2
 reward:

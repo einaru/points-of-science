@@ -1,9 +1,10 @@
 import { useRoute } from "@react-navigation/native";
 import React from "react";
 import { ScrollView, View } from "react-native";
-import { Button, Paragraph, Portal } from "react-native-paper";
+import { Button, Portal } from "react-native-paper";
 
 import AnalyticsContext from "~services/analytics/AnalyticsContext";
+import { MarkdownView } from "~shared/components";
 import { t } from "~shared/i18n";
 import { getTimestamp } from "~shared/timestamp";
 
@@ -91,7 +92,7 @@ function Activity({ navigation }) {
       {/* TODO render activity content based on activity type */}
       <ScrollView contentContainerStyle={styles.scroll}>
         <View style={styles.content}>
-          <Paragraph style={styles.text}>{activity.description}</Paragraph>
+          <MarkdownView>{activity.description}</MarkdownView>
         </View>
         <View style={styles.help}>
           <Button onPress={showHint}>{t("Get a hint?")}</Button>

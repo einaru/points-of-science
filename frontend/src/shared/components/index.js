@@ -9,6 +9,7 @@ export { default as IconBackgroundImage } from "./IconBackgroundImage";
 export { default as IconImage } from "./IconImage";
 export { default as ImageCarousel } from "./ImageCarousel";
 export { default as LoadingScreen } from "./LoadingScreen";
+export { default as MarkdownView } from "./MarkdownView";
 export { default as NoContent } from "./NoContent";
 export { default as ProgressBar } from "./ProgressBar";
 export { default as SmileyOMeter } from "./SmileyOMeter";

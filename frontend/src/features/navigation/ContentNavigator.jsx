@@ -2,7 +2,7 @@ import { useSubscription } from "@apollo/client";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import React from "react";
 import { Portal } from "react-native-paper";
-import { MaterialCommunityIcons } from "react-native-vector-icons";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 import AchievementStack from "~features/achievement/AchievementStack";
 import ChallengesStack from "~features/challenge/ChallengesStack";
@@ -51,9 +51,7 @@ function ContentNavigator() {
         screenOptions={({ route }) => ({
           tabBarIcon: ({ color }) => {
             const iconName = tabIconMap[route.name];
-            return (
-              <MaterialCommunityIcons name={iconName} size={24} color={color} />
-            );
+            return <Icon name={iconName} size={24} color={color} />;
           },
         })}
       >

@@ -7,7 +7,7 @@ import {
   TouchableRipple,
   withTheme,
 } from "react-native-paper";
-import { MaterialCommunityIcons } from "react-native-vector-icons";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 import colors from "~shared/colors";
 import { IconBackgroundImage, NoContent } from "~shared/components";
@@ -39,11 +39,7 @@ function ChallengeListItem({ challenge, user, theme, onPress }) {
           {challenge.name}
         </Text>
         {isAlreadyCompleted && (
-          <MaterialCommunityIcons
-            color={theme.colors.text}
-            name="check-decagram"
-            size={24}
-          />
+          <Icon color={theme.colors.text} name="check-decagram" size={24} />
         )}
       </View>
     );

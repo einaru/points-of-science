@@ -2,7 +2,7 @@ import Color from "color";
 import React from "react";
 import { View } from "react-native";
 import { withTheme } from "react-native-paper";
-import { MaterialCommunityIcons } from "react-native-vector-icons";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 function IconImage({
   iconName,
@@ -31,11 +31,7 @@ function IconImage({
         },
       ]}
     >
-      <MaterialCommunityIcons
-        name={iconName}
-        size={iconSize}
-        color={iconColor}
-      />
+      <Icon name={iconName} size={iconSize} color={iconColor} />
     </View>
   );
 }

@@ -2,7 +2,7 @@ id: EcxIQ2d1ARWNEAlefatH
 categoryID: g3Oo3WDAOZCudZt3EZOD
 difficulty: 1
 activity:
-    description: >
+    description: |
       # Beskrivelse
 
       I denne utfordringen skal du bruke programmering til å finne ut hvor mye du trenger av hver ingrediens for å bake en pizzadeig. 
@@ -37,7 +37,7 @@ activity:
     resources: []
     type: 1
 content:
-    description: >
+    description: |
       # Beskrivelse
 
       Bakking er noe mange gjør i hverdagen og det pleier å være en utfordring å måtte redusere eller øke en oppskrift om man vil ha flere eller færre porsjoner.

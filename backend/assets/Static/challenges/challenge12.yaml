@@ -2,8 +2,10 @@ id: 8IrM3g7YLfHdBSUb7MXi
 categoryID: 6xYWkOcujUVU8kM5uLUy
 difficulty: 1
 activity:
-    description: >
-      # Dette datasettet presenterer fyllingsgraden i forskjellige vannmagasiner i Norge. Fyllingsgraden kan blant annet benyttes til å si noe om hvordan ressurssituasjonen i kraftmarkedet er.
+    description: |
+      # Beskrivelse
+      
+      Dette datasettet presenterer fyllingsgraden i forskjellige vannmagasiner i Norge. Fyllingsgraden kan blant annet benyttes til å si noe om hvordan ressurssituasjonen i kraftmarkedet er.
       Datasett som dette kan brukes av kraftselskaper til å gjøre beregninger på hvor mye strøm de kan levere til markedet og dermed hvilke pris de må ha for sin produksjon.
         
       | År      | Fyllingsgrad | Kapasitet TWH | Fylling TWH | Fyllingsgrad forrige uke | Endring fyllingsgrad |
@@ -29,12 +31,18 @@ activity:
     resources: [] 
     type: 1
 content:
-    description: >
+    description: |
+      # Beskrivelse
+      
       I denne utfordringen skal du studere ett dataset med data om vannmagasiner og fyllingsgrad, og benytte dataene som presenteres til å stille interessante spørsmål om datasettet.
+      
       Dataanalyse handler om i korte trekk om å finne spørsmål som kan stilles ut fra dataen som blir presentert, deretter benytte dataen til å finne ett resultat som svarer på spørsmålet, for så å visualisere resultatet.
+      
       Når man prøver å finne spørsmål man kan stille er det viktig å unngå å stille spørsmål det kan svares ja eller nei på. For å unngå ja eller nei spørsmål, kan du starte spørsmålet med "Hvilke" eller "Hvordan".
       Noen formulering som kan benyttes er for eksempel: "Hvilken sammenheng er det ...", "Hvordan påvirker ...".
+      
       I disse analyseoppgavene vil vi fokusere på å stille spørsmål om dataen som presenteres. 
+    
     id: n6qCPTTASEf51bvOATlA 
     images: ["vannmagasin.jpg"]
     title: Vannkraft og fyllingsgrad

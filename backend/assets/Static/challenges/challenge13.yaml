@@ -2,7 +2,7 @@ id: pQOEsnMyFO3IzVsEyTcs
 categoryID: g3Oo3WDAOZCudZt3EZOD
 difficulty: 1
 activity:
-    description: >
+    description: |
       # Beskrivelse
 
       I denne utfordringen skal du programmere logiske porter ved å benytte programmeringsspråket Python. 
@@ -61,7 +61,7 @@ activity:
     resources: []
     type: 1
 content:
-    description: >
+    description: |
       # Beskrivelse
 
       Logiske porter (Engelsk: Logic gates) er grunnleggende byggesteiner i elektriskekretser og benyttes blant annet til å lede strøm til lyspærer.

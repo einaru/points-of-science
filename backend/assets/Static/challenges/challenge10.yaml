@@ -3,9 +3,14 @@ categoryID: 6xYWkOcujUVU8kM5uLUy
 difficulty: 2
 activity:
     description: |
-      # Dette datasettet presenterer hvilke fartøy som hører til i hvilke fylke og kommune, fartøyets lengde og byggeår for båt pg motor. 
+      # Beskrivelse 
+      
+      Dette datasettet presenterer hvilke fartøy som hører til i hvilke fylke og kommune, fartøyets lengde og byggeår for båt pg motor. 
+      
       Dataen benyttes av statlige virksomheter innen fiskerinæringen for å kunne holde kontroll med hvor fartøy har sin tilhørighet og hva det skal betale i avgifter. 
+      
       Ved å prøve og stille spørmål om dette datasettet lærer du hvordan du kan benytte samfunnsdata fra offentligforvaltning til å finne ut interessante ting om dataene.
+      
       Denne aktiviteten vil vise deg nytten av å kunne dataanalyse og at det kan anvendes på samfunnskunskap. 
 
       | Fylke            | Fartøynavn | Største lengde | Byggeår - Fartøy| Byggeår - Motor |
@@ -39,12 +44,17 @@ activity:
     resources: []
     type: 1
 content:
-    description: >
+    description: |
+      # Beskrivelse
+      
       I denne utfordringen skal du studere ett dataset med data om fartøy og dets tilhørighet, og benytte dataene som presenteres til å finne interessante spørsmål.
+      
       Dataanalyse handler om i korte trekk om å finne spørsmål som kan stilles ut fra dataen som blir presentert, deretter benytte dataen til å finne ett resultat som svarer på spørsmålet, for så å visualisere resultatet.
       Når man prøver å finne spørsmål man kan stille er det viktig å unngå å stille spørsmål man kan svare ja eller nei på. For å unngå ja eller nei spørsmål, kan du starte spørsmålet med "Hvilke" eller "Hvordan".
       Noen formulering som kan benyttes er for eksempel: "Hvilken sammenheng er det ...", "Hvordan påvirker ...".
+      
       I disse analyseoppgavene vil vi fokusere på å stille spørsmål om dataen som presenteres. 
+    
     id: ZIpLPcrsjBJ6KXi9DTxM
     images: ["boats2.jpg"]
     title: Fartøy og landsdel 2

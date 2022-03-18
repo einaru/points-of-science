@@ -3,10 +3,16 @@ categoryID: 6xYWkOcujUVU8kM5uLUy
 difficulty: 3
 activity:
     description: |
-      # Dette datasettet presenterer ett utvalg av flyselskaper fra forskjellige land. Dataen presenterer antall setekilometer flyselskapet har tilgjengelig per uke.
-      Setekilometer er distansen passasjerene på flygningen samlet tilbakelegger fra avreisested til destinasjon. Andre data som vises er: dødsfall forårsaket av menneskligsvikt,
+      # Beskrivelse 
+      
+      Dette datasettet presenterer ett utvalg av flyselskaper fra forskjellige land. Dataen presenterer antall setekilometer flyselskapet har tilgjengelig per uke.
+      Setekilometer er distansen passasjerene på flygningen samlet tilbakelegger fra avreisested til destinasjon. 
+      
+      Andre data som vises er: dødsfall forårsaket av menneskligsvikt,
       dødsfall som er en konsekvens av at ett menneske har gjort en feil, dødsfall forårsaket av teknisksvikt, dødsfall som er en konsekvens av at det har oppstått en mekanisk eller en programvarefeil. Dette settet er delt opp i to tidsperioder, en tidsperiode fra 1985 - 1999 og en annen fra 2000 - 2014.
+      
       Ved å prøve og stille spørmål om dette datasettet lærer du hvordan du kan benytte data fra ulykker til å si noe om for eksempel sammenhengen mellom tidligere hendelser og hendelser i dag.
+      
       Denne aktiviteten vil vise deg nytten av å kunne dataanalyse og at det kan anvendes på data fra ulykker.
 
       | Flyselskap         | Land       | Tilgjengelig setekilometer per uke | Dødsfall pga. menneskeligsvikt 1985 - 1999 | Dødsfall pga. teknisksvikt 1985 - 1999 | Dødsfall pga. menneskeligsvikt 2000 - 2014 | Dødsfall pga. teknisksvikt 2000 - 2014 |
@@ -38,12 +44,18 @@ activity:
       - https://fivethirtyeight.com/features/should-travelers-avoid-flying-airlines-that-have-had-crashes-in-the-past/
     type: 1
 content:
-    description: >
+    description: |
+      # Beskrivelse
+
       I denne utfordringen skal du studere ett dataset med data om flyselskaper sin ulykkeshistorikk, og benytte dataene som presenteres til å stille interessante spørsmål om datasettet.
+      
       Dataanalyse handler om i korte trekk om å finne spørsmål som kan stilles ut fra dataen som blir presentert, deretter benytte dataen til å finne ett resultat som svarer på spørsmålet, for så å visualisere resultatet.
+      
       Når man prøver å finne spørsmål man kan stille er det viktig å unngå å stille spørsmål man kan svare ja eller nei på. For å unngå ja eller nei spørsmål, kan du starte spørsmålet med "Hvilke" eller "Hvordan".
       Noen formulering som kan benyttes er for eksempel: "Hvilken sammenheng er det ...", "Hvordan påvirker ...".
+      
       I disse analyseoppgavene vil vi fokusere på å stille spørsmål om dataen som presenteres. 
+    
     id: fQF4imP5qgejgCsaPWzg
     images: ["airplanes.jpg"]
     title: Historisk påvirkning... eller ikke?

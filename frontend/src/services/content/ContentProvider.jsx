@@ -17,9 +17,7 @@ function ContentProvider({ children }) {
   const [user, setUser] = React.useState({});
   const [categories, setCategories] = React.useState([]);
   const [achievements, setAchievements] = React.useState([]);
-  const [leaderboards, setLeaderboards] = React.useState({
-    highScore: { id: "highScore", scores: [] },
-  });
+  const [leaderboards, setLeaderboards] = React.useState({ highScore: {} });
   const [contacts, setContacts] = React.useState([]);
 
   // This ref and state is used to keep track of new unlocked achievements.
@@ -29,19 +27,20 @@ function ContentProvider({ children }) {
   const [hasNewAchievements, setHasNewAchievements] = React.useState(false);
   const hasSeenNewAchievements = () => setHasNewAchievements(false);
 
-  const { loading, data } = useQuery(GET_ALL_CONTENT, { errorPolicy: "all" });
+  const { loading } = useQuery(GET_ALL_CONTENT, {
+    errorPolicy: "all",
+    onCompleted: (data) => {
+      setUser(data.userProfile || {});
+      setCategories(data.categories || []);
+      setAchievements(data.achievements || []);
+      setLeaderboards(data.leaderboards || { highScore: {} });
 
-  React.useEffect(() => {
-    if (data) {
-      setUser(data.userProfile);
-      setCategories(data.categories);
-      setAchievements(data.achievements);
-      setLeaderboards(data.leaderboards);
-
-      const userAchievements = JSON.stringify(data.userProfile.achievements);
-      achievementsRef.current = userAchievements;
-    }
-  }, [data]);
+      const userAchievements = data?.userProfile?.achievements;
+      if (userAchievements) {
+        achievementsRef.current = JSON.stringify(userAchievements);
+      }
+    },
+  });
 
   useQuery(GET_ALL_CONTACTS, {
     onCompleted: (resp) => {

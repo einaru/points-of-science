@@ -934,9 +934,31 @@
         "title": "Kjemiske Reaksjoner"
       },
       "id": "pTIETOOCSI0gjDqpxkYy"
+    },
+    {
+      "challenges": ["aViaZXEdE6RG4MJUdyH0", "wxGvzCs5wmcnyrySYcF7", "utgz5irPGcwcbLZuqNW2" ,"8IrM3g7YLfHdBSUb7MXi"],
+      "content": {
+        "description": "",
+        "id": "w6Ef9TiNRaBelhTQ8IH1",
+        "image": "",
+        "title": "Analyse av data"
+      },
+      "id": "6xYWkOcujUVU8kM5uLUy"
+    },
+    {
+      "challenges": ["pQOEsnMyFO3IzVsEyTcs", "EcxIQ2d1ARWNEAlefatH", "Mv9Cm6GUHcCEXAP9ipn5", "98irZoBeF1TcY9MSewd7"],
+      "content": {
+        "description": "",
+        "id": "eYygihbnUHlca5IOLWDi",
+        "image": "",
+        "title": "IT"
+      },
+      "id": "g3Oo3WDAOZCudZt3EZOD"
     }
   ],
-  "Challenge": ["challenge1.yaml", "challenge2.yaml", "challenge3.yaml", "challenge4.yaml", "challenge5.yaml", "challenge6.yaml"],
+  "Challenge": ["challenge1.yaml", "challenge2.yaml", "challenge3.yaml", "challenge4.yaml",
+    "challenge5.yaml", "challenge6.yaml", "challenge9.yaml",
+    "challenge10.yaml", "challenge11.yaml", "challenge12.yaml", "challenge13.yaml", "challenge14.yaml", "challenge15.yaml", "challenge16.yaml"],
   "Achievement": [
     {
       "condition": [""],

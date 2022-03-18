@@ -1,0 +1,65 @@
+id: utgz5irPGcwcbLZuqNW2
+categoryID: 6xYWkOcujUVU8kM5uLUy
+difficulty: 3
+activity:
+    description: |
+      # Dette datasettet presenterer ett utvalg av flyselskaper fra forskjellige land. Dataen presenterer antall setekilometer flyselskapet har tilgjengelig per uke.
+      Setekilometer er distansen passasjerene på flygningen samlet tilbakelegger fra avreisested til destinasjon. Andre data som vises er: dødsfall forårsaket av menneskligsvikt,
+      dødsfall som er en konsekvens av at ett menneske har gjort en feil, dødsfall forårsaket av teknisksvikt, dødsfall som er en konsekvens av at det har oppstått en mekanisk eller en programvarefeil. Dette settet er delt opp i to tidsperioder, en tidsperiode fra 1985 - 1999 og en annen fra 2000 - 2014.
+      Ved å prøve og stille spørmål om dette datasettet lærer du hvordan du kan benytte data fra ulykker til å si noe om for eksempel sammenhengen mellom tidligere hendelser og hendelser i dag.
+      Denne aktiviteten vil vise deg nytten av å kunne dataanalyse og at det kan anvendes på data fra ulykker.
+
+      | Flyselskap         | Land       | Tilgjengelig setekilometer per uke | Dødsfall pga. menneskeligsvikt 1985 - 1999 | Dødsfall pga. teknisksvikt 1985 - 1999 | Dødsfall pga. menneskeligsvikt 2000 - 2014 | Dødsfall pga. teknisksvikt 2000 - 2014 |
+      | :----------------: | :--------: | :--------------------------------: | :------------------------------------:     | :------------------------------:       | :------------------------------------:     | :------------------------------:       |
+      | All Nippon Airways | Japan      |  1841234177                        | 1                                          | 1                                      | 0                                          | 0                                      |
+      | Japan Airlines     | Japan      |  1574217531                        | 1                                          | 520                                    | 0                                          | 0                                      |
+      | Kina Airlines      | Taiwan     |  813216487                         | 6                                          | 535                                    | 1                                          | 225                                    |
+      | Xiamen Airlines    | Kina       |  430462962                         | 1                                          | 82                                     | 0                                          | 0                                      |
+      | SAS                | Sverige    |  682971852                         | 0                                          | 0                                      | 1                                          | 110                                    |
+      | Condor             | Tyskland   |  417982610                         | 1                                          | 16                                     | 0                                          | 0                                      |
+      | KLM                | Tyskland   |  1874561773                        | 1                                          | 3                                      | 0                                          | 0                                      |
+      | Lufthansa          | Tyskland   |  3426529504                        | 1                                          | 2                                      | 0                                          | 0                                      |
+      | American           | USA        |  5228357340                        | 5                                          | 101                                    | 3                                          | 416                                    |
+      | Delta/Northwest    | USA        |  6525658894                        | 12                                         | 407                                    | 2                                          | 51                                     |
+      | Southwest Airlines | USA        |  3276525770                        | 0                                          | 0                                      | 0                                          | 0                                      |
+      | United/Continental | USA        |  7139291291                        | 8                                          | 319                                    | 2                                          | 109                                    |
+      | US Airways/America | USA        |  2455687887                        | 7                                          | 224                                    | 2                                          | 23                                     |
+      
+      # Utførelse av oppgaven:
+      
+      1. Studer tabellen over i noen minutter slik at du blir kjent med innholdet og hva dataen prøver å vise.
+      2. Se på navnet til kolonnene. Prøv å stille deg spørsmål som potensielt kan være mulig å finne svar på ved bruk av kolonnene.
+      3. Ett tips er å begynne helt enkelt ved å se på to kolonner og finne ett spørsmål ut fra to kolonner.
+      4. Noter ned spørsmålene du fant ut fra datasettet.
+    hints:
+      - For å kunne starte enkelt bør du benytte deg av enten kolonnen land eller setekilometer.
+    id: qjldeaPHjk7nFSElJ7Cs
+    resources:
+      - https://fivethirtyeight.com/features/should-travelers-avoid-flying-airlines-that-have-had-crashes-in-the-past/
+    type: 1
+content:
+    description: >
+      I denne utfordringen skal du studere ett dataset med data om flyselskaper sin ulykkeshistorikk, og benytte dataene som presenteres til å stille interessante spørsmål om datasettet.
+      Dataanalyse handler om i korte trekk om å finne spørsmål som kan stilles ut fra dataen som blir presentert, deretter benytte dataen til å finne ett resultat som svarer på spørsmålet, for så å visualisere resultatet.
+      Når man prøver å finne spørsmål man kan stille er det viktig å unngå å stille spørsmål man kan svare ja eller nei på. For å unngå ja eller nei spørsmål, kan du starte spørsmålet med "Hvilke" eller "Hvordan".
+      Noen formulering som kan benyttes er for eksempel: "Hvilken sammenheng er det ...", "Hvordan påvirker ...".
+      I disse analyseoppgavene vil vi fokusere på å stille spørsmål om dataen som presenteres. 
+    id: fQF4imP5qgejgCsaPWzg
+    images: ["airplanes.jpg"]
+    title: Historisk påvirkning... eller ikke?
+reflection:
+    id: MQg5Ummw0axQszj1Acen
+    solution: >
+      ["Hvilken sammenheng er det mellom land og setekilometer?", 
+      "Hvilken sammenheng er det mellom setekilometer og dødsfall på grunn av menneskligsvikt i periodene 1985 til 1999 og 2000 til 2014?", 
+      "Hvordan er sammenhengen mellom perioden 1985 til 1999 og 2000 til 2014 for data om dødsfall på grunn av teknisksvikt?", 
+      "Hvordan påvirker landet og antall setekilometer dødsfall på grunn av menneskligsvikt perioden 1985 til 1999?",
+      "Hvordan er sammenhengen mellom setekilometer og teknisksvikt for perioden 2000 til 2014?",
+      "Hvilken påvirkning har setekilometer på dødsfall på grunn av menneskligsvikt i perioden 2000 til 2014?"]
+    title: Hvilke spørsmål kan du stille deg ut fra dataen som ble presentert?
+    reflectionType: 1
+reward:
+    bonusPoints: 0
+    firstTryPoints: 0
+    id: Lj1C7tZPrJgV9eQetqIw
+    maxPoints: 30

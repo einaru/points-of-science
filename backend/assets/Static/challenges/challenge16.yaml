@@ -1,0 +1,27 @@
+id: 98irZoBeF1TcY9MSewd7
+categoryID: g3Oo3WDAOZCudZt3EZOD
+difficulty: 1
+activity:
+    description: >
+      Beskrivelse
+    hints: []
+    id: Fzs01VHtwXJHQvT7B9DB
+    resources: []
+    type: 1
+content:
+    description: >
+      Beskrivelse
+    id: MG1QzidN1uOHseaQwDVn
+    images: []
+    title: Tittel
+reflection:
+    id: n6G6m1pwECgrcFn2cbRf
+    solution: >
+      []
+    title: Tittel 
+    reflectionType: 1
+reward:
+    bonusPoints: 0
+    firstTryPoints: 0
+    id: QullwrTk8vxgrCjMDX51
+    maxPoints: 30

@@ -35,12 +35,14 @@ const getAllCategoriesQuery = {
     categories.forEach((element) => {
       const challenges = [];
       element.challenges.forEach((challenge) => {
-        const challengeResponse = challenge.convertToResponseObject(challenge);
-        challengeResponse.category.name = element.name;
-        if (isPermissionGroup(profile, 3)) {
-          delete challengeResponse.reward;
+        if (challenge === Object(challenge)) {
+          const challengeResponse = challenge.convertToResponseObject(challenge);
+          challengeResponse.category.name = element.name;
+          if (isPermissionGroup(profile, 3)) {
+            delete challengeResponse.reward;
+          }
+          challenges.push(challengeResponse);
         }
-        challenges.push(challengeResponse);
       });
       element.challenges = challenges;
     });

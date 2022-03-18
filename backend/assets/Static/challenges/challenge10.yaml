@@ -1,0 +1,61 @@
+id: wxGvzCs5wmcnyrySYcF7
+categoryID: 6xYWkOcujUVU8kM5uLUy
+difficulty: 2
+activity:
+    description: |
+      # Dette datasettet presenterer hvilke fartøy som hører til i hvilke fylke og kommune, fartøyets lengde og byggeår for båt pg motor. 
+      Dataen benyttes av statlige virksomheter innen fiskerinæringen for å kunne holde kontroll med hvor fartøy har sin tilhørighet og hva det skal betale i avgifter. 
+      Ved å prøve og stille spørmål om dette datasettet lærer du hvordan du kan benytte samfunnsdata fra offentligforvaltning til å finne ut interessante ting om dataene.
+      Denne aktiviteten vil vise deg nytten av å kunne dataanalyse og at det kan anvendes på samfunnskunskap. 
+
+      | Fylke            | Fartøynavn | Største lengde | Byggeår - Fartøy| Byggeår - Motor |
+      | :--------------: | :--------: | :------------: | :-------------: |:--------------: |
+      | Sogn og Fjordane | A1         | 10.36          | 1898            | 1991            |
+      | Nordland         | B1         | 10.18          | 1938            | 1973            |
+      | Sogn og Fjordane | C1         | 7.53           | 1940            | 1971            |
+      | Trøndelag        | D1         | 10.48          | 1954            | 1994            |
+      | Nordland         | E1         | 7.04           | 1955            | 1965            |
+      | Møre og Romsdal  | F1         | 9.41           | 1958            | 1988            |
+      | Nordland         | G1         | 15.53          | 1959            | 2010            |
+      | Troms            | H1         | 44.65          | 1960            | 1960            |
+      | Troms            | I1         | 14.98          | 1960            | 1990            |
+      | Finnmark         | J1         | 10.45          | 1961            | 2006            |
+      | Troms            | K1         | 8.75           | 1960            | 1994            |
+      | Nordland         | L1         | 10.98          | 1962            | 2009            |
+      | Vestfold         | M1         | 10.18          | 1962            | 2010            |
+      | Hordaland        | N1         | 8.16           | 1958            | 1958            |
+      
+      # Utførelse av oppgaven:
+      
+      1. Studer tabellen over i noen minutter slik at du blir kjent med innholdet og hva dataen prøver å vise.
+      2. Se på navnet til kolonnene. Prøv å stille deg spørsmål som potensielt kan være mulig å finne svar på ved bruk av kolonnene.
+      3. Ett tips er å begynne helt enkelt ved å se på to kolonner og finne ett spørsmål ut fra to kolonner.
+      4. Noter ned spørsmålene du fant ut fra datasettet.
+    hints:
+      - Fylke og største lengde er to kolonner som kan benyttes i et enkelt spørsmål. 
+      - Benytt de to kolonnene fylke og motorkraft og start spørsmålet med hvordan.
+      - Det er fem mulige spørsmål som kan stilles til dette datasettet.
+    id: kHLqzFs1UJ4SUhrKfTcs
+    resources: []
+    type: 1
+content:
+    description: >
+      I denne utfordringen skal du studere ett dataset med data om fartøy og dets tilhørighet, og benytte dataene som presenteres til å finne interessante spørsmål.
+      Dataanalyse handler om i korte trekk om å finne spørsmål som kan stilles ut fra dataen som blir presentert, deretter benytte dataen til å finne ett resultat som svarer på spørsmålet, for så å visualisere resultatet.
+      Når man prøver å finne spørsmål man kan stille er det viktig å unngå å stille spørsmål man kan svare ja eller nei på. For å unngå ja eller nei spørsmål, kan du starte spørsmålet med "Hvilke" eller "Hvordan".
+      Noen formulering som kan benyttes er for eksempel: "Hvilken sammenheng er det ...", "Hvordan påvirker ...".
+      I disse analyseoppgavene vil vi fokusere på å stille spørsmål om dataen som presenteres. 
+    id: ZIpLPcrsjBJ6KXi9DTxM
+    images: ["boats2.jpg"]
+    title: Fartøy og landsdel 2
+reflection:
+    id: 0F3m68TQsq59mCcxTAUb
+    solution: >
+      ["Hvilken sammenheng er det mellom størrelsen på båten og fylke?", "Hvordan påvirker fylket byggeåret til fartøyet?", "Hvordan er sammenhengen mellom byggeåret til fartøyet og byggåret til motoren?", "Hvordan påvirker byggeåret til båten lengden?", "Hvilken påvirkning har størrelsen på båten på byggeåret til motoren?"]
+    title: Hvilke spørsmål kan du stille deg ut fra dataen som ble presentert?
+    reflectionType: 1
+reward:
+    bonusPoints: 0
+    firstTryPoints: 0
+    id: jsjx8GFZ3D9eMoqjN775
+    maxPoints: 15

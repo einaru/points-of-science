@@ -1,0 +1,91 @@
+id: pQOEsnMyFO3IzVsEyTcs
+categoryID: g3Oo3WDAOZCudZt3EZOD
+difficulty: 1
+activity:
+    description: >
+      # Beskrivelse
+
+      I denne utfordringen skal du programmere logiske porter ved å benytte programmeringsspråket Python. 
+      Hvis du ikke har python installert på din datamaskin kan du laste ned Python ved å følge denne lenken: https://www.python.org/downloads/
+
+      Din første utfordring er å programmere en AND port i Python. En AND port tar kun inn to input. Verdien til en input er enten 1 eller 0.
+      Hvis begge verdiene til inputene er 1, skal verdien 1 skrives ut. Hvis begge verdiene til inputene er 0 skal 0 skrives ut, det samme gjelder for 0 og 1.
+      Tabellen under viser hvilke to verdier for input som gir hvilke output:
+
+      | Input 1 | Input 2 | Output |
+      | :-----: | :-----: | :----: |
+      | 0       | 0       | 0      |
+      | 0       | 1       | 0      |
+      | 1       | 0       | 0      |
+      | 1       | 1       | 1      |
+
+      Din andre utfordring er å programmere en NAND port i Python. En NAND port (Not AND port) tar i likhet med AND port inn to input. Verdien til en input er enten 1 eller 0.
+      Hvis begge verdiene til inputene er 1, skal verdien 0 skrives ut. Hvis begge verdiene til inputene er 0 skal 1 skrives ut, det samme gjelder for 0 og 1.
+      Tabellen under viser hvilke to verdier for input som gir hvilke output:
+
+      | Input 1 | Input 2 | Output |
+      | :-----: | :-----: | :----: |
+      | 0       | 0       | 1      |
+      | 0       | 1       | 1      |
+      | 1       | 0       | 1      |
+      | 1       | 1       | 0      |
+
+      Din tredje utfordring er å programmere en OR port i Python. En OR port tar inn to input. Verdien til en input er enten 1 eller 0.
+      Hvis begge verdiene til inputene er 1, skal verdien 1 skrives ut, det samme gjelder for 0 og 1. Hvis begge verdiene til inputene er 0 skal 0 skrives ut.
+      Tabellen under viser hvilke to verdier for input som gir hvilke output:
+
+      | Input 1 | Input 2 | Output |
+      | :-----: | :-----: | :----: |
+      | 0       | 0       | 0      |
+      | 0       | 1       | 1      |
+      | 1       | 0       | 1      |
+      | 1       | 1       | 1      |
+
+      Din fjerde utfordring er å programmere en NOR port i Python. En NOR port tar inn to input. Verdien til en input er enten 1 eller 0.
+      Hvis begge verdiene til inputene er 1, skal verdien 0 skrives ut, det samme gjelder for 0 og 1. Hvis begge verdiene til inputene er 0 skal 1 skrives ut.
+      Tabellen under viser hvilke to verdier for input som gir hvilke output:
+
+      | Input 1 | Input 2 | Output |
+      | :-----: | :-----: | :----: |
+      | 0       | 0       | 1      |
+      | 0       | 1       | 0      |
+      | 1       | 0       | 0      |
+      | 1       | 1       | 0      |
+
+      For å kunne løse disse utfordringene må du bruke en if/else setning og print()-funksjonen i Python.
+
+      Hvis du vil ha en ekstra utfordring kan du prøve å lage en funksjon for hver logiske port.
+
+    hints: []
+    id: bBjeO0ow8icKbEJDBFJK
+    resources: []
+    type: 1
+content:
+    description: >
+      # Beskrivelse
+
+      Logiske porter (Engelsk: Logic gates) er grunnleggende byggesteiner i elektriskekretser og benyttes blant annet til å lede strøm til lyspærer.
+      Andre anvendelsesområder for logiske porter er i digitalekretser som benyttes i en datamaskin. I en datamaskin bidrar logiske porter til kalkulering av mattematiske uttrykk,
+      lagring av data eller til å sjekke om en eller flere verdier i ett matematisk uttrykk er riktig. Fordi logiske porter benyttes i digitalekretser, som igjen benyttes i datamaskiner, betyr det at disse enkle
+      komponentene også er sentrale deler for å få en bil, et fly, en båt eller et kamera til å fungere. I alt finnes det syv ulike logiske porter: AND, OR, NOT, NAND, NOR, XOR, XNOR. 
+
+      I denne utfordringen skal du få lære å programmere logiskekretser i programmeringsspråket Pyhton. Ved å lære å programmere logiskekretser er det lettere å teste og mindre tidkrevende å få resultatet fra en eller flere logiske kretser.
+      Hva vil du lære:
+      - Bruke if/else setninger i Python 
+      - Tilordning av en variabel med =
+      - Sjekke om verdien til en variabel er lik med ==
+      - Skrive resultatet ut til konsoll
+    id: VMnQWMVYARSiWVr9Ixhc
+    images: []
+    title: Logiske Porter
+reflection:
+    id: NdvMKFVncsx1tur9YVHR
+    solution: >
+      []
+    title: Hvorfor er det nyttig å kunne programmere logiske kretser?
+    reflectionType: 1
+reward:
+    bonusPoints: 0
+    firstTryPoints: 0
+    id: zJLOZL2UvsjaLNie1sNv
+    maxPoints: 10

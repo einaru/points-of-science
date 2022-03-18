@@ -1,0 +1,51 @@
+id: 8IrM3g7YLfHdBSUb7MXi
+categoryID: 6xYWkOcujUVU8kM5uLUy
+difficulty: 1
+activity:
+    description: >
+      # Dette datasettet presenterer fyllingsgraden i forskjellige vannmagasiner i Norge. Fyllingsgraden kan blant annet benyttes til å si noe om hvordan ressurssituasjonen i kraftmarkedet er.
+      Datasett som dette kan brukes av kraftselskaper til å gjøre beregninger på hvor mye strøm de kan levere til markedet og dermed hvilke pris de må ha for sin produksjon.
+        
+      | År      | Fyllingsgrad | Kapasitet TWH | Fylling TWH | Fyllingsgrad forrige uke | Endring fyllingsgrad |
+      | :-----: | :----------: | :-----------: | :---------: | :----------------------: | :------------------: |
+      | 2020    | 0.41533166   | 20.850529     | 8.659884    | 0.4347356                | -0.019403934         |
+      | 2020    | 0.52209836   | 33.898586     | 17.698397   | 0.5494548                | -0.027356446         |
+      | 2020    | 0.8979552    | 5.975986      | 5.3661675   | 0.89482194               | 0.0031332374         |
+      | 2020    | 0.8528242    | 20.850529     | 17.781836   | 0.8414007                | 0.011423528          |
+      | 2019    | 0.40673426   | 33.898586     | 13.787716   | 0.4164997                | -0.009765446         |
+      | 2019    | 0.5878586    | 33.898586     | 19.927576   | 0.5246846                | 0.06317401           |
+      | 2019    | 0.70716333   | 20.850529     | 14.744729   | 0.7090372                | -0.0018738508        |
+      | 2019    | 0.75838757   | 33.898586     | 25.708265   | 0.73907536               | 0.019312203          |
+
+      # Utførelse av oppgaven:
+
+      1. Studer tabellen over i noen minutter slik at du blir kjent med innholdet og hva dataen prøver å vise.
+      2. Se på navnet til kolonnene. Prøv å stille deg spørsmål som potensielt kan være mulig å finne svar på ved bruk av kolonnene.
+      3. Ett tips er å begynne helt enkelt ved å se på to kolonner og finne ett spørsmål ut fra to kolonner.
+      4. Noter ned spørsmålene du fant ut fra datasettet.
+
+    hints: []
+    id: 15ciQEN1hJ57ArDoYPLU
+    resources: [] 
+    type: 1
+content:
+    description: >
+      I denne utfordringen skal du studere ett dataset med data om vannmagasiner og fyllingsgrad, og benytte dataene som presenteres til å stille interessante spørsmål om datasettet.
+      Dataanalyse handler om i korte trekk om å finne spørsmål som kan stilles ut fra dataen som blir presentert, deretter benytte dataen til å finne ett resultat som svarer på spørsmålet, for så å visualisere resultatet.
+      Når man prøver å finne spørsmål man kan stille er det viktig å unngå å stille spørsmål det kan svares ja eller nei på. For å unngå ja eller nei spørsmål, kan du starte spørsmålet med "Hvilke" eller "Hvordan".
+      Noen formulering som kan benyttes er for eksempel: "Hvilken sammenheng er det ...", "Hvordan påvirker ...".
+      I disse analyseoppgavene vil vi fokusere på å stille spørsmål om dataen som presenteres. 
+    id: n6qCPTTASEf51bvOATlA 
+    images: ["vannmagasin.jpg"]
+    title: Vannkraft og fyllingsgrad
+reflection:
+    id: yCIQ702tm4HGhtRb7dV6
+    solution: >
+      ["Hvordan påvirker året fyllingsgraden i vannmagasinene?", "Hvilken sammenheng er det mellom fyllingsgraden for ett år til ett annet?", "Hvordan påvirker endringen i fyllingsgraden for ett år antall terrawatttimer som leveres det neste året?"]
+    title: Hvilke spørsmål kan du stille deg ut fra dataen som ble presentert?
+    reflectionType: 1
+reward:
+    bonusPoints: 0
+    firstTryPoints: 0
+    id: ccVlqgFTF1yXtR5QhZ5O
+    maxPoints: 30

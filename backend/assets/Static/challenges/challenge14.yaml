@@ -1,0 +1,66 @@
+id: EcxIQ2d1ARWNEAlefatH
+categoryID: g3Oo3WDAOZCudZt3EZOD
+difficulty: 1
+activity:
+    description: >
+      # Beskrivelse
+
+      I denne utfordringen skal du bruke programmering til å finne ut hvor mye du trenger av hver ingrediens for å bake en pizzadeig. 
+      En langpannet pizzadeig har følgende ingredienser og mengde:
+
+      | Ingrediens   | mengde | enhet |
+      | :--------:   | :----: | :---: |
+      | Vann         | 3      | dl    |
+      | Gjær         | 1      | pk*   |
+      | Nøytral olje | 2      | ss**  |
+      | Salt         | 0.5    | ts*** |
+      | Hvetemel     | 10     | dl    |
+
+      pk* = pakke, ss** = spiseskje, ts*** = teskje
+
+      Din oppgave er å kunne spørre brukeren om hvor stor pizza brukeren ønsker å bake, for så å skrive ut hvor mye av hver ingrediens brukeren trenger.
+      La brukeren oppgi størrelsen på pizzaen med ett tall, hvor input 1 gir vanlig størrelse, 2 gir dobbel størrelse og 0.5 gir halv størrelse på pizzadeigen. 
+      Følgende er ett eksempel på hvordan koden skal fungere:
+      
+      ```python
+      Hvor stor pizza ønsker du å bake? 2
+      Størrelse på pizza: Dobbel
+      Vann (dl): 6
+      Gjær (pk): 2
+      Nøytral olje (ss): 4
+      Salt (ts): 1
+      Hvetemel (dl): 20
+      ```
+
+    hints: []
+    id: 15wg16ueZ6WJFL7waezS
+    resources: []
+    type: 1
+content:
+    description: >
+      # Beskrivelse
+
+      Bakking er noe mange gjør i hverdagen og det pleier å være en utfordring å måtte redusere eller øke en oppskrift om man vil ha flere eller færre porsjoner.
+      Oppgaver som gjenntas ofte er typiske oppgaver som programmering kan være ett nyttig værktøy å benytte for å løse. Øking og redusering av en bakeoppskrift er en slik oppgave.
+      I stedenfor å konvertere en bakeoppskrift manuelt, skal du her lære hvordan du kan benytte programmering til å gjøre det for deg, slik at du kan bruke mer tid på bakingen
+      og mindre tid på repetive beregninger.
+
+      Hva vil du lære:
+      - Printe ut tekst til skjerm
+      - Enkle kalkulasjoner
+      - Ta inn input fra brukeren
+
+    id: 4XuHtwGYid0AxZ17xoBE
+    images: []
+    title: Konvertere oppskrift
+reflection:
+    id: FH2v5pPdGvdFKPPeHoeL
+    solution: >
+      []
+    title: Tittel
+    reflectionType: 1
+reward:
+    bonusPoints: 0
+    firstTryPoints: 0
+    id: IKB5qDAANFuGBIbrm1xx
+    maxPoints: 10

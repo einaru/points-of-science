@@ -42,7 +42,7 @@ content:
       væske den settes i. I dette eksperimentet kan du lære hvordan
       kapillærkreftene kan flytte væsker.
     id: SCMIN2g1LV9tJPrJMkmo
-    images: []
+    images: ["capillary1.jpg", "capillary2.jpg", "capillary3.jpg"]
     title: Å få vann til å gå
 reflection:
     id: nfbTjkQb2LUIO1TpCwqm

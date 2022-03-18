@@ -22,6 +22,11 @@ export const getLeaderboardsQuery = {
 
     const { providers } = context;
 
+    const userData = await providers.users.getByID(context.user.id);
+    if (userData == null) {
+      throw new Error("User does not exist.");
+    }
+
     const users = await providers.users.getAll();
     const userProfiles = users
       .filter((user) => isActiveAndPartOfExperiment(user))

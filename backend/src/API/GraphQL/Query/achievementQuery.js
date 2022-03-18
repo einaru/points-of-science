@@ -19,6 +19,11 @@ const getAllAchievementsQuery = {
     assertIsAuthenticated(user);
     assertHasExperimentPermission(user);
 
+    const userData = await providers.users.getByID(user.id);
+    if (userData == null) {
+      throw new Error("User does not exist.");
+    }
+
     const achievements = await providers.achievements.getAll();
 
     const result = [];

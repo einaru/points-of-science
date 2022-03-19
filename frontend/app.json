@@ -9,15 +9,15 @@
     "primaryColor": "#6200ee",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "resizeMode": "cover",
+      "backgroundColor": "#6200ee"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
-      "assets/*",
-      "src/shared/assets/**/*"
+      "assets/*.png",
+      "src/shared/assets/**/*.png"
     ],
     "ios": {
       "bundleIdentifier": "no.uvslokk.msc.ScienceApp",
@@ -25,10 +25,15 @@
     },
     "android": {
       "package": "no.uvslokk.msc.ScienceApp",
+      "icon": "./assets/legacy-icon.png",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "#6200ee"
       }
+    },
+    "androidStatusBar": {
+      "barStyle": "light-content",
+      "backgroundColor": "#6200ee"
     },
     "web": {
       "favicon": "./assets/favicon.png"

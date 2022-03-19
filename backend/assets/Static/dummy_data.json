@@ -961,7 +961,7 @@
     "challenge10.yaml", "challenge11.yaml", "challenge12.yaml", "challenge13.yaml", "challenge14.yaml", "challenge15.yaml", "challenge16.yaml"],
   "Achievement": [
     {
-      "condition": [""],
+      "condition": ["z095TCsRHDjjXVtNkOJ2", "uhQTzXWaocEFAQOxl5dT", "9nYnavMPlPq98031tuMT", "76cq97Qjo48ONgmd8H5U", "kruAnNew6mHOS1qgJna1", "gSZtkJvdewTQvEae50aJ", "aViaZXEdE6RG4MJUdyH0", "wxGvzCs5wmcnyrySYcF7", "utgz5irPGcwcbLZuqNW2" ,"8IrM3g7YLfHdBSUb7MXi", "pQOEsnMyFO3IzVsEyTcs", "EcxIQ2d1ARWNEAlefatH", "Mv9Cm6GUHcCEXAP9ipn5", "98irZoBeF1TcY9MSewd7"],
       "content": {
         "description": "Fullfør alle kategoriene",
         "image": "",
@@ -970,117 +970,108 @@
       "type": 1
     },
     {
-      "condition": [""],
+      "condition": ["aViaZXEdE6RG4MJUdyH0", "wxGvzCs5wmcnyrySYcF7", "utgz5irPGcwcbLZuqNW2" ,"8IrM3g7YLfHdBSUb7MXi"],
       "content": {
-        "description": "Fullfør alle utfordringer i kategorien ...",
+        "description": "Fullfør alle utfordringer i kategorien Analyse av data",
         "image": "",
         "title": "Kategorisk"
       },
       "type": 1
     },
     {
-      "condition": [""],
+      "condition": ["z095TCsRHDjjXVtNkOJ2", "uhQTzXWaocEFAQOxl5dT", "9nYnavMPlPq98031tuMT", "76cq97Qjo48ONgmd8H5U"],
       "content": {
-        "description": "Fullfør alle utfordringer i kategorien ...",
+        "description": "Fullfør alle utfordringer i kategorien Molekylær Bevegelse",
         "image": "",
         "title": "Samleren"
       },
       "type": 1
     },
     {
-      "condition": [""],
+      "condition": ["kruAnNew6mHOS1qgJna1", "gSZtkJvdewTQvEae50aJ"],
       "content": {
-        "description": "Fullfør alle utfordringer i kategorien ...",
+        "description": "Fullfør alle utfordringer i kategorien Kjemiske Reaksjoner",
         "image": "",
         "title": "Støvsuger alt"
       },
       "type": 1
     },
     {
-      "condition": [""],
+      "condition": ["pQOEsnMyFO3IzVsEyTcs", "EcxIQ2d1ARWNEAlefatH", "Mv9Cm6GUHcCEXAP9ipn5", "98irZoBeF1TcY9MSewd7"],
       "content": {
-        "description": "Fullfør alle utfordringer i kategorien ...",
+        "description": "Fullfør alle utfordringer i kategorien IT",
         "image": "",
         "title": "Medaljisten"
       },
       "type": 1
     },
     {
-      "condition": [""],
-      "content": {
-        "description": "Fullfør alle utfordringer i kategorien ...",
-        "image": "",
-        "title": "Mye vil ha mer"
-      },
-      "type": 1
-    },
-    {
-      "condition": [""],
+      "condition": ["uhQTzXWaocEFAQOxl5dT", "76cq97Qjo48ONgmd8H5U", "kruAnNew6mHOS1qgJna1", "aViaZXEdE6RG4MJUdyH0", "8IrM3g7YLfHdBSUb7MXi", "pQOEsnMyFO3IzVsEyTcs", "EcxIQ2d1ARWNEAlefatH"],
       "content": {
         "description": "Fullfør alle utfordringer med nivået nybegynner.",
         "image": "",
         "title": "En enkel utfordring"
       },
-      "type": 1
+      "type": 2
     },
     {
-      "condition": [""],
+      "condition": ["aViaZXEdE6RG4MJUdyH0", "8IrM3g7YLfHdBSUb7MXi"],
       "content": {
-        "description": "Fullfør alle utfordringer i kategorien ... med nivået nybegynner.",
+        "description": "Fullfør alle utfordringer i kategorien Analyse av data med nivået nybegynner.",
         "image": "",
         "title": "Ikke en nybegynner feil"
       },
       "type": 1
     },
     {
-      "condition": [""],
+      "condition": ["uhQTzXWaocEFAQOxl5dT", "76cq97Qjo48ONgmd8H5U"],
       "content": {
-        "description": "Fullfør alle utfordringer i kategorien ... med nivået nybegynner.",
+        "description": "Fullfør alle utfordringer i kategorien Molekylær Bevegelse med nivået nybegynner.",
         "image": "",
         "title": "Begynn med det grunnleggende"
       },
       "type": 1
     },
     {
-      "condition": [""],
+      "condition": ["kruAnNew6mHOS1qgJna1"],
       "content": {
-        "description": "Fullfør alle utfordringer i kategorien ... med nivået nybegynner.",
+        "description": "Fullfør alle utfordringer i kategorien Kjemiske Reaksjoner med nivået nybegynner.",
         "image": "",
         "title": "En solid grunnmur"
       },
       "type": 1
     },
     {
-      "condition": [""],
+      "condition": ["pQOEsnMyFO3IzVsEyTcs", "EcxIQ2d1ARWNEAlefatH"],
       "content": {
-        "description": "Fullfør alle utfordringer i kategorien ... med nivået nybegynner.",
+        "description": "Fullfør alle utfordringer i kategorien IT med nivået nybegynner.",
         "image": "",
         "title": "Alle må begynne en plass"
       },
       "type": 1
     },
     {
-      "condition": [""],
+      "condition": ["9nYnavMPlPq98031tuMT", "wxGvzCs5wmcnyrySYcF7", "Mv9Cm6GUHcCEXAP9ipn5"],
       "content": {
         "description": "Fullfør alle utfordringer med nivået viderekommen.",
         "image": "",
         "title": "Det neste steget"
       },
-      "type": 1
+      "type": 2
     },
     {
-      "condition": [""],
+      "condition": ["wxGvzCs5wmcnyrySYcF7"],
       "content": {
-        "description": "Fullfør alle utfordringer i kategorien ... med nivået viderekommen.",
+        "description": "Fullfør alle utfordringer i kategorien Analyse av data med nivået viderekommen.",
         "image": "",
         "title": "Kunnskapstørst"
       },
       "type": 1
     },
     {
-      "condition": [""],
+      "condition": ["9nYnavMPlPq98031tuMT"],
       "content": {
-        "description": "Fullfør alle utfordringer i kategorien ... med nivået viderekommen.",
+        "description": "Fullfør alle utfordringer i kategorien Molekylær Bevegelse med nivået viderekommen.",
         "image": "",
         "title": "Veien videre"
       },
@@ -1089,61 +1080,61 @@
     {
       "condition": [""],
       "content": {
-        "description": "Fullfør alle utfordringer i kategorien ... med nivået viderekommen.",
+        "description": "Fullfør alle utfordringer i kategorien Kjemiske Reaksjoner med nivået viderekommen.",
         "image": "",
         "title": "Takler en utfordring"
       },
       "type": 1
     },
     {
-      "condition": [""],
+      "condition": ["Mv9Cm6GUHcCEXAP9ipn5"],
       "content": {
-        "description": "Fullfør alle utfordringer i kategorien ... med nivået viderekommen.",
+        "description": "Fullfør alle utfordringer i kategorien IT med nivået viderekommen.",
         "image": "",
         "title": "Fra viderekommen til fullkommen"
       },
       "type": 1
     },
     {
-      "condition": [""],
+      "condition": ["z095TCsRHDjjXVtNkOJ2", "gSZtkJvdewTQvEae50aJ", "utgz5irPGcwcbLZuqNW2", "98irZoBeF1TcY9MSewd7"],
       "content": {
         "description": "Fullfør alle utfordringer med nivået ekspert.",
         "image": "",
         "title": "Det neste steg"
       },
-      "type": 1
+      "type": 2
     },
     {
-      "condition": [""],
+      "condition": ["utgz5irPGcwcbLZuqNW2"],
       "content": {
-        "description": "Fullfør alle utfordringer i kategorien ... med nivået ekspert.",
+        "description": "Fullfør alle utfordringer i kategorien Analyse av data med nivået ekspert.",
         "image": "",
         "title": "Gjennomkjørt"
       },
       "type": 1
     },
     {
-      "condition": [""],
+      "condition": ["z095TCsRHDjjXVtNkOJ2"],
       "content": {
-        "description": "Fullfør alle utfordringer i kategorien ... med nivået ekspert.",
+        "description": "Fullfør alle utfordringer i kategorien Molekylær Bevegelse med nivået ekspert.",
         "image": "",
         "title": "Kunnskapsgenerator"
       },
       "type": 1
     },
     {
-      "condition": [""],
+      "condition": ["gSZtkJvdewTQvEae50aJ"],
       "content": {
-        "description": "Fullfør alle utfordringer i kategorien ... med nivået ekspert.",
+        "description": "Fullfør alle utfordringer i kategorien Kjemiske Reaksjoner med nivået ekspert.",
         "image": "",
         "title": "Ekspertise"
       },
       "type": 1
     },
     {
-      "condition": [""],
+      "condition": ["98irZoBeF1TcY9MSewd7"],
       "content": {
-        "description": "Fullfør alle utfordringer i kategorien ... med nivået ekspert.",
+        "description": "Fullfør alle utfordringer i kategorien IT med nivået ekspert.",
         "image": "",
         "title": "Bezzerwizzer"
       },

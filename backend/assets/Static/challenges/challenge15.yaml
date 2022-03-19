@@ -26,8 +26,13 @@ activity:
       - Del koden opp i tre funksjoner; en hovedfunksjon, en funksjon som beregner ny totalsum på konto når renter er lagt til, en funksjon som øker renten med 0.25.
       - "For å definere en funskjon i Pyhton kan du skrive: def beregnRente()"
       - "Koden for å be brukeren om en input og konvertere inputen fra tekst til tall i Pyhton er: int(input('Hvilke rente har du?' ))" 
+      - "Antall år vil være antall ganger while-løkken har kjørt til den oppfyller: totalsum < 9000"
     id: DQvBFOyVWUohwavoNkm3
-    resources: []
+    resources: ["https://www.w3schools.com/python/python_variables.asp",
+                "https://www.w3schools.com/python/python_operators.asp", 
+                "https://www.w3schools.com/python/python_functions.asp", 
+                "https://www.w3schools.com/python/python_while_loops.asp", 
+                "https://www.w3schools.com/python/python_user_input.asp"]
     type: 1
 content:
     description: |
@@ -47,16 +52,15 @@ content:
       - Definere funksjoner for å gjøre kode lettleselig og gjennbrukbar
 
     id: TxTeqd1rWTm9xFssF7ym
-    images: []
+    images: ["economy1.jpg", "economy2.jpg"]
     title: Personlig økonomi
 reflection:
     id: zm3wMXHzQ9bHVaeiAUdH
-    solution: >
-      []
+    solution: ""
     title: Refleksjon
     reflectionType: 1
 reward:
-    bonusPoints: 0
-    firstTryPoints: 0
+    bonusPoints: 6
+    firstTryPoints: 5
     id: h7nZ8K22WkcGGdBqqDfi
     maxPoints: 20

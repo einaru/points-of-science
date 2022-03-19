@@ -36,7 +36,7 @@ activity:
       - https://www.kiwico.com/diy/stem/crazy-chemistry/carbon-sugar-snake
     type: 1
 content:
-    description: >
+    description: |
       Dette eksperimentet viser hvordan tre kjemiske reaksjoner som all er
       avhengig av varme, reagerer med hverandre. Resultatet er at det vokser en
       *slange* ut av sanden. Ved å forstå egenskapene til de ulike komponentene
@@ -51,7 +51,7 @@ reflection:
     title: Kan du forklare hvilke kjemiske reaksjoner som får slangen til å vokse?
     reflectionType: 1
 reward:
-    bonusPoints: 5
-    firstTryPoints: 2
+    bonusPoints: 9
+    firstTryPoints: 5
     id: dhTqTDdJDc3H3GKVcrLj
-    maxPoints: 15
+    maxPoints: 30

@@ -48,12 +48,14 @@ content:
     title: Vannkraft og fyllingsgrad
 reflection:
     id: yCIQ702tm4HGhtRb7dV6
-    solution: >
-      ["Hvordan påvirker året fyllingsgraden i vannmagasinene?", "Hvilken sammenheng er det mellom fyllingsgraden for ett år til ett annet?", "Hvordan påvirker endringen i fyllingsgraden for ett år antall terrawatttimer som leveres det neste året?"]
+    solution:
+      ["Hvordan påvirker året fyllingsgraden i vannmagasinene?",
+      "Hvilken sammenheng er det mellom fyllingsgraden for ett år til ett annet?", 
+      "Hvordan påvirker endringen i fyllingsgraden for ett år antall terrawatttimer som leveres det neste året?"]
     title: Hvilke spørsmål kan du stille deg ut fra dataen som ble presentert?
     reflectionType: 1
 reward:
-    bonusPoints: 0
-    firstTryPoints: 0
+    bonusPoints: 3
+    firstTryPoints: 5
     id: ccVlqgFTF1yXtR5QhZ5O
-    maxPoints: 30
+    maxPoints: 10

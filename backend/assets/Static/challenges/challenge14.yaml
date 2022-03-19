@@ -34,7 +34,7 @@ activity:
 
     hints: []
     id: 15wg16ueZ6WJFL7waezS
-    resources: []
+    resources: ["https://www.w3schools.com/python/python_variables.asp", "https://www.w3schools.com/python/python_operators.asp", "https://www.w3schools.com/python/python_user_input.asp"]
     type: 1
 content:
     description: |
@@ -51,16 +51,15 @@ content:
       - Ta inn input fra brukeren
 
     id: 4XuHtwGYid0AxZ17xoBE
-    images: []
+    images: ["pizza1.jpg", "pizza2.jpg"]
     title: Konvertere oppskrift
 reflection:
     id: FH2v5pPdGvdFKPPeHoeL
-    solution: >
-      []
+    solution: ""
     title: Tittel
     reflectionType: 1
 reward:
-    bonusPoints: 0
-    firstTryPoints: 0
+    bonusPoints: 3
+    firstTryPoints: 5
     id: IKB5qDAANFuGBIbrm1xx
     maxPoints: 10

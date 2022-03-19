@@ -29,7 +29,7 @@ activity:
       - https://www.sciencekiddo.com/salt-water-experiment-ocean-science/
     type: 1
 content:
-    description: >
+    description: 1
       I dette eksperimentet skal du bruke kunnskapen du har lært fra andre
       eksperimenter om massetetthet, men benytte kontroll og eksperiment
       metodikk til å validere og forklare hypotesene dine.
@@ -38,12 +38,25 @@ content:
     title: Saltvann med kontroll
 reflection:
     id: n4Joab3yzzcvSs0804Pe
-    solution: Vann tilsatt bakepulver eller salt får mer massetetthet enn naturlig vann, og mer massetetthet enn gjenstandene. Derfor flytter gjenstandene.
+    solution: 
+    - vann tilsatt 
+    - bakepulver 
+    - eller 
+    - salt 
+    - får mer 
+    - massetetthet 
+    - enn naturlig vann 
+    - og mer 
+    - massetetthet enn gjenstandene
     title: Hvorfor flyter egget eller druene i vann som er tilsatt bakepulver eller salt, men ikke i glasset med rent vann i?
-    choices: []
+    choices: ["vann tilsatt", "zalo", "bakepulver", 
+              "og", "eller", "både", "salt", "får mindre", 
+              "får mer", "får lik", "massetetthet", 
+              "enn vann med sitron smak", "enn naturlig vann", 
+              "enn forurenset vann", "og mer", "massetetthet enn gjenstandene"]
     reflectionType: 2
 reward:
-    bonusPoints: 2
-    firstTryPoints: 2
+    bonusPoints: 3
+    firstTryPoints: 5
     id: yepYiQdENAfvClvtfBWk
-    maxPoints: 5
+    maxPoints: 10

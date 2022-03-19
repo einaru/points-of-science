@@ -42,7 +42,12 @@ content:
     title: Tenner og sukkerholdig drikke
 reflection:
     id: moj6uCdgcuOBsK3rEGwu
-    solution: mer syreholdig drikke får kalsium til å oppløses, mens sukkeret bidrar til nedbrytning.
+    solution: 
+      - mer syreholdig
+      - drikke får kalsium 
+      - til å oppløses, 
+      - mens sukker bidrar 
+      - til nedbrytning
     title: Sett sammen en argumentasjon med noen av ordene nedenfor som forklarer hvorfor eggene blir misfarget
     choices:
       - mer baseholdig
@@ -50,12 +55,12 @@ reflection:
       - drikke får kalsium
       - til å forsterkes
       - får kalsium
-      - til å oppløses
+      - til å oppløses,
       - mens sukker bidrar
       - til nedbrytning
     reflectionType: 2
 reward:
-    bonusPoints: 5
-    firstTryPoints: 2
+    bonusPoints: 3
+    firstTryPoints: 5
     id: EaoxnMQnXC3mvcLsEpoT
     maxPoints: 10

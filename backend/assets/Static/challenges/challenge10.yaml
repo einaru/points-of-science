@@ -60,12 +60,16 @@ content:
     title: Fartøy og landsdel 2
 reflection:
     id: 0F3m68TQsq59mCcxTAUb
-    solution: >
-      ["Hvilken sammenheng er det mellom størrelsen på båten og fylke?", "Hvordan påvirker fylket byggeåret til fartøyet?", "Hvordan er sammenhengen mellom byggeåret til fartøyet og byggåret til motoren?", "Hvordan påvirker byggeåret til båten lengden?", "Hvilken påvirkning har størrelsen på båten på byggeåret til motoren?"]
+    solution:
+      ["Hvilken sammenheng er det mellom størrelsen på båten og fylke?", 
+      "Hvordan påvirker fylket byggeåret til fartøyet?",
+      "Hvordan er sammenhengen mellom byggeåret til fartøyet og byggåret til motoren?",
+      "Hvordan påvirker byggeåret til båten lengden?",
+      "Hvilken påvirkning har størrelsen på båten på byggeåret til motoren?"]
     title: Hvilke spørsmål kan du stille deg ut fra dataen som ble presentert?
     reflectionType: 1
 reward:
-    bonusPoints: 0
-    firstTryPoints: 0
+    bonusPoints: 6
+    firstTryPoints: 5
     id: jsjx8GFZ3D9eMoqjN775
-    maxPoints: 15
+    maxPoints: 20

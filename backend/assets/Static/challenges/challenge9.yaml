@@ -61,12 +61,14 @@ content:
     title: Fartøy og landsdel
 reflection:
     id: 4YjccdlkGLun8KdGQNzI
-    solution: >
-      ["Hvilken sammenheng er det mellom byggeår for motorer og motorkraft?", "Hvordan påvirker fylke motokraften?", "Hvilken sammenheng er det mellom lokasjonen til fylke og motorkraft?", "Hvordan påvirker fylke byggeåret til motoren?"]
+    solution:
+      ["Hvilken sammenheng er det mellom byggeår for motorer og motorkraft?",
+      "Hvordan påvirker fylke motokraften?", "Hvilken sammenheng er det mellom lokasjonen til fylke og motorkraft?",
+      "Hvordan påvirker fylke byggeåret til motoren?"]
     title: Hvilke spørsmål kan du stille deg ut fra dataen som ble presentert?
     reflectionType: 1
 reward:
-    bonusPoints: 0
-    firstTryPoints: 0
+    bonusPoints: 3
+    firstTryPoints: 5
     id: 5uB0ksRVgGak9tQNiPKy
     maxPoints: 10

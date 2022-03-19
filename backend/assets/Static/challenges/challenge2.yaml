@@ -29,7 +29,7 @@ activity:
     - Kaldt vann har høyere massetetthet enn varmt vann.
     - Molekyler som blir oppvarmet beveger seg raskere og har større avstand mellom molekylene.
   id: 4IjfUeeQ1fPrMDd1bSdO
-  resources: []
+  resources: ["https://www.steamsational.com/hot-and-cold-water-density-experiment/"]
   type: 1
 content:
   description: >
@@ -42,7 +42,14 @@ content:
   title: Massetetthet
 reflection:
     id: "B7HpOyaKs16VvUmy41LE"
-    solution: \"varmt vann\",\"har mindre\",\"massetetthet enn\",\"kaldt vann\",\"på grunn av\",\"forskjellen\",\"i molekylenes bevegelser\"
+    solution: 
+      - varmt vann
+      - har mindre
+      - massetetthet enn
+      - kaldt vann 
+      - på grunn av 
+      - forskjellen 
+      - i molekylenes bevegelser
     title: "Hvorfor blander ikke vannet seg når varmt vann er på toppen?"
     choices:
       - varmt vann
@@ -56,8 +63,8 @@ reflection:
       - i molekylenes bevegelser
     reflectionType: 2
 reward:
-    bonusPoints: 2
-    firstTryPoints: 2
+    bonusPoints: 3
+    firstTryPoints: 5
     id": tvwsU7Kd8TS6zT5cwKdb
-    maxPoints: 5
+    maxPoints: 10
 

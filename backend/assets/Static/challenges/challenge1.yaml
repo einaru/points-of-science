@@ -51,8 +51,8 @@ reflection:
     title: Hvorfor beveger væsken seg fra ett glass til ett annet?
     reflectionType: 1
 reward:
-    bonusPoints: 5
-    firstTryPoints: 2
+    bonusPoints: 9
+    firstTryPoints: 5
     id: TymTg5ADZsoAIFDYniFP
-    maxPoints: 15
+    maxPoints: 30
 

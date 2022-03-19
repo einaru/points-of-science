@@ -1,27 +1,66 @@
 id: 98irZoBeF1TcY9MSewd7
 categoryID: g3Oo3WDAOZCudZt3EZOD
-difficulty: 1
+difficulty: 3
 activity:
     description: |
-      Beskrivelse
-    hints: []
+      # Beskrivelse
+
+      I denne utfordringen skal du programmere en simulering av en ball som faller mot bakken som ikke blir påvirket av luftmotstand.
+      Antar vi at luftmotstand ikke finnes, vil ballen akselerere med en hastighet tilsvarende gravitasjonkraften, som er angitt til 9.8 meter per sekund.
+      Over tid, altså når ballen faller mot bakken, vil gravitasjonskraften være eneste påvirkning på akselerasjonen til ballen. 
+      
+      Hvis ballen kastes oppover sier vi at det gir en positiv hastighet. Ettersom å falle nedover er motsatt av og bli kastet oppover, sier vi at det gir en negativ hastight.
+      For å kunne vise hva som skjer hastigheten over tid må derfor gravitasjonskraften være -9.8 m/s/s.
+
+      Oppgaven din går ut på å lage en funksjon i programmeringsspråket Python som simulerer hvordan akselerasjonen til ballen utvikler seg over tid.
+      Funksjonen skal ta in tre input; høyde, gravitasjonskraften for en fallende gjenstand og endring over tid.
+
+      Variabler du kan trenge til denne oppgaven er:
+      - h (Høyde, målt i meter hvor ballen skal slippes fra)
+      - g (Gravitasjon, målt i meter per sekund, den negative akselerasjonen til ballen)
+      - dT (Endring over tid, målt i sekunder og er et desimaltall)
+      - y (Posisjonen til ballen over tid. En liste som lagrer posisjonen)
+      - v (Hastigheten til ballen over tid. En liste som lagrer hastigheten)
+      - t (Måling av tidsspunkter. En liste som lagrer tidspunkter)
+
+      Mattematiske formler du trenger til denne oppgaven:
+      - t(i+1) = t(i) + dt;
+      - v(i+1) = v(i) + g * dt;
+      - y(i+1) = y(i) + v(i+1) * dt;
+
+    hints: ["Steg 1 er å definere en funksjon som tar inn variablene h, g, og dT som input.",
+            "Steg 2 er å definere de tre listene y, v og t inne i funksjonen.",
+            "Steg 3 er å definere en for-løkke som går fra 0 til 100 og som benytter de matematiske formlene i sin beregning."]
     id: Fzs01VHtwXJHQvT7B9DB
     resources: []
     type: 1
 content:
     description: |
-      Beskrivelse
+      # Beskrivelse
+
+      Som vi har sett i de andre utfordringene har programmering mange bruksområder. 
+      Et annet nyttig bruksområde for programmering er simuleringer av fenomener innen fysikk som kan være tidkrevende å regne ut for hånd.
+      Et slikt fenomen, som denne utfordringen tar for seg, er å gjøre beregninger på en gjenstand som endres over tid. 
+      Det er en repitiv kalkulasjon som programmering kan benyttes til å løse. 
+      I denne utfordringen vil du bli utfordret i forståelse og trene din evne i å bryte ned ett problem i mindre deler som er mer håndterbare. 
+
+      Hva vil du lære:
+      - Bruke programmering til å modelere fysiske prinsipper
+      - If/else setninger
+      - Benytte for-løkker til å gjenta en beregning
+      - Definere funksjoner
+      - Bruke lister
+
     id: MG1QzidN1uOHseaQwDVn
-    images: []
-    title: Tittel
+    images: ["fallingball.jpg"]
+    title: Baller uten luftmotstand
 reflection:
     id: n6G6m1pwECgrcFn2cbRf
-    solution: >
-      []
+    solution: ""
     title: Tittel 
     reflectionType: 1
 reward:
-    bonusPoints: 0
-    firstTryPoints: 0
+    bonusPoints: 9
+    firstTryPoints: 5
     id: QullwrTk8vxgrCjMDX51
     maxPoints: 30

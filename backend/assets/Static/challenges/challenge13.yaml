@@ -58,7 +58,11 @@ activity:
 
     hints: []
     id: bBjeO0ow8icKbEJDBFJK
-    resources: []
+    resources: ["https://www.w3schools.com/python/python_variables.asp", 
+                "https://www.w3schools.com/python/python_operators.asp", 
+                "https://www.w3schools.com/python/python_conditions.asp", 
+                "https://www.youtube.com/watch?v=8BOvLL8ok8I", 
+                "https://www.youtube.com/watch?v=IxXaizglscw"]
     type: 1
 content:
     description: |
@@ -75,17 +79,17 @@ content:
       - Tilordning av en variabel med =
       - Sjekke om verdien til en variabel er lik med ==
       - Skrive resultatet ut til konsoll
+
     id: VMnQWMVYARSiWVr9Ixhc
-    images: []
+    images: ["code.jpg"]
     title: Logiske Porter
 reflection:
     id: NdvMKFVncsx1tur9YVHR
-    solution: >
-      []
+    solution: ""
     title: Hvorfor er det nyttig å kunne programmere logiske kretser?
     reflectionType: 1
 reward:
-    bonusPoints: 0
-    firstTryPoints: 0
+    bonusPoints: 3
+    firstTryPoints: 5
     id: zJLOZL2UvsjaLNie1sNv
     maxPoints: 10

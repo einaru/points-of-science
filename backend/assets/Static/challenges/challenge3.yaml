@@ -39,7 +39,7 @@ content:
       forskjellige væsker og hvordan du kan bruke denne kunnskapen til å kunne
       forklare massetettheten til andre gjenstander.
     id: cxJY5vD0f5erc5vtSq62
-    images: []
+    images: [""]
     title: Lag på lag
 reflection:
     id: h4rKLFAoVF0BG665vhZ4
@@ -47,7 +47,7 @@ reflection:
     title: Hva var dine hypoteser? Prøv å forklare hva du observerte.
     reflectionType: 1
 reward:
-    bonusPoints: 5
-    firstTryPoints: 2
+    bonusPoints: 6
+    firstTryPoints: 5
     id: yM0sGB7OSz4c8pxpBSJZ
-    maxPoints: 15
+    maxPoints: 20

@@ -61,7 +61,7 @@ content:
     title: Historisk påvirkning... eller ikke?
 reflection:
     id: MQg5Ummw0axQszj1Acen
-    solution: >
+    solution:
       ["Hvilken sammenheng er det mellom land og setekilometer?", 
       "Hvilken sammenheng er det mellom setekilometer og dødsfall på grunn av menneskligsvikt i periodene 1985 til 1999 og 2000 til 2014?", 
       "Hvordan er sammenhengen mellom perioden 1985 til 1999 og 2000 til 2014 for data om dødsfall på grunn av teknisksvikt?", 
@@ -71,7 +71,7 @@ reflection:
     title: Hvilke spørsmål kan du stille deg ut fra dataen som ble presentert?
     reflectionType: 1
 reward:
-    bonusPoints: 0
-    firstTryPoints: 0
+    bonusPoints: 9
+    firstTryPoints: 5
     id: Lj1C7tZPrJgV9eQetqIw
     maxPoints: 30

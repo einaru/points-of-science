@@ -926,7 +926,7 @@
       "id": "7E9Z37Z07xzbkfBqJg1f"
     },
     {
-      "challenges": ["kruAnNew6mHOS1qgJna1", "gSZtkJvdewTQvEae50aJ"],
+      "challenges": ["kruAnNew6mHOS1qgJna1", "gSZtkJvdewTQvEae50aJ", "KDiSyRcjQT6o25D1UWr8"],
       "content": {
         "description": "",
         "id": "eYygihbnUHlca5IOLWDi",
@@ -957,8 +957,8 @@
     }
   ],
   "Challenge": ["challenge1.yaml", "challenge2.yaml", "challenge3.yaml", "challenge4.yaml",
-    "challenge5.yaml", "challenge6.yaml", "challenge9.yaml",
-    "challenge10.yaml", "challenge11.yaml", "challenge12.yaml", "challenge13.yaml", "challenge14.yaml", "challenge15.yaml", "challenge16.yaml"],
+    "challenge5.yaml", "challenge6.yaml", "challenge7.yaml", "challenge8.yaml",
+    "challenge9.yaml", "challenge10.yaml", "challenge11.yaml", "challenge12.yaml", "challenge13.yaml", "challenge14.yaml", "challenge15.yaml"],
   "Achievement": [
     {
       "condition": ["z095TCsRHDjjXVtNkOJ2", "uhQTzXWaocEFAQOxl5dT", "9nYnavMPlPq98031tuMT", "76cq97Qjo48ONgmd8H5U", "kruAnNew6mHOS1qgJna1", "gSZtkJvdewTQvEae50aJ", "aViaZXEdE6RG4MJUdyH0", "wxGvzCs5wmcnyrySYcF7", "utgz5irPGcwcbLZuqNW2" ,"8IrM3g7YLfHdBSUb7MXi", "pQOEsnMyFO3IzVsEyTcs", "EcxIQ2d1ARWNEAlefatH", "Mv9Cm6GUHcCEXAP9ipn5", "98irZoBeF1TcY9MSewd7"],
@@ -988,7 +988,7 @@
       "type": 1
     },
     {
-      "condition": ["kruAnNew6mHOS1qgJna1", "gSZtkJvdewTQvEae50aJ"],
+      "condition": ["kruAnNew6mHOS1qgJna1", "gSZtkJvdewTQvEae50aJ", "KDiSyRcjQT6o25D1UWr8"],
       "content": {
         "description": "Fullfør alle utfordringer i kategorien Kjemiske Reaksjoner",
         "image": "",
@@ -1019,7 +1019,7 @@
       "content": {
         "description": "Fullfør alle utfordringer i kategorien Analyse av data med nivået nybegynner.",
         "image": "",
-        "title": "Ikke en nybegynner feil"
+        "title": "Junior analytiker"
       },
       "type": 1
     },
@@ -1078,7 +1078,7 @@
       "type": 1
     },
     {
-      "condition": [""],
+      "condition": ["KDiSyRcjQT6o25D1UWr8"],
       "content": {
         "description": "Fullfør alle utfordringer i kategorien Kjemiske Reaksjoner med nivået viderekommen.",
         "image": "",
@@ -1100,7 +1100,7 @@
       "content": {
         "description": "Fullfør alle utfordringer med nivået ekspert.",
         "image": "",
-        "title": "Det neste steg"
+        "title": "Ingen utfordring er for stor"
       },
       "type": 2
     },

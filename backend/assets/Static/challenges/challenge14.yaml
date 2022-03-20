@@ -1,65 +1,66 @@
-id: EcxIQ2d1ARWNEAlefatH
+id: Mv9Cm6GUHcCEXAP9ipn5
 categoryID: g3Oo3WDAOZCudZt3EZOD
-difficulty: 1
+difficulty: 2
 activity:
     description: |
       # Beskrivelse
 
-      I denne utfordringen skal du bruke programmering til å finne ut hvor mye du trenger av hver ingrediens for å bake en pizzadeig. 
-      En langpannet pizzadeig har følgende ingredienser og mengde:
-
-      | Ingrediens   | mengde | enhet |
-      | :--------:   | :----: | :---: |
-      | Vann         | 3      | dl    |
-      | Gjær         | 1      | pk*   |
-      | Nøytral olje | 2      | ss**  |
-      | Salt         | 0.5    | ts*** |
-      | Hvetemel     | 10     | dl    |
-
-      pk* = pakke, ss** = spiseskje, ts*** = teskje
-
-      Din oppgave er å kunne spørre brukeren om hvor stor pizza brukeren ønsker å bake, for så å skrive ut hvor mye av hver ingrediens brukeren trenger.
-      La brukeren oppgi størrelsen på pizzaen med ett tall, hvor input 1 gir vanlig størrelse, 2 gir dobbel størrelse og 0.5 gir halv størrelse på pizzadeigen. 
-      Følgende er ett eksempel på hvordan koden skal fungere:
+      Å vite hvor mange penger man har i banken etter ett angitt antall år kan være nyttig hvis man for eksempel sparer til noe man har tenkt å bruke pengene på.
+      Da kan det være nyttig å skaffe en oversikt over hvor mange penger man har nå og hvor mye man kan forvente å ha i fremtiden, som kan gi svar på hvor lenge det må spares for å få råd.
+      I denne utfordringen skal du skrive en kode som beregner hvor mange penger du kan forvente å ha på konto etter X antall år. 
       
-      ```python
-      Hvor stor pizza ønsker du å bake? 2
-      Størrelse på pizza: Dobbel
-      Vann (dl): 6
-      Gjær (pk): 2
-      Nøytral olje (ss): 4
-      Salt (ts): 1
-      Hvetemel (dl): 20
-      ```
+      Pengene har du tenkt å kjøpe en liten båt du kan dra på fisketur med. Båten koster 9000 kroner, mens du har 2000 kroner til rådighet. Renten du får hvert år på pengene dine er 0.5 prosent. 
+      
+      1. Din oppgave er å skrive en kode som kan gi deg svar på hvor lenge du må spare for få råd til båten.
 
-    hints: []
-    id: 15wg16ueZ6WJFL7waezS
-    resources: ["https://www.w3schools.com/python/python_variables.asp", "https://www.w3schools.com/python/python_operators.asp", "https://www.w3schools.com/python/python_user_input.asp"]
+      En feil antagelse som er gjort i oppgaven over er at du får 0.5 prosent rente hvert år. Det er feil fordi renten kan endres fra ett år til det neste.
+      
+      2. Din oppgave er å endre koden fra forrige oppgave til at for hvert år som går øker renten med 0.25 prosent. 
+      Det vil si at renten det første året er 0.5, det andre året 0.75 prosent, det tredje året 1 prosent, osv.
+
+      For å gjøre koden lettere å lese og forstå, samt gjøre koden gjenbrukbar er det nyttig å dele koden opp i funksjoner.
+      
+      3. Din oppgave er å benytte funksjoner til å kjøre ulike deler av koden slik at den fremdeles kjører som før, men består av flere deler som gjør den mer lesbar og forståelig.
+
+    hints:
+      - Del koden opp i tre funksjoner; en hovedfunksjon, en funksjon som beregner ny totalsum på konto når renter er lagt til, en funksjon som øker renten med 0.25.
+      - "For å definere en funskjon i Pyhton kan du skrive: def beregnRente()"
+      - "Koden for å be brukeren om en input og konvertere inputen fra tekst til tall i Pyhton er: int(input('Hvilke rente har du?' ))" 
+      - "Antall år vil være antall ganger while-løkken har kjørt til den oppfyller: totalsum < 9000"
+    id: DQvBFOyVWUohwavoNkm3
+    resources: ["https://www.w3schools.com/python/python_variables.asp",
+                "https://www.w3schools.com/python/python_operators.asp", 
+                "https://www.w3schools.com/python/python_functions.asp", 
+                "https://www.w3schools.com/python/python_while_loops.asp", 
+                "https://www.w3schools.com/python/python_user_input.asp"]
     type: 1
 content:
     description: |
       # Beskrivelse
 
-      Bakking er noe mange gjør i hverdagen og det pleier å være en utfordring å måtte redusere eller øke en oppskrift om man vil ha flere eller færre porsjoner.
-      Oppgaver som gjenntas ofte er typiske oppgaver som programmering kan være ett nyttig værktøy å benytte for å løse. Øking og redusering av en bakeoppskrift er en slik oppgave.
-      I stedenfor å konvertere en bakeoppskrift manuelt, skal du her lære hvordan du kan benytte programmering til å gjøre det for deg, slik at du kan bruke mer tid på bakingen
-      og mindre tid på repetive beregninger.
+      Gjentagende utregninger som må utføres for å finne ett svar er noe bruk av programmering er bra å bruke til. 
+      Et eksempel fra dagliglivet er å finne ut hvor mange penger som står på konto etter antall år og man får rente på pengene.
+      Istedenfor å gjøre slike beregninger manuelt, kan man skrive kode som tar hensyn til antall år pengene skal stå i banken og renten
+      som påløper pengene. Det er praktisk å ha en slik kode fordi du enkelt kan beregne et nytt resultat etter at det har gått 
+      for eksempel tre år siden sist man utførte forrige beregning på pengene sine. På den måten trenger man ikke å gjøre jobben manuelt igjen.
 
       Hva vil du lære:
       - Printe ut tekst til skjerm
       - Enkle kalkulasjoner
       - Ta inn input fra brukeren
+      - Benytte while-løkker til å gjenta en beregning
+      - Definere funksjoner for å gjøre kode lettleselig og gjennbrukbar
 
-    id: 4XuHtwGYid0AxZ17xoBE
-    images: ["pizza1.jpg", "pizza2.jpg"]
-    title: Konvertere oppskrift
+    id: TxTeqd1rWTm9xFssF7ym
+    images: ["economy1.jpg", "economy2.jpg"]
+    title: Personlig økonomi
 reflection:
-    id: FH2v5pPdGvdFKPPeHoeL
-    solution: ""
-    title: Tittel
+    id: zm3wMXHzQ9bHVaeiAUdH
+    solution: "31 år"
+    title: Hvor mange år tok det før du fikk råd til å kjøpe båten i oppgave 1?
     reflectionType: 1
 reward:
-    bonusPoints: 3
+    bonusPoints: 6
     firstTryPoints: 5
-    id: IKB5qDAANFuGBIbrm1xx
-    maxPoints: 10
+    id: h7nZ8K22WkcGGdBqqDfi
+    maxPoints: 20

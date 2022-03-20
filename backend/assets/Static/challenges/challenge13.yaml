@@ -1,95 +1,65 @@
-id: pQOEsnMyFO3IzVsEyTcs
+id: EcxIQ2d1ARWNEAlefatH
 categoryID: g3Oo3WDAOZCudZt3EZOD
 difficulty: 1
 activity:
     description: |
       # Beskrivelse
 
-      I denne utfordringen skal du programmere logiske porter ved å benytte programmeringsspråket Python. 
-      Hvis du ikke har python installert på din datamaskin kan du laste ned Python ved å følge denne lenken: https://www.python.org/downloads/
+      I denne utfordringen skal du bruke programmering til å finne ut hvor mye du trenger av hver ingrediens for å bake en pizzadeig. 
+      En langpannet pizzadeig har følgende ingredienser og mengde:
 
-      Din første utfordring er å programmere en AND port i Python. En AND port tar kun inn to input. Verdien til en input er enten 1 eller 0.
-      Hvis begge verdiene til inputene er 1, skal verdien 1 skrives ut. Hvis begge verdiene til inputene er 0 skal 0 skrives ut, det samme gjelder for 0 og 1.
-      Tabellen under viser hvilke to verdier for input som gir hvilke output:
+      | Ingrediens   | mengde | enhet |
+      | :--------:   | :----: | :---: |
+      | Vann         | 3      | dl    |
+      | Gjær         | 1      | pk*   |
+      | Nøytral olje | 2      | ss**  |
+      | Salt         | 0.5    | ts*** |
+      | Hvetemel     | 10     | dl    |
 
-      | Input 1 | Input 2 | Output |
-      | :-----: | :-----: | :----: |
-      | 0       | 0       | 0      |
-      | 0       | 1       | 0      |
-      | 1       | 0       | 0      |
-      | 1       | 1       | 1      |
+      pk* = pakke, ss** = spiseskje, ts*** = teskje
 
-      Din andre utfordring er å programmere en NAND port i Python. En NAND port (Not AND port) tar i likhet med AND port inn to input. Verdien til en input er enten 1 eller 0.
-      Hvis begge verdiene til inputene er 1, skal verdien 0 skrives ut. Hvis begge verdiene til inputene er 0 skal 1 skrives ut, det samme gjelder for 0 og 1.
-      Tabellen under viser hvilke to verdier for input som gir hvilke output:
-
-      | Input 1 | Input 2 | Output |
-      | :-----: | :-----: | :----: |
-      | 0       | 0       | 1      |
-      | 0       | 1       | 1      |
-      | 1       | 0       | 1      |
-      | 1       | 1       | 0      |
-
-      Din tredje utfordring er å programmere en OR port i Python. En OR port tar inn to input. Verdien til en input er enten 1 eller 0.
-      Hvis begge verdiene til inputene er 1, skal verdien 1 skrives ut, det samme gjelder for 0 og 1. Hvis begge verdiene til inputene er 0 skal 0 skrives ut.
-      Tabellen under viser hvilke to verdier for input som gir hvilke output:
-
-      | Input 1 | Input 2 | Output |
-      | :-----: | :-----: | :----: |
-      | 0       | 0       | 0      |
-      | 0       | 1       | 1      |
-      | 1       | 0       | 1      |
-      | 1       | 1       | 1      |
-
-      Din fjerde utfordring er å programmere en NOR port i Python. En NOR port tar inn to input. Verdien til en input er enten 1 eller 0.
-      Hvis begge verdiene til inputene er 1, skal verdien 0 skrives ut, det samme gjelder for 0 og 1. Hvis begge verdiene til inputene er 0 skal 1 skrives ut.
-      Tabellen under viser hvilke to verdier for input som gir hvilke output:
-
-      | Input 1 | Input 2 | Output |
-      | :-----: | :-----: | :----: |
-      | 0       | 0       | 1      |
-      | 0       | 1       | 0      |
-      | 1       | 0       | 0      |
-      | 1       | 1       | 0      |
-
-      For å kunne løse disse utfordringene må du bruke en if/else setning og print()-funksjonen i Python.
-
-      Hvis du vil ha en ekstra utfordring kan du prøve å lage en funksjon for hver logiske port.
+      Din oppgave er å kunne spørre brukeren om hvor stor pizza brukeren ønsker å bake, for så å skrive ut hvor mye av hver ingrediens brukeren trenger.
+      La brukeren oppgi størrelsen på pizzaen med ett tall, hvor input 1 gir vanlig størrelse, 2 gir dobbel størrelse og 0.5 gir halv størrelse på pizzadeigen. 
+      Følgende er ett eksempel på hvordan koden skal fungere:
+      
+      ```python
+      Hvor stor pizza ønsker du å bake? 2
+      Størrelse på pizza: Dobbel
+      Vann (dl): 6
+      Gjær (pk): 2
+      Nøytral olje (ss): 4
+      Salt (ts): 1
+      Hvetemel (dl): 20
+      ```
 
     hints: []
-    id: bBjeO0ow8icKbEJDBFJK
-    resources: ["https://www.w3schools.com/python/python_variables.asp", 
-                "https://www.w3schools.com/python/python_operators.asp", 
-                "https://www.w3schools.com/python/python_conditions.asp", 
-                "https://www.youtube.com/watch?v=8BOvLL8ok8I", 
-                "https://www.youtube.com/watch?v=IxXaizglscw"]
+    id: 15wg16ueZ6WJFL7waezS
+    resources: ["https://www.w3schools.com/python/python_variables.asp", "https://www.w3schools.com/python/python_operators.asp", "https://www.w3schools.com/python/python_user_input.asp"]
     type: 1
 content:
     description: |
       # Beskrivelse
 
-      Logiske porter (Engelsk: Logic gates) er grunnleggende byggesteiner i elektriskekretser og benyttes blant annet til å lede strøm til lyspærer.
-      Andre anvendelsesområder for logiske porter er i digitalekretser som benyttes i en datamaskin. I en datamaskin bidrar logiske porter til kalkulering av mattematiske uttrykk,
-      lagring av data eller til å sjekke om en eller flere verdier i ett matematisk uttrykk er riktig. Fordi logiske porter benyttes i digitalekretser, som igjen benyttes i datamaskiner, betyr det at disse enkle
-      komponentene også er sentrale deler for å få en bil, et fly, en båt eller et kamera til å fungere. I alt finnes det syv ulike logiske porter: AND, OR, NOT, NAND, NOR, XOR, XNOR. 
+      Bakking er noe mange gjør i hverdagen og det pleier å være en utfordring å måtte redusere eller øke en oppskrift om man vil ha flere eller færre porsjoner.
+      Oppgaver som gjenntas ofte er typiske oppgaver som programmering kan være ett nyttig værktøy å benytte for å løse. Øking og redusering av en bakeoppskrift er en slik oppgave.
+      I stedenfor å konvertere en bakeoppskrift manuelt, skal du her lære hvordan du kan benytte programmering til å gjøre det for deg, slik at du kan bruke mer tid på bakingen
+      og mindre tid på repetive beregninger.
 
-      I denne utfordringen skal du få lære å programmere logiskekretser i programmeringsspråket Pyhton. Ved å lære å programmere logiskekretser er det lettere å teste og mindre tidkrevende å få resultatet fra en eller flere logiske kretser.
       Hva vil du lære:
-      - Bruke if/else setninger i Python 
-      - Tilordning av en variabel med =
-      - Sjekke om verdien til en variabel er lik med ==
-      - Skrive resultatet ut til konsoll
+      - Printe ut tekst til skjerm
+      - Enkle kalkulasjoner
+      - Ta inn input fra brukeren
 
-    id: VMnQWMVYARSiWVr9Ixhc
-    images: ["code.jpg"]
-    title: Logiske Porter
+    id: 4XuHtwGYid0AxZ17xoBE
+    images: ["pizza1.jpg", "pizza2.jpg"]
+    title: Konvertere oppskrift
 reflection:
-    id: NdvMKFVncsx1tur9YVHR
+    id: FH2v5pPdGvdFKPPeHoeL
     solution: ""
-    title: Hvorfor er det nyttig å kunne programmere logiske kretser?
+    title: Hva lærte du av denne oppgaven?
     reflectionType: 1
 reward:
     bonusPoints: 3
     firstTryPoints: 5
-    id: zJLOZL2UvsjaLNie1sNv
+    id: IKB5qDAANFuGBIbrm1xx
     maxPoints: 10

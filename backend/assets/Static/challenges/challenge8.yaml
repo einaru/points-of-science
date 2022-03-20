@@ -1,0 +1,74 @@
+id: aViaZXEdE6RG4MJUdyH0
+categoryID: 6xYWkOcujUVU8kM5uLUy
+difficulty: 1
+activity:
+    description: |
+      # Beskrivelse
+
+      Dette datasettet presenterer hvilke fartøy som hører til i hvilke fylke og kommune, fartøyets lengde og bredde, byggeår og motorkraft. 
+      
+      Dataen benyttes av statlige virksomheter innen fiskerinæringen for å kunne holde kontroll med hvor fartøy har sin tilhørighet. 
+      
+      Ved å prøve og stille spørmål om dette datasettet lærer du hvordan du kan benytte samfunnsdata fra offentligforvaltning til å finne ut interessante ting om dataene.
+      
+      Denne aktiviteten vil vise deg nytten av å kunne dataanalyse og at det kan anvendes på samfunnskunskap. 
+
+      | Fylke            | Fartøynavn | Motorkraft | Byggeår - Motor |
+      | :--------------: | :--------: | :--------: | :-------------: |
+      | Sogn og Fjordane | A1         | 110        | 1991            |
+      | Nordland         | B1         | 118        | 1973            |
+      | Sogn og Fjordane | C1         | 10         | 1971            |
+      | Trøndelag        | D1         | 115        | 1994            |
+      | Nordland         | E1         | 8          | 1965            |
+      | Møre og Romsdal  | F1         | 150        | 1988            |
+      | Nordland         | G1         | 255        | 2010            |
+      | Troms            | H1         | 1500       | 1960            |
+      | Troms            | I1         | 300        | 1990            |
+      | Finnmark         | J1         | 182        | 2006            |
+      | Troms            | K1         | 85         | 1994            |
+      | Nordland         | L1         | 167        | 2009            |
+      | Vestfold         | M1         | 106        | 2010            |
+      | Hordaland        | N1         | 8          | 1958            |
+      
+      # Utførelse av oppgaven:
+      
+      1. Studer tabellen over i noen minutter slik at du blir kjent med innholdet og hva dataen prøver å vise.
+      2. Se på navnet til kolonnene. Prøv å stille deg spørsmål som potensielt kan være mulig å finne svar på ved bruk av kolonnene.
+      3. Ett tips er å begynne helt enkelt ved å se på to kolonner og finne ett spørsmål ut fra to kolonner.
+      4. Noter ned spørsmålene du fant ut fra datasettet.
+    hints:
+      - Navnene på kolonnene hjelper deg med å finne spørsmålene, dataen benyttes til å finne svaret. 
+      - Se på de to kolonnene byggeår for motor og motorkraft. De to kolonnene kan benyttes i ett spørsmål som starter med Hvilken.
+      - Benytt de to kolonnene fylke og motorkraft og start spørsmålet med hvordan.
+    id: C0t1awYAOWmMZ2P6j0cT
+    resources: []
+    type: 1
+content:
+    description: |
+      # Beskrivelse
+
+      I denne utfordringen skal du studere ett dataset med data om fartøy og dets tilhørighet, og benytte dataene som presenteres til å finne interessante spørsmål.
+      
+      Dataanalyse handler om i korte trekk om å finne spørsmål som kan stilles ut fra dataen som blir presentert, deretter benytte dataen til å finne ett resultat som svarer på spørsmålet, for så å visualisere resultatet.
+      
+      Når man prøver å finne spørsmål man kan stille er det viktig å unngå å stille spørsmål man kan svare ja eller nei på. For å unngå ja eller nei spørsmål, kan du starte spørsmålet med "Hvilke" eller "Hvordan".
+      Noen formulering som kan benyttes er for eksempel: "Hvilken sammenheng er det ...", "Hvordan påvirker ...".
+      
+      I disse analyseoppgavene vil vi fokusere på å stille spørsmål om dataen som presenteres. 
+    
+    id: ZIpLPcrsjBJ6KXi9DTxM
+    images: ["boats.jpg"]
+    title: Fartøy og landsdel
+reflection:
+    id: 4YjccdlkGLun8KdGQNzI
+    solution:
+      ["Hvilken sammenheng er det mellom byggeår for motorer og motorkraft?",
+      "Hvordan påvirker fylke motokraften?", "Hvilken sammenheng er det mellom lokasjonen til fylke og motorkraft?",
+      "Hvordan påvirker fylke byggeåret til motoren?"]
+    title: Hvilke spørsmål kan du stille deg ut fra dataen som ble presentert?
+    reflectionType: 1
+reward:
+    bonusPoints: 3
+    firstTryPoints: 5
+    id: 5uB0ksRVgGak9tQNiPKy
+    maxPoints: 10

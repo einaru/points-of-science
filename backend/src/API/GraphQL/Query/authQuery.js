@@ -3,6 +3,7 @@ import {
   authenticateRefreshToken,
   initializeProgress,
   profileCreator,
+  profileState,
   setPermissionLevel,
   signIn,
   signUp,
@@ -17,6 +18,7 @@ import {
   SignInModel,
   MessageResponseModel,
 } from "../Model/authModel.js";
+import { AuthenticationError } from "../error.js";
 
 // Root Queries - Used to retrieve data with GET-Requests
 
@@ -39,9 +41,13 @@ const authRefreshTokenQuery = {
 const verifyAccessToken = {
   type: MessageResponseModel,
   args: {},
-  async resolve(_, __, { user }) {
+  async resolve(_, __, { user, providers }) {
     assertIsAuthenticated(user);
-    return { message: "Authentication successful." };
+    const account = providers.users.getByID(user.id);
+    if (account.state === profileState.active.value) {
+      return { message: "Authentication successful." };
+    }
+    throw new AuthenticationError("User is deactivated or suspended.");
   },
 };
 

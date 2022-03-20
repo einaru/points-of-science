@@ -47,7 +47,7 @@ reflection:
     title: Hva var dine hypoteser? Prøv å forklare hva du observerte.
     reflectionType: 1
 reward:
-    bonusPoints: 5
-    firstTryPoints: 2
+    bonusPoints: 6
+    firstTryPoints: 5
     id: yM0sGB7OSz4c8pxpBSJZ
-    maxPoints: 15
+    maxPoints: 20

@@ -1,0 +1,73 @@
+id: KDiSyRcjQT6o25D1UWr8
+categoryID: pTIETOOCSI0gjDqpxkYy
+difficulty: 2
+activity:
+    description: |
+      # Det du trenger til dette eksperimentet
+
+      - Epsom salt (Skaffes på Vitusapotek)
+      - Ett Norgesglass som er vasket
+      - Matfarge (valgfritt)
+      - Varmt vann fra springen
+      - Sand eller småstein
+      - Målebeger
+
+      # Utførelse av eksperimentet
+
+      1. Mål opp 2 dl Epsom salt og hell det oppi Norgesglasset
+      2. Mål opp 2 dl med varmt vann fra springen og tilsett matfarge (Fungerer også uten matfarge)
+      3. Hell vannet over i Norgesglasset og rør i 2-3 minutter slik at saltet blandes ut i vannet.  
+      4. Legg en småstein eller ha noen sandkorn i Norgesglasset, dette er for at nukleering skal starte.
+      5. Sett Norgesglasset i kjøleskapet og la det stå over natten.
+      6. Skriv ned hva du tror vil skje og hvorfor.
+      7. Etter at Norgesglasset har stått over natten kan du slå vannet forsiktig ut.
+    hints: 
+      - Det vil dannes krystaller som dannes ved at molekyler repeterer ett mønster.
+      - En kjemisk løsning er for eksempel salt i vann, hvor vannet kan holde på en hvis mengde av løsningen.
+      - Småstein eller sand benyttes her for å starte nukleering. Det fungerer som en urenhet i den kjemiske løsningen som starter krytalliseringsprosessen.
+    id: 1gvnpwyzRwyXV5bXpleT
+    resources: ["https://snl.no/nukleering"]
+    type: 1
+content:
+    description: |
+      Dette eksperimentet tar for seg hvordan en saltløsning i vann gjennomgår en kjemisk reaksjon som danner krystaller.
+      For å kunne danne krystaller må en prosess som kalles nukleering startes. Nukleering er også prosessen vann gjennomgår når det fryser til is.
+      I denne utfordringen skal du gjennomføre et eksperiment som viser nukleering i praksis og sette sammen ett argument som forklarer hvordan krystaller dannes.
+    id: YxQB9lcIJbKtxIsqh6LW
+    images: ["krystall.jpg"]
+    title: Krystallisering
+reflection:
+    id: FIVvIhAVNROUReL0Zlef
+    solution: 
+      - krystallene
+      - dannes
+      - ved at blandingen
+      - i Norgesglasset
+      - kjøles ned og
+      - starter å fordampe
+      - atomene i saltet reformeres rundt
+      - sanden/småstein som skaper krystallen
+    title: Sett sammen ett argument som forklarer hvordan krystallene dannes.
+    choices:
+      - krystallene
+      - dannes
+      - formes
+      - ved at blandingen
+      - i Norgesglasset
+      - varmes opp og
+      - kjøles ned og
+      - starter å fordampe
+      - starter å fryse
+      - atomene i saltet reformeres rundt
+      - molekylene i saltet
+      - endres i kontakt med
+      - sanden/småstein som skaper krystallen
+      - sanden/småstein
+      - som medfører krystallisering
+    title: Sett sammen ett argument som forklarer hvordan krystallene dannes.
+    reflectionType: 2
+reward:
+    bonusPoints: 6
+    firstTryPoints: 5
+    id: eY90xtQHvaUi4ObiZJjE
+    maxPoints: 20

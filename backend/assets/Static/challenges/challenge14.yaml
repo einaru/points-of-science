@@ -1,0 +1,66 @@
+id: Mv9Cm6GUHcCEXAP9ipn5
+categoryID: g3Oo3WDAOZCudZt3EZOD
+difficulty: 2
+activity:
+    description: |
+      # Beskrivelse
+
+      Å vite hvor mange penger man har i banken etter ett angitt antall år kan være nyttig hvis man for eksempel sparer til noe man har tenkt å bruke pengene på.
+      Da kan det være nyttig å skaffe en oversikt over hvor mange penger man har nå og hvor mye man kan forvente å ha i fremtiden, som kan gi svar på hvor lenge det må spares for å få råd.
+      I denne utfordringen skal du skrive en kode som beregner hvor mange penger du kan forvente å ha på konto etter X antall år. 
+      
+      Pengene har du tenkt å kjøpe en liten båt du kan dra på fisketur med. Båten koster 9000 kroner, mens du har 2000 kroner til rådighet. Renten du får hvert år på pengene dine er 0.5 prosent. 
+      
+      1. Din oppgave er å skrive en kode som kan gi deg svar på hvor lenge du må spare for få råd til båten.
+
+      En feil antagelse som er gjort i oppgaven over er at du får 0.5 prosent rente hvert år. Det er feil fordi renten kan endres fra ett år til det neste.
+      
+      2. Din oppgave er å endre koden fra forrige oppgave til at for hvert år som går øker renten med 0.25 prosent. 
+      Det vil si at renten det første året er 0.5, det andre året 0.75 prosent, det tredje året 1 prosent, osv.
+
+      For å gjøre koden lettere å lese og forstå, samt gjøre koden gjenbrukbar er det nyttig å dele koden opp i funksjoner.
+      
+      3. Din oppgave er å benytte funksjoner til å kjøre ulike deler av koden slik at den fremdeles kjører som før, men består av flere deler som gjør den mer lesbar og forståelig.
+
+    hints:
+      - Del koden opp i tre funksjoner; en hovedfunksjon, en funksjon som beregner ny totalsum på konto når renter er lagt til, en funksjon som øker renten med 0.25.
+      - "For å definere en funskjon i Pyhton kan du skrive: def beregnRente()"
+      - "Koden for å be brukeren om en input og konvertere inputen fra tekst til tall i Pyhton er: int(input('Hvilke rente har du?' ))" 
+      - "Antall år vil være antall ganger while-løkken har kjørt til den oppfyller: totalsum < 9000"
+    id: DQvBFOyVWUohwavoNkm3
+    resources: ["https://www.w3schools.com/python/python_variables.asp",
+                "https://www.w3schools.com/python/python_operators.asp", 
+                "https://www.w3schools.com/python/python_functions.asp", 
+                "https://www.w3schools.com/python/python_while_loops.asp", 
+                "https://www.w3schools.com/python/python_user_input.asp"]
+    type: 1
+content:
+    description: |
+      # Beskrivelse
+
+      Gjentagende utregninger som må utføres for å finne ett svar er noe bruk av programmering er bra å bruke til. 
+      Et eksempel fra dagliglivet er å finne ut hvor mange penger som står på konto etter antall år og man får rente på pengene.
+      Istedenfor å gjøre slike beregninger manuelt, kan man skrive kode som tar hensyn til antall år pengene skal stå i banken og renten
+      som påløper pengene. Det er praktisk å ha en slik kode fordi du enkelt kan beregne et nytt resultat etter at det har gått 
+      for eksempel tre år siden sist man utførte forrige beregning på pengene sine. På den måten trenger man ikke å gjøre jobben manuelt igjen.
+
+      Hva vil du lære:
+      - Printe ut tekst til skjerm
+      - Enkle kalkulasjoner
+      - Ta inn input fra brukeren
+      - Benytte while-løkker til å gjenta en beregning
+      - Definere funksjoner for å gjøre kode lettleselig og gjennbrukbar
+
+    id: TxTeqd1rWTm9xFssF7ym
+    images: ["economy1.jpg", "economy2.jpg"]
+    title: Personlig økonomi
+reflection:
+    id: zm3wMXHzQ9bHVaeiAUdH
+    solution: "31 år"
+    title: Hvor mange år tok det før du fikk råd til å kjøpe båten i oppgave 1?
+    reflectionType: 1
+reward:
+    bonusPoints: 6
+    firstTryPoints: 5
+    id: h7nZ8K22WkcGGdBqqDfi
+    maxPoints: 20

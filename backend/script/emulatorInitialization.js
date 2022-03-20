@@ -185,11 +185,22 @@ function processYaml(challenge) {
   return yaml.load(fileContent);
 }
 
+function serializeSolution(challenge) {
+  if (challenge.reflection.reflectionType === 2) {
+    challenge.reflection.solution = JSON.stringify(
+      challenge.reflection.solution
+    );
+  }
+
+  return challenge;
+}
+
 async function populateData() {
   Object.keys(data).forEach((key) => {
     data[key].forEach((obj, index) => {
       if (key === "Challenge") {
         obj = processYaml(obj);
+        obj = serializeSolution(obj);
       }
 
       const promises = [getData(key)];

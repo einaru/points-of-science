@@ -36,7 +36,7 @@ const authRefreshTokenQuery = {
   },
 };
 
-const authAccessTokenQuery = {
+const verifyAccessToken = {
   type: MessageResponseModel,
   args: {},
   async resolve(_, __, { user }) {
@@ -196,7 +196,7 @@ const swapPermissionQuery = {
 
 export {
   activateAccountQuery,
-  authAccessTokenQuery,
+  verifyAccessToken,
   authRefreshTokenQuery,
   getPermissionsQuery,
   setPermissionQuery,

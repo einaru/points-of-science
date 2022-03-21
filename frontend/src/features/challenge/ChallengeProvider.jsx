@@ -1,10 +1,10 @@
-import React, { useMemo, useReducer } from "react";
+import React from "react";
 
 import ChallengeContext from "./ChallengeContext";
 import { initialState, reducer } from "./ChallengeProvider.reducer";
 
 export default function ChallengeProvider({ challenge, children }) {
-  const [userData, dispatch] = useReducer(reducer, initialState);
+  const [userData, dispatch] = React.useReducer(reducer, initialState);
 
   const setActivityData = (
     answer,
@@ -33,7 +33,7 @@ export default function ChallengeProvider({ challenge, children }) {
     });
   };
 
-  const value = useMemo(
+  const value = React.useMemo(
     () => ({
       challenge,
       userData,

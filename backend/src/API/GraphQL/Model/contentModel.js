@@ -31,23 +31,6 @@ const CategoryModel = new GraphQLObjectType({
   }),
 });
 
-const HintModel = new GraphQLObjectType({
-  name: "Hint",
-  fields: () => ({
-    id: { type: GraphQLString },
-    text: { type: GraphQLString },
-  }),
-});
-
-const ResourceModel = new GraphQLObjectType({
-  name: "Resource",
-  fields: () => ({
-    id: { type: GraphQLString },
-    title: { type: GraphQLString },
-    url: { type: GraphQLString },
-  }),
-});
-
 const ActivityTypeEnum = new GraphQLEnumType({
   name: "ActivityType",
   values: {

@@ -1,5 +1,6 @@
 node_modules/
 assets/Database
+assets/Static/images
 assets/Static/seed
 assets/Static/test
 assets/Static/images

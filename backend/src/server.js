@@ -35,7 +35,7 @@ app.use(
   graphqlHTTP((req, res, params) => {
     return {
       schema,
-      graphiql: true,
+      graphiql: false,
       context: {
         user: req.user,
         providers,
@@ -44,13 +44,6 @@ app.use(
     };
   })
 );
-
-app.use((error, request, response, next) => {
-  if (error) {
-    return response.status(500).send(error);
-  }
-  next();
-});
 
 // Provide feedback on missing secret keys
 Object.entries(config.secret).forEach(([key, value]) => {
@@ -72,76 +65,3 @@ server.on("listening", () => {
   console.log(`Running in "${config.env}" mode`);
   console.log(`Server listening on port ${config.port}`);
 });
-
-function sortSubscriptionOnUser(subscribeTokens, userID) {
-  return new Promise((resolve, reject) => {
-    try {
-      resolve(subscribeTokens.filter((token) => token.userID === userID));
-    } catch (error) {
-      reject(error);
-    }
-  });
-}
-
-function tokensToDelete(subscribeTokens, userID) {
-  return new Promise((resolve, reject) => {
-    sortSubscriptionOnUser(subscribeTokens, userID)
-      .then((userTokens) => {
-        let newest = 0;
-        userTokens.forEach((token, index) => {
-          if (index === 0) {
-            newest = index;
-          } else if (
-            Number(token.created) > Number(userTokens[newest].created)
-          ) {
-            newest = index;
-          }
-        });
-
-        userTokens.splice(newest, 1);
-        resolve(userTokens);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
-}
-
-setInterval(() => {
-  return new Promise((resolve, reject) => {
-    providers.subscribeTokens
-      .getAll()
-      .then((subscribeTokens) => {
-        const userIDs = subscribeTokens.map((item) => item.userID);
-        const subscribedUsers = new Set(userIDs);
-        const promises = [];
-        subscribedUsers.forEach((userID) => {
-          promises.push(tokensToDelete(subscribeTokens, userID));
-        });
-
-        return Promise.all(promises);
-      })
-      .then((deleteTokens) => {
-        deleteTokens.forEach((tokenList) => {
-          tokenList.forEach((token) => {
-            providers.subscribeTokens
-              .delete(token.id)
-              .then(() => {
-                console.log("Expired subscribe token deleted.");
-              })
-              .catch((error) => {
-                console.log("Failed to delete expired subscribe token.");
-              });
-          });
-        });
-        resolve();
-      })
-      .catch((error) => {
-        console.log(
-          "Error occurred when deleting subscribe token.",
-          error.message
-        );
-        reject();
-      });
-  });
-}, 1800000);

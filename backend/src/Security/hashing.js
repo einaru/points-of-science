@@ -17,7 +17,6 @@ function hashPassword(password) {
         });
       })
       .catch((error) => {
-        // TO-DO: Implement error handler to take care of the error and provide a proper response to the user.
         return reject(error);
       });
   });
@@ -35,7 +34,6 @@ function comparePassword(userPassword, storedPassword) {
         });
       })
       .catch((error) => {
-        // TO-DO: Implement error handler to take care of the error and provide a proper response to the user.
         return reject(error);
       });
   });

@@ -43,7 +43,7 @@ const verifyAccessToken = {
   args: {},
   async resolve(_, __, { user, providers }) {
     assertIsAuthenticated(user);
-    const account = providers.users.getByID(user.id);
+    const account = await providers.users.getByID(user.id);
     if (account.state === profileState.active.value) {
       return { message: "Authentication successful." };
     }

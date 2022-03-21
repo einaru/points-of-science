@@ -1,6 +1,7 @@
 import { ApolloProvider } from "@apollo/client";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
+import { Platform } from "react-native";
 import { Provider as ThemeProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
@@ -44,4 +45,4 @@ function App() {
   );
 }
 
-export default Sentry.wrap(App);
+export default Platform.OS === "web" ? App : Sentry.wrap(App);

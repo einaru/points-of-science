@@ -17,12 +17,9 @@ export const emojis = {
 
 export const illustrations = {
   appreciation: require("./appreciation.png"),
+  error: require("./error.png"),
   graduation: require("./graduation.png"),
-  learning: require("./learning.png"),
-  lesson: require("./lesson.png"),
-  pleasantSurprise: require("./pleasant-surprise.png"),
   questions: require("./questions.png"),
   science: require("./science.png"),
-  teaching: require("./teaching.png"),
   winners: require("./winners.png"),
 };

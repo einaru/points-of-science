@@ -1,7 +1,9 @@
 import { ApolloProvider } from "@apollo/client";
+import AppLoading from "expo-app-loading";
+import { Asset } from "expo-asset";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { Platform } from "react-native";
+import { Image, Platform } from "react-native";
 import { Provider as ThemeProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
@@ -12,17 +14,44 @@ import AuthProvider from "~services/auth/AuthProvider";
 import PreferencesContext from "~services/preferences/PreferencesContext";
 import usePreferences from "~services/preferences/usePreferences";
 import Sentry, { ErrorBoundary, ErrorScreen } from "~services/sentry";
-import { LoadingScreen } from "~shared/components";
+import { emojis, illustrations } from "~shared/assets";
+
+function cacheImages(images) {
+  return images.map((image) => {
+    switch (typeof image) {
+      case "string":
+        return Image.prefetch(image);
+      default:
+        return Asset.fromModule(image).downloadAsync();
+    }
+  });
+}
 
 function App() {
+  const [isReady, setIsReady] = React.useState(false);
+
   const client = useApiClient();
   const preferences = usePreferences();
 
   const { theme, preferDarkTheme } = preferences;
   const statusBarStyle = preferDarkTheme ? "light" : "dark";
 
-  if (!client) {
-    return <LoadingScreen />;
+  const loadAssets = async () => {
+    const images = cacheImages([
+      ...Object.values(emojis),
+      ...Object.values(illustrations),
+    ]);
+    await Promise.all([images]);
+  };
+
+  if (!client || !isReady) {
+    return (
+      <AppLoading
+        startAsync={loadAssets}
+        onFinish={() => setIsReady(true)}
+        onError={console.warn}
+      />
+    );
   }
 
   return (

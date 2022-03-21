@@ -2,7 +2,7 @@ import React from "react";
 import { View } from "react-native";
 import { DraxProvider, DraxView } from "react-native-drax";
 import { Button, Text, useTheme } from "react-native-paper";
-import { MaterialCommunityIcons } from "react-native-vector-icons";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 import { t } from "~shared/i18n";
 
@@ -93,11 +93,7 @@ export default function ArgumentConstructor({
           }}
         />
         <View style={styles.divider}>
-          <MaterialCommunityIcons
-            style={styles.icon}
-            name="arrow-up-down"
-            size={24}
-          />
+          <Icon style={styles.icon} name="arrow-up-down" size={24} />
         </View>
         <DraxView
           id="destination"

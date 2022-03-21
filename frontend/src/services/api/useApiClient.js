@@ -1,7 +1,7 @@
 import { ApolloClient } from "@apollo/client";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AsyncStorageWrapper, CachePersistor } from "apollo3-cache-persist";
-import { useEffect, useState } from "react";
+import React from "react";
 
 import cache from "./cache";
 import link from "./link";
@@ -12,9 +12,9 @@ const persistor = new CachePersistor({
 });
 
 function useApiClient() {
-  const [client, setClient] = useState(null);
+  const [client, setClient] = React.useState(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const initCache = async () => {
       await persistor.restore();
       const apolloClient = new ApolloClient({

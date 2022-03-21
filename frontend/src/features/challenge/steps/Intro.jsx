@@ -41,7 +41,7 @@ function Intro({ navigation }) {
   };
 
   const renderImages = () => (
-    <ImageCarousel images={challenge.images} height={150}>
+    <ImageCarousel images={challenge.images} height="50%">
       {renderMeta()}
     </ImageCarousel>
   );

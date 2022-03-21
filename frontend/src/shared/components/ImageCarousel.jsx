@@ -13,15 +13,17 @@ function ImageCarousel({
     return null;
   }
   return (
-    <PagerView style={{ flex: 1 }} initialPage={initialImage}>
+    <PagerView style={{ width, height }} initialPage={initialImage}>
       {images.map((image, index) => (
         <ImageBackground
           key={index.toString()}
-          style={{ height, width }}
           source={{ uri: image }}
-        />
+          height={height}
+          width={width}
+        >
+          {children}
+        </ImageBackground>
       ))}
-      {children}
     </PagerView>
   );
 }

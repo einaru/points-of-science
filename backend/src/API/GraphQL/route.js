@@ -3,7 +3,7 @@ import {
   addUserChallengeQuery,
   addUserChallengeRating,
   activateAccountQuery,
-  authAccessTokenQuery,
+  verifyAccessToken,
   authRefreshTokenQuery,
   createAchievementQuery,
   createCategoryQuery,
@@ -50,7 +50,7 @@ const ROOTQUERY = new GraphQLObjectType({
     contacts: getAllContacts,
     permissions: getPermissionsQuery,
     userProfile: getUserProfile,
-    verifyToken: authAccessTokenQuery,
+    verifyToken: verifyAccessToken,
     verifyUsername: verifyUsernameQuery,
   },
 });

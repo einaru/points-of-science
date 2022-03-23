@@ -5,7 +5,7 @@ export default function themedStyles(theme) {
   const { colors } = theme;
 
   const overlayRow = {
-    backgroundColor: Color(colors.text).fade(0.9).string(),
+    backgroundColor: Color(colors.background).fade(0.6).string(),
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",

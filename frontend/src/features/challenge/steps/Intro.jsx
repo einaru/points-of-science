@@ -1,6 +1,6 @@
 import React from "react";
 import { ScrollView, View } from "react-native";
-import { Button, Chip } from "react-native-paper";
+import { Button } from "react-native-paper";
 
 import {
   IconBackgroundImage,
@@ -10,7 +10,7 @@ import {
 import { t } from "~shared/i18n";
 
 import ChallengeContext from "../ChallengeContext";
-import { getDifficultyColor } from "../difficulty";
+import Chip, { renderDifficulty, renderReward } from "../Chip";
 import styles from "./styles";
 
 function Intro({ navigation }) {
@@ -22,43 +22,15 @@ function Intro({ navigation }) {
     });
   }, [navigation, challenge]);
 
-  const renderDifficulty = () => {
-    const color = getDifficultyColor(challenge.difficulty);
-    const textStyle = {
-      color: color.isLight()
-        ? color.darken(0.6).string()
-        : color.lighten(0.6).string(),
-    };
-    const style = {
-      ...styles.chip,
-      backgroundColor: color.string(),
-    };
-    return (
-      <Chip style={style} textStyle={textStyle}>
-        {t(challenge.difficulty)}
-      </Chip>
-    );
-  };
-
-  const renderReward = () => {
-    return !challenge.reward ? null : (
-      <Chip style={styles.chip} mode="outlined">
-        {challenge.reward.maxPoints} {t("points")}
-      </Chip>
-    );
-  };
-
   const renderMeta = () => {
     return (
       <View style={styles.meta}>
         <View style={styles.metaRow}>
-          <Chip style={styles.chip} mode="outlined">
-            {challenge.category.name}
-          </Chip>
+          <Chip>{challenge.category.name}</Chip>
         </View>
         <View style={styles.metaRow}>
-          {renderDifficulty()}
-          {renderReward()}
+          {renderDifficulty(challenge)}
+          {renderReward(challenge)}
         </View>
       </View>
     );

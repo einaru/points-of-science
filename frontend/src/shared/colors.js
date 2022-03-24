@@ -1,5 +1,7 @@
 import Color from "color";
 
+import Difficulty from "./difficulty";
+
 const colors = {
   red: Color.rgb(237, 51, 59),
   orange: Color.rgb(255, 120, 0),
@@ -37,4 +39,17 @@ export function getColorsFromString(string, lighten = 0.5, darken = 0.5) {
     ? bgColor.lighten(lighten)
     : bgColor.darken(darken);
   return { bgColor, fgColor };
+}
+
+export function getDifficultyColor(difficulty) {
+  switch (difficulty) {
+    case Difficulty.BEGINNER:
+      return colors.green;
+    case Difficulty.INTERMEDIATE:
+      return colors.yellow;
+    case Difficulty.EXPERT:
+      return colors.red;
+    default:
+      throw new Error(`Got invalid difficulty level "${difficulty}.`);
+  }
 }

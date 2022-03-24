@@ -10,6 +10,7 @@ import {
 import { t } from "~shared/i18n";
 
 import ChallengeContext from "../ChallengeContext";
+import { getDifficultyColor } from "../difficulty";
 import styles from "./styles";
 
 function Intro({ navigation }) {
@@ -20,6 +21,24 @@ function Intro({ navigation }) {
       title: challenge.name,
     });
   }, [navigation, challenge]);
+
+  const renderDifficulty = () => {
+    const color = getDifficultyColor(challenge.difficulty);
+    const textStyle = {
+      color: color.isLight()
+        ? color.darken(0.6).string()
+        : color.lighten(0.6).string(),
+    };
+    const style = {
+      ...styles.chip,
+      backgroundColor: color.string(),
+    };
+    return (
+      <Chip style={style} textStyle={textStyle}>
+        {t(challenge.difficulty)}
+      </Chip>
+    );
+  };
 
   const renderReward = () => {
     return !challenge.reward ? null : (
@@ -32,10 +51,15 @@ function Intro({ navigation }) {
   const renderMeta = () => {
     return (
       <View style={styles.meta}>
-        <Chip style={styles.chip} mode="outlined">
-          {challenge.category.name}
-        </Chip>
-        {renderReward()}
+        <View style={styles.metaRow}>
+          <Chip style={styles.chip} mode="outlined">
+            {challenge.category.name}
+          </Chip>
+        </View>
+        <View style={styles.metaRow}>
+          {renderDifficulty()}
+          {renderReward()}
+        </View>
       </View>
     );
   };

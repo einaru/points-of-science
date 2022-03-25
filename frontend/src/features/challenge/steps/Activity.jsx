@@ -33,6 +33,7 @@ function Activity({ navigation }) {
   }, [activity]);
 
   const { hints } = activity;
+  const hasHints = hints.length > 0;
   const [hint, setHint] = React.useState("");
   const [hintIndex, setHintIndex] = React.useState(0);
   const [hintIsVisible, setHintIsVisible] = React.useState(false);
@@ -59,6 +60,7 @@ function Activity({ navigation }) {
   };
 
   const { resources } = activity;
+  const hasResources = resources.length > 0;
   const [resourcesIsVisible, setResourcesIsVisible] = React.useState(false);
   const [hasUsedResources, setHasUsedResources] = React.useState(false);
   const [resourcesResponse, setResourcesResponse] = React.useState(DISMISS);
@@ -95,8 +97,10 @@ function Activity({ navigation }) {
           <MarkdownView>{activity.description}</MarkdownView>
         </View>
         <View style={styles.help}>
-          <Button onPress={showHint}>{t("Get a hint?")}</Button>
-          <Button onPress={showResources}>{t("External resources")}</Button>
+          {hasHints && <Button onPress={showHint}>{t("Get a hint?")}</Button>}
+          {hasResources && (
+            <Button onPress={showResources}>{t("External resources")}</Button>
+          )}
         </View>
       </ScrollView>
       <Button

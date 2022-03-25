@@ -35,13 +35,14 @@ function CategoryListItem({ category, user, onPress, theme }) {
 
   const renderProgress = () => {
     if (user.permission === Permission.EXPERIMENT) {
+      const percent = (progress * 100).toFixed();
       return (
         <>
           <View style={styles.progressRow}>
             <Text>
               {numUserChallenges} {t("of")} {numChallengesLabel}
             </Text>
-            <Text>{`(${progress * 100}%)`}</Text>
+            <Text>{`(${percent}%)`}</Text>
           </View>
           <ProgressBar progress={progress} />
         </>

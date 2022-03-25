@@ -43,6 +43,12 @@ export default function themedStyles(theme) {
     ? Color(colors.background).lighten(0.24).string()
     : Color(colors.background).darken(0.06).string();
 
+  const monospaceFont = Platform.select({
+    ios: {
+      fontFamily: "Courier New",
+    },
+  });
+
   const codeBlock = {
     backgroundColor,
     borderRadius: theme.roundness,
@@ -51,6 +57,7 @@ export default function themedStyles(theme) {
     fontSize: 12,
     marginVertical: 4,
     padding: 8,
+    ...monospaceFont,
   };
 
   return StyleSheet.create({
@@ -82,6 +89,9 @@ export default function themedStyles(theme) {
     th: {
       color: colors.placeholder,
       fontWeight: "500",
+    },
+    code_inline: {
+      ...monospaceFont,
     },
     code_block: {
       ...codeBlock,

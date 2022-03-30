@@ -14,7 +14,7 @@ function ImageCarousel({ images, height: customHeight, children }) {
     <ImageBackground
       source={{ uri: image }}
       resizeMode="cover"
-      style={{ height: "100%", width: window.width }}
+      style={{ height, width: window.width }}
     >
       {children}
     </ImageBackground>
@@ -26,7 +26,6 @@ function ImageCarousel({ images, height: customHeight, children }) {
       pagingEnabled
       snapToInterval={window.width}
       snapToAlignment="end"
-      contentContainerStyle={{ height }}
       keyExtractor={(item) => item}
       data={images}
       renderItem={renderItem}

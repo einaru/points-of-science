@@ -54,7 +54,7 @@ function Intro({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scroll}>
+      <ScrollView>
         {hasImages ? renderImages() : renderFallbackImage()}
         <View style={styles.content}>
           <MarkdownView>{challenge.description}</MarkdownView>

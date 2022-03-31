@@ -98,8 +98,7 @@ function CategoryList({ navigation, theme }) {
       theme={theme}
       onPress={() => {
         navigation.navigate("category:challenge-list", {
-          category,
-          user,
+          categoryID: category.id,
         });
       }}
     />

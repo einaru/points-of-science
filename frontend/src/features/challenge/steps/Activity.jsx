@@ -1,9 +1,9 @@
-import { useRoute } from "@react-navigation/native";
 import React from "react";
 import { ScrollView, View } from "react-native";
 import { Button, Portal } from "react-native-paper";
 
 import AnalyticsContext from "~services/analytics/AnalyticsContext";
+import ContentContext from "~services/content/ContentContext";
 import { MarkdownView } from "~shared/components";
 import { t } from "~shared/i18n";
 import { getTimestamp } from "~shared/timestamp";
@@ -20,9 +20,12 @@ const { DISMISS } = DialogAction;
 function Activity({ route, navigation }) {
   const dateStarted = getTimestamp();
 
+  const { challengeID } = route.params;
+  const { getChallenge } = React.useContext(ContentContext);
+  const challenge = getChallenge(challengeID);
+
   const { logClickEvent } = React.useContext(AnalyticsContext);
   const { setActivityData } = React.useContext(ChallengeContext);
-  const { challenge } = route.params;
   const { activity } = challenge;
 
   const [answer, setAnswer] = React.useState();
@@ -98,7 +101,7 @@ function Activity({ route, navigation }) {
       hasUsedResources,
       resourcesResponse
     );
-    navigation.navigate("challenge:reflection", { challenge });
+    navigation.navigate("challenge:reflection", { challengeID });
   };
 
   return (

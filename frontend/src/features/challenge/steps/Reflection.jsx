@@ -2,6 +2,7 @@ import React from "react";
 import { View } from "react-native";
 import { Button } from "react-native-paper";
 
+import ContentContext from "~services/content/ContentContext";
 import { t } from "~shared/i18n";
 import { getTimestamp } from "~shared/timestamp";
 
@@ -12,8 +13,11 @@ import OpenReflection from "./OpenReflection";
 import styles from "./styles";
 
 function Reflection({ route, navigation }) {
+  const { challengeID } = route.params;
+  const { getChallenge } = React.useContext(ContentContext);
+  const challenge = getChallenge(challengeID);
+
   const { setReflectionData } = React.useContext(ChallengeContext);
-  const { challenge } = route.params;
   const { reflection } = challenge;
 
   const [answer, setAnswer] = React.useState("");
@@ -30,7 +34,7 @@ function Reflection({ route, navigation }) {
 
   const doCompleteReflection = () => {
     setReflectionData(answer, getTimestamp());
-    navigation.navigate("challenge:completed", { challenge });
+    navigation.navigate("challenge:completed", { challengeID });
   };
 
   return (

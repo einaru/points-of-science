@@ -8,13 +8,7 @@ import {
   View,
   useWindowDimensions,
 } from "react-native";
-import {
-  Button,
-  IconButton,
-  Surface,
-  Text,
-  withTheme,
-} from "react-native-paper";
+import { Button, Surface, Text, withTheme } from "react-native-paper";
 
 import ContentContext from "~services/content/ContentContext";
 import Sentry from "~services/sentry";
@@ -36,7 +30,7 @@ const Direction = {
 };
 
 function Completed({ route, navigation, theme }) {
-  const { challenge } = route.params;
+  const { challengeID } = route.params;
   const { user } = React.useContext(ContentContext);
   const { userData } = React.useContext(ChallengeContext);
   const { width: windowWidth } = useWindowDimensions();
@@ -61,7 +55,7 @@ function Completed({ route, navigation, theme }) {
       addUserChallenge({
         variables: {
           data: {
-            challengeID: challenge.id,
+            challengeID,
             activity: {
               dateStarted: userData.dateStarted,
               answer: userData.activityAnswer,
@@ -99,13 +93,6 @@ function Completed({ route, navigation, theme }) {
     }, [goBack])
   );
 
-  React.useLayoutEffect(() => {
-    navigation.setOptions({
-      title: challenge.name,
-      headerLeft: () => <IconButton icon="check" onPress={goBack} />,
-    });
-  }, [navigation, challenge, goBack]);
-
   const [isRated, setIsRated] = React.useState(false);
   const [addChallengeRating] = useMutation(ADD_USER_CHALLENGE_RATING, {
     onError: (error) => {
@@ -134,7 +121,7 @@ function Completed({ route, navigation, theme }) {
     addChallengeRating({
       variables: {
         rating: {
-          challengeID: challenge.id,
+          challengeID,
           dateCompleted: userData.dateCompleted,
           label,
           score,

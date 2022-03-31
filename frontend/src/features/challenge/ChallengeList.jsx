@@ -3,6 +3,7 @@ import { FlatList, ImageBackground, View } from "react-native";
 import { Surface, Text, TouchableRipple, withTheme } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
+import ContentContext from "~services/content/ContentContext";
 import colors from "~shared/colors";
 import { IconBackgroundImage, NoContent } from "~shared/components";
 import { t } from "~shared/i18n";
@@ -75,7 +76,10 @@ function ChallengeListItem({ challenge, user, theme, onPress }) {
 }
 
 function ChallengeList({ route, navigation, theme }) {
-  const { category, user } = route.params;
+  const { categoryID } = route.params;
+  const { user, getCategory } = React.useContext(ContentContext);
+
+  const category = getCategory(categoryID);
   const { challenges } = category;
 
   if (!challenges.length) {
@@ -91,7 +95,8 @@ function ChallengeList({ route, navigation, theme }) {
       theme={theme}
       onPress={() => {
         navigation.navigate("challenge:intro", {
-          challenge,
+          categoryID,
+          challengeID: challenge.id,
         });
       }}
     />

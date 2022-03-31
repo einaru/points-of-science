@@ -2,6 +2,7 @@ import React from "react";
 import { ScrollView, View } from "react-native";
 import { Button } from "react-native-paper";
 
+import ContentContext from "~services/content/ContentContext";
 import {
   IconBackgroundImage,
   ImageCarousel,
@@ -13,7 +14,10 @@ import Chip, { renderDifficulty, renderReward } from "../Chip";
 import styles from "./styles";
 
 function Intro({ route, navigation }) {
-  const { challenge } = route.params;
+  const { challengeID } = route.params;
+  const { getChallenge } = React.useContext(ContentContext);
+  const challenge = getChallenge(challengeID);
+
   React.useLayoutEffect(() => {
     navigation.setOptions({
       title: challenge.name,
@@ -63,7 +67,7 @@ function Intro({ route, navigation }) {
         mode="contained"
         onPress={() =>
           navigation.navigate("challenge:activity", {
-            challenge,
+            challengeID: challenge.id,
           })
         }
       >

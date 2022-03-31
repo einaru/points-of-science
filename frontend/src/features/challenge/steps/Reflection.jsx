@@ -11,8 +11,9 @@ import HeaderTitle from "./HeaderTitle";
 import OpenReflection from "./OpenReflection";
 import styles from "./styles";
 
-function Reflection({ navigation }) {
-  const { challenge, setReflectionData } = React.useContext(ChallengeContext);
+function Reflection({ route, navigation }) {
+  const { setReflectionData } = React.useContext(ChallengeContext);
+  const { challenge } = route.params;
   const { reflection } = challenge;
 
   const [answer, setAnswer] = React.useState("");
@@ -29,7 +30,7 @@ function Reflection({ navigation }) {
 
   const doCompleteReflection = () => {
     setReflectionData(answer, getTimestamp());
-    navigation.navigate("challenge:completed");
+    navigation.navigate("challenge:completed", { challenge });
   };
 
   return (

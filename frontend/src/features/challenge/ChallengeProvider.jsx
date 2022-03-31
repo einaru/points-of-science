@@ -3,7 +3,7 @@ import React from "react";
 import ChallengeContext from "./ChallengeContext";
 import { initialState, reducer } from "./ChallengeProvider.reducer";
 
-export default function ChallengeProvider({ challenge, children }) {
+export default function ChallengeProvider({ children }) {
   const [userData, dispatch] = React.useReducer(reducer, initialState);
 
   const setActivityData = (
@@ -35,12 +35,11 @@ export default function ChallengeProvider({ challenge, children }) {
 
   const value = React.useMemo(
     () => ({
-      challenge,
       userData,
       setActivityData,
       setReflectionData,
     }),
-    [challenge, userData]
+    [userData]
   );
   return (
     <ChallengeContext.Provider value={value}>

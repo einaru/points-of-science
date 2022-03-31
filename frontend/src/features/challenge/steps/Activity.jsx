@@ -17,12 +17,12 @@ import styles from "./styles";
 
 const { DISMISS } = DialogAction;
 
-function Activity({ navigation }) {
+function Activity({ route, navigation }) {
   const dateStarted = getTimestamp();
-  const route = useRoute();
 
   const { logClickEvent } = React.useContext(AnalyticsContext);
-  const { challenge, setActivityData } = React.useContext(ChallengeContext);
+  const { setActivityData } = React.useContext(ChallengeContext);
+  const { challenge } = route.params;
   const { activity } = challenge;
 
   const [answer, setAnswer] = React.useState();
@@ -89,6 +89,18 @@ function Activity({ navigation }) {
     });
   }, [navigation, challenge]);
 
+  const doCompleteActivity = () => {
+    setActivityData(
+      answer,
+      dateStarted,
+      hasUsedHints,
+      hintResponse,
+      hasUsedResources,
+      resourcesResponse
+    );
+    navigation.navigate("challenge:reflection", { challenge });
+  };
+
   return (
     <View style={styles.container}>
       {/* TODO render activity content based on activity type */}
@@ -106,17 +118,7 @@ function Activity({ navigation }) {
       <Button
         mode="contained"
         style={styles.action}
-        onPress={() => {
-          setActivityData(
-            answer,
-            dateStarted,
-            hasUsedHints,
-            hintResponse,
-            hasUsedResources,
-            resourcesResponse
-          );
-          navigation.navigate("challenge:reflection");
-        }}
+        onPress={doCompleteActivity}
       >
         {t("Continue")}
       </Button>

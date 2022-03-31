@@ -35,9 +35,10 @@ const Direction = {
   OUT: "out",
 };
 
-function Completed({ navigation, theme }) {
+function Completed({ route, navigation, theme }) {
+  const { challenge } = route.params;
   const { user } = React.useContext(ContentContext);
-  const { challenge, userData } = React.useContext(ChallengeContext);
+  const { userData } = React.useContext(ChallengeContext);
   const { width: windowWidth } = useWindowDimensions();
 
   const [reward, setReward] = React.useState({ points: 0, bonusPoints: 0 });

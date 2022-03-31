@@ -2,7 +2,6 @@
 import { createContext } from "react";
 
 const ChallengeContext = createContext({
-  challenge: {},
   userData: {},
   setActivityData: (
     answer,

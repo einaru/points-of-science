@@ -9,13 +9,11 @@ import {
 } from "~shared/components";
 import { t } from "~shared/i18n";
 
-import ChallengeContext from "../ChallengeContext";
 import Chip, { renderDifficulty, renderReward } from "../Chip";
 import styles from "./styles";
 
-function Intro({ navigation }) {
-  const { challenge } = React.useContext(ChallengeContext);
-
+function Intro({ route, navigation }) {
+  const { challenge } = route.params;
   React.useLayoutEffect(() => {
     navigation.setOptions({
       title: challenge.name,
@@ -63,7 +61,11 @@ function Intro({ navigation }) {
       <Button
         style={styles.action}
         mode="contained"
-        onPress={() => navigation.navigate("challenge:activity")}
+        onPress={() =>
+          navigation.navigate("challenge:activity", {
+            challenge,
+          })
+        }
       >
         {t("Start")}
       </Button>

@@ -90,7 +90,7 @@ function ChallengeList({ route, navigation, theme }) {
       user={user}
       theme={theme}
       onPress={() => {
-        navigation.navigate("challenge:main", {
+        navigation.navigate("challenge:intro", {
           challenge,
         });
       }}

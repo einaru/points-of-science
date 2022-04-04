@@ -3,7 +3,7 @@ import { ScrollView, View } from "react-native";
 import { Button, Portal } from "react-native-paper";
 
 import AnalyticsContext from "~services/analytics/AnalyticsContext";
-import ContentContext from "~services/content/ContentContext";
+import { useChallenge } from "~services/content/hooks";
 import { MarkdownView } from "~shared/components";
 import { t } from "~shared/i18n";
 import { getTimestamp } from "~shared/timestamp";
@@ -21,27 +21,45 @@ function Activity({ route, navigation }) {
   const dateStarted = getTimestamp();
 
   const { challengeID } = route.params;
-  const { getChallenge } = React.useContext(ContentContext);
-  const challenge = getChallenge(challengeID);
+  const challenge = useChallenge(challengeID);
 
   const { logClickEvent } = React.useContext(AnalyticsContext);
   const { setActivityData } = React.useContext(ChallengeContext);
-  const { activity } = challenge;
 
-  const [answer, setAnswer] = React.useState();
-  React.useEffect(() => {
-    if (activity.type === "external") {
-      setAnswer(null);
+  React.useLayoutEffect(() => {
+    if (challenge) {
+      navigation.setOptions({
+        headerTitle: () => {
+          return (
+            <HeaderTitle title={challenge.name} subtitle={t("Activity")} />
+          );
+        },
+      });
     }
-  }, [activity]);
+  }, [navigation, challenge]);
 
-  const { hints } = activity;
-  const hasHints = hints.length > 0;
+  // This should be implemented using React.useState
+  // when more activity types are implemented.
+  const answer = null;
+
   const [hint, setHint] = React.useState("");
   const [hintIndex, setHintIndex] = React.useState(0);
   const [hintIsVisible, setHintIsVisible] = React.useState(false);
   const [hasUsedHints, setHasUsedHints] = React.useState(false);
   const [hintResponse, setHintResponse] = React.useState(DISMISS);
+
+  const [resourcesIsVisible, setResourcesIsVisible] = React.useState(false);
+  const [hasUsedResources, setHasUsedResources] = React.useState(false);
+  const [resourcesResponse, setResourcesResponse] = React.useState(DISMISS);
+
+  if (!challenge) {
+    return null;
+  }
+
+  const { activity } = challenge;
+
+  const { hints } = activity;
+  const hasHints = hints.length > 0;
 
   const getAHint = () => {
     const index = hintIndex < hints.length ? hintIndex : 0;
@@ -64,9 +82,6 @@ function Activity({ route, navigation }) {
 
   const { resources } = activity;
   const hasResources = resources.length > 0;
-  const [resourcesIsVisible, setResourcesIsVisible] = React.useState(false);
-  const [hasUsedResources, setHasUsedResources] = React.useState(false);
-  const [resourcesResponse, setResourcesResponse] = React.useState(DISMISS);
 
   const showResources = () => {
     logClickEvent(route, "Resources dialog opened");
@@ -84,14 +99,6 @@ function Activity({ route, navigation }) {
     logClickEvent(route, `Resource visited: ${resource}`);
   };
 
-  React.useLayoutEffect(() => {
-    navigation.setOptions({
-      headerTitle: () => {
-        return <HeaderTitle subtitle={t("Activity")} title={challenge.name} />;
-      },
-    });
-  }, [navigation, challenge]);
-
   const doCompleteActivity = () => {
     setActivityData(
       answer,
@@ -101,7 +108,7 @@ function Activity({ route, navigation }) {
       hasUsedResources,
       resourcesResponse
     );
-    navigation.navigate("challenge:reflection", { challengeID });
+    navigation.navigate("challenge:reflection", { ...route.params });
   };
 
   return (

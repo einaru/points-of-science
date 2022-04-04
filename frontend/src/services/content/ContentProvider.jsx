@@ -1,9 +1,8 @@
-import { useApolloClient, useQuery, useSubscription } from "@apollo/client";
+import { useQuery, useSubscription } from "@apollo/client";
 import React from "react";
 
 import AuthContext from "~services/auth/AuthContext";
 import { LoadingScreen } from "~shared/components";
-import { CATEGORY_DATA, CHALLENGE_DATA } from "~shared/fragments";
 import { t } from "~shared/i18n";
 
 import ContentContext from "./ContentContext";
@@ -65,8 +64,6 @@ function ContentProvider({ children }) {
   });
   useSubscription(LEADERBOARDS_UPDATE, { variables: { subscribeToken } });
 
-  const client = useApolloClient();
-
   const content = React.useMemo(
     () => ({
       user,
@@ -76,29 +73,8 @@ function ContentProvider({ children }) {
       contacts,
       hasNewAchievements,
       hasSeenNewAchievements,
-      getCategory: (id) => {
-        return client.readFragment({
-          id: `Category:${id}`,
-          fragment: CATEGORY_DATA,
-          fragmentName: "CategoryData",
-        });
-      },
-      getChallenge: (id) => {
-        return client.readFragment({
-          id: `Challenge:${id}`,
-          fragment: CHALLENGE_DATA,
-        });
-      },
     }),
-    [
-      user,
-      categories,
-      achievements,
-      leaderboards,
-      contacts,
-      hasNewAchievements,
-      client,
-    ]
+    [user, categories, achievements, leaderboards, contacts, hasNewAchievements]
   );
 
   if (loading) {

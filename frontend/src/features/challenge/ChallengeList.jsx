@@ -4,6 +4,7 @@ import { Surface, Text, TouchableRipple, withTheme } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 import ContentContext from "~services/content/ContentContext";
+import { useCategory } from "~services/content/hooks";
 import colors from "~shared/colors";
 import { IconBackgroundImage, NoContent } from "~shared/components";
 import { t } from "~shared/i18n";
@@ -77,14 +78,14 @@ function ChallengeListItem({ challenge, user, theme, onPress }) {
 
 function ChallengeList({ route, navigation, theme }) {
   const { categoryID } = route.params;
-  const { user, getCategory } = React.useContext(ContentContext);
+  const { user } = React.useContext(ContentContext);
+  const category = useCategory(categoryID);
 
-  const category = getCategory(categoryID);
-  const { challenges } = category;
-
-  if (!challenges.length) {
+  if (!category) {
     return <NoContent message={t("Couldn't find any challenges")} />;
   }
+
+  const { challenges } = category;
 
   const styles = themedStyles(theme);
 

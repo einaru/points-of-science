@@ -2,7 +2,7 @@ import React from "react";
 import { ScrollView, View } from "react-native";
 import { Button } from "react-native-paper";
 
-import ContentContext from "~services/content/ContentContext";
+import { useChallenge } from "~services/content/hooks";
 import {
   IconBackgroundImage,
   ImageCarousel,
@@ -15,14 +15,19 @@ import styles from "./styles";
 
 function Intro({ route, navigation }) {
   const { challengeID } = route.params;
-  const { getChallenge } = React.useContext(ContentContext);
-  const challenge = getChallenge(challengeID);
+  const challenge = useChallenge(challengeID);
 
   React.useLayoutEffect(() => {
-    navigation.setOptions({
-      title: challenge.name,
-    });
+    if (challenge) {
+      navigation.setOptions({
+        title: challenge.name,
+      });
+    }
   }, [navigation, challenge]);
+
+  if (!challenge) {
+    return null;
+  }
 
   const renderMeta = () => {
     return (
@@ -52,6 +57,10 @@ function Intro({ route, navigation }) {
     </IconBackgroundImage>
   );
 
+  const doStartChallenge = () => {
+    navigation.navigate("challenge:activity", { ...route.params });
+  };
+
   const hasImages = challenge.images?.length > 0;
 
   return (
@@ -62,15 +71,7 @@ function Intro({ route, navigation }) {
           <MarkdownView>{challenge.description}</MarkdownView>
         </View>
       </ScrollView>
-      <Button
-        style={styles.action}
-        mode="contained"
-        onPress={() =>
-          navigation.navigate("challenge:activity", {
-            challengeID: challenge.id,
-          })
-        }
-      >
+      <Button style={styles.action} mode="contained" onPress={doStartChallenge}>
         {t("Start")}
       </Button>
     </View>

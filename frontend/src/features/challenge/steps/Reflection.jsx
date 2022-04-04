@@ -2,7 +2,7 @@ import React from "react";
 import { View } from "react-native";
 import { Button } from "react-native-paper";
 
-import ContentContext from "~services/content/ContentContext";
+import { useChallenge } from "~services/content/hooks";
 import { t } from "~shared/i18n";
 import { getTimestamp } from "~shared/timestamp";
 
@@ -14,27 +14,33 @@ import styles from "./styles";
 
 function Reflection({ route, navigation }) {
   const { challengeID } = route.params;
-  const { getChallenge } = React.useContext(ContentContext);
-  const challenge = getChallenge(challengeID);
-
-  const { setReflectionData } = React.useContext(ChallengeContext);
-  const { reflection } = challenge;
+  const challenge = useChallenge(challengeID);
 
   const [answer, setAnswer] = React.useState("");
 
   React.useLayoutEffect(() => {
-    navigation.setOptions({
-      headerTitle: () => {
-        return (
-          <HeaderTitle subtitle={t("Reflection")} title={challenge.name} />
-        );
-      },
-    });
+    if (challenge) {
+      navigation.setOptions({
+        headerTitle: () => {
+          return (
+            <HeaderTitle title={challenge.name} subtitle={t("Reflection")} />
+          );
+        },
+      });
+    }
   }, [navigation, challenge]);
+
+  const { setReflectionData } = React.useContext(ChallengeContext);
+
+  if (!challenge) {
+    return null;
+  }
+
+  const { reflection } = challenge;
 
   const doCompleteReflection = () => {
     setReflectionData(answer, getTimestamp());
-    navigation.navigate("challenge:completed", { challengeID });
+    navigation.navigate("challenge:completed", { ...route.params });
   };
 
   return (

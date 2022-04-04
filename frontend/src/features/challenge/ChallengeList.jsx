@@ -88,11 +88,15 @@ function ChallengeList({ route, navigation, theme }) {
         ? [...category.challenges].sort((a, b) =>
             compareDifficulties(a.difficulty, b.difficulty)
           )
-        : null,
+        : [],
     [category]
   );
 
-  if (!challenges) {
+  if (!category) {
+    return null;
+  }
+
+  if (!challenges.length) {
     return <NoContent message={t("Couldn't find any challenges")} />;
   }
 

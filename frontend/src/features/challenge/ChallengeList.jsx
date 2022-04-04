@@ -7,6 +7,7 @@ import ContentContext from "~services/content/ContentContext";
 import { useCategory } from "~services/content/hooks";
 import colors from "~shared/colors";
 import { IconBackgroundImage, NoContent } from "~shared/components";
+import { compareDifficulties } from "~shared/difficulty";
 import { t } from "~shared/i18n";
 
 import themedStyles from "./ChallengeList.style";
@@ -81,11 +82,19 @@ function ChallengeList({ route, navigation, theme }) {
   const { user } = React.useContext(ContentContext);
   const category = useCategory(categoryID);
 
-  if (!category) {
+  const challenges = React.useMemo(
+    () =>
+      category?.challenges?.length
+        ? [...category.challenges].sort((a, b) =>
+            compareDifficulties(a.difficulty, b.difficulty)
+          )
+        : null,
+    [category]
+  );
+
+  if (!challenges) {
     return <NoContent message={t("Couldn't find any challenges")} />;
   }
-
-  const { challenges } = category;
 
   const styles = themedStyles(theme);
 

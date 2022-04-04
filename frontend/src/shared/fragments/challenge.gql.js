@@ -19,8 +19,11 @@ export const CHALLENGE_DATA = gql`
     activity {
       type
       description
-      resources
       hints
+      resources {
+        title
+        url
+      }
     }
     reflection {
       reflectionType # FIXME Rename to type

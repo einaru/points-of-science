@@ -12,12 +12,6 @@ export default function ResourceDialog({
   onDismiss,
   onResourceVisited,
 }) {
-  // FIXME Remove/adjust once the resource structure is updated in backend
-  const getResourceTitle = (resource) => {
-    const title = resource.replace(/^https?:\/\//, "");
-    return title.split("/")[0];
-  };
-
   const openResource = (url) => {
     onResourceVisited(url);
     Linking.openURL(url);
@@ -27,16 +21,16 @@ export default function ResourceDialog({
     <Dialog visible={visible} onDismiss={() => onDismiss(DialogAction.DISMISS)}>
       <Dialog.Title>{t("External resources")}</Dialog.Title>
       <Dialog.Content>
-        {resources.map((resource) => {
+        {resources.map(({ title, url }) => {
           return (
             <List.Item
-              key={resource}
+              key={url}
               style={{ padding: 0 }}
-              title={getResourceTitle(resource)}
-              description={resource}
+              title={title}
+              description={url}
               descriptionNumberOfLines={1}
               right={() => <List.Icon icon="open-in-new" />}
-              onPress={() => openResource(resource)}
+              onPress={() => openResource(url)}
             />
           );
         })}

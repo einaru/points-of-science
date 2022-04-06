@@ -5,6 +5,7 @@ import { Dialog, IconButton, List } from "react-native-paper";
 import { t } from "~shared/i18n";
 
 import DialogAction from "./DialogAction";
+import styles from "./ResourceDialog.style";
 
 export default function ResourceDialog({
   resources,
@@ -20,16 +21,16 @@ export default function ResourceDialog({
   return (
     <Dialog visible={visible} onDismiss={() => onDismiss(DialogAction.DISMISS)}>
       <Dialog.Title>{t("External resources")}</Dialog.Title>
-      <Dialog.Content>
+      <Dialog.Content style={styles.content}>
         {resources.map(({ title, url }) => {
           return (
             <List.Item
               key={url}
-              style={{ padding: 0 }}
+              style={styles.item}
               title={title}
               description={url}
               descriptionNumberOfLines={1}
-              right={() => <List.Icon icon="open-in-new" />}
+              right={() => <List.Icon style={styles.icon} icon="open-in-new" />}
               onPress={() => openResource(url)}
             />
           );

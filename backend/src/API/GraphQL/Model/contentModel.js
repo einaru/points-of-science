@@ -39,25 +39,45 @@ const ActivityTypeEnum = new GraphQLEnumType({
   },
 });
 
-const Activity = {
+const resource = {
+  title: { type: GraphQLString },
+  url: { type: GraphQLString },
+};
+
+const ResourceType = new GraphQLObjectType({
+  name: "Resource",
+  fields: () => ({
+    ...resource,
+  }),
+});
+
+const ResourceInputType = new GraphQLInputObjectType({
+  name: "ResourceInput",
+  fields: () => ({
+    ...resource,
+  }),
+});
+
+const activity = {
   type: { type: ActivityTypeEnum },
   description: { type: GraphQLString },
   hints: { type: new GraphQLList(GraphQLString) },
-  resources: { type: new GraphQLList(GraphQLString) },
 };
 
 const ActivityModel = new GraphQLObjectType({
   name: "Activity",
   fields: () => ({
     id: { type: GraphQLString },
-    ...Activity,
+    ...activity,
+    resources: { type: new GraphQLList(ResourceType) },
   }),
 });
 
 const ActivityInputModel = new GraphQLInputObjectType({
   name: "ActivityInput",
   fields: () => ({
-    ...Activity,
+    ...activity,
+    resources: { type: new GraphQLList(ResourceInputType) },
   }),
 });
 

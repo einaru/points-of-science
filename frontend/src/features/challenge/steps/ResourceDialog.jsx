@@ -5,6 +5,7 @@ import { Dialog, IconButton, List } from "react-native-paper";
 import { t } from "~shared/i18n";
 
 import DialogAction from "./DialogAction";
+import styles from "./ResourceDialog.style";
 
 export default function ResourceDialog({
   resources,
@@ -12,12 +13,6 @@ export default function ResourceDialog({
   onDismiss,
   onResourceVisited,
 }) {
-  // FIXME Remove/adjust once the resource structure is updated in backend
-  const getResourceTitle = (resource) => {
-    const title = resource.replace(/^https?:\/\//, "");
-    return title.split("/")[0];
-  };
-
   const openResource = (url) => {
     onResourceVisited(url);
     Linking.openURL(url);
@@ -26,17 +21,17 @@ export default function ResourceDialog({
   return (
     <Dialog visible={visible} onDismiss={() => onDismiss(DialogAction.DISMISS)}>
       <Dialog.Title>{t("External resources")}</Dialog.Title>
-      <Dialog.Content>
-        {resources.map((resource) => {
+      <Dialog.Content style={styles.content}>
+        {resources.map(({ title, url }) => {
           return (
             <List.Item
-              key={resource}
-              style={{ padding: 0 }}
-              title={getResourceTitle(resource)}
-              description={resource}
+              key={url}
+              style={styles.item}
+              title={title}
+              description={url}
               descriptionNumberOfLines={1}
-              right={() => <List.Icon icon="open-in-new" />}
-              onPress={() => openResource(resource)}
+              right={() => <List.Icon style={styles.icon} icon="open-in-new" />}
+              onPress={() => openResource(url)}
             />
           );
         })}

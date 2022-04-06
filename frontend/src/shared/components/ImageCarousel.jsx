@@ -1,28 +1,35 @@
 import React from "react";
-import { ImageBackground } from "react-native";
-import PagerView from "react-native-pager-view";
+import { FlatList, ImageBackground, useWindowDimensions } from "react-native";
 
-function ImageCarousel({
-  images,
-  width = "100%",
-  height = 200,
-  initialImage = 0,
-  children,
-}) {
+function ImageCarousel({ images, height: customHeight, children }) {
+  const window = useWindowDimensions();
+
+  const height = customHeight || window.height / 3;
+
   if (!images?.length) {
     return null;
   }
-  return (
-    <PagerView style={{ flex: 1 }} initialPage={initialImage}>
-      {images.map((image, index) => (
-        <ImageBackground
-          key={index.toString()}
-          style={{ height, width }}
-          source={{ uri: image }}
-        />
-      ))}
+
+  const renderItem = ({ item: image }) => (
+    <ImageBackground
+      source={{ uri: image }}
+      resizeMode="cover"
+      style={{ height, width: window.width }}
+    >
       {children}
-    </PagerView>
+    </ImageBackground>
+  );
+
+  return (
+    <FlatList
+      horizontal
+      pagingEnabled
+      snapToInterval={window.width}
+      snapToAlignment="end"
+      keyExtractor={(item) => item}
+      data={images}
+      renderItem={renderItem}
+    />
   );
 }
 

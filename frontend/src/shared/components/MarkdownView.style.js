@@ -1,5 +1,6 @@
 import Color from "color";
 import { Platform, StyleSheet } from "react-native";
+import { color } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 
 // This is an attempt to match the styling of the Markdown component from
 // react-native-markdown-display with the styles used in react-native-paper.
@@ -12,18 +13,18 @@ const heading = Platform.select({
   io: {
     fontSize: 16,
     fontWeight: "600",
-    marginVertical: 8,
+    marginVertical: 4,
   },
   android: {
     fontFamily: "sans-serif-medium",
     fontSize: 16,
     fontWeight: "normal",
-    marginVertical: 8,
+    marginVertical: 4,
   },
   default: {
     fontSize: 16,
     fontWeight: "500",
-    marginVertical: 8,
+    marginVertical: 4,
   },
 });
 
@@ -43,6 +44,12 @@ export default function themedStyles(theme) {
     ? Color(colors.background).lighten(0.24).string()
     : Color(colors.background).darken(0.06).string();
 
+  const monospaceFont = Platform.select({
+    ios: {
+      fontFamily: "Courier New",
+    },
+  });
+
   const codeBlock = {
     backgroundColor,
     borderRadius: theme.roundness,
@@ -51,6 +58,11 @@ export default function themedStyles(theme) {
     fontSize: 12,
     marginVertical: 4,
     padding: 8,
+    ...monospaceFont,
+  };
+
+  const list = {
+    marginVertical: 4,
   };
 
   return StyleSheet.create({
@@ -59,8 +71,17 @@ export default function themedStyles(theme) {
       color: colors.text,
     },
     paragraph: {
-      fontSize: 14,
-      marginBottom: 8,
+      marginBottom: 4,
+      marginTop: 4,
+    },
+    link: {
+      color: colors.primary,
+    },
+    bullet_list: {
+      ...list,
+    },
+    ordered_list: {
+      ...list,
     },
     table: {
       borderColor,
@@ -83,11 +104,24 @@ export default function themedStyles(theme) {
       color: colors.placeholder,
       fontWeight: "500",
     },
+    code_inline: {
+      backgroundColor: color.background,
+      color: colors.text,
+      ...monospaceFont,
+    },
     code_block: {
       ...codeBlock,
     },
     fence: {
       ...codeBlock,
+    },
+    blockquote: {
+      backgroundColor,
+      borderColor: colors.primary,
+      marginLeft: 0,
+      marginVertical: 4,
+      paddingEnd: 4,
+      paddingStart: 8,
     },
   });
 }

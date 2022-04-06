@@ -13,15 +13,22 @@ export default function themedStyles(theme) {
     content: {
       flex: 1,
       margin: 8,
+      marginBottom: 0, // FIXME Adjust layout style of the challenge screens
     },
     question: {
       marginBottom: 8,
+    },
+    scrollView: {
+      flex: 1,
+    },
+    scrollViewContent: {
+      flexGrow: 1,
     },
     divider: {
       alignItems: "center",
       flex: 0,
       justifyContent: "center",
-      marginVertical: 8,
+      marginVertical: 4,
     },
     icon: {
       color: colors.text,
@@ -29,7 +36,6 @@ export default function themedStyles(theme) {
     actions: {
       flexDirection: "row",
       justifyContent: "space-between",
-      marginBottom: -8, // FIXME Adjust layout style of the challenge screens
       marginTop: 8,
     },
     bin: {
@@ -37,7 +43,7 @@ export default function themedStyles(theme) {
       borderColor: binBgColor,
       borderRadius: 4,
       borderWidth: 2,
-      flex: 2,
+      flex: 1,
       flexDirection: "row",
       flexWrap: "wrap",
       padding: 2,
@@ -47,7 +53,8 @@ export default function themedStyles(theme) {
       backgroundColor: colors.accent,
       borderRadius: 2,
       margin: 2,
-      padding: 4,
+      paddingHorizontal: 4,
+      paddingVertical: 2,
     },
     placeholder: {
       flex: 1,
@@ -71,7 +78,6 @@ export default function themedStyles(theme) {
     dragging: {
       opacity: 0.2,
     },
-    hoverDragging: {},
     receiving: {
       borderColor: colors.red,
       borderStyle: "dashed",

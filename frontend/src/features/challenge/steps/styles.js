@@ -21,9 +21,13 @@ export default StyleSheet.create({
     marginHorizontal: 8,
   },
   meta: {
-    flexDirection: "row",
+    flex: 1,
     justifyContent: "space-between",
     padding: 8,
+  },
+  metaRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   pagerView: {
     flex: 1,

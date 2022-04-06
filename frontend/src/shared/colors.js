@@ -1,5 +1,7 @@
 import Color from "color";
 
+import Difficulty from "./difficulty";
+
 const colors = {
   red: Color.rgb(237, 51, 59),
   orange: Color.rgb(255, 120, 0),
@@ -21,14 +23,23 @@ export const colorStrings = Object.keys(colors).reduce(
   {}
 );
 
+// Cache stringToColor values
+const cache = {};
+
 export function stringToColor(string) {
+  if (string in cache) {
+    return Color(cache[string]);
+  }
+
   let hash = 0;
   for (let i = 0; i < string.length; i++) {
     hash = string.charCodeAt(i) + ((hash << 5) - hash);
   }
 
   const color = (hash & 0x00ffffff).toString(16).toUpperCase();
-  return Color(`#${"00000".substring(0, 6 - color.length)}${color}`);
+  const padded = `#${"00000".substring(0, 6 - color.length)}${color}`;
+  cache[string] = padded;
+  return Color(padded);
 }
 
 export function getColorsFromString(string, lighten = 0.5, darken = 0.5) {
@@ -37,4 +48,17 @@ export function getColorsFromString(string, lighten = 0.5, darken = 0.5) {
     ? bgColor.lighten(lighten)
     : bgColor.darken(darken);
   return { bgColor, fgColor };
+}
+
+export function getDifficultyColor(difficulty) {
+  switch (difficulty) {
+    case Difficulty.BEGINNER:
+      return colors.green;
+    case Difficulty.INTERMEDIATE:
+      return colors.yellow;
+    case Difficulty.EXPERT:
+      return colors.red;
+    default:
+      throw new Error(`Got invalid difficulty level "${difficulty}.`);
+  }
 }

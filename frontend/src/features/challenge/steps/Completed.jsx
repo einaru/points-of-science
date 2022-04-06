@@ -8,14 +8,9 @@ import {
   View,
   useWindowDimensions,
 } from "react-native";
-import {
-  Button,
-  IconButton,
-  Surface,
-  Text,
-  withTheme,
-} from "react-native-paper";
+import { Button, Surface, Text, withTheme } from "react-native-paper";
 
+import ContentContext from "~services/content/ContentContext";
 import Sentry from "~services/sentry";
 import {
   HeroBackgroundImage,
@@ -23,6 +18,7 @@ import {
   SmileyOMeter,
 } from "~shared/components";
 import { t } from "~shared/i18n";
+import Permission from "~shared/permission";
 
 import ChallengeContext from "../ChallengeContext";
 import { ADD_USER_CHALLENGE, ADD_USER_CHALLENGE_RATING } from "./Completed.gql";
@@ -33,12 +29,13 @@ const Direction = {
   OUT: "out",
 };
 
-function Completed({ navigation, theme }) {
-  const { challenge, userData } = React.useContext(ChallengeContext);
+function Completed({ route, navigation, theme }) {
+  const { challengeID } = route.params;
+  const { user } = React.useContext(ContentContext);
+  const { userData } = React.useContext(ChallengeContext);
   const { width: windowWidth } = useWindowDimensions();
 
-  const [points, setPoints] = React.useState(0);
-  const [bonusPoints, setBonusPoints] = React.useState(0);
+  const [reward, setReward] = React.useState({ points: 0, bonusPoints: 0 });
   const [addUserChallenge, { called, loading }] = useMutation(
     ADD_USER_CHALLENGE,
     {
@@ -47,9 +44,7 @@ function Completed({ navigation, theme }) {
       },
       onCompleted: (data) => {
         if (data?.addUserChallenge.reward) {
-          const { reward } = data.addUserChallenge;
-          setPoints(reward.points);
-          setBonusPoints(reward.bonusPoints);
+          setReward(data.addUserChallenge.reward);
         }
       },
     }
@@ -60,7 +55,7 @@ function Completed({ navigation, theme }) {
       addUserChallenge({
         variables: {
           data: {
-            challengeID: challenge.id,
+            challengeID,
             activity: {
               dateStarted: userData.dateStarted,
               answer: userData.activityAnswer,
@@ -98,13 +93,6 @@ function Completed({ navigation, theme }) {
     }, [goBack])
   );
 
-  React.useLayoutEffect(() => {
-    navigation.setOptions({
-      title: challenge.name,
-      headerLeft: () => <IconButton icon="check" onPress={goBack} />,
-    });
-  }, [navigation, challenge, goBack]);
-
   const [isRated, setIsRated] = React.useState(false);
   const [addChallengeRating] = useMutation(ADD_USER_CHALLENGE_RATING, {
     onError: (error) => {
@@ -133,7 +121,7 @@ function Completed({ navigation, theme }) {
     addChallengeRating({
       variables: {
         rating: {
-          challengeID: challenge.id,
+          challengeID,
           dateCompleted: userData.dateCompleted,
           label,
           score,
@@ -149,13 +137,28 @@ function Completed({ navigation, theme }) {
   const styles = themedStyles(theme);
 
   const renderReward = () => {
-    const reward = points + bonusPoints;
-    return reward ? (
+    if (user.permission !== Permission.EXPERIMENT) {
+      return null;
+    }
+
+    const renderPoints = (points) => {
+      const label = points === 1 ? t("point") : t("points");
+      return <Text style={styles.points}>{`${points} ${label}`}</Text>;
+    };
+
+    const renderBonusPoints = (points) => {
+      const label = points === 1 ? t("bonus point") : t("bonus points");
+      return <Text style={styles.bonusPoints}>{`+${points} ${label}`}</Text>;
+    };
+
+    const { points, bonusPoints } = reward;
+
+    return (
       <View style={styles.rewardContainer}>
-        <Text style={styles.rewardTitle}>{reward}</Text>
-        <Text style={styles.rewardSubtitle}>{t("points")}</Text>
+        {points > 0 && renderPoints(points)}
+        {bonusPoints > 0 && renderBonusPoints(bonusPoints)}
       </View>
-    ) : null;
+    );
   };
 
   if (loading) {

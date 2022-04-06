@@ -14,6 +14,7 @@ function AchievementInfo({ info, visible, onDismiss, theme }) {
 
   const styles = themedStyle(theme);
   const { achievement, progress } = info;
+  const percent = (progress * 100).toFixed();
 
   return (
     <Modal
@@ -29,7 +30,7 @@ function AchievementInfo({ info, visible, onDismiss, theme }) {
       <View style={styles.content}>
         <View style={styles.progressInfo}>
           <Text>{t("Progress")}</Text>
-          <Text>{`(${progress * 100}%)`}</Text>
+          <Text>{`(${percent}%)`}</Text>
         </View>
       </View>
     </Modal>

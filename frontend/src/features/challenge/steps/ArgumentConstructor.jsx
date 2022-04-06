@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "react-native";
-import { DraxProvider, DraxView } from "react-native-drax";
+import { DraxProvider, DraxScrollView, DraxView } from "react-native-drax";
 import { Button, Text, useTheme } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
@@ -64,71 +64,83 @@ export default function ArgumentConstructor({
     <DraxProvider>
       <View style={styles.content}>
         <Text style={styles.question}>{question}</Text>
-        <DraxView
-          id="source"
-          style={styles.bin}
-          payload={argumentChoices}
-          receivingStyle={styles.receiving}
-          draggable={false}
-          renderContent={() => {
-            const items = Array.from(argumentChoices);
-            return items.length === 0 ? (
-              <View style={[styles.placeholder, styles.centered]}>
-                <Text style={styles.title}>
-                  {t("No more items to choose from!")}
-                </Text>
-              </View>
-            ) : (
-              items.map((item) => (
-                <DraggableItem key={item.key} item={item} styles={styles} />
-              ))
-            );
-          }}
-          onReceiveDragDrop={(event) => {
-            const item = event.dragged.payload;
-            setArgumentChoices((state) => new Set(state).add(item));
-            const otherState = argumentData;
-            otherState.delete(item);
-            setArgumentData(otherState);
-          }}
-        />
+        <DraxScrollView
+          style={styles.scrollView}
+          contentContainerStyle={styles.scrollViewContent}
+        >
+          <DraxView
+            id="source"
+            style={styles.bin}
+            payload={argumentChoices}
+            receivingStyle={styles.receiving}
+            draggable={false}
+            renderContent={() => {
+              const items = Array.from(argumentChoices);
+              return items.length === 0 ? (
+                <View style={[styles.placeholder, styles.centered]}>
+                  <Text style={styles.title}>
+                    {t("No more items to choose from!")}
+                  </Text>
+                </View>
+              ) : (
+                items.map((item) => (
+                  <DraggableItem key={item.key} item={item} styles={styles} />
+                ))
+              );
+            }}
+            onReceiveDragDrop={(event) => {
+              const item = event.dragged.payload;
+              setArgumentChoices((state) => new Set(state).add(item));
+              const otherState = argumentData;
+              otherState.delete(item);
+              setArgumentData(otherState);
+            }}
+          />
+        </DraxScrollView>
         <View style={styles.divider}>
-          <Icon style={styles.icon} name="arrow-up-down" size={24} />
+          <Icon style={styles.icon} name="arrow-up-down" size={20} />
         </View>
-        <DraxView
-          id="destination"
-          style={styles.bin}
-          payload={argumentData}
-          receivingStyle={styles.receiving}
-          draggable={false}
-          renderContent={() => {
-            const items = Array.from(argumentData);
-            return items.length === 0 ? (
-              <View style={[styles.placeholder, styles.centered]}>
-                <Text style={styles.title}>
-                  {t("howToFormAnArgumentTitle")}
-                </Text>
-                <Text style={styles.text}>{t("howToFormAnArgumentText")}</Text>
-              </View>
-            ) : (
-              items.map((item) => (
-                <DraggableItem key={item.key} item={item} styles={styles} />
-              ))
-            );
-          }}
-          onReceiveDragDrop={(event) => {
-            const item = event.dragged.payload;
-            setArgumentData((oldState) => {
-              const state = new Set(oldState).add(item);
-              const answer = Array.from(state).map((arg) => arg.label);
-              onChangeArgument(JSON.stringify(answer));
-              return state;
-            });
-            const otherState = argumentChoices;
-            otherState.delete(item);
-            setArgumentChoices(otherState);
-          }}
-        />
+        <DraxScrollView
+          style={styles.scrollView}
+          contentContainerStyle={styles.scrollViewContent}
+        >
+          <DraxView
+            id="destination"
+            style={styles.bin}
+            payload={argumentData}
+            receivingStyle={styles.receiving}
+            draggable={false}
+            renderContent={() => {
+              const items = Array.from(argumentData);
+              return items.length === 0 ? (
+                <View style={[styles.placeholder, styles.centered]}>
+                  <Text style={styles.title}>
+                    {t("howToFormAnArgumentTitle")}
+                  </Text>
+                  <Text style={styles.text}>
+                    {t("howToFormAnArgumentText")}
+                  </Text>
+                </View>
+              ) : (
+                items.map((item) => (
+                  <DraggableItem key={item.key} item={item} styles={styles} />
+                ))
+              );
+            }}
+            onReceiveDragDrop={(event) => {
+              const item = event.dragged.payload;
+              setArgumentData((oldState) => {
+                const state = new Set(oldState).add(item);
+                const answer = Array.from(state).map((arg) => arg.label);
+                onChangeArgument(JSON.stringify(answer));
+                return state;
+              });
+              const otherState = argumentChoices;
+              otherState.delete(item);
+              setArgumentChoices(otherState);
+            }}
+          />
+        </DraxScrollView>
         <View style={styles.actions}>
           <Button mode="outlined" icon="delete" onPress={() => reset()}>
             {t("Reset")}

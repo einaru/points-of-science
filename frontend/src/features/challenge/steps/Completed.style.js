@@ -6,7 +6,8 @@ import commonStyles from "./styles";
 export default function themedStyles(theme) {
   const { colors } = theme;
 
-  const textShadow = {
+  const shoutOutText = {
+    fontWeight: "bold",
     textShadowColor: colors.background,
     textShadowOffset: { height: 1, width: 1 },
     textShadowRadius: 1,
@@ -24,9 +25,8 @@ export default function themedStyles(theme) {
       justifyContent: "center",
     },
     shoutOut: {
-      ...textShadow,
+      ...shoutOutText,
       fontSize: 32,
-      fontWeight: "bold",
     },
     surface: {
       borderRadius: 4,
@@ -35,22 +35,16 @@ export default function themedStyles(theme) {
       marginTop: 16,
     },
     rewardContainer: {
-      alignItems: "baseline",
-      flexDirection: "row",
       marginVertical: 16,
+      alignItems: "center",
     },
-    rewardTitle: {
-      ...textShadow,
-      fontSize: 64,
-      fontWeight: "bold",
+    points: {
+      ...shoutOutText,
+      fontSize: 48,
     },
-    rewardSubtitle: {
-      ...textShadow,
-
-      fontSize: 24,
-      fontWeight: "bold",
-      lineHeight: 64,
-      marginStart: 8,
+    bonusPoints: {
+      ...shoutOutText,
+      fontSize: 28,
     },
   });
 }

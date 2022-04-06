@@ -1,21 +1,17 @@
 import React from "react";
 import { FlatList, ImageBackground, View } from "react-native";
-import {
-  Chip,
-  Surface,
-  Text,
-  TouchableRipple,
-  withTheme,
-} from "react-native-paper";
+import { Surface, Text, TouchableRipple, withTheme } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
+import ContentContext from "~services/content/ContentContext";
+import { useCategory } from "~services/content/hooks";
 import colors from "~shared/colors";
 import { IconBackgroundImage, NoContent } from "~shared/components";
+import { compareDifficulties } from "~shared/difficulty";
 import { t } from "~shared/i18n";
-import Permission from "~shared/permission";
 
 import themedStyles from "./ChallengeList.style";
-import { getDifficultyColor } from "./difficulty";
+import { renderDifficulty, renderReward } from "./Chip";
 
 function ChallengeListItem({ challenge, user, theme, onPress }) {
   const styles = themedStyles(theme);
@@ -45,42 +41,13 @@ function ChallengeListItem({ challenge, user, theme, onPress }) {
     );
   };
 
-  const renderDifficulty = () => {
-    const color = getDifficultyColor(challenge.difficulty);
-    const textStyle = {
-      color: color.isLight()
-        ? color.darken(0.6).string()
-        : color.lighten(0.6).string(),
-    };
-    const style = {
-      ...styles.chip,
-      backgroundColor: color.string(),
-    };
-    return (
-      <Chip style={style} textStyle={textStyle}>
-        {t(challenge.difficulty)}
-      </Chip>
-    );
-  };
-
-  const renderReward = () => {
-    if (user.permission === Permission.EXPERIMENT) {
-      return (
-        <Chip style={styles.chip}>
-          {challenge.reward.maxPoints} {t("points")}
-        </Chip>
-      );
-    }
-    return null;
-  };
-
   const renderContent = () => {
     return (
       <View style={styles.content}>
         {renderHeader()}
         <View style={styles.meta}>
-          {renderDifficulty()}
-          {renderReward()}
+          {renderDifficulty(challenge)}
+          {renderReward(challenge)}
         </View>
       </View>
     );
@@ -111,8 +78,23 @@ function ChallengeListItem({ challenge, user, theme, onPress }) {
 }
 
 function ChallengeList({ route, navigation, theme }) {
-  const { category, user } = route.params;
-  const { challenges } = category;
+  const { categoryID } = route.params;
+  const { user } = React.useContext(ContentContext);
+  const category = useCategory(categoryID);
+
+  const challenges = React.useMemo(
+    () =>
+      category?.challenges?.length
+        ? [...category.challenges].sort((a, b) =>
+            compareDifficulties(a.difficulty, b.difficulty)
+          )
+        : [],
+    [category]
+  );
+
+  if (!category) {
+    return null;
+  }
 
   if (!challenges.length) {
     return <NoContent message={t("Couldn't find any challenges")} />;
@@ -126,8 +108,9 @@ function ChallengeList({ route, navigation, theme }) {
       user={user}
       theme={theme}
       onPress={() => {
-        navigation.navigate("challenge:main", {
-          challenge,
+        navigation.navigate("challenge:intro", {
+          categoryID,
+          challengeID: challenge.id,
         });
       }}
     />

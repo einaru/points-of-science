@@ -1,7 +1,8 @@
 import React from "react";
 import { ScrollView, View } from "react-native";
-import { Button, Chip } from "react-native-paper";
+import { Button } from "react-native-paper";
 
+import { useChallenge } from "~services/content/hooks";
 import {
   IconBackgroundImage,
   ImageCarousel,
@@ -9,41 +10,41 @@ import {
 } from "~shared/components";
 import { t } from "~shared/i18n";
 
-import ChallengeContext from "../ChallengeContext";
+import Chip, { renderDifficulty, renderReward } from "../Chip";
 import styles from "./styles";
 
-function Intro({ navigation }) {
-  const { challenge } = React.useContext(ChallengeContext);
+function Intro({ route, navigation }) {
+  const { challengeID } = route.params;
+  const challenge = useChallenge(challengeID);
 
   React.useLayoutEffect(() => {
-    navigation.setOptions({
-      title: challenge.name,
-    });
+    if (challenge) {
+      navigation.setOptions({
+        title: challenge.name,
+      });
+    }
   }, [navigation, challenge]);
 
-  const renderReward = () => {
-    return !challenge.reward ? null : (
-      <Chip style={styles.chip} mode="outlined">
-        {challenge.reward.maxPoints} {t("points")}
-      </Chip>
-    );
-  };
+  if (!challenge) {
+    return null;
+  }
 
   const renderMeta = () => {
     return (
       <View style={styles.meta}>
-        <Chip style={styles.chip} mode="outlined">
-          {challenge.category.name}
-        </Chip>
-        {renderReward()}
+        <View style={styles.metaRow}>
+          <Chip>{challenge.category.name}</Chip>
+        </View>
+        <View style={styles.metaRow}>
+          {renderDifficulty(challenge)}
+          {renderReward(challenge)}
+        </View>
       </View>
     );
   };
 
   const renderImages = () => (
-    <ImageCarousel images={challenge.images} height={150}>
-      {renderMeta()}
-    </ImageCarousel>
+    <ImageCarousel images={challenge.images}>{renderMeta()}</ImageCarousel>
   );
 
   const renderFallbackImage = () => (
@@ -56,21 +57,21 @@ function Intro({ navigation }) {
     </IconBackgroundImage>
   );
 
+  const doStartChallenge = () => {
+    navigation.navigate("challenge:activity", { ...route.params });
+  };
+
   const hasImages = challenge.images?.length > 0;
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scroll}>
+      <ScrollView>
         {hasImages ? renderImages() : renderFallbackImage()}
         <View style={styles.content}>
           <MarkdownView>{challenge.description}</MarkdownView>
         </View>
       </ScrollView>
-      <Button
-        style={styles.action}
-        mode="contained"
-        onPress={() => navigation.navigate("challenge:activity")}
-      >
+      <Button style={styles.action} mode="contained" onPress={doStartChallenge}>
         {t("Start")}
       </Button>
     </View>

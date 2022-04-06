@@ -3,7 +3,6 @@ import { gql } from "@apollo/client";
 import {
   ACHIEVEMENT_DATA,
   CATEGORY_DATA,
-  CHALLENGE_DATA,
   LEADERBOARD_DATA,
   USER_PROFILE,
 } from "~shared/fragments";
@@ -11,7 +10,6 @@ import {
 export const GET_ALL_CONTENT = gql`
   ${USER_PROFILE}
   ${CATEGORY_DATA}
-  ${CHALLENGE_DATA}
   ${ACHIEVEMENT_DATA}
   ${LEADERBOARD_DATA}
 
@@ -21,9 +19,6 @@ export const GET_ALL_CONTENT = gql`
     }
     categories {
       ...CategoryData
-      challenges {
-        ...ChallengeData
-      }
     }
     achievements {
       ...AchievementData

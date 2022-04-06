@@ -5,7 +5,7 @@ import { Portal } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 import AchievementStack from "~features/achievement/AchievementStack";
-import ChallengesStack from "~features/challenge/ChallengesStack";
+import ChallengesStack from "~features/challenge/ChallengeStack";
 import LeaderboardStack from "~features/leaderboard/LeaderboardStack";
 import ProfileStack from "~features/profile/ProfileStack";
 import AuthContext from "~services/auth/AuthContext";

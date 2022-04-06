@@ -4,6 +4,7 @@ import { createContext } from "react";
 const ChallengeContext = createContext({
   challenge: {},
   userData: {},
+  setChallengeID: (id) => {},
   setActivityData: (
     answer,
     dateStarted,

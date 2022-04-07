@@ -5,6 +5,7 @@ export default {
   "Activate account": "Aktiver konto",
   "Activity": "Aktivitet",
   "Already activated your account?": "Har du allerede aktivert kontoen din?",
+  "Answer": "Svar",
   "Attributions": "Attribusjoner",
   "bonus point": "bonuspoeng",
   "bonus points": "bonuspoeng",

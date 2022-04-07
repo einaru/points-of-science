@@ -26,7 +26,7 @@ function OpenReflection({ title, onChange, theme }) {
           multiline
           style={{ flex: 1 }}
           autoFocus={Platform.OS !== "ios"}
-          label={t("Reflection")}
+          label={t("Answer")}
           value={text}
           onChangeText={handleChange}
         />

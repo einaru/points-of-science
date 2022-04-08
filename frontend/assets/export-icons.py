@@ -13,7 +13,8 @@ EXPORT_CONFIG = {
         ("adaptive-icon.png", 0.0),
     ],
     "splash": [("splash.png", 0.0)],
-    "favicon": [("favicon.png", 0.0)]
+    "favicon": [("favicon.png", 0.0)],
+    "feature": [("feature.png", 1.0)]
 }
 
 

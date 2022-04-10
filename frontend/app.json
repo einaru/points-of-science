@@ -2,7 +2,7 @@
   "expo": {
     "name": "Points of Science",
     "slug": "msc-science-app",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "sdkVersion": "44.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -24,7 +24,8 @@
       "supportsTablet": false,
       "config": {
         "usesNonExemptEncryption": false
-      }
+      },
+      "buildNumber": "1.0.2"
     },
     "android": {
       "package": "no.uvslokk.msc.ScienceApp",
@@ -32,7 +33,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#6200ee"
-      }
+      },
+      "versionCode": 440010002
     },
     "androidStatusBar": {
       "barStyle": "light-content",

@@ -29,6 +29,7 @@ const config = {
     error: "error",
   },
   storage: {
+    databaseURL: process.env.DATABASE_URL,
     bucket: process.env.GOOGLE_STORAGE_BUCKET,
   },
   permissionLevel: {

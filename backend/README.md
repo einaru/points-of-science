@@ -104,6 +104,14 @@ export REFRESH_TOKEN_SECRET=EvEnMoReSeCrEt
 export SUBSCRIBE_TOKEN_SECRET=UnBeLiEvAbLySeCrEt
 ```
 
+To run the application in production on GOOGLE APP ENGINE, the environment variable
+`DATABASE_URL` must be set in the .env file and app.yaml file:
+
+```
+DATABASE_URL: https://<DATABASE_NAME>.firebaseio.com (app.yaml)
+DATABASE_URL = https://<DATABASE_NAME>.firebaseio.com (.env)
+```
+
 Now you should be able run `yarn dev` to fire up the application.
 
 ### Production mode

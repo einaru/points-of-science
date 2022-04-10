@@ -21,7 +21,10 @@
     ],
     "ios": {
       "bundleIdentifier": "no.uvslokk.msc.ScienceApp",
-      "supportsTablet": false
+      "supportsTablet": false,
+      "config": {
+        "usesNonExemptEncryption": false
+      }
     },
     "android": {
       "package": "no.uvslokk.msc.ScienceApp",

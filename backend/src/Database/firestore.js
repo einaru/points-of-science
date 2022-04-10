@@ -5,6 +5,7 @@ import config from "../Config/config.js";
 
 admin.initializeApp({
   credential: admin.credential.applicationDefault(),
+  databaseURL: config.storage.databaseURL,
   storageBucket: config.storage.bucket,
 });
 

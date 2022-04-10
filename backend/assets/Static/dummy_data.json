@@ -1008,7 +1008,7 @@
     {
       "condition": ["uhQTzXWaocEFAQOxl5dT", "76cq97Qjo48ONgmd8H5U", "kruAnNew6mHOS1qgJna1", "aViaZXEdE6RG4MJUdyH0", "8IrM3g7YLfHdBSUb7MXi", "pQOEsnMyFO3IzVsEyTcs", "EcxIQ2d1ARWNEAlefatH"],
       "content": {
-        "description": "Fullfør alle utfordringer med nivået nybegynner.",
+        "description": "Fullfør alle utfordringer med vanskelighetsgrad Nybegynner.",
         "image": "",
         "title": "En enkel utfordring"
       },
@@ -1017,7 +1017,7 @@
     {
       "condition": ["aViaZXEdE6RG4MJUdyH0", "8IrM3g7YLfHdBSUb7MXi"],
       "content": {
-        "description": "Fullfør alle utfordringer i kategorien Analyse av data med nivået nybegynner.",
+        "description": "Fullfør alle utfordringer i kategorien Analyse av data med vanskelighetsgrad Nybegynner.",
         "image": "",
         "title": "Junior analytiker"
       },
@@ -1026,7 +1026,7 @@
     {
       "condition": ["uhQTzXWaocEFAQOxl5dT", "76cq97Qjo48ONgmd8H5U"],
       "content": {
-        "description": "Fullfør alle utfordringer i kategorien Molekylær Bevegelse med nivået nybegynner.",
+        "description": "Fullfør alle utfordringer i kategorien Molekylær Bevegelse med vanskelighetsgrad Nybegynner.",
         "image": "",
         "title": "Begynn med det grunnleggende"
       },
@@ -1035,7 +1035,7 @@
     {
       "condition": ["kruAnNew6mHOS1qgJna1"],
       "content": {
-        "description": "Fullfør alle utfordringer i kategorien Kjemiske Reaksjoner med nivået nybegynner.",
+        "description": "Fullfør alle utfordringer i kategorien Kjemiske Reaksjoner med vanskelighetsgrad Nybegynner.",
         "image": "",
         "title": "En solid grunnmur"
       },
@@ -1044,7 +1044,7 @@
     {
       "condition": ["pQOEsnMyFO3IzVsEyTcs", "EcxIQ2d1ARWNEAlefatH"],
       "content": {
-        "description": "Fullfør alle utfordringer i kategorien IT med nivået nybegynner.",
+        "description": "Fullfør alle utfordringer i kategorien IT med vanskelighetsgrad Nybegynner.",
         "image": "",
         "title": "Alle må begynne en plass"
       },
@@ -1053,7 +1053,7 @@
     {
       "condition": ["9nYnavMPlPq98031tuMT", "wxGvzCs5wmcnyrySYcF7", "Mv9Cm6GUHcCEXAP9ipn5"],
       "content": {
-        "description": "Fullfør alle utfordringer med nivået viderekommen.",
+        "description": "Fullfør alle utfordringer med vanskelighetsgrad Viderekommen.",
         "image": "",
         "title": "Det neste steget"
       },
@@ -1062,7 +1062,7 @@
     {
       "condition": ["wxGvzCs5wmcnyrySYcF7"],
       "content": {
-        "description": "Fullfør alle utfordringer i kategorien Analyse av data med nivået viderekommen.",
+        "description": "Fullfør alle utfordringer i kategorien Analyse av data med vanskelighetsgrad Viderekommen.",
         "image": "",
         "title": "Kunnskapstørst"
       },
@@ -1071,7 +1071,7 @@
     {
       "condition": ["9nYnavMPlPq98031tuMT"],
       "content": {
-        "description": "Fullfør alle utfordringer i kategorien Molekylær Bevegelse med nivået viderekommen.",
+        "description": "Fullfør alle utfordringer i kategorien Molekylær Bevegelse med vanskelighetsgrad Viderekommen.",
         "image": "",
         "title": "Veien videre"
       },
@@ -1080,7 +1080,7 @@
     {
       "condition": ["KDiSyRcjQT6o25D1UWr8"],
       "content": {
-        "description": "Fullfør alle utfordringer i kategorien Kjemiske Reaksjoner med nivået viderekommen.",
+        "description": "Fullfør alle utfordringer i kategorien Kjemiske Reaksjoner med vanskelighetsgrad Viderekommen.",
         "image": "",
         "title": "Takler en utfordring"
       },
@@ -1089,7 +1089,7 @@
     {
       "condition": ["Mv9Cm6GUHcCEXAP9ipn5"],
       "content": {
-        "description": "Fullfør alle utfordringer i kategorien IT med nivået viderekommen.",
+        "description": "Fullfør alle utfordringer i kategorien IT med vanskelighetsgrad Viderekommen.",
         "image": "",
         "title": "Fra viderekommen til fullkommen"
       },
@@ -1098,7 +1098,7 @@
     {
       "condition": ["z095TCsRHDjjXVtNkOJ2", "gSZtkJvdewTQvEae50aJ", "utgz5irPGcwcbLZuqNW2", "98irZoBeF1TcY9MSewd7"],
       "content": {
-        "description": "Fullfør alle utfordringer med nivået ekspert.",
+        "description": "Fullfør alle utfordringer med vanskelighetsgrad Ekspert.",
         "image": "",
         "title": "Ingen utfordring er for stor"
       },
@@ -1107,7 +1107,7 @@
     {
       "condition": ["utgz5irPGcwcbLZuqNW2"],
       "content": {
-        "description": "Fullfør alle utfordringer i kategorien Analyse av data med nivået ekspert.",
+        "description": "Fullfør alle utfordringer i kategorien Analyse av data med vanskelighetsgrad Ekspert.",
         "image": "",
         "title": "Gjennomkjørt"
       },
@@ -1116,7 +1116,7 @@
     {
       "condition": ["z095TCsRHDjjXVtNkOJ2"],
       "content": {
-        "description": "Fullfør alle utfordringer i kategorien Molekylær Bevegelse med nivået ekspert.",
+        "description": "Fullfør alle utfordringer i kategorien Molekylær Bevegelse med vanskelighetsgrad Ekspert.",
         "image": "",
         "title": "Kunnskapsgenerator"
       },
@@ -1125,7 +1125,7 @@
     {
       "condition": ["gSZtkJvdewTQvEae50aJ"],
       "content": {
-        "description": "Fullfør alle utfordringer i kategorien Kjemiske Reaksjoner med nivået ekspert.",
+        "description": "Fullfør alle utfordringer i kategorien Kjemiske Reaksjoner med vanskelighetsgrad Ekspert.",
         "image": "",
         "title": "Ekspertise"
       },
@@ -1134,7 +1134,7 @@
     {
       "condition": ["98irZoBeF1TcY9MSewd7"],
       "content": {
-        "description": "Fullfør alle utfordringer i kategorien IT med nivået ekspert.",
+        "description": "Fullfør alle utfordringer i kategorien IT med vanskelighetsgrad Ekspert.",
         "image": "",
         "title": "Bezzerwizzer"
       },

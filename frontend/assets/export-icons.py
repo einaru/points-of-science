@@ -111,7 +111,7 @@ if __name__ == "__main__":
     args = parse_command_line()
 
     infile = args.infile
-    ids = args.target_ids
+    ids = args.target_ids or EXPORT_CONFIG.keys()
     bg_color = args.primary_color
     outdir = pathlib.Path(args.export_to).absolute()
 

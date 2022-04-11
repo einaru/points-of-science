@@ -1,7 +1,19 @@
 import { RedisPubSub } from "graphql-redis-subscriptions";
+import Redis from "ioredis";
 import { challengeCreator } from "../../../../internal.js";
 
-const pubsub = new RedisPubSub();
+const options = {
+  maxRetriesPerRequest: 50,
+  retryStrategy: (times) => {
+    // reconnect after
+    return Math.min(times * 50, 2000);
+  },
+};
+
+const pubsub = new RedisPubSub({
+  publisher: new Redis(options),
+  subscriber: new Redis(options),
+});
 
 function createContent(content, title = "", images = [], description = "") {
   const newContent = {

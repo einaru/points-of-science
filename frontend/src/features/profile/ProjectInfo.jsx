@@ -1,13 +1,16 @@
+import Constants from "expo-constants";
 import { openURL } from "expo-linking";
 import React from "react";
 import { ScrollView, View } from "react-native";
-import { List, Paragraph, Subheading } from "react-native-paper";
+import { Divider, List, Paragraph, Subheading } from "react-native-paper";
 
 import ContentContext from "~services/content/ContentContext";
 import { HeroImage } from "~shared/components";
 import { t } from "~shared/i18n";
 
 import styles from "./ProjectInfo.style";
+
+const { projectWebsite } = Constants.manifest.extra;
 
 function ProjectInfo() {
   const { contacts } = React.useContext(ContentContext);
@@ -24,7 +27,7 @@ function ProjectInfo() {
       {contacts.map((contact) => {
         return (
           <List.Accordion
-            key={contact.email}
+            key={contact.name}
             title={contact.name}
             description={contact.role}
           >
@@ -33,6 +36,7 @@ function ProjectInfo() {
                 left={() => <List.Icon icon="phone" />}
                 right={() => <List.Icon icon="open-in-new" />}
                 title={contact.phone}
+                description={t("Phone")}
                 onPress={() => openURL(`tel:${contact.phone}`)}
               />
             )}
@@ -41,12 +45,24 @@ function ProjectInfo() {
                 left={() => <List.Icon icon="email" />}
                 right={() => <List.Icon icon="open-in-new" />}
                 title={contact.email}
+                description={t("Email")}
                 onPress={() => openURL(`mailto:${contact.email}`)}
               />
             )}
           </List.Accordion>
         );
       })}
+      {projectWebsite && (
+        <>
+          <Divider />
+          <List.Item
+            right={() => <List.Icon icon="open-in-new" />}
+            title={projectWebsite}
+            description={t("Project website")}
+            onPress={() => openURL(projectWebsite)}
+          />
+        </>
+      )}
     </ScrollView>
   );
 }

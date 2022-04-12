@@ -9,8 +9,7 @@
     "primaryColor": "#6200ee",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "cover",
-      "backgroundColor": "#6200ee"
+      "resizeMode": "cover"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -32,13 +31,9 @@
       "icon": "./assets/legacy-icon.png",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#6200ee"
+        "backgroundImage": "./assets/adaptive-background.png"
       },
       "versionCode": 440010002
-    },
-    "androidStatusBar": {
-      "barStyle": "light-content",
-      "backgroundColor": "#6200ee"
     },
     "web": {
       "favicon": "./assets/favicon.png"

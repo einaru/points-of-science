@@ -2,7 +2,7 @@
   "expo": {
     "name": "Points of Science",
     "slug": "msc-science-app",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "sdkVersion": "44.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -24,7 +24,7 @@
       "config": {
         "usesNonExemptEncryption": false
       },
-      "buildNumber": "1.0.2"
+      "buildNumber": "1.0.3"
     },
     "android": {
       "package": "no.uvslokk.msc.ScienceApp",
@@ -33,7 +33,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundImage": "./assets/adaptive-background.png"
       },
-      "versionCode": 440010002
+      "versionCode": 440010003
     },
     "web": {
       "favicon": "./assets/favicon.png"

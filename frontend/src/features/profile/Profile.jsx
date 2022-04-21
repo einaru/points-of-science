@@ -3,25 +3,31 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import * as Clipboard from "expo-clipboard";
 import React from "react";
 import { ScrollView, View, useWindowDimensions } from "react-native";
-import { Avatar, Divider, List, Snackbar, Switch } from "react-native-paper";
+import {
+  Avatar,
+  Divider,
+  List,
+  Snackbar,
+  Switch,
+  withTheme,
+} from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import AnalyticsContext from "~services/analytics/AnalyticsContext";
 import AuthContext from "~services/auth/AuthContext";
 import PreferencesContext from "~services/preferences/PreferencesContext";
 import Sentry from "~services/sentry";
-import { getColorsFromString } from "~shared/colors";
 import { LoadingScreen } from "~shared/components";
 import { t } from "~shared/i18n";
 
 import LOGOUT from "./Profile.gql";
 import styles from "./Profile.style";
 
-function Profile() {
+function Profile({ theme }) {
   const navigation = useNavigation();
   const route = useRoute();
 
-  const { width: windowWidth } = useWindowDimensions();
+  const window = useWindowDimensions();
 
   const [visibleSnackbar, setVisibleSnackbar] = React.useState(false);
   const showSnackbar = () => setVisibleSnackbar(true);
@@ -33,9 +39,11 @@ function Profile() {
 
   const initials = React.useMemo(() => {
     return user.username
+      .replace(/([A-Z][a-z])/g, " $1")
       .split(" ")
       .map((word) => word[0])
-      .join("");
+      .join("")
+      .toUpperCase();
   }, [user.username]);
 
   const [logOut, { loading, client }] = useMutation(LOGOUT, {
@@ -45,14 +53,12 @@ function Profile() {
   });
 
   const renderAvatar = () => {
-    const { bgColor, fgColor } = getColorsFromString(user.id, 0.9);
     return (
       <View style={styles.avatarContainer}>
         <Avatar.Text
-          size={windowWidth / 4}
+          size={window.width / Math.PI}
           label={initials}
-          color={fgColor.string()}
-          style={[styles.avatar, { backgroundColor: bgColor.string() }]}
+          style={[styles.avatar, { backgroundColor: theme.colors.accent }]}
         />
       </View>
     );
@@ -149,4 +155,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default withTheme(Profile);

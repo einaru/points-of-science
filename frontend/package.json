@@ -1,6 +1,6 @@
 {
   "name": "msc-science-app",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
@@ -14,7 +14,8 @@
     "sort-imports:fix": "import-sort App.jsx ./src/**/*.{js,jsx} --write",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "optimize-assets": "npx expo-optimize"
+    "optimize-assets": "npx expo-optimize",
+    "release": "standard-version --skip.changelog"
   },
   "dependencies": {
     "@apollo/client": "^3.5.7",
@@ -85,6 +86,8 @@
     "prettier": "^2.5.1",
     "react-test-renderer": "17",
     "sentry-testkit": "^3.3.7",
+    "standard-version": "^7.1.0",
+    "standard-version-expo": "^1.0.3",
     "ws": "^8.5.0"
   },
   "importSort": {

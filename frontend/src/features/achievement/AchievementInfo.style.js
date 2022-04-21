@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export default function themedStyle(theme) {
+export default function themedStyles(theme) {
   const { colors } = theme;
   return StyleSheet.create({
     contentContainer: {

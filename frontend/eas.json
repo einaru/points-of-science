@@ -27,6 +27,7 @@
       "env": {
         "HTTP_ENDPOINT": "https://msc-scienceapp.ew.r.appspot.com/graphql",
         "SUBSCRIPTION_ENDPOINT": "ws://msc-scienceapp.ew.r.appspot.com/graphql",
+        "PROJECT_WEBSITE": "https://folk.ntnu.no/einaru/msc-project/",
         "ENABLE_SENTRY": "yes",
         "SENTRY_ORGANIZATION": "msc-project",
         "SENTRY_PROJECT": "msc-scienceapp"

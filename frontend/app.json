@@ -2,15 +2,14 @@
   "expo": {
     "name": "Points of Science",
     "slug": "msc-science-app",
-    "version": "1.0.0",
+    "version": "1.0.4",
     "sdkVersion": "44.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "primaryColor": "#6200ee",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "cover",
-      "backgroundColor": "#6200ee"
+      "resizeMode": "cover"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -21,19 +20,20 @@
     ],
     "ios": {
       "bundleIdentifier": "no.uvslokk.msc.ScienceApp",
-      "supportsTablet": true
+      "supportsTablet": false,
+      "config": {
+        "usesNonExemptEncryption": false
+      },
+      "buildNumber": "1.0.4"
     },
     "android": {
       "package": "no.uvslokk.msc.ScienceApp",
       "icon": "./assets/legacy-icon.png",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#6200ee"
-      }
-    },
-    "androidStatusBar": {
-      "barStyle": "light-content",
-      "backgroundColor": "#6200ee"
+        "backgroundImage": "./assets/adaptive-background.png"
+      },
+      "versionCode": 440010004
     },
     "web": {
       "favicon": "./assets/favicon.png"

@@ -5,14 +5,14 @@ import { Modal, Paragraph, Text, Title, withTheme } from "react-native-paper";
 import { ProgressBar } from "~shared/components";
 import { t } from "~shared/i18n";
 
-import themedStyle from "./AchievementInfo.style";
+import themedStyles from "./AchievementInfo.style";
 
 function AchievementInfo({ info, visible, onDismiss, theme }) {
   if (!info?.achievement) {
     return null;
   }
 
-  const styles = themedStyle(theme);
+  const styles = themedStyles(theme);
   const { achievement, progress } = info;
   const percent = (progress * 100).toFixed();
 

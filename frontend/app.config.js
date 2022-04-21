@@ -21,6 +21,7 @@ export default ({ config }) => {
       wsEndpoint: process.env.SUBSCRIPTION_ENDPOINT,
       enableSentry: asBool(process.env.ENABLE_SENTRY),
       sentryDSN: process.env.SENTRY_DSN,
+      projectWebsite: process.env.PROJECT_WEBSITE,
     },
     plugins: ["sentry-expo"],
     hooks: {

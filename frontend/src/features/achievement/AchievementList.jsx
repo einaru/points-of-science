@@ -43,7 +43,7 @@ function AchievementList() {
   const avatarSize = (windowWidth - gutterSize * numGutters) / numColumns;
 
   const showAchievementInfo = (item) => {
-    const progress = userProgress[item.id];
+    const progress = userProgress[item.id] || 0;
     setInfo({ achievement: item, progress });
     showInfo();
   };

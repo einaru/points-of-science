@@ -5,30 +5,35 @@ import shutil
 import subprocess
 import sys
 
-PRIMARY_COLOR = "#6200ee"
 EXPORT_CONFIG = {
-    "ios": [("icon.png", 1.0)],
-    "android": [
-        ("legacy-icon.png", 1.0),
-        ("adaptive-icon.png", 0.0),
-    ],
-    "splash": [("splash.png", 0.0)],
-    "favicon": [("favicon.png", 0.0)]
+    "logo": "logo.png",
+    "ios": "icon.png",
+    "android": "adaptive-icon.png",
+    "background": "adaptive-background.png",
+    "splash": "splash.png",
+    "favicon": "favicon.png",
+    "feature": "feature.png",
 }
 
 
-def get_executable(*commands):
+def get_executable(*commands, required=False):
     for cmd in commands:
         if path := shutil.which(cmd):
-            return path
+            break
+    else:
+        print(f"Unable to locate executable for {' or '.join(commands)}")
+        if required:
+            sys.exit(1)
+
+    return path
 
 
-inkscape = get_executable("inkscape", "org.inkscape.Inkscape")
+inkscape = get_executable("inkscape", "org.inkscape.Inkscape", required=True)
+sharp = get_executable("sharp")
 
-if not inkscape:
-    print("Unable to locate a inkscape executable…")
-    print("Are you sure inkscape is installed?")
-    sys.exit(1)
+
+def info(message):
+    print(f"\033[1;32m{message}\033[0m")
 
 
 def run(args, timeout=15):
@@ -40,7 +45,7 @@ def run(args, timeout=15):
     return None
 
 
-def get_area_dimens(infile, area_ids):
+def get_area_dimensions(infile, area_ids):
     args = [
         inkscape,
         infile,
@@ -50,28 +55,38 @@ def get_area_dimens(infile, area_ids):
         "--query-width",
         "--query-height",
     ]
-    (x, y, width, height) = range(4)
+    (x, y, w, h) = range(4)
     output = run(args)
     lines = output.strip().split("\n")
     return zip(
-        tuple(int(v) for v in lines[x].split(",")),
-        tuple(int(v) for v in lines[y].split(",")),
-        tuple(int(v) for v in lines[width].split(",")),
-        tuple(int(v) for v in lines[height].split(",")),
+        tuple(float(v) for v in lines[x].split(",")),
+        tuple(float(v) for v in lines[y].split(",")),
+        tuple(float(v) for v in lines[w].split(",")),
+        tuple(float(v) for v in lines[h].split(",")),
     )
 
 
-def export_icon(infile, outfile, dimens, bg_color, bg_opacity=1.0):
-    (x, y, width, height) = dimens
+def export_icon(infile, outfile, dimensions):
+    (x, y, width, height) = dimensions
     args = [
         inkscape,
         infile,
         f"--export-area={x}:{y}:{x+width}:{y+height}",
-        f"--export-background={bg_color}",
-        f"--export-background-opacity={bg_opacity}",
         f"--export-filename={outfile}",
     ]
-    print(f"\033[1;32mExporting -> {outfile}\033[0m")
+    info(f"Exporting -> {outfile}")
+    run(args)
+
+
+def export_android_legacy_icon(background, foreground, outfile):
+    args = [
+        sharp,
+        f"--input={background}",
+        f"--output={outfile}",
+        "composite",
+        foreground,
+    ]
+    info(f"Exporting -> {outfile}")
     run(args)
 
 
@@ -90,13 +105,6 @@ def parse_command_line():
         help="list of target ids to export",
     )
     parser.add_argument(
-        "-c",
-        "--primary-color",
-        metavar="color",
-        default=PRIMARY_COLOR,
-        help="primary color used as background color when exporting icons",
-    )
-    parser.add_argument(
         "-t",
         "--export-to",
         metavar="dir",
@@ -109,16 +117,21 @@ def parse_command_line():
 if __name__ == "__main__":
     args = parse_command_line()
 
+    # Ensure background is exported when android is selected
+    ids = set(args.target_ids or EXPORT_CONFIG.keys())
+    if "android" in ids:
+        ids.add("background")
+
     infile = args.infile
-    ids = args.target_ids
-    bg_color = args.primary_color
     outdir = pathlib.Path(args.export_to).absolute()
+    dimensions = dict(zip(ids, get_area_dimensions(infile, ids)))
 
-    dimens = dict(zip(ids, get_area_dimens(infile, ids)))
+    for target in ids:
+        outfile = outdir / EXPORT_CONFIG[target]
+        export_icon(infile, outfile, dimensions[target])
 
-    export_config = dict(filter(lambda i: i[0] in ids, EXPORT_CONFIG.items()))
-
-    for target, config in export_config.items():
-        for filename, opacity in config:
-            outfile = outdir / filename
-            export_icon(infile, outfile, dimens[target], bg_color, opacity)
+    if "android" in ids and sharp:
+        background = outdir / EXPORT_CONFIG["background"]
+        foreground = outdir / EXPORT_CONFIG["android"]
+        outfile = outdir / "legacy-icon.png"
+        export_android_legacy_icon(background, foreground, outfile)

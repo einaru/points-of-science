@@ -1,4 +1,4 @@
-# MSc project backend
+# Points of Science backend
 
 This is the backend for the application we developed as part of our master's
 thesis in the spring of 2022.

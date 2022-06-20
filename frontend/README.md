@@ -1,4 +1,4 @@
-# MSc project frontend
+# Points of Science frontend
 
 This is the frontend for the application we developed as part of our master's
 thesis in the spring of 2022.

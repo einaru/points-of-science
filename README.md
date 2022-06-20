@@ -1,3 +1,3 @@
-# MSc project
+# Points of Science
 
-This repository contains source code for the application we developed for our master's thesis in the spring of 2022.
+This repository contains the source code **Points of Science**; an application developed for our Master's Thesis during the spring of 2022.
